@@ -1,0 +1,128 @@
+# encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 20140331105358) do
+
+  create_table "categories", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories_users", force: true do |t|
+    t.integer "category_id"
+    t.integer "user_id"
+  end
+
+  create_table "category_translations", force: true do |t|
+    t.integer  "category_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id"
+  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale"
+
+  create_table "dish_translations", force: true do |t|
+    t.integer  "dish_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.string   "drinks"
+    t.string   "sidedish"
+    t.string   "ingredients"
+  end
+
+  add_index "dish_translations", ["dish_id"], name: "index_dish_translations_on_dish_id"
+  add_index "dish_translations", ["locale"], name: "index_dish_translations_on_locale"
+
+  create_table "dishes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "wines_id"
+    t.integer  "dishes_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "languages", force: true do |t|
+    t.string   "title"
+    t.string   "locale"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "languages_users", force: true do |t|
+    t.integer "language_id"
+    t.integer "user_id"
+  end
+
+  create_table "opening_hours", force: true do |t|
+    t.integer  "weekday"
+    t.string   "a_from"
+    t.string   "a_to"
+    t.string   "b_from"
+    t.string   "b_to"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address"
+    t.string   "zip"
+    t.string   "city"
+    t.string   "country"
+    t.string   "telephone"
+    t.string   "website"
+    t.string   "register_source"
+    t.string   "tarif"
+    t.string   "download_code"
+    t.date     "last_login"
+    t.integer  "languages_id"
+    t.integer  "default_language_id"
+    t.integer  "openingHours_id"
+    t.integer  "categories_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "wine_translations", force: true do |t|
+    t.integer  "wine_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.string   "type"
+    t.string   "country"
+    t.string   "description"
+  end
+
+  add_index "wine_translations", ["locale"], name: "index_wine_translations_on_locale"
+  add_index "wine_translations", ["wine_id"], name: "index_wine_translations_on_wine_id"
+
+  create_table "wines", force: true do |t|
+    t.integer  "user_id"
+    t.string   "year"
+    t.string   "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+end
