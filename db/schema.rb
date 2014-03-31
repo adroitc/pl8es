@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331105358) do
+ActiveRecord::Schema.define(version: 20140331134034) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -52,6 +52,9 @@ ActiveRecord::Schema.define(version: 20140331105358) do
     t.integer  "user_id"
     t.integer  "wines_id"
     t.integer  "dishes_id"
+    t.string   "price"
+    t.boolean  "is_daily",   default: false
+    t.date     "daily_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,9 +66,71 @@ ActiveRecord::Schema.define(version: 20140331105358) do
     t.datetime "updated_at"
   end
 
+  create_table "languages_menus", force: true do |t|
+    t.integer "language_id"
+    t.integer "menu_id"
+  end
+
   create_table "languages_users", force: true do |t|
     t.integer "language_id"
     t.integer "user_id"
+  end
+
+  create_table "menu_colors", force: true do |t|
+    t.string   "background"
+    t.string   "bar_background"
+    t.string   "bev_background_selected"
+    t.string   "bev_text"
+    t.string   "bev_text_active"
+    t.string   "bev_background"
+    t.string   "bev_background_active"
+    t.string   "bev_text_selected"
+    t.string   "nav_background"
+    t.string   "nav_background_active"
+    t.string   "nav_background_selected"
+    t.string   "nav_text"
+    t.string   "nav_text_active"
+    t.string   "nav_text_selected"
+    t.string   "sub_background"
+    t.string   "sub_background_active"
+    t.string   "sub_background_selected"
+    t.string   "sub_text"
+    t.string   "sub_text_active"
+    t.string   "sub_text_selected"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menus", force: true do |t|
+    t.string   "title"
+    t.string   "label"
+    t.string   "from_time"
+    t.integer  "navigations_id"
+    t.integer  "beverages_id"
+    t.integer  "languages_id"
+    t.integer  "default_language_id"
+    t.integer  "menuColor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "navigation_translations", force: true do |t|
+    t.integer  "navigation_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "navigation_translations", ["locale"], name: "index_navigation_translations_on_locale"
+  add_index "navigation_translations", ["navigation_id"], name: "index_navigation_translations_on_navigation_id"
+
+  create_table "navigations", force: true do |t|
+    t.integer  "level"
+    t.integer  "sub_navigations_id"
+    t.integer  "dishes_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "opening_hours", force: true do |t|
@@ -78,6 +143,17 @@ ActiveRecord::Schema.define(version: 20140331105358) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_translations", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+  end
+
+  add_index "user_translations", ["locale"], name: "index_user_translations_on_locale"
+  add_index "user_translations", ["user_id"], name: "index_user_translations_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -92,13 +168,16 @@ ActiveRecord::Schema.define(version: 20140331105358) do
     t.string   "telephone"
     t.string   "website"
     t.string   "register_source"
-    t.string   "tarif"
+    t.string   "menu_tariff"
+    t.string   "daily_tariff"
     t.string   "download_code"
     t.date     "last_login"
     t.integer  "languages_id"
     t.integer  "default_language_id"
     t.integer  "openingHours_id"
     t.integer  "categories_id"
+    t.integer  "menus_id"
+    t.integer  "daily_dishes_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

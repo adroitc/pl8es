@@ -6,6 +6,9 @@ class CreateDishes < ActiveRecord::Migration
       t.references :wines
       t.references :dishes
       
+      t.string :price
+      
+      t.boolean :is_daily, :default => false
       t.date :daily_date
       
       t.timestamps

@@ -18,8 +18,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :website
       
       t.string :register_source
-      
-      t.string :tarif
+
+      t.string :menu_tariff
+      t.string :daily_tariff
       
       t.string :download_code
       
@@ -32,13 +33,22 @@ class CreateUsers < ActiveRecord::Migration
       
       t.references :categories
       
+      t.references :menus
+      
+      t.references :daily_dishes
+      
       t.timestamps
     end
+		create_table :languages_users do |t|
+			t.belongs_to :language
+			t.belongs_to :user
+		end
     User.create_translation_table! :description => :string
   end
   
   def down
     drop_table :users
+    drop_table :languages_users
     User.drop_translation_table!
   end
 end
