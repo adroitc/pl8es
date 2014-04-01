@@ -21,7 +21,8 @@ var neonRegister = neonRegister || {};
 		neonRegister.$container.validate({
 			rules: {
 				name: {
-					required: true
+					required: true,
+          minlength: 3
 				},
 				
 				email: {
@@ -30,7 +31,8 @@ var neonRegister = neonRegister || {};
 				},
 				
 				password: {
-					required: true
+					required: true,
+          minlength: 8
 				},
 				
 			},

@@ -1,7 +1,7 @@
 class SignupController < ApplicationController
   
   def index
-    #render :text => t("signup.hello", :user => "Marc")
+    #render :text => t("signup.hello", :a => "8")
   end
   
   def index_post

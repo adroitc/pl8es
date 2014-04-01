@@ -47,6 +47,7 @@ end
 
 gem "rename"
 gem "globalize", "~> 4.0.1"
+gem "i18n-js"
 
 group :assets do
   gem "therubyracer"

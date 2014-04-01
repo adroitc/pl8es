@@ -22,4 +22,4 @@
 en:
   signup:
     welcome : "Create an account, it's free and takes few moments only!"
-    hello: "Hello %{user}!"
+    hello: "Please enter at least %{a} characters!"

@@ -18,14 +18,22 @@ var neonLogin = neonLogin || {};
 		// Login Form & Validation
 		neonLogin.$container.validate({
 			rules: {
-				username: {
-					required: true	
+				email: {
+					required: true,
+					email: true
 				},
 				
 				password: {
 					required: true
 				},
 				
+			},
+      
+			messages: {
+				
+				email: {
+					email: 'Invalid E-mail.'
+				}	
 			},
 			
 			highlight: function(element){
@@ -61,16 +69,17 @@ var neonLogin = neonLogin || {};
 											
 					// Send data to the server
 					$.ajax({
-						url: baseurl + 'data/sample-login-form.php',
+						url: baseurl + 'login',
 						method: 'POST',
 						dataType: 'json',
 						data: {
-							username: $("input#username").val(),
+							email: $("input#email").val(),
 							password: $("input#password").val(),
 						},
-						error: function()
+						error: function(e,r,t)
 						{
 							alert("An error occoured!");
+              console.log(t);
 						},
 						success: function(response)
 						{
@@ -96,7 +105,7 @@ var neonLogin = neonLogin || {};
 									// Redirect to login page
 									setTimeout(function()
 									{
-										var redirect_url = baseurl;
+										var redirect_url = baseurl+"dashboard";
 										
 										if(response.redirect_url && response.redirect_url.length)
 										{
