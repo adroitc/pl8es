@@ -11745,9 +11745,9 @@ button.toast-close-button {
   -o-transform: scale(0.8);
   -ms-transform: scale(0.8);
   transform: scale(0.8);
-  -webkit-transform: scale(0.8, );
-  -ms-transform: scale(0.8, );
-  transform: scale(0.8, );
+  -webkit-transform: scale(0.8 );
+  -ms-transform: scale(0.8 );
+  transform: scale(0.8 );
 }
 .page-container.sidebar-collapsed .sidebar-user-info .user-link span,
 .page-container.sidebar-collapsed .sidebar-user-info .user-link strong {
@@ -11970,9 +11970,9 @@ button.toast-close-button {
   -o-transform: scale(0.8);
   -ms-transform: scale(0.8);
   transform: scale(0.8);
-  -webkit-transform: scale(0.8, );
-  -ms-transform: scale(0.8, );
-  transform: scale(0.8, );
+  -webkit-transform: scale(0.8 );
+  -ms-transform: scale(0.8 );
+  transform: scale(0.8 );
 }
 .page-container.sidebar-is-collapsing .sidebar-menu #main-menu li#search .search-input {
   -webkit-opacity: 0;
