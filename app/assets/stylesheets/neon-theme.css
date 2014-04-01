@@ -5228,9 +5228,9 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   -o-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
-  -webkit-transform: scale(1, );
-  -ms-transform: scale(1, );
-  transform: scale(1, );
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
@@ -6351,9 +6351,9 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   -o-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
-  -webkit-transform: scale(1, );
-  -ms-transform: scale(1, );
-  transform: scale(1, );
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
