@@ -1,4 +1,8 @@
 Pl8es::Application.routes.draw do
+  
+  resources :signup, :only => []
+  get "/signup" => "signup#index"
+  post "/signup" => "signup#index_post"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -34,10 +34,17 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 gem 'rename'
 gem 'globalize', '~> 4.0.1'
+
+group :assets do
+  gem "therubyracer"
+  gem "less-rails"
+  gem "twitter-bootstrap-rails"
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
