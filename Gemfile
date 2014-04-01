@@ -42,6 +42,7 @@ end
 group :production do
   #postgresql for heroku
   gem "pg"
+  gem "rails_12factor"
 end
 
 gem "rename"
