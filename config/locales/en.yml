@@ -21,7 +21,9 @@
 
 en:
   signup:
-    welcome : "Create an account, it's free and takes few moments only!"
+    welcome: "Create an account, it's free and takes few moments only!"
+    restaurant_name: "Restaurant name"
+    email: "E-Mail"
     password: "Choose Password"
     complete: "Complete Registration"
     logging_in: "logging in..."
@@ -30,9 +32,9 @@ en:
     footer_return: "Return to Login Page"
     footer_tos: "ToS"
     footer_policy: "Privacy Policy"
-    
+
   errors:
-  	length: "Please enter at least %{a} characters."
-  	required: "This field is required."
-  	invalid_email: "Invalid E-mail."
-  	already_exists: "This email already exists"
+    required: "This field is required."
+    minlength: "Please enter at least %{a} characters."
+    invalid_email: "Invalid E-mail."
+    already_exists: "This email already exists"

@@ -38,7 +38,7 @@
 			<!-- progress bar indicator -->
 			<div class="login-progressbar-indicator">
 				<h3>43%</h3>
-				<span>logging in...</span>
+				<span><%=t("signup.logging_in") %></span>
 			</div>
 		</div>
 		
@@ -56,8 +56,8 @@
 				
 				<div class="form-register-success">
 					<i class="entypo-check"></i>
-					<h3>You have been successfully registered.</h3>
-					<p>We have emailed you the confirmation link for your account.</p>
+					<h3><%=t("signup.successful") %></h3>
+					<p><%=t("signup.successful_2") %></p>
 				</div>
 				
 				<div class="form-steps">
@@ -72,7 +72,7 @@
 									<i class="entypo-user"></i>
 								</div>
 								
-								<input type="text" class="form-control" name="name" id="name" placeholder="Restaurant name" autocomplete="off" />
+								<input type="text" class="form-control" name="name" id="name" placeholder="<%=t("signup.restaurant_name") %>" autocomplete="off" />
 							</div>
 						</div>
             
@@ -82,7 +82,7 @@
 									<i class="entypo-mail"></i>
 								</div>
 								
-								<input type="text" class="form-control" name="email" id="email" data-mask="email" placeholder="E-mail" autocomplete="off" />
+								<input type="text" class="form-control" name="email" id="email" data-mask="email" placeholder="<%=t("signup.email") %>" autocomplete="off" />
 							</div>
 						</div>
 						
@@ -92,13 +92,13 @@
 									<i class="entypo-lock"></i>
 								</div>
 								
-								<input type="password" class="form-control" name="password" id="password" placeholder="Choose Password" autocomplete="off" />
+								<input type="password" class="form-control" name="password" id="password" placeholder="<%=t("signup.password") %>" autocomplete="off" />
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<button type="submit" class="btn btn-success btn-block btn-login">
-								Complete Registration
+								<%=t("signup.complete") %>
 								<i class="entypo-right-open-mini"></i>
 							</button>
 						</div>
@@ -114,12 +114,12 @@
 				
 				<a href="extra-login.html" class="link">
 					<i class="entypo-lock"></i>
-					Return to Login Page
+					<%=t("signup.footer_return") %>
 				</a>
 				
 				<br />
 				
-				<a href="#">ToS</a>  - <a href="#">Privacy Policy</a>
+				<a href="#"><%=t("signup.footer_tos") %></a>  - <a href="#"><%=t("signup.footer_policy") %></a>
 				
 			</div>
 			

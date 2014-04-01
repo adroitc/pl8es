@@ -21,7 +21,9 @@
 
 de:
   signup:
-    welcome : "Melden Sie sich an!"
+    welcome: "Melden Sie sich an!"
+    restaurant_name: "Restaurant Name"
+    email: "Email"
     password: "Passwort auswählen"
     complete: "Anmelden"
     logging_in: "Anmeldung..."
@@ -32,7 +34,7 @@ de:
     footer_policy: "Datenschutz"
     
   errors:
-  	length: "Geben Sie mind. %{a} Zeichen ein."
-  	required: "Dieses Feld ist Pflicht."
-  	invalid_email: "Ungültige Email"
-  	already_exists: "Diese Email existiert bereits."
+    required: "Dieses Feld ist Pflicht."
+    minlength: "Geben Sie mind. %{a} Zeichen ein."
+    invalid_email: "Ungültige Email"
+    already_exists: "Diese Email existiert bereits."

@@ -4,6 +4,8 @@
   <title>Dailymalist</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "i18n" %>
+  <%= javascript_include_tag "translations" %>
   <%= csrf_meta_tags %>
   <%= yield (:header) %>
 </head>
@@ -11,6 +13,8 @@
 
 <script type="text/javascript">
 var baseurl = "http://10.10.1.19:3000/";
+I18n.defaultLocale = "<%= I18n.default_locale %>";
+I18n.locale = "<%= I18n.locale %>";
 </script>
 
 <%= yield %>

@@ -38,10 +38,18 @@ var neonRegister = neonRegister || {};
 			},
 			
 			messages: {
-				
+				name: {
+				  required: I18n.t("errors.required"),
+				  minlength: I18n.t("errors.minlength",{a:"3"})
+				},
 				email: {
-					email: 'Invalid E-mail.'
-				}	
+				  required: I18n.t("errors.required"),
+					email: I18n.t("errors.invalid_email")
+				},
+				password: {
+				  required: I18n.t("errors.required"),
+				  minlength: I18n.t("errors.minlength",{a:"8"})
+				}
 			},
 			
 			highlight: function(element){
