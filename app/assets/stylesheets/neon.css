@@ -22640,9 +22640,9 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   -o-transform: scale(1.15);
   -ms-transform: scale(1.15);
   transform: scale(1.15);
-  -webkit-transform: scale(1.15, );
-  -ms-transform: scale(1.15, );
-  transform: scale(1.15, );
+  -webkit-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  transform: scale(1.15);
 }
 .language-selector {
   margin-top: -7px;
@@ -22929,9 +22929,9 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   -o-transform: scale(0.5);
   -ms-transform: scale(0.5);
   transform: scale(0.5);
-  -webkit-transform: scale(0.5, );
-  -ms-transform: scale(0.5, );
-  transform: scale(0.5, );
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
   -webkit-transition: all 300ms ease-in-out;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
