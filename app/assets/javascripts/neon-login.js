@@ -79,7 +79,6 @@ var neonLogin = neonLogin || {};
 						error: function(e,r,t)
 						{
 							alert("An error occoured!");
-              console.log(t);
 						},
 						success: function(response)
 						{
@@ -88,7 +87,6 @@ var neonLogin = neonLogin || {};
 															
 							// Form is fully completed, we update the percentage
 							neonLogin.setPercentage(100);
-							
 							
 							// We will give some time for the animation to finish, then execute the following procedures	
 							setTimeout(function()

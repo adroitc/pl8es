@@ -12,7 +12,7 @@
 <body class="<%= yield (:body_class) %>">
 
 <script type="text/javascript">
-var baseurl = "http://10.10.1.19:3000/";
+var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
 I18n.defaultLocale = "<%= I18n.default_locale %>";
 I18n.locale = "<%= I18n.locale %>";
 </script>

@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   has_many :daily_dishes, :class_name => "Dish"
   
   translates :description
+  
+  validates :email, :uniqueness => true
 end
