@@ -1,17 +1,17 @@
 class SignupController < ApplicationController
   
   def index
-    render :text => ENV['AWS_ACCESS']
-    ses = AWS::SES::Base.new(
-      :access_key_id     => ENV['AWS_ACCESS'],
-      :secret_access_key => ENV['AWS_SECRET']
-    )
-    ses.send_email(
-      :to         => ["dmanfredi@gmail.com"],
-      :source     => 'hello@malist.co',
-      :subject    => 'malist.co',
-      :text_body  => 'test message'
-    )
+    #render :text => ENV['AWS_ACCESS']
+    #ses = AWS::SES::Base.new(
+    #  :access_key_id     => ENV['AWS_ACCESS'],
+    #  :secret_access_key => ENV['AWS_SECRET']
+    #)
+    #ses.send_email(
+    #  :to         => ["hello@malist.co"],
+    #  :source     => 'hello@malist.co',
+    #  :subject    => 'malist.co',
+    #  :text_body  => 'test message'
+    #)
   end
   
   def index_post
