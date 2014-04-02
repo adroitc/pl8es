@@ -37,6 +37,8 @@ group :development do
   
   gem "better_errors"
   gem "binding_of_caller"
+  
+  gem "dotenv-rails"
 end
 
 group :production do
@@ -48,6 +50,8 @@ end
 gem "rename"
 gem "globalize", "~> 4.0.1"
 gem "i18n-js"
+
+gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
 group :assets do
   gem "therubyracer"
