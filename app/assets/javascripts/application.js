@@ -14,7 +14,7 @@
 //= require i18n/translations
 //= require jquery
 //= require jquery_ujs
-// require jquery_ui
+//= require jquery.ui.all
 //= require turbolinks
 
 //= require "gsap/main-gsap.js"

@@ -53,6 +53,8 @@ gem "i18n-js"
 
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
+gem "jquery-ui-rails"
+
 group :assets do
   gem "therubyracer"
   gem "less-rails"
