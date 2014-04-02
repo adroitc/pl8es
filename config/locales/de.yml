@@ -20,21 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 de:
+  errors:
+    required: "Dieses Feld ist Pflicht."
+    minlength: "Geben Sie mind. %{a} Zeichen ein."
+    invalid_email: "Ungültige Email"
+    already_exists: "Diese Email existiert bereits."
+    
   signup:
     welcome: "Melden Sie sich an!"
     restaurant_name: "Restaurant Name"
     email: "Email"
     password: "Passwort auswählen"
     complete: "Anmelden"
-    logging_in: "Anmeldung..."
+    logging_in: "Anmeldung ..."
     successful: "Sie sind jetzt erfolgreich angemeldet."
     successful_2: "Überprüfen Sie Ihre Emails und bestätigen Sie diese"
     footer_return: "Zurück zur Anmeldung"
     footer_tos: "AGB"
     footer_policy: "Datenschutz"
-    
-  errors:
-    required: "Dieses Feld ist Pflicht."
-    minlength: "Geben Sie mind. %{a} Zeichen ein."
-    invalid_email: "Ungültige Email"
-    already_exists: "Diese Email existiert bereits."

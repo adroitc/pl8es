@@ -20,21 +20,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  errors:
+    required: "This field is required."
+    minlength: "Please enter at least %{a} characters."
+    invalid_email: "Invalid E-mail."
+    already_exists: "This email already exists"
+    
   signup:
     welcome: "Create an account, it's free and takes few moments only!"
     restaurant_name: "Restaurant name"
     email: "E-Mail"
     password: "Choose Password"
     complete: "Complete Registration"
-    logging_in: "logging in..."
+    logging_in: "logging in ..."
     successful: "You have been successfully registered."
     successful_2: "We have emailed you the confirmation link for your account."
     footer_return: "Return to Login Page"
     footer_tos: "ToS"
     footer_policy: "Privacy Policy"
-
-  errors:
-    required: "This field is required."
-    minlength: "Please enter at least %{a} characters."
-    invalid_email: "Invalid E-mail."
-    already_exists: "This email already exists"
+  
+  login:
+    welcome: "Dear user, log in to access the admin area!"
+    logging_in: "logging in ..."
+    email: "E-Mail"
+    password: "Choose Password"
+    login: "Login"
+    invalid: "Invalid login"
+    invalid_2: "Enter a valid email and password combination."
+    forgot_password: "Forgot your password?"
+    footer_tos: "ToS"
+    footer_policy: "Privacy Policy"

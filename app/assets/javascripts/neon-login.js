@@ -32,8 +32,12 @@ var neonLogin = neonLogin || {};
 			messages: {
 				
 				email: {
-					email: 'Invalid E-mail.'
-				}	
+				  required: I18n.t("errors.required"),
+					email: I18n.t("errors.invalid_email")
+				},
+				password: {
+				  required: I18n.t("errors.required")
+				}
 			},
 			
 			highlight: function(element){
