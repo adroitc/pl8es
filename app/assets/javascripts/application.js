@@ -10,8 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// require i18n
-// require i18n/translations
+//= require i18n
+//= require i18n/translations
 //= require jquery
 //= require jquery_ujs
 // require jquery_ui

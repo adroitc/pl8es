@@ -16,4 +16,5 @@
  *= require "neon-theme"
  *= require "neon-forms"
  *= require "custom"
+ *= require "datatables.responsive.css"
  */

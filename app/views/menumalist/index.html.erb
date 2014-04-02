@@ -1,0 +1,344 @@
+<% content_for :body_class, "page-body" %>
+
+<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
+	
+	<div class="sidebar-menu">
+		
+			
+		<header class="logo-env">
+			
+			<!-- logo -->
+			<div class="logo">
+				<a href="index.html">
+					<img src="assets/images/logo@2x.png" width="160" alt="" />
+				</a>
+			</div>
+			
+						<!-- logo collapse icon -->
+						
+			<div class="sidebar-collapse">
+				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+					<i class="entypo-menu"></i>
+				</a>
+			</div>
+			
+									
+			
+			<!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+			<div class="sidebar-mobile-menu visible-xs">
+				<a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+					<i class="entypo-menu"></i>
+				</a>
+			</div>
+			
+		</header>
+				
+		
+		
+				
+		
+				
+		<ul id="main-menu" class="">
+			 <%=render partial: "layouts/dashboard_menu" %>
+		</ul>
+				
+	</div>	
+	<div class="main-content">
+		
+<div class="row">
+	
+	<!-- Profile Info and Notifications -->
+	<div class="col-md-6 col-sm-8 clearfix">
+		
+		<ul class="user-info pull-left pull-none-xsm">
+		
+						<!-- Profile Info -->
+			<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
+				
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<img src="assets/images/thumb-1@2x.png" alt="" class="img" width="72" /><h3 style="float: right;">Restaurant Le Petit Bistro</h3>
+				</a>
+				
+				<ul class="dropdown-menu">
+					
+					<!-- Reverse Caret -->
+					<li class="caret"></li>
+					
+					<!-- Profile sub-links -->
+					<li>
+						<a href="#">
+							<i class="entypo-user"></i>
+							Edit Profile
+						</a>
+					</li>
+					
+					<li>
+						<a href="mailbox.html">
+							<i class="entypo-mail"></i>
+							Inbox
+						</a>
+					</li>
+					
+					<li>
+						<a href="extra-calendar.html">
+							<i class="entypo-calendar"></i>
+							Calendar
+						</a>
+					</li>
+					
+					<li>
+						<a href="#">
+							<i class="entypo-clipboard"></i>
+							Tasks
+						</a>
+					</li>
+				</ul>
+			</li>
+		
+		</ul>
+				
+		
+	
+	</div>
+	
+	
+	<!-- Raw Links -->
+	<div class="col-md-6 col-sm-4 clearfix hidden-xs">
+		
+		<ul class="list-inline links-list pull-right">
+						<li>
+				<a href="#">Live Site</a>
+			</li>
+						
+			<li class="sep"></li>
+			
+			<li>
+				<a href="#" data-toggle="chat" data-animate="1" data-collapse-sidebar="1">
+					<i class="entypo-chat"></i>
+					Support
+					
+					<span class="badge badge-success chat-notifications-badge is-hidden">0</span>
+				</a>
+			</li>
+			
+			<li class="sep"></li>
+			
+			<li>
+				<a href="extra-login.html">
+					Log Out <i class="entypo-logout right"></i>
+				</a>
+			</li>
+		</ul>
+		
+	</div>
+	
+</div>
+
+<hr />
+			<ol class="breadcrumb bc-3">
+						<li>
+				<a href="index.html"><i class="entypo-home"></i>Home</a>
+			</li>
+					<li>
+			
+							<a href="tables-main.html">Speisekarten</a>
+					</li>
+				<li class="active">
+			
+							<strong>Alle Speisekarten</strong>
+					</li>
+					</ol>
+			
+
+<h3>Alle Speisekarten</h3>
+
+<div class="row">
+	<div class="col-sm-8">
+
+<div class="panel-group" id="accordion-test">
+		
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion-test" href="#collapseOne">
+						Speisekarte #1 <span class="label label-primary">Mittagskarte</span> </h4> <div style="margin-left:76%; margin-bottom:4px; margin-top:-30px;"><a href="#" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Bearbeiten"><i class="entypo-pencil"></i></a>
+									
+				<a href="#" type="button" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Löschen"><i class="entypo-trash"></i></a>
+				
+				<a href="#" type="button" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Duplizieren"><i class="entypo-picture"></i></a>
+						</div>
+						</a>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body">
+					<div class="panel minimal">
+			
+			<!-- panel head -->
+			<div class="panel-heading">
+				
+				<div class="panel-options">
+					<ul class="nav nav-tabs">
+						<li class="active">
+							<a href="#tab1" data-toggle="tab"><i class="entypo-layout"></i></a>
+						</li>
+						
+						<li>
+							<a href="#tab2" data-toggle="tab"><i class="entypo-cog"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- panel body -->
+			<div class="panel-body" style="background-color: #fff;">
+				
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab1">
+						<table class="table table-bordered table-responsive">
+
+				<thead>
+					<tr>
+						<th width="25%" class="col-padding-1">
+							<a href="#" class="album-options"><div class="pull-left">
+							<h2 style="color:#a6a7aa;">24</h2>
+								<div class="h4 no-margin"><i class="glyphicon glyphicon-cutlery"></i> Speisen</div>
+							</div></a>
+							
+						</th>
+						<th width="25%" class="col-padding-1">
+							<a href="#"><div class="pull-left">
+							<h2 style="color:#a6a7aa;">6</h2>
+								<div class="h4 no-margin"><i class="glyphicon glyphicon-folder-open"></i>  Kategorien</div>
+							</div></a>
+						</th>
+						<th width="25%" class="col-padding-1">
+							<a href="#"><div class="pull-left">
+								<h2 style="color:#a6a7aa;">46</h2>
+								<div class="h4 no-margin"><i class="glyphicon glyphicon-glass"></i>Getränke</div>
+							</div></a>
+						</th>
+						<th width="25%" class="col-padding-1">
+							<a href="#"><div class="pull-left">
+							<h4 style="color:#a6a7aa;">DE, EN, FR</h4>
+								<div class="h4 no-margin"><i class="entypo-globe"></i>Sprachen</div>
+							</div></a>
+						</th>
+					</tr>
+				</thead>
+				
+			</table>
+		
+						
+					</div>
+					
+					<div class="tab-pane" id="tab2">
+						<div class="scrollable" data-height="150" data-autohide="0">
+							<p>On am we offices expense thought. Its hence ten smile age means. Seven chief sight far point any. Of so high into easy. Dashwoods eagerness oh extensive as discourse sportsman frankness. Husbands see disposed surprise likewise humoured yet pleasure. Fifteen no inquiry cordial so resolve garrets as. Impression was estimating surrounded solicitude indulgence son shy.</p>
+							
+							<p>Both rest of know draw fond post as. It agreement defective to excellent. Feebly do engage of narrow. Extensive repulsive belonging depending if promotion be zealously as. Preference inquietude ask now are dispatched led appearance. Small meant in so doubt hopes. Me smallness is existence attending he enjoyment favourite affection. Delivered is to ye belonging enjoyment preferred. Astonished and acceptance men two discretion. Law education recommend did objection how old. </p>
+			
+							<p>Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my exercise so in. Procured shutters mr it feelings. To or three offer house begin taken am at. As dissuade cheerful overcame so of friendly he indulged unpacked. Alteration connection to so as collecting me. Difficult in delivered extensive at direction allowance. Alteration put use diminution can considered sentiments interested discretion. An seeing feebly stairs am branch income me unable. </p>
+							
+							<p>On am we offices expense thought. Its hence ten smile age means. Seven chief sight far point any. Of so high into easy. Dashwoods eagerness oh extensive as discourse sportsman frankness. Husbands see disposed surprise likewise humoured yet pleasure. Fifteen no inquiry cordial so resolve garrets as. Impression was estimating surrounded solicitude indulgence son shy.</p>
+							
+							<p>Both rest of know draw fond post as. It agreement defective to excellent. Feebly do engage of narrow. Extensive repulsive belonging depending if promotion be zealously as. Preference inquietude ask now are dispatched led appearance. Small meant in so doubt hopes. Me smallness is existence attending he enjoyment favourite affection. Delivered is to ye belonging enjoyment preferred. Astonished and acceptance men two discretion. Law education recommend did objection how old. </p>
+			
+							<p>Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my exercise so in. Procured shutters mr it feelings. To or three offer house begin taken am at. As dissuade cheerful overcame so of friendly he indulged unpacked. Alteration connection to so as collecting me. Difficult in delivered extensive at direction allowance. Alteration put use diminution can considered sentiments interested discretion. An seeing feebly stairs am branch income me unable. </p>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+					</div>	<br />
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion-test" href="#collapseTwo">
+						 Speisekarte #2 <span class="label label-info">Abendkarte</span> </h4><div style="margin-left:76%; margin-bottom:4px; margin-top:-30px;"><a href="#" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Bearbeiten"><i class="entypo-pencil"></i></a>
+									
+				<a href="#" type="button" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Löschen"><i class="entypo-trash"></i></a>
+				
+				<a href="#" type="button" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Duplizieren"><i class="entypo-picture"></i></a>
+						</div>
+						</a>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse">
+					<div class="panel-body">
+						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					<div style="float:right;"><a href="#" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Bearbeiten">
+					<i class="entypo-pencil"></i>
+					
+				</a>
+				
+				<a href="#" type="button" class="btn btn-gold tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Löschen">
+						<i class="entypo-trash"></i>
+				</a>
+				
+				<a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+					<i class="entypo-info"></i>
+					Optionen
+				</a></div></div>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion-test" href="#collapseThree">
+							Speisekarte #3</h4><div style="margin-left:76%; margin-bottom:4px; margin-top:-30px;"><a href="#" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Bearbeiten"><i class="entypo-pencil"></i></a>
+									
+				<a href="#" type="button" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Löschen"><i class="entypo-trash"></i></a>
+				
+				<a href="#" type="button" class="btn btn-white tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Duplizieren"><i class="entypo-picture"></i></a>
+						</div>
+						</a>
+					</h4>
+				</div>
+				<div id="collapseThree" class="panel-collapse collapse">
+					<div class="panel-body">
+						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</div>
+				</div>
+			</div>
+		</div>
+
+<br />
+	
+
+<a href="javascript:fnClickAddRow();" class="btn btn-primary">
+	<i class="entypo-plus"></i>
+	Neue Speisekarte
+</a>
+
+<br />
+
+	</div>
+	<div class="col-md-4">
+		
+		<div class="panel panel-gray">
+			<div class="panel-heading">
+			<div class="panel-title">Meine Speisekarte installieren</div>
+			</div>
+			
+			<div class="panel-body">
+				
+				<div class="scrollable" data-height="150" data-scroll-position="right" data-rail-opacity="1" data-rail-width="12" data-rail-radius="0" data-rail-color="#fff" data-autohide="0">
+					<p>1. Download the Menumalist iPad app from the appstore. You can click <a href="'">here</a>.</p>
+					<p>2. Insert your installation ID and download your Menus</p>
+					<p>3. Done and enjoy!</p>
+					
+					Lose eyes get fat shew. Winter can indeed letter oppose way change tended now. So is improve my charmed picture exposed adapted demands. Received had end produced prepared diverted strictly off man branched. Known ye money so large decay voice there to. Preserved be mr cordially incommode as an. He doors quick child an point at. Had share vexed front least style off why him.</p>
+
+					<p>Now principles discovered off increasing how reasonably middletons men. Add seems out man met plate court sense. His joy she worth truth given. All year feet led view went sake. You agreeable breakfast his set perceived immediate. Stimulated man are projecting favourable middletons can cultivated.</p>
+					
+				</div>
+		</div>
+		
+	</div>
+</div>
