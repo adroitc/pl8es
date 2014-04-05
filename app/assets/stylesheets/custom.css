@@ -7,3 +7,14 @@
 body {
 	
 }
+
+.pl8es_c_table-toolbar {
+  float: right;
+  margin-right: 12px;
+}
+.pl8es_c_table-toolbar .btn {
+  margin-top: -4px;
+}
+.pl8es_c_toggledefaultmenu,.pl8es_c_revertdefaultmenu, .pl8es_c_confirmdeletemenu {
+  display: none;
+}

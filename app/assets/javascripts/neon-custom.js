@@ -602,7 +602,7 @@ var public_vars = public_vars || {};
 		// Select2 Dropdown replacement
 		if($.isFunction($.fn.select2))
 		{
-			$(".select2").each(function(i, el)
+			$("select.select2").each(function(i, el)
 			{
 				var $this = $(el),
 					opts = {
@@ -612,7 +612,7 @@ var public_vars = public_vars || {};
 				$this.select2(opts);
 				$this.addClass('visible');
 				
-				//$this.select2("open");
+				$this.select2("open");
 			});
 			
 			
