@@ -9,7 +9,8 @@ Pl8es::Application.routes.draw do
   post "/login" => "login#index_post"
   
   resources :menumalist, :only => []
-  get "/dashboard" => "menumalist#index"
+  get "/menumalist" => "menumalist#index"
+  get "/menumalist/:menu_id/categories" => "menumalist#categories"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

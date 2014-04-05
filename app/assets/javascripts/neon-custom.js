@@ -613,6 +613,25 @@ var public_vars = public_vars || {};
 				$this.addClass('visible');
 				
 				$this.select2("open");
+        
+        $this.on("select2-selecting", function(e)
+        {
+          var d = $this.select2("data");
+          jQuery.each(d, function(i, val){
+            d[i].locked = false;
+            return;
+          });
+          $this.select2("data", d);
+        });
+        $this.on("select2-removed", function(e)
+        {
+          var d = $this.select2("data");
+          if (d.length == 1)
+          {
+            d[0].locked = true;
+            $this.select2("data",d);
+          }
+        });
 			});
 			
 			
