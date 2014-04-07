@@ -77,7 +77,7 @@ class AjaxController < ApplicationController
       if !menu.blank?
       
         newMenu = menu.dup
-        newMenu.title = newMenu.title+" #2"
+        newMenu.title = newMenu.title+" 2"
         newMenu.save
         
         render :text => {:status => "success"}.to_json.to_s

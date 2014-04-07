@@ -1,6 +1,6 @@
 <% content_for :body_class, "page-body" %>
 
-<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->  
+<div class="page-container">
   <div class="sidebar-menu">
     <%=render :partial => "layouts/dashboard_menuheader" %>
     <ul id="main-menu">
@@ -8,7 +8,15 @@
     </ul>
   </div>  
   <div class="main-content">
-      <%=render :partial => "layouts/dashboard_topbar" %>
+    <%=render :partial => "layouts/dashboard_topbar" %>
+    <ol class="breadcrumb bc-3">
+      <li>
+        <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
+      </li>
+      <li class="active">
+        <strong>Alle Speisekarten</strong>
+      </li>
+    </ol>
     <div class="row">
       <div class="col-md-8">
     	  <div class="col-sm-6">
@@ -44,7 +52,9 @@
             <% @user.menus.each do |menu| %>
             <tr style="font-size: 18px;">
               <td>
-                <%=menu.title %>
+                <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","_"), :menu_id => menu.id %>">
+                  <%=menu.title.gsub(" ","_") %>
+                </a>
                 <span class="badge badge-primary"><%=menu.menuLabel.title if menu.menuLabel != nil %></span>
                 <span class="pl8es_c_table-toolbar">
                   <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
