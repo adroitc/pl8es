@@ -1,9 +1,13 @@
 class CreateMenus < ActiveRecord::Migration
   def change
     create_table :menus do |t|
+      t.references :user
+      
       t.string :title
-      t.string :label
       t.string :from_time
+      t.string :to_time
+      
+      t.references :menuLabel
       
       t.references :navigations
       t.references :beverages

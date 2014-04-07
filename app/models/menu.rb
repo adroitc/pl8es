@@ -1,4 +1,8 @@
 class Menu < ActiveRecord::Base
+  belongs_to :user
+  
+  belongs_to :menuLabel
+  
   has_many :navigations
   has_many :beverages
   

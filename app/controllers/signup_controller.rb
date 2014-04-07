@@ -14,18 +14,4 @@ class SignupController < ApplicationController
     #render :text => ses.addresses.list.result
   end
   
-  def index_post
-    if !params.values_at(:name, :email, :password).include?(nil)
-      @user = User.create(params.permit(:name, :email, :password))
-      
-      if @user.errors.count == 0 && !@user.blank?
-        
-        
-        render :text => {:signup_status => "success"}.to_json.to_s
-        return
-      end
-    end
-    render :text => {:signup_status => "invalid"}.to_json.to_s
-  end
-  
 end

@@ -33,6 +33,7 @@ class CreateUsers < ActiveRecord::Migration
       
       t.references :categories
       
+      t.references :default_menu
       t.references :menus
       
       t.references :daily_dishes

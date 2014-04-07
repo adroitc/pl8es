@@ -77,7 +77,7 @@ var neonRegister = neonRegister || {};
 					{
 						// Send data to the server
 						$.ajax({
-							url: baseurl + 'signup',
+							url: '/ajax/signup',
 							method: 'POST',
 							dataType: 'json',
 							data: {
@@ -102,7 +102,7 @@ var neonRegister = neonRegister || {};
 									email = response.submitted_data.email,
                   // password = response.submitted_data.password;*/
 
-  							var signup_status = response.signup_status;
+  							var status = response.status;
 								
 								// Form is fully completed, we update the percentage
 								neonRegister.setPercentage(100);
@@ -110,13 +110,13 @@ var neonRegister = neonRegister || {};
 								// We will give some time for the animation to finish, then execute the following procedures	
 								setTimeout(function()
 								{
-  								if(signup_status == 'invalid')
+  								if(status == 'invalid')
   								{
   									$(".login-page").removeClass('logging-in');
   									neonLogin.resetProgressBar(true);
   								}
   								else
-  								if(signup_status == 'success')
+  								if(status == 'success')
   								{
   									// Hide the description title
   									$(".login-page .login-header .description").slideUp();

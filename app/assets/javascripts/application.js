@@ -39,6 +39,52 @@
 
 // require_tree .
 
+$(document).ready(function()
+{
+  $(".pl8es_c_ajaxform").each(function(){
+    var f = $(this);
+    f.submit(function(e){
+      e.preventDefault();
+      
+  		$.ajax({
+  			url: f.attr("action"),
+  			method: "POST",
+  			dataType: "json",
+  			data: f.serialize(),
+  			error: function(e,r,t)
+  			{
+  				alert("An error occoured!");
+          console.log(e);
+          console.log(r);
+          console.log(t);
+  			},
+  			success: function(response)
+  			{
+  				//alert("success");
+          location.reload();
+  			}
+  		});
+    });
+  });
+});
+function pl8es_f_duplicate(m){
+	$.ajax({
+		url: "/ajax/duplicatemenu",
+		method: "POST",
+		dataType: "json",
+		data: {
+		  menu_id: m
+		},
+		error: function(e,r,t)
+		{
+			alert("An error occoured!");
+		},
+		success: function(response)
+		{
+      location.reload();
+		}
+	});
+}
 function pl8es_f_makedefaultmenu(){
   $(".pl8es_c_toggledefaultmenu").show();
   $(".pl8es_c_makedefaultmenu").hide();
@@ -57,9 +103,23 @@ function pl8es_f_initdeletemenu(){
   $(".pl8es_c_initdeletemenu").hide();
   $(".pl8es_c_confirmdeletemenu").show();
 }
-function pl8es_f_confirmdeletemenu(){
-  $(".pl8es_c_initdeletemenu").show();
-  $(".pl8es_c_confirmdeletemenu").hide();
+function pl8es_f_confirmdeletemenu(m){
+	$.ajax({
+		url: "/ajax/deletemenu",
+		method: "POST",
+		dataType: "json",
+		data: {
+		  menu_id: m
+		},
+		error: function(e,r,t)
+		{
+			alert("An error occoured!");
+		},
+		success: function(response)
+		{
+      location.reload();
+		}
+	});
 }
 function pl8es_f_revertdeletemenu(){
   $(".pl8es_c_initdeletemenu").show();

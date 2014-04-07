@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331134034) do
+ActiveRecord::Schema.define(version: 20140407134436) do
 
   create_table "categories", force: true do |t|
+    t.integer  "menu_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -101,10 +102,29 @@ ActiveRecord::Schema.define(version: 20140331134034) do
     t.datetime "updated_at"
   end
 
-  create_table "menus", force: true do |t|
+  create_table "menu_label_translations", force: true do |t|
+    t.integer  "menu_label_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "title"
-    t.string   "label"
+  end
+
+  add_index "menu_label_translations", ["locale"], name: "index_menu_label_translations_on_locale"
+  add_index "menu_label_translations", ["menu_label_id"], name: "index_menu_label_translations_on_menu_label_id"
+
+  create_table "menu_labels", force: true do |t|
+    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menus", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
     t.string   "from_time"
+    t.string   "to_time"
+    t.integer  "menuLabel_id"
     t.integer  "navigations_id"
     t.integer  "beverages_id"
     t.integer  "languages_id"
@@ -126,6 +146,7 @@ ActiveRecord::Schema.define(version: 20140331134034) do
   add_index "navigation_translations", ["navigation_id"], name: "index_navigation_translations_on_navigation_id"
 
   create_table "navigations", force: true do |t|
+    t.integer  "menu_id"
     t.integer  "level"
     t.integer  "sub_navigations_id"
     t.integer  "dishes_id"
@@ -176,6 +197,7 @@ ActiveRecord::Schema.define(version: 20140331134034) do
     t.integer  "default_language_id"
     t.integer  "openingHours_id"
     t.integer  "categories_id"
+    t.integer  "default_menu_id"
     t.integer  "menus_id"
     t.integer  "daily_dishes_id"
     t.datetime "created_at"

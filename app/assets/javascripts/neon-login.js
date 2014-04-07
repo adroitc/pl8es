@@ -73,7 +73,7 @@ var neonLogin = neonLogin || {};
 											
 					// Send data to the server
 					$.ajax({
-						url: baseurl + 'login',
+						url: '/ajax/login',
 						method: 'POST',
 						dataType: 'json',
 						data: {
@@ -87,7 +87,7 @@ var neonLogin = neonLogin || {};
 						success: function(response)
 						{
 							// Login status [success|invalid]
-							var login_status = response.login_status;
+							var status = response.status;
 															
 							// Form is fully completed, we update the percentage
 							neonLogin.setPercentage(100);
@@ -96,13 +96,13 @@ var neonLogin = neonLogin || {};
 							setTimeout(function()
 							{
 								// If login is invalid, we store the 
-								if(login_status == 'invalid')
+								if(status == 'invalid')
 								{
 									$(".login-page").removeClass('logging-in');
 									neonLogin.resetProgressBar(true);
 								}
 								else
-								if(login_status == 'success')
+								if(status == 'success')
 								{
 									// Redirect to login page
 									setTimeout(function()
