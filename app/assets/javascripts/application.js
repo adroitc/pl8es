@@ -10,14 +10,16 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require i18n
-//= require i18n/translations
-//= require jquery
-//= require jquery_ujs
-//= require jquery.ui.all
-//= require turbolinks
 
 //= require "gsap/main-gsap"
+
+//= require i18n
+//= require i18n/translations
+//= require jquery.min
+// require jquery_ujs
+//= require jquery.ui.all
+// require turbolinks
+
 //= require "bootstrap"
 //= require "joinable"
 //= require "resizeable"
@@ -27,43 +29,56 @@
 //= require "neon-register"
 //= require "jquery.inputmask.bundle.min"
 
-//= require "gsap/main-gsap"
 //= require "cookies.min"
 //= require "bootstrap-timepicker.min"
-//= require "select2/select2.min"
+//= require "select2/select2"
 //= require "jquery.multi-select"
 //= require "icheck/icheck"
 
 //= require "neon-custom"
-//= require "neon-demo"
+// require "neon-demo"
 
 // require_tree .
 
 $(document).ready(function()
 {
+  $("body").trigger("click");
   $(".pl8es_c_ajaxform").each(function(){
     var f = $(this);
     f.submit(function(e){
       e.preventDefault();
       
-  		$.ajax({
-  			url: f.attr("action"),
-  			method: "POST",
-  			dataType: "json",
-  			data: f.serialize(),
-  			error: function(e,r,t)
-  			{
-  				alert("An error occoured!");
-          console.log(e);
-          console.log(r);
-          console.log(t);
-  			},
-  			success: function(response)
-  			{
-  				//alert("success");
-          location.reload();
-  			}
-  		});
+      show_loading_bar({
+      	pct: 78,
+      	delay: 0.4,
+    		finish: function()
+    		{
+      		$.ajax({
+      			url: f.attr("action"),
+      			method: "POST",
+      			dataType: "json",
+      			data: f.serialize(),
+      			error: function(e,r,t)
+      			{
+      				alert("An error occoured!");
+              console.log(e);
+              console.log(r);
+              console.log(t);
+      			},
+      			success: function(response)
+      			{
+            	show_loading_bar({
+            		pct: 100,
+            		delay: 0.2,
+            		finish: function()
+            		{
+            			location.reload()
+            		}
+            	});
+      			}
+      		});
+        }
+      });
     });
   });
 });

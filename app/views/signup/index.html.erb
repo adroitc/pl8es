@@ -22,7 +22,8 @@
         <h3>Invalid email</h3>
         <p>This E-Mail is already taken.</p>
       </div>
-			<form method="post" role="form" id="form_register">
+			<!--<form method="post" role="form" id="form_register">-->
+      <%= form_tag({:controller => "ajax", :action => "signup"}, {:role => "form", :id => "form_register"}) do %>
 				<div class="form-register-success">
 					<i class="entypo-check"></i>
 					<h3><%=t("signup.successful") %></h3>
@@ -62,7 +63,8 @@
 						</div>
 					</div>
 				</div>
-			</form>
+      <!--</form>-->
+      <% end %>
 			<div class="login-bottom-links">
 				<a href="<%=url_for :controller => "login", :action => "index" %>" class="link">
 					<i class="entypo-lock"></i>

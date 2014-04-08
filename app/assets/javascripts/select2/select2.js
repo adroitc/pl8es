@@ -1233,6 +1233,8 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // abstract
         shouldOpen: function() {
+            if (!this.searchContainer.is(":visible")) return false;
+            
             var event;
 
             if (this.opened()) return false;

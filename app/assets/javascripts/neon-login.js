@@ -13,6 +13,7 @@ var neonLogin = neonLogin || {};
 	$(document).ready(function()
 	{
 		neonLogin.$container = $("#form_login");
+    
 		
 		
 		// Login Form & Validation
@@ -73,19 +74,17 @@ var neonLogin = neonLogin || {};
 											
 					// Send data to the server
 					$.ajax({
-						url: '/ajax/login',
+						url: $("#form_login").attr("action"),
 						method: 'POST',
 						dataType: 'json',
-						data: {
-							email: $("input#email").val(),
-							password: $("input#password").val(),
-						},
+						data: $("#form_login").serialize(),
 						error: function(e,r,t)
 						{
 							alert("An error occoured!");
 						},
 						success: function(response)
 						{
+              console.log(response);
 							// Login status [success|invalid]
 							var status = response.status;
 															

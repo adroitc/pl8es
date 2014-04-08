@@ -10,16 +10,17 @@
  *
  *= require_self
  *= require jquery.ui.all
- *= require "neon.css"
+ * jquery-ui-1.10.3.custom.min
+ * require "neon.css"
  *= require "font-icons/entypo/css/entypo"
  *= require "bootstrap"
- * require "neon-core"
- * require "neon-theme"
+ *= require "neon-core"
+ *= require "neon-theme"
  *= require "neon-forms"
  *= require "custom"
  *= require "datatables.responsive.css"
 
- *= require "select2/select2-bootstrap"
+ * require "select2/select2-bootstrap"
  *= require "select2/select2"
 
  *= require "icheck.square.blue.css"

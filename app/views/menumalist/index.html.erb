@@ -18,22 +18,33 @@
       </li>
     </ol>
     <div class="row">
-      <div class="col-md-8">
-    	  <div class="col-sm-6">
-    	  	<div class="tile-stats tile-white">
-    	  		<div class="icon"><i class="entypo-monitor"></i></div>
-    	  		<div class="num" data-start="0" data-end="1" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
-            <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
-    	  		<h3>installations</h3>
-            <p>on iPads
-              <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-                want more?
-                <i class="entypo-plus"></i>
-              </button>
-            </p>
-    	  	</div>
-    	  </div>
+      <div class="col-sm-4">
+      	<div class="tile-stats tile-white">
+      		<div class="icon">
+      			<i class="glyphicon glyphicon-download"></i>
+      		</div>
+      		<div class="num">
+      			<h2><%=@user.download_code %></h2>
+      		</div>
+      		<div class="title">
+      			<p>This is your download-code. Enter it on the menumalist iPad app to view your menus.</p>
+      		</div>
+      	</div>
       </div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-white">
+    	 		<div class="icon"><i class="entypo-monitor"></i></div>
+    	 		<div class="num" data-start="0" data-end="1" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+          <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
+    	 		<h3>installations</h3>
+          <p>on iPads
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              want more?
+              <i class="entypo-plus"></i>
+            </button>
+          </p>
+    	 	</div>
+    	 </div>
     </div>
     <h2>Alle Speisekarten</h2>
     <br />
@@ -90,6 +101,6 @@
   </div>
 </div>
 <%=render :partial => "modal_addmenu" %>
-<% @user.menus.each do |o| if 1==2 %>
+<% @user.menus.each do |o| %>
 <%=render :partial => "modal_editmenu", :locals => {:menu => o} %>
-<% end end %>
+<% end %>

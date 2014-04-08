@@ -22,7 +22,8 @@
 				<h3><%=t("login.invalid") %></h3>
 				<p><%=t("login.invalid_2") %></p>
 			</div>
-			<form method="post" role="form" id="form_login">
+			<!--<form method="post" role="form" id="form_login">-->
+      <%= form_tag({:controller => "ajax", :action => "login"}, {:role => "form", :id => "form_login"}) do %>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
@@ -45,7 +46,8 @@
 						<%=t("login.login") %>
 					</button>
 				</div>
-			</form>
+      <!--</form>-->
+      <% end %>
 			<div class="login-bottom-links">
 				<a href="extra-forgot-password.html" class="link"><%=t("login.forgot_password") %></a>
 				<br />

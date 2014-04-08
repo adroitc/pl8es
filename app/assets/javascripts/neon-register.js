@@ -77,17 +77,10 @@ var neonRegister = neonRegister || {};
 					{
 						// Send data to the server
 						$.ajax({
-							url: '/ajax/signup',
+							url: $("#form_register").attr("action"),
 							method: 'POST',
 							dataType: 'json',
-							data: {
-								name: 		$("input#name").val(),
-								//phone: 		$("input#phone").val(),
-								//birthdate: 	$("input#birthdate").val(),
-								//username: 	$("input#username").val(),
-								email: 		$("input#email").val(),
-								password:	$("input#password").val()
-							},
+							data: $("#form_register").serialize(),
 							error: function()
 							{
 								alert("An error occoured!");

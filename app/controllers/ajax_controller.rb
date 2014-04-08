@@ -5,6 +5,14 @@ class AjaxController < ApplicationController
       @user = User.create(params.permit(:name, :email, :password))
       
       if @user.errors.count == 0 && !@user.blank?
+        
+        download_code = SecureRandom.hex(3).upcase
+        while User.find_by_download_code(download_code).present?
+          download_code = SecureRandom.hex(3).upcase
+        end
+        @user.download_code = download_code
+        @user.save
+        
         session[:user_id] = @user.id
         render :text => {:status => "success"}.to_json.to_s
         return

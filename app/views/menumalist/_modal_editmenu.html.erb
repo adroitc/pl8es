@@ -1,7 +1,8 @@
 <div class="modal fade in" id="modal-editmenu-<%=menu.id %>">
 	<div class="modal-dialog">
 		<div class="modal-content">
-      <form method="post" action="<%=url_for :controller => "ajax", :action => "editmenu" %>" role="form" id="form_addmenu" class="pl8es_c_ajaxform">
+      <!--<form method="post" action="<%=url_for :controller => "ajax", :action => "editmenu" %>" role="form" id="form_editmenu" class="pl8es_c_ajaxform">-->
+      <%= form_tag({:controller => "ajax", :action => "editmenu"}, {:role => "form", :class => "pl8es_c_ajaxform", :id => "form_editmenu"}) do %>
         <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
 			  <div class="modal-header">
 			  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -134,7 +135,8 @@
 			  	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			  	<button type="submit" class="btn btn-info" >Save changes</button>
 			  </div>
-      </form>
+      <!--</form>-->
+      <% end %>
 		</div>
 	</div>
 </div>
