@@ -16,7 +16,7 @@ I18n.locale = "<%= I18n.locale %>";
 
 <%= yield %>
 
-<%= yield (:body_bottom_javascript) %>
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
 </body>
 </html>

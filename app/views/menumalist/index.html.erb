@@ -6,7 +6,7 @@
     <ul id="main-menu">
       <%=render :partial => "layouts/dashboard_menu" %>
     </ul>
-  </div>  
+  </div>
   <div class="main-content">
     <%=render :partial => "layouts/dashboard_topbar" %>
     <ol class="breadcrumb bc-3">
@@ -52,8 +52,8 @@
             <% @user.menus.each do |menu| %>
             <tr style="font-size: 18px;">
               <td>
-                <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","_"), :menu_id => menu.id %>">
-                  <%=menu.title.gsub(" ","_") %>
+                <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
+                  <%=menu.title %>
                 </a>
                 <span class="badge badge-primary"><%=menu.menuLabel.title if menu.menuLabel != nil %></span>
                 <span class="pl8es_c_table-toolbar">
@@ -90,6 +90,6 @@
   </div>
 </div>
 <%=render :partial => "modal_addmenu" %>
-<% @user.menus.each do |o| %>
+<% @user.menus.each do |o| if 1==2 %>
 <%=render :partial => "modal_editmenu", :locals => {:menu => o} %>
-<% end %>
+<% end end %>

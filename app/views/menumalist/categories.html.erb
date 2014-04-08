@@ -6,15 +6,15 @@
     <ul id="main-menu">
       <%=render :partial => "layouts/dashboard_menu" %>
     </ul>
-  </div>  
+  </div>
   <div class="main-content">
     <%=render :partial => "layouts/dashboard_topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
         <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
       </li>
-      <li class="active">
-        <a href="#">Alle Speisekarten</a>
+      <li class="">
+        <a href="<%=url_for :controller => "menumalist", :action => "index" %>">Alle Speisekarten</a>
       </li>
       <li class="active">
         <strong><%=@menu.title %></strong>
