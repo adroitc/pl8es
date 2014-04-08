@@ -15,7 +15,7 @@ class MenumalistController < ApplicationController
       if @user.menus.exists?(params[:menu_id])
         @menu = @user.menus.find(params[:menu_id])
       else
-        raise ActionController::RoutingError.new('Not Found')
+        raise ActionController::RoutingError.new("Not Found")
       end
     else
       redirect_to :controller => "login", :action => "index"

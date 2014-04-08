@@ -68,9 +68,11 @@
                 </a>
                 <span class="badge badge-primary"><%=menu.menuLabel.title if menu.menuLabel != nil %></span>
                 <span class="pl8es_c_table-toolbar">
-                  <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                    <i class="entypo-pencil"></i>
-                  </button>
+                  <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
+                    <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                      <i class="entypo-pencil"></i>
+                    </button>
+                  </a>
                   <a href="javascript:;" onclick="pl8es_f_duplicate('<%=menu.id %>')">
                     <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Duplicate">
                       <i class="entypo-docs"></i>

@@ -47,57 +47,54 @@ $(document).ready(function()
     var f = $(this);
     f.submit(function(e){
       e.preventDefault();
-      
-      show_loading_bar({
-      	pct: 78,
-      	delay: 0.4,
-    		finish: function()
-    		{
-      		$.ajax({
-      			url: f.attr("action"),
-      			method: "POST",
-      			dataType: "json",
-      			data: f.serialize(),
-      			error: function(e,r,t)
-      			{
-      				alert("An error occoured!");
-              console.log(e);
-              console.log(r);
-              console.log(t);
-      			},
-      			success: function(response)
-      			{
-            	show_loading_bar({
-            		pct: 100,
-            		delay: 0.2,
-            		finish: function()
-            		{
-            			location.reload()
-            		}
-            	});
-      			}
-      		});
-        }
-      });
+      pl8es_i_ajax(f.attr("action"),f.serialize(),function(){
+	      location.reload();
+	    });
     });
   });
 });
+function pl8es_i_ajax(u,d,s)
+{
+  show_loading_bar({
+  	pct: 78,
+  	delay: 0.4,
+		finish: function()
+		{
+    	$.ajax({
+    		url: u,
+    		method: "POST",
+    		dataType: "json",
+    		data: d,
+    		error: function(e,r,t)
+    		{
+    			alert("An error occoured!");
+          /*
+          console.log(e);
+          console.log(r);
+          console.log(t);
+          */
+    		},
+    		success: function(response)
+    		{
+        	show_loading_bar({
+        		pct: 100,
+        		delay: 0.2,
+        		finish: function()
+        		{
+        			s(response);
+        		}
+        	});
+    		}
+    	});
+    }
+  });
+}
 function pl8es_f_duplicate(m){
-	$.ajax({
-		url: "/ajax/duplicatemenu",
-		method: "POST",
-		dataType: "json",
-		data: {
-		  menu_id: m
-		},
-		error: function(e,r,t)
-		{
-			alert("An error occoured!");
-		},
-		success: function(response)
-		{
-      location.reload();
-		}
+  pl8es_i_ajax("/ajax/duplicatemenu",{
+    authenticity_token: window._token,
+	  menu_id: m
+	},function(){
+	  location.reload();
 	});
 }
 function pl8es_f_makedefaultmenu(){
@@ -119,22 +116,12 @@ function pl8es_f_initdeletemenu(){
   $(".pl8es_c_confirmdeletemenu").show();
 }
 function pl8es_f_confirmdeletemenu(m){
-	$.ajax({
-		url: "/ajax/deletemenu",
-		method: "POST",
-		dataType: "json",
-		data: {
-		  menu_id: m
-		},
-		error: function(e,r,t)
-		{
-			alert("An error occoured!");
-		},
-		success: function(response)
-		{
-      location.reload();
-		}
-	});
+  pl8es_i_ajax("/ajax/deletemenu",{
+    authenticity_token: window._token,
+	  menu_id: m
+	},function(){
+   location.reload();
+  });
 }
 function pl8es_f_revertdeletemenu(){
   $(".pl8es_c_initdeletemenu").show();
