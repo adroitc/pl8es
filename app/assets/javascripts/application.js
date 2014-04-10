@@ -25,6 +25,7 @@
 //= require "resizeable"
 //= require "neon-api"
 //= require "jquery.validate.min"
+//= require "jquery.nestable"
 //= require "neon-login"
 //= require "neon-register"
 //= require "jquery.inputmask.bundle.min"

@@ -21,35 +21,147 @@
       </li>
     </ol>
     <div class="row gallery-env">
-      <% @menu.navigations.each do |navigation| %>
-		  <div class="col-sm-4">
-		  	<article class="album">
-		  		<header>
-		  			<a href="extra-gallery-single.html">
-		  				<img src="assets/images/album-thumb.jpg" />
-		  			</a>
-		  		</header>
-		  		<section class="album-info">
-		  			<h3><a href="extra-gallery-single.html">Album Title</a></h3>
-		  		</section>
-		  		<footer>
-		  			<div class="album-images-count">
-		  				5
-		  				<i class="entypo-folder"></i>
-		  			</div>
-		  			<div class="album-images-count">
-		  				12
-		  				<i class="glyphicon glyphicon-cutlery"></i>
-		  			</div>
-		  			<div class="album-options">
-		  				<a href="#">
-		  					<i class="entypo-trash"></i>
-		  				</a>
-		  			</div>
-		  		</footer>
-		  	</article>
-		  </div>
-      <% end %>
+      <div class="draggable-portlets">
+        <div class="sorted ui-sortable">
+          <% for i in 0..2 do %>
+		      <div class="col-sm-3">
+			      <div class="panel panel-primary" data-collapsed="0">
+			      	<div class="panel-heading">
+			      		<div class="panel-title"><b>Category title</b></div>
+			      	</div>
+			      	<div class="panel-body" style="margin:0px;padding:0px;">
+    		      	<article class="album" style="margin-bottom: 0px;">
+    		      		<header>
+    		      			<a href="extra-gallery-single.html">
+    		      				<img src="assets/images/album-thumb.jpg" />
+    		      			</a>
+    		      		</header>
+    		      		<footer>
+    		      			<div class="album-images-count">
+    		      				5
+    		      				<i class="entypo-folder"></i>
+    		      			</div>
+    		      			<div class="album-images-count">
+    		      				12
+    		      				<i class="glyphicon glyphicon-cutlery"></i>
+    		      			</div>
+    		      			<div class="album-options">
+    		      				<a href="#">
+    		      					<i class="entypo-trash"></i>
+    		      				</a>
+    		      			</div>
+    		      		</footer>
+    		      	</article>
+			      	</div>
+			      </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<div class="modal fade custom-width" id="album-cover-options">
+	<div class="modal-dialog" style="width: 65%;">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Edit: <strong>Album Title</strong></h4>
+			</div>
+			
+			<div class="modal-body">
+				
+				<div class="row">
+					<div class="col-sm-6">
+										
+						<div class="row">
+							<div class="col-md-12">
+								
+								<h4 class="margin-top-none">Crop Image</h4>
+								
+								<div class="croppable-image">
+									<img src="assets/images/sample-crop.jpg" class="img-responsive" />
+								</div>
+								
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="col-sm-6">
+					
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Title</label>
+									
+									<input type="text" class="form-control" id="field-1" placeholder="Enter album title">
+								</div>	
+								
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Tags</label>
+									
+									<input type="text" class="form-control" id="field-3" placeholder="Tags">
+								</div>	
+								
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Description</label>
+									
+									<textarea class="form-control autogrow" id="field-2" placeholder="Enter album description" style="min-height: 120px;"></textarea>
+								</div>	
+								
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success btn-icon">
+					<i class="entypo-check"></i>
+					Apply Changes
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($)
+	{
+		$(function(){
+			var $draggable_portlets = $(".draggable-portlets");
+			
+			$(".draggable-portlets .sorted" ).sortable({
+				connectWith: ".draggable-portlets .sorted",
+				handle: '.panel-heading',
+				start: function()
+				{
+					$draggable_portlets.addClass('dragging');
+				},
+				stop: function()
+				{
+					$draggable_portlets.removeClass('dragging');
+				}
+			});
+			$( ".draggable-portlets .sorted .panel-heading" ).disableSelection();
+		});
+		
+	});
+</script><!-- Footer -->
