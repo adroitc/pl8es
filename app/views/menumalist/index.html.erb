@@ -103,6 +103,6 @@
   </div>
 </div>
 <%=render :partial => "modal_addmenu" %>
-<% @user.menus.each do |o| %>
-<%=render :partial => "modal_editmenu", :locals => {:menu => o} %>
+<% @user.menus.each do |menu| %>
+<%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>
 <% end %>

@@ -35,7 +35,7 @@ class AjaxController < ApplicationController
   end
   
   def addmenu
-    if User.loggedIn(session) && !params.values_at(:title, :from_time, :to_time, :label).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:title, :from_time, :to_time, :languages, :label).include?(nil)
       @user = User.find(session[:user_id])
       
       if MenuLabel.exists?(params[:label]) || params[:label] != ""
@@ -44,11 +44,18 @@ class AjaxController < ApplicationController
         menuLabel = nil
       end
       
-      menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({menuLabel: menuLabel}))
+      languages = Array.new
+      params[:languages].each do |language|
+        if Language.exists?(:title => language[1].downcase)
+          languages.push(Language.find_by_title(language[1].downcase))
+        end
+      end
+      
+      menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({menuLabel: menuLabel, languages: languages}))
       @user.menus.push(menu)
       @user.save
       
-      render :text => {:status => "success"}.to_json.to_s
+      render :text => {:status => "success", :p => params[:languages]}.to_json.to_s
       return
     end
     render :text => {:status => "invalid"}.to_json
@@ -99,11 +106,55 @@ class AjaxController < ApplicationController
     if User.loggedIn(session) && !params.values_at(:menu_id).include?(nil)
       @user = User.find(session[:user_id])
       
-      menu = @user.menus.find(params[:menu_id])
-      if !menu.blank?
-      
+      if !@user.menus.find(params[:menu_id]).blank?
         @user.menus.destroy(params[:menu_id])
         
+        render :text => {:status => "success"}.to_json.to_s
+        return
+      end
+    end
+    render :text => {:status => "invalid"}.to_json
+  end
+  
+  def addnavigation
+    if User.loggedIn(session) && !params.values_at(:menu_id, :title).include?(nil)
+      @user = User.find(session[:user_id])
+      
+      menu = @user.menus.find(params[:menu_id])
+      languages = Language.find_all_by_locale(params[:title].keys)
+      if !menu.blank? && languages.count > 0 && languages.count == params[:title].count
+        navigation = Navigation.create()
+        current_locale = I18n.locale
+        languages.each do |language|
+          I18n.locale = language.locale
+          navigation.title = params[:title][language.locale]
+        end
+        I18n.locale = current_locale
+        menu.navigations.push(navigation)
+        menu.save
+        render :text => {:status => "success"}.to_json.to_s
+        return
+      end
+    end
+    render :text => {:status => "invalid"}.to_json
+  end
+  
+  def editnavigation
+    if User.loggedIn(session) && !params.values_at(:menu_id, :navigation_id, :title).include?(nil)
+      @user = User.find(session[:user_id])
+      
+      menu = @user.menus.find(params[:menu_id])
+      languages = Language.find_all_by_locale(params[:title].keys)
+      if !menu.blank? && menu.navigations.exists?(params[:navigation_id]) && languages.count > 0 && languages.count == params[:title].count
+        navigation = menu.navigations.find(params[:navigation_id])
+        current_locale = I18n.locale
+        languages.each do |language|
+          I18n.locale = language.locale
+          navigation.title = params[:title][language.locale]
+        end
+        I18n.locale = current_locale
+        menu.navigations.push(navigation)
+        menu.save
         render :text => {:status => "success"}.to_json.to_s
         return
       end

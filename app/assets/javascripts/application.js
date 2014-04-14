@@ -35,6 +35,7 @@
 //= require "select2/select2"
 //= require "jquery.multi-select"
 //= require "icheck/icheck"
+//= require "fileinput"
 
 //= require "neon-custom"
 // require "neon-demo"
@@ -48,8 +49,19 @@ $(document).ready(function()
     var f = $(this);
     f.submit(function(e){
       e.preventDefault();
-      pl8es_i_ajax(f.attr("action"),f.serialize(),function(){
+      var d = f.serialize();
+      var s2 = f.find("div.select2");
+      if (s2.size() > 0)
+      {
+        var s2_id = s2.attr("id").split("s2id_form-")[1];
+        var s2_e = s2.children("ul.select2-choices").children("li.select2-search-choice");
+        s2_e.each(function(i){
+          d = d+"&"+s2_id+"["+i+"]="+$(this).text();
+        });
+      }
+      pl8es_i_ajax(f.attr("action"),d,function(r){
 	      location.reload();
+        //console.log(r);
 	    });
     });
   });

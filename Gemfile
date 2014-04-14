@@ -51,6 +51,11 @@ gem "rename"
 gem "globalize", "~> 4.0.1"
 gem "i18n-js"
 
+# paperclip
+gem "paperclip"
+gem "aws-sdk"
+gem "paperclip-dimension"
+
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
 gem "jquery-ui-rails"

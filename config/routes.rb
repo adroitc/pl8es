@@ -3,10 +3,14 @@ Pl8es::Application.routes.draw do
   resources :ajax, :only => []
   post "/ajax/signup" => "ajax#signup"
   post "/ajax/login" => "ajax#login"
+  
   post "/ajax/addmenu" => "ajax#addmenu"
   post "/ajax/editmenu" => "ajax#editmenu"
   post "/ajax/duplicatemenu" => "ajax#duplicatemenu"
   post "/ajax/deletemenu" => "ajax#deletemenu"
+
+  post "/ajax/addcategory" => "ajax#addnavigation"
+  post "/ajax/editcategory" => "ajax#editnavigation"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"
