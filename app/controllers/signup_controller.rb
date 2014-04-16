@@ -1,6 +1,9 @@
 class SignupController < ApplicationController
   
   def index
+    if User.loggedIn(session)
+      redirect_to :controller => "menumalist", :action => "index"
+    end
     #ses = AWS::SES::Base.new(
     #  :access_key_id     => ENV['AWS_ACCESS'],
     #  :secret_access_key => ENV['AWS_SECRET']
