@@ -24,12 +24,16 @@
       </li>
     </ol>
     <div class="row gallery-env draggable-portlets">
+      <%= form_tag({:controller => "ajax", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+      <input type="hidden" name="menu_id" value="<%=@navigation.menu.id %>">
+      <input type="hidden" name="navigation_id" value="<%=@navigation.id %>">
       <span class="sorted ui-sortable">
         <% @navigation.sub_navigations.each do |navigation| %>
 		     <div class="col-sm-3" style="margin-bottom:17px;">
 			     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
 			     	<div class="panel-heading">
 			     		<div class="panel-title">
+                <input type="hidden" name="navigation_ids[<%=navigation.id %>]" value="">
                 <b><%=navigation.title %></b>
               </div>
 			     	</div>
@@ -37,7 +41,7 @@
     	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
     	      		<header>
     	      			<a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id, :navigation_title => navigation.title.gsub(" ","-"), :navigation_id => navigation.id %>">
-    	      				<img src="assets/images/album-thumb.jpg" />
+    	      				<img src="http://placehold.it/1024x1024" />
     	      			</a>
     	      		</header>
     	      		<footer>
@@ -46,7 +50,7 @@
     	      				<i class="glyphicon glyphicon-cutlery"></i>
     	      			</div>
     	      			<div class="album-options">
-    	      				<a href="javascript:;" onclick="jQuery('#modal-editsubnavigation-<%=navigation.id %>').modal('show');">
+    	      				<a href="javascript:;" onclick="jQuery('#modal-editnavigation-<%=navigation.id %>').modal('show');">
     	      					<i class="entypo-cog"></i>
     	      				</a>
     	      			</div>
@@ -57,12 +61,13 @@
         </div>
         <% end %>
       </span>
+      <% end %>
       <% if @navigation.sub_navigations.count != 100 %>
       <div class="col-sm-3" style="height:240px;">
         <div style="margin-top:50%;text-align:center;">
           <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">
             <button type="button" class="btn btn-green btn-icon btn-lg  icon-left">
-            	Add navigation
+            	Add category
             	<i class="entypo-plus"></i>
             </button>
           </a>
@@ -99,7 +104,11 @@
 				},
 				stop: function()
 				{
+          $("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+            $(this).val(i);
+          });
 					$draggable_portlets.removeClass('dragging');
+          $("#form_sortnavigation").submit();
 				}
 			});
 			$( ".draggable-portlets .sorted .panel-heading" ).disableSelection();
@@ -107,6 +116,6 @@
 	});
 </script>
 <%=render :partial => "modal_addnavigation", :locals => {:menu => @navigation.menu, :navigation => @navigation} %>
-<% @menu.navigations.each do |navigation| %>
-<%=render :partial => "modal_editnavigation", :locals => {:navigation => navigation} %>
+<% @navigation.sub_navigations.each do |navigation| %>
+<%=render :partial => "modal_editnavigation", :locals => {:menu => @navigation.menu, :parent_navigation => @navigation, :navigation => navigation} %>
 <% end %>

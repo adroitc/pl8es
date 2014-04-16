@@ -2,8 +2,14 @@
 	<div class="modal-dialog" style="width: 65%;">
 		<div class="modal-content">
       <%= form_tag({:controller => "ajax", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editnavigation"}) do %>
-        <input name="menu_id" type="hidden" id="form-menu_id" value="<%=navigation.menu.id %>">
+        <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
         <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
+        <% if defined? parent_navigation %>
+        <input name="navigation_id" type="hidden" id="form-sub_navigation_id" value="<%=parent_navigation.id %>">
+        <input name="sub_navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
+        <% else %>
+        <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
+        <% end %>
 			  <div class="modal-header">
 			  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			  	<h4 class="modal-title">Add new category</h4>
@@ -12,11 +18,11 @@
 			  	<div class="row">
             <div class="col-sm-12">
           		<ul class="nav nav-tabs right-aligned" style="margin-top:-10px;">
-                <% navigation.menu.languages.each do |language| %>
-          			<li <%="class=active" if navigation.menu.languages.first == language %>>
+                <% menu.languages.each do |language| %>
+          			<li <%="class=active" if menu.languages.first == language %>>
                   <a href="#modal-editmenu-tab-<%=language.locale %>" data-toggle="tab">
-          					<span class="visible-xs"><%=language.locale.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
-          					<span class="hidden-xs"><%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
+          					<span class="visible-xs"><%=language.locale.capitalize %><%=" (Default)" if menu.default_language == language %></span>
+          					<span class="hidden-xs"><%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></span>
           				</a>
           			</li>
                 <% end %>
@@ -49,11 +55,11 @@
 			  					<div class="form-group tab-content">
                     <%
                     current_locale = I18n.locale
-                    navigation.menu.languages.each do |language|
+                    menu.languages.each do |language|
                       I18n.locale = language.locale
                     %>
-                    <div class="tab-pane <%="active" if navigation.menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
-                      <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
+                    <div class="tab-pane <%="active" if menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
+                      <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></label>
 			  						  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>">
                     </div>
                     <%

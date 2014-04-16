@@ -90,7 +90,6 @@
 				},
 				stop: function()
 				{
-          //alert($draggable_portlets.size());
           $("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
             $(this).val(i);
           });
@@ -104,5 +103,5 @@
 </script>
 <%=render :partial => "modal_addnavigation", :locals => {:menu => @menu} %>
 <% @menu.navigations.each do |navigation| %>
-<%=render :partial => "modal_editnavigation", :locals => {:navigation => navigation} %>
+<%=render :partial => "modal_editnavigation", :locals => {:menu => @menu, :navigation => navigation} %>
 <% end %>

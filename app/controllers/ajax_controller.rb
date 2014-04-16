@@ -14,6 +14,7 @@ class AjaxController < ApplicationController
         @user.save
         
         session[:user_id] = @user.id
+        
         render :text => {:status => "success"}.to_json.to_s
         return
       end
@@ -138,6 +139,7 @@ class AjaxController < ApplicationController
           menu.navigations.push(new_navigation)
           menu.save
         end
+        
         render :text => {:status => "success"}.to_json
         return
       end
@@ -152,17 +154,28 @@ class AjaxController < ApplicationController
       menu = @user.menus.find(params[:menu_id])
       languages = Language.find_all_by_locale(params[:title].keys)
       if !menu.blank? && menu.navigations.exists?(params[:navigation_id]) && languages.count > 0 && languages.count == params[:title].count
+        parent = menu
+        parent_navigations = parent.navigations
         navigation = menu.navigations.find(params[:navigation_id])
-        current_locale = I18n.locale
-        languages.each do |language|
-          I18n.locale = language.locale
-          navigation.title = params[:title][language.locale]
+        if params[:sub_navigation_id] == nil || (params[:sub_navigation_id] != nil && navigation.sub_navigations.exists?(params[:sub_navigation_id]))
+          if params[:sub_navigation_id] != nil && navigation.sub_navigations.exists?(params[:sub_navigation_id])
+            parent = navigation
+            parent_navigations = parent.sub_navigations
+            navigation = parent_navigations.find(params[:sub_navigation_id])
+          end
+          
+          current_locale = I18n.locale
+          languages.each do |language|
+            I18n.locale = language.locale
+            navigation.title = params[:title][language.locale]
+          end
+          I18n.locale = current_locale
+          parent_navigations.push(navigation)
+          parent.save
+          
+          render :text => {:status => "success"}.to_json
+          return
         end
-        I18n.locale = current_locale
-        menu.navigations.push(navigation)
-        menu.save
-        render :text => {:status => "success"}.to_json
-        return
       end
     end
     render :text => {:status => "invalid"}.to_json
