@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407134436) do
+ActiveRecord::Schema.define(version: 20140416133844) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -147,11 +147,13 @@ ActiveRecord::Schema.define(version: 20140407134436) do
 
   create_table "navigations", force: true do |t|
     t.integer  "menu_id"
+    t.integer  "navigation_id"
     t.integer  "level"
     t.integer  "sub_navigations_id"
     t.integer  "dishes_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   create_table "opening_hours", force: true do |t|

@@ -22,12 +22,12 @@ class MenumalistController < ApplicationController
     end
   end
   
-  def categories_edit
+  def category
     if User.loggedIn(session)
       @user = User.find(session[:user_id])
       
-      if @user.menus.exists?(params[:menu_id])
-        @menu = @user.menus.find(params[:menu_id])
+      if @user.menus.exists?(params[:menu_id]) && @user.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
+        @navigation = @user.menus.find(params[:menu_id]).navigations.find(params[:navigation_id])
       else
         raise ActionController::RoutingError.new("Not Found")
       end

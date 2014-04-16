@@ -3,6 +3,9 @@
 		<div class="modal-content">
       <%= form_tag({:controller => "ajax", :action => "addnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_addnavigation"}) do %>
         <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
+        <% if defined? navigation %>
+        <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
+        <% end %>
 			  <div class="modal-header">
 			  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			  	<h4 class="modal-title">Add new category</h4>

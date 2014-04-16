@@ -55,7 +55,7 @@ class AjaxController < ApplicationController
       @user.menus.push(menu)
       @user.save
       
-      render :text => {:status => "success", :p => params[:languages]}.to_json.to_s
+      render :text => {:status => "success", :p => params[:languages]}.to_json
       return
     end
     render :text => {:status => "invalid"}.to_json
@@ -77,7 +77,7 @@ class AjaxController < ApplicationController
         menu.attributes = params.permit(:title, :from_time, :to_time).merge({menuLabel: menuLabel})
         menu.save
         
-        render :text => {:status => "success"}.to_json.to_s
+        render :text => {:status => "success"}.to_json
         return
       end
     end
@@ -95,7 +95,7 @@ class AjaxController < ApplicationController
         newMenu.title = newMenu.title+" 2"
         newMenu.save
         
-        render :text => {:status => "success"}.to_json.to_s
+        render :text => {:status => "success"}.to_json
         return
       end
     end
@@ -106,10 +106,10 @@ class AjaxController < ApplicationController
     if User.loggedIn(session) && !params.values_at(:menu_id).include?(nil)
       @user = User.find(session[:user_id])
       
-      if !@user.menus.find(params[:menu_id]).blank?
+      if !@user.menus.exists?(params[:menu_id])
         @user.menus.destroy(params[:menu_id])
         
-        render :text => {:status => "success"}.to_json.to_s
+        render :text => {:status => "success"}.to_json
         return
       end
     end
@@ -123,16 +123,22 @@ class AjaxController < ApplicationController
       menu = @user.menus.find(params[:menu_id])
       languages = Language.find_all_by_locale(params[:title].keys)
       if !menu.blank? && languages.count > 0 && languages.count == params[:title].count
-        navigation = Navigation.create()
+        new_navigation = Navigation.create()
         current_locale = I18n.locale
         languages.each do |language|
           I18n.locale = language.locale
-          navigation.title = params[:title][language.locale]
+          new_navigation.title = params[:title][language.locale]
         end
         I18n.locale = current_locale
-        menu.navigations.push(navigation)
-        menu.save
-        render :text => {:status => "success"}.to_json.to_s
+        if params[:navigation_id] && menu.navigations.exists?(params[:navigation_id])
+          navigation = menu.navigations.find(params[:navigation_id])
+          navigation.sub_navigations.push(new_navigation)
+          navigation.save
+        else
+          menu.navigations.push(new_navigation)
+          menu.save
+        end
+        render :text => {:status => "success"}.to_json
         return
       end
     end
@@ -155,11 +161,37 @@ class AjaxController < ApplicationController
         I18n.locale = current_locale
         menu.navigations.push(navigation)
         menu.save
-        render :text => {:status => "success"}.to_json.to_s
+        render :text => {:status => "success"}.to_json
         return
       end
     end
     render :text => {:status => "invalid"}.to_json
+  end
+  
+  def sortnavigation
+    if User.loggedIn(session) && !params.values_at(:navigation_ids).include?(nil)
+      @user = User.find(session[:user_id])
+      
+      navigations = nil
+      if params[:menu_id] != nil && @user.menus.exists?(params[:menu_id])
+        if params[:navigation_id] && @user.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
+          navigations = @user.menus.find(params[:menu_id]).navigations.find(params[:navigation_id]).sub_navigations
+        else
+          navigations = @user.menus.find(params[:menu_id]).navigations
+        end
+      end
+      
+      if navigations != nil && navigations.count == params[:navigation_ids].count
+        navigations.each do |navigation|
+          navigation.position = params[:navigation_ids][navigation.id.to_s]
+          navigation.save
+        end
+      end
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
   end
   
 end

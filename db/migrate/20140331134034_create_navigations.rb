@@ -2,6 +2,7 @@ class CreateNavigations < ActiveRecord::Migration
   def up
     create_table :navigations do |t|
       t.references :menu
+      t.references :navigation
       
       t.integer :level
       t.references :sub_navigations
