@@ -12,6 +12,8 @@ Pl8es::Application.routes.draw do
   post "/ajax/addcategory" => "ajax#addnavigation"
   post "/ajax/editcategory" => "ajax#editnavigation"
   post "/ajax/sortcategory" => "ajax#sortnavigation"
+
+  post "/ajax/adddish" => "ajax#adddish"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"
@@ -23,6 +25,7 @@ Pl8es::Application.routes.draw do
   get "/menumalist" => "menumalist#index"
   get "/menumalist/:menu_title-:menu_id" => "menumalist#categories"
   get "/menumalist/:menu_title-:menu_id/:navigation_title-:navigation_id" => "menumalist#category"
+  get "/menumalist/:menu_title-:menu_id/:parent_navigation_title-:parent_navigation_id/:navigation_title-:navigation_id" => "menumalist#category"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

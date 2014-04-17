@@ -19,6 +19,11 @@
       <li class="">
         <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id %>"><%=@navigation.menu.title %></a>
       </li>
+      <% if @navigation.navigation != nil%>
+      <li class="">
+        <a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id, :navigation_title => @navigation.navigation.title.gsub(" ","-"), :navigation_id => @navigation.navigation.id %>"><%=@navigation.navigation.title %></a>
+      </li>
+      <% end %>
       <li class="active">
         <strong><%=@navigation.title %></strong>
       </li>
@@ -40,7 +45,7 @@
 			     	<div class="panel-body" style="margin:0px;padding:0px;">
     	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
     	      		<header>
-    	      			<a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id, :navigation_title => navigation.title.gsub(" ","-"), :navigation_id => navigation.id %>">
+    	      			<a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id, :parent_navigation_title => @navigation.title.gsub(" ","-"), :parent_navigation_id => @navigation.id, :navigation_title => navigation.title.gsub(" ","-"), :navigation_id => navigation.id %>">
     	      				<img src="http://placehold.it/1024x1024" />
     	      			</a>
     	      		</header>
@@ -62,7 +67,39 @@
         <% end %>
       </span>
       <% end %>
-      <% if @navigation.sub_navigations.count != 100 %>
+      <span class="sorted ui-sortable">
+        <% @navigation.dishes.each do |dish| %>
+		     <div class="col-sm-3" style="margin-bottom:17px;">
+			     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
+			     	<div class="panel-heading">
+			     		<div class="panel-title">
+                <input type="hidden" name="dish_ids[<%=dish.id %>]" value="">
+                <b><%=dish.title %></b>
+              </div>
+			     	</div>
+			     	<div class="panel-body" style="margin:0px;padding:0px;">
+    	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
+    	      		<header>
+    	      			<img src="http://placehold.it/1024x1024" />
+    	      		</header>
+    	      		<footer>
+    	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
+    	      				12
+    	      				<i class="glyphicon glyphicon-cutlery"></i>
+    	      			</div>
+    	      			<div class="album-options">
+    	      				<a href="javascript:;" onclick="jQuery('#modal-editdish-<%=dish.id %>').modal('show');">
+    	      					<i class="entypo-cog"></i>
+    	      				</a>
+    	      			</div>
+    	      		</footer>
+    	      	</article>
+			     	</div>
+			    </div>
+        </div>
+        <% end %>
+      </span>
+      <% if @navigation.dishes.count == 0 && @navigation.level == 0 %>
       <div class="col-sm-3" style="height:240px;">
         <div style="margin-top:50%;text-align:center;">
           <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">
@@ -77,7 +114,7 @@
       <% if @navigation.sub_navigations.count == 0 %>
       <div class="col-sm-3" style="height:240px;">
         <div style="margin-top:50%;text-align:center;">
-          <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">
+          <a href="javascript:;" onclick="jQuery('#modal-adddish').modal('show');">
             <button type="button" class="btn btn-green btn-icon btn-lg  icon-left">
             	Add dish
             	<i class="entypo-plus"></i>
@@ -117,5 +154,9 @@
 </script>
 <%=render :partial => "modal_addnavigation", :locals => {:menu => @navigation.menu, :navigation => @navigation} %>
 <% @navigation.sub_navigations.each do |navigation| %>
-<%=render :partial => "modal_editnavigation", :locals => {:menu => @navigation.menu, :parent_navigation => @navigation, :navigation => navigation} %>
+<%=render :partial => "modal_editnavigation", :locals => {:navigation => navigation} %>
+<% end %>
+<%=render :partial => "modal_adddish", :locals => {:navigation => @navigation} %>
+<% @navigation.dishes.each do |dish| %>
+<%=render :partial => "modal_editdish", :locals => {:dish => dish} %>
 <% end %>

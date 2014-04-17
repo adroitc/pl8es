@@ -10,3 +10,5 @@
 Language.create([{title: "english", locale: "en"}, {title: "deutsch", locale: "de"}, {title: "français", locale: "fr"}, {title: "español", locale: "es"}, {title: "italiano", locale: "it"}, {title: "русский", locale: "ru"}, {title: "português", locale: "pt"}])
 
 MenuLabel.create([{title: "Lunch"}, {title: "Dinner"}])
+
+user = User.create({:email => "marc@illnox.com", :password => "lol123lol", :name => "Marc's restaurant", :download_code => SecureRandom.hex(3).upcase})

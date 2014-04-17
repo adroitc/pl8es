@@ -1,21 +1,21 @@
-<div class="modal fade custom-width" id="modal-editnavigation-<%=navigation.id %>">
+<div class="modal fade custom-width" id="modal-editdish-<%=dish.id %>">
 	<div class="modal-dialog" style="width: 65%;">
 		<div class="modal-content">
       <%= form_tag({:controller => "ajax", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editnavigation"}) do %>
-        <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
+        <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 			  <div class="modal-header">
 			  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			  	<h4 class="modal-title">Edit category</h4>
+			  	<h4 class="modal-title">Edit dish</h4>
 			  </div>
 			  <div class="modal-body">
 			  	<div class="row">
             <div class="col-sm-12">
           		<ul class="nav nav-tabs right-aligned" style="margin-top:-10px;">
-                <% navigation.menu.languages.each do |language| %>
-          			<li <%="class=active" if navigation.menu.languages.first == language %>>
+                <% dish.navigation.menu.languages.each do |language| %>
+          			<li <%="class=active" if dish.navigation.menu.languages.first == language %>>
                   <a href="#modal-editmenu-tab-<%=language.locale %>" data-toggle="tab">
-          					<span class="visible-xs"><%=language.locale.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
-          					<span class="hidden-xs"><%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
+          					<span class="visible-xs"><%=language.locale.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></span>
+          					<span class="hidden-xs"><%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></span>
           				</a>
           			</li>
                 <% end %>
@@ -48,18 +48,27 @@
 			  					<div class="form-group tab-content">
                     <%
                     current_locale = I18n.locale
-                    navigation.menu.languages.each do |language|
+                    dish.navigation.menu.languages.each do |language|
                       I18n.locale = language.locale
                     %>
-                    <div class="tab-pane <%="active" if navigation.menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
-                      <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			  						  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>">
+                    <div class="tab-pane <%="active" if dish.navigation.menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
+                      <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
+			  						  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>">
                     </div>
                     <%
                     end
                     I18n.locale = current_locale
                     %>
 			  					</div>
+			  				</div>
+			  				<div class="col-md-12">
+                  <label class="control-label"><strong>Description</strong></label>
+	  						  <textarea class="control-label"></textarea>
+                  <br />
+			  				</div>
+			  				<div class="col-md-12">
+                  <label  class="control-label"><strong>Price</strong></label>
+	  						  <input name="" type="text" class="form-control" id="" placeholder="Enter album title" value="<">
 			  				</div>
 			  			</div>
 			  		</div>

@@ -1,11 +1,11 @@
-<div class="modal fade custom-width" id="modal-editnavigation-<%=navigation.id %>">
+<div class="modal fade custom-width" id="modal-adddish">
 	<div class="modal-dialog" style="width: 65%;">
 		<div class="modal-content">
-      <%= form_tag({:controller => "ajax", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editnavigation"}) do %>
+      <%= form_tag({:controller => "ajax", :action => "adddish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_addnavigation"}) do %>
         <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
 			  <div class="modal-header">
 			  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			  	<h4 class="modal-title">Edit category</h4>
+			  	<h4 class="modal-title">Add new dish</h4>
 			  </div>
 			  <div class="modal-body">
 			  	<div class="row">
@@ -13,7 +13,7 @@
           		<ul class="nav nav-tabs right-aligned" style="margin-top:-10px;">
                 <% navigation.menu.languages.each do |language| %>
           			<li <%="class=active" if navigation.menu.languages.first == language %>>
-                  <a href="#modal-editmenu-tab-<%=language.locale %>" data-toggle="tab">
+                  <a href="#modal-addmenu-tab-<%=language.locale %>" data-toggle="tab">
           					<span class="visible-xs"><%=language.locale.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
           					<span class="hidden-xs"><%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
           				</a>
@@ -46,19 +46,12 @@
 			  			<div class="row">
 			  				<div class="col-md-12">
 			  					<div class="form-group tab-content">
-                    <%
-                    current_locale = I18n.locale
-                    navigation.menu.languages.each do |language|
-                      I18n.locale = language.locale
-                    %>
-                    <div class="tab-pane <%="active" if navigation.menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
+                    <% navigation.menu.languages.each do |language| %>
+                    <div class="tab-pane <%="active" if navigation.menu.languages.first == language %>" id="modal-addmenu-tab-<%=language.locale %>">
                       <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			  						  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>">
+			  						  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title">
                     </div>
-                    <%
-                    end
-                    I18n.locale = current_locale
-                    %>
+                    <% end %>
 			  					</div>
 			  				</div>
 			  			</div>
@@ -67,7 +60,10 @@
 			  </div>
 			  <div class="modal-footer">
 			  	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  	<button type="submit" class="btn btn-info" >Save changes</button>
+			  	<button type="submit" class="btn btn-success btn-icon icon-left">
+			  		<i class="entypo-plus"></i>
+			  		Add dish
+			  	</button>
 			  </div>
       <% end %>
 		</div>

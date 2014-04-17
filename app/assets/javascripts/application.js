@@ -53,6 +53,7 @@ $(document).ready(function()
     pl8es_i_ajaxform($(this),function(){
     })
   });
+  $("input[type='text']").attr("autocomplete","off");
 });
 function pl8es_i_ajaxform(f,a)
 {

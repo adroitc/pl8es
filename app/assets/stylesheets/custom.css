@@ -24,3 +24,7 @@ body {
   margin-top: -15px;
   background-color: #eee;
 }
+.draggable-portlets .sorted .panel .panel-heading
+{
+  cursor: move;
+}

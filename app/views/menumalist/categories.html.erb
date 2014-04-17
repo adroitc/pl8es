@@ -24,7 +24,7 @@
       <%= form_tag({:controller => "ajax", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
       <input type="hidden" name="menu_id" value="<%=@menu.id %>">
       <span class="sorted ui-sortable">
-        <% @menu.navigations.each do |navigation| %>
+        <% @menu.navigations.find_all_by_level(0).each do |navigation| %>
 		     <div class="col-sm-3" style="margin-bottom:17px;">
 			     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
 			     	<div class="panel-heading">
@@ -41,14 +41,18 @@
     	      			</a>
     	      		</header>
     	      		<footer>
+                  <% if navigation.sub_navigations.count > 0 %>
     	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
-    	      				5
+    	      				<%=navigation.sub_navigations.count %>
     	      				<i class="entypo-folder"></i>
     	      			</div>
+                  <% end %>
+                  <% if navigation.dishes.count > 0 %>
     	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
-    	      				12
+    	      				<%=navigation.dishes.count %>
     	      				<i class="glyphicon glyphicon-cutlery"></i>
     	      			</div>
+                  <% end %>
     	      			<div class="album-options">
     	      				<a href="javascript:;" onclick="jQuery('#modal-editnavigation-<%=navigation.id %>').modal('show');">
     	      					<i class="entypo-cog"></i>
@@ -103,5 +107,5 @@
 </script>
 <%=render :partial => "modal_addnavigation", :locals => {:menu => @menu} %>
 <% @menu.navigations.each do |navigation| %>
-<%=render :partial => "modal_editnavigation", :locals => {:menu => @menu, :navigation => navigation} %>
+<%=render :partial => "modal_editnavigation", :locals => {:navigation => navigation} %>
 <% end %>
