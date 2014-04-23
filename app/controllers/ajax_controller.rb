@@ -131,7 +131,7 @@ class AjaxController < ApplicationController
           navigation_new.image = params[:image]
           
           if navigation_new.image_dimensions["original"][1] >= navigation_new.image_dimensions["original"][0]
-            navigation_new.image_crop_w = navigation.image_dimensions["original"].min
+            navigation_new.image_crop_w = navigation_new.image_dimensions["original"].min
             navigation_new.image_crop_h = navigation_new.image_crop_w/(navigation_new.image_dimensions["cropped_retina"][0].to_f/navigation_new.image_dimensions["cropped_retina"][1].to_f)
           else
             navigation_new.image_crop_h = navigation_new.image_dimensions["original"].min
@@ -279,6 +279,20 @@ class AjaxController < ApplicationController
       
       if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
         new_dish = Dish.create()
+        
+        if params[:image]
+          new_dish.image = params[:image]
+          
+          if new_dish.image_dimensions["original"][1] >= new_dish.image_dimensions["original"][0]
+            new_dish.image_crop_w = new_dish.image_dimensions["original"].min
+            new_dish.image_crop_h = new_dish.image_crop_w/(new_dish.image_dimensions["cropped_retina"][0].to_f/new_dish.image_dimensions["cropped_retina"][1].to_f)
+          else
+            new_dish.image_crop_h = new_dish.image_dimensions["original"].min
+            new_dish.image_crop_w = (new_dish.image_dimensions["cropped_retina"][0].to_f/new_dish.image_dimensions["cropped_retina"][1].to_f)*new_dish.image_crop_h
+          end
+          new_dish.image_crop_x = (new_dish.image_dimensions["original"][0]-new_dish.image_crop_w).to_f/2
+          new_dish.image_crop_y = (new_dish.image_dimensions["original"][1]-new_dish.image_crop_h).to_f/2
+        end
         
         current_locale = I18n.locale
         
