@@ -39,35 +39,42 @@ class AjaxController < ApplicationController
     if User.loggedIn(session) && !params.values_at(:title, :from_time, :to_time, :languages, :label).include?(nil)
       @user = User.find(session[:user_id])
       
+      languages = Array.new
+      params[:languages].each do |language|
+        if Language.exists?(:title => language[1].strip.downcase)
+          languages.push(Language.find_by_title(language[1].strip.downcase))
+        end
+      end
+      
       if MenuLabel.exists?(params[:label]) || params[:label] != ""
         menuLabel = MenuLabel.find(params[:label])
       else
         menuLabel = nil
       end
       
-      languages = Array.new
-      params[:languages].each do |language|
-        if Language.exists?(:title => language[1].downcase)
-          languages.push(Language.find_by_title(language[1].downcase))
-        end
-      end
-      
       menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({menuLabel: menuLabel, languages: languages}))
       @user.menus.push(menu)
       @user.save
       
-      render :text => {:status => "success", :p => params[:languages]}.to_json
+      render :text => {:status => "success"}.to_json
       return
     end
     render :text => {:status => "invalid"}.to_json
   end
   
   def editmenu
-    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :from_time, :to_time, :label).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :from_time, :to_time, :languages, :label).include?(nil)
       @user = User.find(session[:user_id])
       
       if @user.menus.exists?(params[:menu_id])
         menu = @user.menus.find(params[:menu_id])
+        
+        languages = Array.new
+        params[:languages].each do |language|
+          if Language.exists?(:title => language[1].strip.downcase)
+            languages.push(Language.find_by_title(language[1].strip.downcase))
+          end
+        end
         
         if MenuLabel.exists?(params[:label]) || params[:label] != ""
           menuLabel = MenuLabel.find(params[:label])
@@ -75,14 +82,14 @@ class AjaxController < ApplicationController
           menuLabel = nil
         end
       
-        menu.attributes = params.permit(:title, :from_time, :to_time).merge({menuLabel: menuLabel})
+        menu.attributes = params.permit(:title, :from_time, :to_time).merge({languages: languages, menuLabel: menuLabel})
         menu.save
         
-        render :text => {:status => "success"}.to_json
+        render :json => {:status => "success", :p => languages}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
   end
   
   def duplicatemenu
@@ -93,7 +100,7 @@ class AjaxController < ApplicationController
         menu = @user.menus.find(params[:menu_id])
         
         menu_dup = menu.dup
-        menu_dup.title = newMenu.title+" 2"
+        menu_dup.title = menu.title+" 2"
         menu_dup.save
         
         render :text => {:status => "success"}.to_json
@@ -107,7 +114,7 @@ class AjaxController < ApplicationController
     if User.loggedIn(session) && !params.values_at(:menu_id).include?(nil)
       @user = User.find(session[:user_id])
       
-      if !@user.menus.exists?(params[:menu_id])
+      if @user.menus.exists?(params[:menu_id])
         @user.menus.destroy(params[:menu_id])
         
         render :text => {:status => "success"}.to_json

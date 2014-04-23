@@ -83,7 +83,7 @@ function pl8es_i_ajaxform(f,a)
       var s2_id = s2.attr("id").split("s2id_form-")[1];
       var s2_e = s2.children("ul.select2-choices").children("li.select2-search-choice");
       s2_e.each(function(i){
-        d.append(s2_id+"["+i+"]", $(this).text());
+        d.append(s2_id+"["+i+"]", $.trim($(this).text()));
         //d = d+"&"+s2_id+"["+i+"]="+$(this).text();
       });
     }
@@ -131,10 +131,10 @@ function pl8es_i_ajax(u,d,s)
   });
 }
 function pl8es_f_duplicate(m){
-  pl8es_i_ajax("/ajax/duplicatemenu",{
-    authenticity_token: window._token,
-	  menu_id: m
-	},function(){
+  var d = new FormData();
+  d.append("authenticity_token", window._token);
+  d.append("menu_id", m);
+  pl8es_i_ajax("/ajax/duplicatemenu",d,function(){
 	  location.reload();
 	});
 }
@@ -157,11 +157,11 @@ function pl8es_f_initdeletemenu(){
   $(".pl8es_c_confirmdeletemenu").show();
 }
 function pl8es_f_confirmdeletemenu(m){
-  pl8es_i_ajax("/ajax/deletemenu",{
-    authenticity_token: window._token,
-	  menu_id: m
-	},function(){
-   location.reload();
+  var d = new FormData();
+  d.append("authenticity_token", window._token);
+  d.append("menu_id", m);
+  pl8es_i_ajax("/ajax/deletemenu",d,function(){
+    location.reload();
   });
 }
 function pl8es_f_revertdeletemenu(){

@@ -70,9 +70,12 @@
 				  	<div class="col-md-12">
 				  		<label for="form-languages" class="control-label">Select your languages</label>
               <br />
-				  		<select class="select2" multiple>
-                <% Language.all.each do |language| %>
-				  			<option value="<%=language.locale %>" <%="selected data-locked=true" if language.id==1 %>><%=language.title.capitalize %></option>
+				  		<select class="select2" id="form-languages" multiple>
+                <%
+                languages = menu.languages
+                Language.all.each do |language|
+                %>
+				  			<option value="<%=language.locale %>" <%="selected" if languages.exists?(language.id) %> <%="data-locked=true" if languages.count==1 %>><%=language.title.capitalize %></option>
                 <% end %>
 				  		</select>
 				  	</div>

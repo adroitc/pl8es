@@ -6,7 +6,6 @@ Pl8es::Application.routes.draw do
   
   post "/ajax/addmenu" => "ajax#addmenu"
   post "/ajax/editmenu" => "ajax#editmenu"
-  post "/ajax/duplicatemenu" => "ajax#duplicatemenu"
   post "/ajax/deletemenu" => "ajax#deletemenu"
 
   post "/ajax/addcategory" => "ajax#addnavigation"
