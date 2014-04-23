@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423082106) do
+ActiveRecord::Schema.define(version: 20140423100629) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -55,11 +55,21 @@ ActiveRecord::Schema.define(version: 20140423082106) do
     t.integer  "wines_id"
     t.integer  "dishes_id"
     t.string   "price"
-    t.boolean  "is_daily",      default: false
+    t.boolean  "is_daily",           default: false
     t.date     "daily_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "image_dimensions"
+    t.string   "image_fingerprint"
+    t.integer  "image_crop_w"
+    t.integer  "image_crop_h"
+    t.integer  "image_crop_x"
+    t.integer  "image_crop_y"
   end
 
   create_table "languages", force: true do |t|

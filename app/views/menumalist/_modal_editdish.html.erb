@@ -1,7 +1,7 @@
 <div class="modal fade custom-width" id="modal-editdish-<%=dish.id %>">
 	<div class="modal-dialog" style="width: 65%;">
 		<div class="modal-content">
-      <%= form_tag({:controller => "ajax", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editnavigation"}) do %>
+      <%= form_tag({:controller => "ajax", :action => "editdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editdish"}) do %>
         <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 			  <div class="modal-header">
 			  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -25,20 +25,40 @@
 			  			<div class="row">
 			  				<div class="col-md-12">
 			  					<h4 class="margin-top-none">Upload Image</h4>
-  		  					<div class="fileinput fileinput-new" data-provides="fileinput">
-  		  						<div class="fileinput-new thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
-  		  							<img src="http://placehold.it/1508x1012" alt="...">
-  		  						</div>
-  		  						<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
-  		  						<div>
-  		  							<span class="btn btn-white btn-file">
-  		  								<span class="fileinput-new">Select image</span>
-  		  								<span class="fileinput-exists">Change</span>
-  		  								<input name="image" type="file" accept="image/*">
-  		  							</span>
-  		  							<a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
-  		  						</div>
-  		  					</div>
+                  <% if dish.image.present? %>
+		  						<div class="thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
+		  							<img id="navigation-image-<%=dish.id %>" src="<%=dish.image.url(:crop) %>">
+		  						</div>
+                  <input name="image_crop_w" type="hidden" id="form-modal-editdish-<%=dish.id %>-image_crop_w" value="<%=dish.image_crop_w %>">
+                  <input name="image_crop_h" type="hidden" id="form-modal-editdish-<%=dish.id %>-image_crop_h" value="<%=dish.image_crop_h %>">
+                  <input name="image_crop_x" type="hidden" id="form-modal-editdish-<%=dish.id %>-image_crop_x" value="<%=dish.image_crop_x %>">
+                  <input name="image_crop_y" type="hidden" id="form-modal-editdish-<%=dish.id %>-image_crop_y" value="<%=dish.image_crop_y %>">
+                  <script type="text/javascript">
+                	  $("#navigation-image-<%=dish.id %>").Jcrop({
+                      aspectRatio: <%=dish.image_dimensions["cropped"][0].to_f/dish.image_dimensions["cropped"][1].to_f %>,
+                      onSelect: updateCoords,
+                      trueSize: [<%=dish.image_dimensions["original"][0] %>,<%=dish.image_dimensions["original"][1] %>],
+                      setSelect: [<%=dish.image_crop_x %>, <%=dish.image_crop_y %>, <%=dish.image_crop_w %>, <%=dish.image_crop_h %>],
+                      minSize: [<%=dish.image_dimensions["cropped_retina"][0] %>,<%=dish.image_dimensions["cropped_retina"][1] %>]
+                    });
+                	  function updateCoords(c)
+                	  {
+                	  	$("#form-modal-editdish-<%=dish.id %>-image_crop_w").val(Math.min(<%=dish.image_dimensions["original"][0] %>,Math.round(c.w)));
+                	  	$("#form-modal-editdish-<%=dish.id %>-image_crop_h").val(Math.min(<%=dish.image_dimensions["original"][1] %>,Math.round(c.h)));
+                	  	$("#form-modal-editdish-<%=dish.id %>-image_crop_x").val(Math.round(c.x));
+                	  	$("#form-modal-editdish-<%=dish.id %>-image_crop_y").val(Math.round(c.y));
+                	  };
+                  </script>
+                  <% end %>
+    							<div class="fileinput fileinput-new" data-provides="fileinput">
+    								<span class="btn btn-info btn-file">
+    									<span class="fileinput-new">Select <%="different " if dish.image.present? %>image</span>
+    									<span class="fileinput-exists">Change</span>
+    									<input type="file" name="image">
+    								</span>
+    								<span class="fileinput-filename"></span>
+    								<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+    							</div>
 			  				</div>
 			  			</div>
 			  		</div>

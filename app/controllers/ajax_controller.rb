@@ -319,20 +319,36 @@ class AjaxController < ApplicationController
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)
-      if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
-        #new_dish = Dish.create()
+      if Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).navigation.menu.user == @user && languages.count > 0 && languages.count == params[:title].count
+        dish = Dish.find(params[:dish_id])
+        
+        if params[:image]
+          dish.image = params[:image]
+          
+          if dish.image_dimensions["original"][1] >= dish.image_dimensions["original"][0]
+            dish.image_crop_w = dish.image_dimensions["original"].min
+            dish.image_crop_h = dish.image_crop_w/(dish.image_dimensions["cropped_retina"][0].to_f/dish.image_dimensions["cropped_retina"][1].to_f)
+          else
+            dish.image_crop_h = dish.image_dimensions["original"].min
+            dish.image_crop_w = (dish.image_dimensions["cropped_retina"][0].to_f/dish.image_dimensions["cropped_retina"][1].to_f)*dish.image_crop_h
+          end
+          dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
+          dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
+        elsif params[:image_crop_w] && params[:image_crop_h] && params[:image_crop_x] && params[:image_crop_y]
+          dish.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
+          dish.image_should_process = true
+          dish.image.reprocess!
+          dish.image_should_process = false
+        end
         
         current_locale = I18n.locale
         
         languages.each do |language|
           I18n.locale = language.locale
-          new_dish.title = params[:title][language.locale]
+          dish.title = params[:title][language.locale]
         end
         
-        I18n.locale = current_locale
-        navigation = Navigation.find_by_menu_id_and_id(params[:menu_id],params[:navigation_id])
-        navigation.dishes.push(new_dish)
-        navigation.save
+        dish.save
         
         render :json => {:status => "success"}
         return

@@ -83,7 +83,11 @@
 			     	<div class="panel-body" style="margin:0px;padding:0px;">
     	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
     	      		<header>
-    	      			<img src="http://placehold.it/1024x1024" />
+    	      			<% if dish.image.present? %>
+                  <img src="<%=dish.image.url(:cropped) %>" />
+                  <% else %>
+                  <img src="http://placehold.it/1516x1012" />
+                  <% end %>
     	      		</header>
     	      		<footer>
     	      			<div class="album-options">

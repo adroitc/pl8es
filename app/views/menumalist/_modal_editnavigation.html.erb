@@ -29,11 +29,10 @@
 		  						<div class="thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
 		  							<img id="navigation-image-<%=navigation.id %>" src="<%=navigation.image.url(:crop) %>">
 		  						</div>
-                  <input name="image_crop_w" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_w" value="<%=navigation.image_crop_w %>">
-                  <input name="image_crop_h" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_h" value="<%=navigation.image_crop_h %>">
-                  <input name="image_crop_x" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_x" value="<%=navigation.image_crop_x %>">
-                  <input name="image_crop_y" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_y" value="<%=navigation.image_crop_y %>">
-                  
+                  <input name="image_crop_w" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_w" value="<%=navigation.image_crop_w %>">
+                  <input name="image_crop_h" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_h" value="<%=navigation.image_crop_h %>">
+                  <input name="image_crop_x" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_x" value="<%=navigation.image_crop_x %>">
+                  <input name="image_crop_y" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_y" value="<%=navigation.image_crop_y %>">
                   <script type="text/javascript">
                 	  $("#navigation-image-<%=navigation.id %>").Jcrop({
                       aspectRatio: <%=navigation.image_dimensions["cropped"][0].to_f/navigation.image_dimensions["cropped"][1].to_f %>,
@@ -50,7 +49,6 @@
                 	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_y").val(Math.round(c.y));
                 	  };
                   </script>
-                  
                   <% end %>
     							<div class="fileinput fileinput-new" data-provides="fileinput">
     								<span class="btn btn-info btn-file">
