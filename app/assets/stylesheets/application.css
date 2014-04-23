@@ -23,6 +23,8 @@
  * require "select2/select2-bootstrap"
  *= require "select2/select2"
 
- *= require "icheck.square.blue.css"
+ *= require "icheck.square.blue"
 
+ *= require "jquery.Jcrop.min"
+ 
  */

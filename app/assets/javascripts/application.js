@@ -36,6 +36,7 @@
 //= require "jquery.multi-select"
 //= require "icheck/icheck"
 //= require "fileinput"
+//= require "jcrop/jquery.Jcrop.min"
 
 //= require "neon-custom"
 // require "neon-demo"
@@ -54,19 +55,36 @@ $(document).ready(function()
     })
   });
   $("input[type='text']").attr("autocomplete","off");
+  $(".fileinput").on("change.bs.fileinput",function(){
+    var f = $(this);
+    if (f.find(".fileinput-preview img").size() > 0)
+    {
+    }
+  });
 });
 function pl8es_i_ajaxform(f,a)
 {
+  var files;
   f.submit(function(e){
     e.preventDefault();
     var d = f.serialize();
     var s2 = f.find("div.select2");
-    if (s2.size() > 0)
+    /*if (s2.size() > 0)
     {
       var s2_id = s2.attr("id").split("s2id_form-")[1];
       var s2_e = s2.children("ul.select2-choices").children("li.select2-search-choice");
       s2_e.each(function(i){
         d = d+"&"+s2_id+"["+i+"]="+$(this).text();
+      });
+    }*/
+    d = new FormData(f[0]);
+    if (s2.size() > 0)
+    {
+      var s2_id = s2.attr("id").split("s2id_form-")[1];
+      var s2_e = s2.children("ul.select2-choices").children("li.select2-search-choice");
+      s2_e.each(function(i){
+        d.append(s2_id+"["+i+"]", $(this).text());
+        //d = d+"&"+s2_id+"["+i+"]="+$(this).text();
       });
     }
     pl8es_i_ajax(f.attr("action"),d,function(r){
@@ -86,6 +104,8 @@ function pl8es_i_ajax(u,d,s)
     		method: "POST",
     		dataType: "json",
     		data: d,
+        contentType: false,
+        processData: false,
     		error: function(e,r,t)
     		{
     			alert("An error occoured!");

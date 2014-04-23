@@ -37,7 +37,11 @@
     	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
     	      		<header>
     	      			<a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @menu.title.gsub(" ","-"), :menu_id => @menu.id, :navigation_title => navigation.title.gsub(" ","-"), :navigation_id => navigation.id %>">
-    	      				<img src="http://placehold.it/1024x1024" />
+    	      				<% if navigation.image.present? %>
+                    <img src="<%=navigation.image.url(:cropped) %>" />
+                    <% else %>
+                    <img src="http://placehold.it/622x566" />
+                    <% end %>
     	      			</a>
     	      		</header>
     	      		<footer>

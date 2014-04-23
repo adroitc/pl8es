@@ -28,3 +28,11 @@ body {
 {
   cursor: move;
 }
+.gallery-env article.album header img
+{
+  -webkit-border-radius: 0 0 0 0;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 0 0 0 0;
+  -moz-background-clip: padding;
+  border-radius: 0 0 0 0;
+}

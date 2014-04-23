@@ -24,21 +24,43 @@
 			  		<div class="col-sm-6">
 			  			<div class="row">
 			  				<div class="col-md-12">
-			  					<h4 class="margin-top-none">Upload Image</h4>
-  		  					<div class="fileinput fileinput-new" data-provides="fileinput">
-  		  						<div class="fileinput-new thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
-  		  							<img src="http://placehold.it/1508x1012" alt="...">
-  		  						</div>
-  		  						<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
-  		  						<div>
-  		  							<span class="btn btn-white btn-file">
-  		  								<span class="fileinput-new">Select image</span>
-  		  								<span class="fileinput-exists">Change</span>
-  		  								<input name="image" type="file" accept="image/*">
-  		  							</span>
-  		  							<a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
-  		  						</div>
-  		  					</div>
+			  					<h4 class="margin-top-none">Image</h4>
+                  <% if navigation.image.present? %>
+		  						<div class="thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
+		  							<img id="navigation-image-<%=navigation.id %>" src="<%=navigation.image.url(:crop) %>">
+		  						</div>
+                  <input name="image_crop_w" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_w" value="<%=navigation.image_crop_w %>">
+                  <input name="image_crop_h" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_h" value="<%=navigation.image_crop_h %>">
+                  <input name="image_crop_x" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_x" value="<%=navigation.image_crop_x %>">
+                  <input name="image_crop_y" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_y" value="<%=navigation.image_crop_y %>">
+                  
+                  <script type="text/javascript">
+                	  $("#navigation-image-<%=navigation.id %>").Jcrop({
+                      aspectRatio: <%=navigation.image_dimensions["cropped"][0].to_f/navigation.image_dimensions["cropped"][1].to_f %>,
+                      onSelect: updateCoords,
+                      trueSize: [<%=navigation.image_dimensions["original"][0] %>,<%=navigation.image_dimensions["original"][1] %>],
+                      setSelect: [<%=navigation.image_crop_x %>, <%=navigation.image_crop_y %>, <%=navigation.image_crop_w %>, <%=navigation.image_crop_h %>],
+                      minSize: [<%=navigation.image_dimensions["cropped_retina"][0] %>,<%=navigation.image_dimensions["cropped_retina"][1] %>]
+                    });
+                	  function updateCoords(c)
+                	  {
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_w").val(Math.min(<%=navigation.image_dimensions["original"][0] %>,Math.round(c.w)));
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_h").val(Math.min(<%=navigation.image_dimensions["original"][1] %>,Math.round(c.h)));
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_x").val(Math.round(c.x));
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_y").val(Math.round(c.y));
+                	  };
+                  </script>
+                  
+                  <% end %>
+    							<div class="fileinput fileinput-new" data-provides="fileinput">
+    								<span class="btn btn-info btn-file">
+    									<span class="fileinput-new">Select <%="different " if navigation.image.present? %>image</span>
+    									<span class="fileinput-exists">Change</span>
+    									<input type="file" name="image">
+    								</span>
+    								<span class="fileinput-filename"></span>
+    								<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+    							</div>
 			  				</div>
 			  			</div>
 			  		</div>

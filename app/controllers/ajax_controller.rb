@@ -164,6 +164,25 @@ class AjaxController < ApplicationController
       if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
         navigation = Navigation.find(params[:navigation_id])
         
+        if params[:image]
+          navigation.image = params[:image]
+          
+          if navigation.image_dimensions["original"][1] >= navigation.image_dimensions["original"][0]
+            navigation.image_crop_w = navigation.image_dimensions["original"].min
+            navigation.image_crop_h = navigation.image_crop_w/(navigation.image_dimensions["cropped_retina"][0].to_f/navigation.image_dimensions["cropped_retina"][1].to_f)
+          else
+            navigation.image_crop_h = navigation.image_dimensions["original"].min
+            navigation.image_crop_w = (navigation.image_dimensions["cropped_retina"][0].to_f/navigation.image_dimensions["cropped_retina"][1].to_f)*navigation.image_crop_h
+          end
+          navigation.image_crop_x = (navigation.image_dimensions["original"][0]-navigation.image_crop_w).to_f/2
+          navigation.image_crop_y = (navigation.image_dimensions["original"][1]-navigation.image_crop_h).to_f/2
+        elsif params[:image_crop_w] && params[:image_crop_h] && params[:image_crop_x] && params[:image_crop_y]
+          navigation.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
+          navigation.image_should_process = true
+          navigation.image.reprocess!
+          navigation.image_should_process = false
+        end
+        
         current_locale = I18n.locale
         
         languages.each do |language|
@@ -194,8 +213,8 @@ class AjaxController < ApplicationController
         #  parent_navigations.push(navigation)
         #  parent.save
         #  
-        #  render :text => {:status => "success"}.to_json
-        #  return
+        render :text => {:status => "success"}.to_json
+        return
         #end
       end
     end
