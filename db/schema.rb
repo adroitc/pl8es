@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422114148) do
+ActiveRecord::Schema.define(version: 20140423082106) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140422114148) do
     t.date     "daily_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   create_table "languages", force: true do |t|

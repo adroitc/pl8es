@@ -14,6 +14,7 @@ Pl8es::Application.routes.draw do
   post "/ajax/sortcategory" => "ajax#sortnavigation"
 
   post "/ajax/adddish" => "ajax#adddish"
+  post "/ajax/sortdish" => "ajax#sortdish"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"

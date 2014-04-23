@@ -127,6 +127,20 @@ class AjaxController < ApplicationController
         
         navigation_new = Navigation.create()
         
+        if params[:image]
+          navigation_new.image = params[:image]
+          
+          if navigation_new.image_dimensions["original"][1] >= navigation_new.image_dimensions["original"][0]
+            navigation_new.image_crop_w = navigation.image_dimensions["original"].min
+            navigation_new.image_crop_h = navigation_new.image_crop_w/(navigation_new.image_dimensions["cropped_retina"][0].to_f/navigation_new.image_dimensions["cropped_retina"][1].to_f)
+          else
+            navigation_new.image_crop_h = navigation_new.image_dimensions["original"].min
+            navigation_new.image_crop_w = (navigation_new.image_dimensions["cropped_retina"][0].to_f/navigation_new.image_dimensions["cropped_retina"][1].to_f)*navigation_new.image_crop_h
+          end
+          navigation_new.image_crop_x = (navigation_new.image_dimensions["original"][0]-navigation_new.image_crop_w).to_f/2
+          navigation_new.image_crop_y = (navigation_new.image_dimensions["original"][1]-navigation_new.image_crop_h).to_f/2
+        end
+        
         current_locale = I18n.locale
         
         languages.each do |language|
@@ -140,10 +154,12 @@ class AjaxController < ApplicationController
           navigation_new.level = 1
           navigation_new.menu = menu
           navigation = menu.navigations.find(params[:navigation_id])
+          navigation_new.position = navigation.sub_navigations.last.position+1
           navigation.sub_navigations.push(navigation_new)
           navigation.save
         else
           navigation_new.level = 0
+          navigation_new.position = menu.navigations.last.position+1
           menu.navigations.push(navigation_new)
           menu.save
         end
@@ -277,11 +293,11 @@ class AjaxController < ApplicationController
         navigation.dishes.push(new_dish)
         navigation.save
         
-        render :text => {:status => "success"}.to_json
+        render :json => {:status => "success"}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
   end
   
   def editdish
@@ -304,11 +320,45 @@ class AjaxController < ApplicationController
         navigation.dishes.push(new_dish)
         navigation.save
         
-        render :text => {:status => "success"}.to_json
+        render :json => {:status => "success"}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
+  end
+  
+  def sortdish
+    if User.loggedIn(session) && !params.values_at(:dish_ids).include?(nil)
+      @user = User.find(session[:user_id])
+      
+      #navigations = nil
+      #if params[:menu_id] != nil && @user.menus.exists?(params[:menu_id])
+      #  if params[:navigation_id] && @user.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
+      #    navigations = @user.menus.find(params[:menu_id]).navigations.find(params[:navigation_id]).sub_navigations
+      #  else
+      #    navigations = @user.menus.find(params[:menu_id]).navigations
+      #  end
+      #end
+      #
+      #if navigations != nil && navigations.count == params[:navigation_ids].count
+      #  navigations.each do |navigation|
+      #    navigation.position = params[:navigation_ids][navigation.id.to_s]
+      #    navigation.save
+      #  end
+      #end
+      
+      params[:dish_ids].each do |dish_id|
+        if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).navigation.menu.user == @user
+          dish = Dish.find(dish_id[0].to_i)
+          dish.position = dish_id[1].to_i
+          dish.save
+        end
+      end
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
   end
   
 end
