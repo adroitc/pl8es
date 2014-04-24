@@ -56,10 +56,10 @@ class AjaxController < ApplicationController
       @user.menus.push(menu)
       @user.save
       
-      render :text => {:status => "success"}.to_json
+      render :json => {:status => "success"}
       return
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
   end
   
   def editmenu
@@ -161,12 +161,16 @@ class AjaxController < ApplicationController
           navigation_new.level = 1
           navigation_new.menu = menu
           navigation = menu.navigations.find(params[:navigation_id])
-          navigation_new.position = navigation.sub_navigations.last.position+1
+          if navigation.sub_navigations.count > 0
+            navigation_new.position = navigation.sub_navigations.last.position+1
+          end
           navigation.sub_navigations.push(navigation_new)
           navigation.save
         else
           navigation_new.level = 0
-          navigation_new.position = menu.navigations.last.position+1
+          if menu.navigations.count > 0
+            navigation_new.position = menu.navigations.last.position+1
+          end
           menu.navigations.push(navigation_new)
           menu.save
         end
