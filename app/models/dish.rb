@@ -10,7 +10,7 @@ class Dish < ActiveRecord::Base
   
   default_scope :order => "position, id"
   
-  attr_accessor :image_should_process
+  #attr_accessor :image_should_process
   has_attached_file :image, {
     :styles => {
       #:crop => ["286x286", :png],

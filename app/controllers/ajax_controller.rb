@@ -204,10 +204,13 @@ class AjaxController < ApplicationController
           navigation.image_crop_x = (navigation.image_dimensions["original"][0]-navigation.image_crop_w).to_f/2
           navigation.image_crop_y = (navigation.image_dimensions["original"][1]-navigation.image_crop_h).to_f/2
         elsif params[:image_crop_w] && params[:image_crop_h] && params[:image_crop_x] && params[:image_crop_y]
-          navigation.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
-          navigation.image_should_process = true
+          navigation.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).merge({:image_crop_processed => false}))
+          #navigation.image_should_process = true
+          #navigation.save
           navigation.image.reprocess!
-          navigation.image_should_process = false
+          navigation.update_attributes({:image_crop_processed => false})
+          #navigation.image_should_process = false
+          #navigation.save
         end
         
         current_locale = I18n.locale
