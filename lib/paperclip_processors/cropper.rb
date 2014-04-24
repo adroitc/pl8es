@@ -28,6 +28,8 @@ module Paperclip
         #puts "running crop = -crop '#{target.crop_w.to_i}x#{target.crop_h.to_i}+#{target.crop_x.to_i}+#{target.crop_y.to_i}'"
         #["-crop", "1080x1080+0+0"]
         [" -crop", "#{img_val("crop_w")}x#{img_val("crop_h")}+#{img_val("crop_x")}+#{img_val("crop_y")}"]
+        puts '" -crop", "#{img_val("crop_w")}x#{img_val("crop_h")}+#{img_val("crop_x")}+#{img_val("crop_y")}"'
+        puts "---------------------------------------------------#{@attachment.instance.class} #{@attachment.instance.id}"
       end
     end
     
