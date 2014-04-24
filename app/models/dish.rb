@@ -33,4 +33,18 @@ class Dish < ActiveRecord::Base
     }
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  def image_url
+    return image.url
+  end
+  
+  def dish_lang
+    all_translated_attributes_hash = {}
+    navigation.menu.languages.each do |language|
+      I18n.locale = language.locale
+      
+      all_translated_attributes_hash[language.locale] = translated_attributes
+    end
+    return all_translated_attributes_hash
+  end
+  
 end

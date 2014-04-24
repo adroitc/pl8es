@@ -33,6 +33,19 @@ class Navigation < ActiveRecord::Base
     }
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  def image_url
+    return image.url
+  end
+
+  def navigation_lang
+    all_translated_attributes_hash = {}
+    menu.languages.each do |language|
+      I18n.locale = language.locale
+      
+      all_translated_attributes_hash[language.locale] = translated_attributes
+    end
+    return all_translated_attributes_hash
+  end
   
   #def cropping?
   #  !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

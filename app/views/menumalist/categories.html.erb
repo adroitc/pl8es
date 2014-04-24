@@ -45,13 +45,13 @@
     	      			</a>
     	      		</header>
     	      		<footer>
-                  <% if navigation.sub_navigations.count > 0 %>
+                  <% if navigation.dishes.count == 0 %>
     	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
     	      				<%=navigation.sub_navigations.count %>
     	      				<i class="entypo-folder"></i>
     	      			</div>
                   <% end %>
-                  <% if navigation.dishes.count > 0 %>
+                  <% if navigation.sub_navigations.count == 0 %>
     	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
     	      				<%=navigation.dishes.count %>
     	      				<i class="glyphicon glyphicon-cutlery"></i>
