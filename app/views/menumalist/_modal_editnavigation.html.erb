@@ -29,24 +29,24 @@
 		  						<div class="thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
 		  							<img id="navigation-image-<%=navigation.id %>" src="<%=navigation.image.url(:crop) %>">
 		  						</div>
-                  <input name="image_crop_w" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_w" value="<%=navigation.image_crop_w %>">
-                  <input name="image_crop_h" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_h" value="<%=navigation.image_crop_h %>">
-                  <input name="image_crop_x" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_x" value="<%=navigation.image_crop_x %>">
-                  <input name="image_crop_y" type="text" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_y" value="<%=navigation.image_crop_y %>">
+                  <input name="image_crop_w" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_w">
+                  <input name="image_crop_h" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_h">
+                  <input name="image_crop_x" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_x">
+                  <input name="image_crop_y" type="hidden" id="form-modal-editnavigation-<%=navigation.id %>-image_crop_y">
                   <script type="text/javascript">
                 	  $("#navigation-image-<%=navigation.id %>").Jcrop({
                       aspectRatio: <%=navigation.image_dimensions["cropped"][0].to_f/navigation.image_dimensions["cropped"][1].to_f %>,
                       onSelect: updateCoords,
                       trueSize: [<%=navigation.image_dimensions["original"][0] %>,<%=navigation.image_dimensions["original"][1] %>],
-                      setSelect: [<%=navigation.image_crop_x %>, <%=navigation.image_crop_y %>, <%=navigation.image_crop_w %>, <%=navigation.image_crop_h %>],
+                      setSelect: [<%=navigation.image_crop_x %>, <%=navigation.image_crop_y %>, <%=navigation.image_crop_x+navigation.image_crop_w %>, <%=navigation.image_crop_y+navigation.image_crop_h %>],
                       minSize: [<%=navigation.image_dimensions["cropped_retina"][0] %>,<%=navigation.image_dimensions["cropped_retina"][1] %>]
                     });
                 	  function updateCoords(c)
                 	  {
-                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_w").val(Math.min(<%=navigation.image_dimensions["original"][0] %>,Math.round(c.w)));
-                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_h").val(Math.min(<%=navigation.image_dimensions["original"][1] %>,Math.round(c.h)));
-                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_x").val(Math.round(c.x));
-                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_y").val(Math.round(c.y));
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_w").val(Math.min(<%=navigation.image_dimensions["original"][0] %>,Math.floor(c.w)));
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_h").val(Math.min(<%=navigation.image_dimensions["original"][1] %>,Math.floor(c.h)));
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_x").val(Math.floor(c.x));
+                	  	$("#form-modal-editnavigation-<%=navigation.id %>-image_crop_y").val(Math.floor(c.y));
                 	  };
                   </script>
                   <% end %>
