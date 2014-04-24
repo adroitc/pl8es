@@ -161,14 +161,14 @@ class AjaxController < ApplicationController
           navigation_new.level = 1
           navigation_new.menu = menu
           navigation = menu.navigations.find(params[:navigation_id])
-          if navigation.sub_navigations.count > 0
+          if navigation.sub_navigations.count > 0 && navigation.sub_navigations.last.position != nil
             navigation_new.position = navigation.sub_navigations.last.position+1
           end
           navigation.sub_navigations.push(navigation_new)
           navigation.save
         else
           navigation_new.level = 0
-          if menu.navigations.count > 0
+          if menu.navigations.count > 0 && menu.navigations.last.position != nil
             navigation_new.position = menu.navigations.last.position+1
           end
           menu.navigations.push(navigation_new)
