@@ -281,6 +281,7 @@ class AjaxController < ApplicationController
         I18n.locale = current_locale
         
         navigation = Navigation.find(params[:navigation_id])
+        new_dish.user = navigation.menu.user
         navigation.dishes.push(new_dish)
         navigation.save
         
