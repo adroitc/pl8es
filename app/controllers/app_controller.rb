@@ -3,36 +3,7 @@ class AppController < ApplicationController
   def menumalist
     if User.find_by_download_code(params[:user_download_code])
       app_user = User.find_by_download_code(params[:user_download_code])
-      #json = JSON.parse(
-      #  ipull_user.to_json(
-      #    :only => [:app_title],
-      #    :include => {
-      #      :menuStyle => {
-      #        :only => [:background_color, :text_color, :line_color],
-      #        :include => {
-      #          :menuButton  => {
-      #            :only => [:image]
-      #          },
-      #          :menuType  => {
-      #            :only => [:image]
-      #          }
-      #        }
-      #      },
-      #      :navigationStyle => {
-      #        :only => [:background_color, :text_color, :button_color, :statusbar_color],
-      #        :include => {
-      #          :navigationButton  => {
-      #            :only => [:image]
-      #          },
-      #          :navigationColorTemplate => {
-      #            :only => [:background_color, :button_color, :statusbar_color, :text_color]
-      #          }
-      #        }
-      #      }
-      #    }
-      #  )
-      #)
-      render :json => {
+      return_json = {
         :content_menues => JSON.parse(
           app_user.menus.to_json(
             :only => [:title, :from_time, :to_time],
@@ -63,6 +34,8 @@ class AppController < ApplicationController
           )
         )
       }
+      #render :text => Digest::SHA1.hexdigest(return_json.to_json.to_s)
+      render :json => return_json
       return
     end
     render :json => {:status => "invalid"}

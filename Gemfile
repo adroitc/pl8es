@@ -47,6 +47,10 @@ group :production do
   gem "rails_12factor"
 end
 
+# encryption
+gem "bcrypt-ruby", :require => "bcrypt"
+
+# languages
 gem "rename"
 gem "globalize", "~> 4.0.1"
 gem "i18n-js"
