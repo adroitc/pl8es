@@ -15,11 +15,11 @@ class AjaxController < ApplicationController
         
         session[:user_id] = @user.id
         
-        render :text => {:status => "success"}.to_json.to_s
+        render :json => {:status => "success"}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json.to_s
+    render :json => {:status => "invalid"}
   end
   
   def login
@@ -28,11 +28,11 @@ class AjaxController < ApplicationController
       
       if !@user.blank?
         session[:user_id] = @user.id
-        render :text => {:status => "success"}.to_json.to_s
+        render :json => {:status => "success"}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json.to_s
+    render :json => {:status => "invalid"}
   end
   
   def addmenu
@@ -103,11 +103,11 @@ class AjaxController < ApplicationController
         menu_dup.title = menu.title+" 2"
         menu_dup.save
         
-        render :text => {:status => "success"}.to_json
+        render :json => {:status => "success"}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
   end
   
   def deletemenu
@@ -117,11 +117,11 @@ class AjaxController < ApplicationController
       if @user.menus.exists?(params[:menu_id])
         @user.menus.destroy(params[:menu_id])
         
-        render :text => {:status => "success"}.to_json
+        render :json => {:status => "success"}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
   end
   
   def addnavigation
@@ -175,11 +175,11 @@ class AjaxController < ApplicationController
           menu.save
         end
         
-        render :text => {:status => "success"}.to_json
+        render :json => {:status => "success"}
         return
       end
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
   end
   
   def editnavigation
@@ -187,7 +187,6 @@ class AjaxController < ApplicationController
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)
-      #if @user.menus.exists?(params[:menu_id]) && @user.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id]) && languages.count > 0 && languages.count == params[:title].count
       if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
         navigation = Navigation.find(params[:navigation_id])
         
@@ -211,10 +210,8 @@ class AjaxController < ApplicationController
             params[:image_crop_y] = navigation.image_dimensions["original"][1]-params[:image_crop_h].to_i
           end
           navigation.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).merge({:image_crop_processed => false}))
-          #navigation.image_should_process = true
           navigation.image.reprocess!
           navigation.update_attributes({:image_crop_processed => false})
-          #navigation.image_should_process = false
         end
         
         current_locale = I18n.locale
@@ -226,54 +223,16 @@ class AjaxController < ApplicationController
         navigation.save
         
         I18n.locale = current_locale
-        
-        #parent = menu
-        #parent_navigations = parent.navigations
-        #navigation = menu.navigations.find(params[:navigation_id])
-        #
-        #if params[:sub_navigation_id] == nil || (params[:sub_navigation_id] != nil && navigation.sub_navigations.exists?(params[:sub_navigation_id]))
-        #  if params[:sub_navigation_id] != nil && navigation.sub_navigations.exists?(params[:sub_navigation_id])
-        #    parent = navigation
-        #    parent_navigations = parent.sub_navigations
-        #    navigation = parent_navigations.find(params[:sub_navigation_id])
-        #  end
-        #  
-        #  current_locale = I18n.locale
-        #  languages.each do |language|
-        #    I18n.locale = language.locale
-        #    navigation.title = params[:title][language.locale]
-        #  end
-        #  I18n.locale = current_locale
-        #  parent_navigations.push(navigation)
-        #  parent.save
-        #  
-        render :text => {:status => "success"}.to_json
+        render :json => {:status => "success"}
         return
-        #end
       end
     end
-    render :text => {:status => "invalid"}.to_json
+    render :json => {:status => "invalid"}
   end
   
   def sortnavigation
     if User.loggedIn(session) && !params.values_at(:navigation_ids).include?(nil)
       @user = User.find(session[:user_id])
-      
-      #navigations = nil
-      #if params[:menu_id] != nil && @user.menus.exists?(params[:menu_id])
-      #  if params[:navigation_id] && @user.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
-      #    navigations = @user.menus.find(params[:menu_id]).navigations.find(params[:navigation_id]).sub_navigations
-      #  else
-      #    navigations = @user.menus.find(params[:menu_id]).navigations
-      #  end
-      #end
-      #
-      #if navigations != nil && navigations.count == params[:navigation_ids].count
-      #  navigations.each do |navigation|
-      #    navigation.position = params[:navigation_ids][navigation.id.to_s]
-      #    navigation.save
-      #  end
-      #end
       
       params[:navigation_ids].each do |navigation_id|
         if Navigation.exists?(navigation_id[0].to_i) && Navigation.find(navigation_id[0].to_i).menu.user == @user
@@ -353,17 +312,15 @@ class AjaxController < ApplicationController
           dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
           dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
         elsif params[:image_crop_w] && params[:image_crop_h] && params[:image_crop_x] && params[:image_crop_y]
-          if params[:image_crop_w].to_i+params[:image_crop_x].to_i > navigation.image_dimensions["original"][0]
-            params[:image_crop_x] = navigation.image_dimensions["original"][0]-params[:image_crop_w].to_i
+          if params[:image_crop_w].to_i+params[:image_crop_x].to_i > dish.image_dimensions["original"][0]
+            params[:image_crop_x] = dish.image_dimensions["original"][0]-params[:image_crop_w].to_i
           end
-          if params[:image_crop_h].to_i+params[:image_crop_y].to_i > navigation.image_dimensions["original"][1]
-            params[:image_crop_y] = navigation.image_dimensions["original"][1]-params[:image_crop_h].to_i
+          if params[:image_crop_h].to_i+params[:image_crop_y].to_i > dish.image_dimensions["original"][1]
+            params[:image_crop_y] = dish.image_dimensions["original"][1]-params[:image_crop_h].to_i
           end
           dish.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).merge({:image_crop_processed => false}))
-          #dish.image_should_process = true
           dish.image.reprocess!
           dish.update_attributes({:image_crop_processed => false})
-          #dish.image_should_process = false
         end
         
         current_locale = I18n.locale
@@ -385,22 +342,6 @@ class AjaxController < ApplicationController
   def sortdish
     if User.loggedIn(session) && !params.values_at(:dish_ids).include?(nil)
       @user = User.find(session[:user_id])
-      
-      #navigations = nil
-      #if params[:menu_id] != nil && @user.menus.exists?(params[:menu_id])
-      #  if params[:navigation_id] && @user.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
-      #    navigations = @user.menus.find(params[:menu_id]).navigations.find(params[:navigation_id]).sub_navigations
-      #  else
-      #    navigations = @user.menus.find(params[:menu_id]).navigations
-      #  end
-      #end
-      #
-      #if navigations != nil && navigations.count == params[:navigation_ids].count
-      #  navigations.each do |navigation|
-      #    navigation.position = params[:navigation_ids][navigation.id.to_s]
-      #    navigation.save
-      #  end
-      #end
       
       params[:dish_ids].each do |dish_id|
         if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).navigation.menu.user == @user
