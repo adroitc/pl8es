@@ -1,11 +1,8 @@
 <% content_for :body_class, "page-body" %>
-
 <div class="page-container">
   <div class="sidebar-menu">
     <%=render :partial => "layouts/dashboard_menuheader" %>
-    <ul id="main-menu">
-      <%=render :partial => "layouts/dashboard_menu" %>
-    </ul>
+    <%=render :partial => "layouts/dashboard_menu" %>
   </div>
   <div class="main-content">
     <%=render :partial => "layouts/dashboard_topbar" %>

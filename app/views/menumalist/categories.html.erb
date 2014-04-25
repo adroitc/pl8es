@@ -1,11 +1,8 @@
 <% content_for :body_class, "page-body" %>
-
 <div class="page-container">
   <div class="sidebar-menu">
     <%=render :partial => "layouts/dashboard_menuheader" %>
-    <ul id="main-menu">
-      <%=render :partial => "layouts/dashboard_menu" %>
-    </ul>
+    <%=render :partial => "layouts/dashboard_menu" %>
   </div>
   <div class="main-content">
     <%=render :partial => "layouts/dashboard_topbar" %>
@@ -25,7 +22,7 @@
       <input type="hidden" name="menu_id" value="<%=@menu.id %>">
       <span class="sorted ui-sortable">
         <% @menu.navigations.find_all_by_level(0).each do |navigation| %>
-		     <div class="col-sm-3" style="margin-bottom:17px;">
+		     <div class="col-sm-4" style="margin-bottom:17px;">
 			     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
 			     	<div class="panel-heading">
 			     		<div class="panel-title">

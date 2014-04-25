@@ -330,6 +330,8 @@ class AjaxController < ApplicationController
           dish.title = params[:title][language.locale]
         end
         
+        I18n.locale = current_locale
+        
         dish.save
         
         render :json => {:status => "success"}

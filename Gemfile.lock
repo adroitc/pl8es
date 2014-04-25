@@ -44,6 +44,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    block_helpers (0.3.3)
+      activesupport (>= 2.0)
     builder (3.1.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -183,6 +185,7 @@ DEPENDENCIES
   bcrypt-ruby
   better_errors
   binding_of_caller
+  block_helpers
   coffee-rails (~> 4.0.0)
   dotenv-rails
   globalize (~> 4.0.1)

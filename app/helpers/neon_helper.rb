@@ -1,0 +1,88 @@
+module NeonHelper
+  
+  def neon_modal(opts={},&block)
+    if opts[:width]
+      width = "width:#{opts[:width]};"
+    end
+    raw %(
+    <div class="modal fade in" id="modal-#{opts[:id]}">
+    	<div class="modal-dialog" style="#{width}">
+    		<div class="modal-content">
+    			 <div class="modal-header">
+    			 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    			 	<h4 class="modal-title">#{opts[:title]}</h4>
+    			 </div>
+    			 #{capture(&block)}
+    		</div>
+    	</div>
+    </div>
+    )
+  end
+  
+  def neon_modal_body(opts={},&block)
+    raw %(
+    <div class="modal-body">
+    #{capture(&block)}
+    </div>
+    )
+  end
+  
+  def neon_modal_footer(opts={},&block)
+    raw %(
+    <div class="modal-footer">
+    #{capture(&block)}
+    </div>
+    )
+  end
+  
+  def neon_imageinput(opts={},&block)
+    raw %(
+		<div class="fileinput fileinput-new" data-provides="fileinput">
+			<span class="btn btn-info btn-file">
+				<span class="fileinput-new">Select #{"different " if opts[:different] == true}image</span>
+				<span class="fileinput-exists">Change</span>
+				<input type="file" name="#{opts[:name]}">
+			</span>
+			<span class="fileinput-filename"></span>
+			<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+		</div>
+    )
+  end
+  
+  def neon_imagecrop(opts={},&block)
+    image = opts[:image]
+    instance = image.instance
+    
+    output = neon_imageinput :name => opts[:image].name, :different => opts[:image].present?
+    if opts[:image].present?
+      output = raw %(
+  		<div class="thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
+  			<img id="navigation-image-#{instance.id}" src="#{image.url(:crop)}">
+  		</div>
+      <input name="image_crop_w" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_w">
+      <input name="image_crop_h" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_h">
+      <input name="image_crop_x" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_x">
+      <input name="image_crop_y" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_y">
+      <script type="text/javascript">
+    	  $("#navigation-image-#{instance.id}").Jcrop({
+          aspectRatio: #{instance.image_dimensions["cropped"][0].to_f/instance.image_dimensions["cropped"][1].to_f},
+          onSelect: updateCoords,
+          trueSize: [#{instance.image_dimensions["original"][0]},#{instance.image_dimensions["original"][1]}],
+          setSelect: [#{instance.image_crop_x}, #{instance.image_crop_y}, #{instance.image_crop_x}+#{instance.image_crop_w}, #{instance.image_crop_y}+#{instance.image_crop_h}],
+          minSize: [#{instance.image_dimensions["cropped_retina"][0]},#{instance.image_dimensions["cropped_retina"][1]}]
+        });
+    	  function updateCoords(c)
+    	  {
+    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_w").val(Math.min(#{instance.image_dimensions["original"][0]},Math.floor(c.w)));
+    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_h").val(Math.min(#{instance.image_dimensions["original"][1]},Math.floor(c.h)));
+    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_x").val(Math.floor(c.x));
+    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_y").val(Math.floor(c.y));
+    	  };
+      </script>
+      )+output
+    end
+    
+    output
+  end
+  
+end

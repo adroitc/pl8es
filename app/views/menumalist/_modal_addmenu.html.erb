@@ -1,114 +1,106 @@
-<div class="modal fade in" id="modal-addmenu">
-	<div class="modal-dialog">
-		<div class="modal-content">
-      <%= form_tag({:controller => "ajax", :action => "addmenu"}, {:role => "form", :class => "pl8es_c_ajaxform", :id => "form_addmenu"}) do %>
-			  <div class="modal-header">
-			  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			  	<h4 class="modal-title">Add new speisekarte</h4>
-			  </div>
-			  <div class="modal-body">
-				  <div class="row">
-				  	<div class="col-md-12">
-				  		<div class="form-group">
-				  			<label for="form-title" class="control-label">Speisekarten name</label>
-				  			<input name="title" type="text" class="form-control" id="form-title" placeholder="Menu name" value="">
-				  		</div>
-				  	</div>
-				  </div>
-				  <div class="row">
-				  	<div class="col-md-12">
-				  		<div class="form-group">
-				  			<label class="control-label">Make this speisekarte the default one</label>
-                <br />
-                <span class="pl8es_c_toggledefaultmenu">
-                  <button type="button" class="btn btn-green btn-icon disabled icon-left">
-                  	Default
-                  	<i class="entypo-flag"></i>
-                  </button>
-                </span>
-                <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
-                  <button type="button" class="btn btn-default btn-icon icon-left">
-                  	Make default
-                  	<i class="entypo-flag"></i>
-                  </button>
-                </a>
-                <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
-                  <button type="button" class="btn btn-warning btn-xs">
-                  	undo
-                  </button>
-                </a>
-				  		</div>
-				  	</div>
-				  </div>
-				  <div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
-				  	<div class="col-md-12">
-				  		<label for="field-1" class="control-label">Choose speisekarte display time</label>
-            </div>
-				  	<div class="col-md-12">
-  			    	<div class="col-md-6 input-group">
-				  			<label for="form-from_time" class="control-label">From :</label>
-                <div class="input-group">
-				    	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="16:00" data-show-meridian="false" data-minute-step="5" />
-				    	    <div class="input-group-addon">
-				    	    	<a href="#"><i class="entypo-clock"></i></a>
-				    	    </div>
-                </div>
-              </div>
-  			    	<div class="col-md-6">
-				  			<label for="form-to_time" class="control-label">To :</label>
-                <div class="input-group">
-				    	   	<input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="23:30" data-show-meridian="false" data-minute-step="5" />
-				    	    <div class="input-group-addon">
-				    	    	<a href="#"><i class="entypo-clock"></i></a>
-				    	    </div>
-                </div>
-              </div>
-				  	</div>
-				  </div>
-				  <div class="row" style="margin-bottom:14px;">
-				  	<div class="col-md-12">
-				  		<label for="form-languages" class="control-label">Select your languages</label>
-              <br />
-				  		<select class="select2" id="form-languages" multiple>
-                <% Language.all.each do |o| %>
-				  			<option value="<%=o.locale %>" <%="selected data-locked=true" if o.id==1 %>><%=o.title.capitalize %></option>
-                <% end %>
-				  		</select>
-				  	</div>
-				  </div>
-				  <div class="row" style="margin-bottom:14px;">
-				  	<div class="col-sm-12">
-				  		<label class="control-label">To delete this speisekarte, press "delete"</label>
-              <br />
-              <% MenuLabel.all.each do |menuLabel|%>
-              <div class="col-sm-4">
-	  		        <input class="icheck-2" type="radio" id="form-label-<%=menuLabel.id %>" name="label" value="<%=menuLabel.id %>">
-	  		        <label for="form-label-<%=menuLabel.id %>"><span class="badge badge-primary"><%=menuLabel.title %></span></label>
-              </div>
-              <% end %>
-              <div class="col-sm-4">
-	  		        <input class="icheck-2" type="radio" id="form-label-1" name="label" value="" checked="checked">
-	  		        <label for="form-label-1">None</label>
-              </div>
-              <script type="text/javascript">
-              jQuery(document).ready(function($)
-              {
-              	$('input.icheck-2').iCheck({
-              		radioClass: 'iradio_square-blue'
-              	});
-              });
-              </script>
-				  	</div>
-				  </div>
-			  </div>
-			  <div class="modal-footer">
-			  	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  	<button type="submit" class="btn btn-success btn-icon icon-left">
-			  		<i class="entypo-plus"></i>
-			  		Add category
-			  	</button>
-			  </div>
-      <% end %>
+<%= neon_modal :id => "addmenu", :title => "Add new speisekarte" do |m| %>
+<%= form_tag({:controller => "ajax", :action => "addmenu"}, {:role => "form", :class => "pl8es_c_ajaxform", :id => "form_addmenu"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<label for="form-title" class="control-label">Speisekarten name</label>
+			<input name="title" type="text" class="form-control" id="form-title" placeholder="Menu name" value="">
 		</div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<label class="control-label">Make this speisekarte the default one</label>
+      <br />
+      <span class="pl8es_c_toggledefaultmenu">
+        <button type="button" class="btn btn-green btn-icon disabled icon-left">
+        	Default
+        	<i class="entypo-flag"></i>
+        </button>
+      </span>
+      <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
+        <button type="button" class="btn btn-default btn-icon icon-left">
+        	Make default
+        	<i class="entypo-flag"></i>
+        </button>
+      </a>
+      <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
+        <button type="button" class="btn btn-warning btn-xs">
+        	undo
+        </button>
+      </a>
+		</div>
+	</div>
+</div>
+<div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
+	<div class="col-md-12">
+		<label for="field-1" class="control-label">Choose speisekarte display time</label>
+  </div>
+	<div class="col-md-12">
+  	<div class="col-md-6 input-group">
+			<label for="form-from_time" class="control-label">From :</label>
+      <div class="input-group">
+  	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="16:00" data-show-meridian="false" data-minute-step="5" />
+  	    <div class="input-group-addon">
+  	    	<a href="#"><i class="entypo-clock"></i></a>
+  	    </div>
+      </div>
+    </div>
+  	<div class="col-md-6">
+			<label for="form-to_time" class="control-label">To :</label>
+      <div class="input-group">
+  	   	<input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="23:30" data-show-meridian="false" data-minute-step="5" />
+  	    <div class="input-group-addon">
+  	    	<a href="#"><i class="entypo-clock"></i></a>
+  	    </div>
+      </div>
+    </div>
+	</div>
+</div>
+<div class="row" style="margin-bottom:14px;">
+	<div class="col-md-12">
+		<label for="form-languages" class="control-label">Select your languages</label>
+    <br />
+		<select class="select2" id="form-languages" multiple>
+      <% Language.all.each do |o| %>
+			<option value="<%=o.locale %>" <%="selected data-locked=true" if o.id==1 %>><%=o.title.capitalize %></option>
+      <% end %>
+		</select>
+	</div>
+</div>
+<div class="row" style="margin-bottom:14px;">
+	<div class="col-sm-12">
+		<label class="control-label">To delete this speisekarte, press "delete"</label>
+    <br />
+    <% MenuLabel.all.each do |menuLabel|%>
+    <div class="col-sm-4">
+      <input class="icheck-2" type="radio" id="form-label-<%=menuLabel.id %>" name="label" value="<%=menuLabel.id %>">
+      <label for="form-label-<%=menuLabel.id %>"><span class="badge badge-primary"><%=menuLabel.title %></span></label>
+    </div>
+    <% end %>
+    <div class="col-sm-4">
+      <input class="icheck-2" type="radio" id="form-label-1" name="label" value="" checked="checked">
+      <label for="form-label-1">None</label>
+    </div>
+    <script type="text/javascript">
+    jQuery(document).ready(function($)
+    {
+    	$('input.icheck-2').iCheck({
+    		radioClass: 'iradio_square-blue'
+    	});
+    });
+    </script>
+	</div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-success btn-icon icon-left">
+	<i class="entypo-plus"></i>
+	Add category
+</button>
+<% end %>
+<% end %>
+<% end %>

@@ -15,15 +15,19 @@ class AppController < ApplicationController
                 :only => [:locale, :title]
               },
               :navigations => {
-                :only => [:id, :title, :image_fingerprint],
+                :only => [:id, :image_fingerprint],
                 :methods => [:image_url, :navigation_lang],
                 :include => {
+                  :dishes => {
+                    :only => [:id, :image_fingerprint],
+                    :methods => [:image_url, :dish_lang]
+                  },
                   :sub_navigations => {
-                    :only => [:id, :title, :image_fingerprint],
+                    :only => [:id, :image_fingerprint],
                     :methods => [:image_url, :navigation_lang],
                     :include => {
                       :dishes => {
-                        :only => [:id, :title, :image_fingerprint],
+                        :only => [:id, :image_fingerprint],
                         :methods => [:image_url, :dish_lang]
                       }
                     }
