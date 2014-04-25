@@ -29,78 +29,18 @@
       <%= form_tag({:controller => "ajax", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
       <span class="sorted ui-sortable">
         <% @navigation.sub_navigations.each do |navigation| %>
-		     <div class="col-sm-3" style="margin-bottom:17px;">
-			     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
-			     	<div class="panel-heading">
-			     		<div class="panel-title">
-                <input type="hidden" name="navigation_ids[<%=navigation.id %>]" value="">
-                <b><%=navigation.title %></b>
-              </div>
-			     	</div>
-			     	<div class="panel-body" style="margin:0px;padding:0px;">
-    	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
-    	      		<header>
-    	      			<a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id, :parent_navigation_title => @navigation.title.gsub(" ","-"), :parent_navigation_id => @navigation.id, :navigation_title => navigation.title.gsub(" ","-"), :navigation_id => navigation.id %>">
-    	      				<% if navigation.image.present? %>
-                    <img src="<%=navigation.image.url(:cropped) %>" />
-                    <% else %>
-                    <img src="http://placehold.it/622x566" />
-                    <% end %>
-    	      			</a>
-    	      		</header>
-    	      		<footer>
-    	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
-    	      				<%=navigation.dishes.count %>
-    	      				<i class="glyphicon glyphicon-cutlery"></i>
-    	      			</div>
-    	      			<div class="album-options">
-    	      				<a href="javascript:;" onclick="jQuery('#modal-editnavigation-<%=navigation.id %>').modal('show');">
-    	      					<i class="entypo-cog"></i>
-    	      				</a>
-    	      			</div>
-    	      		</footer>
-    	      	</article>
-			     	</div>
-			    </div>
-        </div>
+        <%=neon_navigationpanel :navigation => navigation %>
         <% end %>
       </span>
       <% end %>
       <%= form_tag({:controller => "ajax", :action => "sortdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
       <span class="sorted ui-sortable">
         <% @navigation.dishes.each do |dish| %>
-		     <div class="col-sm-3" style="margin-bottom:17px;">
-			     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
-			     	<div class="panel-heading">
-			     		<div class="panel-title">
-                <input type="hidden" name="dish_ids[<%=dish.id %>]" value="">
-                <b><%=dish.title %></b>
-              </div>
-			     	</div>
-			     	<div class="panel-body" style="margin:0px;padding:0px;">
-    	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
-    	      		<header>
-    	      			<% if dish.image.present? %>
-                  <img src="<%=dish.image.url(:cropped) %>" />
-                  <% else %>
-                  <img src="http://placehold.it/1516x1012" />
-                  <% end %>
-    	      		</header>
-    	      		<footer>
-    	      			<div class="album-options">
-    	      				<a href="javascript:;" onclick="jQuery('#modal-editdish-<%=dish.id %>').modal('show');">
-    	      					<i class="entypo-cog"></i>
-    	      				</a>
-    	      			</div>
-    	      		</footer>
-    	      	</article>
-			     	</div>
-			    </div>
-        </div>
+		    <%=neon_dishpanel :dish => dish %>
         <% end %>
       </span>
       <% end %>
-      <% if @navigation.dishes.count == 0 && @navigation.level == 0 %>
+      <% if @navigation.level == 0 && @navigation.dishes.count == 0 %>
       <div class="col-sm-3" style="height:240px;">
         <div style="margin-top:50%;text-align:center;">
           <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">

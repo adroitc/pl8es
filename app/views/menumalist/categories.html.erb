@@ -22,48 +22,7 @@
       <input type="hidden" name="menu_id" value="<%=@menu.id %>">
       <span class="sorted ui-sortable">
         <% @menu.navigations.find_all_by_level(0).each do |navigation| %>
-		     <div class="col-sm-4" style="margin-bottom:17px;">
-			     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
-			     	<div class="panel-heading">
-			     		<div class="panel-title">
-                <input type="hidden" name="navigation_ids[<%=navigation.id %>]" value="">
-                <b><%=navigation.title %></b>
-              </div>
-			     	</div>
-			     	<div class="panel-body" style="margin:0px;padding:0px;">
-    	      	<article class="album" style="margin-bottom:0px;border-width:0px;">
-    	      		<header>
-    	      			<a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @menu.title.gsub(" ","-"), :menu_id => @menu.id, :navigation_title => navigation.title.gsub(" ","-"), :navigation_id => navigation.id %>">
-    	      				<% if navigation.image.present? %>
-                    <img src="<%=navigation.image.url(:cropped) %>" />
-                    <% else %>
-                    <img src="http://placehold.it/622x566" />
-                    <% end %>
-    	      			</a>
-    	      		</header>
-    	      		<footer>
-                  <% if navigation.dishes.count == 0 %>
-    	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
-    	      				<%=navigation.sub_navigations.count %>
-    	      				<i class="entypo-folder"></i>
-    	      			</div>
-                  <% end %>
-                  <% if navigation.sub_navigations.count == 0 %>
-    	      			<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
-    	      				<%=navigation.dishes.count %>
-    	      				<i class="glyphicon glyphicon-cutlery"></i>
-    	      			</div>
-                  <% end %>
-    	      			<div class="album-options">
-    	      				<a href="javascript:;" onclick="jQuery('#modal-editnavigation-<%=navigation.id %>').modal('show');">
-    	      					<i class="entypo-cog"></i>
-    	      				</a>
-    	      			</div>
-    	      		</footer>
-    	      	</article>
-			     	</div>
-			    </div>
-        </div>
+        <%=neon_navigationpanel :navigation => navigation %>
         <% end %>
       </span>
       <% end %>

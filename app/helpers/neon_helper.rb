@@ -85,4 +85,78 @@ module NeonHelper
     output
   end
   
+  def neon_panel_withfooter(opts={},&block)
+    raw %(
+    <div class="col-sm-#{opts[:size]}" style="margin-bottom:17px;">
+      <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
+       	<div class="panel-heading">
+       		<div class="panel-title">
+             <input type="hidden" name="#{opts[:sort_key]}" value="">
+             <b>#{opts[:title]}</b>
+           </div>
+       	</div>
+       	<div class="panel-body" style="margin:0px;padding:0px;">
+        	<article class="album" style="margin-bottom:0px;border-width:0px;">
+        		<header>
+              <a href="#{opts[:action_url]}">
+                <img src="#{opts[:image_url]}" />
+        			</a>
+        		</header>
+        		<footer>
+            #{capture(&block)}
+        		</footer>
+        	</article>
+       	</div>
+      </div>
+    </div>
+    )
+  end
+  
+  def neon_navigationpanel(opts={},&block)
+    sub_navigations = raw %(
+		<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
+			#{opts[:navigation].sub_navigations.count}
+			<i class="entypo-folder"></i>
+		</div>
+    )
+    dishes = raw %(
+		<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
+			#{opts[:navigation].dishes.count}
+			<i class="glyphicon glyphicon-cutlery"></i>
+		</div>
+    )
+    neon_panel_withfooter(
+      :size => "3",
+      :sort_key => "navigation_ids[#{opts[:navigation].id}]",
+      :title => opts[:navigation].title,
+      :action_url => url_for(
+        :controller => "menumalist", :action => "category",
+        :menu_title => opts[:navigation].menu.title.gsub(" ","-"),
+        :menu_id => opts[:navigation].menu.id,
+        :navigation_title => opts[:navigation].title.gsub(" ","-"),
+        :navigation_id => opts[:navigation].id
+      ),
+      :image_url => opts[:navigation].image.present? ? opts[:navigation].image.url(:cropped) : "http://placehold.it/622x566") {|p|
+        raw %(#{sub_navigations if opts[:navigation].level == 0 && opts[:navigation].dishes.count == 0}
+          #{dishes if opts[:navigation].sub_navigations.count == 0}
+        	<div class="album-options">
+        	  <a href="javascript:;" onclick="jQuery('#modal-editnavigation-#{opts[:navigation].id}').modal('show');">
+        	  	<i class="entypo-cog"></i>
+        	  </a>
+        	</div>)}
+  end
+  
+  def neon_dishpanel(opts={},&block)
+    neon_panel_withfooter(
+      :size => "3",
+      :sort_key => "dish_ids[#{opts[:dish].id}]",
+      :title => opts[:dish].title,
+      :image_url => opts[:dish].image.present? ? opts[:dish].image.url(:cropped) : "http://placehold.it/1516x1012") {|p|
+        raw %(<div class="album-options">
+        	  <a href="javascript:;" onclick="jQuery('#modal-editdish-#{opts[:dish].id}').modal('show');">
+        	  	<i class="entypo-cog"></i>
+        	  </a>
+        	</div>)}
+  end
+  
 end
