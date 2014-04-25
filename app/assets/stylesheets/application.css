@@ -17,7 +17,6 @@
  *= require "neon-core"
  *= require "neon-theme"
  *= require "neon-forms"
- *= require "custom"
  *= require "datatables.responsive.css"
 
  * require "select2/select2-bootstrap"
@@ -26,5 +25,7 @@
  *= require "icheck.square.blue"
 
  *= require "jquery.Jcrop.min"
+
+ *= require "custom"
  
  */

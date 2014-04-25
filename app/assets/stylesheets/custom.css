@@ -28,11 +28,35 @@ body {
 {
   cursor: move;
 }
-.gallery-env article.album header img
+.gallery-env.draggable-portlets .panel
 {
-  -webkit-border-radius: 0 0 0 0;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 0 0 0 0;
-  -moz-background-clip: padding;
-  border-radius: 0 0 0 0;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.gallery-env.draggable-portlets .panel .panel-body
+{
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.gallery-env.draggable-portlets article.album .panel-heading
+{
+  color: #000;
+  position: absolute;
+  margin-top: -40px;
+  margin-bottom: -40px;
+  background-color: rgba(255,255,255,0.6);
+  width: 100%;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.gallery-env.draggable-portlets article.album .panel-heading
+{
+  color: #000;
+  position: absolute;
+  margin-top: -40px;
+  margin-bottom: -40px;
+  background-color: rgba(255,255,255,0.6);
+  width: 100%;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
 }

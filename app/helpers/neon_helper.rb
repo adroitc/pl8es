@@ -89,12 +89,6 @@ module NeonHelper
     raw %(
     <div class="col-sm-#{opts[:size]}" style="margin-bottom:17px;">
       <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
-       	<div class="panel-heading">
-       		<div class="panel-title">
-             <input type="hidden" name="#{opts[:sort_key]}" value="">
-             <b>#{opts[:title]}</b>
-           </div>
-       	</div>
        	<div class="panel-body" style="margin:0px;padding:0px;">
         	<article class="album" style="margin-bottom:0px;border-width:0px;">
         		<header>
@@ -102,6 +96,12 @@ module NeonHelper
                 <img src="#{opts[:image_url]}" />
         			</a>
         		</header>
+           	<div class="panel-heading">
+           		<div class="panel-title">
+                 <input type="hidden" name="#{opts[:sort_key]}" value="">
+                 <b>#{opts[:title]}</b>
+               </div>
+           	</div>
         		<footer>
             #{capture(&block)}
         		</footer>
