@@ -186,7 +186,7 @@ class AjaxController < ApplicationController
       if @user.menus.exists?(params[:menu_id]) && languages.count > 0 && languages.count == params[:title].count
         menu = @user.menus.find(params[:menu_id])
         
-        navigation_new = Navigation.create()
+        navigation_new = Navigation.create(:style => "default")
         
         if params[:image]
           navigation_new.image = params[:image]

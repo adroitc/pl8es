@@ -21,7 +21,7 @@ class AppController < ApplicationController
                 :only => [:locale, :title]
               },
               :navigations => {
-                :only => [:id, :image_fingerprint],
+                :only => [:id, :image_fingerprint, :style],
                 :methods => [:image_url, :navigation_lang],
                 :include => {
                   :dishes => {
@@ -29,7 +29,7 @@ class AppController < ApplicationController
                     :methods => [:image_url, :dish_lang]
                   },
                   :sub_navigations => {
-                    :only => [:id, :image_fingerprint],
+                    :only => [:id, :image_fingerprint, :style],
                     :methods => [:image_url, :navigation_lang],
                     :include => {
                       :dishes => {
