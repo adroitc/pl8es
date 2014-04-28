@@ -14,7 +14,7 @@ class CreateDishes < ActiveRecord::Migration
       
       t.timestamps
     end
-    Dish.create_translation_table! :title => :string, :drinks => :string, :sidedish => :string, :ingredients => :string
+    Dish.create_translation_table! :title => :string, :description => :string, :drinks => :string, :sidedish => :string, :ingredients => :string
   end
   
   def down

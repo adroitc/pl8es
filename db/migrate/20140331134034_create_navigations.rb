@@ -5,6 +5,7 @@ class CreateNavigations < ActiveRecord::Migration
       t.references :navigation
       
       t.integer :level
+      t.string :style
       t.references :sub_navigations
       
       t.references :dishes
