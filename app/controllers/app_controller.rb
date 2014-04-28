@@ -50,7 +50,7 @@ class AppController < ApplicationController
         )
       }
       #render :text => Digest::SHA1.hexdigest(return_json.to_json.to_s)
-      render :json => return_json
+      render :json => return_json.to_json
       return
     end
     render :json => {:status => "invalid"}
