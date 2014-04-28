@@ -40,8 +40,19 @@
               <i class="entypo-plus"></i>
             </button>
           </p>
-    	 	</div>
-    	 </div>
+    	  </div>
+    	</div><div class="col-sm-4">
+    	 	<div class="tile-stats tile-white">
+    	 		<div class="icon"><i class="entypo-brush"></i></div>
+    	 		<h2>Design</h3>
+          <a href="javascript:;" onclick="jQuery('#modal-design').modal('show');">
+            <button type="button" class="btn btn-default btn-icon icon-left" style="margin-top: -2px">
+              Change
+              <i class="entypo-brush"></i>
+            </button>
+          </a>
+    	  </div>
+    	</div>
     </div>
     <h2>Alle Speisekarten</h2>
     <br />
@@ -99,6 +110,7 @@
     </div>
   </div>
 </div>
+<%=render :partial => "modal_design", :locals => {:navigation => Navigation.first} %>
 <%=render :partial => "modal_addmenu" %>
 <% @user.menus.each do |menu| %>
 <%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>

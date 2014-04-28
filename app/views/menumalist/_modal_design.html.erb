@@ -1,0 +1,81 @@
+<%= neon_modal :id => "design", :title => "Change design" do |m| %>
+<%= form_tag({:controller => "ajax", :action => "editdesign"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_design"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row" style="margin-bottom:14px;">
+	<div class="col-sm-12">
+		<div class="form-group">
+      <label for="form-" class="control-label">Colors</label>
+  		<ul class="ui-selectable" style="width:auto">
+        <li class="col-sm-3" style="height:100px;">test</li>
+        <li class="col-sm-3" style="height:100px;">test</li>
+        <li class="col-sm-3" style="height:100px;">test</li>
+        <li class="col-sm-3" style="height:100px;">custom</li>
+      </ul>
+		</div>
+	</div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+  	<div class="form-group">
+  		<label for="field-1" class="control-label">Background</label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<a href="#"><i class="entypo-droplet"></i></a>
+				</div>
+				<input name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.background %>" />
+			</div>
+  	</div>
+  </div>
+  <div class="col-md-6 col-md-offset-2">
+  	<div class="form-group">
+  		<label for="field-1" class="control-label">Background image</label>
+      <br />
+      <%=neon_imagecrop :image => @user.appmain_image %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+  	<div class="form-group">
+  		<label for="field-1" class="control-label">Navigation-bar</label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<a href="#"><i class="entypo-droplet"></i></a>
+				</div>
+				<input name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.bar_background %>" />
+			</div>
+  	</div>
+  </div> 
+  <div class="col-md-4">
+  	<div class="form-group">
+  		<label for="field-1" class="control-label">Navigation text</label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<a href="#"><i class="entypo-droplet"></i></a>
+				</div>
+				<input name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text %>" />
+			</div>
+  	</div>
+  </div>
+  <div class="col-md-4">
+  	<div class="form-group">
+  		<label for="field-1" class="control-label">Navigation text active</label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<a href="#"><i class="entypo-droplet"></i></a>
+				</div>
+				<input name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text_active %>" />
+			</div>
+  	</div>
+  </div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-success btn-icon icon-left">
+	<i class="entypo-plus"></i>
+	Add dish
+</button>
+<% end %>
+<% end %>
+<% end %>

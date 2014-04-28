@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424105737) do
+ActiveRecord::Schema.define(version: 20140428105556) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -93,26 +93,27 @@ ActiveRecord::Schema.define(version: 20140424105737) do
   create_table "menu_colors", force: true do |t|
     t.string   "background"
     t.string   "bar_background"
-    t.string   "bev_background_selected"
-    t.string   "bev_text"
-    t.string   "bev_text_active"
     t.string   "bev_background"
+    t.string   "bev_background_selected"
     t.string   "bev_background_active"
+    t.string   "bev_text"
     t.string   "bev_text_selected"
+    t.string   "bev_text_active"
     t.string   "nav_background"
-    t.string   "nav_background_active"
     t.string   "nav_background_selected"
+    t.string   "nav_background_active"
     t.string   "nav_text"
-    t.string   "nav_text_active"
     t.string   "nav_text_selected"
+    t.string   "nav_text_active"
     t.string   "sub_background"
-    t.string   "sub_background_active"
     t.string   "sub_background_selected"
+    t.string   "sub_background_active"
     t.string   "sub_text"
-    t.string   "sub_text_active"
     t.string   "sub_text_selected"
+    t.string   "sub_text_active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "menu_label_translations", force: true do |t|
@@ -228,6 +229,40 @@ ActiveRecord::Schema.define(version: 20140424105737) do
     t.integer  "daily_dishes_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "restaurant_image_file_name"
+    t.string   "restaurant_image_content_type"
+    t.integer  "restaurant_image_file_size"
+    t.datetime "restaurant_image_updated_at"
+    t.string   "restaurant_image_dimensions"
+    t.string   "logo_image_file_name"
+    t.string   "logo_image_content_type"
+    t.integer  "logo_image_file_size"
+    t.datetime "logo_image_updated_at"
+    t.string   "logo_image_dimensions"
+    t.string   "appmain_image_file_name"
+    t.string   "appmain_image_content_type"
+    t.integer  "appmain_image_file_size"
+    t.datetime "appmain_image_updated_at"
+    t.string   "appmain_image_dimensions"
+    t.string   "restaurant_image_fingerprint"
+    t.string   "logo_image_fingerprint"
+    t.string   "appmain_image_fingerprint"
+    t.integer  "restaurant_image_crop_w"
+    t.integer  "restaurant_image_crop_h"
+    t.integer  "restaurant_image_crop_x"
+    t.integer  "restaurant_image_crop_y"
+    t.integer  "logo_image_crop_w"
+    t.integer  "logo_image_crop_h"
+    t.integer  "logo_image_crop_x"
+    t.integer  "logo_image_crop_y"
+    t.integer  "appmain_image_crop_w"
+    t.integer  "appmain_image_crop_h"
+    t.integer  "appmain_image_crop_x"
+    t.integer  "appmain_image_crop_y"
+    t.boolean  "restaurant_image_processed",    default: true
+    t.boolean  "logo_image_processed",          default: true
+    t.boolean  "appmain_image_processed",       default: true
+    t.integer  "menuColor_id"
   end
 
   create_table "wine_translations", force: true do |t|

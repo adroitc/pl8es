@@ -59,24 +59,24 @@ module NeonHelper
   		<div class="thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
   			<img id="navigation-image-#{instance.id}" src="#{image.url(:crop)}">
   		</div>
-      <input name="image_crop_w" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_w">
-      <input name="image_crop_h" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_h">
-      <input name="image_crop_x" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_x">
-      <input name="image_crop_y" type="hidden" id="form-modal-editdish-#{instance.id}-image_crop_y">
+      <input name="image_crop_w" type="hidden" id="form-cropimage-#{instance.id}-image_crop_w">
+      <input name="image_crop_h" type="hidden" id="form-cropimage-#{instance.id}-image_crop_h">
+      <input name="image_crop_x" type="hidden" id="form-cropimage-#{instance.id}-image_crop_x">
+      <input name="image_crop_y" type="hidden" id="form-cropimage-#{instance.id}-image_crop_y">
       <script type="text/javascript">
     	  $("#navigation-image-#{instance.id}").Jcrop({
-          aspectRatio: #{instance.image_dimensions["cropped"][0].to_f/instance.image_dimensions["cropped"][1].to_f},
+          aspectRatio: #{instance.read_attribute(image.name.to_s+"_dimensions")["cropped"][0].to_f/instance.read_attribute(image.name.to_s+"_dimensions")["cropped"][1].to_f},
           onSelect: updateCoords,
-          trueSize: [#{instance.image_dimensions["original"][0]},#{instance.image_dimensions["original"][1]}],
-          setSelect: [#{instance.image_crop_x}, #{instance.image_crop_y}, #{instance.image_crop_x}+#{instance.image_crop_w}, #{instance.image_crop_y}+#{instance.image_crop_h}],
-          minSize: [#{instance.image_dimensions["cropped_retina"][0]},#{instance.image_dimensions["cropped_retina"][1]}]
+          trueSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]}],
+          setSelect: [#{instance.read_attribute(image.name.to_s+"_crop_x")}, #{instance.read_attribute(image.name.to_s+"_crop_y")}, #{instance.read_attribute(image.name.to_s+"_crop_x")}+#{instance.read_attribute(image.name.to_s+"_crop_w")}, #{instance.read_attribute(image.name.to_s+"_crop_y")}+#{instance.read_attribute(image.name.to_s+"_crop_h")}],
+          minSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_retina"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_retina"][1]}]
         });
     	  function updateCoords(c)
     	  {
-    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_w").val(Math.min(#{instance.image_dimensions["original"][0]},Math.floor(c.w)));
-    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_h").val(Math.min(#{instance.image_dimensions["original"][1]},Math.floor(c.h)));
-    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_x").val(Math.floor(c.x));
-    	  	$("#form-modal-editdish-#{opts[:image].instance.id}-image_crop_y").val(Math.floor(c.y));
+    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_w").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},Math.floor(c.w)));
+    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_h").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]},Math.floor(c.h)));
+    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_x").val(Math.floor(c.x));
+    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_y").val(Math.floor(c.y));
     	  };
       </script>
       )+output

@@ -32,6 +32,7 @@
 
 //= require "cookies.min"
 //= require "bootstrap-timepicker.min"
+//= require "bootstrap-colorpicker.min"
 //= require "select2/select2"
 //= require "jquery.multi-select"
 //= require "icheck/icheck"
@@ -59,6 +60,13 @@ $(document).ready(function()
     var f = $(this);
     if (f.find(".fileinput-preview img").size() > 0)
     {
+    }
+  });
+  $(".ui-selectable").selectable({
+    stop: function(event, id){
+      $(event.target).children(".ui-selected").not(":first").removeClass("ui-selected");
+      var s = $(this);
+      alert(s.parent().find("li").index(s.find(".ui-selected")));
     }
   });
 });

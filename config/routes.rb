@@ -7,6 +7,8 @@ Pl8es::Application.routes.draw do
   post "/ajax/signup" => "ajax#signup"
   post "/ajax/login" => "ajax#login"
   
+  post "/ajax/editdesign" => "ajax#editdesign"
+  
   post "/ajax/addmenu" => "ajax#addmenu"
   post "/ajax/editmenu" => "ajax#editmenu"
   post "/ajax/duplicatemenu" => "ajax#duplicatemenu"
