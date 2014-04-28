@@ -6,7 +6,7 @@ class Dish < ActiveRecord::Base
   has_many :wines
   has_many :dishes
   
-  translates :title, :drinks, :sidedish, :ingredients
+  translates :title, :description, :drinks, :sidedish, :ingredients
   
   default_scope :order => "position, id"
   
