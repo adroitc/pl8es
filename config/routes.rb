@@ -20,12 +20,12 @@ Pl8es::Application.routes.draw do
   post "/ajax/editcategory" => "ajax#editnavigation"
   post "/ajax/sortcategory" => "ajax#sortnavigation"
 
-  post "/ajax/adddish" => "ajax#adddish"
-  post "/ajax/editdish" => "ajax#editdish"
-  post "/ajax/sortdish" => "ajax#sortdish"
-
   resources :ajax_dish, :only => []
   get "/ajax/dish/:id" => "ajax/dish#dish"
+  
+  post "/ajax/adddish" => "ajax/dish#adddish"
+  post "/ajax/editdish" => "ajax/dish#editdish"
+  post "/ajax/sortdish" => "ajax/dish#sortdish"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"
