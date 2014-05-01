@@ -53,17 +53,17 @@
   <div class="col-md-12" style="margin-top:14px;">
 		<div class="tabs-vertical-env">
 			<ul class="nav tabs-vertical">
-				<li class="active"><a href="#v2-wines" data-toggle="tab">Wines</a></li>
-				<li><a href="#v2-dishes" data-toggle="tab">Dishes</a></li>
-				<li><a href="#v2-drinks" data-toggle="tab">Drinks</a></li>
-				<li><a href="#v2-sides" data-toggle="tab">Sides</a></li>
-				<li><a href="#v2-ingredients" data-toggle="tab">Ingredients</a></li>
+				<li class="active"><a href="#v2-editdish-<%=dish.id %>-wines" data-toggle="tab">Wines</a></li>
+				<li><a href="#v2-editdish-<%=dish.id %>-dishes" data-toggle="tab">Dishes</a></li>
+				<li><a href="#v2-editdish-<%=dish.id %>-drinks" data-toggle="tab">Drinks</a></li>
+				<li><a href="#v2-editdish-<%=dish.id %>-sides" data-toggle="tab">Sides</a></li>
+				<li><a href="#v2-editdish-<%=dish.id %>-ingredients" data-toggle="tab">Ingredients</a></li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="v2-wines">
+				<div class="tab-pane active" id="v2-editdish-<%=dish.id %>-wines">
 					<p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>				
 				</div>
-				<div class="tab-pane" id="v2-dishes">
+				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-dishes">
           <div class="col-md-6">
             <div class="col-md-12">
 						  <select name="dishsuggestions[0]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
@@ -126,13 +126,13 @@
           });
           </script>
 				</div>
-				<div class="tab-pane" id="v2-drinks">
+				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-drinks">
 					<textarea name="drinks" class="form-control"><%=dish.description %></textarea>
 				</div>
-				<div class="tab-pane" id="v2-sides">
+				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-sides">
 					<textarea name="sides" class="form-control"><%=dish.description %></textarea>
 				</div>
-				<div class="tab-pane" id="v2-ingredients">
+				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-ingredients">
 					<textarea name="ingredients" class="form-control"><%=dish.description %></textarea>
 				</div>
 			</div>
