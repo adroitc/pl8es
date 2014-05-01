@@ -4,7 +4,8 @@ class Dish < ActiveRecord::Base
   belongs_to :navigation
   
   has_many :wines
-  has_many :dishes
+  belongs_to :dishsuggestion_1, :class_name => "Dish"
+  belongs_to :dishsuggestion_2, :class_name => "Dish"
   
   translates :title, :description, :drinks, :sidedish, :ingredients
   
@@ -25,12 +26,38 @@ class Dish < ActiveRecord::Base
         :geometry => "1516x1012#",
         :format => :png,
         :processors => [:cropper]
+      },
+      :cropped_mini => {
+        :geometry => "77x51#",
+        :format => :png,
+        :processors => [:cropper]
       }
     }
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  
   def image_url
-    return image.url
+    if image.present?
+      return image.url
+    else
+      return nil
+    end
+  end
+  
+  def image_url
+    if image.present?
+      return image.url
+    else
+      return nil
+    end
+  end
+  
+  def price_currency
+    if price != nil
+      return price.to_s+" EUR"
+    else
+      return nil
+    end
   end
   
   def dish_lang

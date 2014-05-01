@@ -1,11 +1,12 @@
 class CreateDishes < ActiveRecord::Migration
   def up
     create_table :dishes do |t|
-      t.references :user
+      t.references :menu
       t.references :navigation
       
       t.references :wines
-      t.references :dishes
+      t.references :dishsuggestion_1
+      t.references :dishsuggestion_2
       
       t.string :price
       

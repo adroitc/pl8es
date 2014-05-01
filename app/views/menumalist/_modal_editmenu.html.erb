@@ -1,4 +1,4 @@
-<%= neon_modal :id => "editmenu-#{menu.id}", :title => "Edit speisekarte" do |m| %>
+<%= neon_modal :id => "editmenu-#{menu.id}", :width => "678px", :title => "Edit speisekarte" do |m| %>
 <%= form_tag({:controller => "ajax", :action => "editmenu"}, {:role => "form", :class => "pl8es_c_ajaxform", :id => "form_editmenu"}) do %>
 <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
 <%=neon_modal_body do |b| %>
@@ -67,7 +67,7 @@
       languages = menu.languages
       Language.all.each do |language|
       %>
-			<option value="<%=language.locale %>" <%="selected" if languages.exists?(language.id) %> <%="data-locked=true" if languages.count==1 %>><%=language.title.capitalize %></option>
+			<option value="<%=language.locale %>" <%="selected" if languages.exists?(language.id) %> <%="data-locked=true" if languages.count==1 && language.id==1 %>><%=language.title.capitalize %></option>
       <% end %>
 		</select>
 	</div>

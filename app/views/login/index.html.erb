@@ -23,7 +23,7 @@
 				<p><%=t("login.invalid_2") %></p>
 			</div>
 			<!--<form method="post" role="form" id="form_login">-->
-      <%= form_tag({:controller => "ajax", :action => "login"}, {:role => "form", :id => "form_login"}) do %>
+      <%= form_tag({:controller => "ajax/session", :action => "login"}, {:role => "form", :id => "form_login"}) do %>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">

@@ -51,10 +51,11 @@ ActiveRecord::Schema.define(version: 20140428105556) do
   add_index "dish_translations", ["locale"], name: "index_dish_translations_on_locale"
 
   create_table "dishes", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "menu_id"
     t.integer  "navigation_id"
     t.integer  "wines_id"
-    t.integer  "dishes_id"
+    t.integer  "dishsuggestion_1_id"
+    t.integer  "dishsuggestion_2_id"
     t.string   "price"
     t.boolean  "is_daily",             default: false
     t.date     "daily_date"

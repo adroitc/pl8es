@@ -1,4 +1,4 @@
-<%= neon_modal :id => "addnavigation", :width => "65%", :title => "Add new category" do |m| %>
+<%= neon_modal :id => "addnavigation", :width => "678px", :title => "Add new category" do |m| %>
 <%= form_tag({:controller => "ajax", :action => "addnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_addnavigation"}) do %>
 <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
 <% if defined? navigation %>

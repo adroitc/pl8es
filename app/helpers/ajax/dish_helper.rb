@@ -1,0 +1,2 @@
+module Ajax::DishHelper
+end

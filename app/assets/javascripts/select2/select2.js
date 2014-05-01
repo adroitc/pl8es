@@ -641,7 +641,7 @@ the specific language governing permissions and limitations under the Apache Lic
         constructor.prototype = $.extend(constructor.prototype, methods);
         return constructor;
     }
-
+    
     AbstractSelect2 = clazz(Object, {
 
         // abstract
@@ -1232,8 +1232,16 @@ the specific language governing permissions and limitations under the Apache Lic
         },
 
         // abstract
-        shouldOpen: function() {
-            if (!this.searchContainer.is(":visible")) return false;
+        shouldOpen: function(e) {
+            var m = $("#"+this.containerId.split("s2id_")[1]).attr("multiple");
+            if (typeof m !== 'undefined'
+                && m !== false){
+              if ((!this.searchContainer.is(":visible"))) return false;
+            }
+            else if (this.mr_enabled != true){
+              this.mr_enabled = true;
+              return false;
+            }
             
             var event;
 

@@ -1,41 +1,5 @@
 class AjaxController < ApplicationController
   
-  def signup
-    if !User.loggedIn(session) && !params.values_at(:name, :email, :password).include?(nil)
-      @user = User.create(params.permit(:name, :email, :password))
-      
-      if @user.errors.count == 0 && !@user.blank?
-        
-        download_code = SecureRandom.hex(3).upcase
-        while User.find_by_download_code(download_code).present?
-          download_code = SecureRandom.hex(3).upcase
-        end
-        @user.menuColor = MenuColor.create()
-        @user.download_code = download_code
-        @user.save
-        
-        session[:user_id] = @user.id
-        
-        render :json => {:status => "success"}
-        return
-      end
-    end
-    render :json => {:status => "invalid"}
-  end
-  
-  def login
-    if !User.loggedIn(session) && !params.values_at(:email, :password).include?(nil)
-      @user = User.find_by_email_and_password(params[:email],params[:password])
-      
-      if !@user.blank?
-        session[:user_id] = @user.id
-        render :json => {:status => "success"}
-        return
-      end
-    end
-    render :json => {:status => "invalid"}
-  end
-  
   def editdesign
     if User.loggedIn(session) && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active).include?(nil)
       @user = User.find(session[:user_id])
@@ -309,7 +273,8 @@ class AjaxController < ApplicationController
       languages = Language.find_all_by_locale(params[:title].keys)
       
       if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
-        new_dish = Dish.create()
+        navigation = Navigation.find(params[:navigation_id])
+        new_dish = Dish.create(:menu => navigation.menu)
         
         if params[:image]
           new_dish.image = params[:image]
@@ -334,7 +299,6 @@ class AjaxController < ApplicationController
         
         I18n.locale = current_locale
         
-        navigation = Navigation.find(params[:navigation_id])
         navigation.dishes.push(new_dish)
         navigation.save
         
@@ -346,11 +310,11 @@ class AjaxController < ApplicationController
   end
   
   def editdish
-    if User.loggedIn(session) && !params.values_at(:dish_id, :title).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:dish_id, :title, :description, :price).include?(nil)
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)
-      if Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).navigation.menu.user == @user && languages.count > 0 && languages.count == params[:title].count
+      if Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).navigation.menu.user == @user && languages.count > 0
         dish = Dish.find(params[:dish_id])
         
         if params[:image]
@@ -377,14 +341,26 @@ class AjaxController < ApplicationController
           dish.update_attributes({:image_crop_processed => false})
         end
         
+        dish.price = params[:price]
+        
         current_locale = I18n.locale
         
         languages.each do |language|
           I18n.locale = language.locale
           dish.title = params[:title][language.locale]
+          dish.description = params[:description][language.locale]
         end
         
         I18n.locale = current_locale
+        
+        params[:dishsuggestions].each_with_index do |dishsuggestion, i|
+          break if i == 2;
+          if Dish.exists?(dishsuggestion[1].to_i) && Dish.find(dishsuggestion[1].to_i).menu.user == @user && dish["dishsuggestion_"+(i+1).to_s] != Dish.find(dishsuggestion[1].to_i)
+            dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
+          else
+            dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
+          end
+        end
         
         dish.save
         

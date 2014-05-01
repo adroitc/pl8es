@@ -41,7 +41,8 @@
             </button>
           </p>
     	  </div>
-    	</div><div class="col-sm-4">
+    	</div>
+      <div class="col-sm-4">
     	 	<div class="tile-stats tile-white">
     	 		<div class="icon"><i class="entypo-brush"></i></div>
     	 		<h2>Design</h3>
@@ -93,8 +94,8 @@
                   </a>
                 <span>
               </td>
-              <td><a href="#"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
-              <td><a href="#"><%=0 %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></a></td>
+              <td><a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
+              <td><a href="#"><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></a></td>
               <td><a href="#"><%=0 %> <i class="glyphicon glyphicon-glass" style="color:#ccc;"></i></a></td>
             </tr>
             <% end %>

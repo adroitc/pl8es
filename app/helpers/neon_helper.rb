@@ -4,13 +4,31 @@ module NeonHelper
     if opts[:width]
       width = "width:#{opts[:width]};"
     end
+    if opts[:languages]
+      output_languages = raw %(
+      <ul class="nav nav-tabs" style="margin-top:-10px;">
+      )
+      opts[:languages].each do |language|
+        output_languages += raw %(
+  			<li class="">
+          <a href="#modal-editmenu-tab-#{language.locale}" data-toggle="tab">
+            #{language.title.capitalize}
+  				</a>
+  			</li>
+        )
+      end
+      output_languages += raw %(
+      </ul>
+      )
+    end
     raw %(
     <div class="modal fade in" id="modal-#{opts[:id]}">
     	<div class="modal-dialog" style="#{width}">
     		<div class="modal-content">
     			 <div class="modal-header">
     			 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    			 	<h4 class="modal-title">#{opts[:title]}</h4>
+    			 	<h4 class="modal-title" style="display:inline-block;">#{opts[:title]}</h4>
+        		#{output_languages}
     			 </div>
     			 #{capture(&block)}
     		</div>

@@ -29,7 +29,11 @@ class Navigation < ActiveRecord::Base
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   def image_url
-    return image.url
+    if image.present?
+      return image.url
+    else
+      return nil
+    end
   end
 
   def navigation_lang

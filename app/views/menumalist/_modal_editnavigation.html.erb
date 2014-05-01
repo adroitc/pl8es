@@ -1,4 +1,4 @@
-<%= neon_modal :id => "editnavigation-#{navigation.id}", :width => "65%", :title => "Edit category" do |m| %>
+<%= neon_modal :id => "editnavigation-#{navigation.id}", :width => "678px", :title => "Edit category" do |m| %>
 <%= form_tag({:controller => "ajax", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editnavigation"}) do %>
 <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
 <%=neon_modal_body do |b| %>

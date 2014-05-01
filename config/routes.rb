@@ -3,10 +3,12 @@ Pl8es::Application.routes.draw do
   resources :app, :only => []
   get "/app/menumalist/:user_download_code" => "app#menumalist"
   
-  resources :ajax, :only => []
-  post "/ajax/signup" => "ajax#signup"
-  post "/ajax/login" => "ajax#login"
+  #ajax/session
+  resources :ajax_session, :only => []
+  post "/ajax/signup" => "ajax/session#signup"
+  post "/ajax/login" => "ajax/session#login"
   
+  resources :ajax, :only => []
   post "/ajax/editdesign" => "ajax#editdesign"
   
   post "/ajax/addmenu" => "ajax#addmenu"
@@ -21,6 +23,9 @@ Pl8es::Application.routes.draw do
   post "/ajax/adddish" => "ajax#adddish"
   post "/ajax/editdish" => "ajax#editdish"
   post "/ajax/sortdish" => "ajax#sortdish"
+
+  resources :ajax_dish, :only => []
+  get "/ajax/dish/:id" => "ajax/dish#dish"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"

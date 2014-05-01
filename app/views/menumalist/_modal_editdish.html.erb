@@ -1,4 +1,4 @@
-<%= neon_modal :id => "editdish-#{dish.id}", :width => "65%", :title => "Edit dish" do |m| %>
+<%= neon_modal :id => "editdish-#{dish.id}", :width => "678px", :title => "Edit dish", :languages => dish.navigation.menu.languages do |m| %>
 <%= form_tag({:controller => "ajax", :action => "editdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editdish"}) do %>
 <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 <%=neon_modal_body do |b| %>
@@ -20,35 +20,124 @@
     <%=neon_imagecrop :image => dish.image %>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="form-group tab-content">
-          <%
-          current_locale = I18n.locale
-          dish.navigation.menu.languages.each do |language|
-            I18n.locale = language.locale
-          %>
-          <div class="tab-pane <%="active" if dish.navigation.menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
-            <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
-					  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>">
-          </div>
-          <%
-          end
-          I18n.locale = current_locale
-          %>
-				</div>
-			</div>
-			<div class="col-md-12">
-        <label class="control-label"><strong>Description</strong></label>
-			  <textarea class="control-label"></textarea>
-        <br />
-			</div>
+		<div class="row form-group tab-content">
+      <%
+      current_locale = I18n.locale
+      dish.navigation.menu.languages.each do |language|
+        I18n.locale = language.locale
+      %>
+      <div class="tab-pane <%="active" if dish.navigation.menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
+			  <div class="col-md-12">
+          <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
+			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>">
+          <br />
+			  </div>
+			  <div class="col-md-12">
+          <label class="control-label"><strong>Description</strong></label>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description"><%=dish.description %></textarea>
+          <br />
+			  </div>
+      </div>
+      <%
+      end
+      I18n.locale = current_locale
+      %>
 			<div class="col-md-12">
         <label  class="control-label"><strong>Price</strong></label>
-			  <input name="" type="text" class="form-control" id="" placeholder="Enter album title" value="<">
+			  <input name="price" type="text" class="form-control" id="" placeholder="Enter album title" value="<%=dish.price %>">
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row">
+  <div class="col-md-12" style="margin-top:14px;">
+		<div class="tabs-vertical-env">
+			<ul class="nav tabs-vertical">
+				<li class="active"><a href="#v2-wines" data-toggle="tab">Wines</a></li>
+				<li><a href="#v2-dishes" data-toggle="tab">Dishes</a></li>
+				<li><a href="#v2-drinks" data-toggle="tab">Drinks</a></li>
+				<li><a href="#v2-sides" data-toggle="tab">Sides</a></li>
+				<li><a href="#v2-ingredients" data-toggle="tab">Ingredients</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="v2-wines">
+					<p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>				
+				</div>
+				<div class="tab-pane" id="v2-dishes">
+          <div class="col-md-6">
+            <div class="col-md-12">
+						  <select name="dishsuggestions[0]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
+								<option></option>
+                <% dish.navigation.menu.navigations.each do |navigation| %>
+						  	<optgroup label="<%=navigation.title %>">
+                  <% navigation.dishes.each do |cat_dish| %>
+                  <% if cat_dish.id != dish.id %>
+						  		<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_1 == cat_dish %>><%=cat_dish.title %></option>
+                  <% end %>
+                  <% end %>
+						  	</optgroup>
+                <% end %>
+						  </select>
+            </div>
+            <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info0">
+              <img src="" width="100%">
+              <div class="pl8es_c_dishsuggestion_title"></div>
+              <div class="pl8es_c_dishsuggestion_price"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-12">
+					  	<select name="dishsuggestions[1]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
+								<option></option>
+                <% dish.navigation.menu.navigations.each do |navigation| %>
+					  		<optgroup label="<%=navigation.title %>">
+                  <% navigation.dishes.each do |cat_dish| %>
+                  <% if cat_dish.id != dish.id %>
+					  			<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_2 == cat_dish %>><%=cat_dish.title %></option>
+                  <% end %>
+                  <% end %>
+					  		</optgroup>
+                <% end %>
+					  	</select>
+            </div>
+            <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info1">
+              <img src="" width="100%">
+              <div class="pl8es_c_dishsuggestion_title"></div>
+              <div class="pl8es_c_dishsuggestion_price"></div>
+            </div>
+          </div>
+          <script type="text/javascript">
+          $("#modal-editdish-<%=dish.id %> select.select2[name^='dishsuggestions[']").each(function(){
+            var i = $(this).attr("name").split("[")[1].split("]")[0];
+            var c = $(this).closest("form").find("#form-dishsuggestion_info"+i);
+            $(this).on("change",function(e){
+              if ($(this).val().length > 0){
+                $.get("/ajax/dish/"+$(this).val(),function(d){
+                  c.show();
+                  c.find("img").show().attr("src", d["dish"]["image_url"]);
+                  c.find(".pl8es_c_dishsuggestion_price").html(d["dish"]["price_currency"]);
+                  c.find(".pl8es_c_dishsuggestion_title").html(d["dish"]["title"]);
+                });
+              }
+            }).trigger("change");
+            $(this).on("select2-removed", function(e){
+              c.hide();
+            });
+          });
+          </script>
+				</div>
+				<div class="tab-pane" id="v2-drinks">
+					<textarea name="drinks" class="form-control"><%=dish.description %></textarea>
+				</div>
+				<div class="tab-pane" id="v2-sides">
+					<textarea name="sides" class="form-control"><%=dish.description %></textarea>
+				</div>
+				<div class="tab-pane" id="v2-ingredients">
+					<textarea name="ingredients" class="form-control"><%=dish.description %></textarea>
+				</div>
+			</div>
+		</div>
+  </div>
 </div>
 <% end %>
 <%=neon_modal_footer do |b| %>

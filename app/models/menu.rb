@@ -4,6 +4,7 @@ class Menu < ActiveRecord::Base
   belongs_to :menuLabel
   
   has_many :navigations
+  has_many :dishes
   has_many :beverages
   
   has_and_belongs_to_many :languages
