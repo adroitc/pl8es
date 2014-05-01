@@ -11,14 +11,16 @@ Pl8es::Application.routes.draw do
   resources :ajax, :only => []
   post "/ajax/editdesign" => "ajax#editdesign"
   
-  post "/ajax/addmenu" => "ajax#addmenu"
-  post "/ajax/editmenu" => "ajax#editmenu"
-  post "/ajax/duplicatemenu" => "ajax#duplicatemenu"
-  post "/ajax/deletemenu" => "ajax#deletemenu"
-
-  post "/ajax/addcategory" => "ajax#addnavigation"
-  post "/ajax/editcategory" => "ajax#editnavigation"
-  post "/ajax/sortcategory" => "ajax#sortnavigation"
+  resources :ajax_menu, :only => []
+  post "/ajax/addmenu" => "ajax/menu#addmenu"
+  post "/ajax/editmenu" => "ajax/menu#editmenu"
+  post "/ajax/duplicatemenu" => "ajax/menu#duplicatemenu"
+  post "/ajax/deletemenu" => "ajax/menu#deletemenu"
+  
+  resources :ajax_navigation, :only => []
+  post "/ajax/addcategory" => "ajax/navigation#addnavigation"
+  post "/ajax/editcategory" => "ajax/navigation#editnavigation"
+  post "/ajax/sortcategory" => "ajax/navigation#sortnavigation"
 
   resources :ajax_dish, :only => []
   get "/ajax/dish/:id" => "ajax/dish#dish"
