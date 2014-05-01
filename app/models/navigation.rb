@@ -28,6 +28,16 @@ class Navigation < ActiveRecord::Base
     }
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  
+  def checkCropValues(crop_values)
+    crop_values.each do |crop_value|
+      if read_attribute(crop_value[0]) != crop_value[1].to_i
+        return true
+      end
+    end
+    return false
+  end
+  
   def image_url
     if image.present?
       return image.url
@@ -45,9 +55,5 @@ class Navigation < ActiveRecord::Base
     end
     return all_translated_attributes_hash
   end
-  
-  #def cropping?
-  #  !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
-  #end
   
 end

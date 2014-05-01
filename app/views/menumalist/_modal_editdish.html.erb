@@ -3,18 +3,6 @@
 <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
-  <div class="col-sm-12">
-		<ul class="nav nav-tabs right-aligned" style="margin-top:-10px;">
-      <% dish.navigation.menu.languages.each do |language| %>
-			<li <%="class=active" if dish.navigation.menu.languages.first == language %>>
-        <a href="#modal-editmenu-tab-<%=language.locale %>" data-toggle="tab">
-					<span class="visible-xs"><%=language.locale.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></span>
-					<span class="hidden-xs"><%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></span>
-				</a>
-			</li>
-      <% end %>
-		</ul>
-  </div>
 	<div class="col-sm-6">
 		<h4 class="margin-top-none">Upload Image</h4>
     <%=neon_imagecrop :image => dish.image %>

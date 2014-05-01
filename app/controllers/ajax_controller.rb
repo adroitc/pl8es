@@ -220,7 +220,7 @@ class AjaxController < ApplicationController
           end
           navigation.image_crop_x = (navigation.image_dimensions["original"][0]-navigation.image_crop_w).to_f/2
           navigation.image_crop_y = (navigation.image_dimensions["original"][1]-navigation.image_crop_h).to_f/2
-        elsif params[:image_crop_w] && params[:image_crop_h] && params[:image_crop_x] && params[:image_crop_y]
+        elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil) && navigation.checkCropValues(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
           if params[:image_crop_w].to_i+params[:image_crop_x].to_i > navigation.image_dimensions["original"][0]
             params[:image_crop_x] = navigation.image_dimensions["original"][0]-params[:image_crop_w].to_i
           end
@@ -329,7 +329,7 @@ class AjaxController < ApplicationController
           end
           dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
           dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
-        elsif params[:image_crop_w] && params[:image_crop_h] && params[:image_crop_x] && params[:image_crop_y]
+        elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil) && dish.checkCropValues(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
           if params[:image_crop_w].to_i+params[:image_crop_x].to_i > dish.image_dimensions["original"][0]
             params[:image_crop_x] = dish.image_dimensions["original"][0]-params[:image_crop_w].to_i
           end
