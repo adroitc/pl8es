@@ -18,7 +18,7 @@
       </li>
     </ol>
     <div class="row gallery-env draggable-portlets">
-      <%= form_tag({:controller => "ajax", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+      <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
       <input type="hidden" name="menu_id" value="<%=@menu.id %>">
       <span class="sorted ui-sortable">
         <% @menu.navigations.find_all_by_level(0).each do |navigation| %>

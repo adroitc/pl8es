@@ -26,14 +26,14 @@
       </li>
     </ol>
     <div class="row gallery-env draggable-portlets">
-      <%= form_tag({:controller => "ajax", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+      <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
       <span class="sorted ui-sortable">
         <% @navigation.sub_navigations.each do |navigation| %>
         <%=neon_navigationpanel :navigation => navigation %>
         <% end %>
       </span>
       <% end %>
-      <%= form_tag({:controller => "ajax", :action => "sortdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
+      <%= form_tag({:controller => "ajax/dish", :action => "sortdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
       <span class="sorted ui-sortable">
         <% @navigation.dishes.each do |dish| %>
 		    <%=neon_dishpanel :dish => dish %>
