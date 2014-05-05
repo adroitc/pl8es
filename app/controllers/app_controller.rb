@@ -26,7 +26,7 @@ class AppController < ApplicationController
                 :include => {
                   :dishes => {
                     :only => [:id, :image_fingerprint, :price],
-                    :methods => [:image_url, :dish_lang],
+                    :methods => [:image_url, :dish_lang, :dishsuggestion_1_present, :dishsuggestion_2_present],
                     :include => {
                       :dishsuggestion_1 => {
                         :only => [:id, :image_fingerprint, :price],
@@ -44,7 +44,7 @@ class AppController < ApplicationController
                     :include => {
                       :dishes => {
                         :only => [:id, :image_fingerprint, :price],
-                        :methods => [:image_url, :dish_lang],
+                        :methods => [:image_url, :dish_lang, :dishsuggestion_1_present, :dishsuggestion_2_present],
                         :include => {
                           :dishsuggestion_1 => {
                             :only => [:id, :image_fingerprint, :price],

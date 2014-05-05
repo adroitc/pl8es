@@ -88,4 +88,12 @@ class Dish < ActiveRecord::Base
     }
   end
   
+  def dishsuggestion_1_present
+    dishsuggestion_1.present? ? "1" : "0"
+  end
+  
+  def dishsuggestion_2_present
+    dishsuggestion_2.present? ? "1" : "0"
+  end
+  
 end
