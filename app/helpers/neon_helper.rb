@@ -10,7 +10,7 @@ module NeonHelper
       )
       opts[:languages].each do |language|
         output_languages += raw %(
-  			<li class="">
+  			<li class="#{"active" if I18n.locale.to_s == language.locale}">
           <a href="#modal-editmenu-tab-#{language.locale}" data-toggle="tab">
             #{language.title.capitalize}
   				</a>
@@ -115,10 +115,10 @@ module NeonHelper
         			</a>
         		</header>
            	<div class="panel-heading">
-           		<div class="panel-title">
-                 <input type="hidden" name="#{opts[:sort_key]}" value="">
-                 <b>#{opts[:title]}</b>
-               </div>
+              <input type="hidden" name="#{opts[:sort_key]}" value="">
+           		<div class="panel-title ellipsis">
+                #{opts[:title]}
+              </div>
            	</div>
         		<footer>
             #{capture(&block)}

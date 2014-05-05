@@ -62,10 +62,10 @@
         <table class="table table-striped responsive">
           <thead>
             <tr>
-              <th width="58%">Menu</th>
-              <th width="14%">Categories</th>
-              <th width="14%">Dishes</th>
-              <th width="14%">Drinks</th>
+              <th width="40%">Menu</th>
+              <th width="100px" style="width:180px;"></th>
+              <th width="">Categories</th>
+              <th width="">Dishes</th>
             </tr>
           </thead>
           <tbody>
@@ -75,6 +75,8 @@
                 <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
                   <%=menu.title %>
                 </a>
+              </td>
+              <td>
                 <span class="badge badge-primary"><%=menu.menuLabel.title if menu.menuLabel != nil %></span>
                 <span class="pl8es_c_table-toolbar">
                   <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
@@ -96,7 +98,6 @@
               </td>
               <td><a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
               <td><a href="#"><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></a></td>
-              <td><a href="#"><%=0 %> <i class="glyphicon glyphicon-glass" style="color:#ccc;"></i></a></td>
             </tr>
             <% end %>
           </tbody>

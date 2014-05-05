@@ -60,6 +60,16 @@ body {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
 }
+.gallery-env.draggable-portlets article.album .panel-heading .panel-title
+{
+  height: 40px;
+  line-height: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: bold;
+}
 ul.ui-selectable
 {
   list-style-type: none;
@@ -77,13 +87,13 @@ ul.ui-selectable li.ui-selectee.ui-selected
 }
 .pl8es_c_dishsuggestion_title
 {
-  margin-right: 6px;
+  /*margin-right: 6px;*/
   padding-top: 6px;
   padding-bottom: 6px;
-  color:#000;
+  color: #000;
   font-size: 14px;
   font-weight: bold;
-  display: inline-block;
+  /*display: inline;*/
 }
 .pl8es_c_dishsuggestion_price
 {

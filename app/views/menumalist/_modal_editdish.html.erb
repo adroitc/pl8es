@@ -38,20 +38,20 @@
 	</div>
 </div>
 <div class="row">
-  <div class="col-md-12" style="margin-top:14px;">
-		<div class="tabs-vertical-env">
-			<ul class="nav tabs-vertical">
-				<li class="active"><a href="#v2-editdish-<%=dish.id %>-wines" data-toggle="tab">Wines</a></li>
-				<li><a href="#v2-editdish-<%=dish.id %>-dishes" data-toggle="tab">Dishes</a></li>
-				<li><a href="#v2-editdish-<%=dish.id %>-drinks" data-toggle="tab">Drinks</a></li>
-				<li><a href="#v2-editdish-<%=dish.id %>-sides" data-toggle="tab">Sides</a></li>
-				<li><a href="#v2-editdish-<%=dish.id %>-ingredients" data-toggle="tab">Ingredients</a></li>
+  <div class="col-md-12" style="margin-top:-34px;">
+		<div class="tabs-vertical-env" style="margin-bottom:0px;">
+			<ul class="nav nav-tabs right-aligned">
+				<li class="active"><a href="#v2-editdish-suggestions-<%=dish.id %>-wines" data-toggle="tab">Wines</a></li>
+				<li><a href="#v2-editdish-suggestions-<%=dish.id %>-dishes" data-toggle="tab">Dishes</a></li>
+				<li><a href="#v2-editdish-suggestions-<%=dish.id %>-drinks" data-toggle="tab">Drinks</a></li>
+				<li><a href="#v2-editdish-suggestions-<%=dish.id %>-sides" data-toggle="tab">Sides</a></li>
+				<li><a href="#v2-editdish-suggestions-<%=dish.id %>-ingredients" data-toggle="tab">Ingredients</a></li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="v2-editdish-<%=dish.id %>-wines">
+				<div class="tab-pane active" id="v2-editdish-suggestions-<%=dish.id %>-wines">
 					<p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>				
 				</div>
-				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-dishes">
+				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-dishes">
           <div class="col-md-6">
             <div class="col-md-12">
 						  <select name="dishsuggestions[0]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
@@ -68,7 +68,7 @@
 						  </select>
             </div>
             <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info0">
-              <img src="" width="100%">
+              <img src="" width="50%">
               <div class="pl8es_c_dishsuggestion_title"></div>
               <div class="pl8es_c_dishsuggestion_price"></div>
             </div>
@@ -89,7 +89,8 @@
 					  	</select>
             </div>
             <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info1">
-              <img src="" width="100%">
+              <img src="" width="50%">
+              <br />
               <div class="pl8es_c_dishsuggestion_title"></div>
               <div class="pl8es_c_dishsuggestion_price"></div>
             </div>
@@ -114,13 +115,13 @@
           });
           </script>
 				</div>
-				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-drinks">
+				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-drinks">
 					<textarea name="drinks" class="form-control"><%=dish.description %></textarea>
 				</div>
-				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-sides">
+				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-sides">
 					<textarea name="sides" class="form-control"><%=dish.description %></textarea>
 				</div>
-				<div class="tab-pane" id="v2-editdish-<%=dish.id %>-ingredients">
+				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-ingredients">
 					<textarea name="ingredients" class="form-control"><%=dish.description %></textarea>
 				</div>
 			</div>

@@ -43,6 +43,9 @@
 //= require "neon-custom"
 // require "neon-demo"
 
+//= require "jquery.ellipsize"
+//= require "jquery.dotdotdot.min"
+
 // require_tree .
 
 $(document).ready(function()
@@ -70,6 +73,7 @@ $(document).ready(function()
       alert(s.parent().find("li").index(s.find(".ui-selected")));
     }
   });
+  $(".ellipsis").css("overflow","hidden")/*.ellipsis()*/.dotdotdot();
 });
 function pl8es_i_ajaxform(f,a)
 {
