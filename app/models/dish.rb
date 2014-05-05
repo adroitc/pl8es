@@ -84,8 +84,7 @@ class Dish < ActiveRecord::Base
       :id => id,
       :image_fingerprint => image_fingerprint,
       :image_url => image.url(:cropped_retina),
-      :dish_lang => all_translated_attributes_hash,
-      :dishsuggestion_1_title => 
+      :dish_lang => all_translated_attributes_hash
     }
   end
   
