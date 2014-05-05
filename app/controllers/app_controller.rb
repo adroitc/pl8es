@@ -25,15 +25,15 @@ class AppController < ApplicationController
                 :methods => [:image_url, :navigation_lang],
                 :include => {
                   :dishes => {
-                    :only => [:id, :image_fingerprint],
+                    :only => [:id, :image_fingerprint, :price],
                     :methods => [:image_url, :dish_lang],
                     :include => {
                       :dishsuggestion_1 => {
-                        :only => [:id, :image_fingerprint],
+                        :only => [:id, :image_fingerprint, :price],
                         :methods => [:image_url, :dish_lang]
                       },
                       :dishsuggestion_2 => {
-                        :only => [:id, :image_fingerprint],
+                        :only => [:id, :image_fingerprint, :price],
                         :methods => [:image_url, :dish_lang]
                       }
                     }
@@ -43,15 +43,15 @@ class AppController < ApplicationController
                     :methods => [:image_url, :navigation_lang],
                     :include => {
                       :dishes => {
-                        :only => [:id, :image_fingerprint],
+                        :only => [:id, :image_fingerprint, :price],
                         :methods => [:image_url, :dish_lang],
                         :include => {
                           :dishsuggestion_1 => {
-                            :only => [:id, :image_fingerprint],
+                            :only => [:id, :image_fingerprint, :price],
                             :methods => [:image_url, :dish_lang]
                           },
                           :dishsuggestion_2 => {
-                            :only => [:id, :image_fingerprint],
+                            :only => [:id, :image_fingerprint, :price],
                             :methods => [:image_url, :dish_lang]
                           }
                         }
