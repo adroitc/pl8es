@@ -113,6 +113,15 @@ class Ajax::DishController < ApplicationController
             dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
           end
         end
+
+        dish.ingredients = []
+        if params[:ingredients]
+          params[:ingredients].each do |ingredient|
+            if Ingredient.exists?(ingredient.to_i)
+              dish.ingredients.push(Ingredient.find(ingredient.to_i))
+            end
+          end
+        end
         
         dish.save
         

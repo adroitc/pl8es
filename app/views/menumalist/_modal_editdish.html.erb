@@ -34,6 +34,7 @@
         <label  class="control-label"><strong>Price</strong></label>
 			  <input name="price" type="text" class="form-control" id="" placeholder="Enter album title" value="<%=dish.price %>">
 			</div>
+      <br />
 		</div>
 	</div>
 </div>
@@ -49,80 +50,103 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="v2-editdish-suggestions-<%=dish.id %>-wines">
-					<p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>				
+          <div class="col-md-12">
+					  <p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>
+          </div>
 				</div>
 				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-dishes">
-          <div class="col-md-6">
-            <div class="col-md-12">
-						  <select name="dishsuggestions[0]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
-								<option></option>
-                <% dish.navigation.menu.navigations.each do |navigation| %>
-						  	<optgroup label="<%=navigation.title %>">
-                  <% navigation.dishes.each do |cat_dish| %>
-                  <% if cat_dish.id != dish.id %>
-						  		<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_1 == cat_dish %>><%=cat_dish.title %></option>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-12">
+				  		  <select name="dishsuggestions[0]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
+				  				<option></option>
+                  <% dish.navigation.menu.navigations.each do |navigation| %>
+				  		  	<optgroup label="<%=navigation.title %>">
+                    <% navigation.dishes.each do |cat_dish| %>
+                    <% if cat_dish.id != dish.id %>
+				  		  		<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_1 == cat_dish %>><%=cat_dish.title %></option>
+                    <% end %>
+                    <% end %>
+				  		  	</optgroup>
                   <% end %>
+				  		  </select>
+              </div>
+              <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info0">
+                <img src="" width="50%">
+                <div class="pl8es_c_dishsuggestion_title"></div>
+                <div class="pl8es_c_dishsuggestion_price"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12">
+				  	  	<select name="dishsuggestions[1]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
+				  				<option></option>
+                  <% dish.navigation.menu.navigations.each do |navigation| %>
+				  	  		<optgroup label="<%=navigation.title %>">
+                    <% navigation.dishes.each do |cat_dish| %>
+                    <% if cat_dish.id != dish.id %>
+				  	  			<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_2 == cat_dish %>><%=cat_dish.title %></option>
+                    <% end %>
+                    <% end %>
+				  	  		</optgroup>
                   <% end %>
-						  	</optgroup>
-                <% end %>
-						  </select>
+				  	  	</select>
+              </div>
+              <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info1">
+                <img src="" width="50%">
+                <br />
+                <div class="pl8es_c_dishsuggestion_title"></div>
+                <div class="pl8es_c_dishsuggestion_price"></div>
+              </div>
             </div>
-            <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info0">
-              <img src="" width="50%">
-              <div class="pl8es_c_dishsuggestion_title"></div>
-              <div class="pl8es_c_dishsuggestion_price"></div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="col-md-12">
-					  	<select name="dishsuggestions[1]" id="form-dishes" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
-								<option></option>
-                <% dish.navigation.menu.navigations.each do |navigation| %>
-					  		<optgroup label="<%=navigation.title %>">
-                  <% navigation.dishes.each do |cat_dish| %>
-                  <% if cat_dish.id != dish.id %>
-					  			<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_2 == cat_dish %>><%=cat_dish.title %></option>
-                  <% end %>
-                  <% end %>
-					  		</optgroup>
-                <% end %>
-					  	</select>
-            </div>
-            <div class="col-md-12" style="margin-top:14px;display:none;" id="form-dishsuggestion_info1">
-              <img src="" width="50%">
-              <br />
-              <div class="pl8es_c_dishsuggestion_title"></div>
-              <div class="pl8es_c_dishsuggestion_price"></div>
-            </div>
-          </div>
-          <script type="text/javascript">
-          $("#modal-editdish-<%=dish.id %> select.select2[name^='dishsuggestions[']").each(function(){
-            var i = $(this).attr("name").split("[")[1].split("]")[0];
-            var c = $(this).closest("form").find("#form-dishsuggestion_info"+i);
-            $(this).on("change",function(e){
-              if ($(this).val().length > 0){
-                $.get("/ajax/dish/"+$(this).val(),function(d){
-                  c.show();
-                  c.find("img").show().attr("src", d["dish"]["image_url"]);
-                  c.find(".pl8es_c_dishsuggestion_price").html(d["dish"]["price_currency"]);
-                  c.find(".pl8es_c_dishsuggestion_title").html(d["dish"]["title"]);
-                });
-              }
-            }).trigger("change");
-            $(this).on("select2-removed", function(e){
-              c.hide();
+            <script type="text/javascript">
+            $("#modal-editdish-<%=dish.id %> select.select2[name^='dishsuggestions[']").each(function(){
+              var i = $(this).attr("name").split("[")[1].split("]")[0];
+              var c = $(this).closest("form").find("#form-dishsuggestion_info"+i);
+              $(this).on("change",function(e){
+                if ($(this).val().length > 0){
+                  $.get("/ajax/dish/"+$(this).val(),function(d){
+                    c.show();
+                    c.find("img").show().attr("src", d["dish"]["image_url"]);
+                    c.find(".pl8es_c_dishsuggestion_price").html(d["dish"]["price_currency"]);
+                    c.find(".pl8es_c_dishsuggestion_title").html(d["dish"]["title"]);
+                  });
+                }
+              }).trigger("change");
+              $(this).on("select2-removed", function(e){
+                c.hide();
+              });
             });
-          });
-          </script>
+            </script>
+          </div>
 				</div>
 				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-drinks">
-					<textarea name="drinks" class="form-control"><%=dish.description %></textarea>
+          <div class="col-md-12">
+					  <textarea name="drinks" class="form-control"><%=dish.description %></textarea>
+          </div>
 				</div>
 				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-sides">
-					<textarea name="sides" class="form-control"><%=dish.description %></textarea>
+          <div class="col-md-12">
+					  <textarea name="sides" class="form-control"><%=dish.description %></textarea>
+          </div>
 				</div>
-				<div class="tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-ingredients">
-					<textarea name="ingredients" class="form-control"><%=dish.description %></textarea>
+				<div class="row tab-pane" id="v2-editdish-suggestions-<%=dish.id %>-ingredients">
+          <div class="col-md-12">
+            <% Ingredient.all.each do |ingredient| %>
+            <div class="col-sm-3">
+              <input class="icheck-2" type="checkbox" id="form-ingredients-1" name="ingredients[]" value="<%=ingredient.id %>" <%="checked" if dish.ingredients.exists?(ingredient.id) %>>
+              <label for="form-ingredients-1"><%=ingredient.title %></label>
+            </div>
+            <% end %>
+            <script type="text/javascript">
+            jQuery(document).ready(function($)
+            {
+            	$('input.icheck-2').iCheck({
+            		checkboxClass: 'icheckbox_square-blue'
+            	});
+            });
+            </script>
+          </div>
 				</div>
 			</div>
 		</div>

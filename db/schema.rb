@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428105556) do
+ActiveRecord::Schema.define(version: 20140505114757) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20140428105556) do
     t.string   "description"
     t.string   "drinks"
     t.string   "sidedish"
-    t.string   "ingredients"
   end
 
   add_index "dish_translations", ["dish_id"], name: "index_dish_translations_on_dish_id"
@@ -73,6 +72,29 @@ ActiveRecord::Schema.define(version: 20140428105556) do
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
     t.boolean  "image_crop_processed", default: true
+    t.integer  "ingredients_id"
+  end
+
+  create_table "dishes_ingredients", force: true do |t|
+    t.integer "dish_id"
+    t.integer "ingredient_id"
+  end
+
+  create_table "ingredient_translations", force: true do |t|
+    t.integer  "ingredient_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "ingredient_translations", ["ingredient_id"], name: "index_ingredient_translations_on_ingredient_id"
+  add_index "ingredient_translations", ["locale"], name: "index_ingredient_translations_on_locale"
+
+  create_table "ingredients", force: true do |t|
+    t.integer  "dish_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "languages", force: true do |t|

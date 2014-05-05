@@ -6,8 +6,9 @@ class Dish < ActiveRecord::Base
   has_many :wines
   belongs_to :dishsuggestion_1, :class_name => "Dish"
   belongs_to :dishsuggestion_2, :class_name => "Dish"
+  has_and_belongs_to_many :ingredients
   
-  translates :title, :description, :drinks, :sidedish, :ingredients
+  translates :title, :description, :drinks, :sidedish
   
   default_scope :order => "position, id"
   
@@ -69,6 +70,23 @@ class Dish < ActiveRecord::Base
       all_translated_attributes_hash[language.locale] = translated_attributes
     end
     return all_translated_attributes_hash
+  end
+  
+  def api_output
+    all_translated_attributes_hash = {}
+    navigation.menu.languages.each do |language|
+      I18n.locale = language.locale
+      
+      all_translated_attributes_hash[language.locale] = translated_attributes
+    end
+    
+    return {
+      :id => id,
+      :image_fingerprint => image_fingerprint,
+      :image_url => image.url(:cropped_retina),
+      :dish_lang => all_translated_attributes_hash,
+      :dishsuggestion_1_title => 
+    }
   end
   
 end

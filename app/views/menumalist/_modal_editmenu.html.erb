@@ -77,12 +77,12 @@
 		<label class="control-label">To delete this speisekarte, press "delete"</label>
     <br />
     <% MenuLabel.all.each do |menuLabel|%>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <input class="icheck-2" type="radio" id="form-label-1" name="label" value="<%=menuLabel.id %>" <%="checked" if menu.menuLabel != nil && menu.menuLabel.id == menuLabel.id %>>
       <label for="form-label-1"><span class="badge badge-primary"><%=menuLabel.title %></span></label>
     </div>
     <% end %>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <input class="icheck-2" type="radio" id="form-label-1" name="label" value="" <%="checked" if menu.menuLabel == nil %>>
       <label for="form-label-1">None</label>
     </div>

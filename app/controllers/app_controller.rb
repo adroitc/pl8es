@@ -26,7 +26,17 @@ class AppController < ApplicationController
                 :include => {
                   :dishes => {
                     :only => [:id, :image_fingerprint],
-                    :methods => [:image_url, :dish_lang]
+                    :methods => [:image_url, :dish_lang],
+                    :include => {
+                      :dishsuggestion_1 => {
+                        :only => [:id, :image_fingerprint],
+                        :methods => [:image_url, :dish_lang]
+                      },
+                      :dishsuggestion_2 => {
+                        :only => [:id, :image_fingerprint],
+                        :methods => [:image_url, :dish_lang]
+                      }
+                    }
                   },
                   :sub_navigations => {
                     :only => [:id, :image_fingerprint, :style],
@@ -34,7 +44,17 @@ class AppController < ApplicationController
                     :include => {
                       :dishes => {
                         :only => [:id, :image_fingerprint],
-                        :methods => [:image_url, :dish_lang]
+                        :methods => [:image_url, :dish_lang],
+                        :include => {
+                          :dishsuggestion_1 => {
+                            :only => [:id, :image_fingerprint],
+                            :methods => [:image_url, :dish_lang]
+                          },
+                          :dishsuggestion_2 => {
+                            :only => [:id, :image_fingerprint],
+                            :methods => [:image_url, :dish_lang]
+                          }
+                        }
                       }
                     }
                   }
