@@ -72,6 +72,40 @@ class Dish < ActiveRecord::Base
     return all_translated_attributes_hash
   end
   
+  def dishingredients
+    all_translated_attributes_hash = {}
+    navigation.menu.languages.each do |language|
+      I18n.locale = language.locale
+      
+      dishingredients_text = ""
+      dishingredients.each do |ingredient|
+        if ingredient != dishingredients.first
+          dishingredients_text = "\n"
+        end
+        dishingredients_text += ingredient 
+      end
+      
+      all_translated_attributes_hash[language.locale] = dishingredients_text
+    end
+    all_translated_attributes_hash
+  end
+  
+  def dishsuggestion_1_present
+    dishsuggestion_1.present? ? "1" : "0"
+  end
+  
+  def dishsuggestion_2_present
+    dishsuggestion_2.present? ? "1" : "0"
+  end
+  
+  def dishingredients_present
+    if ingredients.count == 0
+      return "1"
+    else
+      return "0"
+    end
+  end
+  
   def api_output
     all_translated_attributes_hash = {}
     navigation.menu.languages.each do |language|
@@ -86,14 +120,6 @@ class Dish < ActiveRecord::Base
       :image_url => image.url(:cropped_retina),
       :dish_lang => all_translated_attributes_hash
     }
-  end
-  
-  def dishsuggestion_1_present
-    dishsuggestion_1.present? ? "1" : "0"
-  end
-  
-  def dishsuggestion_2_present
-    dishsuggestion_2.present? ? "1" : "0"
   end
   
 end
