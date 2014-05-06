@@ -73,7 +73,7 @@ class Dish < ActiveRecord::Base
   end
   
   def dishingredients_present
-    if ingredients.count == 0
+    if ingredients.count > 0
       return "1"
     else
       return "0"
