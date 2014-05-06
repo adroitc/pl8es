@@ -7,8 +7,14 @@ class Ajax::DishController < ApplicationController
         :status => "success",
         :dish => JSON.parse(
           Dish.find(params[:id]).to_json(
-            :only => [:id, :title],
-            :methods => [:image_url, :price_currency]
+            :only => [
+              :id,
+              :title,
+              :price
+            ],
+            :methods => [
+              :image_url
+            ]
           )
         )
       }

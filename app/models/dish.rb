@@ -93,7 +93,7 @@ class Dish < ActiveRecord::Base
         dishingredients_text += ingredient.title
       end
       
-      ingredients_translated_attributes_hash[language.locale] = dishingredients_text
+      ingredients_translated_attributes_hash[language.locale] = {:text => dishingredients_text}
     end
     return ingredients_translated_attributes_hash
   end
