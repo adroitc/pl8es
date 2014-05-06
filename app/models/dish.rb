@@ -54,14 +54,6 @@ class Dish < ActiveRecord::Base
     end
   end
   
-  def price_currency
-    if price != nil
-      return price.to_s+" EUR"
-    else
-      return nil
-    end
-  end
-  
   def dish_lang
     all_translated_attributes_hash = {}
     navigation.menu.languages.each do |language|
@@ -70,24 +62,6 @@ class Dish < ActiveRecord::Base
       all_translated_attributes_hash[language.locale] = translated_attributes
     end
     return all_translated_attributes_hash
-  end
-  
-  def dishingredients
-    all_translated_attributes_hash = {}
-    navigation.menu.languages.each do |language|
-      I18n.locale = language.locale
-      
-      dishingredients_text = ""
-      dishingredients.each do |ingredient|
-        if ingredient != dishingredients.first
-          dishingredients_text = "\n"
-        end
-        dishingredients_text += ingredient 
-      end
-      
-      all_translated_attributes_hash[language.locale] = dishingredients_text
-    end
-    all_translated_attributes_hash
   end
   
   def dishsuggestion_1_present
@@ -106,20 +80,22 @@ class Dish < ActiveRecord::Base
     end
   end
   
-  def api_output
-    all_translated_attributes_hash = {}
+  def dishingredients
+    ingredients_translated_attributes_hash = {}
     navigation.menu.languages.each do |language|
       I18n.locale = language.locale
       
-      all_translated_attributes_hash[language.locale] = translated_attributes
+      dishingredients_text = ""
+      ingredients.each do |ingredient|
+        if ingredient != ingredients.first
+          dishingredients_text = "\n"
+        end
+        dishingredients_text += ingredient.title
+      end
+      
+      ingredients_translated_attributes_hash[language.locale] = dishingredients_text
     end
-    
-    return {
-      :id => id,
-      :image_fingerprint => image_fingerprint,
-      :image_url => image.url(:cropped_retina),
-      :dish_lang => all_translated_attributes_hash
-    }
+    return ingredients_translated_attributes_hash
   end
   
 end

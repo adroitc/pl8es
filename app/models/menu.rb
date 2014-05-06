@@ -12,7 +12,4 @@ class Menu < ActiveRecord::Base
   
   belongs_to :menuColor
   
-  def navigations_main
-    return navigations.find_all_by_level(0)
-  end
 end
