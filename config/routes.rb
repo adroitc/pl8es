@@ -23,7 +23,7 @@ Pl8es::Application.routes.draw do
   post "/ajax/sortcategory" => "ajax/navigation#sortnavigation"
 
   resources :ajax_dish, :only => []
-  get "/ajax/dish/:id" => "ajax/dish#dish"
+  get "/ajax/dish/:id/:language_locale" => "ajax/dish#dish"
   
   post "/ajax/adddish" => "ajax/dish#adddish"
   post "/ajax/editdish" => "ajax/dish#editdish"

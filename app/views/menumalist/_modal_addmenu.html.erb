@@ -76,22 +76,14 @@
     <br />
     <% MenuLabel.all.each do |menuLabel|%>
     <div class="col-sm-3">
-      <input class="icheck-2" type="radio" id="form-label-<%=menuLabel.id %>" name="label" value="<%=menuLabel.id %>">
+      <input class="icheck-2-radio" type="radio" id="form-label-<%=menuLabel.id %>" name="label" value="<%=menuLabel.id %>">
       <label for="form-label-<%=menuLabel.id %>"><span class="badge badge-primary"><%=menuLabel.title %></span></label>
     </div>
     <% end %>
     <div class="col-sm-3">
-      <input class="icheck-2" type="radio" id="form-label-1" name="label" value="" checked="checked">
+      <input class="icheck-2-radio" type="radio" id="form-label-1" name="label" value="" checked="checked">
       <label for="form-label-1">None</label>
     </div>
-    <script type="text/javascript">
-    jQuery(document).ready(function($)
-    {
-    	$('input.icheck-2').iCheck({
-    		radioClass: 'iradio_square-blue'
-    	});
-    });
-    </script>
 	</div>
 </div>
 <% end %>

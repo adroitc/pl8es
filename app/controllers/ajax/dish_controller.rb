@@ -3,6 +3,8 @@ class Ajax::DishController < ApplicationController
   # get methods
   def dish
     if User.loggedIn(session) && Dish.find(params[:id]) && Dish.find(params[:id]).menu.user == User.find(session[:user_id])
+      current_locale = I18n.locale
+      I18n.locale = params[:language_locale]
       render :json => {
         :status => "success",
         :dish => JSON.parse(
@@ -18,6 +20,7 @@ class Ajax::DishController < ApplicationController
           )
         )
       }
+      I18n.locale = current_locale
       return
     end
     render :json => {:status => "invalid"}
@@ -68,7 +71,7 @@ class Ajax::DishController < ApplicationController
   end
   
   def editdish
-    if User.loggedIn(session) && !params.values_at(:dish_id, :title, :description, :price).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sidedish).include?(nil)
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)
@@ -87,16 +90,19 @@ class Ajax::DishController < ApplicationController
           end
           dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
           dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
-        elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil) && dish.checkCropValues(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
+        elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil)
           if params[:image_crop_w].to_i+params[:image_crop_x].to_i > dish.image_dimensions["original"][0]
             params[:image_crop_x] = dish.image_dimensions["original"][0]-params[:image_crop_w].to_i
           end
           if params[:image_crop_h].to_i+params[:image_crop_y].to_i > dish.image_dimensions["original"][1]
             params[:image_crop_y] = dish.image_dimensions["original"][1]-params[:image_crop_h].to_i
           end
-          dish.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).merge({:image_crop_processed => false}))
-          dish.image.reprocess!
-          dish.update_attributes({:image_crop_processed => false})
+          dish.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
+          if dish.image_crop_w_changed? || dish.image_crop_h_changed? || dish.image_crop_x_changed? || dish.image_crop_y_changed?
+            dish.update_attributes({:image_crop_processed => true})
+            dish.image.reprocess!
+            dish.update_attributes({:image_crop_processed => false})
+          end
         end
         
         dish.price = params[:price]
@@ -107,6 +113,8 @@ class Ajax::DishController < ApplicationController
           I18n.locale = language.locale
           dish.title = params[:title][language.locale]
           dish.description = params[:description][language.locale]
+          dish.drinks = params[:drinks][language.locale]
+          dish.sidedish = params[:sidedish][language.locale]
         end
         
         I18n.locale = current_locale
@@ -123,8 +131,8 @@ class Ajax::DishController < ApplicationController
         dish.ingredients = []
         if params[:ingredients]
           params[:ingredients].each do |ingredient|
-            if Ingredient.exists?(ingredient.to_i)
-              dish.ingredients.push(Ingredient.find(ingredient.to_i))
+            if Ingredient.exists?(ingredient[0].to_i)
+              dish.ingredients.push(Ingredient.find(ingredient[0].to_i))
             end
           end
         end

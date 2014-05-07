@@ -37,15 +37,6 @@ class Dish < ActiveRecord::Base
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   
-  def checkCropValues(crop_values)
-    crop_values.each do |crop_value|
-      if read_attribute(crop_value[0]) != crop_value[1].to_i
-        return true
-      end
-    end
-    return false
-  end
-  
   def image_url
     if image.present?
       return image.url

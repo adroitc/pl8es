@@ -11,7 +11,7 @@ module NeonHelper
       opts[:languages].each do |language|
         output_languages += raw %(
   			<li class="#{"active" if I18n.locale.to_s == language.locale}">
-          <a href="#modal-editmenu-tab-#{language.locale}" data-toggle="tab">
+          <a href="#modal-#{opts[:id]}-lang-#{language.locale}" data-toggle="tab">
             #{language.title.capitalize}
   				</a>
   			</li>
@@ -74,7 +74,7 @@ module NeonHelper
     output = neon_imageinput :name => opts[:image].name, :different => opts[:image].present?
     if opts[:image].present?
       output = raw %(
-  		<div class="thumbnail" style="width:100%;height:auto;" data-trigger="fileinput">
+  		<div class="thumbnail" style="width:auto;height:auto;" data-trigger="fileinput">
   			<img id="navigation-image-#{instance.id}" src="#{image.url(:crop)}">
   		</div>
       <input name="image_crop_w" type="hidden" id="form-cropimage-#{instance.id}-image_crop_w">

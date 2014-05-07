@@ -74,6 +74,43 @@ $(document).ready(function()
     }
   });
   $(".ellipsis").css("overflow","hidden")/*.ellipsis()*/.dotdotdot();
+
+	$("input.icheck-2-checkbox").iCheck({
+		checkboxClass: 'icheckbox_square-blue'
+	});
+  $('input.icheck-2-radio').iCheck({
+  	radioClass: 'iradio_square-blue'
+  });
+  
+  function pl8es_f_setupinputchanger(t){
+    var f = "change";
+    if (t.attr("type") == "checkbox"){
+      f = "ifChanged"
+    }
+    t.one(f, function(){
+      t.closest("form").find(t[0].tagName+"[name='"+t.attr("name")+"']").not(t).each(function(){
+        if (t.attr("type") != "checkbox"){
+          $(this).val(t.val()).trigger("change");
+        }
+        else if (t.attr("type") == "checkbox"){
+          //console.log(t.icheck("data"));
+          if (t.parent().hasClass("checked")){
+            $(this).iCheck("uncheck");
+          }
+          else{
+            $(this).iCheck("check");
+          }
+        }
+      });
+      pl8es_f_setupinputchanger(t);
+    });
+  }
+  $("input[type!='checkbox'], select").each(function(){
+    pl8es_f_setupinputchanger($(this));
+  });
+  $("input[type='checkbox']").each(function(){
+    pl8es_f_setupinputchanger($(this));
+  });
 });
 function pl8es_i_ajaxform(f,a)
 {
