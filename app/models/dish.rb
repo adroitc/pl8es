@@ -8,7 +8,7 @@ class Dish < ActiveRecord::Base
   belongs_to :dishsuggestion_2, :class_name => "Dish"
   has_and_belongs_to_many :ingredients
   
-  translates :title, :description, :drinks, :sidedish
+  translates :title, :description, :drinks, :sides
   
   default_scope :order => "position, id"
   

@@ -74,7 +74,7 @@ class Ajax::DishController < ApplicationController
   end
   
   def editdish
-    if User.loggedIn(session) && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sidedish).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sides).include?(nil)
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)

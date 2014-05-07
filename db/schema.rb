@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140505114757) do
     t.string   "title"
     t.string   "description"
     t.string   "drinks"
-    t.string   "sidedish"
+    t.string   "sides"
   end
 
   add_index "dish_translations", ["dish_id"], name: "index_dish_translations_on_dish_id"
