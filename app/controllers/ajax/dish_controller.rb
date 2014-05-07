@@ -28,7 +28,7 @@ class Ajax::DishController < ApplicationController
   
   # post methods
   def adddish
-    if User.loggedIn(session) && !params.values_at(:navigation_id, :title).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:navigation_id, :title, :description, :price).include?(nil)
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)
@@ -56,7 +56,10 @@ class Ajax::DishController < ApplicationController
         languages.each do |language|
           I18n.locale = language.locale
           new_dish.title = params[:title][language.locale]
+          new_dish.description = params[:description][language.locale]
         end
+        
+        new_dish.price = params[:price]
         
         I18n.locale = current_locale
         

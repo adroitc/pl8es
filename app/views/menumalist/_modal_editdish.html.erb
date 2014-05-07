@@ -1,4 +1,4 @@
-<%= neon_modal :id => "editdish-#{dish.id}", :width => "678px", :title => "Edit dish", :languages => dish.navigation.menu.languages do |m| %>
+<%= neon_modal :id => "editdish-#{dish.id}", :width => "678px", :title => "Edit dish", :languages => dish.navigation.menu.languages, :default_language => dish.navigation.menu.default_language do |m| %>
 <%= form_tag({:controller => "ajax/dish", :action => "editdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editdish"}) do %>
 <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 <%=neon_modal_body do |b| %>
@@ -13,7 +13,7 @@
     dish.navigation.menu.languages.each do |language|
       I18n.locale = language.locale
     %>
-    <span class="tab-pane <%="active" if dish.navigation.menu.languages.first == language %>" id="modal-editdish-<%=dish.id %>-lang-<%=language.locale %>">
+    <span class="tab-pane <%="active" if dish.navigation.menu.default_language == language %>" id="modal-editdish-<%=dish.id %>-lang-<%=language.locale %>">
       <input type="hidden" name="language_locale" value="<%=language.locale %>">
 	    <div class="col-sm-6">
 			  <div class="col-md-12">

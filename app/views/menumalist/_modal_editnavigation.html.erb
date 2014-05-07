@@ -1,20 +1,8 @@
-<%= neon_modal :id => "editnavigation-#{navigation.id}", :width => "678px", :title => "Edit category" do |m| %>
+<%= neon_modal :id => "editnavigation-#{navigation.id}", :width => "678px", :title => "Edit category", :languages => navigation.menu.languages, :default_language => navigation.menu.default_language do |m| %>
 <%= form_tag({:controller => "ajax/navigation", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editnavigation"}) do %>
 <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
-  <div class="col-sm-12">
-		<ul class="nav nav-tabs right-aligned" style="margin-top:-10px;">
-      <% navigation.menu.languages.each do |language| %>
-			<li <%="class=active" if navigation.menu.languages.first == language %>>
-        <a href="#modal-editmenu-tab-<%=language.locale %>" data-toggle="tab">
-					<span class="visible-xs"><%=language.locale.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
-					<span class="hidden-xs"><%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></span>
-				</a>
-			</li>
-      <% end %>
-		</ul>
-  </div>
 	<div class="col-sm-6">
 		<div class="row">
 			<div class="col-md-12">
@@ -31,7 +19,7 @@
       navigation.menu.languages.each do |language|
         I18n.locale = language.locale
       %>
-      <div class="tab-pane <%="active" if navigation.menu.languages.first == language %>" id="modal-editmenu-tab-<%=language.locale %>">
+      <div class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-editnavigation-<%=navigation.id %>-lang-<%=language.locale %>">
         <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
 			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>">
       </div>
