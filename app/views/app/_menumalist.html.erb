@@ -43,7 +43,7 @@ raw(Jsonify::Builder.plain do |j|
           j.sides_should_display       dish.drinks_should_display ? "1" : "0"
           j.ingredients_should_display dish.ingredients_should_display ? "1" : "0"
           
-          j.dish_suggestion_1(dish.dish_suggestion_1) do |dish_suggestion|
+          j.dish_suggestion_1(dish.dishsuggestion_1) do |dish_suggestion|
             j.id                         dish_suggestion.id
             j.image_url                  dish_suggestion.image.present? ? dish.image.url(:cropped_retina) : nil
             j.image_fingerprint          dish_suggestion.image_fingerprint
@@ -51,7 +51,7 @@ raw(Jsonify::Builder.plain do |j|
             j.price                      dish_suggestion.price
           end
           
-          j.dish_suggestion_2(dish.dish_suggestion_2) do |dish_suggestion|
+          j.dish_suggestion_2(dish.dishsuggestion_2) do |dish_suggestion|
             j.id                         dish_suggestion.id
             j.image_url                  dish_suggestion.image.present? ? dish.image.url(:cropped_retina) : nil
             j.image_fingerprint          dish_suggestion.image_fingerprint
@@ -77,7 +77,7 @@ raw(Jsonify::Builder.plain do |j|
         j.sides_should_display       dish.drinks_should_display ? "1" : "0"
         j.ingredients_should_display dish.ingredients_should_display ? "1" : "0"
         
-        j.dish_suggestion_1(dish.dish_suggestion_1) do |dish_suggestion|
+        j.dish_suggestion_1(dish.dishsuggestion_1) do |dish_suggestion|
           j.id                         dish_suggestion.id
           j.image_url                  dish_suggestion.image.present? ? dish.image.url(:cropped_retina) : nil
           j.image_fingerprint          dish_suggestion.image_fingerprint
@@ -85,7 +85,7 @@ raw(Jsonify::Builder.plain do |j|
           j.price                      dish_suggestion.price
         end
         
-        j.dish_suggestion_2(dish.dish_suggestion_2) do |dish_suggestion|
+        j.dish_suggestion_2(dish.dishsuggestion_2) do |dish_suggestion|
           j.id                         dish_suggestion.id
           j.image_url                  dish_suggestion.image.present? ? dish.image.url(:cropped_retina) : nil
           j.image_fingerprint          dish_suggestion.image_fingerprint
