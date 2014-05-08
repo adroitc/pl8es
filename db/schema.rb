@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505114757) do
+ActiveRecord::Schema.define(version: 20140508084025) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20140505114757) do
     t.integer  "dishsuggestion_1_id"
     t.integer  "dishsuggestion_2_id"
     t.string   "price"
-    t.boolean  "is_daily",             default: false
+    t.boolean  "is_daily",                   default: false
     t.date     "daily_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -71,8 +71,13 @@ ActiveRecord::Schema.define(version: 20140505114757) do
     t.integer  "image_crop_h"
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed", default: true
+    t.boolean  "image_crop_processed",       default: true
     t.integer  "ingredients_id"
+    t.boolean  "wines_should_display",       default: false
+    t.boolean  "dishes_should_display",      default: false
+    t.boolean  "drinks_should_display",      default: false
+    t.boolean  "sides_should_display",       default: false
+    t.boolean  "ingredients_should_display", default: false
   end
 
   create_table "dishes_ingredients", force: true do |t|

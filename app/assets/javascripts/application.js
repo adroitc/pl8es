@@ -33,6 +33,7 @@
 //= require "cookies.min"
 //= require "bootstrap-timepicker.min"
 //= require "bootstrap-colorpicker.min"
+//= require "bootstrap-switch.min"
 //= require "select2/select2"
 //= require "bootstrap-tagsinput.min"
 //= require "jquery.multi-select"

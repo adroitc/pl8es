@@ -117,7 +117,7 @@ class Ajax::DishController < ApplicationController
           dish.title = params[:title][language.locale]
           dish.description = params[:description][language.locale]
           dish.drinks = params[:drinks][language.locale]
-          dish.sidedish = params[:sidedish][language.locale]
+          dish.sides = params[:sides][language.locale]
         end
         
         I18n.locale = current_locale
@@ -138,6 +138,36 @@ class Ajax::DishController < ApplicationController
               dish.ingredients.push(Ingredient.find(ingredient[0].to_i))
             end
           end
+        end
+        
+        if params[:wines_should_display]
+          dish.wines_should_display = true
+        else
+          dish.wines_should_display = false
+        end
+        
+        if params[:dishes_should_display]
+          dish.dishes_should_display = true
+        else
+          dish.dishes_should_display = false
+        end
+        
+        if params[:drinks_should_display]
+          dish.drinks_should_display = true
+        else
+          dish.drinks_should_display = false
+        end
+        
+        if params[:sides_should_display]
+          dish.sides_should_display = true
+        else
+          dish.sides_should_display = false
+        end
+        
+        if params[:ingredients_should_display]
+          dish.ingredients_should_display = true
+        else
+          dish.ingredients_should_display = false
         end
         
         dish.save

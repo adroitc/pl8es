@@ -1,8 +1,12 @@
+require 'jsonify'
+
 class AppController < ApplicationController
+  
+  respond_to :json
   
   def menumalist
     if User.find_by_download_code(params[:user_download_code])
-      app_user = User.find_by_download_code(params[:user_download_code])
+      @user = app_user = User.find_by_download_code(params[:user_download_code])
       return_json = {
         :content_restaurant => JSON.parse(
           app_user.to_json(
@@ -176,7 +180,12 @@ class AppController < ApplicationController
         )
       }
       #render :text => Digest::SHA1.hexdigest(return_json.to_json.to_s)
-      render :json => return_json.to_json
+      #render :json => return_json.to_json
+      render :partial => "menumalist"
+      json = Jsonify::Builder.plain do |j|
+        j.fname @user.name
+      end
+      #render :json => json
       return
     end
     render :json => {:status => "invalid"}

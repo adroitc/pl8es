@@ -1,0 +1,114 @@
+<%=
+raw(Jsonify::Builder.plain do |j|
+  
+  j.content_menues(@user.menus) do |menu|
+    j.title                      menu.title
+    j.from_time                  menu.from_time
+    j.to_time                    menu.to_time
+    
+    j.default_language do
+      j.locale                     menu.default_language.locale
+      j.title                      menu.default_language.title
+    end
+    
+    j.languages(menu.languages) do |language|
+      j.locale                     language.locale
+      j.title                      language.title
+    end
+    
+    j.navigations(menu.navigations.find_all_by_level(0)) do |navigation|
+      j.id                         navigation.id
+      j.image_url                  navigation.image.present? ? navigation.image.url(:cropped_retina) : nil
+      j.image_fingerprint          navigation.image_fingerprint
+      j.style                      navigation.style
+      j.navigation_lang            navigation.navigation_lang
+      
+      j.sub_navigations(navigation.sub_navigations) do |sub_navigation|
+        j.id                         sub_navigation.id
+        j.image_url                  sub_navigation.image.present? ? navigation.image.url(:cropped_retina) : nil
+        j.image_fingerprint          sub_navigation.image_fingerprint
+        j.style                      sub_navigation.style
+        j.navigation_lang            sub_navigation.navigation_lang
+      
+        j.dishes(navigation.dishes) do |dish|
+          j.id                         dish.id
+          j.image_url                  dish.image.present? ? dish.image.url(:cropped_retina) : nil
+          j.image_fingerprint          dish.image_fingerprint
+          j.dish_lang                  dish.dish_lang
+          j.price                      dish.price
+          
+          j.wines_should_display       dish.wines_should_display
+          j.dishes_should_display      dish.dishes_should_display
+          j.drinks_should_display      dish.drinks_should_display
+          j.sides_should_display       dish.drinks_should_display
+          j.ingredients_should_display dish.ingredients_should_display
+          
+          j.dish_suggestion_1          dish.dishsuggestion_1
+          j.dish_suggestion_2          dish.dishsuggestion_2
+          
+          j.dishingredients            dish.dishingredients
+        end
+        
+      end
+      
+      j.dishes(navigation.dishes) do |dish|
+        j.id                         dish.id
+        j.image_url                  dish.image.present? ? dish.image.url(:cropped_retina) : nil
+        j.image_fingerprint          dish.image_fingerprint
+        j.dish_lang                  dish.dish_lang
+        j.price                      dish.price
+        
+        j.wines_should_display       dish.wines_should_display
+        j.dishes_should_display      dish.dishes_should_display
+        j.drinks_should_display      dish.drinks_should_display
+        j.sides_should_display       dish.drinks_should_display
+        j.ingredients_should_display dish.ingredients_should_display
+        
+        j.dish_suggestion_1          dish.dishsuggestion_1
+        j.dish_suggestion_2          dish.dishsuggestion_2
+        
+        j.dishingredients            dish.dishingredients
+      end
+      
+    end
+    
+  end
+  
+  j.content_restaurant do
+    j.name                       @user.name
+    j.appmain_image_fingerprint  @user.appmain_image_fingerprint
+    j.appmain_image_url          @user.appmain_image.present? ? @user.appmain_image.url(:cropped_retina) : nil
+    j.address                    @user.address
+    j.city                       @user.city
+    j.country                    @user.country
+    j.zip                        @user.zip
+  end
+  
+  j.content_style do
+    j.background                 @user.menuColor.background
+    j.bar_background             @user.menuColor.bar_background
+    
+    j.bev_background             @user.menuColor.bev_background
+    j.bev_background_selected    @user.menuColor.bev_background_selected
+    j.bev_background_active      @user.menuColor.bev_background_active
+    j.bev_text                   @user.menuColor.bev_text
+    j.bev_text_selected          @user.menuColor.bev_text_selected
+    j.bev_text_active            @user.menuColor.bev_text_active
+    
+    j.nav_background             @user.menuColor.nav_background
+    j.nav_background_selected    @user.menuColor.nav_background_selected
+    j.nav_background_active      @user.menuColor.nav_background_active
+    j.nav_text                   @user.menuColor.nav_text
+    j.nav_text_selected          @user.menuColor.nav_text_selected
+    j.nav_text_active            @user.menuColor.nav_text_active
+    
+    j.sub_background             @user.menuColor.sub_background
+    j.sub_background_selected    @user.menuColor.sub_background_selected
+    j.sub_background_active      @user.menuColor.sub_background_active
+    j.sub_text                   @user.menuColor.sub_text
+    j.sub_text_selected          @user.menuColor.sub_text_selected
+    j.sub_text_selected          @user.menuColor.sub_text_active
+  end
+  
+end)
+%>

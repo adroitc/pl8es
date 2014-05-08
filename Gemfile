@@ -47,7 +47,11 @@ group :production do
   gem "rails_12factor"
 end
 
-gem "block_helpers"
+# test
+gem "block_helpers" # to remove
+
+# json
+gem "jsonify"
 
 # encryption
 gem "bcrypt-ruby", :require => "bcrypt"
@@ -61,7 +65,6 @@ gem "i18n-js"
 gem "paperclip"
 gem "aws-sdk"
 gem "paperclip-dimension"
-
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
 gem "jquery-ui-rails"
