@@ -37,11 +37,11 @@ raw(Jsonify::Builder.plain do |j|
           j.dish_lang                  dish.dish_lang
           j.price                      dish.price
           
-          j.wines_should_display       dish.wines_should_display
-          j.dishes_should_display      dish.dishes_should_display
-          j.drinks_should_display      dish.drinks_should_display
-          j.sides_should_display       dish.drinks_should_display
-          j.ingredients_should_display dish.ingredients_should_display
+          j.wines_should_display       dish.wines_should_display ? "1" : "0"
+          j.dishes_should_display      dish.dishes_should_display ? "1" : "0"
+          j.drinks_should_display      dish.drinks_should_display ? "1" : "0"
+          j.sides_should_display       dish.drinks_should_display ? "1" : "0"
+          j.ingredients_should_display dish.ingredients_should_display ? "1" : "0"
           
           j.dish_suggestion_1          dish.dishsuggestion_1
           j.dish_suggestion_2          dish.dishsuggestion_2
