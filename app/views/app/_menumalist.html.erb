@@ -46,7 +46,7 @@ raw(Jsonify::Builder.plain do |j|
           if dish.dishsuggestion_1.present?
             j.dish_suggestion_1 do
               j.id                         dish.dishsuggestion_1.id
-              j.image_url                  dish.dishsuggestion_1.image.present? ? dish.image.url(:cropped_retina) : nil
+              j.image_url                  dish.dishsuggestion_1.image.present? ? dish.dishsuggestion_1.image.url(:cropped_retina) : nil
               j.image_fingerprint          dish.dishsuggestion_1.image_fingerprint
               j.dish_lang                  dish.dishsuggestion_1.dish_lang
               j.price                      dish.dishsuggestion_1.price
@@ -56,7 +56,7 @@ raw(Jsonify::Builder.plain do |j|
           if dish.dishsuggestion_2.present?
             j.dish_suggestion_2 do
               j.id                         dish.dishsuggestion_2.id
-              j.image_url                  dish.dishsuggestion_2.image.present? ? dish.image.url(:cropped_retina) : nil
+              j.image_url                  dish.dishsuggestion_2.image.present? ? dish.dishsuggestion_2.image.url(:cropped_retina) : nil
               j.image_fingerprint          dish.dishsuggestion_2.image_fingerprint
               j.dish_lang                  dish.dishsuggestion_2.dish_lang
               j.price                      dish.dishsuggestion_2.price
@@ -84,7 +84,7 @@ raw(Jsonify::Builder.plain do |j|
         if dish.dishsuggestion_1.present?
           j.dish_suggestion_1 do
             j.id                         dish.dishsuggestion_1.id
-            j.image_url                  dish.dishsuggestion_1.image.present? ? dish.image.url(:cropped_retina) : nil
+            j.image_url                  dish.dishsuggestion_1.image.present? ? dish.dishsuggestion_1.image.url(:cropped_retina) : nil
             j.image_fingerprint          dish.dishsuggestion_1.image_fingerprint
             j.dish_lang                  dish.dishsuggestion_1.dish_lang
             j.price                      dish.dishsuggestion_1.price
@@ -94,7 +94,7 @@ raw(Jsonify::Builder.plain do |j|
         if dish.dishsuggestion_2.present?
           j.dish_suggestion_2 do
             j.id                         dish.dishsuggestion_2.id
-            j.image_url                  dish.dishsuggestion_2.image.present? ? dish.image.url(:cropped_retina) : nil
+            j.image_url                  dish.dishsuggestion_2.image.present? ? dish.dishsuggestion_2.image.url(:cropped_retina) : nil
             j.image_fingerprint          dish.dishsuggestion_2.image_fingerprint
             j.dish_lang                  dish.dishsuggestion_2.dish_lang
             j.price                      dish.dishsuggestion_2.price
