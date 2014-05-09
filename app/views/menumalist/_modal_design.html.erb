@@ -69,6 +69,20 @@
   	</div>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-4">
+  	<div class="form-group">
+  		<label for="field-1" class="control-label">Font</label>
+			<div class="input-group">
+			  <select name="supportedFont_id" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
+          <% SupportedFont.all.each do |supportedFont| %>
+          <option value="<%=supportedFont.id %>"><%=supportedFont.title %></option>
+          <% end %>
+        </select>
+      </div>
+  	</div>
+  </div>
+</div>
 <% end %>
 <%=neon_modal_footer do |b| %>
 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

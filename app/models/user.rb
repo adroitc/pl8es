@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   
   has_one :menuColor
   
+  belongs_to :supportedFont
+  
   translates :description
   
   validates :email, :uniqueness => true

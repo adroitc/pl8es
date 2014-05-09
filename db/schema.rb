@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508084025) do
+ActiveRecord::Schema.define(version: 20140509095805) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -222,6 +222,14 @@ ActiveRecord::Schema.define(version: 20140508084025) do
     t.datetime "updated_at"
   end
 
+  create_table "supported_fonts", force: true do |t|
+    t.string   "title"
+    t.string   "name"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_translations", force: true do |t|
     t.integer  "user_id",     null: false
     t.string   "locale",      null: false
@@ -293,6 +301,7 @@ ActiveRecord::Schema.define(version: 20140508084025) do
     t.boolean  "logo_image_processed",          default: true
     t.boolean  "appmain_image_processed",       default: true
     t.integer  "menuColor_id"
+    t.integer  "supportedFont_id"
   end
 
   create_table "wine_translations", force: true do |t|

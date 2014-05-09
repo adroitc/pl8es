@@ -119,18 +119,23 @@ raw(Jsonify::Builder.plain do |j|
   end
   
   j.content_style do
-    j.font_name_navigation       "Zapfino"
-    j.font_size_navigation       18
-    j.font_name_heading          "Zapfino"
-    j.font_size_heading          18
-    j.font_name_heading_small    "Zapfino"
-    j.font_size_heading_small    18
-    j.font_name_description      "Zapfino"
-    j.font_size_description      18
-    j.font_name_price            "Zapfino"
-    j.font_size_price            18
-    j.font_name_card_tab_title   "Zapfino"
-    j.font_size_card_tab_title   18
+    j.font_name_navigation       @user.supportedFont.name_navigation
+    j.font_size_navigation       @user.supportedFont.size_navigation
+    
+    j.font_name_heading          @user.supportedFont.name_heading
+    j.font_size_heading          @user.supportedFont.size_heading
+    
+    j.font_name_heading_small    @user.supportedFont.name_heading_small
+    j.font_size_heading_small    @user.supportedFont.size_heading_small
+    
+    j.font_name_description      @user.supportedFont.name_description
+    j.font_size_description      @user.supportedFont.size_description
+    
+    j.font_name_price            @user.supportedFont.name_price
+    j.font_size_price            @user.supportedFont.size_price
+    
+    j.font_name_card_tab_title   @user.supportedFont.name_card_tab_title
+    j.font_size_card_tab_title   @user.supportedFont.size_card_tab_title
     
     j.background                 @user.menuColor.background
     j.bar_background             @user.menuColor.bar_background

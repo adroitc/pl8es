@@ -1,7 +1,7 @@
 class AjaxController < ApplicationController
   
   def editdesign
-    if User.loggedIn(session) && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)
       @user = User.find(session[:user_id])
       
       menuColor = @user.menuColor
@@ -30,6 +30,10 @@ class AjaxController < ApplicationController
       })
       
       menuColor.save
+      
+      if SupportedFont.exists?(params[:supportedFont_id])
+        @user.supportedFont = SupportedFont.find(params[:supportedFont_id])
+      end
       
       if params[:appmain_image]
         @user.appmain_image = params[:appmain_image]
