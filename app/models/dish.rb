@@ -52,14 +52,6 @@ class Dish < ActiveRecord::Base
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   
-  def image_url
-    if image.present?
-      return image.url
-    else
-      return nil
-    end
-  end
-  
   def dish_lang
     all_translated_attributes_hash = {}
     navigation.menu.languages.each do |language|

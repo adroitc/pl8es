@@ -4,12 +4,17 @@
 <div class="row" style="margin-bottom:14px;">
 	<div class="col-sm-12">
 		<div class="form-group">
-      <label for="form-" class="control-label">Colors</label>
+      <label class="control-label">Colors</label>
   		<ul class="ui-selectable" style="width:auto">
-        <li class="col-sm-3" style="height:100px;">test</li>
-        <li class="col-sm-3" style="height:100px;">test</li>
-        <li class="col-sm-3" style="height:100px;">test</li>
-        <li class="col-sm-3" style="height:100px;">custom</li>
+        <li class="col-sm-3 ui-selected" style="padding-top:15px;padding-bottom:15px;height:100px;">
+          <div class="col-sm-6" style="background-color:#eee">test</div>
+          <div class="col-sm-6">test</div>
+          <div class="col-sm-6">test</div>
+          <div class="col-sm-6">test</div>
+        </li>
+        <li class="col-sm-3" style="padding-top:15px;padding-bottom:15px;height:100px;">test</li>
+        <li class="col-sm-3" style="padding-top:15px;padding-bottom:15px;height:100px;">test</li>
+        <li class="col-sm-3" style="padding-top:15px;padding-bottom:15px;height:100px;">custom</li>
       </ul>
 		</div>
 	</div>
@@ -73,13 +78,11 @@
   <div class="col-md-4">
   	<div class="form-group">
   		<label for="field-1" class="control-label">Font</label>
-			<div class="input-group">
-			  <select name="supportedFont_id" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
-          <% SupportedFont.all.each do |supportedFont| %>
-          <option value="<%=supportedFont.id %>"><%=supportedFont.title %></option>
-          <% end %>
-        </select>
-      </div>
+		  <select name="supportedFont_id" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
+        <% SupportedFont.all.each do |supportedFont| %>
+        <option value="<%=supportedFont.id %>"><%=supportedFont.title %></option>
+        <% end %>
+      </select>
   	</div>
   </div>
 </div>

@@ -1120,7 +1120,7 @@ var public_vars = public_vars || {};
 					}
 				});
 				
-				console.log( opts );
+				//console.log( opts );
 				$this.validate(opts);
 			});
 		}

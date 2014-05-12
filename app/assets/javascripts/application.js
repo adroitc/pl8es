@@ -15,6 +15,7 @@
 
 //= require i18n
 //= require i18n/translations
+
 //= require jquery.min
 // require jquery_ujs
 //= require jquery.ui.all
@@ -40,6 +41,7 @@
 //= require "icheck/icheck"
 //= require "fileinput"
 //= require "jcrop/jquery.Jcrop.min"
+//= require "jquery.validate.min"
 
 //= require "neon-custom"
 // require "neon-demo"
@@ -71,7 +73,7 @@ $(document).ready(function()
     stop: function(event, id){
       $(event.target).children(".ui-selected").not(":first").removeClass("ui-selected");
       var s = $(this);
-      alert(s.parent().find("li").index(s.find(".ui-selected")));
+      //alert(s.parent().find("li").index(s.find(".ui-selected")));
     }
   });
   $(".ellipsis").css("overflow","hidden")/*.ellipsis()*/.dotdotdot();
@@ -118,16 +120,12 @@ function pl8es_i_ajaxform(f,a)
   var files;
   f.submit(function(e){
     e.preventDefault();
+    if (f.hasClass("validate")
+        && f.validate().numberOfInvalids() > 0){
+      return;
+    }
     var d = f.serialize();
     var s2 = f.find("div.select2");
-    /*if (s2.size() > 0)
-    {
-      var s2_id = s2.attr("id").split("s2id_form-")[1];
-      var s2_e = s2.children("ul.select2-choices").children("li.select2-search-choice");
-      s2_e.each(function(i){
-        d = d+"&"+s2_id+"["+i+"]="+$(this).text();
-      });
-    }*/
     d = new FormData(f[0]);
     if (s2.size() > 0)
     {
@@ -173,7 +171,7 @@ function pl8es_i_ajax(u,d,s)
         		delay: 0.2,
         		finish: function()
         		{
-        			s(response);
+              s(response);
         		}
         	});
     		}

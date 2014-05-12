@@ -97,7 +97,7 @@
                 <span>
               </td>
               <td><a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
-              <td><a href="#"><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></a></td>
+              <td><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></td>
             </tr>
             <% end %>
           </tbody>

@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140509095805) do
     t.integer  "wines_id"
     t.integer  "dishsuggestion_1_id"
     t.integer  "dishsuggestion_2_id"
-    t.string   "price"
+    t.integer  "price"
     t.boolean  "is_daily",                   default: false
     t.date     "daily_date"
     t.datetime "created_at"

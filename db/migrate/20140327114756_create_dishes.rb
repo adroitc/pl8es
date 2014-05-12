@@ -8,7 +8,7 @@ class CreateDishes < ActiveRecord::Migration
       t.references :dishsuggestion_1
       t.references :dishsuggestion_2
       
-      t.string :price
+      t.integer :price
       
       t.boolean :is_daily, :default => false
       t.date :daily_date

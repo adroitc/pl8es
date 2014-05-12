@@ -27,15 +27,16 @@ class Navigation < ActiveRecord::Base
       }
     }
   }
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   
-  def image_url
-    if image.present?
-      return image.url
-    else
-      return nil
-    end
-  end
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  validates :image, :dimensions => {
+    :width => 828,
+    :height => 552
+  }
+  
+  validates :title, :length => {
+    :maximum => 28
+  }
 
   def navigation_lang
     all_translated_attributes_hash = {}

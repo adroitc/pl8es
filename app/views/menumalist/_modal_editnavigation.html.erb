@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editnavigation-#{navigation.id}", :width => "678px", :title => "Edit category", :languages => navigation.menu.languages, :default_language => navigation.menu.default_language do |m| %>
-<%= form_tag({:controller => "ajax/navigation", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editnavigation"}) do %>
+<%= form_tag({:controller => "ajax/navigation", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editnavigation"}) do %>
 <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -21,7 +21,7 @@
       %>
       <div class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-editnavigation-<%=navigation.id %>-lang-<%=language.locale %>">
         <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>">
+			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
       </div>
       <%
       end
