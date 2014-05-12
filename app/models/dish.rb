@@ -14,22 +14,37 @@ class Dish < ActiveRecord::Base
   
   has_attached_file :image, {
     :styles => {
-      :crop => {
+      :original_cropping => {
         :geometry => "286x286",
         :format => :png
       },
-      :cropped => {
-        :geometry => "758x506#",
+      :cropped_default => {
+        :geometry => "840x560#",
         :format => :png,
         :processors => [:cropper]
       },
-      :cropped_retina => {
-        :geometry => "1516x1012#",
+      :cropped_default_retina => {
+        :geometry => "1680x1120#",
         :format => :png,
         :processors => [:cropper]
       },
-      :cropped_mini => {
-        :geometry => "77x51#",
+      :cropped_grid => {
+        :geometry => "414x276#",
+        :format => :png,
+        :processors => [:cropper]
+      },
+      :cropped_grid_retina => {
+        :geometry => "828x552#",
+        :format => :png,
+        :processors => [:cropper]
+      },
+      :cropped_suggestion => {
+        :geometry => "150x100#",
+        :format => :png,
+        :processors => [:cropper]
+      },
+      :cropped_suggestion_retina => {
+        :geometry => "300x200#",
         :format => :png,
         :processors => [:cropper]
       }

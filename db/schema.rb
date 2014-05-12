@@ -224,8 +224,18 @@ ActiveRecord::Schema.define(version: 20140509095805) do
 
   create_table "supported_fonts", force: true do |t|
     t.string   "title"
-    t.string   "name"
-    t.integer  "size"
+    t.string   "name_navigation"
+    t.string   "size_navigation"
+    t.string   "name_heading"
+    t.string   "size_heading"
+    t.string   "name_heading_small"
+    t.string   "size_heading_small"
+    t.string   "name_description"
+    t.string   "size_description"
+    t.string   "name_price"
+    t.string   "size_price"
+    t.string   "name_card_tab_title"
+    t.string   "size_card_tab_title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

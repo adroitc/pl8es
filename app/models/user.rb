@@ -17,16 +17,16 @@ class User < ActiveRecord::Base
   
   has_attached_file :appmain_image, {
     :styles => {
-      :crop => {
+      :original_cropping => {
         :geometry => "286x286",
         :format => :png
       },
-      :cropped => {
+      :cropped_default => {
         :geometry => "758x506#",
         :format => :png,
         :processors => [:cropper]
       },
-      :cropped_retina => {
+      :cropped_default_retina => {
         :geometry => "1516x1012#",
         :format => :png,
         :processors => [:cropper]

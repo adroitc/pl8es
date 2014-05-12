@@ -11,17 +11,17 @@ class Navigation < ActiveRecord::Base
   
   has_attached_file :image, {
     :styles => {
-      :crop => {
+      :original_cropping => {
         :geometry => "286x286",
         :format => :png
       },
-      :cropped => {
-        :geometry => "311x283#",
+      :cropped_default => {
+        :geometry => "414x276#",
         :format => :png,
         :processors => [:cropper]
       },
-      :cropped_retina => {
-        :geometry => "622x566#",
+      :cropped_default_retina => {
+        :geometry => "828x552#",
         :format => :png,
         :processors => [:cropper]
       }
