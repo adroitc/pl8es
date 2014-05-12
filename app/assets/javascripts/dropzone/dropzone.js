@@ -632,7 +632,7 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
       },
       successmultiple: noop,
       canceled: function(file) {
-        return this.emit("error", file, "Upload canceled.");
+        return this.emit("custom-error", file, "Upload canceled.");
       },
       canceledmultiple: noop,
       complete: function(file) {
@@ -1486,11 +1486,11 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
         file.status = Dropzone.ERROR;
-        this.emit("error", file, message, xhr);
+        this.emit("custom-error", file, message, xhr);
         this.emit("complete", file);
       }
       if (this.options.uploadMultiple) {
-        this.emit("errormultiple", files, message, xhr);
+        this.emit("custom-errormultiple", files, message, xhr);
         this.emit("completemultiple", files);
       }
       if (this.options.autoProcessQueue) {
