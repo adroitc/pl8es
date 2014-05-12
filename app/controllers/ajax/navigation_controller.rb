@@ -15,10 +15,10 @@ class Ajax::NavigationController < ApplicationController
           
           if navigation_new.image_dimensions["original"][1] >= navigation_new.image_dimensions["original"][0]
             navigation_new.image_crop_w = navigation_new.image_dimensions["original"].min
-            navigation_new.image_crop_h = navigation_new.image_crop_w/(navigation_new.image_dimensions["cropped_retina"][0].to_f/navigation_new.image_dimensions["cropped_retina"][1].to_f)
+            navigation_new.image_crop_h = navigation_new.image_crop_w/(navigation_new.image_dimensions["cropped_default_retina"][0].to_f/navigation_new.image_dimensions["cropped_default_retina"][1].to_f)
           else
             navigation_new.image_crop_h = navigation_new.image_dimensions["original"].min
-            navigation_new.image_crop_w = (navigation_new.image_dimensions["cropped_retina"][0].to_f/navigation_new.image_dimensions["cropped_retina"][1].to_f)*navigation_new.image_crop_h
+            navigation_new.image_crop_w = (navigation_new.image_dimensions["cropped_default_retina"][0].to_f/navigation_new.image_dimensions["cropped_default_retina"][1].to_f)*navigation_new.image_crop_h
           end
           navigation_new.image_crop_x = (navigation_new.image_dimensions["original"][0]-navigation_new.image_crop_w).to_f/2
           navigation_new.image_crop_y = (navigation_new.image_dimensions["original"][1]-navigation_new.image_crop_h).to_f/2
@@ -71,10 +71,10 @@ class Ajax::NavigationController < ApplicationController
           
           if navigation.image_dimensions["original"][1] >= navigation.image_dimensions["original"][0]
             navigation.image_crop_w = navigation.image_dimensions["original"].min
-            navigation.image_crop_h = navigation.image_crop_w/(navigation.image_dimensions["cropped_retina"][0].to_f/navigation.image_dimensions["cropped_retina"][1].to_f)
+            navigation.image_crop_h = navigation.image_crop_w/(navigation.image_dimensions["cropped_default_retina"][0].to_f/navigation.image_dimensions["cropped_default_retina"][1].to_f)
           else
             navigation.image_crop_h = navigation.image_dimensions["original"].min
-            navigation.image_crop_w = (navigation.image_dimensions["cropped_retina"][0].to_f/navigation.image_dimensions["cropped_retina"][1].to_f)*navigation.image_crop_h
+            navigation.image_crop_w = (navigation.image_dimensions["cropped_default_retina"][0].to_f/navigation.image_dimensions["cropped_default_retina"][1].to_f)*navigation.image_crop_h
           end
           navigation.image_crop_x = (navigation.image_dimensions["original"][0]-navigation.image_crop_w).to_f/2
           navigation.image_crop_y = (navigation.image_dimensions["original"][1]-navigation.image_crop_h).to_f/2
@@ -86,11 +86,13 @@ class Ajax::NavigationController < ApplicationController
             params[:image_crop_y] = navigation.image_dimensions["original"][1]-params[:image_crop_h].to_i
           end
           
-          navigation.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
+          navigation.attributes = params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y)
           if navigation.image_crop_w_changed? || navigation.image_crop_h_changed? || navigation.image_crop_x_changed? || navigation.image_crop_y_changed?
-            navigation.update_attributes({:image_crop_processed => true})
-            navigation.image.reprocess!
+            navigation.save
             navigation.update_attributes({:image_crop_processed => false})
+            navigation.image.reprocess!
+            navigation.update_attributes({:image_crop_processed => true})
+          else
           end
         end
         

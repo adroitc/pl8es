@@ -40,10 +40,10 @@ class AjaxController < ApplicationController
         
         if @user.appmain_image_dimensions["original"][1] >= @user.appmain_image_dimensions["original"][0]
           @user.appmain_image_crop_w = @user.appmain_image_dimensions["original"].min
-          @user.appmain_image_crop_h = @user.appmain_image_crop_w/(@user.appmain_image_dimensions["cropped_retina"][0].to_f/@user.appmain_image_dimensions["cropped_retina"][1].to_f)
+          @user.appmain_image_crop_h = @user.appmain_image_crop_w/(@user.appmain_image_dimensions["cropped_default_retina"][0].to_f/@user.appmain_image_dimensions["cropped_default_retina"][1].to_f)
         else
           @user.appmain_image_crop_h = @user.appmain_image_dimensions["original"].min
-          @user.appmain_image_crop_w = (@user.appmain_image_dimensions["cropped_retina"][0].to_f/@user.appmain_image_dimensions["cropped_retina"][1].to_f)*@user.appmain_image_crop_h
+          @user.appmain_image_crop_w = (@user.appmain_image_dimensions["cropped_default_retina"][0].to_f/@user.appmain_image_dimensions["cropped_default_retina"][1].to_f)*@user.appmain_image_crop_h
         end
         @user.appmain_image_crop_x = (@user.appmain_image_dimensions["original"][0]-@user.appmain_image_crop_w).to_f/2
         @user.appmain_image_crop_y = (@user.appmain_image_dimensions["original"][1]-@user.appmain_image_crop_h).to_f/2

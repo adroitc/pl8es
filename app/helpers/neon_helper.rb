@@ -83,11 +83,11 @@ module NeonHelper
       <input name="image_crop_y" type="hidden" id="form-cropimage-#{instance.id}-image_crop_y">
       <script type="text/javascript">
     	  $("#navigation-image-#{instance.id}").Jcrop({
-          aspectRatio: #{instance.read_attribute(image.name.to_s+"_dimensions")["cropped"][0].to_f/instance.read_attribute(image.name.to_s+"_dimensions")["cropped"][1].to_f},
+          aspectRatio: #{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default"][0].to_f/instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default"][1].to_f},
           onSelect: updateCoords,
           trueSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]}],
           setSelect: [#{instance.read_attribute(image.name.to_s+"_crop_x")}, #{instance.read_attribute(image.name.to_s+"_crop_y")}, #{instance.read_attribute(image.name.to_s+"_crop_x")}+#{instance.read_attribute(image.name.to_s+"_crop_w")}, #{instance.read_attribute(image.name.to_s+"_crop_y")}+#{instance.read_attribute(image.name.to_s+"_crop_h")}],
-          minSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_retina"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_retina"][1]}]
+          minSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default_retina"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default_retina"][1]}]
         });
     	  function updateCoords(c)
     	  {

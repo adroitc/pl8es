@@ -42,10 +42,10 @@ class Ajax::DishController < ApplicationController
           
           if new_dish.image_dimensions["original"][1] >= new_dish.image_dimensions["original"][0]
             new_dish.image_crop_w = new_dish.image_dimensions["original"].min
-            new_dish.image_crop_h = new_dish.image_crop_w/(new_dish.image_dimensions["cropped_retina"][0].to_f/new_dish.image_dimensions["cropped_retina"][1].to_f)
+            new_dish.image_crop_h = new_dish.image_crop_w/(new_dish.image_dimensions["cropped_default_retina"][0].to_f/new_dish.image_dimensions["cropped_default_retina"][1].to_f)
           else
             new_dish.image_crop_h = new_dish.image_dimensions["original"].min
-            new_dish.image_crop_w = (new_dish.image_dimensions["cropped_retina"][0].to_f/new_dish.image_dimensions["cropped_retina"][1].to_f)*new_dish.image_crop_h
+            new_dish.image_crop_w = (new_dish.image_dimensions["cropped_default_retina"][0].to_f/new_dish.image_dimensions["cropped_default_retina"][1].to_f)*new_dish.image_crop_h
           end
           new_dish.image_crop_x = (new_dish.image_dimensions["original"][0]-new_dish.image_crop_w).to_f/2
           new_dish.image_crop_y = (new_dish.image_dimensions["original"][1]-new_dish.image_crop_h).to_f/2
@@ -86,10 +86,10 @@ class Ajax::DishController < ApplicationController
           
           if dish.image_dimensions["original"][1] >= dish.image_dimensions["original"][0]
             dish.image_crop_w = dish.image_dimensions["original"].min
-            dish.image_crop_h = dish.image_crop_w/(dish.image_dimensions["cropped_retina"][0].to_f/dish.image_dimensions["cropped_retina"][1].to_f)
+            dish.image_crop_h = dish.image_crop_w/(dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)
           else
             dish.image_crop_h = dish.image_dimensions["original"].min
-            dish.image_crop_w = (dish.image_dimensions["cropped_retina"][0].to_f/dish.image_dimensions["cropped_retina"][1].to_f)*dish.image_crop_h
+            dish.image_crop_w = (dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)*dish.image_crop_h
           end
           dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
           dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
@@ -100,11 +100,12 @@ class Ajax::DishController < ApplicationController
           if params[:image_crop_h].to_i+params[:image_crop_y].to_i > dish.image_dimensions["original"][1]
             params[:image_crop_y] = dish.image_dimensions["original"][1]-params[:image_crop_h].to_i
           end
-          dish.update_attributes(params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
+          dish.attributes = params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y)
           if dish.image_crop_w_changed? || dish.image_crop_h_changed? || dish.image_crop_x_changed? || dish.image_crop_y_changed?
-            dish.update_attributes({:image_crop_processed => true})
-            dish.image.reprocess!
+            dish.save
             dish.update_attributes({:image_crop_processed => false})
+            dish.image.reprocess!
+            dish.update_attributes({:image_crop_processed => true})
           end
         end
         
