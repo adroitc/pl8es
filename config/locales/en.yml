@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  custom-errors:
+  customerrors:
     required: "This field is required."
     minlength: "Please enter at least %{a} characters."
     invalid_email: "Invalid E-mail."

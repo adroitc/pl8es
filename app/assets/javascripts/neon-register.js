@@ -39,16 +39,16 @@ var neonRegister = neonRegister || {};
 			
 			messages: {
 				name: {
-				  required: I18n.t("custom-errors.required"),
-				  minlength: I18n.t("custom-errors.minlength",{a:"3"})
+				  required: I18n.t("customerrors.required"),
+				  minlength: I18n.t("customerrors.minlength",{a:"3"})
 				},
 				email: {
-				  required: I18n.t("custom-errors.required"),
-					email: I18n.t("custom-errors.invalid_email")
+				  required: I18n.t("customerrors.required"),
+					email: I18n.t("customerrors.invalid_email")
 				},
 				password: {
-				  required: I18n.t("custom-errors.required"),
-				  minlength: I18n.t("custom-errors.minlength",{a:"8"})
+				  required: I18n.t("customerrors.required"),
+				  minlength: I18n.t("customerrors.minlength",{a:"8"})
 				}
 			},
 			
