@@ -18,6 +18,18 @@
 			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" data-validate="maxlength[28]"<%=" required" if menu.default_language == language %>>
       </div>
       <% end %>
+      <br />
+      <label class="control-label"><strong>Design</strong></label>
+      <div class="row">
+        <div class="col-sm-6">
+          <input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default">
+          <label for="form-style-1">default</label>
+        </div>
+        <div class="col-sm-6">
+          <input class="icheck-2-radio" type="radio" id="form-style-2" name="style" value="grid">
+          <label for="form-style-2">grid</label>
+        </div>
+      </div>
 		</div>
 	</div>
 </div>

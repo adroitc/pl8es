@@ -78,7 +78,7 @@
   <div class="col-md-4">
   	<div class="form-group">
   		<label for="field-1" class="control-label">Font</label>
-		  <select name="supportedFont_id" class="select2" data-allow-clear="true" data-placeholder="Select one city...">
+		  <select name="supportedFont_id" class="select2" data-allow-clear="false" data-placeholder="Select one city...">
         <% SupportedFont.all.each do |supportedFont| %>
         <option value="<%=supportedFont.id %>"><%=supportedFont.title %></option>
         <% end %>

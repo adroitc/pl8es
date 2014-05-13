@@ -1,14 +1,16 @@
 class Ajax::NavigationController < ApplicationController
   
   def addnavigation
-    if User.loggedIn(session) && !params.values_at(:menu_id, :title).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :style).include?(nil)
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)
       if @user.menus.exists?(params[:menu_id]) && languages.count > 0 && languages.count == params[:title].count
         menu = @user.menus.find(params[:menu_id])
         
-        navigation_new = Navigation.create(:style => "default")
+        navigation_new = Navigation.create()
+        
+        navigation_new.style = params[:style]
         
         if params[:image]
           navigation_new.image = params[:image]
@@ -59,12 +61,14 @@ class Ajax::NavigationController < ApplicationController
   end
   
   def editnavigation
-    if User.loggedIn(session) && !params.values_at(:navigation_id, :title).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:navigation_id, :title, :style).include?(nil)
       @user = User.find(session[:user_id])
       
       languages = Language.find_all_by_locale(params[:title].keys)
       if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
         navigation = Navigation.find(params[:navigation_id])
+        
+        navigation.style = params[:style]
         
         if params[:image]
           navigation.image = params[:image]
