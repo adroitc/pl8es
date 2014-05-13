@@ -33,11 +33,11 @@ var neonLogin = neonLogin || {};
 			messages: {
 				
 				email: {
-				  required: I18n.t("customerrors.required"),
-					email: I18n.t("customerrors.invalid_email")
+				  required: I18n.t("errors.required"),
+					email: I18n.t("errors.invalid_email")
 				},
 				password: {
-				  required: I18n.t("customerrors.required")
+				  required: I18n.t("errors.required")
 				}
 			},
 			
