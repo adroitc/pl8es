@@ -24,7 +24,7 @@ en:
     required: "This field is required."
     minlength: "Please enter at least %{a} characters."
     invalid_email: "Invalid E-mail."
-    already_exists: "This email already exists"
+    already_exists: "This email already exists."
     
   signup:
     welcome: "Create an account, it's free and takes few moments only!"
