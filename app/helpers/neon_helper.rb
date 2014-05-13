@@ -55,11 +55,11 @@ module NeonHelper
   
   def neon_imageinput(opts={},&block)
     raw %(
-		<div class="fileinput fileinput-new" data-provides="fileinput">
+		<div class="form-group fileinput fileinput-new" data-provides="fileinput">
 			<span class="btn btn-info btn-file">
 				<span class="fileinput-new">Select #{"different " if opts[:different] == true}image</span>
 				<span class="fileinput-exists">Change</span>
-				<input type="file" name="#{opts[:name]}">
+				<input type="file" name="#{opts[:name].to_s}" accept="image/*" data-imgvalidation="#{opts[:instance_class].img_min_dimensions()[opts[:name]].join("x") if opts[:instance_class]}">
 			</span>
 			<span class="fileinput-filename"></span>
 			<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
@@ -71,31 +71,31 @@ module NeonHelper
     image = opts[:image]
     instance = image.instance
     
-    output = neon_imageinput :name => opts[:image].name, :different => opts[:image].present?
+    output = neon_imageinput :instance_class => instance.class, :name => image.name, :different => image.present?
     if opts[:image].present?
       output = raw %(
-  		<div class="thumbnail" style="width:auto;height:auto;" data-trigger="fileinput">
-  			<img id="navigation-image-#{instance.id}" src="#{image.url(:original_cropping)}">
-  		</div>
+      <div class="thumbnail" style="width:auto;height:auto;" data-trigger="fileinput">
+      	<img id="navigation-image-#{instance.id}" src="#{image.url(:original_cropping)}">
+      </div>
       <input name="image_crop_w" type="hidden" id="form-cropimage-#{instance.id}-image_crop_w">
       <input name="image_crop_h" type="hidden" id="form-cropimage-#{instance.id}-image_crop_h">
       <input name="image_crop_x" type="hidden" id="form-cropimage-#{instance.id}-image_crop_x">
       <input name="image_crop_y" type="hidden" id="form-cropimage-#{instance.id}-image_crop_y">
       <script type="text/javascript">
-    	  $("#navigation-image-#{instance.id}").Jcrop({
+        $("#navigation-image-#{instance.id}").Jcrop({
           aspectRatio: #{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default"][0].to_f/instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default"][1].to_f},
           onSelect: updateCoords,
           trueSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]}],
           setSelect: [#{instance.read_attribute(image.name.to_s+"_crop_x")}, #{instance.read_attribute(image.name.to_s+"_crop_y")}, #{instance.read_attribute(image.name.to_s+"_crop_x")}+#{instance.read_attribute(image.name.to_s+"_crop_w")}, #{instance.read_attribute(image.name.to_s+"_crop_y")}+#{instance.read_attribute(image.name.to_s+"_crop_h")}],
           minSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default_retina"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["cropped_default_retina"][1]}]
         });
-    	  function updateCoords(c)
-    	  {
-    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_w").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},Math.floor(c.w)));
-    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_h").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]},Math.floor(c.h)));
-    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_x").val(Math.floor(c.x));
-    	  	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_y").val(Math.floor(c.y));
-    	  };
+        function updateCoords(c)
+        {
+        	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_w").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},Math.floor(c.w)));
+        	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_h").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]},Math.floor(c.h)));
+        	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_x").val(Math.floor(c.x));
+        	$("#form-cropimage-#{opts[:image].instance.id}-image_crop_y").val(Math.floor(c.y));
+        };
       </script>
       )+output
     end

@@ -62,7 +62,6 @@ $(document).ready(function()
     pl8es_i_ajaxform($(this),function(){
     })
   });
-  $("input[type='text']").attr("autocomplete","off");
   $(".fileinput").on("change.bs.fileinput",function(){
     var f = $(this);
     if (f.find(".fileinput-preview img").size() > 0)
@@ -76,7 +75,10 @@ $(document).ready(function()
       //alert(s.parent().find("li").index(s.find(".ui-selected")));
     }
   });
-  $(".ellipsis").css("overflow","hidden")/*.ellipsis()*/.dotdotdot();
+  $(".ellipsis").dotdotdot({
+    wrap: "letter",
+    fallbackToLetter: true
+  }).css("overflow", "hidden");
 
 	$("input.icheck-2-checkbox").iCheck({
 		checkboxClass: 'icheckbox_square-blue'
@@ -96,7 +98,6 @@ $(document).ready(function()
           $(this).val(t.val()).trigger("change");
         }
         else if (t.attr("type") == "checkbox"){
-          //console.log(t.icheck("data"));
           if (t.parent().hasClass("checked")){
             $(this).iCheck("uncheck");
           }
@@ -114,12 +115,40 @@ $(document).ready(function()
   $("input[type='checkbox']").each(function(){
     pl8es_f_setupinputchanger($(this));
   });
+  
+  $("input[type='file']").each(function(){
+    var file_input = $(this);
+    var file_input_name = file_input.attr("name");
+    var _URL = window.URL || window.webkitURL;
+    file_input.change(function(){
+      var file, img;
+      if ((file = this.files[0])) {
+        img = new Image();
+        img.onload = function (){
+          var dim = file_input.attr("data-imgvalidation").split("x");
+          if (this.width < dim[0]
+              || this.height < dim[1]){
+            file_input.attr("name","").closest(".form-group").append("<span class=\"validate-has-error\">Image is too small.</span>").addClass("validate-has-error");
+            //alert("too small");
+          }
+          else{
+            file_input.closest(".form-group").removeClass("validate-has-error").find("span.validate-has-error").remove();
+          }
+        };
+        img.src = _URL.createObjectURL(file);
+      }
+      else{
+        file_input.closest(".form-group").removeClass("validate-has-error").find("span.validate-has-error").remove();
+      }
+    });
+  });
 });
 function pl8es_i_ajaxform(f,a)
 {
   var files;
   f.submit(function(e){
     e.preventDefault();
+    console.log(f.validate().errors());
     if (f.hasClass("validate")
         && f.validate().numberOfInvalids() > 0){
       return;

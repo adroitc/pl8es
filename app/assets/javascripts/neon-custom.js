@@ -1082,7 +1082,7 @@ var public_vars = public_vars || {};
 						var rule = _validate[k],
 							params,
 							message;
-						
+            
 						if(typeof opts['rules'][name] == 'undefined')
 						{
 							opts['rules'][name] = {};
@@ -1107,7 +1107,6 @@ var public_vars = public_vars || {};
 							if($.inArray(params[1], ['min', 'max', 'minlength', 'maxlength', 'equalTo']) != -1)
 							{
 								opts['rules'][name][params[1]] = params[2];
-								
 							
 								message = $field.data('message-' + params[1]);
 								

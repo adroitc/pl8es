@@ -69,6 +69,7 @@ body {
   padding-left: 10px;
   padding-right: 10px;
   font-weight: bold;
+  width: 100%;
 }
 ul.ui-selectable
 {
@@ -127,4 +128,12 @@ ul.ui-selectable li.ui-selectee.ui-selected
   background-color: transparent;
   */
   padding-bottom: 15px;
+}
+div.form-group.fileinput.fileinput-new .fileinput-filename
+{
+  position: absolute;
+}
+div.form-group.fileinput.fileinput-new .close
+{
+  position: absolute;
 }
