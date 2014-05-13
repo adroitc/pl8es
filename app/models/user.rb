@@ -22,20 +22,27 @@ class User < ActiveRecord::Base
         :format => :png
       },
       :cropped_default => {
-        :geometry => "758x506#",
+        :geometry => "840x560#",
         :format => :png,
         :processors => [:cropper]
       },
       :cropped_default_retina => {
-        :geometry => "1516x1012#",
+        :geometry => "1680x1120#",
         :format => :png,
         :processors => [:cropper]
       }
     }
   }
   validates_attachment_content_type :appmain_image, :content_type => /\Aimage\/.*\Z/
-  def appmain_image_url
-    return appmain_image.url
+  validates :appmain_image, :dimensions => {
+    :width => 1680,
+    :height => 1120
+  }
+  
+  def self.img_min_dimensions
+    {
+      :appmain_image => [1680, 1120]
+    }
   end
   
 	def self.loggedIn(session)

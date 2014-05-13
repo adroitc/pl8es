@@ -51,6 +51,14 @@ class Dish < ActiveRecord::Base
     }
   }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  validates :image, :dimensions => {
+    :width => 1680,
+    :height => 1120
+  }
+  
+  validates :title, :length => {
+    :maximum => 28
+  }
   
   def self.img_min_dimensions
     {

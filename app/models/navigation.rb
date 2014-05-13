@@ -28,12 +28,6 @@ class Navigation < ActiveRecord::Base
     }
   }
   
-  def self.img_min_dimensions
-    {
-      :image => [828, 552]
-    }
-  end
-  
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates :image, :dimensions => {
     :width => 828,
@@ -43,6 +37,12 @@ class Navigation < ActiveRecord::Base
   validates :title, :length => {
     :maximum => 28
   }
+  
+  def self.img_min_dimensions
+    {
+      :image => [828, 552]
+    }
+  end
 
   def navigation_lang
     all_translated_attributes_hash = {}
