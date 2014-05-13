@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 de:
-  customerrors:
+  errors:
     required: "Dieses Feld ist Pflicht."
     minlength: "Geben Sie mind. %{a} Zeichen ein."
     invalid_email: "Ungültige Email"
