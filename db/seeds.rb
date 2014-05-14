@@ -38,7 +38,7 @@ MenuLabel.create([
   }
 ])
 
-cUser.create([
+User.create([
   {
     :email => "marc@roemer.io",
     :password => "lol123lol",
