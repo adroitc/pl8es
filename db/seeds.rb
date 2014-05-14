@@ -38,13 +38,13 @@ MenuLabel.create([
   }
 ])
 
-User.create([
+cUser.create([
   {
     :email => "marc@roemer.io",
     :password => "lol123lol",
     :name => "Marc's restaurant",
     :menuColor => MenuColor.create(),
-    :download_code => SecureRandom.hex(3).upcase
+    :download_code => "8D34C8"
   }
 ])
 
