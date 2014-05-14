@@ -38,16 +38,6 @@ MenuLabel.create([
   }
 ])
 
-User.create([
-  {
-    :email => "marc@roemer.io",
-    :password => "lol123lol",
-    :name => "Marc's restaurant",
-    :menuColor => MenuColor.create(),
-    :download_code => "8D34C8"
-  }
-])
-
 SupportedFont.create([
   {
     :title => "GillSans",
@@ -63,5 +53,16 @@ SupportedFont.create([
     :size_price => "18",
     :name_card_tab_title => "GillSans",
     :size_card_tab_title => "18"
+  }
+])
+
+User.create([
+  {
+    :email => "marc@roemer.io",
+    :password => "lol123lol",
+    :name => "Marc's restaurant",
+    :menuColor => MenuColor.create(),
+    :download_code => "8D34C8",
+    :supportedFont => SupportedFont.first
   }
 ])

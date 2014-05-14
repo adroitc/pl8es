@@ -12,6 +12,7 @@ class Ajax::SessionController < ApplicationController
         end
         @user.menuColor = MenuColor.create()
         @user.download_code = download_code
+        @user.supportedFont = SupportedFont.first
         @user.save
         
         session[:user_id] = @user.id
