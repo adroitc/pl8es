@@ -74,7 +74,7 @@ en:
     
     design_modal_title: "Change design"
     design_modal_cancel: "Cancel"
-    design_modal_submit: "Cancel"
+    design_modal_submit: "Save"
     design_background_color: "Background color"
     design_background_image: "Background image"
     design_navigation_bar_color: "Navigation-bar color"
