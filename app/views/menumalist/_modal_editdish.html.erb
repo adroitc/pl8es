@@ -23,7 +23,7 @@
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Description</strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" data-validate="maxlength[2]" <%="required" if dish.navigation.menu.default_language == language %>><%=dish.description %></textarea>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" <%="required" if dish.navigation.menu.default_language == language %>><%=dish.description %></textarea>
           <br />
 			  </div>
 			  <div class="col-md-12 form-group">
