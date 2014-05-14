@@ -1,4 +1,4 @@
-<%= neon_modal :id => "design", :width => "678px", :title => "Change design" do |m| %>
+<%= neon_modal :id => "design", :width => "678px", :title => t("menumalist.design_modal_title") do |m| %>
 <%= form_tag({:controller => "ajax", :action => "editdesign"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_design"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row" style="margin-bottom:14px;">
@@ -22,18 +22,18 @@
 <div class="row">
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label">Background</label>
+  		<label for="field-1" class="control-label"><%=t("menumalist.design_background_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.background %>" />
+				<input name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
   <div class="col-md-6 col-md-offset-2">
   	<div class="form-group">
-  		<label for="field-1" class="control-label">Background image</label>
+  		<label for="field-1" class="control-label"><%=t("menumalist.design_background_image") %></label>
       <br />
       <%=neon_imagecrop :image => @user.appmain_image %>
     </div>
@@ -42,34 +42,34 @@
 <div class="row">
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label">Navigation-bar</label>
+  		<label for="field-1" class="control-label"><%=t("menumalist.design_navigation_bar_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.bar_background %>" />
+				<input name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.bar_background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div> 
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label">Navigation text</label>
+  		<label for="field-1" class="control-label"><%=t("menumalist.design_navigation_text_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text %>" />
+				<input name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label">Navigation text active</label>
+  		<label for="field-1" class="control-label"><%=t("menumalist.design_navigation_text_active_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text_active %>" />
+				<input name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text_active %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
@@ -77,7 +77,7 @@
 <div class="row">
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label">Font</label>
+  		<label for="field-1" class="control-label"><%=t("menumalist.design_font") %></label>
 		  <select name="supportedFont_id" class="select2" data-allow-clear="false" data-placeholder="Select one city...">
         <% SupportedFont.all.each do |supportedFont| %>
         <option value="<%=supportedFont.id %>" <%="selected" if @user.supportedFont == supportedFont %>><%=supportedFont.title %></option>
@@ -88,10 +88,10 @@
 </div>
 <% end %>
 <%=neon_modal_footer do |b| %>
-<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("menumalist.design_modal_cancel") %></button>
 <button type="submit" class="btn btn-success btn-icon icon-left">
 	<i class="entypo-plus"></i>
-	Add dish
+	<%=t("menumalist.design_modal_submit") %>
 </button>
 <% end %>
 <% end %>

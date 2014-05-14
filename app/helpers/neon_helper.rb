@@ -57,8 +57,8 @@ module NeonHelper
     raw %(
 		<div class="form-group fileinput fileinput-new" data-provides="fileinput">
 			<span class="btn btn-info btn-file">
-				<span class="fileinput-new">Select #{"different " if opts[:different] == true}image</span>
-				<span class="fileinput-exists">Change</span>
+				<span class="fileinput-new">#{opts[:different] ? t("neon.image_input_select_different") : t("neon.image_input_select")}</span>
+				<span class="fileinput-exists">#{t("neon.image_input_change")}</span>
 				<input type="file" name="#{opts[:name].to_s}" accept="image/*" data-imgvalidation="#{opts[:instance_class].img_min_dimensions()[opts[:name]].join("x") if opts[:instance_class]}">
 			</span>
 			<span class="fileinput-filename"></span>

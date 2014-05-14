@@ -1,41 +1,48 @@
-<%= neon_modal :id => "adddish", :width => "678px", :title => "Add new dish", :languages => navigation.menu.languages, :default_language => navigation.menu.default_language do |m| %>
+<%= neon_modal :id => "adddish", :width => "678px", :title => t("menumalist.dish_modal_add_title"), :languages => navigation.menu.languages, :default_language => navigation.menu.default_language do |m| %>
 <%= form_tag({:controller => "ajax/dish", :action => "adddish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_addnavigation"}) do %>
 <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
-		<h4 class="margin-top-none">Upload Image</h4>
+		<h4 class="margin-top-none"><%=t("menumalist.dish_upload_image") %></h4>
 		<%=neon_imageinput :instance_class => Dish, :name => :image %>
 	</div>
 	<div class="col-sm-6">
 		<div class="tab-content">
-      <% navigation.menu.languages.each do |language| %>
+      <%
+      current_locale = I18n.locale
+      navigation.menu.languages.each do |language|
+        I18n.locale = language.locale
+      %>
       <div class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-adddish-lang-<%=language.locale %>">
 			  <div class="col-md-12 form-group">
-          <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
+          <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
+			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
           <br />
 			  </div>
 			  <div class="col-md-12 form-group">
-          <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Description</strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" data-validate="maxlength[700]" <%="required" if navigation.menu.default_language == language %> style="height:134px;"></textarea>
+          <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_description") %><% I18n.locale = language.locale %></strong></label>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[700]" <%="required" if navigation.menu.default_language == language %> style="height:134px;"></textarea>
           <br />
 			  </div>
 			  <div class="col-md-12 form-group">
-          <label for="form-price" class="control-label"><strong>Price</strong></label>
-			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="" data-validate="number,maxlength[7]" <%="required" if navigation.menu.default_language == language %>>
+          <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>
+			    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="number,maxlength[7]" <%="required" if navigation.menu.default_language == language %>>
 			  </div>
       </div>
-      <% end %>
+      <%
+      end
+      I18n.locale = current_locale
+      %>
 		</div>
 	</div>
 </div>
 <% end %>
 <%=neon_modal_footer do |b| %>
-<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("menumalist.dish_modal_add_cancel") %></button>
 <button type="submit" class="btn btn-success btn-icon icon-left">
 	<i class="entypo-plus"></i>
-	Add dish
+	<%=t("menumalist.dish_modal_add_submit") %>
 </button>
 <% end %>
 <% end %>

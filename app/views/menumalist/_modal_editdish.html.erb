@@ -1,10 +1,10 @@
-<%= neon_modal :id => "editdish-#{dish.id}", :width => "678px", :title => "Edit dish", :languages => dish.navigation.menu.languages, :default_language => dish.navigation.menu.default_language do |m| %>
+<%= neon_modal :id => "editdish-#{dish.id}", :width => "678px", :title => t("menumalist.dish_modal_edit_title"), :languages => dish.navigation.menu.languages, :default_language => dish.navigation.menu.default_language do |m| %>
 <%= form_tag({:controller => "ajax/dish", :action => "editdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editdish"}) do %>
 <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6">
-		<h4 class="margin-top-none">Upload Image</h4>
+		<h4 class="margin-top-none"><%=t("menumalist.dish_upload_image") %></h4>
     <%=neon_imagecrop :image => dish.image %>
 	</div>
 	<span class="row tab-content">
@@ -17,28 +17,28 @@
       <input type="hidden" name="language_locale" value="<%=language.locale %>">
 	    <div class="col-sm-6">
 			  <div class="col-md-12 form-group">
-          <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
-			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>" data-validate="maxlength[28]" <%="required" if dish.navigation.menu.default_language == language %>>
+          <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
+			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=dish.title %>" data-validate="maxlength[28]" <%="required" if dish.navigation.menu.default_language == language %>>
           <br />
 			  </div>
 			  <div class="col-md-12 form-group">
-          <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Description</strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" data-validate="maxlength[700]" <%="required" if dish.navigation.menu.default_language == language %> style="height:134px;"><%=dish.description %></textarea>
+          <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_description") %><% I18n.locale = language.locale %></strong></label>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[700]" <%="required" if dish.navigation.menu.default_language == language %> style="height:134px;"><%=dish.description %></textarea>
           <br />
 			  </div>
 			  <div class="col-md-12 form-group">
-          <label for="form-price" class="control-label"><strong>Price</strong></label>
-			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="<%=dish.price %>" data-validate="number,maxlength[7]" <%="required" if dish.navigation.menu.default_language == language %>>
+          <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>
+			    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="<%=dish.price %>" data-validate="number,maxlength[7]" <%="required" if dish.navigation.menu.default_language == language %>>
 			  </div>
       </div>
       <div class="row">
 	    	<div class="col-md-12" style="display:inline-block;">
 	    		<ul class="nav nav-tabs right-aligned">
-	    			<li class="active"><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-wines" data-toggle="tab">Wines</a></li>
-	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-dishes" data-toggle="tab">Dishes</a></li>
-	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-drinks" data-toggle="tab">Drinks</a></li>
-	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-sides" data-toggle="tab">Sides</a></li>
-	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-ingredients" data-toggle="tab">Ingredients</a></li>
+	    			<li class="active"><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-wines" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_wines") %><% I18n.locale = language.locale %></a></li>
+	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-dishes" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_dishes") %><% I18n.locale = language.locale %></a></li>
+	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-drinks" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_drinks") %><% I18n.locale = language.locale %></a></li>
+	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-sides" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_sides") %><% I18n.locale = language.locale %></a></li>
+	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-ingredients" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_ingredients") %><% I18n.locale = language.locale %></a></li>
 	    		</ul>
         </div>
 	    	<div class="col-md-12">
@@ -46,7 +46,7 @@
 	    			<div class="tab-pane active" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-wines">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<div class="form-group">
-      						<label class="col-md-8 control-label align-right" style="padding:2px;">Apply Icon</label>
+      						<label class="col-md-8 control-label align-right" style="padding:2px;"><% I18n.locale = current_locale %><%=t("menumalist.dish_wines_text") %><% I18n.locale = language.locale %></label>
       						<div class="col-md-4">
       							<div class="make-switch switch-mini" data-on-label="<i class='entypo-check'></i>" data-off-label="<i class='entypo-cancel'></i>" style="float:right;">
       								<input name="wines_should_display" type="checkbox"<%=" checked" if dish.wines_should_display %> />
@@ -61,7 +61,7 @@
 	    			<div class="tab-pane" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-dishes">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<div class="form-group">
-      						<label class="col-md-8 control-label align-right" style="padding:2px;">Apply Icon</label>
+      						<label class="col-md-8 control-label align-right" style="padding:2px;"><% I18n.locale = current_locale %><%=t("menumalist.dish_dishes_text") %><% I18n.locale = language.locale %></label>
       						<div class="col-md-4">
       							<div class="make-switch switch-mini" data-on-label="<i class='entypo-check'></i>" data-off-label="<i class='entypo-cancel'></i>" style="float:right;">
       								<input name="dishes_should_display" type="checkbox" <%=" checked" if dish.dishes_should_display %> />
@@ -71,7 +71,7 @@
               </div>
               <div class="col-md-6">
                 <div class="col-md-12">
-    			  		  <select name="dishsuggestions[0]" id="form-dishes" class="select2" data-language="<%=language.locale %>" data-allow-clear="true" data-placeholder="Select one city...">
+    			  		  <select name="dishsuggestions[0]" id="form-dishes" class="select2" data-language="<%=language.locale %>" data-allow-clear="true" data-placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_dishes_placeholder") %><% I18n.locale = language.locale %>">
     			  				<option></option>
                     <% dish.navigation.menu.navigations.each do |navigation| %>
     			  		  	<optgroup label="<%=navigation.title %>">
@@ -92,7 +92,7 @@
               </div>
               <div class="col-md-6">
                 <div class="col-md-12">
-    			  	  	<select name="dishsuggestions[1]" id="form-dishes" class="select2" data-language="<%=language.locale %>" data-allow-clear="true" data-placeholder="Select one city...">
+    			  	  	<select name="dishsuggestions[1]" id="form-dishes" class="select2" data-language="<%=language.locale %>" data-allow-clear="true" data-placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_dishes_placeholder") %><% I18n.locale = language.locale %>">
     			  				<option></option>
                     <% dish.navigation.menu.navigations.each do |navigation| %>
     			  	  		<optgroup label="<%=navigation.title %>">
@@ -116,7 +116,7 @@
 	    		  <div class="tab-pane form-group" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-drinks">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<div class="form-group">
-      						<label class="col-md-8 control-label align-right" style="padding:2px;">Apply Icon</label>
+      						<label class="col-md-8 control-label align-right" style="padding:2px;"><% I18n.locale = current_locale %><%=t("menumalist.dish_drinks_text") %><% I18n.locale = language.locale %></label>
       						<div class="col-md-4">
       							<div class="make-switch switch-mini" data-on-label="<i class='entypo-check'></i>" data-off-label="<i class='entypo-cancel'></i>" style="float:right;">
       								<input name="drinks_should_display" type="checkbox" <%=" checked" if dish.drinks_should_display %> />
@@ -125,13 +125,13 @@
       					</div>
               </div>
               <div class="col-md-12">
-	    		  	  <textarea name="drinks[<%=language.locale %>]" class="form-control" data-validate="maxlength[250]"><%=dish.drinks %></textarea>
+	    		  	  <textarea name="drinks[<%=language.locale %>]" class="form-control" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_drinks_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[250]"><%=dish.drinks %></textarea>
               </div>
 	    		  </div>
 	    		  <div class="tab-pane form-group" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-sides">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<div class="form-group">
-      						<label class="col-md-8 control-label align-right" style="padding:2px;">Apply Icon</label>
+      						<label class="col-md-8 control-label align-right" style="padding:2px;"><% I18n.locale = current_locale %><%=t("menumalist.dish_sides_text") %><% I18n.locale = language.locale %></label>
       						<div class="col-md-4">
       							<div class="make-switch switch-mini" data-on-label="<i class='entypo-check'></i>" data-off-label="<i class='entypo-cancel'></i>" style="float:right;">
       								<input name="sides_should_display" type="checkbox" <%=" checked" if dish.sides_should_display %> />
@@ -140,13 +140,13 @@
       					</div>
               </div>
               <div class="col-md-12">
-	    	  	    <textarea name="sides[<%=language.locale %>]" class="form-control" data-validate="maxlength[250]"><%=dish.sides %></textarea>
+	    	  	    <textarea name="sides[<%=language.locale %>]" class="form-control" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_sides_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[250]"><%=dish.sides %></textarea>
               </div>
 	    		  </div>
 	    			<div class="tab-pane" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-ingredients">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<div class="form-group">
-      						<label class="col-md-8 control-label align-right" style="padding:2px;">Apply Icon</label>
+      						<label class="col-md-8 control-label align-right" style="padding:2px;"><% I18n.locale = current_locale %><%=t("menumalist.dish_ingredients_text") %><% I18n.locale = language.locale %></label>
       						<div class="col-md-4">
       							<div class="make-switch switch-mini" data-on-label="<i class='entypo-check'></i>" data-off-label="<i class='entypo-cancel'></i>" style="float:right;">
       								<input name="ingredients_should_display" type="checkbox" <%=" checked" if dish.ingredients_should_display %> />
@@ -197,8 +197,8 @@ $("#modal-editdish-<%=dish.id %> select.select2[name^='dishsuggestions[']").each
 </script>
 <% end %>
 <%=neon_modal_footer do |b| %>
-<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-<button type="submit" class="btn btn-info" >Save changes</button>
+<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("menumalist.dish_modal_edit_cancel") %></button>
+<button type="submit" class="btn btn-success"><%=t("menumalist.dish_modal_edit_submit") %></button>
 <% end %>
 <% end %>
 <% end %>

@@ -1,4 +1,4 @@
-<%= neon_modal :id => "addnavigation", :width => "678px", :title => "Add new category", :languages => menu.languages, :default_language => menu.default_language do |m| %>
+<%= neon_modal :id => "addnavigation", :width => "678px", :title => t("menumalist.navigation_modal_add_title"), :languages => menu.languages, :default_language => menu.default_language do |m| %>
 <%= form_tag({:controller => "ajax/navigation", :action => "addnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addnavigation"}) do %>
 <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
 <% if defined? navigation %>
@@ -7,19 +7,26 @@
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
-		<h4 class="margin-top-none">Upload Image</h4>
+		<h4 class="margin-top-none"><%=t("menumalist.navigation_upload_image") %></h4>
 		<%=neon_imageinput :instance_class => Navigation, :name => :image %>
 	</div>
 	<div class="col-sm-6">
 		<div class="tab-content">
-      <% menu.languages.each do |language| %>
+      <%
+      current_locale = I18n.locale
+      menu.languages.each do |language|
+        I18n.locale = language.locale
+      %>
       <div class="tab-pane <%="active" if menu.default_language == language %> form-group" id="modal-addnavigation-lang-<%=language.locale %>">
-        <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></label>
-			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" data-validate="maxlength[28]" <%="required" if menu.default_language == language %>>
+        <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></label>
+			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[28]" <%="required" if menu.default_language == language %>>
       </div>
-      <% end %>
+      <%
+      end
+      I18n.locale = current_locale
+      %>
       <br />
-      <label class="control-label"><strong>Design</strong></label>
+      <label class="control-label"><strong><%=t("menumalist.navigation_design") %></strong></label>
       <div class="row">
         <div class="col-sm-6">
           <input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default" checked>
@@ -35,10 +42,10 @@
 </div>
 <% end %>
 <%=neon_modal_footer do |b| %>
-<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("menumalist.navigation_modal_add_cancel") %></button>
 <button type="submit" class="btn btn-success btn-icon icon-left">
 	<i class="entypo-plus"></i>
-	Add navigation
+	<%=t("menumalist.navigation_modal_add_submit") %>
 </button>
 <% end %>
 <% end %>

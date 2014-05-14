@@ -11,7 +11,7 @@
         <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
       </li>
       <li class="">
-        <a href="<%=url_for :controller => "menumalist", :action => "index" %>">Alle Speisekarten</a>
+        <a href="<%=url_for :controller => "menumalist", :action => "index" %>"><%=t("menumalist.all_menus") %></a>
       </li>
       <li class="">
         <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id %>"><%=@navigation.menu.title %></a>
@@ -45,7 +45,7 @@
         <div style="margin-top:50%;text-align:center;">
           <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">
             <button type="button" class="btn btn-green btn-icon btn-lg  icon-left">
-            	Add category
+            	<%=t("menumalist.add_category") %>
             	<i class="entypo-plus"></i>
             </button>
           </a>
@@ -57,7 +57,7 @@
         <div style="margin-top:50%;text-align:center;">
           <a href="javascript:;" onclick="jQuery('#modal-adddish').modal('show');">
             <button type="button" class="btn btn-green btn-icon btn-lg  icon-left">
-            	Add dish
+            	<%=t("menumalist.add_dish") %>
             	<i class="entypo-plus"></i>
             </button>
           </a>

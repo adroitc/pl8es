@@ -11,7 +11,7 @@
         <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
       </li>
       <li class="active">
-        <strong>Alle Speisekarten</strong>
+        <strong><%=t("menumalist.all_menus") %></strong>
       </li>
     </ol>
     <div class="row">
@@ -24,7 +24,7 @@
       			<h2><%=@user.download_code %></h2>
       		</div>
       		<div class="title">
-      			<p>This is your download-code. Enter it on the menumalist iPad app to view your menus.</p>
+      			<p><%=t("menumalist.download_code_title") %></p>
       		</div>
       	</div>
       </div>
@@ -33,10 +33,10 @@
     	 		<div class="icon"><i class="entypo-monitor"></i></div>
     	 		<div class="num" data-start="0" data-end="1" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
           <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
-    	 		<h3>installations</h3>
-          <p>on iPads
+    	 		<h3><%=t("menumalist.installations") %></h3>
+          <p><%=t("menumalist.installations_on_iPad") %>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              want more?
+              <%=t("menumalist.installations_want_more") %>
               <i class="entypo-plus"></i>
             </button>
           </p>
@@ -45,27 +45,27 @@
       <div class="col-sm-4">
     	 	<div class="tile-stats tile-white">
     	 		<div class="icon"><i class="entypo-brush"></i></div>
-    	 		<h2>Design</h3>
+    	 		<h2><%=t("menumalist.design") %></h3>
           <a href="javascript:;" onclick="jQuery('#modal-design').modal('show');">
             <button type="button" class="btn btn-default btn-icon icon-left" style="margin-top: -2px">
-              Change
+              <%=t("menumalist.design_change") %>
               <i class="entypo-brush"></i>
             </button>
           </a>
     	  </div>
     	</div>
     </div>
-    <h2>Alle Speisekarten</h2>
+    <h2><%=t("menumalist.all_menus") %></h2>
     <br />
     <div class="row">
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <thead>
             <tr>
-              <th width="40%">Menu</th>
+              <th width="40%"><%=t("menumalist.menu") %></th>
               <th width="100px" style="width:180px;"></th>
-              <th width="">Categories</th>
-              <th width="">Dishes</th>
+              <th width=""><%=t("menumalist.categories") %></th>
+              <th width=""><%=t("menumalist.dishes") %></th>
             </tr>
           </thead>
           <tbody>
@@ -104,7 +104,7 @@
         </table>
         <a href="javascript:;" onclick="jQuery('#modal-addmenu').modal('show');">
           <button type="button" class="btn btn-green btn-icon icon-left">
-          	Add new speisekarte
+          	<%=t("menumalist.add_new_menu") %>
           	<i class="entypo-plus"></i>
           </button>
         </a>
