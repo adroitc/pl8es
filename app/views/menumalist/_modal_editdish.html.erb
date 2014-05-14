@@ -18,7 +18,7 @@
 	    <div class="col-sm-6">
 			  <div class="col-md-12">
           <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
-			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>">
+			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
           <br />
 			  </div>
 			  <div class="col-md-12">
