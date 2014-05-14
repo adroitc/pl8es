@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editdish-#{dish.id}", :width => "678px", :title => "Edit dish", :languages => dish.navigation.menu.languages, :default_language => dish.navigation.menu.default_language do |m| %>
-<%= form_tag({:controller => "ajax/dish", :action => "editdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_editdish"}) do %>
+<%= form_tag({:controller => "ajax/dish", :action => "editdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editdish"}) do %>
 <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -7,7 +7,7 @@
 		<h4 class="margin-top-none">Upload Image</h4>
     <%=neon_imagecrop :image => dish.image %>
 	</div>
-	<span class="row form-group tab-content">
+	<span class="row tab-content">
     <%
     current_locale = I18n.locale
     dish.navigation.menu.languages.each do |language|
@@ -16,19 +16,19 @@
     <span class="tab-pane <%="active" if dish.navigation.menu.default_language == language %>" id="modal-editdish-<%=dish.id %>-lang-<%=language.locale %>">
       <input type="hidden" name="language_locale" value="<%=language.locale %>">
 	    <div class="col-sm-6">
-			  <div class="col-md-12">
+			  <div class="col-md-12 form-group">
           <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
-			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
+			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=dish.title %>" data-validate="maxlength[28]" <%="required" if dish.navigation.menu.default_language == language %>>
           <br />
 			  </div>
-			  <div class="col-md-12">
+			  <div class="col-md-12 form-group">
           <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Description</strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description"><%=dish.description %></textarea>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" data-validate="maxlength[2]" <%="required" if dish.navigation.menu.default_language == language %>><%=dish.description %></textarea>
           <br />
 			  </div>
-			  <div class="col-md-12">
+			  <div class="col-md-12 form-group">
           <label for="form-price" class="control-label"><strong>Price</strong></label>
-			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="<%=dish.price %>">
+			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="<%=dish.price %>" data-validate="number" <%="required" if dish.navigation.menu.default_language == language %>>
 			  </div>
       </div>
       <div class="row">

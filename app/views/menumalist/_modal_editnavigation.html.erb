@@ -12,16 +12,16 @@
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="form-group tab-content">
+		<div class="tab-content">
       <%
       current_locale = I18n.locale
       
       navigation.menu.languages.each do |language|
         I18n.locale = language.locale
       %>
-      <div class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-editnavigation-<%=navigation.id %>-lang-<%=language.locale %>">
+      <div class="tab-pane <%="active" if navigation.menu.default_language == language %> form-group" id="modal-editnavigation-<%=navigation.id %>-lang-<%=language.locale %>">
         <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
+			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="<%=navigation.title %>" data-validate="maxlength[28]" <%="required" if navigation.menu.default_language == language %>>
       </div>
       <%
       end

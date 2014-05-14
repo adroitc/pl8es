@@ -11,11 +11,11 @@
 		<%=neon_imageinput :instance_class => Navigation, :name => :image %>
 	</div>
 	<div class="col-sm-6">
-		<div class="form-group tab-content">
+		<div class="tab-content">
       <% menu.languages.each do |language| %>
-      <div class="tab-pane <%="active" if menu.default_language == language %>" id="modal-addnavigation-lang-<%=language.locale %>">
+      <div class="tab-pane <%="active" if menu.default_language == language %> form-group" id="modal-addnavigation-lang-<%=language.locale %>">
         <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></label>
-			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" data-validate="maxlength[28]"<%=" required" if menu.default_language == language %>>
+			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" data-validate="maxlength[28]" <%="required" if menu.default_language == language %>>
       </div>
       <% end %>
       <br />
