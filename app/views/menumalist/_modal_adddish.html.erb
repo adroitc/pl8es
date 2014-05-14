@@ -8,22 +8,22 @@
 		<%=neon_imageinput :instance_class => Dish, :name => :image %>
 	</div>
 	<div class="col-sm-6">
-		<div class="form-group tab-content">
+		<div class="tab-content">
       <% navigation.menu.languages.each do |language| %>
       <div class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-adddish-lang-<%=language.locale %>">
-			  <div class="col-md-12">
+			  <div class="col-md-12 form-group">
           <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
 			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Enter album title" value="" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
           <br />
 			  </div>
-			  <div class="col-md-12">
+			  <div class="col-md-12 form-group">
           <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Description</strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description"></textarea>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" data-validate="maxlength[700]" <%="required" if dish.navigation.menu.default_language == language %> style="height:134px;"></textarea>
           <br />
 			  </div>
-			  <div class="col-md-12">
+			  <div class="col-md-12 form-group">
           <label for="form-price" class="control-label"><strong>Price</strong></label>
-			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="">
+			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="" data-validate="number,maxlength[7]" <%="required" if dish.navigation.menu.default_language == language %>>
 			  </div>
       </div>
       <% end %>

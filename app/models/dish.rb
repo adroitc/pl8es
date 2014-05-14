@@ -60,6 +60,22 @@ class Dish < ActiveRecord::Base
     :maximum => 28
   }
   
+  validates :description, :length => {
+    :maximum => 700
+  }
+  
+  validates :price, :length => {
+    :maximum => 7
+  }
+  
+  validates :drinks, :length => {
+    :maximum => 250
+  }
+  
+  validates :sides, :length => {
+    :maximum => 250
+  }
+  
   def self.img_min_dimensions
     {
       :image => [1680, 1120]

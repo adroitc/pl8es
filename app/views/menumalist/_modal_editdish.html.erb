@@ -23,12 +23,12 @@
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Description</strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" <%="required" if dish.navigation.menu.default_language == language %>><%=dish.description %></textarea>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Description" data-validate="maxlength[700]" <%="required" if dish.navigation.menu.default_language == language %> style="height:134px;"><%=dish.description %></textarea>
           <br />
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-price" class="control-label"><strong>Price</strong></label>
-			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="<%=dish.price %>" data-validate="number" <%="required" if dish.navigation.menu.default_language == language %>>
+			    <input name="price" type="text" class="form-control" id="form-price" placeholder="Enter album title" value="<%=dish.price %>" data-validate="number,maxlength[7]" <%="required" if dish.navigation.menu.default_language == language %>>
 			  </div>
       </div>
       <div class="row">
@@ -113,7 +113,7 @@
                 </div>
               </div>
 	    			</div>
-	    		  <div class="tab-pane" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-drinks">
+	    		  <div class="tab-pane form-group" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-drinks">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<div class="form-group">
       						<label class="col-md-8 control-label align-right" style="padding:2px;">Apply Icon</label>
@@ -125,10 +125,10 @@
       					</div>
               </div>
               <div class="col-md-12">
-	    		  	  <textarea name="drinks[<%=language.locale %>]" class="form-control"><%=dish.drinks %></textarea>
+	    		  	  <textarea name="drinks[<%=language.locale %>]" class="form-control" data-validate="maxlength[250]"><%=dish.drinks %></textarea>
               </div>
 	    		  </div>
-	    		  <div class="tab-pane" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-sides">
+	    		  <div class="tab-pane form-group" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-sides">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<div class="form-group">
       						<label class="col-md-8 control-label align-right" style="padding:2px;">Apply Icon</label>
@@ -140,7 +140,7 @@
       					</div>
               </div>
               <div class="col-md-12">
-	    	  	    <textarea name="sides[<%=language.locale %>]" class="form-control"><%=dish.sides %></textarea>
+	    	  	    <textarea name="sides[<%=language.locale %>]" class="form-control" data-validate="maxlength[250]"><%=dish.sides %></textarea>
               </div>
 	    		  </div>
 	    			<div class="tab-pane" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-ingredients">
