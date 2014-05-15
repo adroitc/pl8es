@@ -84,15 +84,17 @@ class Ajax::DishController < ApplicationController
         if params[:image]
           dish.image = params[:image]
           
-          if dish.image_dimensions["original"][1] >= dish.image_dimensions["original"][0]
-            dish.image_crop_w = dish.image_dimensions["original"].min
-            dish.image_crop_h = dish.image_crop_w/(dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)
-          else
-            dish.image_crop_h = dish.image_dimensions["original"].min
-            dish.image_crop_w = (dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)*dish.image_crop_h
+          if dish.image.present?
+            if dish.image_dimensions["original"][1] >= dish.image_dimensions["original"][0]
+              dish.image_crop_w = dish.image_dimensions["original"].min
+              dish.image_crop_h = dish.image_crop_w/(dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)
+            else
+              dish.image_crop_h = dish.image_dimensions["original"].min
+              dish.image_crop_w = (dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)*dish.image_crop_h
+            end
+            dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
+            dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
           end
-          dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
-          dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
         elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil)
           if params[:image_crop_w].to_i+params[:image_crop_x].to_i > dish.image_dimensions["original"][0]
             params[:image_crop_x] = dish.image_dimensions["original"][0]-params[:image_crop_w].to_i
@@ -124,7 +126,7 @@ class Ajax::DishController < ApplicationController
         I18n.locale = current_locale
         
         params[:dishsuggestions].each_with_index do |dishsuggestion, i|
-          break if i == 2;
+          break if i >= 2;
           if Dish.exists?(dishsuggestion[1].to_i) && Dish.find(dishsuggestion[1].to_i).menu.user == @user && dish["dishsuggestion_"+(i+1).to_s] != Dish.find(dishsuggestion[1].to_i)
             dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
           else
