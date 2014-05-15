@@ -128,50 +128,50 @@ class Ajax::DishController < ApplicationController
         #params[:dishsuggestions].each_with_index do |dishsuggestion, i|
         #  break if i >= 2;
         #  if Dish.exists?(dishsuggestion[1].to_i) && Dish.find(dishsuggestion[1].to_i).menu.user == @user && dish["dishsuggestion_"+(i+1).to_s] != Dish.find(dishsuggestion[1].to_i)
-        #    #dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
+        #    dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
         #  else
-        #    #dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
+        #    dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
         #  end
         #end
 
-        dish.ingredients = []
-        if params[:ingredients]
-          params[:ingredients].each do |ingredient|
-            if Ingredient.exists?(ingredient[0].to_i)
-              dish.ingredients.push(Ingredient.find(ingredient[0].to_i))
-            end
-          end
-        end
-        
-        if params[:wines_should_display]
-          dish.wines_should_display = true
-        else
-          dish.wines_should_display = false
-        end
-        
-        if params[:dishes_should_display]
-          dish.dishes_should_display = true
-        else
-          dish.dishes_should_display = false
-        end
-        
-        if params[:drinks_should_display]
-          dish.drinks_should_display = true
-        else
-          dish.drinks_should_display = false
-        end
-        
-        if params[:sides_should_display]
-          dish.sides_should_display = true
-        else
-          dish.sides_should_display = false
-        end
-        
-        if params[:ingredients_should_display]
-          dish.ingredients_should_display = true
-        else
-          dish.ingredients_should_display = false
-        end
+        #dish.ingredients = []
+        #if params[:ingredients]
+        #  params[:ingredients].each do |ingredient|
+        #    if Ingredient.exists?(ingredient[0].to_i)
+        #      dish.ingredients.push(Ingredient.find(ingredient[0].to_i))
+        #    end
+        #  end
+        #end
+        #
+        #if params[:wines_should_display]
+        #  dish.wines_should_display = true
+        #else
+        #  dish.wines_should_display = false
+        #end
+        #
+        #if params[:dishes_should_display]
+        #  dish.dishes_should_display = true
+        #else
+        #  dish.dishes_should_display = false
+        #end
+        #
+        #if params[:drinks_should_display]
+        #  dish.drinks_should_display = true
+        #else
+        #  dish.drinks_should_display = false
+        #end
+        #
+        #if params[:sides_should_display]
+        #  dish.sides_should_display = true
+        #else
+        #  dish.sides_should_display = false
+        #end
+        #
+        #if params[:ingredients_should_display]
+        #  dish.ingredients_should_display = true
+        #else
+        #  dish.ingredients_should_display = false
+        #end
         
         dish.save
         
