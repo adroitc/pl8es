@@ -173,6 +173,9 @@ class Ajax::DishController < ApplicationController
         #  dish.ingredients_should_display = false
         #end
         
+        
+        puts "changed => "+dish.changes.to_json.to_s
+        
         dish.save
         
         render :json => {:status => "success"}
