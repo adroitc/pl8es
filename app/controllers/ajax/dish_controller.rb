@@ -13,11 +13,10 @@ class Ajax::DishController < ApplicationController
               :id,
               :title,
               :price
-            ],
-            :methods => [
-              :image_url
             ]
           )
+        ).merge(
+          :image_url => Dish.find(params[:id]).image.url(:cropped_grid_retina)
         )
       }
       I18n.locale = current_locale

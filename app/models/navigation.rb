@@ -15,11 +15,11 @@ class Navigation < ActiveRecord::Base
         :geometry => "286x286",
         :format => :png
       },
-      :cropped_default => {
-        :geometry => "414x276#",
-        :format => :png,
-        :processors => [:cropper]
-      },
+      #:cropped_default => {
+      #  :geometry => "414x276#",
+      #  :format => :png,
+      #  :processors => [:cropper]
+      #},
       :cropped_default_retina => {
         :geometry => "828x552#",
         :format => :png,

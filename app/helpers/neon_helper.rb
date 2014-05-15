@@ -154,7 +154,7 @@ module NeonHelper
         :navigation_title => opts[:navigation].title.gsub(" ","-"),
         :navigation_id => opts[:navigation].id
       ),
-      :image_url => opts[:navigation].image.present? ? opts[:navigation].image.url(:cropped_default) : "http://placehold.it/828x552") {|p|
+      :image_url => opts[:navigation].image.present? ? opts[:navigation].image.url(:cropped_default_retina) : "http://placehold.it/828x552") {|p|
         raw %(#{sub_navigations if opts[:navigation].level == 0 && opts[:navigation].dishes.count == 0}
           #{dishes if opts[:navigation].sub_navigations.count == 0}
         	<div class="album-options">
@@ -169,7 +169,7 @@ module NeonHelper
       :size => "3",
       :sort_key => "dish_ids[#{opts[:dish].id}]",
       :title => opts[:dish].title,
-      :image_url => opts[:dish].image.present? ? opts[:dish].image.url(:cropped_default) : "http://placehold.it/1680x1120") {|p|
+      :image_url => opts[:dish].image.present? ? opts[:dish].image.url(:cropped_default_retina) : "http://placehold.it/1680x1120") {|p|
         raw %(<div class="album-options">
         	  <a href="javascript:;" onclick="jQuery('#modal-editdish-#{opts[:dish].id}').modal('show');">
         	  	<i class="entypo-cog"></i>
