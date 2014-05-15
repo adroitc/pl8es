@@ -125,14 +125,14 @@ class Ajax::DishController < ApplicationController
         
         I18n.locale = current_locale
         
-        params[:dishsuggestions].each_with_index do |dishsuggestion, i|
-          break if i >= 2;
-          if Dish.exists?(dishsuggestion[1].to_i) && Dish.find(dishsuggestion[1].to_i).menu.user == @user && dish["dishsuggestion_"+(i+1).to_s] != Dish.find(dishsuggestion[1].to_i)
-            #dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
-          else
-            dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
-          end
-        end
+        #params[:dishsuggestions].each_with_index do |dishsuggestion, i|
+        #  break if i >= 2;
+        #  if Dish.exists?(dishsuggestion[1].to_i) && Dish.find(dishsuggestion[1].to_i).menu.user == @user && dish["dishsuggestion_"+(i+1).to_s] != Dish.find(dishsuggestion[1].to_i)
+        #    #dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
+        #  else
+        #    #dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
+        #  end
+        #end
 
         dish.ingredients = []
         if params[:ingredients]
