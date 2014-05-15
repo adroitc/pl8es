@@ -73,15 +73,17 @@ class Ajax::NavigationController < ApplicationController
         if params[:image]
           navigation.image = params[:image]
           
-          if navigation.image_dimensions["original"][1] >= navigation.image_dimensions["original"][0]
-            navigation.image_crop_w = navigation.image_dimensions["original"].min
-            navigation.image_crop_h = navigation.image_crop_w/(navigation.image_dimensions["cropped_default_retina"][0].to_f/navigation.image_dimensions["cropped_default_retina"][1].to_f)
-          else
-            navigation.image_crop_h = navigation.image_dimensions["original"].min
-            navigation.image_crop_w = (navigation.image_dimensions["cropped_default_retina"][0].to_f/navigation.image_dimensions["cropped_default_retina"][1].to_f)*navigation.image_crop_h
+          if navigation.image.present?
+            if navigation.image_dimensions["original"][1] >= navigation.image_dimensions["original"][0]
+              navigation.image_crop_w = navigation.image_dimensions["original"].min
+              navigation.image_crop_h = navigation.image_crop_w/(navigation.image_dimensions["cropped_default_retina"][0].to_f/navigation.image_dimensions["cropped_default_retina"][1].to_f)
+            else
+              navigation.image_crop_h = navigation.image_dimensions["original"].min
+              navigation.image_crop_w = (navigation.image_dimensions["cropped_default_retina"][0].to_f/navigation.image_dimensions["cropped_default_retina"][1].to_f)*navigation.image_crop_h
+            end
+            navigation.image_crop_x = (navigation.image_dimensions["original"][0]-navigation.image_crop_w).to_f/2
+            navigation.image_crop_y = (navigation.image_dimensions["original"][1]-navigation.image_crop_h).to_f/2
           end
-          navigation.image_crop_x = (navigation.image_dimensions["original"][0]-navigation.image_crop_w).to_f/2
-          navigation.image_crop_y = (navigation.image_dimensions["original"][1]-navigation.image_crop_h).to_f/2
         elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil)
           if params[:image_crop_w].to_i+params[:image_crop_x].to_i > navigation.image_dimensions["original"][0]
             params[:image_crop_x] = navigation.image_dimensions["original"][0]-params[:image_crop_w].to_i
