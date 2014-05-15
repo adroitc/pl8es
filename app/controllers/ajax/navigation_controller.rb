@@ -108,9 +108,13 @@ class Ajax::NavigationController < ApplicationController
           I18n.locale = language.locale
           navigation.title = params[:title][language.locale]
         end
-        navigation.save
         
         I18n.locale = current_locale
+
+        puts "changed => "+navigation.changes.to_json.to_s
+        
+        navigation.save
+        
         render :json => {:status => "success"}
         return
       end
