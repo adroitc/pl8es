@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509095805) do
+ActiveRecord::Schema.define(version: 20140520071444) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -307,11 +307,22 @@ ActiveRecord::Schema.define(version: 20140509095805) do
     t.integer  "appmain_image_crop_h"
     t.integer  "appmain_image_crop_x"
     t.integer  "appmain_image_crop_y"
-    t.boolean  "restaurant_image_processed",    default: true
-    t.boolean  "logo_image_processed",          default: true
-    t.boolean  "appmain_image_processed",       default: true
+    t.boolean  "restaurant_image_processed",      default: true
+    t.boolean  "logo_image_processed",            default: true
+    t.boolean  "appmain_image_processed",         default: true
     t.integer  "menuColor_id"
     t.integer  "supportedFont_id"
+    t.string   "splashscreen_image_file_name"
+    t.string   "splashscreen_image_content_type"
+    t.integer  "splashscreen_image_file_size"
+    t.datetime "splashscreen_image_updated_at"
+    t.string   "splashscreen_image_dimensions"
+    t.string   "splashscreen_image_fingerprint"
+    t.integer  "splashscreen_image_crop_w"
+    t.integer  "splashscreen_image_crop_h"
+    t.integer  "splashscreen_image_crop_x"
+    t.integer  "splashscreen_image_crop_y"
+    t.boolean  "splashscreen_image_processed",    default: true
   end
 
   create_table "wine_translations", force: true do |t|

@@ -81,6 +81,7 @@ en:
     design_navigation_text_color: "Navigation-text color"
     design_navigation_text_active_color: "Navigation-text active color"
     design_font: "Font"
+    design_splashscreen_image: "Splashscreen image"
     
     menu_modal_add_title: "Add menu"
     menu_modal_edit_title: "Edit menu"

@@ -21,11 +21,6 @@ class User < ActiveRecord::Base
         :geometry => "286x286",
         :format => :png
       },
-      :cropped_default => {
-        :geometry => "840x560#",
-        :format => :png,
-        :processors => [:cropper]
-      },
       :cropped_default_retina => {
         :geometry => "1680x1120#",
         :format => :png,
@@ -39,9 +34,29 @@ class User < ActiveRecord::Base
     :height => 1120
   }
   
+  has_attached_file :splashscreen_image, {
+    :styles => {
+      :original_cropping => {
+        :geometry => "286x286",
+        :format => :png
+      },
+      :cropped_default_retina => {
+        :geometry => "2048x1536#",
+        :format => :png,
+        :processors => [:cropper]
+      }
+    }
+  }
+  validates_attachment_content_type :splashscreen_image, :content_type => /\Aimage\/.*\Z/
+  validates :splashscreen_image, :dimensions => {
+    :width => 2048,
+    :height => 1536
+  }
+  
   def self.img_min_dimensions
     {
-      :appmain_image => [1680, 1120]
+      :appmain_image => [1680, 1120],
+      :splashscreen_image => [2048, 1536]
     }
   end
   
