@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :menus
   has_many :daily_dishes, :class_name => "Dish"
   
+  belongs_to :menuColorTemplate
+  
   has_one :menuColor
   
   belongs_to :supportedFont
@@ -14,6 +16,49 @@ class User < ActiveRecord::Base
   translates :description
   
   validates :email, :uniqueness => true
+  
+  has_attached_file :logo_image, {
+    :styles => {
+      :original_cropping => {
+        :geometry => "286x286",
+        :format => :png
+      },
+      :cropped_website => {
+        :geometry => "108x72#",
+        :format => :png,
+        :processors => [:cropper]
+      },
+      :cropped_default_retina => {
+        :geometry => "312x208#",
+        :format => :png,
+        :processors => [:cropper]
+      }
+    }
+  }
+  validates_attachment_content_type :logo_image, :content_type => /\Aimage\/.*\Z/
+  validates :logo_image, :dimensions => {
+    :width => 312,
+    :height => 208
+  }
+  
+  has_attached_file :restaurant_image, {
+    :styles => {
+      :original_cropping => {
+        :geometry => "286x286",
+        :format => :png
+      },
+      :cropped_default_retina => {
+        :geometry => "828x552#",
+        :format => :png,
+        :processors => [:cropper]
+      }
+    }
+  }
+  validates_attachment_content_type :restaurant_image, :content_type => /\Aimage\/.*\Z/
+  validates :restaurant_image, :dimensions => {
+    :width => 828,
+    :height => 552
+  }
   
   has_attached_file :appmain_image, {
     :styles => {
@@ -55,6 +100,8 @@ class User < ActiveRecord::Base
   
   def self.img_min_dimensions
     {
+      :logo_image => [312, 208],
+      :restaurant_image => [828, 552]
       :appmain_image => [1680, 1120],
       :splashscreen_image => [2048, 1536]
     }

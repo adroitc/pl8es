@@ -1,0 +1,77 @@
+<% content_for :body_class, "page-body" %>
+<div class="page-container">
+  <div class="sidebar-menu">
+    <%=render :partial => "layouts/dashboard_menuheader" %>
+    <%=render :partial => "layouts/dashboard_menu" %>
+  </div>
+  <div class="main-content">
+    <%=render :partial => "layouts/dashboard_topbar" %>
+    <ol class="breadcrumb bc-3">
+      <li>
+        <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
+      </li>
+      <li class="active">
+        <strong>Profile</strong>
+      </li>
+    </ol>
+  <div class="profile-env">
+   	<header class="row" style="height:100px;">
+   		<div class="col-sm-2">
+   			<img src="<%=@user.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
+   		</div>
+   		<div class="col-sm-8">
+   			<ul class="profile-info-sections">
+   				<li>
+   					<div class="profile-name">
+   						<strong style="color:#000">
+   							<%=@user.name %>
+              </strong>
+   						<span>
+   							<%=@user.email %>
+   						</span>
+   					</div>
+   				</li>
+   				<li>
+   					<div class="profile-stat">
+   						<h3><%=@user.menus.count %></h3>
+   						<span><a href="#">Menus</a></span>
+   					</div>
+   				</li>
+   			</ul>
+   		</div>
+      <div class="col-sm-2">
+        <div class="profile-buttons">
+        	<a href="#" class="btn btn-default">
+        		<i class="entypo-brush"></i>
+        		Edit
+        	</a>
+        </div>
+      </div>
+   	</header>
+   	<header class="row" style="height:100px;">
+   		<div class="col-sm-offset-3 col-sm-6">
+   			<%=neon_imagecrop :image => @user.logo_image %>
+        <br />
+        testetfdgv
+   		</div>
+   	</header>
+   	<section class="profile-info-tabs">
+   		<div class="row">
+   			<div class="col-sm-offset-2 col-sm-10">
+   				<ul class="user-details">
+   					<li>
+   						Prishtina
+   					</li>
+   					<li>
+   						Prishtina
+   					</li>
+   					<li>
+   						Prishtina
+   					</li>
+   				</ul>
+   			</div>
+   		</div>
+   	</section>
+   </div>
+  </div>
+</div>

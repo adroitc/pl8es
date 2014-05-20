@@ -35,6 +35,9 @@ Pl8es::Application.routes.draw do
   resources :login, :only => []
   get "/login" => "login#index"
   
+  resources :profile, :only => []
+  get "/profile" => "profile#index"
+  
   resources :menumalist, :only => []
   get "/menumalist" => "menumalist#index"
   get "/menumalist/:menu_title-:menu_id" => "menumalist#categories"

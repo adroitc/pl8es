@@ -5,7 +5,7 @@
 	<div class="col-sm-12">
 		<div class="form-group">
       <label class="control-label">Colors</label>
-  		<ul class="ui-selectable" style="width:auto">
+  		<ul id="form-menu_color" class="ui-selectable" style="width:auto">
         <li class="col-sm-3 ui-selected" style="padding-top:15px;padding-bottom:15px;height:100px;">
           <div class="col-sm-6" style="background-color:#eee">test</div>
           <div class="col-sm-6">test</div>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
+<div id="form-menu_color_custom" class="row">
   <div class="col-md-4">
   	<div class="form-group">
       <input class="icheck-2-radio" type="radio" id="form-background_type_color" name="background_type" value="color" <%="checked" if @user.background_type == "color" %>>
@@ -40,8 +40,6 @@
       <%=neon_imagecrop :image => @user.appmain_image %>
     </div>
   </div>
-</div>
-<div class="row">
   <div class="col-md-4">
   	<div class="form-group">
   		<label for="form-bar_background" class="control-label"><%=t("menumalist.design_navigation_bar_color") %></label>
@@ -95,6 +93,20 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$("#form-menu_color.ui-selectable").selectable({
+  stop: function(event, id){
+    $(event.target).children(".ui-selected").not(":first").removeClass("ui-selected");
+    var s = $(this);
+    if (s.parent().find("li").size()-s.parent().find("li").index(s.find(".ui-selected")) == 1){
+      $("#form-menu_color_custom").show();
+    }
+    else{
+      $("#form-menu_color_custom").hide();
+    }
+  }
+});
+</script>
 <% end %>
 <%=neon_modal_footer do |b| %>
 <button type="button" class="btn btn-default" data-dismiss="modal"><%=t("menumalist.design_modal_cancel") %></button>

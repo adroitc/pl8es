@@ -68,13 +68,6 @@ $(document).ready(function()
     {
     }
   });
-  $(".ui-selectable").selectable({
-    stop: function(event, id){
-      $(event.target).children(".ui-selected").not(":first").removeClass("ui-selected");
-      var s = $(this);
-      //alert(s.parent().find("li").index(s.find(".ui-selected")));
-    }
-  });
   $(".ellipsis").dotdotdot({
     wrap: "letter",
     fallbackToLetter: true

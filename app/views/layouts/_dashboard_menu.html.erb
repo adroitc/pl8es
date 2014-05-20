@@ -5,7 +5,13 @@
   		<span>Dashboard</span>
   	</a>
   </li>
-  <li class="opened active">
+  <li class="opened <%="active" if params[:controller] == "profile" %>">
+  	<a href="<%=url_for :controller => "profile", :action => "index" %>">
+  		<i class="entypo-user"></i>
+  		<span>Profile</span>
+  	</a>
+  </li>
+  <li class="opened <%="active" if params[:controller] == "menumalist" %>">
   	<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
   		<i class="entypo-layout"></i>
   		<span>Speisekarten</span>
@@ -22,26 +28,6 @@
   		<i class="entypo-mail"></i>
   		<span>Weinkarte</span>
   	</a>
-  	<ul>
-  		<li>
-  			<a href="mailbox.html">
-  				<i class="entypo-inbox"></i>
-  				<span>Inbox</span>
-  			</a>
-  		</li>
-  		<li>
-  			<a href="mailbox-compose.html">
-  				<i class="entypo-pencil"></i>
-  				<span>Compose Message</span>
-  			</a>
-  		</li>
-  		<li>
-  			<a href="mailbox-message.html">
-  				<i class="entypo-attach"></i>
-  				<span>View Message</span>
-  			</a>
-  		</li>
-  	</ul>
   </li>
   <li>
   	<a href="extra-profile.html">

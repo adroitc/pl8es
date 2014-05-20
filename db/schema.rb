@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520113343) do
+ActiveRecord::Schema.define(version: 20140520122008) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -117,6 +117,32 @@ ActiveRecord::Schema.define(version: 20140520113343) do
   create_table "languages_users", force: true do |t|
     t.integer "language_id"
     t.integer "user_id"
+  end
+
+  create_table "menu_color_templates", force: true do |t|
+    t.string   "preview_image"
+    t.string   "background"
+    t.string   "bar_background"
+    t.string   "bev_background"
+    t.string   "bev_background_selected"
+    t.string   "bev_background_active"
+    t.string   "bev_text"
+    t.string   "bev_text_selected"
+    t.string   "bev_text_active"
+    t.string   "nav_background"
+    t.string   "nav_background_selected"
+    t.string   "nav_background_active"
+    t.string   "nav_text"
+    t.string   "nav_text_selected"
+    t.string   "nav_text_active"
+    t.string   "sub_background"
+    t.string   "sub_background_selected"
+    t.string   "sub_background_active"
+    t.string   "sub_text"
+    t.string   "sub_text_selected"
+    t.string   "sub_text_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "menu_colors", force: true do |t|
@@ -324,6 +350,7 @@ ActiveRecord::Schema.define(version: 20140520113343) do
     t.integer  "splashscreen_image_crop_y"
     t.boolean  "splashscreen_image_processed",    default: true
     t.string   "background_type"
+    t.integer  "menuColorTemplate_id"
   end
 
   create_table "wine_translations", force: true do |t|
