@@ -110,8 +110,6 @@ class Ajax::NavigationController < ApplicationController
         end
         
         I18n.locale = current_locale
-
-        puts "changed => "+navigation.changes.to_json.to_s
         
         navigation.save
         

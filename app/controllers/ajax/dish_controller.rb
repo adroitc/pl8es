@@ -142,38 +142,35 @@ class Ajax::DishController < ApplicationController
           end
         end
         
-        if params[:wines_should_display]
+        if params[:wines_should_display] == "on"
           dish.wines_should_display = true
         else
           dish.wines_should_display = false
         end
         
-        if params[:dishes_should_display]
+        if params[:dishes_should_display] == "on"
           dish.dishes_should_display = true
         else
           dish.dishes_should_display = false
         end
         
-        if params[:drinks_should_display]
+        if params[:drinks_should_display] == "on"
           dish.drinks_should_display = true
         else
           dish.drinks_should_display = false
         end
         
-        if params[:sides_should_display]
+        if params[:sides_should_display] == "on"
           dish.sides_should_display = true
         else
           dish.sides_should_display = false
         end
         
-        if params[:ingredients_should_display]
+        if params[:ingredients_should_display] == "on"
           dish.ingredients_should_display = true
         else
           dish.ingredients_should_display = false
         end
-        
-        
-        puts "changed => "+dish.changes.to_json.to_s
         
         dish.save
         

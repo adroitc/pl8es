@@ -22,18 +22,20 @@
 <div class="row">
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label"><%=t("menumalist.design_background_color") %></label>
+      <input class="icheck-2-radio" type="radio" id="form-background_type_color" name="background_type" value="color" <%="checked" if @user.background_type == "color" %>>
+  		<label for="form-background_type_color" class="control-label"><%=t("menumalist.design_background_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-background" name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
   <div class="col-md-6 col-md-offset-2">
   	<div class="form-group">
-  		<label for="field-1" class="control-label"><%=t("menumalist.design_background_image") %></label>
+      <input class="icheck-2-radio" type="radio" id="form-background_type_image" name="background_type" value="image" <%="checked" if @user.background_type == "image" %>>
+  		<label for="form-background_type_image" class="control-label"><%=t("menumalist.design_background_image") %></label>
       <br />
       <%=neon_imagecrop :image => @user.appmain_image %>
     </div>
@@ -42,34 +44,34 @@
 <div class="row">
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label"><%=t("menumalist.design_navigation_bar_color") %></label>
+  		<label for="form-bar_background" class="control-label"><%=t("menumalist.design_navigation_bar_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.bar_background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-bar_background" name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.bar_background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div> 
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label"><%=t("menumalist.design_navigation_text_color") %></label>
+  		<label for="form-nav_text" class="control-label"><%=t("menumalist.design_navigation_text_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-nav_text" name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label"><%=t("menumalist.design_navigation_text_active_color") %></label>
+  		<label for="form-nav_text_active" class="control-label"><%=t("menumalist.design_navigation_text_active_color") %></label>
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text_active %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-nav_text_active" name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text_active %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
@@ -77,13 +79,20 @@
 <div class="row">
   <div class="col-md-4">
   	<div class="form-group">
-  		<label for="field-1" class="control-label"><%=t("menumalist.design_font") %></label>
+  		<label class="control-label"><%=t("menumalist.design_font") %></label>
 		  <select name="supportedFont_id" class="select2" data-allow-clear="false" data-placeholder="Select one city...">
         <% SupportedFont.all.each do |supportedFont| %>
         <option value="<%=supportedFont.id %>" <%="selected" if @user.supportedFont == supportedFont %>><%=supportedFont.title %></option>
         <% end %>
       </select>
   	</div>
+  </div>
+  <div class="col-md-6 col-md-offset-2">
+  	<div class="form-group">
+  		<label for="field-1" class="control-label"><%=t("menumalist.design_splashscreen_image") %></label>
+      <br />
+      <%=neon_imagecrop :image => @user.splashscreen_image %>
+    </div>
   </div>
 </div>
 <% end %>

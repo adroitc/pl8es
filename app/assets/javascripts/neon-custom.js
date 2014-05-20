@@ -588,13 +588,12 @@ var public_vars = public_vars || {};
 		
 		
 		// Radio Toggle
-		if($.isFunction($.fn.bootstrapSwitch))
+		/*if($.isFunction($.fn.bootstrapSwitch))
 		{
-		
 			$('.make-switch.is-radio').on('switch-change', function () {
 		        $('.make-switch.is-radio').bootstrapSwitch('toggleRadioState');
 		    });	
-		}
+		}*/
 		
 		
 		

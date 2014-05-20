@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520071444) do
+ActiveRecord::Schema.define(version: 20140520113343) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -323,6 +323,7 @@ ActiveRecord::Schema.define(version: 20140520071444) do
     t.integer  "splashscreen_image_crop_x"
     t.integer  "splashscreen_image_crop_y"
     t.boolean  "splashscreen_image_processed",    default: true
+    t.string   "background_type"
   end
 
   create_table "wine_translations", force: true do |t|

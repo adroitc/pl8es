@@ -89,21 +89,21 @@ $(document).ready(function()
   
   function pl8es_f_setupinputchanger(t){
     var f = "change";
-    if (t.attr("type") == "checkbox"){
+    if (t.hasClass("icheck-2-checkbox") && t.attr("type") == "checkbox"){
       f = "ifChanged"
     }
     t.one(f, function(){
       t.closest("form").find(t[0].tagName+"[name='"+t.attr("name")+"']").not(t).each(function(){
-        if (t.attr("type") != "checkbox"){
-          $(this).val(t.val()).trigger("change");
-        }
-        else if (t.attr("type") == "checkbox"){
+        if (t.hasClass("icheck-2-checkbox") && t.attr("type") == "checkbox"){
           if (t.parent().hasClass("checked")){
             $(this).iCheck("uncheck");
           }
           else{
             $(this).iCheck("check");
           }
+        }
+        else{
+          $(this).val(t.val()).trigger("change");
         }
       });
       pl8es_f_setupinputchanger(t);

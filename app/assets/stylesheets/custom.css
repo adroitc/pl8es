@@ -126,3 +126,7 @@ div.form-group.fileinput.fileinput-new .close
 {
   position: absolute;
 }
+div.has-switch div.switch-off input
+{
+  display: none;
+}

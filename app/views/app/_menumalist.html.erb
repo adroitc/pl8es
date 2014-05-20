@@ -37,11 +37,11 @@ raw(Jsonify::Builder.plain do |j|
           j.dish_lang                  dish.dish_lang
           j.price                      dish.price
           
-          j.wines_should_display       dish.wines_should_display ? "1" : "0"
-          j.dishes_should_display      dish.dishes_should_display ? "1" : "0"
-          j.drinks_should_display      dish.drinks_should_display ? "1" : "0"
-          j.sides_should_display       dish.drinks_should_display ? "1" : "0"
-          j.ingredients_should_display dish.ingredients_should_display ? "1" : "0"
+          j.wines_should_display       "1"#dish.wines_should_display ? "1" : "0"
+          j.dishes_should_display      "1"#dish.dishes_should_display ? "1" : "0"
+          j.drinks_should_display      "1"#dish.drinks_should_display ? "1" : "0"
+          j.sides_should_display       "1"#dish.drinks_should_display ? "1" : "0"
+          j.ingredients_should_display "1"#dish.ingredients_should_display ? "1" : "0"
           
           if dish.dishsuggestion_1.present?
             j.dish_suggestion_1 do
@@ -75,11 +75,11 @@ raw(Jsonify::Builder.plain do |j|
         j.dish_lang                  dish.dish_lang
         j.price                      dish.price
         
-        j.wines_should_display       dish.wines_should_display ? "1" : "0"
-        j.dishes_should_display      dish.dishes_should_display ? "1" : "0"
-        j.drinks_should_display      dish.drinks_should_display ? "1" : "0"
-        j.sides_should_display       dish.drinks_should_display ? "1" : "0"
-        j.ingredients_should_display dish.ingredients_should_display ? "1" : "0"
+        j.wines_should_display       "1"#dish.wines_should_display ? "1" : "0"
+        j.dishes_should_display      "1"#dish.dishes_should_display ? "1" : "0"
+        j.drinks_should_display      "1"#dish.drinks_should_display ? "1" : "0"
+        j.sides_should_display       "1"#dish.drinks_should_display ? "1" : "0"
+        j.ingredients_should_display "1"#dish.ingredients_should_display ? "1" : "0"
         
         if dish.dishsuggestion_1.present?
           j.dish_suggestion_1 do
@@ -137,6 +137,8 @@ raw(Jsonify::Builder.plain do |j|
     
     j.font_name_card_tab_title   @user.supportedFont.name_card_tab_title
     j.font_size_card_tab_title   @user.supportedFont.size_card_tab_title
+    
+    j.background_type            @user.background_type
     
     j.background                 @user.menuColor.background
     j.bar_background             @user.menuColor.bar_background

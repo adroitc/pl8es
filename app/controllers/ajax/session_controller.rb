@@ -10,6 +10,7 @@ class Ajax::SessionController < ApplicationController
         while User.find_by_download_code(download_code).present?
           download_code = SecureRandom.hex(3).upcase
         end
+        @user.background_type = "color"
         @user.menuColor = MenuColor.create()
         @user.download_code = download_code
         @user.supportedFont = SupportedFont.first

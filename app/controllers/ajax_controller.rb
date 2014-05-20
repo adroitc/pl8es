@@ -1,8 +1,10 @@
 class AjaxController < ApplicationController
   
   def editdesign
-    if User.loggedIn(session) && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:background_type, :background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)
       @user = User.find(session[:user_id])
+      
+      @user.background_type = params[:background_type]
       
       menuColor = @user.menuColor
       
