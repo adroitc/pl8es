@@ -94,7 +94,7 @@ en:
     menu_default: "Make this menu the default one."
     menu_default_default: "Default"
     menu_default_make_default: "Default"
-    menu_default_default_undo: "Default"
+    menu_default_default_undo: "undo"
     menu_time: "Choose speisekarte display time"
     menu_from: "From"
     menu_to: "To"

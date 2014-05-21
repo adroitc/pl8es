@@ -5,29 +5,32 @@ Pl8es::Application.routes.draw do
   
   #ajax/session
   resources :ajax_session, :only => []
-  post "/ajax/signup" => "ajax/session#signup"
-  post "/ajax/login" => "ajax/session#login"
+  post "/a/session/signup" => "ajax/session#signup"
+  post "/a/session/login" => "ajax/session#login"
   
   resources :ajax, :only => []
-  post "/ajax/editdesign" => "ajax#editdesign"
+  post "/a/design/edit" => "ajax#editdesign"
+  
+  resources :ajax_profile, :only => []
+  post "/a/profile/edit" => "ajax/profile#edit"
   
   resources :ajax_menu, :only => []
-  post "/ajax/addmenu" => "ajax/menu#addmenu"
-  post "/ajax/editmenu" => "ajax/menu#editmenu"
-  post "/ajax/duplicatemenu" => "ajax/menu#duplicatemenu"
-  post "/ajax/deletemenu" => "ajax/menu#deletemenu"
+  post "/a/menu/add" => "ajax/menu#addmenu"
+  post "/a/menu/edit" => "ajax/menu#editmenu"
+  post "/a/menu/duplicate" => "ajax/menu#duplicatemenu"
+  post "/a/menu/delete" => "ajax/menu#deletemenu"
   
   resources :ajax_navigation, :only => []
-  post "/ajax/addcategory" => "ajax/navigation#addnavigation"
-  post "/ajax/editcategory" => "ajax/navigation#editnavigation"
-  post "/ajax/sortcategory" => "ajax/navigation#sortnavigation"
+  post "/a/category/add" => "ajax/navigation#addnavigation"
+  post "/a/category/edit" => "ajax/navigation#editnavigation"
+  post "/a/category/sort" => "ajax/navigation#sortnavigation"
 
   resources :ajax_dish, :only => []
-  get "/ajax/dish/:id/:language_locale" => "ajax/dish#dish"
+  get "/a/dish/:id/:language_locale" => "ajax/dish#dish"
   
-  post "/ajax/adddish" => "ajax/dish#adddish"
-  post "/ajax/editdish" => "ajax/dish#editdish"
-  post "/ajax/sortdish" => "ajax/dish#sortdish"
+  post "/a/dish/add" => "ajax/dish#adddish"
+  post "/a/dish/edit" => "ajax/dish#editdish"
+  post "/a/dish/sort" => "ajax/dish#sortdish"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"

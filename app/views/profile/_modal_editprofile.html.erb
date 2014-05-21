@@ -1,0 +1,54 @@
+<%= neon_modal :id => "editprofile", :width => "678px", :title => "Edit profile" do |m| %>
+<%= form_tag({:controller => "ajax/profile", :action => "edit"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_edit"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-sm-6 hidden-xs">
+		<h4 class="margin-top-none">Upload Logo</h4>
+    <%=neon_imagecrop :image => @user.logo_image %>
+    
+		<h4 class="margin-top-none">Upload Restaurant image</h4>
+    <%=neon_imagecrop :image => @user.restaurant_image %>
+	</div>
+  <div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Restaurant name</strong></label>
+	  <input name="name" type="text" class="form-control" id="form-name" placeholder="Restaurant name" data-validate="maxlength[28]" value="<%=@user.name %>" required>
+  </div>
+  <div class="col-sm-6 form-group">
+    <label for="form-email" class="control-label"><strong>Email</strong></label>
+	  <input name="email" type="text" class="form-control" id="form-email" placeholder="Email" data-validate="maxlength[28]" value="<%=@user.email %>" required>
+  </div>
+  <div class="col-sm-6 form-group">
+    <label for="form-address" class="control-label"><strong>Address</strong></label>
+	  <input name="address" type="text" class="form-control" id="form-address" placeholder="Address" data-validate="maxlength[28]" value="<%=@user.address %>" required>
+  </div>
+  <div class="col-sm-3 form-group">
+    <label for="form-zip" class="control-label"><strong>Zip code</strong></label>
+	  <input name="zip" type="text" class="form-control" id="form-zip" placeholder="Zip code" data-validate="maxlength[28]" value="<%=@user.zip %>" required>
+  </div>
+  <div class="col-sm-3 form-group">
+    <label for="form-city" class="control-label"><strong>City</strong></label>
+	  <input name="city" type="text" class="form-control" id="form-city" placeholder="City" data-validate="maxlength[28]" value="<%=@user.city %>" required>
+  </div>
+  <div class="col-sm-6 form-group">
+    <label for="form-country" class="control-label"><strong>Country</strong></label>
+	  <input name="country" type="text" class="form-control" id="form-country" placeholder="Country" data-validate="maxlength[28]" value="<%=@user.country %>" required>
+  </div>
+  <div class="col-sm-3 form-group">
+    <label for="form-website" class="control-label"><strong>Website</strong></label>
+	  <input name="website" type="text" class="form-control" id="form-website" placeholder="Website" data-validate="maxlength[28]" value="<%=@user.website %>">
+  </div>
+  <div class="col-sm-3 form-group">
+    <label for="form-telephone" class="control-label"><strong>Telephone</strong></label>
+	  <input name="telephone" type="text" class="form-control" id="form-telephone" placeholder="Telephone" data-validate="maxlength[28]" value="<%=@user.telephone %>">
+  </div>
+  <br />
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-success">
+	Save
+</button>
+<% end %>
+<% end %>
+<% end %>

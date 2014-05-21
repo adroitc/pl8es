@@ -41,16 +41,16 @@
    		</div>
       <div class="col-sm-2">
         <div class="profile-buttons">
-        	<a href="#" class="btn btn-default">
+        	<a href="javascript:;" onclick="jQuery('#modal-editprofile').modal('show');" class="btn btn-default">
         		<i class="entypo-brush"></i>
         		Edit
         	</a>
         </div>
       </div>
    	</header>
-   	<header class="row" style="height:100px;">
+   	<header class="row" style="margin-bottom:60px;">
+   		<img src="<%=@user.restaurant_image.url(:cropped_default_retina) %>" alt="" class="col-sm-offset-3 col-sm-6" />
    		<div class="col-sm-offset-3 col-sm-6">
-   			<%=neon_imagecrop :image => @user.logo_image %>
         <br />
         testetfdgv
    		</div>
@@ -75,3 +75,4 @@
    </div>
   </div>
 </div>
+<%=render :partial => "modal_editprofile" %>

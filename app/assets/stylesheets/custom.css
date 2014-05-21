@@ -7,6 +7,9 @@
 body {
 	
 }
+.profile-info.dropdown > a img {
+  border: solid 1px transparent;
+}
 .pl8es_c_table-toolbar {
   float: right;
   margin-right: 12px;
