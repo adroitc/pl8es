@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
   def self.img_min_dimensions
     {
       :logo_image => [312, 208],
-      :restaurant_image => [828, 552]
+      :restaurant_image => [828, 552],
       :appmain_image => [1680, 1120],
       :splashscreen_image => [2048, 1536]
     }
