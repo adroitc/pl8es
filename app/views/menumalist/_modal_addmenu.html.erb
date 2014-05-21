@@ -63,11 +63,14 @@
 	<div class="col-md-12">
 		<label for="form-languages" class="control-label"><%=t("menumalist.menu_languages") %></label>
     <br />
-		<select class="select2" id="form-languages" multiple>
-      <% Language.all.each do |o| %>
-			<option value="<%=o.locale %>" <%="selected data-locked=true" if o.id==1 %>><%=o.title.capitalize %></option>
-      <% end %>
-		</select>
+    <%
+    Language.all.each do |language|
+    %>
+    <div class="col-sm-3">
+      <input class="icheck-2-checkbox" type="checkbox" id="form-language-<%=language.id %>" name="languages[<%=language.id %>]">
+      <label for="form-language-<%=language.id %>"><%=language.title.capitalize %></label>
+    </div>
+    <% end %>
 	</div>
 </div>
 <div class="row" style="margin-bottom:14px;">

@@ -36,8 +36,8 @@ class Ajax::MenuController < ApplicationController
         
         languages = Array.new
         params[:languages].each do |language|
-          if Language.exists?(:title => language[1].strip.downcase)
-            languages.push(Language.find_by_title(language[1].strip.downcase))
+          if Language.exists?(language[0].to_i)
+            languages.push(Language.find(language[0].to_i))
           end
         end
         
@@ -50,7 +50,7 @@ class Ajax::MenuController < ApplicationController
         menu.attributes = params.permit(:title, :from_time, :to_time).merge({languages: languages, menuLabel: menuLabel})
         menu.save
         
-        render :json => {:status => "success", :p => languages}
+        render :json => {:status => "success"}
         return
       end
     end

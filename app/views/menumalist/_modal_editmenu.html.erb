@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editmenu-#{menu.id}", :width => "678px", :title => t("menumalist.menu_modal_edit_title") do |m| %>
-<%= form_tag({:controller => "ajax/menu", :action => "editmenu"}, {:role => "form", :class => "pl8es_c_ajaxform", :id => "form_editmenu"}) do %>
+<%= form_tag({:controller => "ajax/menu", :action => "editmenu"}, {:role => "form", :class_ => "pl8es_c_ajaxform", :id => "form_editmenu"}) do %>
 <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -64,14 +64,15 @@
 	<div class="col-md-12">
 		<label for="form-languages" class="control-label"><%=t("menumalist.menu_languages") %></label>
     <br />
-		<select class="select2" id="form-languages" multiple>
-      <%
-      languages = menu.languages
-      Language.all.each do |language|
-      %>
-			<option value="<%=language.locale %>" <%="selected" if languages.exists?(language.id) %> <%="data-locked=true" if languages.count==1 && language.id==1 %>><%=language.title.capitalize %></option>
-      <% end %>
-		</select>
+    <%
+    languages = menu.languages
+    Language.all.each do |language|
+    %>
+    <div class="col-sm-3">
+      <input class="icheck-2-checkbox" type="checkbox" id="form-language-<%=language.id %>" name="languages[<%=language.id %>]" <%="checked" if languages.exists?(language.id) %>>
+      <label for="form-language-<%=language.id %>"><%=language.title.capitalize %></label>
+    </div>
+    <% end %>
 	</div>
 </div>
 <div class="row" style="margin-bottom:14px;">
@@ -80,8 +81,8 @@
     <br />
     <% MenuLabel.all.each do |menuLabel|%>
     <div class="col-sm-3">
-      <input class="icheck-2-radio" type="radio" id="form-label-1" name="label" value="<%=menuLabel.id %>" <%="checked" if menu.menuLabel != nil && menu.menuLabel.id == menuLabel.id %>>
-      <label for="form-label-1"><span class="badge badge-primary"><%=menuLabel.title %></span></label>
+      <input class="icheck-2-radio" type="radio" id="form-label-<%=menuLabel.id %>" name="label" value="<%=menuLabel.id %>" <%="checked" if menu.menuLabel != nil && menu.menuLabel.id == menuLabel.id %>>
+      <label for="form-label-<%=menuLabel.id %>"><span class="badge badge-primary"><%=menuLabel.title %></span></label>
     </div>
     <% end %>
     <div class="col-sm-3">
