@@ -34,7 +34,7 @@ class Ajax::DishController < ApplicationController
       
       if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
         navigation = Navigation.find(params[:navigation_id])
-        new_dish = Dish.create(:menu => navigation.menu)
+        new_dish = Dish.create(:user => @user, :menu => navigation.menu)
         
         if params[:image]
           new_dish.image = params[:image]
@@ -50,6 +50,8 @@ class Ajax::DishController < ApplicationController
           new_dish.image_crop_y = (new_dish.image_dimensions["original"][1]-new_dish.image_crop_h).to_f/2
         end
         
+        new_dish.price = params[:price]
+        
         current_locale = I18n.locale
         
         languages.each do |language|
@@ -57,8 +59,6 @@ class Ajax::DishController < ApplicationController
           new_dish.title = params[:title][language.locale]
           new_dish.description = params[:description][language.locale]
         end
-        
-        new_dish.price = params[:price]
         
         I18n.locale = current_locale
         

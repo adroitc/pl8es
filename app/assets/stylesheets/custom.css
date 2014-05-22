@@ -72,11 +72,11 @@ ul.ui-selectable
 ul.ui-selectable li.ui-selectee
 {
   /*display: inline;*/
-  border: solid 1px #ccc;
+  border: solid 2px #fff;
 }
 ul.ui-selectable li.ui-selectee.ui-selected
 {
-  border: solid 1px #000;
+  border: solid 2px #21a9e1;
 }
 .pl8es_c_dishsuggestion_title
 {

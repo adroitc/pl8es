@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :default_menu, :class_name => "Menu"
   has_many :menus
+  has_many :dishes
   has_many :daily_dishes, :class_name => "Dish"
   
   belongs_to :menuColorTemplate

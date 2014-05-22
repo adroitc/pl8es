@@ -34,7 +34,13 @@
    				<li>
    					<div class="profile-stat">
    						<h3><%=@user.menus.count %></h3>
-   						<span><a href="#">Menus</a></span>
+   						<span><a href="<%=url_for :controller => "menumalist", :action => "index" %>">Menus</a></span>
+   					</div>
+   				</li>
+   				<li>
+   					<div class="profile-stat">
+   						<h3><%=@user.dishes.count %></h3>
+   						<span>Dishes</span>
    					</div>
    				</li>
    			</ul>

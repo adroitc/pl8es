@@ -68,9 +68,9 @@ en:
     menu: "Menu"
     categories: "Categories"
     dishes: "Dishes"
-    add_new_menu: "Add new menu"
-    add_category: "Add category"
-    add_dish: "Add dish"
+    add_new_menu: "Add menu"
+    add_new_category: "Add category"
+    add_new_dish: "Add dish"
     
     design_modal_title: "Change design"
     design_modal_cancel: "Cancel"

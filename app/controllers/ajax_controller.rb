@@ -4,6 +4,11 @@ class AjaxController < ApplicationController
     if User.loggedIn(session) && !params.values_at(:background_type, :background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)
       @user = User.find(session[:user_id])
       
+      if MenuColorTemplate.exists?(params[:menuColorTemplate_id])
+        @user.menuColorTemplate = MenuColorTemplate.find(params[:menuColorTemplate_id])
+      else
+        @user.menuColorTemplate = nil
+      end
       @user.background_type = params[:background_type]
       
       menuColor = @user.menuColor

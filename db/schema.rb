@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521100123) do
+ActiveRecord::Schema.define(version: 20140522114335) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20140521100123) do
     t.boolean  "drinks_should_display",      default: false
     t.boolean  "sides_should_display",       default: false
     t.boolean  "ingredients_should_display", default: false
+    t.integer  "user_id"
   end
 
   create_table "dishes_ingredients", force: true do |t|
@@ -120,7 +121,6 @@ ActiveRecord::Schema.define(version: 20140521100123) do
   end
 
   create_table "menu_color_templates", force: true do |t|
-    t.string   "preview_image"
     t.string   "background"
     t.string   "bar_background"
     t.string   "bev_background"
@@ -143,6 +143,17 @@ ActiveRecord::Schema.define(version: 20140521100123) do
     t.string   "sub_text_active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "preview_image_file_name"
+    t.string   "preview_image_content_type"
+    t.integer  "preview_image_file_size"
+    t.datetime "preview_image_updated_at"
+    t.string   "preview_image_dimensions"
+    t.string   "preview_image_fingerprint"
+    t.integer  "preview_image_crop_w"
+    t.integer  "preview_image_crop_h"
+    t.integer  "preview_image_crop_x"
+    t.integer  "preview_image_crop_y"
+    t.boolean  "preview_image_processed",    default: true
   end
 
   create_table "menu_colors", force: true do |t|
@@ -201,6 +212,7 @@ ActiveRecord::Schema.define(version: 20140521100123) do
     t.integer  "menuColor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "menuColorTemplate_id"
   end
 
   create_table "navigation_translations", force: true do |t|

@@ -5,17 +5,13 @@
 	<div class="col-sm-12">
 		<div class="form-group">
       <label class="control-label">Colors</label>
-  		<ul id="form-menu_color" class="ui-selectable" style="width:auto">
-        <li class="col-sm-3 ui-selected" style="padding-top:15px;padding-bottom:15px;height:100px;">
-          <div class="col-sm-6" style="background-color:#eee">test</div>
-          <div class="col-sm-6">test</div>
-          <div class="col-sm-6">test</div>
-          <div class="col-sm-6">test</div>
-        </li>
-        <li class="col-sm-3" style="padding-top:15px;padding-bottom:15px;height:100px;">test</li>
-        <li class="col-sm-3" style="padding-top:15px;padding-bottom:15px;height:100px;">test</li>
-        <li class="col-sm-3" style="padding-top:15px;padding-bottom:15px;height:100px;">custom</li>
+  		<ul id="form-menu_color" class="ui-selectable">
+        <% MenuColorTemplate.all.each do |menuColorTemplate| %>
+        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;background-image:url(<%=menuColorTemplate.preview_image.url(:cropped_default_retina) %>);background-size:cover;color:transparent;" class="<%="ui-selected" if @user.menuColorTemplate == menuColorTemplate %>"><%=menuColorTemplate.id %></li>
+        <% end %>
+        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;" class="<%="ui-selected" if @user.menuColorTemplate == nil %>">custom</li>
       </ul>
+      <input name="menuColorTemplate_id" type="hidden" id="form-menuColorTemplate_id" value="<%=@user.menuColorTemplate.id if @user.menuColorTemplate %>">
 		</div>
 	</div>
 </div>
@@ -94,18 +90,29 @@
   </div>
 </div>
 <script type="text/javascript">
-$("#form-menu_color.ui-selectable").selectable({
-  stop: function(event, id){
-    $(event.target).children(".ui-selected").not(":first").removeClass("ui-selected");
-    var s = $(this);
-    if (s.parent().find("li").size()-s.parent().find("li").index(s.find(".ui-selected")) == 1){
+$("#form-menu_color.ui-selectable").each(function(){
+  var menucolors = jQuery.parseJSON('<%=raw MenuColorTemplate.all.to_json(:only => [:background, :bar_background, :nav_text, :nav_text_active]).to_s %>');
+  function change_appearance(s){
+    var i = s.parent().find("li").index(s.find(".ui-selected"));
+    if (s.parent().find("li").size()-i == 1){
+      $("#form-menuColorTemplate_id").val(0);
       $("#form-menu_color_custom").show();
     }
     else{
+      $("#form-menuColorTemplate_id").val(s.find("li").eq(i).html());
+      $.each(menucolors[i],function(k,v){
+        $("input[name='"+k+"']").val(v).closest(".input-group").find(".input-group-addon .color-preview").css("background-color",v);
+      });
       $("#form-menu_color_custom").hide();
     }
   }
-});
+  $(this).selectable({
+    stop: function(event, id){
+      change_appearance($(this));
+    }
+  });
+  change_appearance($(this));
+})
 </script>
 <% end %>
 <%=neon_modal_footer do |b| %>

@@ -1,0 +1,79 @@
+<%= neon_modal :id => "addfont", :width => "678px", :title => "Add font" do |m| %>
+<%= form_tag({:controller => "ajax/admin", :action => "addfont"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addfont"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-sm-12 form-group">
+    <label for="form-name" class="control-label"><strong>Font name</strong></label>
+		<input name="name" type="text" class="form-control" id="form-name" placeholder="Font title" data-validate="maxlength[250]">
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Navigation font title</strong></label>
+		<input name="name_navigation" type="text" class="form-control" id="form-name" placeholder="Navigation font title" data-validate="maxlength[250]">
+	</div>
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Navigation font size</strong></label>
+		<input name="size_navigation" type="text" class="form-control" id="form-name" placeholder="Navigation font size" data-validate="number,maxlength[9]">
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Heading font title</strong></label>
+		<input name="name_navigation" type="text" class="form-control" id="form-name" placeholder="Heading font title" data-validate="maxlength[250]">
+	</div>
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Heading font size</strong></label>
+		<input name="size_navigation" type="text" class="form-control" id="form-name" placeholder="Heading font size" data-validate="number,maxlength[9]">
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Heading-small font title</strong></label>
+		<input name="name_navigation" type="text" class="form-control" id="form-name" placeholder="Heading-small font title" data-validate="maxlength[250]">
+	</div>
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Heading-small font size</strong></label>
+		<input name="size_navigation" type="text" class="form-control" id="form-name" placeholder="Heading-small font size" data-validate="number,maxlength[9]">
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Description font title</strong></label>
+		<input name="name_navigation" type="text" class="form-control" id="form-name" placeholder="Description font title" data-validate="maxlength[250]">
+	</div>
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Description font size</strong></label>
+		<input name="size_navigation" type="text" class="form-control" id="form-name" placeholder="Description font size" data-validate="number,maxlength[9]">
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Price font title</strong></label>
+		<input name="name_navigation" type="text" class="form-control" id="form-name" placeholder="Price font title" data-validate="maxlength[250]">
+	</div>
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Price font size</strong></label>
+		<input name="size_navigation" type="text" class="form-control" id="form-name" placeholder="Price font size" data-validate="number,maxlength[9]">
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Card-tab-title font title</strong></label>
+		<input name="name_navigation" type="text" class="form-control" id="form-name" placeholder="Card-tab-title font title" data-validate="maxlength[250]">
+	</div>
+	<div class="col-sm-6 form-group">
+    <label for="form-name" class="control-label"><strong>Card-tab-title font size</strong></label>
+		<input name="size_navigation" type="text" class="form-control" id="form-name" placeholder="Card-tab-title font size" data-validate="number,maxlength[9]">
+	</div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-success btn-icon icon-left">
+	<i class="entypo-plus"></i>
+	Add font
+</button>
+<% end %>
+<% end %>
+<% end %>

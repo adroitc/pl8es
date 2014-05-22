@@ -1,0 +1,85 @@
+<% content_for :body_class, "page-body" %>
+<div class="page-container">
+  <div class="sidebar-menu">
+    <%=render :partial => "layouts/dashboard_menuheader" %>
+    <%=render :partial => "layouts/dashboard_menu" %>
+  </div>
+  <div class="main-content">
+    <%=render :partial => "layouts/dashboard_topbar" %>
+    <ol class="breadcrumb bc-3">
+      <li>
+        <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
+      </li>
+      <li class="active">
+        <strong>Admin</strong>
+      </li>
+    </ol>
+    <div class="row">
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-gray">
+    	 		<div class="icon"><i class="entypo-user"></i></div>
+    	 		<div class="num" data-start="0" data-end="<%=User.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+    	 		<h3>users</h3>
+          <a href="<%=url_for :controller => "admin", :action => "users" %>"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              view all users
+              <i class="entypo-user"></i>
+            </button>
+          </p></a>
+    	  </div>
+    	</div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-red">
+    	 		<div class="icon"><i class="entypo-quote"></i></div>
+    	 		<div class="num" data-start="0" data-end="<%=SupportedFont.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+    	 		<h3>fonts</h3>
+          <a href="<%=url_for :controller => "admin", :action => "fonts" %>"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              view all fonts
+              <i class="entypo-quote"></i>
+            </button>
+          </p></a>
+    	  </div>
+    	</div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-aqua">
+    	 		<div class="icon"><i class="entypo-tag"></i></div>
+    	 		<div class="num" data-start="0" data-end="<%=Category.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+    	 		<h3>restaurant tags</h3>
+          <a href="<%=url_for :controller => "admin", :action => "categories" %>"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              view all restaurant tags
+              <i class="entypo-tag"></i>
+            </button>
+          </p></a>
+    	  </div>
+    	</div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-blue">
+    	 		<div class="icon"><i class="entypo-tag"></i></div>
+    	 		<div class="num" data-start="0" data-end="<%=MenuLabel.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+    	 		<h3>menu labels</h3>
+          <a href="<%=url_for :controller => "admin", :action => "menulabels" %>"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              view all menu labels
+              <i class="entypo-tag"></i>
+            </button>
+          </p></a>
+    	  </div>
+    	</div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-green">
+    	 		<div class="icon"><i class="entypo-brush"></i></div>
+    	 		<div class="num" data-start="0" data-end="<%=MenuColorTemplate.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+    	 		<h3>color templates</h3>
+          <a href="<%=url_for :controller => "admin", :action => "menucolortemplates" %>"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              view all color templates
+              <i class="entypo-brush"></i>
+            </button>
+          </p></a>
+    	  </div>
+    	</div>
+    </div>
+  </div>
+</div>
