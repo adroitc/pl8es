@@ -110,6 +110,10 @@ raw(Jsonify::Builder.plain do |j|
   
   j.content_restaurant do
     j.name                       @user.name
+    j.address                    @user.address
+    j.city                       @user.city
+    j.country                    @user.country
+    j.zip                        @user.zip
     j.logo_image_fingerprint     @user.logo_image_fingerprint
     j.logo_image_url             @user.logo_image.present? ? @user.logo_image.url(:cropped_default_retina) : nil
     j.restaurant_image_fingerprint  @user.restaurant_image_fingerprint
@@ -118,10 +122,7 @@ raw(Jsonify::Builder.plain do |j|
     j.appmain_image_url          @user.appmain_image.present? ? @user.appmain_image.url(:cropped_default_retina) : nil
     j.splashscreen_image_fingerprint  @user.splashscreen_image_fingerprint
     j.splashscreen_image_url     @user.splashscreen_image.present? ? @user.splashscreen_image.url(:cropped_default_retina) : nil
-    j.address                    @user.address
-    j.city                       @user.city
-    j.country                    @user.country
-    j.zip                        @user.zip
+    j.currency                   "EUR"
   end
   
   j.content_style do
