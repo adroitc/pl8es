@@ -112,8 +112,12 @@ raw(Jsonify::Builder.plain do |j|
     j.name                       @user.name
     j.appmain_image_fingerprint  @user.appmain_image_fingerprint
     j.logo_image_url             @user.appmain_image.present? ? @user.logo_image.url(:cropped_default_retina) : nil
+    j.restaurant_image_fingerprint  @user.appmain_image_fingerprint
+    j.restaurant_image_url       @user.restaurant_image.present? ? @user.restaurant_image.url(:cropped_default_retina) : nil
+    j.appmain_image_fingerprint  @user.appmain_image_fingerprint
     j.appmain_image_url          @user.appmain_image.present? ? @user.appmain_image.url(:cropped_default_retina) : nil
-    j.splashscreen_image_url     @user.appmain_image.present? ? @user.splashscreen_image.url(:cropped_default_retina) : nil
+    j.splashscreen_image_fingerprint  @user.appmain_image_fingerprint
+    j.splashscreen_image_url     @user.splashscreen_image.present? ? @user.splashscreen_image.url(:cropped_default_retina) : nil
     j.address                    @user.address
     j.city                       @user.city
     j.country                    @user.country

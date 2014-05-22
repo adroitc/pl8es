@@ -205,7 +205,7 @@ function pl8es_f_duplicate(m){
   var d = new FormData();
   d.append("authenticity_token", window._token);
   d.append("menu_id", m);
-  pl8es_i_ajax("/ajax/duplicatemenu",d,function(){
+  pl8es_i_ajax("/a/menu/duplicate",d,function(){
 	  location.reload();
 	});
 }
@@ -231,7 +231,7 @@ function pl8es_f_confirmdeletemenu(m){
   var d = new FormData();
   d.append("authenticity_token", window._token);
   d.append("menu_id", m);
-  pl8es_i_ajax("/ajax/deletemenu",d,function(){
+  pl8es_i_ajax("/a/menu/delete",d,function(){
     location.reload();
   });
 }
