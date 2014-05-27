@@ -152,29 +152,33 @@ raw(Jsonify::Builder.plain do |j|
     
     j.background_type            @user.background_type
     
-    j.background                 @user.menuColor.background
-    j.bar_background             @user.menuColor.bar_background
+    menuColor = @user.menuColor
+    if @user.menuColorTemplate.present?
+      menuColor = @user.menuColorTemplate
+    end
+    j.background                 menuColor.background
+    j.bar_background             menuColor.bar_background
     
-    j.bev_background             @user.menuColor.bev_background
-    j.bev_background_selected    @user.menuColor.bev_background_selected
-    j.bev_background_active      @user.menuColor.bev_background_active
-    j.bev_text                   @user.menuColor.bev_text
-    j.bev_text_selected          @user.menuColor.bev_text_selected
-    j.bev_text_active            @user.menuColor.bev_text_active
+    j.bev_background             menuColor.bev_background
+    j.bev_background_selected    menuColor.bev_background_selected
+    j.bev_background_active      menuColor.bev_background_active
+    j.bev_text                   menuColor.bev_text
+    j.bev_text_selected          menuColor.bev_text_selected
+    j.bev_text_active            menuColor.bev_text_active
     
-    j.nav_background             @user.menuColor.nav_background
-    j.nav_background_selected    @user.menuColor.nav_background_selected
-    j.nav_background_active      @user.menuColor.nav_background_active
-    j.nav_text                   @user.menuColor.nav_text
-    j.nav_text_selected          @user.menuColor.nav_text_selected
-    j.nav_text_active            @user.menuColor.nav_text_active
+    j.nav_background             menuColor.nav_background
+    j.nav_background_selected    menuColor.nav_background_selected
+    j.nav_background_active      menuColor.nav_background_active
+    j.nav_text                   menuColor.nav_text
+    j.nav_text_selected          menuColor.nav_text_selected
+    j.nav_text_active            menuColor.nav_text_active
     
-    j.sub_background             @user.menuColor.sub_background
-    j.sub_background_selected    @user.menuColor.sub_background_selected
-    j.sub_background_active      @user.menuColor.sub_background_active
-    j.sub_text                   @user.menuColor.sub_text
-    j.sub_text_selected          @user.menuColor.sub_text_selected
-    j.sub_text_selected          @user.menuColor.sub_text_active
+    j.sub_background             menuColor.sub_background
+    j.sub_background_selected    menuColor.sub_background_selected
+    j.sub_background_active      menuColor.sub_background_active
+    j.sub_text                   menuColor.sub_text
+    j.sub_text_selected          menuColor.sub_text_selected
+    j.sub_text_selected          menuColor.sub_text_active
   end
   
 end)
