@@ -1,0 +1,65 @@
+<% content_for :body_class, "page-body" %>
+<div class="page-container">
+  <div class="sidebar-menu">
+    <%=render :partial => "layouts/dashboard_menuheader" %>
+    <%=render :partial => "layouts/dashboard_menu" %>
+  </div>
+  <div class="main-content">
+    <%=render :partial => "layouts/dashboard_topbar" %>
+    <ol class="breadcrumb bc-3">
+      <li>
+        <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
+      </li>
+      <li class="active">
+        <strong>Dailycious</strong>
+      </li>
+    </ol>
+    <div class="row">
+      <div class="col-sm-4">
+      	<div class="tile-stats tile-white">
+      		<div class="icon">
+      			<i class="glyphicon glyphicon-download"></i>
+      		</div>
+      		<div class="num">
+      			<h2><%=@user.download_code %></h2>
+      		</div>
+      		<div class="title">
+      			<p><%=t("menumalist.download_code_title") %></p>
+      		</div>
+      	</div>
+      </div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-white">
+    	 		<div class="icon"><i class="entypo-monitor"></i></div>
+    	 		<div class="num" data-start="0" data-end="1" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+          <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
+    	 		<h3><%=t("menumalist.installations") %></h3>
+          <p><%=t("menumalist.installations_on_iPad") %>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              <%=t("menumalist.installations_want_more") %>
+              <i class="entypo-plus"></i>
+            </button>
+          </p>
+    	  </div>
+    	</div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-white">
+    	 		<div class="icon"><i class="entypo-brush"></i></div>
+    	 		<h2><%=t("menumalist.design") %></h3>
+          <a href="javascript:;" onclick="jQuery('#modal-design').modal('show');">
+            <button type="button" class="btn btn-default btn-icon icon-left" style="margin-top: -2px">
+              <%=t("menumalist.design_change") %>
+              <i class="entypo-brush"></i>
+            </button>
+          </a>
+    	  </div>
+    	</div>
+    </div>
+    <h2><%=t("menumalist.all_menus") %></h2>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+    </div>
+  </div>
+</div>

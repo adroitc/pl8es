@@ -1,0 +1,2 @@
+module DailyciousHelper
+end

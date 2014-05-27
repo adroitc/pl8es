@@ -51,6 +51,9 @@ Pl8es::Application.routes.draw do
   resources :login, :only => []
   get "/login" => "login#index"
   
+  resources :logout, :only => []
+  get "/logout" => "logout#index"
+  
   resources :admin, :only => []
   get "/admin" => "admin#index"
   get "/admin/users" => "admin#users"
@@ -60,12 +63,15 @@ Pl8es::Application.routes.draw do
   get "/admin/menucolortemplates" => "admin#menucolortemplates"
   
   resources :profile, :only => []
-  get "/profile" => "profile#index"
+  get "/restaurant" => "profile#index"
   
   resources :menumalist, :only => []
   get "/menumalist" => "menumalist#index"
   get "/menumalist/:menu_title-:menu_id" => "menumalist#categories"
   get "/menumalist/:menu_title-:menu_id/:navigation_title-:navigation_id" => "menumalist#category"
   get "/menumalist/:menu_title-:menu_id/:parent_navigation_title-:parent_navigation_id/:navigation_title-:navigation_id" => "menumalist#category"
+  
+  resources :dailycious, :only => []
+  get "/dailycious" => "dailycious#index"
   
 end

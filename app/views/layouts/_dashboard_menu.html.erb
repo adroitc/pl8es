@@ -8,7 +8,7 @@
   <li class="opened <%="active" if params[:controller] == "profile" %>">
   	<a href="<%=url_for :controller => "profile", :action => "index" %>">
   		<i class="entypo-user"></i>
-  		<span>Profile</span>
+  		<span>Restaurant</span>
   	</a>
   </li>
   <li class="opened <%="active" if params[:controller] == "menumalist" %>">
@@ -18,7 +18,7 @@
   	</a>
   </li>
   <li>
-  	<a href="daily-meals.html">
+  	<a href="<%=url_for :controller => "dailycious", :action => "index" %>">
   		<i class="entypo-newspaper"></i>
   		<span>Tagesmenüs</span>
   	</a>
@@ -27,12 +27,6 @@
   	<a href="mailbox.html">
   		<i class="entypo-mail"></i>
   		<span>Weinkarte</span>
-  	</a>
-  </li>
-  <li>
-  	<a href="extra-profile.html">
-  		<i class="entypo-doc-text"></i>
-  		<span>Restaurant</span>
   	</a>
   </li>
 </ul>
