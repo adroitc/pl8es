@@ -63,7 +63,7 @@
     			  		  	<optgroup label="<%=navigation.title %>">
                       <% navigation.dishes.each do |cat_dish| %>
                       <% if cat_dish.id != dish.id %>
-    			  		  		<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_1 == cat_dish %>><%=cat_dish.title %></option>
+    			  		  		<option value="<%=cat_dish.id %>" <%="selected" if dish.dishsuggestion_1 == cat_dish %>><%=cat_dish.title %></option>
                       <% end %>
                       <% end %>
     			  		  	</optgroup>
@@ -84,7 +84,7 @@
     			  	  		<optgroup label="<%=navigation.title %>">
                       <% navigation.dishes.each do |cat_dish| %>
                       <% if cat_dish.id != dish.id %>
-    			  	  			<option value="<%=cat_dish.id %>"<%=" selected" if dish.dishsuggestion_2 == cat_dish %>><%=cat_dish.title %></option>
+    			  	  			<option value="<%=cat_dish.id %>" <%="selected" if dish.dishsuggestion_2 == cat_dish %>><%=cat_dish.title %></option>
                       <% end %>
                       <% end %>
     			  	  		</optgroup>

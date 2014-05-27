@@ -1,14 +1,22 @@
 class Ajax::MenuController < ApplicationController
   
   def addmenu
-    if User.loggedIn(session) && !params.values_at(:title, :from_time, :to_time, :languages, :label).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:title, :from_time, :to_time, :default_language, :languages, :label).include?(nil)
       @user = User.find(session[:user_id])
+      
+      if Language.exists?(params[:default_language].to_i)
+        menu.default_language = Language.find(params[:default_language].to_i)
+      end
       
       languages = Array.new
       params[:languages].each do |language|
-        if Language.exists?(:title => language[1].strip.downcase)
-          languages.push(Language.find_by_title(language[1].strip.downcase))
+          if Language.exists?(language[0].to_i)
+            languages.push(Language.find(language[0].to_i))
         end
+      end
+      
+      if !languages.exists?(params[:default_language].to_i)
+        languages.push(Language.find(params[:default_language].to_i))
       end
       
       if MenuLabel.exists?(params[:label]) || params[:label] != ""
@@ -28,17 +36,27 @@ class Ajax::MenuController < ApplicationController
   end
   
   def editmenu
-    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :from_time, :to_time, :languages, :label).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language, :languages, :label).include?(nil)
       @user = User.find(session[:user_id])
       
       if @user.menus.exists?(params[:menu_id])
         menu = @user.menus.find(params[:menu_id])
+        
+        if Language.exists?(params[:default_language].to_i)
+          menu.default_language = Language.find(params[:default_language].to_i)
+        end
         
         languages = Array.new
         params[:languages].each do |language|
           if Language.exists?(language[0].to_i)
             languages.push(Language.find(language[0].to_i))
           end
+        end
+        menu.languages = languages
+      
+        if !menu.languages.exists?(params[:default_language].to_i)
+          languages.push(Language.find(params[:default_language].to_i))
+          menu.languages = languages
         end
         
         if MenuLabel.exists?(params[:label]) || params[:label] != ""
