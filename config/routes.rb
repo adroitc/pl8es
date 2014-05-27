@@ -72,15 +72,15 @@ Pl8es::Application.routes.draw do
   
   resources :menumalist, :only => []
   if Rails.env.production?
-    get "/menumalist" => "menumalist#index"
-    get "/menumalist/:menu_title-:menu_id" => "menumalist#categories"
-    get "/menumalist/:menu_title-:menu_id/:navigation_title-:navigation_id" => "menumalist#category"
-    get "/menumalist/:menu_title-:menu_id/:parent_navigation_title-:parent_navigation_id/:navigation_title-:navigation_id" => "menumalist#category"
-  else
     get "/" => "menumalist#index", :constraints => {:subdomain => "menumalist"}
     get "/:menu_title-:menu_id" => "menumalist#categories", :constraints => {:subdomain => "menumalist"}
     get "/:menu_title-:menu_id/:navigation_id-:navigation_title" => "menumalist#category", :constraints => {:subdomain => "menumalist"}
     get "/:menu_title-:menu_id/:parent_navigation_id-:parent_navigation_title/:navigation_id-:navigation_title" => "menumalist#category", :constraints => {:subdomain => "menumalist"}
+  else
+    get "/menumalist" => "menumalist#index"
+    get "/menumalist/:menu_title-:menu_id" => "menumalist#categories"
+    get "/menumalist/:menu_title-:menu_id/:navigation_title-:navigation_id" => "menumalist#category"
+    get "/menumalist/:menu_title-:menu_id/:parent_navigation_title-:parent_navigation_id/:navigation_title-:navigation_id" => "menumalist#category"
   end
   
 end
