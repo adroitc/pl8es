@@ -46,10 +46,18 @@ Pl8es::Application.routes.draw do
   post "/a/dish/sort" => "ajax/dish#sortdish"
   
   resources :signup, :only => []
-  get "/signup" => "signup#index"
+  if Rails.env.production?
+    get "/" => "signup#index", :constraints => {:subdomain => "signup"}
+  else
+    get "/signup" => "signup#index"
+  end
   
   resources :login, :only => []
-  get "/login" => "login#index"
+  if Rails.env.production?
+    get "/" => "login#index", :constraints => {:subdomain => "login"}
+  else
+    get "/login" => "login#index"
+  end
   
   resources :admin, :only => []
   get "/admin" => "admin#index"
@@ -63,9 +71,16 @@ Pl8es::Application.routes.draw do
   get "/profile" => "profile#index"
   
   resources :menumalist, :only => []
-  get "/menumalist" => "menumalist#index"
-  get "/menumalist/:menu_title-:menu_id" => "menumalist#categories"
-  get "/menumalist/:menu_title-:menu_id/:navigation_title-:navigation_id" => "menumalist#category"
-  get "/menumalist/:menu_title-:menu_id/:parent_navigation_title-:parent_navigation_id/:navigation_title-:navigation_id" => "menumalist#category"
+  if Rails.env.production?
+    get "/menumalist" => "menumalist#index"
+    get "/menumalist/:menu_title-:menu_id" => "menumalist#categories"
+    get "/menumalist/:menu_title-:menu_id/:navigation_title-:navigation_id" => "menumalist#category"
+    get "/menumalist/:menu_title-:menu_id/:parent_navigation_title-:parent_navigation_id/:navigation_title-:navigation_id" => "menumalist#category"
+  else
+    get "/" => "menumalist#index", :constraints => {:subdomain => "menumalist"}
+    get "/:menu_title-:menu_id" => "menumalist#categories", :constraints => {:subdomain => "menumalist"}
+    get "/:menu_title-:menu_id/:navigation_id-:navigation_title" => "menumalist#category", :constraints => {:subdomain => "menumalist"}
+    get "/:menu_title-:menu_id/:parent_navigation_id-:parent_navigation_title/:navigation_id-:navigation_title" => "menumalist#category", :constraints => {:subdomain => "menumalist"}
+  end
   
 end
