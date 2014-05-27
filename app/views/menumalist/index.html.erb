@@ -116,9 +116,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $("form").each(function(){
-    var d = $(this).find("select[name='default_language']");
+    var f = $(this);
+    var d = f.find("select[name='default_language']");
     d.on("change",function(){
-      $(this).find("input[name^='languages']").each(function(){
+      f.find("input[name^='languages']").each(function(){
         $(this).iCheck("enable");
       });
       $("input[name='languages["+d.val()+"]']").each(function(){
