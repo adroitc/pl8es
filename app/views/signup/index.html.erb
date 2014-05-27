@@ -36,7 +36,7 @@
 								<div class="input-group-addon">
 									<i class="entypo-user"></i>
 								</div>
-								<input type="text" class="form-control" name="name" id="name" placeholder="<%=t("signup.restaurant_name") %>" autocomplete="off" />
+								<input type="text" class="form-control" name="name" id="name" placeholder="<%=t("signup.restaurant_name") %>" autocomplete="off" data-message-required="<%=I18n.t("errors.required") %>" data-message-minlength="<%=I18n.t("errors.minlength",{l:"3"}) %>" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -44,7 +44,7 @@
 								<div class="input-group-addon">
 									<i class="entypo-mail"></i>
 								</div>
-								<input type="text" class="form-control" name="email" id="email" data-mask="email" placeholder="<%=t("signup.email") %>" autocomplete="off" />
+								<input type="text" class="form-control" name="email" id="email" data-mask="email" placeholder="<%=t("signup.email") %>" autocomplete="off" data-message-required="<%=I18n.t("errors.required") %>" data-message-email="<%=I18n.t("errors.invalid_email") %>" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -52,7 +52,7 @@
 								<div class="input-group-addon">
 									<i class="entypo-lock"></i>
 								</div>
-								<input type="password" class="form-control" name="password" id="password" placeholder="<%=t("signup.password") %>" autocomplete="off" />
+								<input type="password" class="form-control" name="password" id="password" placeholder="<%=t("signup.password") %>" autocomplete="off" data-message-required="<%=I18n.t("errors.required") %>" data-message-minlength="<%=I18n.t("errors.minlength",{l:"8"}) %>" />
 							</div>
 						</div>
 						<div class="form-group">

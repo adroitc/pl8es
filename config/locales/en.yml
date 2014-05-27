@@ -22,7 +22,7 @@
 en:
   errors:
     required: "This field is required."
-    minlength: "Please enter at least %{a} characters."
+    minlength: "Please enter at least %{l} characters."
     invalid_email: "Invalid E-mail."
     already_exists: "This email already exists."
     

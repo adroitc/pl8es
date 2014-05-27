@@ -59,7 +59,7 @@ gem "bcrypt-ruby", :require => "bcrypt"
 # languages
 gem "rename"
 gem "globalize", "~> 4.0.1"
-gem "i18n-js"
+#gem "i18n-js"
 
 # paperclip
 gem "paperclip"

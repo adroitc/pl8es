@@ -31,13 +31,12 @@ var neonLogin = neonLogin || {};
 			},
       
 			messages: {
-				
 				email: {
-				  required: I18n.t("errors.required"),
-					email: I18n.t("errors.invalid_email")
+				  required: neonLogin.$container.find("input[name='email']").data("message-required"),
+					email: neonLogin.$container.find("input[name='email']").data("message-email")
 				},
 				password: {
-				  required: I18n.t("errors.required")
+				  required: neonLogin.$container.find("input[name='password']").data("message-required")
 				}
 			},
 			

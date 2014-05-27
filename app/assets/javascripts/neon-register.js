@@ -39,16 +39,16 @@ var neonRegister = neonRegister || {};
 			
 			messages: {
 				name: {
-				  required: I18n.t("errors.required"),
-				  minlength: I18n.t("errors.minlength",{a:"3"})
+				  required: neonRegister.$container.find("input[name='name']").data("message-required"),
+				  minlength: neonRegister.$container.find("input[name='name']").data("message-minlength")
 				},
 				email: {
-				  required: I18n.t("errors.required"),
-					email: I18n.t("errors.invalid_email")
+				  required: neonRegister.$container.find("input[name='email']").data("message-required"),
+					email: neonRegister.$container.find("input[name='email']").data("message-email")
 				},
 				password: {
-				  required: I18n.t("errors.required"),
-				  minlength: I18n.t("errors.minlength",{a:"8"})
+				  required: neonRegister.$container.find("input[name='password']").data("message-required"),
+				  minlength: neonRegister.$container.find("input[name='password']").data("message-minlength")
 				}
 			},
 			
