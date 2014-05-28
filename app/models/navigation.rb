@@ -37,12 +37,6 @@ class Navigation < ActiveRecord::Base
   validates :title, :length => {
     :maximum => 28
   }
-  
-  def self.img_min_dimensions
-    {
-      :image => [828, 552]
-    }
-  end
 
   def navigation_lang
     all_translated_attributes_hash = {}

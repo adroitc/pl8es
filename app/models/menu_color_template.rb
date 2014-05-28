@@ -17,10 +17,4 @@ class MenuColorTemplate < ActiveRecord::Base
     :width => 288,
     :height => 216
   }
-  
-  def self.img_min_dimensions
-    {
-      :preview_image => [288, 216]
-    }
-  end
 end

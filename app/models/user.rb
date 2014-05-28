@@ -99,15 +99,6 @@ class User < ActiveRecord::Base
     :height => 1536
   }
   
-  def self.img_min_dimensions
-    {
-      :logo_image => [312, 208],
-      :restaurant_image => [828, 552],
-      :appmain_image => [1680, 1120],
-      :splashscreen_image => [2048, 1536]
-    }
-  end
-  
 	def self.loggedIn(session)
 		if session[:user_id] && User.exists?(id: session[:user_id])
 			return true

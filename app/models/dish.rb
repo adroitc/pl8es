@@ -76,12 +76,6 @@ class Dish < ActiveRecord::Base
     :maximum => 250
   }
   
-  def self.img_min_dimensions
-    {
-      :image => [1680, 1120]
-    }
-  end
-  
   def dish_lang
     all_translated_attributes_hash = {}
     navigation.menu.languages.each do |language|
