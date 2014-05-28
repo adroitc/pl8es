@@ -17,7 +17,7 @@
       <div class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-adddish-lang-<%=language.locale %>">
 			  <div class="col-md-12 form-group">
           <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="maxlength[28]"<%=" required" if navigation.menu.default_language == language %>>
+			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="maxlength[28]" <%="required" if navigation.menu.default_language == language %>>
           <br />
 			  </div>
 			  <div class="col-md-12 form-group">
