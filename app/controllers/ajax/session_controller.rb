@@ -31,6 +31,7 @@ class Ajax::SessionController < ApplicationController
       
       if !@user.blank?
         session[:user_id] = @user.id
+        
         render :json => {:status => "success"}
         return
       end
