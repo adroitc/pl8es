@@ -20,4 +20,12 @@ class DailyDish < ActiveRecord::Base
     :height => 640
   }
   
+  validates :title, :length => {
+    :maximum => 28
+  }
+  
+  validates :price, :length => {
+    :maximum => 7
+  }
+  
 end
