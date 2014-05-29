@@ -26,6 +26,8 @@
 
  *= require "jquery.Jcrop.min"
 
+ *= require "daterangepicker/daterangepicker-bs3"
+
  *= require "custom"
  
  */

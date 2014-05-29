@@ -33,13 +33,21 @@ body {
 }
 .gallery-env.draggable-portlets .panel
 {
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    border-radius: 0px;
+    border-radius: 0px;
 }
-.gallery-env.draggable-portlets .panel .panel-body
+.gallery-env.draggable-portlets .panel *
 {
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    border-radius: 0px;
+    border-radius: 0px;
+}
+.gallery-env.draggable-portlets .panel img
+{
+  -webkit-border-radius: 0 0 0 0;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 0 0 0 0;
+  -moz-background-clip: padding;
+  border-radius: 0 0 0 0;
 }
 .gallery-env.draggable-portlets article.album .panel-heading
 {
@@ -78,7 +86,7 @@ ul.ui-selectable li.ui-selectee.ui-selected
 {
   border: solid 2px #21a9e1;
 }
-.pl8es_c_dishsuggestion_title
+.pl8es_c_dish .pl8es_c_dish_title
 {
   /*margin-right: 6px;*/
   padding-top: 6px;
@@ -88,7 +96,7 @@ ul.ui-selectable li.ui-selectee.ui-selected
   font-weight: bold;
   /*display: inline;*/
 }
-.pl8es_c_dishsuggestion_price
+.pl8es_c_dish .pl8es_c_dish_price
 {
   padding: 6px;
   background-color: rgba(0,0,0,0.2);
@@ -132,4 +140,25 @@ div.form-group.fileinput.fileinput-new .close
 div.has-switch div.switch-off input
 {
   display: none;
+}
+div.tile-stats.datepicker.weekpicker
+{
+  float: left;
+  padding: 0px;
+  border: solid 0px transparent;
+}
+.form-group.fileinput.validate-has-error > span.btn.btn-info.btn-file
+{
+  overflow: visible;
+  border-color: #cc2424;
+}
+.form-group.fileinput.validate-has-error > span.btn.btn-info.btn-file > span.validate-has-error
+{
+  position: absolute;
+  left: 0px;
+  top: 30px;
+}
+.form-group.fileinput.validate-has-error > span.validate-has-error
+{
+  position: absolute;
 }

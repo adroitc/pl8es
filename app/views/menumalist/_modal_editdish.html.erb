@@ -19,12 +19,10 @@
 			  <div class="col-md-12 form-group">
           <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
 			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=dish.title %>" data-validate="maxlength[28]" <%="required" if dish.navigation.menu.default_language == language %>>
-          <br />
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_description") %><% I18n.locale = language.locale %></strong></label>
 			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[700]" <%="required" if dish.navigation.menu.default_language == language %> style="height:134px;"><%=dish.description %></textarea>
-          <br />
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>
@@ -70,10 +68,10 @@
                     <% end %>
     			  		  </select>
                 </div>
-                <div class="col-md-12 form-dishsuggestion_info0" style="margin-top:14px;display:none;" id="form-dishsuggestion_info0">
+                <div class="col-md-12 pl8es_c_dish" style="margin-top:14px;display:none;" id="form-dishsuggestion_info0">
                   <img src="" width="50%">
-                  <div class="pl8es_c_dishsuggestion_title"></div>
-                  <div class="pl8es_c_dishsuggestion_price"></div>
+                  <div class="pl8es_c_dish_title"></div>
+                  <div class="pl8es_c_dish_price"></div>
                 </div>
               </div>
               <div class="col-md-6">
@@ -91,11 +89,11 @@
                     <% end %>
     			  	  	</select>
                 </div>
-                <div class="col-md-12 form-dishsuggestion_info1" style="margin-top:14px;display:none;" id="form-dishsuggestion_info1">
+                <div class="col-md-12 pl8es_c_dish" style="margin-top:14px;display:none;" id="form-dishsuggestion_info1">
                   <img src="" width="50%">
                   <br />
-                  <div class="pl8es_c_dishsuggestion_title"></div>
-                  <div class="pl8es_c_dishsuggestion_price"></div>
+                  <div class="pl8es_c_dish_title"></div>
+                  <div class="pl8es_c_dish_price"></div>
                 </div>
               </div>
 	    			</div>
@@ -141,10 +139,10 @@
 <script type="text/javascript">
 $("#modal-editdish-<%=dish.id %> select.select2[name^='dishsuggestions[']").each(function(){
   var i = $(this).attr("name").split("[")[1].split("]")[0];
-  var c = $(this).closest("span[id^='modal-editdish-<%=dish.id %>']").find(".form-dishsuggestion_info"+i);
+  var c = $(this).closest("span[id^='modal-editdish-<%=dish.id %>']").find("#form-dishsuggestion_info"+i);
   $(this).on("change",function(e){
     if ($(this).val().length > 0){
-      $.get("/ajax/dish/"+$(this).val()+"/"+$(this).attr("data-language"),function(d){
+      $.get("/a/dish/"+$(this).val()+"/"+$(this).attr("data-language"),function(d){
         c.show();
         c.find("img").show().attr("src", d["dish"]["image_url"]);
         c.find(".pl8es_c_dishsuggestion_price").html(d["dish"]["price"]);

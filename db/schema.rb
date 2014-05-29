@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526125604) do
+ActiveRecord::Schema.define(version: 20140529074715) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -35,6 +35,26 @@ ActiveRecord::Schema.define(version: 20140526125604) do
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale"
 
+  create_table "daily_dishes", force: true do |t|
+    t.string   "title"
+    t.string   "price"
+    t.datetime "display_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "image_dimensions"
+    t.integer  "image_crop_w"
+    t.integer  "image_crop_h"
+    t.integer  "image_crop_x"
+    t.integer  "image_crop_y"
+    t.boolean  "image_crop_processed", default: true
+    t.string   "image_fingerprint"
+    t.integer  "user_id"
+  end
+
   create_table "dish_translations", force: true do |t|
     t.integer  "dish_id",     null: false
     t.string   "locale",      null: false
@@ -56,8 +76,6 @@ ActiveRecord::Schema.define(version: 20140526125604) do
     t.integer  "dishsuggestion_1_id"
     t.integer  "dishsuggestion_2_id"
     t.string   "price"
-    t.boolean  "is_daily",                   default: false
-    t.date     "daily_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"

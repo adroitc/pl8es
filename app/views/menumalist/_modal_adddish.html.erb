@@ -1,5 +1,5 @@
 <%= neon_modal :id => "adddish", :width => "678px", :title => t("menumalist.dish_modal_add_title"), :languages => navigation.menu.languages, :default_language => navigation.menu.default_language do |m| %>
-<%= form_tag({:controller => "ajax/dish", :action => "adddish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_addnavigation"}) do %>
+<%= form_tag({:controller => "ajax/dish", :action => "adddish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addnavigation"}) do %>
 <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -18,12 +18,10 @@
 			  <div class="col-md-12 form-group">
           <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
 			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="maxlength[28]" <%="required" if navigation.menu.default_language == language %>>
-          <br />
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_description") %><% I18n.locale = language.locale %></strong></label>
 			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[700]" <%="required" if navigation.menu.default_language == language %> style="height:134px;"></textarea>
-          <br />
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>

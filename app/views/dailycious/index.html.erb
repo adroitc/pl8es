@@ -16,19 +16,6 @@
     </ol>
     <div class="row">
       <div class="col-sm-4">
-      	<div class="tile-stats tile-white">
-      		<div class="icon">
-      			<i class="glyphicon glyphicon-download"></i>
-      		</div>
-      		<div class="num">
-      			<h2><%=@user.download_code %></h2>
-      		</div>
-      		<div class="title">
-      			<p>All daily dishes</p>
-      		</div>
-      	</div>
-      </div>
-      <div class="col-sm-4">
     	 	<div class="tile-stats tile-white">
     	 		<div class="icon"><i class="entypo-monitor"></i></div>
     	 		<div class="num" data-start="0" data-end="1" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
@@ -42,24 +29,76 @@
           </p>
     	  </div>
     	</div>
-      <div class="col-sm-4">
-    	 	<div class="tile-stats tile-white">
-    	 		<div class="icon"><i class="entypo-brush"></i></div>
-    	 		<h2><%=t("menumalist.design") %></h3>
-          <a href="javascript:;" onclick="jQuery('#modal-design').modal('show');">
-            <button type="button" class="btn btn-default btn-icon icon-left" style="margin-top: -2px">
-              <%=t("menumalist.design_change") %>
-              <i class="entypo-brush"></i>
-            </button>
-          </a>
-    	  </div>
-    	</div>
     </div>
-    <h2><%=t("menumalist.all_menus") %></h2>
+    <h2>All daily dishes of the week</h2>
+    <br />
+    <%
+    date = Date.today
+    if params[:add_weeks]
+      date += params[:add_weeks].to_i*7
+    end
+    %>
+    <div class="row">
+			<div class="col-md-12">
+        <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i-1) %>">
+				  <button type="button" class="col-md-3 btn btn-white">
+            <i class="entypo-left-dir"></i>
+            Last week
+          </button>
+        </a>
+				<button type="button" class="col-md-6 btn btn-white" disabled>
+          <%=date.beginning_of_week.strftime('%a, %d %B %Y') %>
+          -
+          <%=date.end_of_week.strftime('%a, %d %B %Y') %>
+        </button>
+        <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i+1) %>">
+				  <button type="button" class="col-md-3 btn btn-white">
+            Next week
+            <i class="entypo-right-dir"></i>
+          </button>
+        </a>
+			</div>
+		</div>
     <br />
     <div class="row">
       <div class="col-md-12">
+        <table class="table table-striped responsive">
+          <tbody>
+            <%
+            for i in 0..6
+              current_date = (date.beginning_of_week+i)
+            %>
+            <tr style="font-size: 18px;">
+              <td width="100px;">
+                <%=current_date.strftime("%A") %>
+              </td>
+              <td class="row gallery-env draggable-portlets">
+                <% @user.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
+		            <%=neon_dailydishpanel :daily_dish => daily_dish %>
+                <% end %>
+                <% if !current_date.past? %>
+                <a href="javascript:;" onclick="jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('<%=current_date.strftime("%d-%m-%Y") %>');" class="col-md-4">
+                  <button type="button" class="btn btn-green btn-icon icon-left">
+                  	Add daily dish
+                  	<i class="entypo-plus"></i>
+                  </button>
+                </a>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
+<%=render :partial => "modal_adddailydish" %>
+<%
+for i in 0..6
+  current_date = (date.beginning_of_week+i)
+%>
+<% @user.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
+<%=render :partial => "modal_editdailydish", :locals => {:daily_dish => daily_dish} %>
+<% end %>
+<% end %>

@@ -29,6 +29,7 @@
 //= require "jquery.inputmask.bundle.min"
 
 //= require "cookies.min"
+//= require "bootstrap-datepicker"
 //= require "bootstrap-timepicker.min"
 //= require "bootstrap-colorpicker.min"
 //= require "bootstrap-switch.min"
@@ -39,6 +40,9 @@
 //= require "fileinput"
 //= require "jcrop/jquery.Jcrop.min"
 //= require "jquery.validate.min"
+//= require "daterangepicker/moment.min"
+//= require "daterangepicker/daterangepicker"
+//= require "jquery.weekpicker"
 
 //= require "neon-custom"
 // require "neon-demo"
@@ -132,6 +136,7 @@ $(document).ready(function()
       }
     });
   });
+  $("div.weekpicker").weekpicker();
 });
 function pl8es_i_ajaxform(f,a)
 {

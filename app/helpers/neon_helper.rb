@@ -62,7 +62,7 @@ module NeonHelper
 			<span class="btn btn-info btn-file">
 				<span class="fileinput-new">#{opts[:different] ? t("neon.image_input_select_different") : t("neon.image_input_select")}</span>
 				<span class="fileinput-exists">#{t("neon.image_input_change")}</span>
-				<input type="file" name="#{opts[:name].to_s}" accept="image/*" data-imgvalidation="#{image_min_size[:width].to_s+"x"+image_min_size[:height].to_s if opts[:instance_class]}">
+				<input type="file" name="#{opts[:name].to_s}" accept="image/*" data-imgvalidation="#{image_min_size[:width].to_s+"x"+image_min_size[:height].to_s if opts[:instance_class]}" required>
 			</span>
 			<span class="fileinput-filename"></span>
 			<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
@@ -168,17 +168,52 @@ module NeonHelper
         	</div>)}
   end
   
-  def neon_dishpanel(opts={},&block)
-    neon_panel_withfooter(
-      :size => "3",
-      :sort_key => "dish_ids[#{opts[:dish].id}]",
-      :title => opts[:dish].title,
-      :image_url => opts[:dish].image.present? ? opts[:dish].image.url(:cropped_default_retina) : "http://placehold.it/1680x1120") {|p|
-        raw %(<div class="album-options">
-        	  <a href="javascript:;" onclick="jQuery('#modal-editdish-#{opts[:dish].id}').modal('show');">
-        	  	<i class="entypo-cog"></i>
-        	  </a>
-        	</div>)}
+  def neon_dishpanel(opts={})
+    raw %(
+    <div class="col-sm-4" style="margin-bottom:17px;">
+      <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
+       	<div class="panel-body" style="margin:0px;padding:0px;">
+        	<article class="album" style="margin-bottom:0px;border-width:0px;">
+        		<header>
+              <a href="javascript:;" onclick="jQuery('#modal-editdish-#{opts[:dish].id}').modal('show');">
+                <img src="#{opts[:dish].image.present? ? opts[:dish].image.url(:cropped_default_retina) : "http://placehold.it/1680x1120"}" />
+        			</a>
+        		</header>
+           	<div class="panel-heading">
+              <input type="hidden" name="dish_ids[#{opts[:dish].id}]" value="">
+           		<div class="panel-title ellipsis">
+                #{opts[:dish].title}
+              </div>
+           	</div>
+        	</article>
+       	</div>
+      </div>
+    </div>
+    )
+  end
+  
+  def neon_dailydishpanel(opts={},&block)
+    raw %(
+    <div class="col-sm-3">
+     <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
+      	<div class="panel-body" style="margin:0px;padding:0px;">
+       	<article class="album" style="margin-bottom:0px;border-width:0px;">
+       		<header>
+             <a href="javascript:;" onclick="jQuery('#modal-editdailydish-#{opts[:daily_dish].id}').modal('show');">
+               <img src="#{opts[:daily_dish].image.present? ? opts[:daily_dish].image.url(:cropped_default_retina) : "http://placehold.it/400x400"}" />
+       			</a>
+       		</header>
+          	<div class="panel-heading">
+             <input type="hidden" name="dish_ids[#{opts[:daily_dish].id}]" value="">
+          		<div class="panel-title ellipsis">
+               #{opts[:daily_dish].title}
+             </div>
+          	</div>
+       	</article>
+      	</div>
+     </div>
+    </div>
+    )
   end
   
 end

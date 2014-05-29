@@ -44,6 +44,10 @@ Pl8es::Application.routes.draw do
   post "/a/dish/add" => "ajax/dish#adddish"
   post "/a/dish/edit" => "ajax/dish#editdish"
   post "/a/dish/sort" => "ajax/dish#sortdish"
+
+  resources :ajax_dish, :only => []
+  post "/a/dailydish/add" => "ajax/daily_dish#adddailydish"
+  post "/a/dailydish/edit" => "ajax/daily_dish#editdailydish"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"
@@ -75,5 +79,6 @@ Pl8es::Application.routes.draw do
   
   resources :dailycious, :only => []
   get "/dailycious" => "dailycious#index"
+  get "/dailycious/week/:add_weeks" => "dailycious#index"
   
 end

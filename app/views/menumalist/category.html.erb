@@ -36,8 +36,7 @@
       <%= form_tag({:controller => "ajax/dish", :action => "sortdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
       <span class="sorted ui-sortable">
         <% @navigation.dishes.each do |dish| %>
-		    <%=neon_dishpanel :dish => dish %>
-        <% end %>
+		    <%=neon_dishpanel :dish => dish %><% end %>
       </span>
       <% end %>
       <% if @navigation.level == 0 && @navigation.dishes.count == 0 %>

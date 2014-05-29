@@ -752,6 +752,9 @@ var public_vars = public_vars || {};
 						endDate: attrDefault($this, 'endDate', ''),
 						daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
 						startView: attrDefault($this, 'startView', 0),
+            weekStart: attrDefault($this, 'weekstart', 1),
+            viewMode: "days",
+            minViewMode: "days",
 						rtl: rtl()
 					},
 					$n = $this.next(),
