@@ -71,15 +71,16 @@
      		<div class="row">
      			<div class="col-sm-offset-2 col-sm-10">
      				<ul class="user-details">
+              <% if @user.categories.count >= 1 %>
      					<li>
-     						Prishtina
+                <%=@user.categories.first.title %>
      					</li>
+              <% end %>
+              <% if @user.categories.count == 2 %>
      					<li>
-     						Prishtina
+                <%=@user.categories.last.title %>
      					</li>
-     					<li>
-     						Prishtina
-     					</li>
+              <% end %>
      				</ul>
      			</div>
      		</div>

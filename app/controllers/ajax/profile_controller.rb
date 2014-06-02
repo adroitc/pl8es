@@ -19,7 +19,7 @@ class Ajax::ProfileController < ApplicationController
   end
   
   def editdescription
-    if User.loggedIn(session) && !params.values_at(:name, :description).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:name, :description, :categories).include?(nil)
       @user = User.find(session[:user_id])
       
       @user.attributes = params.permit(:logo_image, :restaurant_image, :name)
@@ -34,6 +34,14 @@ class Ajax::ProfileController < ApplicationController
       end
       
       I18n.locale = current_locale
+      
+      @user.categories = []
+      params[:categories].each_with_index do |category, i|
+        break if i >= 2;
+        if Category.exists?(category[1].to_i)
+          @user.categories.push(Category.find(category[1].to_i))
+        end
+      end
       
       if params[:logo_image]
         if @user.logo_image_dimensions["original"][1] >= @user.logo_image_dimensions["original"][0]

@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editdescription", :width => "678px", :title => "Edit description", :languages => @user.menu_languages, :default_language => @user.default_language do |m| %>
-<%= form_tag({:controller => "ajax/profile", :action => "editdescription"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
+<%= form_tag({:controller => "ajax/profile", :action => "editdescription"}, {:multipart => true, :role => "form", :class_ => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
@@ -30,20 +30,20 @@
       %>
     </div>
     <div class="col-sm-12 form-group" style="padding:0px;">
-      <label for="form-category[0]" class="control-label"><strong>Primary category</strong></label>
-	    <select name="category[0]" id="form-category[0]" class="select2" data-allow-clear="true" data-placeholder="Select default language">
+      <label for="form-categories[0]" class="control-label"><strong>Primary category</strong></label>
+	    <select name="categories[0]" id="form-categories[0]" class="select2" data-allow-clear="true" data-placeholder="Select default language">
         <option></option>
         <% Category.all.each do |category| %>
-	    	<option value="<%=category.id %>" <%="selected" if @user.categories.exists?(category) %>><%=category.title %></option>
+	    	<option value="<%=category.id %>" <%="selected" if @user.categories.count >= 1 && @user.categories.first == category %>><%=category.title %></option>
         <% end %>
 	    </select>
     </div>
     <div class="col-sm-12 form-group" style="padding:0px;">
-      <label for="form-category[1]" class="control-label"><strong>Secondary category</strong></label>
-	    <select name="category[1]" id="form-category[1]" class="select2" data-allow-clear="true" data-placeholder="Select default language">
+      <label for="form-categories[1]" class="control-label"><strong>Secondary category</strong></label>
+	    <select name="categories[1]" id="form-categories[1]" class="select2" data-allow-clear="true" data-placeholder="Select default language">
         <option></option>
         <% Category.all.each do |category| %>
-	    	<option value="<%=category.id %>" <%="selected" if @user.categories.exists?(category) %>><%=category.title %></option>
+	    	<option value="<%=category.id %>" <%="selected" if @user.categories.count == 2 && @user.categories.last == category %>><%=category.title %></option>
         <% end %>
 	    </select>
     </div>
