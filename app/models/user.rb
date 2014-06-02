@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
   belongs_to :menuColorTemplate
   has_one :menuColor
   belongs_to :supportedFont
+  
   translates :description
+  
   validates :email, :uniqueness => true
   
   has_attached_file :logo_image, {
