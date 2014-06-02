@@ -134,7 +134,7 @@ class Ajax::AdminController < ApplicationController
         bev_background_active: params[:bar_background],
         bev_text: params[:bar_background],
         bev_text_selected: params[:nav_text],
-        bev_text_active: params[:bar_background],
+        bev_text_active: params[:nav_text],
         
         nav_background: params[:bar_background],
         nav_background_selected: params[:bar_background],
@@ -169,7 +169,7 @@ class Ajax::AdminController < ApplicationController
           bev_background_active: params[:bar_background],
           bev_text: params[:bar_background],
           bev_text_selected: params[:nav_text],
-          bev_text_active: params[:bar_background],
+          bev_text_active: params[:nav_text],
           
           nav_background: params[:bar_background],
           nav_background_selected: params[:bar_background],
