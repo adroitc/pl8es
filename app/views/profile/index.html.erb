@@ -14,71 +14,78 @@
         <strong>Restaurant</strong>
       </li>
     </ol>
-  <div class="profile-env">
-   	<header class="row" style="height:100px;">
-   		<div class="col-sm-2">
-   			<img src="<%=@user.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
-   		</div>
-   		<div class="col-sm-8">
-   			<ul class="profile-info-sections">
-   				<li>
-   					<div class="profile-name">
-   						<strong style="color:#000">
-   							<%=@user.name %>
-              </strong>
-   						<span>
-   							<%=@user.email %>
-   						</span>
-   					</div>
-   				</li>
-   				<li>
-   					<div class="profile-stat">
-   						<h3><%=@user.menus.count %></h3>
-   						<span><a href="<%=url_for :controller => "menumalist", :action => "index" %>">Menus</a></span>
-   					</div>
-   				</li>
-   				<li>
-   					<div class="profile-stat">
-   						<h3><%=@user.dishes.count %></h3>
-   						<span>Dishes</span>
-   					</div>
-   				</li>
-   			</ul>
-   		</div>
-      <div class="col-sm-2">
-        <div class="profile-buttons">
-        	<a href="javascript:;" onclick="jQuery('#modal-editprofile').modal('show');" class="btn btn-default">
-        		<i class="entypo-brush"></i>
-        		Edit
-        	</a>
+    <div class="profile-env">
+     	<header class="row" style="height:100px;">
+     		<div class="col-sm-2">
+     			<img src="<%=@user.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
+     		</div>
+     		<div class="col-sm-10">
+     			<ul class="profile-info-sections">
+     				<li>
+     					<div class="profile-name">
+     						<strong style="color:#000">
+     							<%=@user.name %>
+                </strong>
+     						<span>
+     							<%=@user.email %>
+     						</span>
+     					</div>
+     				</li>
+     				<li>
+     					<div class="profile-stat">
+     						<h3><%=@user.menus.count %></h3>
+     						<span><a href="<%=url_for :controller => "menumalist", :action => "index" %>">Menus</a></span>
+     					</div>
+     				</li>
+     				<li>
+     					<div class="profile-stat">
+     						<h3><%=@user.dishes.count %></h3>
+     						<span>Dishes</span>
+     					</div>
+     				</li>
+     			</ul>
+     		</div>
+     	</header>
+      <div class="row">
+          <div class="col-sm-12">
+            <div class="profile-buttons">
+            	<a href="javascript:;" onclick="jQuery('#modal-editsettings').modal('show');" class="btn btn-default">
+            		<i class="entypo-cog"></i>
+            		Account settings
+            	</a>
+            	<a href="javascript:;" onclick="jQuery('#modal-editdescription').modal('show');" class="btn btn-default">
+            		<i class="entypo-brush"></i>
+            		Restaurant description
+            	</a>
+            </div>
+          </div>
         </div>
-      </div>
-   	</header>
-   	<header class="row" style="margin-bottom:60px;">
-   		<img src="<%=@user.restaurant_image.url(:cropped_default_retina) %>" alt="" class="col-sm-offset-3 col-sm-6" />
-   		<div class="col-sm-offset-3 col-sm-6">
-        <br />
-        testetfdgv
-   		</div>
-   	</header>
-   	<section class="profile-info-tabs">
-   		<div class="row">
-   			<div class="col-sm-offset-2 col-sm-10">
-   				<ul class="user-details">
-   					<li>
-   						Prishtina
-   					</li>
-   					<li>
-   						Prishtina
-   					</li>
-   					<li>
-   						Prishtina
-   					</li>
-   				</ul>
-   			</div>
-   		</div>
-   	</section>
-   </div>
+     	<header class="row" style="margin-bottom:60px;">
+     		<img src="<%=@user.restaurant_image.url(:cropped_default_retina) %>" alt="" class="col-sm-4" />
+     		<div class="col-sm-8">
+          <br />
+          <%=@user.description %>
+     		</div>
+     	</header>
+     	<section class="profile-info-tabs">
+     		<div class="row">
+     			<div class="col-sm-offset-2 col-sm-10">
+     				<ul class="user-details">
+     					<li>
+     						Prishtina
+     					</li>
+     					<li>
+     						Prishtina
+     					</li>
+     					<li>
+     						Prishtina
+     					</li>
+     				</ul>
+     			</div>
+     		</div>
+     	</section>
+    </div>
   </div>
 </div>
-<%=render :partial => "modal_editprofile" %>
+<%=render :partial => "modal_editsettings" %>
+<%=render :partial => "modal_editdescription" %>

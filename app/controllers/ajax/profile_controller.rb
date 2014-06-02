@@ -1,10 +1,39 @@
 class Ajax::ProfileController < ApplicationController
   
-  def edit
-    if User.loggedIn(session) && !params.values_at(:name, :email, :address, :zip, :city, :country).include?(nil)
+  def editsettings
+    if User.loggedIn(session) && !params.values_at(:default_language, :email, :address, :zip, :city, :country).include?(nil)
       @user = User.find(session[:user_id])
       
-      @user.attributes = params.permit(:logo_image, :restaurant_image, :name, :email, :address, :zip, :city, :country, :website, :telephone)
+      @user.attributes = params.permit(:email, :address, :zip, :city, :country, :website, :telephone)
+      
+      if Language.exists?(params[:default_language])
+        @user.default_language = Language.find(params[:default_language])
+      end
+      
+      @user.save
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def editdescription
+    if User.loggedIn(session) && !params.values_at(:name, :description).include?(nil)
+      @user = User.find(session[:user_id])
+      
+      @user.attributes = params.permit(:logo_image, :restaurant_image, :name)
+      
+      languages = Language.find_all_by_locale(params[:description].keys)
+      
+      current_locale = I18n.locale
+      
+      languages.each do |language|
+        I18n.locale = language.locale
+        @user.description = params[:description][language.locale]
+      end
+      
+      I18n.locale = current_locale
       
       if params[:logo_image]
         if @user.logo_image_dimensions["original"][1] >= @user.logo_image_dimensions["original"][0]

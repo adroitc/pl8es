@@ -25,7 +25,8 @@ Pl8es::Application.routes.draw do
   post "/a/menucolortemplate/edit" => "ajax/admin#editmenucolortemplate"
   
   resources :ajax_profile, :only => []
-  post "/a/profile/edit" => "ajax/profile#edit"
+  post "/a/profile/editsettings" => "ajax/profile#editsettings"
+  post "/a/profile/editdescription" => "ajax/profile#editdescription"
   
   resources :ajax_menu, :only => []
   post "/a/menu/add" => "ajax/menu#addmenu"

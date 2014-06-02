@@ -1,0 +1,42 @@
+<%= neon_modal :id => "editdescription", :width => "678px", :title => "Edit description", :languages => @user.menu_languages, :default_language => @user.default_language do |m| %>
+<%= form_tag({:controller => "ajax/profile", :action => "editdescription"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-sm-6 hidden-xs">
+		<h4 class="margin-top-none">Upload Logo</h4>
+    <%=neon_imagecrop :image => @user.logo_image %>
+    
+		<h4 class="margin-top-none">Upload Restaurant image</h4>
+    <%=neon_imagecrop :image => @user.restaurant_image %>
+	</div>
+  <div class="col-sm-6">
+    <div class="col-sm-12 form-group" style="padding:0px;">
+      <label for="form-name" class="control-label"><strong>Restaurant name</strong></label>
+	    <input name="name" type="text" class="form-control" id="form-name" placeholder="Restaurant name" data-validate="maxlength[28]" value="<%=@user.name %>" required>
+    </div>
+    <div class="col-sm-12 form-group tab-content" style="padding:0px;">
+      <%
+      current_locale = I18n.locale
+      @user.menu_languages.each do |language|
+        I18n.locale = language.locale
+      %>
+      <span class="tab-pane <%="active" if language == @user.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
+        <label for="form-name" class="control-label"><strong>Restaurant description</strong> - <%=language.title.capitalize %><%=" (Default)" if @user.default_language == language %></label>
+	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Restaurant description" data-validate="maxlength[250]" <%="required" if language == @user.default_language %>><%=@user.description %></textarea>
+      </span>
+      <%
+      end
+      I18n.locale = current_locale
+      %>
+    </div>
+  </div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-success">
+	Save
+</button>
+<% end %>
+<% end %>
+<% end %>

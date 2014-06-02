@@ -106,4 +106,16 @@ class User < ActiveRecord::Base
 		return false
 	end
   
+  def menu_languages
+    menu_languages = []
+    menus.each do |menu|
+      menu.languages.each do |menu_language|
+        if menu_languages.select{|language| language[:locale] == menu_language.locale}.count == 0
+          menu_languages.push(menu_language)
+        end
+      end
+    end
+    return menu_languages.sort_by {|k| k[:id]}
+  end
+  
 end

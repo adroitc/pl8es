@@ -9,6 +9,7 @@ module NeonHelper
       <ul class="nav nav-tabs" style="margin-top:-10px;">
       )
       opts[:languages].each do |language|
+        set_active = (language == opts[:default_language]) || (opts[:default_language] == nil && language == opts[:languages].first)
         output_languages += raw %(
   			<li class="#{"active" if language == opts[:default_language]}">
           <a href="#modal-#{opts[:id]}-lang-#{language.locale}" data-toggle="tab">
@@ -23,7 +24,7 @@ module NeonHelper
     end
     raw %(
     <div class="modal fade in" id="modal-#{opts[:id]}">
-    	<div class="modal-dialog" style="#{width}">
+    	<div class="modal-dialog" style="margin-bottom:60px;#{width}">
     		<div class="modal-content">
     			 <div class="modal-header">
     			 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
