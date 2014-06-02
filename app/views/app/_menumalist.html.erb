@@ -115,7 +115,9 @@ raw(Jsonify::Builder.plain do |j|
   end
   
   j.daily_dishes(@user.daily_dishes.where("display_date BETWEEN ? AND ?", Date.today.to_datetime, (Date.today+7).to_datetime)) do |daily_dish|
+    j.id                         daily_dish.id
     j.display_date               Date.today.strftime("%d-%m-%Y")
+    j.image_fingerprint          daily_dish.image_fingerprint
     j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
     j.title                      daily_dish.title
     j.price                      daily_dish.price
