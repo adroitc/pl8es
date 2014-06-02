@@ -97,27 +97,35 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true, :length => {
     :maximum => 28
   }
+  
   validates :name, :length => {
     :maximum => 28
   }
+  
   validates :description, :length => {
     :maximum => 250
   }
+  
   validates :address, :length => {
     :maximum => 28
   }
+  
   validates :zip, :length => {
     :maximum => 28
   }
+  
   validates :city, :length => {
     :maximum => 28
   }
+  
   validates :country, :length => {
     :maximum => 28
   }
+  
   validates :website, :length => {
     :maximum => 28
   }
+  
   validates :telephone, :length => {
     :maximum => 28
   }
