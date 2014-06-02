@@ -6,7 +6,7 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
-			<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>">
+			<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>" data-validate="maxlength[28]" required>
 		</div>
 	</div>
 </div>
