@@ -7,15 +7,10 @@ class User < ActiveRecord::Base
   has_many :menus
   has_many :dishes
   has_many :daily_dishes
-  
   belongs_to :menuColorTemplate
-  
   has_one :menuColor
-  
   belongs_to :supportedFont
-  
   translates :description
-  
   validates :email, :uniqueness => true
   
   has_attached_file :logo_image, {
