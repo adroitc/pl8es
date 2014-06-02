@@ -63,7 +63,7 @@
 <div class="row" style="margin-bottom:14px;">
 	<div class="col-md-12">
 		<label for="form-languages" class="control-label">Select default language</label>
-    </br>
+    <br />
 	  <select name="default_language" id="form-default_language" class="col-md-4 select2" data-allow-clear="false" data-placeholder="Select default language" style="padding:0px;">
       <% Language.all.each do |language| %>
 	  	<option value="<%=language.id %>" <%="selected" if menu.default_language == language %>><%=language.title.capitalize %></option>
