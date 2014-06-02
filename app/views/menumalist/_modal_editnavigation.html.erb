@@ -11,33 +11,31 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6">
-		<div class="tab-content">
-      <%
-      current_locale = I18n.locale
-      navigation.menu.languages.each do |language|
-        I18n.locale = language.locale
-      %>
-      <div class="tab-pane <%="active" if navigation.menu.default_language == language %> form-group" id="modal-editnavigation-<%=navigation.id %>-lang-<%=language.locale %>">
-        <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=navigation.title %>" data-validate="maxlength[28]" <%="required" if navigation.menu.default_language == language %>>
+	<div class="col-sm-6 tab-content">
+    <%
+    current_locale = I18n.locale
+    navigation.menu.languages.each do |language|
+      I18n.locale = language.locale
+    %>
+    <div class="tab-pane <%="active" if navigation.menu.default_language == language %> form-group" id="modal-editnavigation-<%=navigation.id %>-lang-<%=language.locale %>">
+      <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
+		  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=navigation.title %>" data-validate="maxlength[28]" <%="required" if navigation.menu.default_language == language %>>
+    </div>
+    <%
+    end
+    I18n.locale = current_locale
+    %>
+    <label class="control-label"><strong><%=t("menumalist.navigation_design") %></strong></label>
+    <div class="row">
+      <div class="col-sm-6">
+        <input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default" <%="checked" if navigation.style == "default" %>>
+        <label for="form-style-1">default</label>
       </div>
-      <%
-      end
-      I18n.locale = current_locale
-      %>
-      <label class="control-label"><strong><%=t("menumalist.navigation_design") %></strong></label>
-      <div class="row">
-        <div class="col-sm-6">
-          <input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default" <%="checked" if navigation.style == "default" %>>
-          <label for="form-style-1">default</label>
+      <div class="col-sm-6">
+        <input class="icheck-2-radio" type="radio" id="form-style-2" name="style" value="grid" <%="checked" if navigation.style == "grid" %>>
+        <label for="form-style-2">grid</label>
         </div>
-        <div class="col-sm-6">
-          <input class="icheck-2-radio" type="radio" id="form-style-2" name="style" value="grid" <%="checked" if navigation.style == "grid" %>>
-          <label for="form-style-2">grid</label>
-          </div>
-      </div>
-		</div>
+    </div>
 	</div>
 </div>
 <% end %>

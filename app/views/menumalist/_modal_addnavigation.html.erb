@@ -8,35 +8,33 @@
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
 		<h4 class="margin-top-none"><%=t("menumalist.navigation_upload_image") %></h4>
-		<%=neon_imageinput :instance_class => Navigation, :name => :image %>
+    <%=render :partial => "neon/image_upload", :locals => {:instance_class => Navigation, :name => :image} %>
 	</div>
-	<div class="col-sm-6">
-		<div class="tab-content">
-      <%
-      current_locale = I18n.locale
-      menu.languages.each do |language|
-        I18n.locale = language.locale
-      %>
-      <div class="tab-pane <%="active" if menu.default_language == language %> form-group" id="modal-addnavigation-lang-<%=language.locale %>">
-        <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></label>
-			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[28]" <%="required" if menu.default_language == language %>>
+	<div class="col-sm-6 tab-content">
+    <%
+    current_locale = I18n.locale
+    menu.languages.each do |language|
+      I18n.locale = language.locale
+    %>
+    <div class="tab-pane <%="active" if menu.default_language == language %> form-group" id="modal-addnavigation-lang-<%=language.locale %>">
+      <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></label>
+		  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[28]" <%="required" if menu.default_language == language %>>
+    </div>
+    <%
+    end
+    I18n.locale = current_locale
+    %>
+    <label class="control-label"><strong><%=t("menumalist.navigation_design") %></strong></label>
+    <div class="row">
+      <div class="col-sm-6">
+        <input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default" checked>
+        <label for="form-style-1">default</label>
       </div>
-      <%
-      end
-      I18n.locale = current_locale
-      %>
-      <label class="control-label"><strong><%=t("menumalist.navigation_design") %></strong></label>
-      <div class="row">
-        <div class="col-sm-6">
-          <input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default" checked>
-          <label for="form-style-1">default</label>
-        </div>
-        <div class="col-sm-6">
-          <input class="icheck-2-radio" type="radio" id="form-style-2" name="style" value="grid">
-          <label for="form-style-2">grid</label>
-        </div>
+      <div class="col-sm-6">
+        <input class="icheck-2-radio" type="radio" id="form-style-2" name="style" value="grid">
+        <label for="form-style-2">grid</label>
       </div>
-		</div>
+    </div>
 	</div>
 </div>
 <% end %>

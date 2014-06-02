@@ -7,33 +7,31 @@
 		<h4 class="margin-top-none"><%=t("menumalist.dish_upload_image") %></h4>
 		<%=neon_imageinput :instance_class => Dish, :name => :image %>
 	</div>
-	<div class="col-sm-6">
-		<div class="tab-content">
-      <%
-      current_locale = I18n.locale
-      navigation.menu.languages.each do |language|
-        I18n.locale = language.locale
-      %>
-      <div class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-adddish-lang-<%=language.locale %>">
-			  <div class="col-md-12 form-group">
-          <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
-			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="maxlength[28]" <%="required" if navigation.menu.default_language == language %>>
-			  </div>
-			  <div class="col-md-12 form-group">
-          <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_description") %><% I18n.locale = language.locale %></strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[700]" <%="required" if navigation.menu.default_language == language %> style="height:134px;"></textarea>
-			  </div>
-			  <div class="col-md-12 form-group">
-          <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>
-			    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="number,maxlength[7]" <%="required" if navigation.menu.default_language == language %>>
-			  </div>
-      </div>
-      <%
-      end
-      I18n.locale = current_locale
-      %>
-		</div>
-	</div>
+	<div class="col-sm-6 tab-content">
+    <%
+    current_locale = I18n.locale
+    navigation.menu.languages.each do |language|
+      I18n.locale = language.locale
+    %>
+    <span class="tab-pane <%="active" if navigation.menu.default_language == language %>" id="modal-adddish-lang-<%=language.locale %>">
+		  <div class="col-md-12 form-group">
+        <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if navigation.menu.default_language == language %></label>
+		    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="maxlength[28]" <%="required" if navigation.menu.default_language == language %>>
+		  </div>
+		  <div class="col-md-12 form-group">
+        <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_description") %><% I18n.locale = language.locale %></strong></label>
+		    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[700]" <%="required" if navigation.menu.default_language == language %> style="height:134px;"></textarea>
+		  </div>
+		  <div class="col-md-12 form-group">
+        <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>
+		    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="number,maxlength[7]" <%="required" if navigation.menu.default_language == language %>>
+		  </div>
+    </span>
+    <%
+    end
+    I18n.locale = current_locale
+    %>
+  </div>
 </div>
 <% end %>
 <%=neon_modal_footer do |b| %>
