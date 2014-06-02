@@ -62,7 +62,7 @@ module NeonHelper
 			<span class="btn btn-info btn-file">
 				<span class="fileinput-new">#{opts[:different] ? t("neon.image_input_select_different") : t("neon.image_input_select")}</span>
 				<span class="fileinput-exists">#{t("neon.image_input_change")}</span>
-				<input type="file" name="#{opts[:name].to_s}" accept="image/*" data-imgvalidation="#{image_min_size[:width].to_s+"x"+image_min_size[:height].to_s if opts[:instance_class]}" required>
+				<input type="file" name="#{opts[:name].to_s}" accept="image/*" data-validate="filedimension" data-imgvalidation="#{image_min_size[:width].to_s+"x"+image_min_size[:height].to_s if opts[:instance_class]}" #{"required" if !opts[:different]}>
 			</span>
 			<span class="fileinput-filename"></span>
 			<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>

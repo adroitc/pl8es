@@ -22,6 +22,7 @@ var public_vars = public_vars || {};
 		public_vars.$mainContent	= public_vars.$pageContainer.find('.main-content');
 		public_vars.$sidebarUserEnv = public_vars.$sidebarMenu.find('.sidebar-user-info');
 		public_vars.$sidebarUser 	= public_vars.$sidebarUserEnv.find('.user-link');
+    public_vars.$form_validations = {};
 		
 		
 		public_vars.$body.addClass('loaded');
@@ -1091,7 +1092,7 @@ var public_vars = public_vars || {};
 							opts['messages'][name] = {};
 						}
 						
-						if($.inArray(rule, ['required', 'url', 'email', 'number', 'date', 'creditcard']) != -1)
+						if($.inArray(rule, ['required', 'url', 'email', 'number', 'date', 'creditcard', 'filedimension']) != -1)
 						{
 							opts['rules'][name][rule] = true;
 							
@@ -1122,7 +1123,7 @@ var public_vars = public_vars || {};
 				});
 				
 				//console.log( opts );
-				$this.validate(opts);
+				public_vars.$form_validations[$this.attr("id")] = $this.validate(opts);
 			});
 		}
 		

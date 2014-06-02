@@ -42,7 +42,7 @@
 //= require "jquery.validate.min"
 //= require "daterangepicker/moment.min"
 //= require "daterangepicker/daterangepicker"
-//= require "jquery.weekpicker"
+//= require "toastr"
 
 //= require "neon-custom"
 // require "neon-demo"
@@ -110,6 +110,14 @@ $(document).ready(function()
     pl8es_f_setupinputchanger($(this));
   });
   
+  jQuery.validator.addMethod("filedimension", function(v,e){
+    if ($(e).val() == null){
+      return false;
+    }
+    return !$(e).data("file-size-error");
+  }, "Image is too small.");
+  
+  /*
   $("input[type='file']").each(function(){
     var file_input = $(this);
     var file_input_name = file_input.attr("name");
@@ -122,28 +130,72 @@ $(document).ready(function()
           var dim = file_input.attr("data-imgvalidation").split("x");
           if (this.width < dim[0]
               || this.height < dim[1]){
-            file_input.attr("name","").closest(".form-group").append("<span class=\"validate-has-error\">Image is too small.</span>").addClass("validate-has-error");
-            //alert("too small");
+            file_input.attr("name","_fileerror").closest(".form-group").addClass("validate-has-error-file");
+            file_input.parent().append("<span class=\"validate-has-error-file\">Image is too small.</span>");
+            file_input.parent().find(".validate-has-error").hide();
           }
           else{
-            file_input.closest(".form-group").removeClass("validate-has-error").find("span.validate-has-error").remove();
+            file_input.closest(".form-group").removeClass("validate-has-error-file");
+            file_input.parent().find("span.validate-has-error-file").remove();
+            file_input.parent().find(".validate-has-error").show();
           }
         };
         img.src = _URL.createObjectURL(file);
       }
       else{
-        file_input.closest(".form-group").removeClass("validate-has-error").find("span.validate-has-error").remove();
+        file_input.closest(".form-group").removeClass("validate-has-error-file");
+        file_input.parent().find("span.validate-has-error-file").remove();
+        file_input.parent().find(".validate-has-error").show();
       }
     });
   });
-  $("div.weekpicker").weekpicker();
+  */
+  $("input[type='file']").each(function(){
+    var file_input = $(this);
+    var file_input_name = file_input.attr("name");
+    var _URL = window.URL || window.webkitURL;
+    file_input.change(function(){
+      var file, img;
+      if ((file = this.files[0])) {
+        img = new Image();
+        img.onload = function (){
+          var dim = file_input.attr("data-imgvalidation").split("x");
+          if (this.width < dim[0]
+              || this.height < dim[1]){
+            file_input.data("file-size-error",true);
+            //public_vars.$form_validations[file_input.closest("form").attr("id")].form();
+            /*file_input.closest(".form-group").addClass("validate-has-error-file");
+            file_input.parent().append("<span class=\"validate-has-error-file\">Image is too small.</span>");
+            file_input.parent().find(".validate-has-error").hide();*/
+            //validator.element("input[type='file',name='"+file_input.attr("name")+"']");
+          }
+          else{
+            file_input.data("file-size-error",false);
+            //public_vars.$form_validations[file_input.closest("form").attr("id")].form();
+            /*file_input.closest(".form-group").removeClass("validate-has-error-file");
+            file_input.parent().find("span.validate-has-error-file").remove();
+            file_input.parent().find(".validate-has-error").show();*/
+            //validator.element("input[type='file',name='"+file_input.attr("name")+"']");
+          }
+        };
+        img.src = _URL.createObjectURL(file);
+      }
+      else{
+        file_input.data("file-size-error",false);
+        public_vars.$form_validations[file_input.closest("form").attr("id")].form();
+        /*file_input.closest(".form-group").removeClass("validate-has-error-file");
+        file_input.parent().find("span.validate-has-error-file").remove();
+        file_input.parent().find(".validate-has-error").show();*/
+        //validator.element("input[type='file',name='"+file_input.attr("name")+"']");
+      }
+    });
+  });
 });
 function pl8es_i_ajaxform(f,a)
 {
   var files;
   f.submit(function(e){
     e.preventDefault();
-    console.log(f.validate().errors());
     if (f.hasClass("validate")
         && f.validate().numberOfInvalids() > 0){
       return;
@@ -157,9 +209,9 @@ function pl8es_i_ajaxform(f,a)
       var s2_e = s2.children("ul.select2-choices").children("li.select2-search-choice");
       s2_e.each(function(i){
         d.append(s2_id+"["+i+"]", $.trim($(this).text()));
-        //d = d+"&"+s2_id+"["+i+"]="+$(this).text();
       });
     }
+    console.log(d);
     pl8es_i_ajax(f.attr("action"),d,function(r){
       a(r);
     });
@@ -181,12 +233,21 @@ function pl8es_i_ajax(u,d,s)
         processData: false,
     		error: function(e,r,t)
     		{
-    			alert("An error occoured!");
-          /*
-          console.log(e);
-          console.log(r);
-          console.log(t);
-          */
+          var opts = {
+          	"closeButton": true,
+          	"debug": false,
+          	"positionClass": "toast-top-right",
+          	"onclick": null,
+          	"showDuration": "100",
+          	"hideDuration": "100",
+          	"timeOut": "2000",
+          	"extendedTimeOut": "1000",
+          	"showEasing": "swing",
+          	"hideEasing": "linear",
+          	"showMethod": "fadeIn",
+          	"hideMethod": "fadeOut"
+          };
+          toastr.error("The administrator was contacted.", "An error occured", opts);
     		},
     		success: function(response)
     		{
