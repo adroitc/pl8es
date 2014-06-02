@@ -13,8 +13,6 @@ class User < ActiveRecord::Base
   
   translates :description
   
-  validates :email, :uniqueness => true
-  
   has_attached_file :logo_image, {
     :styles => {
       :original_cropping => {
@@ -95,6 +93,8 @@ class User < ActiveRecord::Base
     :width => 2048,
     :height => 1536
   }
+  
+  validates :email, :uniqueness => true
   
 	def self.loggedIn(session)
 		if session[:user_id] && User.exists?(id: session[:user_id])
