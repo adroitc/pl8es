@@ -5,12 +5,11 @@
   <div class="col-sm-12">
     <div class="row col-sm-12 form-group" style="padding:0px;">
       <label for="form-email" class="col-sm-12 control-label"><strong>Default language</strong></label>
-      <% Language.all.each do |language| %>
-      <div class="col-sm-3">
-        <input class="icheck-2-radio" type="radio" id="form-default_language-<%=language.id %>" name="default_language" value="<%=language.id %>" <%="checked" if @user.default_language == language %>>
-        <label for="form-default_language-<%=language.id %>"><%=language.title.capitalize %></label>
-      </div>
-      <% end %>
+  	  <select name="default_language" id="form-default_language" class="col-md-4 select2" data-allow-clear="false" data-placeholder="Select default language">
+        <% Language.all.each do |language| %>
+  	  	<option value="<%=language.id %>" <%="selected" if @user.default_language == language %>><%=language.title.capitalize %></option>
+        <% end %>
+  	  </select>
     </div>
     <div class="col-sm-12 form-group" style="padding:0px;">
       <label for="form-email" class="control-label"><strong>Email</strong></label>
