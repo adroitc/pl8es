@@ -2,7 +2,6 @@ class Dish < ActiveRecord::Base
   belongs_to :user
   belongs_to :menu
   belongs_to :navigation
-  
   has_many :wines
   belongs_to :dishsuggestion_1, :class_name => "Dish"
   belongs_to :dishsuggestion_2, :class_name => "Dish"
