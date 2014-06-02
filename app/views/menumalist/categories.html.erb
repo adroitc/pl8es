@@ -22,7 +22,7 @@
       <input type="hidden" name="menu_id" value="<%=@menu.id %>">
       <span class="sorted ui-sortable">
         <% @menu.navigations.find_all_by_level(0).each do |navigation| %>
-        <%=neon_navigationpanel :navigation => navigation %>
+        <%=render :partial => "neon/navigation_panel", :locals => {:navigation => navigation} %>
         <% end %>
       </span>
       <% end %>

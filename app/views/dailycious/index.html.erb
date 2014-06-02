@@ -74,7 +74,7 @@
               </td>
               <td class="row gallery-env draggable-portlets">
                 <% @user.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
-		            <%=neon_dailydishpanel :daily_dish => daily_dish %>
+                <%=render :partial => "neon/daily_dish_panel", :locals => {:daily_dish => daily_dish} %>
                 <% end %>
                 <% if !current_date.past? %>
                 <a href="javascript:;" onclick="jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('<%=current_date.strftime("%d-%m-%Y") %>');" class="col-md-4">

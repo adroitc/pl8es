@@ -1,0 +1,19 @@
+<div class="col-sm-4" style="margin-bottom:17px;">
+  <div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
+   	<div class="panel-body" style="margin:0px;padding:0px;">
+    	<article class="album" style="margin-bottom:0px;border-width:0px;">
+    		<header>
+          <a href="javascript:;" onclick="jQuery('#modal-editdish-<%=dish.id %>').modal('show');">
+            <img src="<%=dish.image.present? ? dish.image.url(:cropped_default_retina) : "http://placehold.it/1680x1120" %>" />
+    			</a>
+    		</header>
+       	<div class="panel-heading">
+          <input type="hidden" name="dish_ids[<%=dish.id %>]" value="">
+       		<div class="panel-title ellipsis">
+            <%=dish.title %>
+          </div>
+       	</div>
+    	</article>
+   	</div>
+  </div>
+</div>
