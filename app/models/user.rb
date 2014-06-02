@@ -94,7 +94,33 @@ class User < ActiveRecord::Base
     :height => 1536
   }
   
-  validates :email, :uniqueness => true
+  validates :email, :uniqueness => true, :length => {
+    :maximum => 28
+  }
+  validates :name, :length => {
+    :maximum => 28
+  }
+  validates :description, :length => {
+    :maximum => 250
+  }
+  validates :address, :length => {
+    :maximum => 28
+  }
+  validates :zip, :length => {
+    :maximum => 28
+  }
+  validates :city, :length => {
+    :maximum => 28
+  }
+  validates :country, :length => {
+    :maximum => 28
+  }
+  validates :website, :length => {
+    :maximum => 28
+  }
+  validates :telephone, :length => {
+    :maximum => 28
+  }
   
 	def self.loggedIn(session)
 		if session[:user_id] && User.exists?(id: session[:user_id])

@@ -21,7 +21,7 @@
         I18n.locale = language.locale
       %>
       <span class="tab-pane <%="active" if language == @user.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
-        <label for="form-name" class="control-label"><strong>Restaurant description</strong> - <%=language.title.capitalize %><%=" (Default)" if @user.default_language == language %></label>
+        <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Restaurant description</strong> - <%=language.title.capitalize %><%=" (Default)" if @user.default_language == language %></label>
 	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Restaurant description" data-validate="maxlength[250]" <%="required" if language == @user.default_language %>><%=@user.description %></textarea>
       </span>
       <%
