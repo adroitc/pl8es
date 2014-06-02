@@ -118,7 +118,7 @@ raw(Jsonify::Builder.plain do |j|
     j.id                         daily_dish.id
     j.display_date               daily_dish.display_date.strftime("%d-%m-%Y")
     j.image_fingerprint          daily_dish.image_fingerprint
-    j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
+    j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_menumalist_retina) : nil
     j.title                      daily_dish.title
     j.price                      daily_dish.price
   end
