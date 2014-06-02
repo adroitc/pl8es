@@ -79,6 +79,6 @@ Pl8es::Application.routes.draw do
   
   resources :dailycious, :only => []
   get "/dailycious" => "dailycious#index"
-  get "/dailycious/week/:add_weeks" => "dailycious#index"
+  get "/dailycious/:add_weeks-week" => "dailycious#index"
   
 end
