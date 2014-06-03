@@ -1,7 +1,6 @@
 class DimensionsValidator < ActiveModel::EachValidator
   
   def validate_each(record, attribute, value)
-    puts "width----------------------------------------"
     if value.queued_for_write[:original]
       dimensions = Paperclip::Geometry.from_file(value.queued_for_write[:original].path)
       width = options[:width]
