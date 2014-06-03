@@ -1,11 +1,11 @@
 <%= neon_modal :id => "addmenu", :width => "678px", :title => t("menumalist.menu_modal_add_title") do |m| %>
-<%= form_tag({:controller => "ajax/menu", :action => "addmenu"}, {:role => "form", :class => "pl8es_c_ajaxform", :id => "form_addmenu"}) do %>
+<%= form_tag({:controller => "ajax/menu", :action => "addmenu"}, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addmenu"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
 			<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
-			<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="">
+			<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="" data-validate="maxlength[28]" required>
 		</div>
 	</div>
 </div>
@@ -82,22 +82,6 @@
       <label for="form-language-<%=language.id %>"><%=language.title.capitalize %></label>
     </div>
     <% end %>
-	</div>
-</div>
-<div class="row" style="margin-bottom:14px;">
-	<div class="col-sm-12">
-		<label class="control-label"><%=t("menumalist.menu_label") %></label>
-    <br />
-    <% MenuLabel.all.each do |menuLabel|%>
-    <div class="col-sm-3">
-      <input class="icheck-2-radio" type="radio" id="form-label-<%=menuLabel.id %>" name="label" value="<%=menuLabel.id %>">
-      <label for="form-label-<%=menuLabel.id %>"><span class="badge badge-primary"><%=menuLabel.title %></span></label>
-    </div>
-    <% end %>
-    <div class="col-sm-3">
-      <input class="icheck-2-radio" type="radio" id="form-label-1" name="label" value="" checked="checked">
-      <label for="form-label-1"><%=t("menumalist.menu_label_none") %></label>
-    </div>
 	</div>
 </div>
 <% end %>

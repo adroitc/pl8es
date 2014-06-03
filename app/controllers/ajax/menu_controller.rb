@@ -1,31 +1,37 @@
 class Ajax::MenuController < ApplicationController
   
   def addmenu
-    if User.loggedIn(session) && !params.values_at(:title, :from_time, :to_time, :default_language, :languages, :label).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:title, :from_time, :to_time, :default_language).include?(nil)
       @user = User.find(session[:user_id])
+      
+      menu = Menu.create(params.permit(:title, :from_time, :to_time))
       
       if Language.exists?(params[:default_language].to_i)
         menu.default_language = Language.find(params[:default_language].to_i)
       end
       
       languages = Array.new
-      params[:languages].each do |language|
-          if Language.exists?(language[0].to_i)
-            languages.push(Language.find(language[0].to_i))
+      if params[:languages]
+        params[:languages].each do |language|
+            if Language.exists?(language[0].to_i)
+              languages.push(Language.find(language[0].to_i))
+          end
         end
       end
-      
-      if !languages.exists?(params[:default_language].to_i)
+      if Language.exists?(params[:default_language].to_i) && !languages.include?(Language.find(params[:default_language].to_i))
         languages.push(Language.find(params[:default_language].to_i))
       end
+      menu.languages = languages
       
-      if MenuLabel.exists?(params[:label]) || params[:label] != ""
+      if MenuLabel.exists?(params[:label]) || (params[:label] && params[:label] != "")
         menuLabel = MenuLabel.find(params[:label])
       else
         menuLabel = nil
       end
+      menu.menuLabel = menuLabel
       
-      menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({menuLabel: menuLabel, languages: languages, default_language: languages.first}))
+      menu.save
+      
       @user.menus.push(menu)
       @user.save
       
@@ -36,7 +42,7 @@ class Ajax::MenuController < ApplicationController
   end
   
   def editmenu
-    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language, :languages, :label).include?(nil)
+    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language).include?(nil)
       @user = User.find(session[:user_id])
       
       if @user.menus.exists?(params[:menu_id])
@@ -47,17 +53,17 @@ class Ajax::MenuController < ApplicationController
         end
         
         languages = Array.new
-        params[:languages].each do |language|
-          if Language.exists?(language[0].to_i)
-            languages.push(Language.find(language[0].to_i))
+        if params[:languages]
+          params[:languages].each do |language|
+            if Language.exists?(language[0].to_i)
+              languages.push(Language.find(language[0].to_i))
+            end
           end
         end
-        menu.languages = languages
-      
-        if !menu.languages.exists?(params[:default_language].to_i)
+        if Language.exists?(params[:default_language].to_i) && !languages.include?(Language.find(params[:default_language].to_i))
           languages.push(Language.find(params[:default_language].to_i))
-          menu.languages = languages
         end
+        menu.languages = languages
         
         if MenuLabel.exists?(params[:label]) || params[:label] != ""
           menuLabel = MenuLabel.find(params[:label])
