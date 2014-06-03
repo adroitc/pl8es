@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529074715) do
+ActiveRecord::Schema.define(version: 20140603093348) do
 
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
@@ -53,6 +53,19 @@ ActiveRecord::Schema.define(version: 20140529074715) do
     t.boolean  "image_crop_processed", default: true
     t.string   "image_fingerprint"
     t.integer  "user_id"
+  end
+
+  create_table "devices", force: true do |t|
+    t.integer  "user_id"
+    t.string   "device_id"
+    t.string   "device_app"
+    t.string   "device_version"
+    t.string   "device_type"
+    t.string   "device_system"
+    t.string   "request_hash"
+    t.datetime "request_update"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "dish_translations", force: true do |t|

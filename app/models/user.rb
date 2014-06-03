@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :menuColorTemplate
   has_one :menuColor
   belongs_to :supportedFont
+  has_many :devices
   
   translates :description
   
