@@ -5,6 +5,7 @@ module NeonHelper
       width = "width:#{opts[:width]};"
     end
     if opts[:languages]
+      opts[:languages] = opts[:languages].sort_by {|k| k[:id]}
       output_languages = raw %(
       <ul class="nav nav-tabs" style="margin-top:-10px;">
       )

@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
         end
       end
     end
-    return menu_languages.sort_by {|k| k[:id]}
+    menu_languages
   end
   
 end
