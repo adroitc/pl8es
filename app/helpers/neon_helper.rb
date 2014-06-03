@@ -28,7 +28,7 @@ module NeonHelper
     	<div class="modal-dialog" style="margin-bottom:20px;#{width}">
     		<div class="modal-content">
     			 <div class="modal-header">
-    			 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    			 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     			 	<h4 class="modal-title" style="display:inline-block;">#{opts[:title]}</h4>
         		#{output_languages}
     			 </div>
