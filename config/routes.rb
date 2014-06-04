@@ -65,7 +65,7 @@ Pl8es::Application.routes.draw do
   resources :logout, :only => []
   #get "/logout" => "logout#index"
   constraints(:subdomain => "login") do
-    get "/logout" => "login#index"
+    get "/logout" => "logout#index"
   end
   
   resources :admin, :only => []
