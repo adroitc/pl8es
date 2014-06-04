@@ -5,37 +5,37 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_current_locale
   
-  helper_method :url_for
-  def url_for(options = {}, *params)
-    
-    subdomain = Rails.application.routes.routes.routes.find_all{|item|
-      item.requirements[:controller] == options[:controller] &&
-      item.requirements[:action] == options[:action]
-    }[0].constraints[:subdomain]
-    
-    if subdomain
-      options[:only_path] = false
-      options[:subdomain] = subdomain
-    end
-      
-    return super(options, *params)
-  end
-  
-  helper_method :redirect_to
-  def redirect_to(options = {}, *params)
-    
-    subdomain = Rails.application.routes.routes.routes.find_all{|item|
-      item.requirements[:controller] == options[:controller] &&
-      item.requirements[:action] == options[:action]
-    }[0].constraints[:subdomain]
-    
-    if subdomain
-      options[:only_path] = false
-      options[:subdomain] = subdomain
-    end
-      
-    return super(options, *params)
-  end
+  #helper_method :url_for
+  #def url_for(options = {}, *params)
+  #  
+  #  subdomain = Rails.application.routes.routes.routes.find_all{|item|
+  #    item.requirements[:controller] == options[:controller] &&
+  #    item.requirements[:action] == options[:action]
+  #  }[0].constraints[:subdomain]
+  #  
+  #  if subdomain
+  #    options[:only_path] = false
+  #    options[:subdomain] = subdomain
+  #  end
+  #    
+  #  return super(options, *params)
+  #end
+  #
+  #helper_method :redirect_to
+  #def redirect_to(options = {}, *params)
+  #  
+  #  subdomain = Rails.application.routes.routes.routes.find_all{|item|
+  #    item.requirements[:controller] == options[:controller] &&
+  #    item.requirements[:action] == options[:action]
+  #  }[0].constraints[:subdomain]
+  #  
+  #  if subdomain
+  #    options[:only_path] = false
+  #    options[:subdomain] = subdomain
+  #  end
+  #    
+  #  return super(options, *params)
+  #end
 
   private
   def set_current_locale
