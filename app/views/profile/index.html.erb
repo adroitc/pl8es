@@ -33,6 +33,12 @@
      				</li>
      				<li>
      					<div class="profile-stat">
+     						<h3><%=@user.devices.count %></h3>
+     						<span>iPads</span>
+     					</div>
+     				</li>
+     				<li>
+     					<div class="profile-stat">
      						<h3><%=@user.menus.count %></h3>
      						<span><a href="<%=url_for :controller => "menumalist", :action => "index" %>">Menus</a></span>
      					</div>
