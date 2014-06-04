@@ -39,6 +39,8 @@ class AppController < ApplicationController
       
       render :json => request_partial
       return
+    elsif User.find_by_download_code(params[:user_download_code])
+      render :partial => "menumalist"
     end
     
     render :json => {:status => "invalid"}
