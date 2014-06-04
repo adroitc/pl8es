@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     
     subdomain = Rails.application.routes.routes.routes.find_all{|item|
       item.requirements[:controller] == options[:controller] &&
-      item.requirements[:action] == options[:index]
+      item.requirements[:action] == options[:action]
     }[0].constraints[:subdomain]
     
     options[:only_path] = false
