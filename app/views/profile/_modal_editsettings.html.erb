@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editsettings", :width => "678px", :title => "Edit settings" do |m| %>
-<%= form_tag({:controller => "ajax/profile", :action => "editsettings"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
+<%= form_tag({:controller => "ajax/profile", :action => "editsettings"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "editsettings"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
   <div class="col-sm-12">
@@ -17,7 +17,7 @@
     </div>
     <div class="col-sm-12 form-group" style="padding:0px;">
       <label for="form-address" class="control-label"><strong>Address</strong></label>
-	    <input name="address" type="text" class="form-control" id="form-address" placeholder="Address" data-validate="maxlength[28]" value="<%=@user.address %>" required>
+	    <input name="address" type="text" class="form-control" id="form-address" placeholder="Address" data-validate="validaddress" value="<%=@user.address %>" required>
     </div>
     <div class="col-sm-4 form-group" style="padding-left:0px;">
       <label for="form-zip" class="control-label"><strong>Zip code</strong></label>

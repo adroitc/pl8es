@@ -117,6 +117,13 @@ $(document).ready(function()
     return !$(e).data("file-size-error");
   }, "Image is too small.");
   
+  jQuery.validator.addMethod("validaddress", function(v,e){
+    if ($(e).val() == null){
+      return false;
+    }
+    return !$(e).data("validaddress-error");
+  }, "Please use a valid address.");
+  
   /*
   $("input[type='file']").each(function(){
     var file_input = $(this);
@@ -196,10 +203,21 @@ function pl8es_i_ajaxform(f,a)
   var files;
   f.submit(function(e){
     e.preventDefault();
-    if (f.hasClass("validate")
-        && f.validate().numberOfInvalids() > 0){
-      return;
+    
+    function submit_ajax(){
+      pl8es_i_ajax(f.attr("action"),d,function(r){
+        a(r);
+      });
     }
+    
+    public_vars.$form_validations[f.attr("id")].form();
+    /*if (f.hasClass("validate")
+        && !f.valid()
+        //&& public_vars.$form_validations[f.attr("id")].numberOfInvalids() > 0
+    ){
+      alert("submit-A-"+f.attr("action")+"-"+f.valid());
+      return;
+    }*/
     var d = f.serialize();
     var s2 = f.find("div.select2");
     d = new FormData(f[0]);
@@ -211,10 +229,27 @@ function pl8es_i_ajaxform(f,a)
         d.append(s2_id+"["+i+"]", $.trim($(this).text()));
       });
     }
-    console.log(d);
-    pl8es_i_ajax(f.attr("action"),d,function(r){
-      a(r);
-    });
+    if (f.find("input[data-validate~='validaddress']").size() > 0){
+      function addr_inputval(n){
+        return $(f).find("input[name='"+n+"']").val().replace(" ","+")+",";
+      }
+      google_url = "http://maps.googleapis.com/maps/api/geocode/json?address="+addr_inputval("address")+addr_inputval("zip")+addr_inputval("city")+addr_inputval("country")+"&sensor=true&language=en"
+      pl8es_i_ajax(google_url,null,function(r){
+        if (r["results"].length == 1 &&
+            r["results"][0]["geometry"]["location_type"] == "ROOFTOP"){
+          f.find("input[name='address']").data("validaddress-error",false);
+          f.valid();
+          submit_ajax();
+        }
+        else{
+          f.find("input[name='address']").data("validaddress-error",true);
+          f.valid();
+        }
+      });
+    }
+    else{
+      submit_ajax();
+    }
   });
 }
 function pl8es_i_ajax(u,d,s)
@@ -224,9 +259,13 @@ function pl8es_i_ajax(u,d,s)
   	delay: 0.4,
 		finish: function()
 		{
+      method = "POST";
+      if (d == null){
+        method = "GET";
+      }
     	$.ajax({
     		url: u,
-    		method: "POST",
+    		method: method,
     		dataType: "json",
     		data: d,
         contentType: false,

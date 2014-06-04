@@ -4,16 +4,40 @@ class Ajax::ProfileController < ApplicationController
     if User.loggedIn(session) && !params.values_at(:default_language, :email, :address, :zip, :city, :country).include?(nil)
       @user = User.find(session[:user_id])
       
-      @user.attributes = params.permit(:email, :address, :zip, :city, :country, :website, :telephone)
-      
-      if Language.exists?(params[:default_language])
-        @user.default_language = Language.find(params[:default_language])
+      google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
+      google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
+      google_req = Net::HTTP::Get.new(google_url.request_uri)
+      google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
+        http.request(google_req)
+      }
+      google_results = JSON.parse(google_res.body)["results"]
+      if google_results.count == 1
+        params[:address] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["route"]
+        }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["street_number"]
+        }[0]["long_name"]
+        params[:zip] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["postal_code"]
+        }[0]["long_name"]
+        params[:city] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["locality", "political"]
+        }[0]["long_name"]
+        params[:country] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["country", "political"]
+        }[0]["long_name"]
+        
+        @user.attributes = params.permit(:email, :address, :zip, :city, :country, :website, :telephone)
+        
+        if Language.exists?(params[:default_language])
+          @user.default_language = Language.find(params[:default_language])
+        end
+        
+        @user.save
+        
+        render :json => {:status => "success"}
+        return
       end
-      
-      @user.save
-      
-      render :json => {:status => "success"}
-      return
     end
     render :json => {:status => "invalid"}
   end

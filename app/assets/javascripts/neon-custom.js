@@ -1092,7 +1092,7 @@ var public_vars = public_vars || {};
 							opts['messages'][name] = {};
 						}
 						
-						if($.inArray(rule, ['required', 'url', 'email', 'number', 'date', 'creditcard', 'filedimension']) != -1)
+						if($.inArray(rule, ['required', 'url', 'email', 'number', 'date', 'creditcard', 'filedimension', 'validaddress']) != -1)
 						{
 							opts['rules'][name][rule] = true;
 							
@@ -1122,7 +1122,6 @@ var public_vars = public_vars || {};
 					}
 				});
 				
-				//console.log( opts );
 				public_vars.$form_validations[$this.attr("id")] = $this.validate(opts);
 			});
 		}
