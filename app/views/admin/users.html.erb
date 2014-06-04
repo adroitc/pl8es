@@ -26,6 +26,7 @@
             <tr>
               <th width="40%">User</th>
               <th width="">Email</th>
+              <th width="">Devices</th>
               <th width="">Menus</th>
               <th width="">Dishes</th>
             </tr>
@@ -40,6 +41,9 @@
               </td>
               <td>
                 <%=user.email %>
+              </td>
+              <td>
+                <%=user.devices.count %>
               </td>
               <td>
                 <%=user.menus.count %>
