@@ -51,13 +51,22 @@ Pl8es::Application.routes.draw do
   post "/a/dailydish/edit" => "ajax/daily_dish#editdailydish"
   
   resources :signup, :only => []
-  get "/signup" => "signup#index"
+  #get "/signup" => "signup#index"
+  constraints(:subdomain => "login") do
+    get "/" => "signup#index"
+  end
   
   resources :login, :only => []
-  get "/login" => "login#index"
+  #get "/login" => "login#index"
+  constraints(:subdomain => "login") do
+    get "/" => "login#index"
+  end
   
   resources :logout, :only => []
-  get "/logout" => "logout#index"
+  #get "/logout" => "logout#index"
+  constraints(:subdomain => "login") do
+    get "/logout" => "login#index"
+  end
   
   resources :admin, :only => []
   get "/admin" => "admin#index"
@@ -70,16 +79,25 @@ Pl8es::Application.routes.draw do
   resources :profile, :only => []
   get "/restaurant" => "profile#index"
   
-  resources :menumalist, :only => []
-  get "/menumalist" => "menumalist#index"
-  get "/menumalist/:menu_id-:menu_title" => "menumalist#categories"
-  get "/menumalist/:menu_id-:menu_title/:navigation_id-:navigation_title" => "menumalist#category"
-  get "/menumalist/:menu_id-:menu_title/:parent_navigation_id-:parent_navigation_title/:navigation_id-:navigation_title" => "menumalist#category"
+  resources :menumalist, :only => []#, :constraints => {:subdomain => "menumalist"}
+  #get "/menumalist" => "menumalist#index"
+  #get "/menumalist/:menu_id-:menu_title" => "menumalist#categories"
+  #get "/menumalist/:menu_id-:menu_title/:navigation_id-:navigation_title" => "menumalist#category"
+  #get "/menumalist/:menu_id-:menu_title/:parent_navigation_id-:parent_navigation_title/:navigation_id-:navigation_title" => "menumalist#category"
+  constraints(:subdomain => "menumalist") do
+    get "/" => "menumalist#index"
+    get "/:menu_id-:menu_title" => "menumalist#categories"
+    get "/:menu_id-:menu_title/:navigation_id-:navigation_title" => "menumalist#category"
+    get "/:menu_id-:menu_title/:parent_navigation_id-:parent_navigation_title/:navigation_id-:navigation_title" => "menumalist#category"
+  end
   
-  #get "/" => "menumalist#index", :constraints => {:subdomain => "menumalist"}
   
   resources :dailycious, :only => []
-  get "/dailycious" => "dailycious#index"
-  get "/dailycious/:add_weeks-week" => "dailycious#index"
+  ##get "/dailycious" => "dailycious#index"
+  #get "/dailycious/:add_weeks-week" => "dailycious#index"
+  constraints(:subdomain => "dailycious") do
+    get "/" => "dailycious#index"
+    get "/:add_weeks-week" => "dailycious#index"
+  end
   
 end

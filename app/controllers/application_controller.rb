@@ -4,6 +4,20 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_filter :set_current_locale
+  
+  helper_method :url_for
+  def url_for(options = {}, *params)
+    
+    subdomain = Rails.application.routes.routes.routes.find_all{|item|
+      item.requirements[:controller] == "menumalist" &&
+      item.requirements[:action] == "index"
+    }[0].constraints[:subdomain]
+    
+    options[:only_path] = false
+    options[:subdomain] = subdomain
+      
+    return super(options, *params)
+  end
 
   private
   def set_current_locale
