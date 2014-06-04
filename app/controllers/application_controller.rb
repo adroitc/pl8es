@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   def url_for(options = {}, *params)
     
     subdomain = Rails.application.routes.routes.routes.find_all{|item|
-      item.requirements[:controller] == "menumalist" &&
-      item.requirements[:action] == "index"
+      item.requirements[:controller] == options[:controller] &&
+      item.requirements[:action] == options[:index]
     }[0].constraints[:subdomain]
     
     options[:only_path] = false
