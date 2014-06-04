@@ -52,7 +52,7 @@ Pl8es::Application.routes.draw do
   
   resources :signup, :only => []
   #get "/signup" => "signup#index"
-  constraints(:subdomain => "login") do
+  constraints(:subdomain => "signup") do
     get "/" => "signup#index"
   end
   
