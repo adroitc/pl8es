@@ -61,6 +61,7 @@ User.create([
     :email => "marc@roemer.io",
     :password => "lol123lol",
     :name => "Marc's restaurant",
+    :location => Location.create()
     :background_type => "color",
     :menuColor => MenuColor.create(),
     :download_code => "8D34C8",

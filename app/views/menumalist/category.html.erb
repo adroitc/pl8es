@@ -40,7 +40,7 @@
         <% end %>
       </span>
       <% end %>
-      <% if @navigation.level == 0 && @navigation.dishes.count == 0 %>
+      <% if @navigation.navigation == nil && @navigation.dishes.count == 0 %>
       <div class="col-sm-3" style="height:240px;">
         <div style="margin-top:50%;text-align:center;">
           <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">

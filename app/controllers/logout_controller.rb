@@ -1,7 +1,7 @@
 class LogoutController < ApplicationController
   
   def index
-    if User.loggedIn(session)
+    if @user
       reset_session
       redirect_to :controller => "login", :action => "index"
     end

@@ -1,15 +1,16 @@
 class User < ActiveRecord::Base
+  has_one :location
 	has_and_belongs_to_many :languages
   belongs_to :default_language, :class_name => "Language"
   has_many :openingHours
   has_and_belongs_to_many :categories
+  belongs_to :menuColorTemplate
+  has_one :menuColor
+  belongs_to :supportedFont
   belongs_to :default_menu, :class_name => "Menu"
   has_many :menus
   has_many :dishes
   has_many :daily_dishes
-  belongs_to :menuColorTemplate
-  has_one :menuColor
-  belongs_to :supportedFont
   has_many :devices
   
   translates :description
@@ -105,22 +106,6 @@ class User < ActiveRecord::Base
   
   validates :description, :length => {
     :maximum => 250
-  }
-  
-  validates :address, :length => {
-    :maximum => 28
-  }
-  
-  validates :zip, :length => {
-    :maximum => 28
-  }
-  
-  validates :city, :length => {
-    :maximum => 28
-  }
-  
-  validates :country, :length => {
-    :maximum => 28
   }
   
   validates :website, :length => {

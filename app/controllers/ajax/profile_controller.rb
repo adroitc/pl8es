@@ -1,9 +1,7 @@
 class Ajax::ProfileController < ApplicationController
   
   def editsettings
-    if User.loggedIn(session) && !params.values_at(:default_language, :email, :address, :zip, :city, :country).include?(nil)
-      @user = User.find(session[:user_id])
-      
+    if @user && !params.values_at(:default_language, :email, :address, :zip, :city, :country).include?(nil) && Language.exists?(params[:default_language])
       google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
       google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
       google_req = Net::HTTP::Get.new(google_url.request_uri)
@@ -12,28 +10,26 @@ class Ajax::ProfileController < ApplicationController
       }
       google_results = JSON.parse(google_res.body)["results"]
       if google_results.count == 1
-        params[:address] = google_results[0]["address_components"].find_all{|item|
+        google_result_address_components = google_results[0]["address_components"]
+        params[:address] = google_result_address_components.find_all{|item|
           item["types"] == ["route"]
-        }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
+        }[0]["long_name"]+" "+google_result_address_components.find_all{|item|
           item["types"] == ["street_number"]
         }[0]["long_name"]
-        params[:zip] = google_results[0]["address_components"].find_all{|item|
+        params[:zip] = google_result_address_components.find_all{|item|
           item["types"] == ["postal_code"]
         }[0]["long_name"]
-        params[:city] = google_results[0]["address_components"].find_all{|item|
+        params[:city] = google_result_address_components.find_all{|item|
           item["types"] == ["locality", "political"]
         }[0]["long_name"]
-        params[:country] = google_results[0]["address_components"].find_all{|item|
+        params[:country] = google_result_address_components.find_all{|item|
           item["types"] == ["country", "political"]
         }[0]["long_name"]
         
-        @user.attributes = params.permit(:email, :address, :zip, :city, :country, :website, :telephone)
-        
-        if Language.exists?(params[:default_language])
-          @user.default_language = Language.find(params[:default_language])
-        end
-        
-        @user.save
+        @user.update_attributes(params.permit(:email, :website, :telephone).merge({
+          :default_language => Language.find(params[:default_language])
+        }))
+        @user.location.update_attributes(params.permit(:address, :zip, :city, :country))
         
         render :json => {:status => "success"}
         return
@@ -43,9 +39,7 @@ class Ajax::ProfileController < ApplicationController
   end
   
   def editdescription
-    if User.loggedIn(session) && !params.values_at(:name, :description, :categories).include?(nil)
-      @user = User.find(session[:user_id])
-      
+    if @user && !params.values_at(:name, :description, :categories).include?(nil)
       @user.attributes = params.permit(:logo_image, :restaurant_image, :name)
       
       languages = Language.find_all_by_locale(params[:description].keys)

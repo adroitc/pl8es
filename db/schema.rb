@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603093348) do
+ActiveRecord::Schema.define(version: 20140605084059) do
 
   create_table "categories", force: true do |t|
-    t.integer  "menu_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,13 +101,8 @@ ActiveRecord::Schema.define(version: 20140603093348) do
     t.integer  "image_crop_h"
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed",       default: true
+    t.boolean  "image_crop_processed", default: true
     t.integer  "ingredients_id"
-    t.boolean  "wines_should_display",       default: false
-    t.boolean  "dishes_should_display",      default: false
-    t.boolean  "drinks_should_display",      default: false
-    t.boolean  "sides_should_display",       default: false
-    t.boolean  "ingredients_should_display", default: false
     t.integer  "user_id"
   end
 
@@ -129,7 +123,6 @@ ActiveRecord::Schema.define(version: 20140603093348) do
   add_index "ingredient_translations", ["locale"], name: "index_ingredient_translations_on_locale"
 
   create_table "ingredients", force: true do |t|
-    t.integer  "dish_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -149,6 +142,18 @@ ActiveRecord::Schema.define(version: 20140603093348) do
   create_table "languages_users", force: true do |t|
     t.integer "language_id"
     t.integer "user_id"
+  end
+
+  create_table "locations", force: true do |t|
+    t.integer  "user_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "zip"
+    t.string   "city"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "menu_color_templates", force: true do |t|
@@ -235,12 +240,6 @@ ActiveRecord::Schema.define(version: 20140603093348) do
     t.string   "title"
     t.string   "from_time"
     t.string   "to_time"
-    t.integer  "menuLabel_id"
-    t.integer  "navigations_id"
-    t.integer  "beverages_id"
-    t.integer  "languages_id"
-    t.integer  "default_language_id"
-    t.integer  "menuColor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -261,7 +260,6 @@ ActiveRecord::Schema.define(version: 20140603093348) do
     t.integer  "navigation_id"
     t.integer  "level"
     t.string   "style"
-    t.integer  "sub_navigations_id"
     t.integer  "dishes_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -325,10 +323,6 @@ ActiveRecord::Schema.define(version: 20140603093348) do
     t.string   "password"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "address"
-    t.string   "zip"
-    t.string   "city"
-    t.string   "country"
     t.string   "telephone"
     t.string   "website"
     t.string   "register_source"
@@ -336,13 +330,8 @@ ActiveRecord::Schema.define(version: 20140603093348) do
     t.string   "daily_tariff"
     t.string   "download_code"
     t.date     "last_login"
-    t.integer  "languages_id"
     t.integer  "default_language_id"
-    t.integer  "openingHours_id"
-    t.integer  "categories_id"
     t.integer  "default_menu_id"
-    t.integer  "menus_id"
-    t.integer  "daily_dishes_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "restaurant_image_file_name"

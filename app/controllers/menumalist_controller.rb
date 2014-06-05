@@ -1,17 +1,13 @@
 class MenumalistController < ApplicationController
   
   def index
-    if User.loggedIn(session)
-      @user = User.find(session[:user_id])
-    else
+    if !@user
       redirect_to :controller => "login", :action => "index"
     end
   end
   
   def categories
-    if User.loggedIn(session)
-      @user = User.find(session[:user_id])
-      
+    if @user
       if @user.menus.exists?(params[:menu_id])
         @menu = @user.menus.find(params[:menu_id])
       else
@@ -23,9 +19,7 @@ class MenumalistController < ApplicationController
   end
   
   def category
-    if User.loggedIn(session)
-      @user = User.find(session[:user_id])
-      
+    if @user
       if @user.menus.exists?(params[:menu_id]) && @user.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
         @navigation = @user.menus.find(params[:menu_id]).navigations.find(params[:navigation_id])
       else

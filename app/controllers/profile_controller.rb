@@ -1,17 +1,13 @@
 class ProfileController < ApplicationController
   
   def index
-    if User.loggedIn(session)
-      @user = User.find(session[:user_id])
-    else
+    if !@user
       redirect_to :controller => "login", :action => "index"
     end
   end
   
   def edit
-    if User.loggedIn(session)
-      @user = User.find(session[:user_id])
-    else
+    if !@user
       redirect_to :controller => "login", :action => "index"
     end
   end

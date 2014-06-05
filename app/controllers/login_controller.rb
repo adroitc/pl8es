@@ -1,7 +1,7 @@
 class LoginController < ApplicationController
   
   def index
-    if User.loggedIn(session)
+    if @user
       redirect_to :controller => "menumalist", :action => "index"
     end
   end

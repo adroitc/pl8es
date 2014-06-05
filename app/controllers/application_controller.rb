@@ -39,6 +39,10 @@ class ApplicationController < ActionController::Base
 
   private
   def set_current_locale
+    if User.loggedIn(session)
+      @user = User.find(session[:user_id])
+    end
+    
     I18n.locale = params[:locale]
   end
   

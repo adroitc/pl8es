@@ -1,57 +1,44 @@
 class Ajax::NavigationController < ApplicationController
   
   def addnavigation
-    if User.loggedIn(session) && !params.values_at(:menu_id, :title, :style).include?(nil)
-      @user = User.find(session[:user_id])
-      
+    if @user && !params.values_at(:menu_id, :title, :style).include?(nil)
       languages = Language.find_all_by_locale(params[:title].keys)
       if @user.menus.exists?(params[:menu_id]) && languages.count > 0 && languages.count == params[:title].count
         menu = @user.menus.find(params[:menu_id])
         
-        navigation_new = Navigation.create()
-        
-        navigation_new.style = params[:style]
+        new_navigation = Navigation.create(params.permit(:style).merge({
+          :menu => menu
+        }))
         
         if params[:image]
-          navigation_new.image = params[:image]
+          new_navigation.image = params[:image]
           
-          if navigation_new.image_dimensions["original"][1] >= navigation_new.image_dimensions["original"][0]
-            navigation_new.image_crop_w = navigation_new.image_dimensions["original"].min
-            navigation_new.image_crop_h = navigation_new.image_crop_w/(navigation_new.image_dimensions["cropped_default_retina"][0].to_f/navigation_new.image_dimensions["cropped_default_retina"][1].to_f)
+          if new_navigation.image_dimensions["original"][1] >= new_navigation.image_dimensions["original"][0]
+            new_navigation.image_crop_w = new_navigation.image_dimensions["original"].min
+            new_navigation.image_crop_h = new_navigation.image_crop_w/(new_navigation.image_dimensions["cropped_default_retina"][0].to_f/new_navigation.image_dimensions["cropped_default_retina"][1].to_f)
           else
-            navigation_new.image_crop_h = navigation_new.image_dimensions["original"].min
-            navigation_new.image_crop_w = (navigation_new.image_dimensions["cropped_default_retina"][0].to_f/navigation_new.image_dimensions["cropped_default_retina"][1].to_f)*navigation_new.image_crop_h
+            new_navigation.image_crop_h = new_navigation.image_dimensions["original"].min
+            new_navigation.image_crop_w = (new_navigation.image_dimensions["cropped_default_retina"][0].to_f/new_navigation.image_dimensions["cropped_default_retina"][1].to_f)*new_navigation.image_crop_h
           end
-          navigation_new.image_crop_x = (navigation_new.image_dimensions["original"][0]-navigation_new.image_crop_w).to_f/2
-          navigation_new.image_crop_y = (navigation_new.image_dimensions["original"][1]-navigation_new.image_crop_h).to_f/2
+          new_navigation.image_crop_x = (new_navigation.image_dimensions["original"][0]-new_navigation.image_crop_w).to_f/2
+          new_navigation.image_crop_y = (new_navigation.image_dimensions["original"][1]-new_navigation.image_crop_h).to_f/2
         end
         
         current_locale = I18n.locale
         
         languages.each do |language|
           I18n.locale = language.locale
-          navigation_new.title = params[:title][language.locale]
+          new_navigation.title = params[:title][language.locale]
         end
         
         I18n.locale = current_locale
         
         if params[:navigation_id] && menu.navigations.exists?(params[:navigation_id])
-          navigation_new.level = 1
-          navigation_new.menu = menu
-          navigation = menu.navigations.find(params[:navigation_id])
-          if navigation.sub_navigations.count > 0 && navigation.sub_navigations.last.position != nil
-            navigation_new.position = navigation.sub_navigations.last.position+1
-          end
-          navigation.sub_navigations.push(navigation_new)
-          navigation.save
-        else
-          navigation_new.level = 0
-          if menu.navigations.count > 0 && menu.navigations.last.position != nil
-            navigation_new.position = menu.navigations.last.position+1
-          end
-          menu.navigations.push(navigation_new)
-          menu.save
+          new_navigation.level = 1
+          new_navigation.navigation = menu.navigations.find(params[:navigation_id])
         end
+        
+        new_navigation.save
         
         render :json => {:status => "success"}
         return
@@ -61,9 +48,7 @@ class Ajax::NavigationController < ApplicationController
   end
   
   def editnavigation
-    if User.loggedIn(session) && !params.values_at(:navigation_id, :title, :style).include?(nil)
-      @user = User.find(session[:user_id])
-      
+    if @user && !params.values_at(:navigation_id, :title, :style).include?(nil)
       languages = Language.find_all_by_locale(params[:title].keys)
       if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
         navigation = Navigation.find(params[:navigation_id])
@@ -121,9 +106,7 @@ class Ajax::NavigationController < ApplicationController
   end
   
   def sortnavigation
-    if User.loggedIn(session) && !params.values_at(:navigation_ids).include?(nil)
-      @user = User.find(session[:user_id])
-      
+    if @user && !params.values_at(:navigation_ids).include?(nil)
       params[:navigation_ids].each do |navigation_id|
         if Navigation.exists?(navigation_id[0].to_i) && Navigation.find(navigation_id[0].to_i).menu.user == @user
           navigation = Navigation.find(navigation_id[0].to_i)
