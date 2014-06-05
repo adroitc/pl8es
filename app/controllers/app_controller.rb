@@ -50,14 +50,14 @@ class AppController < ApplicationController
   
   def dailycious
     if !params.values_at(:q).include?(nil)
-      locations = Location.within(
+      @req_locations = Location.where(["user_id IN (?)", DailyDish.find(:all, :select => "user_id", :conditions => ["display_date = (?)", Date.today.to_datetime]).map{|d| d.user_id}]).within(
       10,
       :origin => [
         params[:q].split(",")[0].to_f,
         params[:q].split(",")[1]
-      ]).order("distance DESC")
+      ]).order("distance")
       
-      render :json => locations.to_json(
+      render :json => @req_locations.to_json(
         :only => [:id, :address, :zip, :city, :country, :distance, :latitude, :longitude],
         :include => {
           :user => {

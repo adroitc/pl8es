@@ -1,0 +1,9 @@
+<%=
+raw(Jsonify::Builder.plain do |j|
+  
+  j.daily_dishes(@req_locations.menus) do |menu|
+    
+  end
+  
+end)
+%>
