@@ -1,7 +1,5 @@
 class RemoveUnecessaryColumns < ActiveRecord::Migration
   def change
-    remove_column :users, :address, :string
-    
     remove_reference :categories, :menu 
     remove_reference :ingredients, :dish 
     
