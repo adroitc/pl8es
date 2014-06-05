@@ -10,7 +10,7 @@ class Ajax::SessionController < ApplicationController
           download_code = SecureRandom.hex(3).upcase
         end
         @user.update_attributes({
-          :location => Location.create()
+          :location => Location.create(),
           :background_type => "color",
           :menuColorTemplate => MenuColorTemplate.first,
           :menuColor => MenuColor.create(),
