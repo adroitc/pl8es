@@ -47,8 +47,7 @@ group :production do
   gem "rails_12factor"
 end
 
-# test
-gem "block_helpers" # to remove
+gem "jquery-ui-rails"
 
 # json
 gem "jsonify"
@@ -67,7 +66,8 @@ gem "aws-sdk"
 gem "paperclip-dimension"
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
-gem "jquery-ui-rails"
+#location
+gem "geokit-rails"
 
 group :assets do
   gem "therubyracer"

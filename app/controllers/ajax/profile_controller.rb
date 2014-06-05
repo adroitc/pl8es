@@ -9,27 +9,29 @@ class Ajax::ProfileController < ApplicationController
         http.request(google_req)
       }
       google_results = JSON.parse(google_res.body)["results"]
-      if google_results.count == 1
-        google_result_address_components = google_results[0]["address_components"]
-        params[:address] = google_result_address_components.find_all{|item|
+      if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
+        params[:address] = google_results[0]["address_components"].find_all{|item|
           item["types"] == ["route"]
-        }[0]["long_name"]+" "+google_result_address_components.find_all{|item|
+        }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
           item["types"] == ["street_number"]
         }[0]["long_name"]
-        params[:zip] = google_result_address_components.find_all{|item|
+        params[:zip] = google_results[0]["address_components"].find_all{|item|
           item["types"] == ["postal_code"]
         }[0]["long_name"]
-        params[:city] = google_result_address_components.find_all{|item|
+        params[:city] = google_results[0]["address_components"].find_all{|item|
           item["types"] == ["locality", "political"]
         }[0]["long_name"]
-        params[:country] = google_result_address_components.find_all{|item|
+        params[:country] = google_results[0]["address_components"].find_all{|item|
           item["types"] == ["country", "political"]
         }[0]["long_name"]
         
         @user.update_attributes(params.permit(:email, :website, :telephone).merge({
           :default_language => Language.find(params[:default_language])
         }))
-        @user.location.update_attributes(params.permit(:address, :zip, :city, :country))
+        @user.location.update_attributes(params.permit(:address, :zip, :city, :country).merge({
+          :latitude => google_results[0]["geometry"]["location"]["lat"].to_f,
+          :longitude => google_results[0]["geometry"]["location"]["lng"].to_f
+        }))
         
         render :json => {:status => "success"}
         return

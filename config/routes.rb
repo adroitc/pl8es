@@ -2,6 +2,7 @@ Pl8es::Application.routes.draw do
   
   resources :app, :only => []
   get "/app/menumalist/:user_download_code" => "app#menumalist"
+  get "/app/dailycious" => "app#dailycious"
   
   #ajax/session
   resources :ajax_session, :only => []

@@ -44,8 +44,6 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    block_helpers (0.3.3)
-      activesupport (>= 2.0)
     builder (3.1.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -66,6 +64,11 @@ GEM
       dotenv (= 0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    geokit (1.8.5)
+      multi_json (>= 1.3.2)
+    geokit-rails (2.0.1)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     globalize (4.0.1)
       activemodel (>= 4.0.0, < 5)
       activerecord (>= 4.0.0, < 5)
@@ -185,9 +188,9 @@ DEPENDENCIES
   bcrypt-ruby
   better_errors
   binding_of_caller
-  block_helpers
   coffee-rails (~> 4.0.0)
   dotenv-rails
+  geokit-rails
   globalize (~> 4.0.1)
   jbuilder (~> 1.2)
   jquery-rails

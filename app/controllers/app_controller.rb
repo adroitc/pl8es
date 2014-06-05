@@ -45,7 +45,28 @@ class AppController < ApplicationController
       render :partial => "menumalist"
       return
     end
-    
+    render :json => {:status => "invalid"}
+  end
+  
+  def dailycious
+    if !params.values_at(:q).include?(nil)
+      locations = Location.within(
+      10,
+      :origin => [
+        params[:q].split(",")[0].to_f,
+        params[:q].split(",")[1]
+      ]).order("distance DESC")
+      
+      render :json => locations.to_json(
+        :only => [:id, :address, :zip, :city, :country, :distance, :latitude, :longitude],
+        :include => {
+          :user => {
+            :only => [:id, :name, :telephone, :website]
+          }
+        }
+      )
+      return
+    end
     render :json => {:status => "invalid"}
   end
   
