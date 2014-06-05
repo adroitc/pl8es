@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605084059) do
+ActiveRecord::Schema.define(version: 20140605095931) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(version: 20140605084059) do
     t.string   "to_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "default_language_id"
   end
 
   create_table "navigation_translations", force: true do |t|
