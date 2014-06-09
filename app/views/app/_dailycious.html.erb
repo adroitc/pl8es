@@ -1,8 +1,29 @@
 <%=
 raw(Jsonify::Builder.plain do |j|
   
-  j.daily_dishes(@req_locations.menus) do |menu|
+  j.locations(@req_locations) do |location|
+    j.id                         location.id
+
+    j.name                       location.user.name
     
+    j.address                    location.address
+    j.zip                        location.zip
+    j.city                       location.city
+    j.country                    location.country
+
+    j.telephone                  location.user.telephone
+    j.website                    location.user.website
+    
+    j.distance                   location.distance
+    j.latitude                   location.latitude
+    j.longitude                  location.longitude
+    
+    j.daily_dishes(location.user.daily_dishes.where(:display_date => Date.today.to_datetime)) do |daily_dish|
+      j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
+      j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
+      j.title                      daily_dish.title
+      j.price                      daily_dish.price
+    end
   end
   
 end)

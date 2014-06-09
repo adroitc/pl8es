@@ -54,17 +54,11 @@ class AppController < ApplicationController
       10,
       :origin => [
         params[:q].split(",")[0].to_f,
-        params[:q].split(",")[1]
-      ]).order("distance")
+        params[:q].split(",")[1].to_f
+      ]
+      ).order("distance")
       
-      render :json => @req_locations.to_json(
-        :only => [:id, :address, :zip, :city, :country, :distance, :latitude, :longitude],
-        :include => {
-          :user => {
-            :only => [:id, :name, :telephone, :website]
-          }
-        }
-      )
+      render :partial => "dailycious"
       return
     end
     render :json => {:status => "invalid"}
