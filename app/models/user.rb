@@ -49,6 +49,11 @@ class User < ActiveRecord::Base
         :geometry => "828x552#",
         :format => :png,
         :processors => [:cropper]
+      },
+      :cropped_dailycious_retina => {
+        :geometry => "87x58#",
+        :format => :png,
+        :processors => [:cropper]
       }
     }
   }
