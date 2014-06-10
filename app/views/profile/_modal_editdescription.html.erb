@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editdescription", :width => "678px", :title => "Edit description", :languages => @user.menu_languages, :default_language => @user.default_language do |m| %>
-<%= form_tag({:controller => "ajax/profile", :action => "editdescription"}, {:multipart => true, :role => "form", :class_ => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
+<%= form_tag({:controller => "ajax/profile", :action => "editdescription"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
