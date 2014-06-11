@@ -1,6 +1,8 @@
 class DailyDish < ActiveRecord::Base
   belongs_to :user
   
+  default_scope :order => "id"
+  
   has_attached_file :image, {
     :styles => {
       :original_cropping => {
