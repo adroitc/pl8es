@@ -158,6 +158,8 @@ $(document).ready(function()
   });
   */
   $("input[type='file']").each(function(){
+    console.log("test");
+    var f = $(this).closest("form");
     var file_input = $(this);
     var file_input_name = file_input.attr("name");
     var _URL = window.URL || window.webkitURL;
@@ -170,6 +172,7 @@ $(document).ready(function()
           if (this.width < dim[0]
               || this.height < dim[1]){
             file_input.data("file-size-error",true);
+            f.valid();
             //public_vars.$form_validations[file_input.closest("form").attr("id")].form();
             /*file_input.closest(".form-group").addClass("validate-has-error-file");
             file_input.parent().append("<span class=\"validate-has-error-file\">Image is too small.</span>");
@@ -178,6 +181,7 @@ $(document).ready(function()
           }
           else{
             file_input.data("file-size-error",false);
+            f.valid();
             //public_vars.$form_validations[file_input.closest("form").attr("id")].form();
             /*file_input.closest(".form-group").removeClass("validate-has-error-file");
             file_input.parent().find("span.validate-has-error-file").remove();
@@ -189,6 +193,7 @@ $(document).ready(function()
       }
       else{
         file_input.data("file-size-error",false);
+        f.valid();
         public_vars.$form_validations[file_input.closest("form").attr("id")].form();
         /*file_input.closest(".form-group").removeClass("validate-has-error-file");
         file_input.parent().find("span.validate-has-error-file").remove();
@@ -211,7 +216,8 @@ function pl8es_i_ajaxform(f,a)
     }
     if (f.hasClass("validate")
             && !f.valid()){
-      public_vars.$form_validations[f.attr("id")].form();
+      //public_vars.$form_validations[f.attr("id")].form();
+      return;
     }
     /*if (f.hasClass("validate")
         && !f.valid()
