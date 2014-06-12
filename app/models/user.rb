@@ -137,6 +137,9 @@ class User < ActiveRecord::Base
         end
       end
     end
+    if !menu_languages.include?(default_language)
+      menu_languages.push(default_language)
+    end
     menu_languages
   end
   

@@ -1,11 +1,13 @@
 class Ajax::MenuController < ApplicationController
   
   def addmenu
-    if @user && !params.values_at(:title, :from_time, :to_time, :default_language, :languages).include?(nil) && Language.exists?(params[:default_language].to_i)
+    if @user && !params.values_at(:title, :from_time, :to_time, :default_language).include?(nil) && Language.exists?(params[:default_language].to_i)
       languages = Array.new
-      params[:languages].each do |language|
-        if Language.exists?(language[0].to_i)
-          languages.push(Language.find(language[0].to_i))
+      if params[:languages]
+        params[:languages].each do |language|
+          if Language.exists?(language[0].to_i)
+            languages.push(Language.find(language[0].to_i))
+          end
         end
       end
       if !languages.include?(Language.find(params[:default_language].to_i))
@@ -21,15 +23,17 @@ class Ajax::MenuController < ApplicationController
       render :json => {:status => "success"}
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:status => "invalid", :params => params}
   end
   
   def editmenu
-    if @user && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language, :languages).include?(nil) && @user.menus.exists?(params[:menu_id]) && Language.exists?(params[:default_language].to_i)
+    if @user && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language).include?(nil) && @user.menus.exists?(params[:menu_id]) && Language.exists?(params[:default_language].to_i)
       languages = Array.new
-      params[:languages].each do |language|
-        if Language.exists?(language[0].to_i)
-          languages.push(Language.find(language[0].to_i))
+      if params[:languages]
+        params[:languages].each do |language|
+          if Language.exists?(language[0].to_i)
+            languages.push(Language.find(language[0].to_i))
+          end
         end
       end
       if !languages.include?(Language.find(params[:default_language].to_i))

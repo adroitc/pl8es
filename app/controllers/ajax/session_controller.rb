@@ -10,6 +10,7 @@ class Ajax::SessionController < ApplicationController
           download_code = SecureRandom.hex(3).upcase
         end
         @user.update_attributes({
+          :default_language => Language.first,
           :location => Location.create(),
           :background_type => "color",
           :menuColorTemplate => MenuColorTemplate.first,
