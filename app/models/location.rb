@@ -1,7 +1,7 @@
 class Location < ActiveRecord::Base
   belongs_to :user
   
-  #attr_accessor :distance
+  attr_accessor :distance
   acts_as_mappable :default_units => :kms,
                    :default_formula => :sphere,
                    :distance_field_name => :distance,

@@ -21,10 +21,12 @@ class App::DailyciousController < ApplicationController
           params[:q].split(",")[1].to_f
         ]
       ).sort_by do |e|
-        e.distance_to([
+        distance = e.distance_to([
           params[:q].split(",")[0].to_f,
           params[:q].split(",")[1].to_f
         ])
+        e.distance = distance
+        distance
       end
       #.order("distance")
       
