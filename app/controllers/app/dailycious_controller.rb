@@ -61,6 +61,9 @@ class App::DailyciousController < ApplicationController
       )
       #.order("distance")
       
+      render :json => @req_locations
+      return
+      
       render :partial => "map"
       return
     end
