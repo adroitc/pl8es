@@ -44,9 +44,9 @@ class App::DailyciousController < ApplicationController
           DailyDish.find(
             :all,
             :select => "user_id",
-            :conditions => ["display_date = (?) AND (LOWER(title) LIKE (?))",
+            :conditions => ["display_date = (?) AND LOWER(title) LIKE (?)",
               Date.today.to_datetime,
-              "%#{params[:q].gsub("+"," ").downcase!}%"
+              "%#{params[:q].gsub("+"," ").downcase}%"
             ]
           ).map{|d| d.user_id}.concat(
             User.find(
