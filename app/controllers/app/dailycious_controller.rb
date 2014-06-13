@@ -1,6 +1,7 @@
 class App::DailyciousController < ApplicationController
   
   def defaults
+    render :partial => "defaults"
   end
   
   def map

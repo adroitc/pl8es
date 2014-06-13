@@ -3,6 +3,7 @@ Pl8es::Application.routes.draw do
   resources :app, :only => []
   get "/app/menumalist/:user_download_code" => "app#menumalist"
   get "/app/dailycious" => "app#dailycious"
+  get "/app/dailycious/defaults" => "app/dailycious#defaults"
   get "/app/dailycious/map" => "app/dailycious#map"
   get "/app/dailycious/search" => "app/dailycious#search"
   get "/app/dailycious/user" => "app/dailycious#user"
