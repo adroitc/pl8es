@@ -59,9 +59,26 @@ class App::DailyciousController < ApplicationController
           )
         ]
       )
+      
+      user_ids = DailyDish.find(
+            :all,
+            :select => "user_id",
+            :conditions => ["display_date = (?) AND (title LIKE (?))",
+              Date.today.to_datetime,
+              "%#{params[:q]}%"
+            ]
+          ).map{|d| d.user_id}.concat(
+            User.find(
+              :all,
+              :select => "id",
+              :conditions => ["name LIKE (?)",
+                "%#{params[:q]}%"
+              ]
+            ).map{|u| u.id}
+          )
       #.order("distance")
       
-      render :json => @req_locations
+      render :json => user_ids
       return
       
       render :partial => "map"
