@@ -46,14 +46,14 @@ class App::DailyciousController < ApplicationController
             :select => "user_id",
             :conditions => ["display_date = (?) AND (LOWER(title) LIKE (?))",
               Date.today.to_datetime,
-              "%#{params[:q].downcase!}%"
+              "%#{params[:q].gsub("+"," ").downcase!}%"
             ]
           ).map{|d| d.user_id}.concat(
             User.find(
               :all,
               :select => "id",
               :conditions => ["LOWER(name) LIKE (?)",
-                "%#{params[:q].downcase}%"
+                "%#{params[:q].gsub("+"," ").downcase}%"
               ]
             ).map{|u| u.id}
           )
