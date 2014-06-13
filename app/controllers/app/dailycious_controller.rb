@@ -44,42 +44,21 @@ class App::DailyciousController < ApplicationController
           DailyDish.find(
             :all,
             :select => "user_id",
-            :conditions => ["display_date = (?) AND (title LIKE (?))",
+            :conditions => ["display_date = (?) AND (LOWER(title) LIKE (?))",
               Date.today.to_datetime,
-              "%#{params[:q]}%"
+              "%#{params[:q].downcase!}%"
             ]
           ).map{|d| d.user_id}.concat(
             User.find(
               :all,
               :select => "id",
-              :conditions => ["name LIKE (?)",
-                "%#{params[:q]}%"
+              :conditions => ["LOWER(name) LIKE (?)",
+                "%#{params[:q].downcase}%"
               ]
             ).map{|u| u.id}
           )
         ]
       )
-      
-      user_ids = DailyDish.find(
-            :all,
-            :select => "user_id",
-            :conditions => ["display_date = (?) AND (title LIKE (?))",
-              Date.today.to_datetime,
-              "%#{params[:q]}%"
-            ]
-          ).map{|d| d.user_id}.concat(
-            User.find(
-              :all,
-              :select => "id",
-              :conditions => ["name LIKE (?)",
-                "%#{params[:q]}%"
-              ]
-            ).map{|u| u.id}
-          )
-      #.order("distance")
-      
-      render :json => user_ids
-      return
       
       render :partial => "map"
       return
