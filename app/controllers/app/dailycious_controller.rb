@@ -36,6 +36,36 @@ class App::DailyciousController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
+  def search
+    if !params.values_at(:q).include?(nil) && params[:q].length > 2
+      @req_locations = Location.where(
+        ["user_id IN (?)",
+          DailyDish.find(
+            :all,
+            :select => "user_id",
+            :conditions => ["display_date = (?) AND (title LIKE (?))",
+              Date.today.to_datetime,
+              "%#{params[:q]}%"
+            ]
+          ).map{|d| d.user_id}.concat(
+            User.find(
+              :all,
+              :select => "id",
+              :conditions => ["name LIKE (?)",
+                "%#{params[:q]}%"
+              ]
+            ).map{|u| u.id}
+          )
+        ]
+      )
+      #.order("distance")
+      
+      render :partial => "map"
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def user
     if !params.values_at(:q).include?(nil) && Location.exists?(params[:q])
       @req_location = Location.find(params[:q])

@@ -4,6 +4,7 @@ Pl8es::Application.routes.draw do
   get "/app/menumalist/:user_download_code" => "app#menumalist"
   get "/app/dailycious" => "app#dailycious"
   get "/app/dailycious/map" => "app/dailycious#map"
+  get "/app/dailycious/search" => "app/dailycious#search"
   get "/app/dailycious/user" => "app/dailycious#user"
   
   #ajax/session

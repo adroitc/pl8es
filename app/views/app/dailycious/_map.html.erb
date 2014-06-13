@@ -9,7 +9,9 @@ raw(Jsonify::Builder.plain do |j|
 
     j.name                       location.user.name
     
-    j.distance                   location.distance
+    if location.distance
+      j.distance                   location.distance
+    end
     j.latitude                   location.latitude
     j.longitude                  location.longitude
     
