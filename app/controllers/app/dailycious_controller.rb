@@ -58,7 +58,14 @@ class App::DailyciousController < ApplicationController
             ).map{|u| u.id}
           )
         ]
-      )
+      ).sort_by do |e|
+        distance = e.distance_to([
+          params[:q].split(",")[0].to_f,
+          params[:q].split(",")[1].to_f
+        ])
+        e.distance = distance
+        distance
+      end
       
       render :partial => "map"
       return
