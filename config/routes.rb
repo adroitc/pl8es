@@ -5,6 +5,7 @@ Pl8es::Application.routes.draw do
   get "/app/dailycious" => "app#dailycious"
   get "/app/dailycious/defaults" => "app/dailycious#defaults"
   get "/app/dailycious/map" => "app/dailycious#map"
+  get "/app/dailycious/suggestions" => "app/dailycious#suggestions"
   get "/app/dailycious/search" => "app/dailycious#search"
   get "/app/dailycious/user" => "app/dailycious#user"
   

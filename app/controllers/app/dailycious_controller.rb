@@ -37,8 +37,33 @@ class App::DailyciousController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
+  def suggestions
+    if !params.values_at(:q).include?(nil)
+      suggestions = DailyDish.find(
+            :all,
+            :select => "title",
+            :conditions => ["display_date = (?) AND LOWER(title) LIKE (?)",
+              Date.today.to_datetime,
+              "%#{params[:q].gsub("+"," ").downcase}%"
+            ]
+          ).map{|d| d.title}.concat(
+            User.find(
+              :all,
+              :select => "name",
+              :conditions => ["LOWER(name) LIKE (?)",
+                "%#{params[:q].gsub("+"," ").downcase}%"
+              ]
+            ).map{|u| u.name}
+          )
+      
+      render :json => {:suggestions => suggestions}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def search
-    if !params.values_at(:q).include?(nil) && params[:q].length > 2
+    if !params.values_at(:q).include?(nil)
       @req_locations = Location.where(
         ["user_id IN (?)",
           DailyDish.find(
