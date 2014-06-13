@@ -4,7 +4,7 @@ Pl8es::Application.routes.draw do
   get "/app/menumalist/:user_download_code" => "app#menumalist"
   get "/app/dailycious" => "app#dailycious"
   get "/app/dailycious/map/:lat_long" => "app/dailycious#map"
-  get "/app/dailycious/user/:user_id" => "app/dailycious#map"
+  get "/app/dailycious/user/:user_id" => "app/dailycious#user"
   
   #ajax/session
   resources :ajax_session, :only => []
