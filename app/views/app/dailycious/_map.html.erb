@@ -13,15 +13,15 @@ raw(Jsonify::Builder.plain do |j|
     j.latitude                   location.latitude
     j.longitude                  location.longitude
     
-    j.daily_dishes_count         location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime]).count
-    
-    j.daily_dishes(location.user.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])) do |daily_dish|
-      j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil
-      j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
-      j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
-      j.title                      daily_dish.title
-      j.price                      daily_dish.price
-    end
+    #j.daily_dishes_count         location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime]).count
+    #
+    #j.daily_dishes(location.user.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])) do |daily_dish|
+    #  j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil
+    #  j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
+    #  j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
+    #  j.title                      daily_dish.title
+    #  j.price                      daily_dish.price
+    #end
   end
   
 end)
