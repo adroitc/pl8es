@@ -27,7 +27,7 @@ class App::DailyciousController < ApplicationController
         ])
         e.distance = distance
         distance
-       end
+      end
       #.order("distance")
       
       render :partial => "map"

@@ -25,7 +25,7 @@ class DailyDish < ActiveRecord::Base
         :processors => [:cropper]
       },
       :cropped_small_retina => {
-        :geometry => "160x160#",
+        :geometry => "320x320#",
         :format => :png,
         :processors => [:cropper]
       }
