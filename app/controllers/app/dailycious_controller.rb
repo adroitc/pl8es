@@ -5,13 +5,16 @@ class App::DailyciousController < ApplicationController
   
   def map
     if !params.values_at(:q).include?(nil)
-      @req_locations = Location.where(["user_id IN (?)", DailyDish.find(:all, :select => "user_id", :conditions => ["display_date = (?)", Date.today.to_datetime]).map{|d| d.user_id}]).within(
-      10,
-      :origin => [
-        params[:q].split(",")[0].to_f,
-        params[:q].split(",")[1].to_f
-      ]
-      ).order("distance")
+      @req_locations = Location.where(["user_id IN (?)", DailyDish.find(:all, :select => "user_id", :conditions => ["display_date = (?)", Date.today.to_datetime]).map{|d| d.user_id}])
+      if @req_locations.count > 0
+        @req_locations = @req_locations.within(
+        10,
+        :origin => [
+          params[:q].split(",")[0].to_f,
+          params[:q].split(",")[1].to_f
+        ]
+        ).order("distance")
+      end
       
       render :partial => "map"
       return
