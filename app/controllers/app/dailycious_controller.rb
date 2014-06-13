@@ -14,13 +14,19 @@ class App::DailyciousController < ApplicationController
           [
             params[:q].split(",")[4].to_f,
             params[:q].split(",")[5].to_f
-            ]
-          ],
-          :origin => [
+          ]
+        ],
+        :origin => [
           params[:q].split(",")[0].to_f,
           params[:q].split(",")[1].to_f
         ]
-      )#.order("distance")
+      ).sort_by do |e|
+        e.distance_to([
+          params[:q].split(",")[0].to_f,
+          params[:q].split(",")[1].to_f
+        ])
+      end
+      #.order("distance")
       
       render :partial => "map"
       return
