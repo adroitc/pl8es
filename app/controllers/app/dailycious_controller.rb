@@ -20,7 +20,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def user
-    if Location.exists?(params[:q])
+    if !params.values_at(:q).include?(nil) && Location.exists?(params[:q])
       @req_location = Location.find(params[:q])
       
       render :partial => "user"

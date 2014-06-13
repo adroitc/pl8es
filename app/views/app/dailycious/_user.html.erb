@@ -3,7 +3,7 @@ raw(Jsonify::Builder.plain do |j|
   
   j.id                         @req_location.id
   
-  j.restaurant_image_url       @req_location.user.restaurant_image.present? ? location.user.restaurant_image.url(:cropped_dailycious_retina) : nil
+  j.restaurant_image_url       @req_location.user.restaurant_image.present? ? @req_location.user.restaurant_image.url(:cropped_dailycious_retina) : nil
   j.restaurant_image_fingerprint  @req_location.user.restaurant_image.present? ? @req_location.user.restaurant_image_fingerprint : nil
 
   j.name                       @req_location.user.name
