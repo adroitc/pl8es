@@ -16,11 +16,10 @@ raw(Jsonify::Builder.plain do |j|
   j.telephone                  @req_location.user.telephone
   j.website                    @req_location.user.website
   
-  j.distance                   @req_location.distance
   j.latitude                   @req_location.latitude
   j.longitude                  @req_location.longitude
   
-  j.daily_dishes(@req_location.user.daily_dishes.find(:all, :conditions => [:display_date => Date.today.to_datetime])) do |daily_dish|
+  j.daily_dishes(@req_location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime])) do |daily_dish|
     j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil     
     j.image_small_url            daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil
     j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
