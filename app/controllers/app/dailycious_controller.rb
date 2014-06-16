@@ -61,7 +61,7 @@ class App::DailyciousController < ApplicationController
       #  ActiveRecord::Base.connection.execute("SELECT title FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')").map{|u| u["title"]}
       #).uniq
       
-      query = params[:q].gsub("+"," ").downcase#Mysql.escape_string(params[:q].gsub("+"," ").downcase)
+      query = Mysql.escape_string(params[:q].gsub("+"," ").downcase)
       
       suggestions = DailyDish.unscoped.find(
         :all,
@@ -97,7 +97,7 @@ class App::DailyciousController < ApplicationController
   
   def search
     if !params.values_at(:q).include?(nil)
-      query = params[:q].gsub("+"," ").downcase#Mysql.escape_string(params[:q].gsub("+"," ").downcase)
+      query = Mysql.escape_string(params[:q].gsub("+"," ").downcase)
       
       @req_locations = Location.where(
         ["user_id IN (?)",
