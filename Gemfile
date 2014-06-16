@@ -54,6 +54,7 @@ gem "jsonify"
 
 # encryption
 gem "bcrypt-ruby", :require => "bcrypt"
+gem "mysql"
 
 # languages
 gem "rename"
