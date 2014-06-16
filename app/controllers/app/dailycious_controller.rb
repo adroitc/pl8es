@@ -42,24 +42,24 @@ class App::DailyciousController < ApplicationController
   
   def suggestions
     if !params.values_at(:q).include?(nil)
-      suggestions = DailyDish.find(
-        :all,
-        :select => "title",
-        :conditions => ["display_date = (?) AND LOWER(title) LIKE (?)",
-          Date.today.to_datetime,
-          "%#{params[:q].gsub("+"," ").downcase}%"
-        ]
-      ).map{|d| d.title}.concat(
-        User.find(
-          :all,
-          :select => "name",
-          :conditions => ["LOWER(name) LIKE (?)",
-            "%#{params[:q].gsub("+"," ").downcase}%"
-          ]
-        ).map{|u| u.name}
-      ).concat(
-        ActiveRecord::Base.connection.execute("SELECT title FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')").map{|u| u["title"]}
-      ).uniq
+      #suggestions = DailyDish.find(
+      #  :all,
+      #  :select => "title",
+      #  :conditions => ["display_date = (?) AND LOWER(title) LIKE (?)",
+      #    Date.today.to_datetime,
+      #    "%#{params[:q].gsub("+"," ").downcase}%"
+      #  ]
+      #).map{|d| d.title}.concat(
+      #  User.find(
+      #    :all,
+      #    :select => "name",
+      #    :conditions => ["LOWER(name) LIKE (?)",
+      #      "%#{params[:q].gsub("+"," ").downcase}%"
+      #    ]
+      #  ).map{|u| u.name}
+      #).concat(
+      #  ActiveRecord::Base.connection.execute("SELECT title FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')").map{|u| u["title"]}
+      #).uniq
       
       suggestions = DailyDish.unscoped.find(
         :all,
