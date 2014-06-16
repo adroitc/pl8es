@@ -140,7 +140,7 @@ class App::DailyciousController < ApplicationController
           #).map{|u| u.user_id}
           suggestions = DailyDish.unscoped.find(
             :all,
-            :select => "user_id",
+            :select => "daily_dishes.user_id",
             :joins => [
               "INNER JOIN users ON users.id = daily_dishes.user_id",
               "LEFT JOIN categories_users ON categories_users.user_id = daily_dishes.user_id",
@@ -160,7 +160,7 @@ class App::DailyciousController < ApplicationController
                 ActiveRecord::Base.connection.execute("SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')").map{|u| u["user_id"]}
               )
             ],
-            :group => "user_id"
+            :group => "daily_dishes.user_id"
           ).map{|u| u.user_id}
         ]
       ).sort_by do |e|
