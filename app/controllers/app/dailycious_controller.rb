@@ -63,11 +63,11 @@ class App::DailyciousController < ApplicationController
       
       suggestions = DailyDish.unscoped.find(
         :all,
-        :select => "CASE WHEN LOWER(users.name) LIKE ('%#{params[:q].gsub("+"," ").downcase}%') THEN users.name WHEN category_translations.title IS NOT NULL THEN category_translations.title ELSE daily_dishes.title END AS suggestion",
+        :select => "CASE WHEN LOWER(users.name) LIKE ('%#{sanitize(params[:q].gsub("+"," ").downcase)}%') THEN users.name WHEN category_translations.title IS NOT NULL THEN category_translations.title ELSE daily_dishes.title END AS suggestion",
         :joins => [
           "INNER JOIN users ON users.id = daily_dishes.user_id",
           "LEFT JOIN categories_users ON categories_users.user_id = daily_dishes.user_id",
-          "LEFT JOIN category_translations ON category_translations.category_id = categories_users.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')"
+          "LEFT JOIN category_translations ON category_translations.category_id = categories_users.category_id AND LOWER(category_translations.title) LIKE ('%#{sanitize(params[:q].gsub("+"," ").downcase)}%')"
         ],
         :conditions => [
           "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.user_id IN (?))",
@@ -80,7 +80,7 @@ class App::DailyciousController < ApplicationController
               "%#{params[:q].gsub("+"," ").downcase}%"
             ]
           ).map{|u| u.id}.concat(
-            ActiveRecord::Base.connection.execute("SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')").map{|u| u["user_id"]}
+            ActiveRecord::Base.connection.execute("SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{sanitize(params[:q].gsub("+"," ").downcase)}%')").map{|u| u["user_id"]}
           )
         ],
         :group => "suggestion",
@@ -144,7 +144,7 @@ class App::DailyciousController < ApplicationController
             :joins => [
               "INNER JOIN users ON users.id = daily_dishes.user_id",
               "LEFT JOIN categories_users ON categories_users.user_id = daily_dishes.user_id",
-              "LEFT JOIN category_translations ON category_translations.category_id = categories_users.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')"
+              "LEFT JOIN category_translations ON category_translations.category_id = categories_users.category_id AND LOWER(category_translations.title) LIKE ('%#{sanitize(params[:q].gsub("+"," ").downcase)}%')"
             ],
             :conditions => [
               "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.user_id IN (?))",
@@ -157,7 +157,7 @@ class App::DailyciousController < ApplicationController
                   "%#{params[:q].gsub("+"," ").downcase}%"
                 ]
               ).map{|u| u.id}.concat(
-                ActiveRecord::Base.connection.execute("SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')").map{|u| u["user_id"]}
+                ActiveRecord::Base.connection.execute("SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{sanitize(params[:q].gsub("+"," ").downcase)}%')").map{|u| u["user_id"]}
               )
             ],
             :group => "daily_dishes.user_id"
