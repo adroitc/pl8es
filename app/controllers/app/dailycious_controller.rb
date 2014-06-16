@@ -68,7 +68,7 @@ class App::DailyciousController < ApplicationController
         :select => ActiveRecord::Base.send(:sanitize_sql_array,[
           "CASE WHEN LOWER(users.name) LIKE (?) THEN users.name WHEN category_translations.title IS NOT NULL THEN category_translations.title ELSE daily_dishes.title END AS suggestion",
           query
-        ],
+        ]),
         :joins => [
           "INNER JOIN users ON users.id = daily_dishes.user_id",
           "LEFT JOIN categories_users ON categories_users.user_id = daily_dishes.user_id",
