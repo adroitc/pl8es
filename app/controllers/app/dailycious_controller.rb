@@ -97,6 +97,8 @@ class App::DailyciousController < ApplicationController
   
   def search
     if !params.values_at(:q).include?(nil)
+      query = params[:q].gsub("+"," ").downcase#Mysql.escape_string(params[:q].gsub("+"," ").downcase)
+      
       @req_locations = Location.where(
         ["user_id IN (?)",
           #DailyDish.find(
@@ -141,9 +143,7 @@ class App::DailyciousController < ApplicationController
           #  :group => "daily_dishes.user_id"
           #).map{|u| u.user_id}
           
-          query = params[:q].gsub("+"," ").downcase#Mysql.escape_string(params[:q].gsub("+"," ").downcase)
-          
-          suggestions = DailyDish.unscoped.find(
+          DailyDish.unscoped.find(
             :all,
             :select => "daily_dishes.user_id",
             :joins => [
