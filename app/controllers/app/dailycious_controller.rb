@@ -8,7 +8,7 @@ class App::DailyciousController < ApplicationController
     if !params.values_at(:q).include?(nil)
       @req_locations = Location.where([
         "id IN (?) AND user_id IN (?)",
-        params[:q].split(","),
+        params[:q].split(",").drop(2),
         DailyDish.find(
           :all,
           :select => "user_id",
