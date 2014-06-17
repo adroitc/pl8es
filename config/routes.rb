@@ -2,7 +2,11 @@ Pl8es::Application.routes.draw do
   
   resources :app, :only => []
   get "/app/menumalist/:user_download_code" => "app#menumalist"
-  get "/app/dailycious" => "app#dailycious"
+  
+  #post
+  post "/app/dailycious/login" => "app/dailycious#login"
+  
+  #get
   get "/app/dailycious/defaults" => "app/dailycious#defaults"
   get "/app/dailycious/favorites" => "app/dailycious#favorites"
   get "/app/dailycious/map" => "app/dailycious#map"
@@ -47,11 +51,11 @@ Pl8es::Application.routes.draw do
   post "/a/category/sort" => "ajax/navigation#sortnavigation"
 
   resources :ajax_dish, :only => []
-  get "/a/dish/:id/:language_locale" => "ajax/dish#dish"
-  
   post "/a/dish/add" => "ajax/dish#adddish"
   post "/a/dish/edit" => "ajax/dish#editdish"
   post "/a/dish/sort" => "ajax/dish#sortdish"
+  
+  get "/a/dish/:id/:language_locale" => "ajax/dish#dish"
 
   resources :ajax_dish, :only => []
   post "/a/dailydish/add" => "ajax/daily_dish#adddailydish"

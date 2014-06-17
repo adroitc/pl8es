@@ -1,5 +1,21 @@
 class App::DailyciousController < ApplicationController
   
+  skip_before_filter  :verify_authenticity_token
+  
+  def login
+    if !@user && !params.values_at(:email, :password).include?(nil)
+      @user = User.find_by_email_and_password(params[:email],params[:password])
+      
+      if !@user.blank?
+        session[:user_id] = @user.id
+        
+        render :json => {:status => "success"}
+        return
+      end
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def defaults
     render :partial => "defaults"
   end
