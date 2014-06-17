@@ -5,11 +5,47 @@ class App::DailyciousController < ApplicationController
   end
   
   def favorites
+    if !params.values_at(:q).include?(nil)
+      @req_locations = Location.where([
+        "id IN (?) AND user_id IN (?)",
+        params[:q].split(","),
+        DailyDish.find(
+          :all,
+          :select => "user_id",
+          :conditions => [
+            "display_date = (?)",
+            Date.today.to_datetime
+          ]
+        ).map{|d| d.user_id}
+      ]).sort_by do |e|
+        distance = e.distance_to([
+          params[:q].split(",")[0].to_f,
+          params[:q].split(",")[1].to_f
+        ])
+        e.distance = distance
+        distance
+      end
+      #.order("distance")
+      
+      render :partial => "map"
+      return
+    end
+    render :json => {:status => "invalid"}
   end
   
   def map
     if !params.values_at(:q).include?(nil)
-      @req_locations = Location.where(["user_id IN (?)", DailyDish.find(:all, :select => "user_id", :conditions => ["display_date = (?)", Date.today.to_datetime]).map{|d| d.user_id}]).in_bounds(
+      @req_locations = Location.where([
+        "user_id IN (?)",
+        DailyDish.find(
+          :all,
+          :select => "user_id",
+          :conditions => [
+            "display_date = (?)",
+            Date.today.to_datetime
+          ]
+        ).map{|d| d.user_id}
+      ]).in_bounds(
         [
           [
             params[:q].split(",")[2].to_f,
