@@ -29,7 +29,7 @@ class Ajax::SessionController < ApplicationController
   end
   
   def login
-    if !@user && !params.values_at(:email, :password).include?(nil)
+    if !params.values_at(:email, :password).include?(nil)
       @user = User.find_by_email_and_password(params[:email],params[:password])
       
       if !@user.blank?
