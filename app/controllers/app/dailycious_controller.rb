@@ -4,12 +4,12 @@ class App::DailyciousController < ApplicationController
   
   def login
     if !params.values_at(:email, :password).include?(nil)
-      @user = User.find_by_email_and_password(params[:email],params[:password])
+      @user = User.find_by_email_and_password(params[:email], params[:password])
       
       if !@user.blank?
         session[:user_id] = @user.id
         
-        render :json => {:status => "success"}
+        render :partial => "login"
         return
       end
     end

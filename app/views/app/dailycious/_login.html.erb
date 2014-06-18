@@ -1,0 +1,34 @@
+<%=
+raw(Jsonify::Builder.plain do |j|
+  
+  j.location do
+    j.id                         @user.location.id
+    
+    j.restaurant_image_url       @user.location.user.restaurant_image.present? ? @user.location.user.restaurant_image.url(:cropped_dailycious_retina) : nil
+    j.restaurant_image_fingerprint  @user.location.user.restaurant_image.present? ? @user.location.user.restaurant_image_fingerprint : nil
+
+    j.name                       @user.location.user.name
+  
+    j.address                    @user.location.address
+    j.zip                        @user.location.zip
+    j.city                       @user.location.city
+    j.country                    @user.location.country
+    
+    j.telephone                  @user.location.user.telephone
+    j.email                      @user.location.user.email
+    j.website                    @user.location.user.website
+    
+    j.daily_dishes_count         @user.location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime]).count
+    
+    j.daily_dish do
+      daily_dish = @user.location.user.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
+      j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil
+      j.image_small_url            daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil
+      j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
+      j.title                      daily_dish.title
+      j.price                      daily_dish.price
+    end
+  end
+  
+end)
+%>
