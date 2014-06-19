@@ -12,6 +12,9 @@ class App::DailyciousController < ApplicationController
         render :partial => "login"
         return
       end
+    elsif @user
+      render :partial => "login"
+      return
     end
     render :json => {:status => "invalid"}
   end
