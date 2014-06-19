@@ -18,9 +18,10 @@ raw(Jsonify::Builder.plain do |j|
     j.email                      @user.location.user.email
     j.website                    @user.location.user.website
     
-    j.daily_dishes_count         @user.location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime]).count
+    daily_dishes_count = @user.location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime]).count
+    j.daily_dishes_count         daily_dishes_count
     
-    if j.daily_dishes_count > 0
+    if daily_dishes_count > 0
       j.daily_dish do
         daily_dish = @user.location.user.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
         j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil
