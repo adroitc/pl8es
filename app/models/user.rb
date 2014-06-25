@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
   }
   
   validates :website, :length => {
-    :maximum => 28
+    :maximum => 250
   }
   
   validates :telephone, :length => {
