@@ -9,7 +9,7 @@ class Location < ActiveRecord::Base
                    :lng_column_name => :longitude
   
   validates :address, :length => {
-    :maximum => 28
+    :maximum => 250
   }
   
   validates :zip, :length => {
@@ -17,10 +17,10 @@ class Location < ActiveRecord::Base
   }
   
   validates :city, :length => {
-    :maximum => 28
+    :maximum => 250
   }
   
   validates :country, :length => {
-    :maximum => 28
+    :maximum => 250
   }
 end

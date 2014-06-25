@@ -214,6 +214,9 @@ function pl8es_i_ajaxform(f,a)
         a(r);
       });
     }
+
+    f.find("input[name='address']").data("validaddress-error",false);
+    
     if (f.hasClass("validate")
             && !f.valid()){
       //public_vars.$form_validations[f.attr("id")].form();
