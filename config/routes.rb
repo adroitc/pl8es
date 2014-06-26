@@ -8,6 +8,7 @@ Pl8es::Application.routes.draw do
   post "/app/dailycious/add" => "app/dailycious#adddailydish"
   
   #get
+  get "/app/dailycious/week" => "app/dailycious#week"
   get "/app/dailycious/defaults" => "app/dailycious#defaults"
   get "/app/dailycious/favorites" => "app/dailycious#favorites"
   get "/app/dailycious/map" => "app/dailycious#map"

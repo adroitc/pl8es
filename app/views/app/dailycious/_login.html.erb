@@ -18,7 +18,13 @@ raw(Jsonify::Builder.plain do |j|
     j.email                      @user.location.user.email
     j.website                    @user.location.user.website
     
-    daily_dishes_count = @user.location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime]).count
+    daily_dishes_count = @user.location.user.daily_dishes.find(
+      :all,
+      :conditions => [
+        "display_date = (?)",
+        Date.today.to_datetime
+      ]
+    ).count
     j.daily_dishes_count         daily_dishes_count
     
     if daily_dishes_count > 0

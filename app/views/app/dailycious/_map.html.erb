@@ -15,7 +15,13 @@ raw(Jsonify::Builder.plain do |j|
     j.latitude                   location.latitude
     j.longitude                  location.longitude
     
-    daily_dishes_count = location.user.daily_dishes.find(:all, :conditions => ["display_date = (?)", Date.today.to_datetime]).count
+    daily_dishes_count = location.user.daily_dishes.find(
+      :all,
+      :conditions => [
+        "display_date = (?)",
+        Date.today.to_datetime
+      ]
+    ).count
     j.daily_dishes_count         daily_dishes_count
     
     if daily_dishes_count > 0
