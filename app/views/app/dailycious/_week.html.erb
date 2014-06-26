@@ -6,7 +6,7 @@ raw(Jsonify::Builder.plain do |j|
   j.daily_dishes(@user.daily_dishes.find(
     :all,
     :conditions => [
-      "display_date >= (?) AND display_date <=",
+      "display_date >= (?) AND display_date <= (?)",
       Date.today.beginning_of_week.to_datetime,
       Date.today.end_of_week.to_datetime
     ]
