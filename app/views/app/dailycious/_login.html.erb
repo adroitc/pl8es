@@ -26,17 +26,6 @@ raw(Jsonify::Builder.plain do |j|
       ]
     ).count
     j.daily_dishes_count         daily_dishes_count
-    
-    if daily_dishes_count > 0
-      j.daily_dish do
-        daily_dish = @user.location.user.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
-        j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil
-        j.image_small_url            daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil
-        j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
-        j.title                      daily_dish.title
-        j.price                      daily_dish.price
-      end
-    end
   end
   
 end)
