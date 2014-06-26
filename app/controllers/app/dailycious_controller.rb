@@ -44,7 +44,8 @@ class App::DailyciousController < ApplicationController
   end
   
   def week
-    if @user
+    if @user && !params.values_at(:q).include?(nil)
+      @add_weeks = params[:q].to_i
       render :partial => "week"
       return
     end
