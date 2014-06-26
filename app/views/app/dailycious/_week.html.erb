@@ -14,6 +14,7 @@ raw(Jsonify::Builder.plain do |j|
       date.end_of_week.to_datetime
     ]
   )) do |daily_dish|  
+    j.display_date               daily_dish.display_date.strftime("%d-%m-%Y")
     j.image_small_url            daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil
     j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
     j.title                      daily_dish.title
