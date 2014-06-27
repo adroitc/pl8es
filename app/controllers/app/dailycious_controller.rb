@@ -129,7 +129,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def suggestions
-    if !params.values_at(:q).include?(nil)
+    if !params.values_at(:q).include?(nil) && params[:q].length > 0
       #suggestions = DailyDish.find(
       #  :all,
       #  :select => "title",
