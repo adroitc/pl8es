@@ -193,7 +193,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def search
-    if !params.values_at(:q).include?(nil)
+    if !params.values_at(:q).include?(nil) && params[:q].length > 0
       query = "%#{params[:q].gsub("+"," ").downcase}%"
       
       @req_locations = Location.where(
