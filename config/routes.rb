@@ -59,9 +59,10 @@ Pl8es::Application.routes.draw do
   
   get "/a/dish/:id/:language_locale" => "ajax/dish#dish"
 
-  resources :ajax_dish, :only => []
+  resources :ajax_daily_dish, :only => []
   post "/a/dailydish/add" => "ajax/daily_dish#adddailydish"
   post "/a/dailydish/edit" => "ajax/daily_dish#editdailydish"
+  post "/a/dailydish/sort" => "ajax/daily_dish#sortdailydish"
   
   resources :signup, :only => []
   get "/signup" => "signup#index"

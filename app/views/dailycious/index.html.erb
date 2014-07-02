@@ -73,8 +73,12 @@
                 <%=current_date.strftime("%A") %>
               </td>
               <td class="row gallery-env draggable-portlets">
-                <% @user.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
-                <%=render :partial => "neon/daily_dish_panel", :locals => {:daily_dish => daily_dish} %>
+                <%= form_tag({:controller => "ajax/daily_dish", :action => "sortdailydish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
+                <span class="sorted ui-sortable">
+                  <% @user.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
+                  <%=render :partial => "neon/daily_dish_panel", :locals => {:daily_dish => daily_dish} %>
+                  <% end %>
+                </span>
                 <% end %>
                 <% if !current_date.past? %>
                 <a href="javascript:;" onclick="jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('<%=current_date.strftime("%d-%m-%Y") %>');" class="col-md-4">
@@ -93,6 +97,32 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($)
+	{
+		$(function(){
+			var $draggable_portlets = $(".draggable-portlets");
+			
+			$(".draggable-portlets .sorted").sortable({
+				connectWith: ".draggable-portlets .sorted",
+				handle: '.panel-heading',
+				start: function()
+				{
+					$draggable_portlets.addClass('dragging');
+				},
+				stop: function()
+				{
+          var f = $(this).closest("form");
+          f.find(".panel input[name^='daily_dish_ids[']").each(function(i){
+            $(this).val(i);
+          });
+          f.submit();
+				}
+			});
+			$(".draggable-portlets .sorted .panel-heading").disableSelection();
+		});
+	});
+</script>
 <%=render :partial => "modal_adddailydish" %>
 <%
 for i in 0..6
