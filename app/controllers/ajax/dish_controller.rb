@@ -153,7 +153,7 @@ class Ajax::DishController < ApplicationController
   def sortdish
     if @user && !params.values_at(:dish_ids).include?(nil)
       params[:dish_ids].each do |dish_id|
-        if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).navigation.menu.user == @user
+        if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).user == @user
           Dish.find(dish_id[0].to_i).update_attributes({
             :position => dish_id[1].to_i
           })

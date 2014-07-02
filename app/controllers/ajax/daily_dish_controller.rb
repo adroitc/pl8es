@@ -26,24 +26,25 @@ class Ajax::DailyDishController < ApplicationController
   
   def editdailydish
     if @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id])
-      daily_dish = DailyDish.find(params[:daily_dish_id])
-      daily_dish.attributes = params.permit(:image, :title, :price)
-      
-      if params[:image]
-        if daily_dish.image_dimensions["original"][1] >= daily_dish.image_dimensions["original"][0]
-          daily_dish.image_crop_w = daily_dish.image_dimensions["original"].min
-          daily_dish.image_crop_h = daily_dish.image_crop_w/(daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)
-        else
-          daily_dish.image_crop_h = daily_dish.image_dimensions["original"].min
-          daily_dish.image_crop_w = (daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)*daily_dish.image_crop_h
+      if daily_dish.user == @user
+        daily_dish.attributes = params.permit(:image, :title, :price)
+        
+        if params[:image]
+          if daily_dish.image_dimensions["original"][1] >= daily_dish.image_dimensions["original"][0]
+            daily_dish.image_crop_w = daily_dish.image_dimensions["original"].min
+            daily_dish.image_crop_h = daily_dish.image_crop_w/(daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)
+          else
+            daily_dish.image_crop_h = daily_dish.image_dimensions["original"].min
+            daily_dish.image_crop_w = (daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)*daily_dish.image_crop_h
+          end
+          daily_dish.image_crop_x = (daily_dish.image_dimensions["original"][0]-daily_dish.image_crop_w).to_f/2
+          daily_dish.image_crop_y = (daily_dish.image_dimensions["original"][1]-daily_dish.image_crop_h).to_f/2
         end
-        daily_dish.image_crop_x = (daily_dish.image_dimensions["original"][0]-daily_dish.image_crop_w).to_f/2
-        daily_dish.image_crop_y = (daily_dish.image_dimensions["original"][1]-daily_dish.image_crop_h).to_f/2
+        daily_dish.save
+        
+        render :json => {:status => "success"}
+        return
       end
-      daily_dish.save
-      
-      render :json => {:status => "success"}
-      return
     end
     render :json => {:status => "invalid"}
   end
