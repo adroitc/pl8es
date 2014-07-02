@@ -52,9 +52,9 @@ class Ajax::DailyDishController < ApplicationController
     if @user && !params.values_at(:daily_dish_ids).include?(nil)
       params[:daily_dish_ids].each do |daily_dish_id|
         if DailyDish.exists?(daily_dish_id[0].to_i) && DailyDish.find(daily_dish_id[0].to_i).user == @user
-          daily_dish = DailyDish.find(daily_dish_id[0].to_i)
-          daily_dish.position = daily_dish_id[1].to_i
-          daily_dish.save
+          DailyDish.find(daily_dish_id[0].to_i).update_attributes({
+            :position => daily_dish_id[1].to_i
+          })
         end
       end
       
