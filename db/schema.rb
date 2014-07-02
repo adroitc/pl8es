@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610083504) do
+ActiveRecord::Schema.define(version: 20140702114234) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140610083504) do
     t.boolean  "image_crop_processed",             default: true
     t.string   "image_fingerprint"
     t.integer  "user_id"
+    t.integer  "position"
   end
 
   create_table "devices", force: true do |t|
