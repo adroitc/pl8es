@@ -33,7 +33,7 @@
             </tr>
           </thead>
           <tbody>
-            <% User.all.each do |user| %>
+            <% User.all.order(:name).each do |user| %>
             <tr style="font-size: 16px;">
               <td>
                 <a href="">
@@ -53,7 +53,7 @@
                 <%=user.dishes.count %>
               </td>
               <td>
-                <%=user.daily_dishes.count %>(<%=user.daily_dishes.where(:display_date => Date.today).count %>)
+                <%=user.daily_dishes.count %> (<%=user.daily_dishes.where(:display_date => Date.today).count %>)
               </td>
             </tr>
             <% end %>
