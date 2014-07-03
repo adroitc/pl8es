@@ -8,7 +8,7 @@
     <%=render :partial => "layouts/dashboard_topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="index.html"><i class="entypo-home"></i>Dashboard</a>
+        <a href="<%=url_for :controller => "dashboard", :action => "index" %>"><i class="entypo-home"></i>Dashboard</a>
       </li>
       <li class="active">
         <strong>Restaurant</strong>
