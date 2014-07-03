@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702114234) do
+ActiveRecord::Schema.define(version: 20140703080153) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -331,7 +331,7 @@ ActiveRecord::Schema.define(version: 20140702114234) do
     t.string   "menu_tariff"
     t.string   "daily_tariff"
     t.string   "download_code"
-    t.date     "last_login"
+    t.datetime "last_login"
     t.integer  "default_language_id"
     t.integer  "default_menu_id"
     t.datetime "created_at"

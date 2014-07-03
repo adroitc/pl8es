@@ -10,6 +10,7 @@ class Ajax::SessionController < ApplicationController
           download_code = SecureRandom.hex(3).upcase
         end
         @user.update_attributes({
+          :last_login => DateTime.now,
           :default_language => Language.first,
           :location => Location.create(),
           :background_type => "color",
@@ -33,6 +34,9 @@ class Ajax::SessionController < ApplicationController
       @user = User.find_by_email_and_password(params[:email],params[:password])
       
       if !@user.blank?
+        @user.update_attributes({
+          :last_login => DateTime.now
+        })
         session[:user_id] = @user.id
         
         render :json => {:status => "success"}
