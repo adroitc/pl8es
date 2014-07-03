@@ -82,6 +82,9 @@ Pl8es::Application.routes.draw do
   get "/admin/menulabels" => "admin#menulabels"
   get "/admin/menucolortemplates" => "admin#menucolortemplates"
   
+  resources :dashboard, :only => []
+  get "/" => "dashboard#index"
+  
   resources :profile, :only => []
   get "/restaurant" => "profile#index"
   

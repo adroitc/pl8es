@@ -1,6 +1,6 @@
 <ul id="main-menu">
-  <li>
-  	<a href="index.html">
+  <li class="<%="active" if params[:controller] == "dashboard" %>">
+  	<a href="<%=url_for :controller => "dashboard", :action => "index" %>">
   		<i class="entypo-gauge"></i>
   		<span>Dashboard</span>
   	</a>
