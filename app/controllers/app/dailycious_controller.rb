@@ -156,25 +156,6 @@ class App::DailyciousController < ApplicationController
   
   def suggestions
     if !params.values_at(:q).include?(nil) && params[:q].length > 0
-      #suggestions = DailyDish.find(
-      #  :all,
-      #  :select => "title",
-      #  :conditions => ["display_date = (?) AND LOWER(title) LIKE (?)",
-      #    Date.today.to_datetime,
-      #    "%#{params[:q].gsub("+"," ").downcase}%"
-      #  ]
-      #).map{|d| d.title}.concat(
-      #  User.find(
-      #    :all,
-      #    :select => "name",
-      #    :conditions => ["LOWER(name) LIKE (?)",
-      #      "%#{params[:q].gsub("+"," ").downcase}%"
-      #    ]
-      #  ).map{|u| u.name}
-      #).concat(
-      #  ActiveRecord::Base.connection.execute("SELECT title FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')").map{|u| u["title"]}
-      #).uniq
-
       query = "%#{params[:q].gsub("+"," ").downcase}%"
       
       suggestions = DailyDish.unscoped.find(
@@ -224,48 +205,6 @@ class App::DailyciousController < ApplicationController
       
       @req_locations = Location.where(
         ["user_id IN (?)",
-          #DailyDish.find(
-          #  :all,
-          #  :select => "title",
-          #  :conditions => ["display_date = (?) AND LOWER(title) LIKE (?)",
-          #    Date.today.to_datetime,
-          #    "%#{params[:q].gsub("+"," ").downcase}%"
-          #  ]
-          #).map{|d| d.user_id}.concat(
-          #  User.find(
-          #    :all,
-          #    :select => "name",
-          #    :conditions => ["LOWER(name) LIKE (?)",
-          #      "%#{params[:q].gsub("+"," ").downcase}%"
-          #    ]
-          #  ).map{|u| u.id}
-          #)
-          
-          #DailyDish.unscoped.find(
-          #  :all,
-          #  :select => "daily_dishes.user_id",
-          #  :joins => [
-          #    "INNER JOIN users ON users.id = daily_dishes.user_id",
-          #    "INNER JOIN categories_users ON categories_users.user_id = daily_dishes.user_id",
-          #    "LEFT JOIN category_translations ON category_translations.category_id = categories_users.category_id AND LOWER(category_translations.title) LIKE ('%#{params[:q].gsub("+"," ").downcase}%')"
-          #  ],
-          #  :conditions => [
-          #    "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.user_id IN (?))",
-          #    Date.today.to_datetime,
-          #    "%#{params[:q].gsub("+"," ").downcase}%",
-          #    User.find(
-          #      :all,
-          #      :select => "id",
-          #      :conditions => ["LOWER(name) LIKE (?)",
-          #        "%#{params[:q].gsub("+"," ").downcase}%"
-          #      ]
-          #    ).map{|u| u.id}.concat(
-          #      ActiveRecord::Base.connection.execute("SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE '%italienisch%'").map{|u| u["user_id"]}
-          #    )
-          #  ],
-          #  :group => "daily_dishes.user_id"
-          #).map{|u| u.user_id}
-          
           DailyDish.unscoped.find(
             :all,
             :select => "daily_dishes.user_id",
