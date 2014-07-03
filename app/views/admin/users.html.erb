@@ -29,7 +29,7 @@
               <th>Devices</th>
               <th>Menus</th>
               <th>Dishes</th>
-              <th>Daily dishes (today)</th>
+              <th>Daily dishes (all)</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +53,7 @@
                 <%=user.dishes.count %>
               </td>
               <td>
-                <%=user.daily_dishes.count %> (<%=user.daily_dishes.where(:display_date => Date.today).count %>)
+                <%=user.daily_dishes.where(:display_date => Date.today).count %> (<%=user.daily_dishes.count %>)
               </td>
             </tr>
             <% end %>
