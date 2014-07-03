@@ -105,7 +105,7 @@ var neonLogin = neonLogin || {};
 									// Redirect to login page
 									setTimeout(function()
 									{
-										var redirect_url = baseurl+"dashboard";
+										var redirect_url = baseurl;
 										
 										if(response.redirect_url && response.redirect_url.length)
 										{
