@@ -69,6 +69,22 @@ class App::DailyciousController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
+  def sortdailydish
+    if @user && !params.values_at(:daily_dish_ids).include?(nil)
+      params[:daily_dish_ids].each do |daily_dish_id|
+        if DailyDish.exists?(daily_dish_id[0].to_i) && DailyDish.find(daily_dish_id[0].to_i).user == @user
+          DailyDish.find(daily_dish_id[0].to_i).update_attributes({
+            :position => daily_dish_id[1].to_i
+          })
+        end
+      end
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def week
     if @user && !params.values_at(:q).include?(nil)
       @add_weeks = params[:q].to_i
