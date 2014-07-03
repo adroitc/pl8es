@@ -24,17 +24,17 @@
         <table class="table table-striped responsive">
           <thead>
             <tr>
-              <th width="40%">User</th>
-              <th width="">Email</th>
-              <th width="">Devices</th>
-              <th width="">Menus</th>
-              <th width="">Dishes</th>
-              <th width="">Daily dishes (today)</th>
+              <th>User</th>
+              <th>Email</th>
+              <th>Devices</th>
+              <th>Menus</th>
+              <th>Dishes</th>
+              <th>Daily dishes (today)</th>
             </tr>
           </thead>
           <tbody>
             <% User.all.each do |user| %>
-            <tr style="font-size: 18px;">
+            <tr style="font-size: 16px;">
               <td>
                 <a href="">
                   <%=user.name %>
