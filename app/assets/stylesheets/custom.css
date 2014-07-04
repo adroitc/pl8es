@@ -22,9 +22,8 @@ body {
 }
 .draggable-portlets .sorted .ui-sortable-placeholder
 {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-top: -15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background-color: #eee;
 }
 .draggable-portlets .sorted .panel .panel-heading
