@@ -14,6 +14,10 @@ window._token = "<%=form_authenticity_token %>";
 var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
 </script>
 
+<% if session[:admin_id] && session[:admin_id] != @user.id %>
+<a href="<%=url_for :controller => "admin", :action => "user_switch", :user_id => session[:admin_id] %>">Switch to admin</a>
+<% end %>
+
 <%= yield %>
 
 </body>

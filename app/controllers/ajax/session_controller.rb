@@ -38,6 +38,9 @@ class Ajax::SessionController < ApplicationController
           :last_login => DateTime.now
         })
         session[:user_id] = @user.id
+        if @user.isAdmin
+        session[:admin_id] = @user.id
+        end
         
         render :json => {:status => "success"}
         return

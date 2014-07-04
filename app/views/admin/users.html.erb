@@ -36,7 +36,7 @@
             <% User.all.order(:name).each do |user| %>
             <tr style="font-size: 16px;">
               <td>
-                <a href="">
+                <a href="<%=url_for :controller => "admin", :action => "user_switch", :user_id => user.id %>">
                   <%=user.name %>
                 </a>
               </td>

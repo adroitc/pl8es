@@ -78,6 +78,7 @@ Pl8es::Application.routes.draw do
   resources :admin, :only => []
   get "/admin" => "admin#index"
   get "/admin/users" => "admin#users"
+  get "/admin/userswitch/:user_id" => "admin#user_switch"
   get "/admin/fonts" => "admin#fonts"
   get "/admin/tags" => "admin#categories"
   get "/admin/menulabels" => "admin#menulabels"
