@@ -26,6 +26,8 @@ class Ajax::DailyDishController < ApplicationController
   
   def editdailydish
     if @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id])
+      daily_dish = DailyDish.find(params[:daily_dish_id])
+      
       if daily_dish.user == @user
         daily_dish.attributes = params.permit(:image, :title, :price)
         
