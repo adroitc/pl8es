@@ -55,13 +55,6 @@
 
 $(document).ready(function()
 {
-  $.each(["show","hide"],function(i,ev){
-    var el = $.fn[ev];
-    $.fn[ev] = function(){
-      this.trigger(ev);
-      return el.apply(this, arguments);
-    };
-  });
   $(".pl8es_c_ajaxform").each(function(){
     pl8es_i_ajaxform($(this),function(){
       location.reload();
@@ -290,7 +283,7 @@ function pl8es_f_initdelete(e){
   md.find(".pl8es-btn-delete").css("display","none");
   md.find(".pl8es-btn-delete-cancel").css("display","inline-block");
   md.find(".pl8es-btn-delete-confirm").css("display","inline-block");
-  e.closest(".modal").on("hide",function(){
+  e.closest(".modal").on("hide.bs.modal",function(){
     pl8es_f_initdelete_cancel(e);
   });
 }
