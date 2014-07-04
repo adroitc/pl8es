@@ -24,15 +24,15 @@ module NeonHelper
       )
     end
     raw %(
-    <div class="modal fade in" id="modal-#{opts[:id]}">
+    <div class="modal in" id="modal-#{opts[:id]}">
     	<div class="modal-dialog" style="margin-bottom:20px;#{width}">
     		<div class="modal-content">
-    			 <div class="modal-header">
+    			<div class="modal-header">
     			 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     			 	<h4 class="modal-title" style="display:inline-block;">#{opts[:title]}</h4>
         		#{output_languages}
-    			 </div>
-    			 #{capture(&block)}
+    			</div>
+    			#{capture(&block)}
     		</div>
     	</div>
     </div>
@@ -96,8 +96,7 @@ module NeonHelper
           minSize: [#{image_min_size[:width]},#{image_min_size[:height]}]
         });
         function updateCoords(c)
-        {
-        	$("#form-cropimage-#{opts[:image].instance.id}-#{image.name.to_s}_crop_w").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},Math.floor(c.w)));
+        { 	$("#form-cropimage-#{opts[:image].instance.id}-#{image.name.to_s}_crop_w").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},Math.floor(c.w)));
         	$("#form-cropimage-#{opts[:image].instance.id}-#{image.name.to_s}_crop_h").val(Math.min(#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]},Math.floor(c.h)));
         	$("#form-cropimage-#{opts[:image].instance.id}-#{image.name.to_s}_crop_x").val(Math.floor(c.x));
         	$("#form-cropimage-#{opts[:image].instance.id}-#{image.name.to_s}_crop_y").val(Math.floor(c.y));

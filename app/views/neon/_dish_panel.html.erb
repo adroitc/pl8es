@@ -4,7 +4,7 @@
     	<article class="album" style="margin-bottom:0px;border-width:0px;">
     		<header>
           <a href="javascript:;" onclick="jQuery('#modal-editdish-<%=dish.id %>').modal('show');">
-            <img src="<%=dish.image.present? ? dish.image.url(:cropped_default_retina) : "http://placehold.it/1680x1120" %>" />
+            <img class="unveil" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=dish.image.present? ? dish.image.url(:cropped_default_retina) : "http://placehold.it/1680x1120" %>" />
     			</a>
     		</header>
        	<div class="panel-heading">

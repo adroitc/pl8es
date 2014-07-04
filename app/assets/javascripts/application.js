@@ -49,11 +49,19 @@
 
 //= require "jquery.ellipsize"
 //= require "jquery.dotdotdot.min"
+//= require "jquery.unveil"
 
 // require_tree .
 
 $(document).ready(function()
 {
+  $.each(["show","hide"],function(i,ev){
+    var el = $.fn[ev];
+    $.fn[ev] = function(){
+      this.trigger(ev);
+      return el.apply(this, arguments);
+    };
+  });
   $(".pl8es_c_ajaxform").each(function(){
     pl8es_i_ajaxform($(this),function(){
       location.reload();
@@ -69,6 +77,7 @@ $(document).ready(function()
     {
     }
   });
+  $("img.unveil").unveil(200);
   $(".ellipsis").dotdotdot({
     wrap: "letter",
     fallbackToLetter: true
@@ -124,41 +133,7 @@ $(document).ready(function()
     return !$(e).data("validaddress-error");
   }, "Please use a valid address.");
   
-  /*
   $("input[type='file']").each(function(){
-    var file_input = $(this);
-    var file_input_name = file_input.attr("name");
-    var _URL = window.URL || window.webkitURL;
-    file_input.change(function(){
-      var file, img;
-      if ((file = this.files[0])) {
-        img = new Image();
-        img.onload = function (){
-          var dim = file_input.attr("data-imgvalidation").split("x");
-          if (this.width < dim[0]
-              || this.height < dim[1]){
-            file_input.attr("name","_fileerror").closest(".form-group").addClass("validate-has-error-file");
-            file_input.parent().append("<span class=\"validate-has-error-file\">Image is too small.</span>");
-            file_input.parent().find(".validate-has-error").hide();
-          }
-          else{
-            file_input.closest(".form-group").removeClass("validate-has-error-file");
-            file_input.parent().find("span.validate-has-error-file").remove();
-            file_input.parent().find(".validate-has-error").show();
-          }
-        };
-        img.src = _URL.createObjectURL(file);
-      }
-      else{
-        file_input.closest(".form-group").removeClass("validate-has-error-file");
-        file_input.parent().find("span.validate-has-error-file").remove();
-        file_input.parent().find(".validate-has-error").show();
-      }
-    });
-  });
-  */
-  $("input[type='file']").each(function(){
-    console.log("test");
     var f = $(this).closest("form");
     var file_input = $(this);
     var file_input_name = file_input.attr("name");
@@ -173,20 +148,10 @@ $(document).ready(function()
               || this.height < dim[1]){
             file_input.data("file-size-error",true);
             f.valid();
-            //public_vars.$form_validations[file_input.closest("form").attr("id")].form();
-            /*file_input.closest(".form-group").addClass("validate-has-error-file");
-            file_input.parent().append("<span class=\"validate-has-error-file\">Image is too small.</span>");
-            file_input.parent().find(".validate-has-error").hide();*/
-            //validator.element("input[type='file',name='"+file_input.attr("name")+"']");
           }
           else{
             file_input.data("file-size-error",false);
             f.valid();
-            //public_vars.$form_validations[file_input.closest("form").attr("id")].form();
-            /*file_input.closest(".form-group").removeClass("validate-has-error-file");
-            file_input.parent().find("span.validate-has-error-file").remove();
-            file_input.parent().find(".validate-has-error").show();*/
-            //validator.element("input[type='file',name='"+file_input.attr("name")+"']");
           }
         };
         img.src = _URL.createObjectURL(file);
@@ -195,10 +160,6 @@ $(document).ready(function()
         file_input.data("file-size-error",false);
         f.valid();
         public_vars.$form_validations[file_input.closest("form").attr("id")].form();
-        /*file_input.closest(".form-group").removeClass("validate-has-error-file");
-        file_input.parent().find("span.validate-has-error-file").remove();
-        file_input.parent().find(".validate-has-error").show();*/
-        //validator.element("input[type='file',name='"+file_input.attr("name")+"']");
       }
     });
   });
@@ -219,16 +180,8 @@ function pl8es_i_ajaxform(f,a)
     
     if (f.hasClass("validate")
             && !f.valid()){
-      //public_vars.$form_validations[f.attr("id")].form();
       return;
     }
-    /*if (f.hasClass("validate")
-        && !f.valid()
-        //&& public_vars.$form_validations[f.attr("id")].numberOfInvalids() > 0
-    ){
-      alert("submit-A-"+f.attr("action")+"-"+f.valid());
-      return;
-    }*/
     var d = f.serialize();
     var s2 = f.find("div.select2");
     d = new FormData(f[0]);
@@ -331,6 +284,29 @@ function pl8es_f_revertdefaultmenu(){
   $(".pl8es_c_toggledefaultmenu").hide();
   $(".pl8es_c_makedefaultmenu").show();
   $(".pl8es_c_revertdefaultmenu").hide();
+}
+function pl8es_f_initdelete(e){
+  var md = e.closest(".pl8es-modal-delete");
+  md.find(".pl8es-btn-delete").css("display","none");
+  md.find(".pl8es-btn-delete-cancel").css("display","inline-block");
+  md.find(".pl8es-btn-delete-confirm").css("display","inline-block");
+  e.closest(".modal").on("hide",function(){
+    pl8es_f_initdelete_cancel(e);
+  });
+}
+function pl8es_f_initdelete_cancel(e){
+  var md = e.closest(".pl8es-modal-delete");
+
+  md.find(".pl8es-btn-delete").css("display","inline-block");
+  md.find(".pl8es-btn-delete-cancel").css("display","none");
+  md.find(".pl8es-btn-delete-confirm").css("display","none");
+}
+function pl8es_f_initdelete_confirm(e){
+  var md = e.closest(".pl8es-modal-delete");
+
+  md.find(".pl8es-input-delete").css("display","inline-block").removeAttr("disabled");
+  md.closest("form").submit();
+  md.find(".pl8es-input-delete").css("display","none").attr("disabled","disabled");
 }
 function pl8es_f_initdeletemenu(){
   $(".pl8es_c_initdeletemenu").hide();

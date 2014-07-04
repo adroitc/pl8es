@@ -174,3 +174,27 @@ div.tile-stats.datepicker.weekpicker
   display: inline-block;
   margin-top: 5px;
 }
+span.pl8es-modal-delete button.btn.pl8es-btn-delete
+{
+  float: left;
+  opacity: 0.1;
+}
+span.pl8es-modal-delete button.btn.pl8es-btn-delete:hover
+{
+  opacity: 0.4;
+}
+span.pl8es-modal-delete button.btn.pl8es-btn-delete-cancel
+{
+  float: left;
+  display: none;
+  margin-right: 8px;
+}
+span.pl8es-modal-delete button.btn.pl8es-btn-delete-confirm
+{
+  float: left;
+  display: none;
+}
+span.pl8es-modal-delete input.pl8es-input-delete
+{
+  display: none;
+}
