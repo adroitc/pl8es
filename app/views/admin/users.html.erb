@@ -44,7 +44,7 @@
                 <%=user.email %>
               </td>
               <td>
-                <%=user.devices.count %>
+                <%=user.devices.where(["updated_at >= (?)", DateTime.now-31.days]).count %>
               </td>
               <td>
                 <%=user.menus.count %>

@@ -33,7 +33,7 @@
      				</li>
      				<li>
      					<div class="profile-stat">
-     						<h3><%=@user.devices.count %></h3>
+     						<h3><%=@user.devices.where(["updated_at >= (?)", DateTime.now-31.days]).count %></h3>
      						<span>iPads</span>
      					</div>
      				</li>
