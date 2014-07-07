@@ -11,7 +11,11 @@ class User < ActiveRecord::Base
   has_many :menus
   has_many :dishes
   has_many :daily_dishes
-  has_many :devices
+  has_many :devices do
+    def actives()
+      where(["updated_at >= (?)", DateTime.now-31.days])
+    end
+  end
   
   translates :description
   

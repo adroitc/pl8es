@@ -31,7 +31,7 @@
       <div class="col-sm-4">
     	 	<div class="tile-stats tile-white">
     	 		<div class="icon"><i class="entypo-monitor"></i></div>
-    	 		<div class="num" data-start="0" data-end="<%=@user.devices.where(["updated_at >= (?)", DateTime.now-31.days]).count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+    	 		<div class="num" data-start="0" data-end="<%=@user.devices.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
           <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
     	 		<h3><%=t("menumalist.installations") %></h3>
           <p><%=t("menumalist.installations_on_iPad") %>
