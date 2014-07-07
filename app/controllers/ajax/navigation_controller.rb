@@ -48,10 +48,13 @@ class Ajax::NavigationController < ApplicationController
   end
   
   def editnavigation
-    if @user && !params.values_at(:navigation_id, :title, :style).include?(nil)
-      languages = Language.find_all_by_locale(params[:title].keys)
-      if Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
-        navigation = Navigation.find(params[:navigation_id])
+    if @user && !params.values_at(:navigation_id, :title, :style).include?(nil) && Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
+      navigation = Navigation.find(params[:navigation_id])
+      
+      if params[:delete] == "true"
+        navigation.destroy
+      else
+        languages = Language.find_all_by_locale(params[:title].keys)
         
         navigation.style = params[:style]
         
@@ -97,10 +100,10 @@ class Ajax::NavigationController < ApplicationController
         I18n.locale = current_locale
         
         navigation.save
-        
-        render :json => {:status => "success"}
-        return
       end
+        
+      render :json => {:status => "success"}
+      return
     end
     render :json => {:status => "invalid"}
   end

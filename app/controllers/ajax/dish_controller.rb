@@ -74,75 +74,79 @@ class Ajax::DishController < ApplicationController
   
   def editdish
     if @user && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sides).include?(nil) && Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).navigation.menu.user == @user
-      languages = Language.find_all_by_locale(params[:title].keys)
-      
       dish = Dish.find(params[:dish_id])
       
-      if params[:image]
-        dish.image = params[:image]
+      if params[:delete] == "true"
+        dish.destroy
+      else
+        languages = Language.find_all_by_locale(params[:title].keys)
         
-        if dish.image.present?
-          if dish.image_dimensions["original"][1] >= dish.image_dimensions["original"][0]
-            dish.image_crop_w = dish.image_dimensions["original"].min
-            dish.image_crop_h = dish.image_crop_w/(dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)
+        if params[:image]
+          dish.image = params[:image]
+          
+          if dish.image.present?
+            if dish.image_dimensions["original"][1] >= dish.image_dimensions["original"][0]
+              dish.image_crop_w = dish.image_dimensions["original"].min
+              dish.image_crop_h = dish.image_crop_w/(dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)
+            else
+              dish.image_crop_h = dish.image_dimensions["original"].min
+              dish.image_crop_w = (dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)*dish.image_crop_h
+            end
+            dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
+            dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
+          end
+        elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil)
+          if params[:image_crop_w].to_i+params[:image_crop_x].to_i > dish.image_dimensions["original"][0]
+            params[:image_crop_x] = dish.image_dimensions["original"][0]-params[:image_crop_w].to_i
+          end
+          if params[:image_crop_h].to_i+params[:image_crop_y].to_i > dish.image_dimensions["original"][1]
+            params[:image_crop_y] = dish.image_dimensions["original"][1]-params[:image_crop_h].to_i
+          end
+          dish.attributes = params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y)
+          if dish.image_crop_w_changed? || dish.image_crop_h_changed? || dish.image_crop_x_changed? || dish.image_crop_y_changed?
+            dish.save
+            dish.update_attributes({:image_crop_processed => false})
+            dish.image.reprocess!
+            dish.update_attributes({:image_crop_processed => true})
+          end
+        end
+        
+        dish.price = params[:price]
+        
+        current_locale = I18n.locale
+        
+        languages.each do |language|
+          I18n.locale = language.locale
+          dish.attributes = {
+            :title => params[:title][language.locale],
+            :description => params[:description][language.locale],
+            :drinks => params[:drinks][language.locale],
+            :sides => params[:sides][language.locale]
+          }
+        end
+        
+        I18n.locale = current_locale
+        
+        params[:dishsuggestions].each_with_index do |dishsuggestion, i|
+          break if i >= 2;
+          if Dish.exists?(dishsuggestion[1].to_i) && Dish.find(dishsuggestion[1].to_i).menu.user == @user && dish["dishsuggestion_"+(i+1).to_s] != Dish.find(dishsuggestion[1].to_i)
+            dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
           else
-            dish.image_crop_h = dish.image_dimensions["original"].min
-            dish.image_crop_w = (dish.image_dimensions["cropped_default_retina"][0].to_f/dish.image_dimensions["cropped_default_retina"][1].to_f)*dish.image_crop_h
-          end
-          dish.image_crop_x = (dish.image_dimensions["original"][0]-dish.image_crop_w).to_f/2
-          dish.image_crop_y = (dish.image_dimensions["original"][1]-dish.image_crop_h).to_f/2
-        end
-      elsif !params.values_at(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y).include?(nil)
-        if params[:image_crop_w].to_i+params[:image_crop_x].to_i > dish.image_dimensions["original"][0]
-          params[:image_crop_x] = dish.image_dimensions["original"][0]-params[:image_crop_w].to_i
-        end
-        if params[:image_crop_h].to_i+params[:image_crop_y].to_i > dish.image_dimensions["original"][1]
-          params[:image_crop_y] = dish.image_dimensions["original"][1]-params[:image_crop_h].to_i
-        end
-        dish.attributes = params.permit(:image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y)
-        if dish.image_crop_w_changed? || dish.image_crop_h_changed? || dish.image_crop_x_changed? || dish.image_crop_y_changed?
-          dish.save
-          dish.update_attributes({:image_crop_processed => false})
-          dish.image.reprocess!
-          dish.update_attributes({:image_crop_processed => true})
-        end
-      end
-      
-      dish.price = params[:price]
-      
-      current_locale = I18n.locale
-      
-      languages.each do |language|
-        I18n.locale = language.locale
-        dish.attributes = {
-          :title => params[:title][language.locale],
-          :description => params[:description][language.locale],
-          :drinks => params[:drinks][language.locale],
-          :sides => params[:sides][language.locale]
-        }
-      end
-      
-      I18n.locale = current_locale
-      
-      params[:dishsuggestions].each_with_index do |dishsuggestion, i|
-        break if i >= 2;
-        if Dish.exists?(dishsuggestion[1].to_i) && Dish.find(dishsuggestion[1].to_i).menu.user == @user && dish["dishsuggestion_"+(i+1).to_s] != Dish.find(dishsuggestion[1].to_i)
-          dish.update_attribute("dishsuggestion_"+(i+1).to_s,Dish.find(dishsuggestion[1].to_i))
-        else
-          dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
-        end
-      end
-
-      dish.ingredients = []
-      if params[:ingredients]
-        params[:ingredients].each do |ingredient|
-          if Ingredient.exists?(ingredient[0].to_i)
-            dish.ingredients.push(Ingredient.find(ingredient[0].to_i))
+            dish.update_attribute("dishsuggestion_"+(i+1).to_s,nil)
           end
         end
-      end
       
-      dish.save
+        dish.ingredients = []
+        if params[:ingredients]
+          params[:ingredients].each do |ingredient|
+            if Ingredient.exists?(ingredient[0].to_i)
+              dish.ingredients.push(Ingredient.find(ingredient[0].to_i))
+            end
+          end
+        end
+        
+        dish.save
+      end
       
       render :json => {:status => "success"}
       return
