@@ -12,13 +12,19 @@ raw(Jsonify::Builder.plain do |j|
   j.zip                        @req_location.zip
   j.city                       @req_location.city
   j.country                    @req_location.country
+  
+  j.latitude                   @req_location.latitude
+  j.longitude                  @req_location.longitude
 
   j.telephone                  @req_location.user.telephone
   j.email                      @req_location.user.email
   j.website                    @req_location.user.website
   
-  j.latitude                   @req_location.latitude
-  j.longitude                  @req_location.longitude
+  j.categories(@req_location.user.categories) do |category|
+    category.category_lang.each do |key, value|
+      j[key] = value
+    end
+  end
   
   j.daily_dishes(@req_location.user.daily_dishes.find(
     :all,
