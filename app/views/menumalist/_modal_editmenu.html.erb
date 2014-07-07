@@ -86,36 +86,9 @@
     <% end %>
 	</div>
 </div>
-<div class="row">
-	<div class="col-md-12">
-		<div class="form-group">
-			<label for="field-1" class="control-label"><%=t("menumalist.menu_delete") %></label>
-      <br />
-      <a href="javascript:;" onclick="pl8es_f_initdeletemenu();" class="pl8es_c_initdeletemenu">
-        <button type="button" class="btn btn-red btn-icon icon-left">
-        	<%=t("menumalist.menu_delete_delete") %>
-        	<i class="entypo-cancel"></i>
-        </button>
-      </a>
-      <span class="pl8es_c_confirmdeletemenu">
-        <%=t("menumalist.menu_delete_sure") %>
-        <a href="javascript:;" onclick="pl8es_f_confirmdeletemenu(<%=menu.id %>);">
-          <button type="button" class="btn btn-red btn-icon icon-left">
-          	<%=t("menumalist.menu_delete_yes") %>
-          	<i class="entypo-cancel"></i>
-          </button>
-        </a>
-        <a href="javascript:;" onclick="pl8es_f_revertdeletemenu();">
-          <button type="button" class="btn btn-warning btn-xs">
-            <%=t("menumalist.menu_delete_keep") %>
-          </button>
-        </a>
-      </span>
-		</div>
-	</div>
-</div>
 <% end %>
 <%=neon_modal_footer do |b| %>
+<%=render :partial => "neon/modal_footer_delete" %>
 <button type="button" class="btn btn-default" data-dismiss="modal"><%=t("menumalist.menu_modal_edit_cancel") %></button>
 <button type="submit" class="btn btn-success" ><%=t("menumalist.menu_modal_edit_submit") %></button>
 <% end %>

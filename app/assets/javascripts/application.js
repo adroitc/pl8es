@@ -301,23 +301,3 @@ function pl8es_f_initdelete_confirm(e){
   md.closest("form").submit();
   md.find(".pl8es-input-delete").css("display","none").attr("disabled","disabled");
 }
-function pl8es_f_initdeletemenu(){
-  $(".pl8es_c_initdeletemenu").hide();
-  $(".pl8es_c_confirmdeletemenu").show();
-}
-function pl8es_f_initdeletemenu(){
-  $(".pl8es_c_initdeletemenu").hide();
-  $(".pl8es_c_confirmdeletemenu").show();
-}
-function pl8es_f_confirmdeletemenu(m){
-  var d = new FormData();
-  d.append("authenticity_token", window._token);
-  d.append("menu_id", m);
-  pl8es_i_ajax("/a/menu/delete",d,function(){
-    location.reload();
-  });
-}
-function pl8es_f_revertdeletemenu(){
-  $(".pl8es_c_initdeletemenu").show();
-  $(".pl8es_c_confirmdeletemenu").hide();
-}

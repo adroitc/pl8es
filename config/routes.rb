@@ -47,7 +47,6 @@ Pl8es::Application.routes.draw do
   post "/a/menu/add" => "ajax/menu#addmenu"
   post "/a/menu/edit" => "ajax/menu#editmenu"
   post "/a/menu/duplicate" => "ajax/menu#duplicatemenu"
-  post "/a/menu/delete" => "ajax/menu#deletemenu"
   
   resources :ajax_navigation, :only => []
   post "/a/category/add" => "ajax/navigation#addnavigation"
