@@ -4,7 +4,7 @@
      	<article class="album" style="margin-bottom:0px;border-width:0px;">
      		<header>
           <a href="javascript:;" onclick="jQuery('#modal-editdailydish-<%=daily_dish.id %>').modal('show');">
-            <img class="unveil" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : "http://placehold.it/400x400" %>" style="background-color:" />
+            <img class="unveil" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : "http://placehold.it/400x400" %>" />
           </a>
         </header>
         <div class="panel-heading">
