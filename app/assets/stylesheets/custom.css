@@ -72,17 +72,28 @@ body {
   font-weight: normal;
   width: 100%;
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album
+.gallery-env.draggable-portlets div.panel.panel-primary.panel-add
 {
+  background-color: transparent;
+  border-color: transparent;
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add:hover article.album header
+.gallery-env.draggable-portlets div.panel.panel-primary.panel-add div.panel-body
 {
-  background-color: rgba(0,0,0,0.01);
+  border: 4px dashed #999;
+}
+.gallery-env.draggable-portlets div.panel.panel-primary.panel-add:hover div.panel-body
+{
+  border: 4px dashed #666;
+}
+.gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album header img
+{
+  visibility: hidden;
 }
 .gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album div.panel-heading
 {
+  /*background-color: rgba(0,0,0,0.02);*/
   background-color: transparent;
-  color: #000;
+  color: #666;
   position: absolute;
   top: 0px;
   margin: 0px;
@@ -96,7 +107,17 @@ body {
 }
 .gallery-env.draggable-portlets div.panel.panel-primary.panel-add:hover article.album div.panel-heading
 {
-  background-color: rgba(0,0,0,0.05);
+  color: #333;
+  pointer-events: none;
+}
+.gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album div.panel-heading div
+{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  margin-top: -14px;
+  text-align: center;
+  font-size: 60px;
 }
 ul.ui-selectable
 {
