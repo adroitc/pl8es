@@ -26,6 +26,8 @@
         <% end %>
       </span>
       <% end %>
+      <%=render :partial => "neon/panel_add", :locals => {:js_onclick => "jQuery('#modal-addnavigation').modal('show');", :image_size => 1} %>
+      <% if 1 == 2 %>
       <div class="col-sm-3" style="height:240px;">
         <div style="margin-top:50%;text-align:center;">
           <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">
@@ -36,6 +38,7 @@
           </a>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
