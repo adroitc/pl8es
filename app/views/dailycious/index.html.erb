@@ -81,7 +81,7 @@
                 </span>
                 <% end %>
                 <% if !current_date.past? %>
-                <%=render :partial => "neon/panel_add", :locals => {:js_onclick => "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');", :image_size => 0} %>
+                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
                 <% end %>
               </td>
             </tr>

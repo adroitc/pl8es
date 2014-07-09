@@ -41,34 +41,10 @@
       </span>
       <% end %>
       <% if @navigation.navigation == nil && @navigation.dishes.count == 0 %>
-      <%=render :partial => "neon/panel_add", :locals => {:js_onclick => "jQuery('#modal-addnavigation').modal('show');", :image_size => 1} %>
-      <% if 1 == 2 %>
-      <div class="col-sm-3" style="height:240px;">
-        <div style="margin-top:50%;text-align:center;">
-          <a href="javascript:;" onclick="jQuery('#modal-addnavigation').modal('show');">
-            <button type="button" class="btn btn-green btn-icon btn-lg  icon-left">
-            	<%=t("menumalist.add_new_category") %>
-            	<i class="entypo-plus"></i>
-            </button>
-          </a>
-        </div>
-      </div>
-      <% end %>
+      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 4, :image_size => 1, :js_onclick => "jQuery('#modal-addnavigation').modal('show');"} %>
       <% end %>
       <% if @navigation.sub_navigations.count == 0 %>
-      <%=render :partial => "neon/panel_add", :locals => {:js_onclick => "jQuery('#modal-adddish').modal('show');", :image_size => 1} %>
-      <% if 1 == 2 %>
-      <div class="col-sm-3" style="height:240px;">
-        <div style="margin-top:50%;text-align:center;">
-          <a href="javascript:;" onclick="jQuery('#modal-adddish').modal('show');">
-            <button type="button" class="btn btn-green btn-icon btn-lg  icon-left">
-            	<%=t("menumalist.add_new_dish") %>
-            	<i class="entypo-plus"></i>
-            </button>
-          </a>
-        </div>
-      </div>
-      <% end %>
+      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 4, :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');"} %>
       <% end %>
     </div>
   </div>
