@@ -22,7 +22,7 @@
       %>
       <span class="tab-pane <%="active" if language == @user.restaurant.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
         <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Restaurant description</strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.default_language == language %></label>
-	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Restaurant description" data-validate="maxlength[250]" <%="required" if language == @user.default_language %>><%=@user.description %></textarea>
+	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Restaurant description" data-validate="maxlength[250]" <%="required" if language == @user.restaurant.default_language %>><%=@user.restaurant.description %></textarea>
       </span>
       <%
       end
