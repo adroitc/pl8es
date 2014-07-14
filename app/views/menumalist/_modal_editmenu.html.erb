@@ -2,18 +2,16 @@
 <%= form_tag({:controller => "ajax/menu", :action => "editmenu"}, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editmenu"}) do %>
 <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
 <%=neon_modal_body do |b| %>
-<div class="row">
-	<div class="col-md-12">
-		<div class="form-group">
-			<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
-			<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>" data-validate="maxlength[28]" required>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<div class="form-group">
-			<label class="control-label"><%=t("menumalist.menu_default") %></label>
+<div class="col-md-12">
+  <div class="row">
+  	<div class="form-group">
+  		<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
+  		<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>" data-validate="maxlength[28]" required>
+  	</div>
+  </div>
+  <div class="row pl8es_c_makedefaultmenu">
+  	<div class="form-group">
+  		<label class="control-label"><%=t("menumalist.menu_default") %></label>
       <br />
       <span class="pl8es_c_toggledefaultmenu">
         <button type="button" class="btn btn-green btn-icon disabled icon-left">
@@ -32,16 +30,14 @@
         	<%=t("menumalist.menu_default_default_undo") %>
         </button>
       </a>
-		</div>
-	</div>
-</div>
-<div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
-	<div class="col-md-12">
-		<label for="field-1" class="control-label"><%=t("menumalist.menu_time") %></label>
+  	</div>
   </div>
-	<div class="col-md-12">
-  	<div class="col-md-6 input-group" style="padding-left:0px;">
-			<label for="form-from_time" class="control-label"><%=t("menumalist.menu_from") %></label>
+  <div class="row" style="margin-bottom:14px;">
+  	<label for="field-1" class="control-label"><%=t("menumalist.menu_time") %></label>
+  </div>
+  <div class="row" style="margin-bottom:14px;">
+  	<div class="col-md-4 input-group" style="padding-left:0px;">
+  		<label for="form-from_time" class="control-label"><%=t("menumalist.menu_from") %></label>
       <div class="input-group">
   	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.from_time %>" data-show-meridian="false" data-minute-step="5" />
   	    <div class="input-group-addon">
@@ -49,7 +45,7 @@
   	    </div>
       </div>
     </div>
-  	<div class="col-md-6 input-group" style="padding-right:0px;">
+    <div class="col-md-4 input-group" style="padding-right:0px;">
 			<label for="form-to_time" class="control-label"><%=t("menumalist.menu_to") %></label>
       <div class="input-group">
   	    <input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.to_time %>" data-show-meridian="false" data-minute-step="5" />
@@ -59,32 +55,29 @@
       </div>
     </div>
 	</div>
-</div>
-<div class="row" style="margin-bottom:14px;">
-	<div class="col-md-12">
-		<label for="form-languages" class="control-label">Select default language</label>
+  <div class="row" style="margin-bottom:14px;">
+    <label for="form-languages" class="control-label">Select default language</label>
     <br />
-	  <select name="default_language" id="form-default_language" class="col-md-4 select2" data-allow-clear="false" data-placeholder="Select default language" style="padding:0px;">
+    <select name="default_language" id="form-default_language" class="col-md-4 select2" data-allow-clear="false" data-placeholder="Select default language">
       <% Language.all.each do |language| %>
-	  	<option value="<%=language.id %>" <%="selected" if menu.default_language == language %>><%=language.title.capitalize %></option>
+    	<option value="<%=language.id %>" <%="selected" if menu.default_language == language %>><%=language.title.capitalize %></option>
       <% end %>
-	  </select>
-	</div>
-</div>
-<div class="row" style="margin-bottom:14px;">
-	<div class="col-md-12">
-		<label for="form-languages" class="control-label"><%=t("menumalist.menu_languages") %></label>
-    <br />
-    <%
-    languages = menu.languages
-    Language.all.each do |language|
-    %>
-    <div class="col-sm-3">
-      <input class="icheck-2-checkbox" type="checkbox" id="form-language-<%=language.id %>" name="languages[<%=language.id %>]" <%="disabled" if menu.default_language == language %> <%="checked" if languages.exists?(language.id) %>>
-      <label for="form-language-<%=language.id %>"><%=language.title.capitalize %></label>
+    </select>
+  </div>
+  <div class="row" style="margin-bottom:14px;">
+  	<label for="form-languages" class="control-label"><%=t("menumalist.menu_languages") %></label>
+    <div class="input-group">
+      <%
+      languages = menu.languages
+      Language.all.each do |language|
+      %>
+      <div class="col-sm-3">
+        <input class="icheck-2-checkbox" type="checkbox" id="form-language-<%=language.id %>" name="languages[<%=language.id %>]" <%="disabled" if menu.default_language == language %> <%="checked" if languages.exists?(language.id) %>>
+        <label for="form-language-<%=language.id %>"><%=language.title.capitalize %></label>
+      </div>
+      <% end %>
     </div>
-    <% end %>
-	</div>
+  </div>
 </div>
 <% end %>
 <%=neon_modal_footer do |b| %>

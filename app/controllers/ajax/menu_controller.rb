@@ -17,18 +17,18 @@ class Ajax::MenuController < ApplicationController
       new_menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({
         :default_language => Language.find(params[:default_language].to_i),
         :languages => languages,
-        :user => @user
+        :restaurant => @user.restaurant
       }))
       
       render :json => {:status => "success"}
       return
     end
-    render :json => {:status => "invalid", :params => params}
+    render :json => {:status => "invalid"}
   end
   
   def editmenu
     if @user && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language).include?(nil) && @user.menus.exists?(params[:menu_id]) && Language.exists?(params[:default_language].to_i)
-      menu = @user.menus.find(params[:menu_id])
+      menu = @user.restaurant.menus.find(params[:menu_id])
       
       if params[:delete] == "true"
         menu.destroy
@@ -51,7 +51,7 @@ class Ajax::MenuController < ApplicationController
         }))
       end
       
-      render :json => {:status => "success", :p => params}
+      render :json => {:status => "success"}
       return
     end
     render :json => {:status => "invalid"}

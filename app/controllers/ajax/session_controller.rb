@@ -39,7 +39,7 @@ class Ajax::SessionController < ApplicationController
         })
         session[:user_id] = @user.id
         if @user.isAdmin
-        session[:admin_id] = @user.id
+          session[:admin_id] = @user.id
         end
         
         render :json => {:status => "success"}

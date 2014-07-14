@@ -189,6 +189,21 @@ div.has-switch div.switch-off input
 {
   display: none;
 }
+.select2-container .select2-choice
+{
+  height: 31px;
+  line-height: 31px;
+}
+.select2-container .select2-choice .select2-chosen
+{
+  height: 31px;
+  line-height: 31px;
+}
+.select2-container .select2-choice .select2-arrow
+{
+  height: 31px;
+  line-height: 31px;
+}
 div.tile-stats.datepicker.weekpicker
 {
   float: left;

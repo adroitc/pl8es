@@ -7,11 +7,11 @@
       <label class="control-label">Colors</label>
   		<ul id="form-menu_color" class="ui-selectable">
         <% MenuColorTemplate.all.each do |menuColorTemplate| %>
-        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;background-image:url(<%=menuColorTemplate.preview_image.url(:cropped_default_retina) %>);background-size:cover;color:transparent;" class="<%="ui-selected" if @user.menuColorTemplate == menuColorTemplate %>"><%=menuColorTemplate.id %></li>
+        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;background-image:url(<%=menuColorTemplate.preview_image.url(:cropped_default_retina) %>);background-size:cover;color:transparent;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == menuColorTemplate %>"><%=menuColorTemplate.id %></li>
         <% end %>
-        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;" class="<%="ui-selected" if @user.menuColorTemplate == nil %>">custom</li>
+        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == nil %>">custom</li>
       </ul>
-      <input name="menuColorTemplate_id" type="hidden" id="form-menuColorTemplate_id" value="<%=@user.menuColorTemplate.id if @user.menuColorTemplate %>">
+      <input name="menuColorTemplate_id" type="hidden" id="form-menuColorTemplate_id" value="<%=@user.restaurant.menuColorTemplate.id if @user.restaurant.menuColorTemplate %>">
 		</div>
 	</div>
 </div>
@@ -26,7 +26,7 @@
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input id="form-background" name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-background" name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
@@ -46,7 +46,7 @@
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input id="form-bar_background" name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.bar_background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-bar_background" name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.bar_background %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div> 
@@ -57,7 +57,7 @@
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input id="form-nav_text" name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-nav_text" name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.nav_text %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
@@ -68,7 +68,7 @@
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
 				</div>
-				<input id="form-nav_text_active" name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.menuColor.nav_text_active %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
+				<input id="form-nav_text_active" name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.nav_text_active %>" placeholder="<%=t("neon.input_color_placeholder") %>" />
 			</div>
   	</div>
   </div>
@@ -79,7 +79,7 @@
   		<label class="control-label"><%=t("menumalist.design_font") %></label>
 		  <select name="supportedFont_id" class="select2" data-allow-clear="false" data-placeholder="Select one city...">
         <% SupportedFont.all.each do |supportedFont| %>
-        <option value="<%=supportedFont.id %>" <%="selected" if @user.supportedFont == supportedFont %>><%=supportedFont.title %></option>
+        <option value="<%=supportedFont.id %>" <%="selected" if @user.restaurant.supportedFont == supportedFont %>><%=supportedFont.title %></option>
         <% end %>
       </select>
   	</div>

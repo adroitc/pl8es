@@ -1,23 +1,10 @@
 class User < ActiveRecord::Base
-  has_one :location
-	has_and_belongs_to_many :languages
-  belongs_to :default_language, :class_name => "Language"
-  has_many :openingHours
-  has_and_belongs_to_many :categories
-  belongs_to :menuColorTemplate
-  has_one :menuColor
-  belongs_to :supportedFont
-  belongs_to :default_menu, :class_name => "Menu"
-  has_many :menus
-  has_many :dishes
-  has_many :daily_dishes
+  has_one :restaurant
   has_many :devices do
     def actives()
       where(["updated_at >= (?)", DateTime.now-31.days])
     end
   end
-  
-  translates :description
   
   has_attached_file :logo_image, {
     :styles => {
@@ -108,20 +95,7 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true, :length => {
     :maximum => 28
   }
-  
   validates :name, :length => {
-    :maximum => 28
-  }
-  
-  validates :description, :length => {
-    :maximum => 250
-  }
-  
-  validates :website, :length => {
-    :maximum => 250
-  }
-  
-  validates :telephone, :length => {
     :maximum => 28
   }
   
@@ -131,20 +105,5 @@ class User < ActiveRecord::Base
 		end
 		return false
 	end
-  
-  def menu_languages
-    menu_languages = []
-    menus.each do |menu|
-      menu.languages.each do |menu_language|
-        if menu_languages.select{|language| language[:locale] == menu_language.locale}.count == 0
-          menu_languages.push(menu_language)
-        end
-      end
-    end
-    if !menu_languages.include?(default_language)
-      menu_languages.push(default_language)
-    end
-    menu_languages
-  end
   
 end

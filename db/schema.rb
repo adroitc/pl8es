@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704075348) do
+ActiveRecord::Schema.define(version: 20140714111911) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "categories_users", force: true do |t|
+  create_table "categories_restaurants", force: true do |t|
     t.integer "category_id"
-    t.integer "user_id"
+    t.integer "restaurant_id"
   end
 
   create_table "category_translations", force: true do |t|
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.integer  "image_crop_y"
     t.boolean  "image_crop_processed",             default: true
     t.string   "image_fingerprint"
-    t.integer  "user_id"
     t.integer  "position"
+    t.integer  "restaurant_id"
   end
 
   create_table "devices", force: true do |t|
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.integer  "image_crop_y"
     t.boolean  "image_crop_processed",             default: true
     t.integer  "ingredients_id"
-    t.integer  "user_id"
+    t.integer  "restaurant_id"
   end
 
   create_table "dishes_ingredients", force: true do |t|
@@ -140,13 +140,12 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.integer "menu_id"
   end
 
-  create_table "languages_users", force: true do |t|
+  create_table "languages_restaurants", force: true do |t|
     t.integer "language_id"
-    t.integer "user_id"
+    t.integer "restaurant_id"
   end
 
   create_table "locations", force: true do |t|
-    t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
@@ -155,6 +154,7 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "restaurant_id"
   end
 
   create_table "menu_color_templates", force: true do |t|
@@ -216,34 +216,17 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.string   "sub_text_active"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  create_table "menu_label_translations", force: true do |t|
-    t.integer  "menu_label_id", null: false
-    t.string   "locale",        null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-  end
-
-  add_index "menu_label_translations", ["locale"], name: "index_menu_label_translations_on_locale"
-  add_index "menu_label_translations", ["menu_label_id"], name: "index_menu_label_translations_on_menu_label_id"
-
-  create_table "menu_labels", force: true do |t|
-    t.string   "color"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "restaurant_id"
   end
 
   create_table "menus", force: true do |t|
-    t.integer  "user_id"
     t.string   "title"
     t.string   "from_time"
     t.string   "to_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "default_language_id"
+    t.integer  "restaurant_id"
   end
 
   create_table "navigation_translations", force: true do |t|
@@ -279,15 +262,30 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.boolean  "image_crop_processed",             default: true
   end
 
-  create_table "opening_hours", force: true do |t|
-    t.integer  "weekday"
-    t.string   "a_from"
-    t.string   "a_to"
-    t.string   "b_from"
-    t.string   "b_to"
-    t.integer  "user_id"
+  create_table "restaurant_translations", force: true do |t|
+    t.integer  "restaurant_id", null: false
+    t.string   "locale",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
+  end
+
+  add_index "restaurant_translations", ["locale"], name: "index_restaurant_translations_on_locale"
+  add_index "restaurant_translations", ["restaurant_id"], name: "index_restaurant_translations_on_restaurant_id"
+
+  create_table "restaurants", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "telephone"
+    t.string   "website"
+    t.string   "download_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "default_language_id"
+    t.integer  "menuColor_id"
+    t.integer  "menuColorTemplate_id"
+    t.integer  "supportedFont_id"
+    t.integer  "defaultMenu_id"
   end
 
   create_table "supported_fonts", force: true do |t|
@@ -308,31 +306,13 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.datetime "updated_at"
   end
 
-  create_table "user_translations", force: true do |t|
-    t.integer  "user_id",     null: false
-    t.string   "locale",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "description"
-  end
-
-  add_index "user_translations", ["locale"], name: "index_user_translations_on_locale"
-  add_index "user_translations", ["user_id"], name: "index_user_translations_on_user_id"
-
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "telephone"
-    t.string   "website"
-    t.string   "register_source"
-    t.string   "menu_tariff"
-    t.string   "daily_tariff"
-    t.string   "download_code"
     t.datetime "last_login"
-    t.integer  "default_language_id"
     t.integer  "default_menu_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -369,8 +349,6 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.boolean  "restaurant_image_crop_processed",             default: true
     t.boolean  "logo_image_crop_processed",                   default: true
     t.boolean  "appmain_image_crop_processed",                default: true
-    t.integer  "menuColor_id"
-    t.integer  "supportedFont_id"
     t.string   "splashscreen_image_file_name"
     t.string   "splashscreen_image_content_type"
     t.integer  "splashscreen_image_file_size"
@@ -383,7 +361,6 @@ ActiveRecord::Schema.define(version: 20140704075348) do
     t.integer  "splashscreen_image_crop_y"
     t.boolean  "splashscreen_image_processed",                default: true
     t.string   "background_type"
-    t.integer  "menuColorTemplate_id"
     t.boolean  "isAdmin",                                     default: false
   end
 

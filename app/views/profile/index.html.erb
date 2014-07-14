@@ -24,7 +24,7 @@
      				<li>
      					<div class="profile-name">
      						<strong style="color:#000">
-     							<%=@user.name %>
+     							<%=@user.restaurant.name %>
                 </strong>
      						<span>
      							<%=@user.email %>
@@ -39,13 +39,13 @@
      				</li>
      				<li>
      					<div class="profile-stat">
-     						<h3><%=@user.menus.count %></h3>
+     						<h3><%=@user.restaurant.menus.count %></h3>
      						<span><a href="<%=url_for :controller => "menumalist", :action => "index" %>">Menus</a></span>
      					</div>
      				</li>
      				<li>
      					<div class="profile-stat">
-     						<h3><%=@user.dishes.count %></h3>
+     						<h3><%=@user.restaurant.dishes.count %></h3>
      						<span>Dishes</span>
      					</div>
      				</li>
@@ -70,21 +70,21 @@
      		<img src="<%=@user.restaurant_image.url(:cropped_default_retina) %>" alt="" class="col-sm-4" />
      		<div class="col-sm-8">
           <br />
-          <%=@user.description %>
+          <%=@user.restaurant.description %>
      		</div>
      	</header>
      	<section class="profile-info-tabs">
      		<div class="row">
      			<div class="col-sm-offset-2 col-sm-10">
      				<ul class="user-details">
-              <% if @user.categories.count >= 1 %>
+              <% if @user.restaurant.categories.count >= 1 %>
      					<li>
-                <%=@user.categories.first.title %>
+                <%=@user.restaurant.categories.first.title %>
      					</li>
               <% end %>
-              <% if @user.categories.count == 2 %>
+              <% if @user.restaurant.categories.count == 2 %>
      					<li>
-                <%=@user.categories.last.title %>
+                <%=@user.restaurant.categories.last.title %>
      					</li>
               <% end %>
      				</ul>

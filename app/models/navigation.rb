@@ -1,4 +1,5 @@
 class Navigation < ActiveRecord::Base
+  belongs_to :restaurant
   belongs_to :menu
   belongs_to :navigation
   has_many :sub_navigations, :class_name => "Navigation"
@@ -32,7 +33,6 @@ class Navigation < ActiveRecord::Base
     :width => 828,
     :height => 552
   }
-  
   validates :title, :length => {
     :maximum => 28
   }

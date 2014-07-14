@@ -1,7 +1,7 @@
 class Ajax::AdminController < ApplicationController
   
   def addfont
-    if @user && !params.values_at(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil)
+    if @user && @user.isAdmin && !params.values_at(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil)
       SupportedFont.create(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
       
       render :json => {:status => "success"}
@@ -11,7 +11,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def editfont
-    if @user && !params.values_at(:supportedFont_id, :title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil) && SupportedFont.exists?(params[:supportedFont_id])
+    if @user && @user.isAdmin && !params.values_at(:supportedFont_id, :title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil) && SupportedFont.exists?(params[:supportedFont_id])
       SupportedFont.find(params[:supportedFont_id]).update_attributes(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
       
       render :json => {:status => "success"}
@@ -21,7 +21,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def addcategory
-    if @user && !params.values_at(:title).include?(nil)
+    if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
       new_category = Category.create()
       
       current_locale = I18n.locale
@@ -42,7 +42,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def editcategory
-    if @user && !params.values_at(:category_id, :title).include?(nil) && Category.exists?(params[:category_id])
+    if @user && @user.isAdmin && !params.values_at(:category_id, :title).include?(nil) && Category.exists?(params[:category_id])
       category = Category.find(params[:category_id])
       
       current_locale = I18n.locale
@@ -62,50 +62,8 @@ class Ajax::AdminController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
-  def addmenulabel
-    if @user && !params.values_at(:title).include?(nil)
-      new_menuLabel = MenuLabel.create()
-      
-      current_locale = I18n.locale
-      
-      Language.all.each do |language|
-        I18n.locale = language.locale
-        new_menuLabel.title = params[:title][language.locale]
-      end
-      
-      I18n.locale = current_locale
-      
-      new_menuLabel.save
-      
-      render :json => {:status => "success"}
-      return
-    end
-    render :json => {:status => "invalid"}
-  end
-  
-  def editmenulabel
-    if @user && !params.values_at(:menuLabel_id, :title).include?(nil) && MenuLabel.exists?(params[:menuLabel_id])
-      menuLabel = MenuLabel.find(params[:menuLabel_id])
-      
-      current_locale = I18n.locale
-      
-      Language.all.each do |language|
-        I18n.locale = language.locale
-        menuLabel.title = params[:title][language.locale]
-      end
-      
-      I18n.locale = current_locale
-      
-      menuLabel.save
-      
-      render :json => {:status => "success"}
-      return
-    end
-    render :json => {:status => "invalid"}
-  end
-  
   def addmenucolortemplate
-    if @user && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active).include?(nil)
+    if @user && @user.isAdmin && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active).include?(nil)
       MenuColorTemplate.create(params.permit(:background, :bar_background, :nav_text, :nav_text_active).merge({
         bev_background: params[:nav_text],
         bev_background_selected: params[:bar_background],
@@ -136,7 +94,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def editmenucolortemplate
-    if @user && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active).include?(nil) && MenuColorTemplate.exists?(params[:menuColorTemplate_id])
+    if @user && @user.isAdmin && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active).include?(nil) && MenuColorTemplate.exists?(params[:menuColorTemplate_id])
       menuColorTemplate = MenuColorTemplate.find(params[:menuColorTemplate_id])
       menuColorTemplate.attributes = params.permit(:background, :bar_background, :nav_text, :nav_text_active).merge({
         bev_background: params[:nav_text],

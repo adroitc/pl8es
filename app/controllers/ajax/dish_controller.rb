@@ -2,7 +2,7 @@ class Ajax::DishController < ApplicationController
   
   # get methods
   def dish
-    if @user && Dish.exists?(params[:id]) && Dish.find(params[:id]).menu.user == User.find(session[:user_id])
+    if @user && Dish.exists?(params[:id]) && Dish.find(params[:id]).menu.restaurant.user == User.find(session[:user_id])
       current_locale = I18n.locale
       
       I18n.locale = params[:language_locale]
@@ -30,7 +30,7 @@ class Ajax::DishController < ApplicationController
   
   # post methods
   def adddish
-    if @user && !params.values_at(:navigation_id, :title, :description, :price).include?(nil) && Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user
+    if @user && !params.values_at(:navigation_id, :title, :description, :price).include?(nil) && Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.restaurant.user == @user
       languages = Language.find_all_by_locale(params[:title].keys)
       
       navigation = Navigation.find(params[:navigation_id])
@@ -73,7 +73,7 @@ class Ajax::DishController < ApplicationController
   end
   
   def editdish
-    if @user && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sides).include?(nil) && Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).navigation.menu.user == @user
+    if @user && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sides).include?(nil) && Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).navigation.menu.restaurant.user == @user
       dish = Dish.find(params[:dish_id])
       
       if params[:delete] == "true"
@@ -157,7 +157,7 @@ class Ajax::DishController < ApplicationController
   def sortdish
     if @user && !params.values_at(:dish_ids).include?(nil)
       params[:dish_ids].each do |dish_id|
-        if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).user == @user
+        if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).restaurant.user == @user
           Dish.find(dish_id[0].to_i).update_attributes({
             :position => dish_id[1].to_i
           })

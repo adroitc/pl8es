@@ -25,10 +25,10 @@ class Ajax::ProfileController < ApplicationController
           item["types"] == ["country", "political"]
         }[0]["long_name"]
         
-        @user.update_attributes(params.permit(:email, :website, :telephone).merge({
+        @user.restaurant.update_attributes(params.permit(:email, :website, :telephone).merge({
           :default_language => Language.find(params[:default_language])
         }))
-        @user.location.update_attributes(params.permit(:address, :zip, :city, :country).merge({
+        @user.restaurant.location.update_attributes(params.permit(:address, :zip, :city, :country).merge({
           :latitude => google_results[0]["geometry"]["location"]["lat"].to_f,
           :longitude => google_results[0]["geometry"]["location"]["lng"].to_f
         }))

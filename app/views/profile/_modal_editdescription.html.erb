@@ -1,4 +1,4 @@
-<%= neon_modal :id => "editdescription", :width => "678px", :title => "Edit description", :languages => @user.menu_languages, :default_language => @user.default_language do |m| %>
+<%= neon_modal :id => "editdescription", :width => "678px", :title => "Edit description", :languages => @user.restaurant.menu_languages, :default_language => @user.restaurant.default_language do |m| %>
 <%= form_tag({:controller => "ajax/profile", :action => "editdescription"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -12,16 +12,16 @@
   <div class="col-sm-6">
     <div class="col-sm-12 form-group" style="padding:0px;">
       <label for="form-name" class="control-label"><strong>Restaurant name</strong></label>
-	    <input name="name" type="text" class="form-control" id="form-name" placeholder="Restaurant name" data-validate="maxlength[28]" value="<%=@user.name %>" required>
+	    <input name="name" type="text" class="form-control" id="form-name" placeholder="Restaurant name" data-validate="maxlength[28]" value="<%=@user.restaurant.name %>" required>
     </div>
     <div class="col-sm-12 form-group tab-content" style="padding:0px;">
       <%
       current_locale = I18n.locale
-      @user.menu_languages.each do |language|
+      @user.restaurant.menu_languages.each do |language|
         I18n.locale = language.locale
       %>
-      <span class="tab-pane <%="active" if language == @user.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
-        <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Restaurant description</strong> - <%=language.title.capitalize %><%=" (Default)" if @user.default_language == language %></label>
+      <span class="tab-pane <%="active" if language == @user.restaurant.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
+        <label for="form-description[<%=language.locale %>]" class="control-label"><strong>Restaurant description</strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.default_language == language %></label>
 	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="Restaurant description" data-validate="maxlength[250]" <%="required" if language == @user.default_language %>><%=@user.description %></textarea>
       </span>
       <%
@@ -34,7 +34,7 @@
 	    <select name="categories[0]" id="form-categories[0]" class="select2" data-allow-clear="true" data-placeholder="Select default language">
         <option></option>
         <% Category.all.each do |category| %>
-	    	<option value="<%=category.id %>" <%="selected" if @user.categories.count >= 1 && @user.categories.first == category %>><%=category.title %></option>
+	    	<option value="<%=category.id %>" <%="selected" if @user.restaurant.categories.count >= 1 && @user.restaurant.categories.first == category %>><%=category.title %></option>
         <% end %>
 	    </select>
     </div>
@@ -43,7 +43,7 @@
 	    <select name="categories[1]" id="form-categories[1]" class="select2" data-allow-clear="true" data-placeholder="Select default language">
         <option></option>
         <% Category.all.each do |category| %>
-	    	<option value="<%=category.id %>" <%="selected" if @user.categories.count == 2 && @user.categories.last == category %>><%=category.title %></option>
+	    	<option value="<%=category.id %>" <%="selected" if @user.restaurant.categories.count == 2 && @user.restaurant.categories.last == category %>><%=category.title %></option>
         <% end %>
 	    </select>
     </div>
