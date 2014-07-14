@@ -80,7 +80,6 @@ Pl8es::Application.routes.draw do
   get "/admin/userswitch/:user_id" => "admin#user_switch"
   get "/admin/fonts" => "admin#fonts"
   get "/admin/tags" => "admin#categories"
-  get "/admin/menulabels" => "admin#menulabels"
   get "/admin/menucolortemplates" => "admin#menucolortemplates"
   
   resources :dashboard, :only => []
