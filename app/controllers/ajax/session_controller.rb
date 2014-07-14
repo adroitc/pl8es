@@ -11,13 +11,15 @@ class Ajax::SessionController < ApplicationController
         end
         @user.update_attributes({
           :last_login => DateTime.now,
-          :default_language => Language.first,
-          :location => Location.create(),
           :background_type => "color",
-          :menuColorTemplate => MenuColorTemplate.first,
-          :menuColor => MenuColor.create(),
-          :download_code => download_code,
-          :supportedFont => SupportedFont.first
+          :restaurant => Restaurant.create({
+            :default_language => Language.first,
+            :location => Location.create(),
+            :menuColorTemplate => MenuColorTemplate.first,
+            :menuColor => MenuColor.create(),
+            :download_code => download_code,
+            :supportedFont => SupportedFont.first
+          })
         })
         
         session[:user_id] = @user.id

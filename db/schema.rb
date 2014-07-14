@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714140140) do
+ActiveRecord::Schema.define(version: 20140714150951) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -342,6 +342,7 @@ ActiveRecord::Schema.define(version: 20140714140140) do
     t.integer  "restaurant_image_crop_x"
     t.integer  "restaurant_image_crop_y"
     t.boolean  "restaurant_image_processed",      default: true
+    t.string   "background_type"
   end
 
   create_table "supported_fonts", force: true do |t|
@@ -371,11 +372,7 @@ ActiveRecord::Schema.define(version: 20140714140140) do
     t.datetime "last_login"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "restaurant_image_crop_processed", default: true
-    t.boolean  "logo_image_crop_processed",       default: true
-    t.boolean  "appmain_image_crop_processed",    default: true
-    t.string   "background_type"
-    t.boolean  "isAdmin",                         default: false
+    t.boolean  "isAdmin",    default: false
   end
 
   create_table "wine_translations", force: true do |t|

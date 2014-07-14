@@ -161,7 +161,7 @@ raw(Jsonify::Builder.plain do |j|
     j.font_name_card_tab_title   @req_restaurant.restaurant.supportedFont.name_card_tab_title
     j.font_size_card_tab_title   @req_restaurant.restaurant.supportedFont.size_card_tab_title
     
-    j.background_type            @req_restaurant.background_type
+    j.background_type            @req_restaurant.restaurant.background_type
     
     menuColor = @req_restaurant.restaurant.menuColorTemplate.present? ? @req_restaurant.restaurant.menuColorTemplate : @req_restaurant.restaurant.menuColor
     j.background                 menuColor.background
