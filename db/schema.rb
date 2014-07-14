@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714132206) do
+ActiveRecord::Schema.define(version: 20140714132950) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -314,7 +314,6 @@ ActiveRecord::Schema.define(version: 20140714132206) do
     t.string   "first_name"
     t.string   "last_name"
     t.datetime "last_login"
-    t.integer  "default_menu_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "restaurant_image_file_name"
