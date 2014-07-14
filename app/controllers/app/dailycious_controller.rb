@@ -21,7 +21,9 @@ class App::DailyciousController < ApplicationController
   
   def adddailydish
     if @user && !params.values_at(:display_date, :title, :price).include?(nil)
-      new_daily_dish = DailyDish.create(params.permit(:display_date, :image, :title, :price).merge({user: @user}))
+      new_daily_dish = DailyDish.create(params.permit(:display_date, :image, :title, :price).merge({
+        :restaurant => @user.restaurant
+      }))
       
       if params[:image]
         if new_daily_dish.image_dimensions["original"][1] >= new_daily_dish.image_dimensions["original"][0]
@@ -44,27 +46,26 @@ class App::DailyciousController < ApplicationController
   end
   
   def editdailydish
-    if @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id])
+    if @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id]) && DailyDish.find(params[:daily_dish_id]).restaurant.user == @user
       daily_dish = DailyDish.find(params[:daily_dish_id])
-      if daily_dish.user == @user
-        daily_dish.attributes = params.permit(:image, :title, :price)
-        
-        if params[:image]
-          if daily_dish.image_dimensions["original"][1] >= daily_dish.image_dimensions["original"][0]
-            daily_dish.image_crop_w = daily_dish.image_dimensions["original"].min
-            daily_dish.image_crop_h = daily_dish.image_crop_w/(daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)
-          else
-            daily_dish.image_crop_h = daily_dish.image_dimensions["original"].min
-            daily_dish.image_crop_w = (daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)*daily_dish.image_crop_h
-          end
-          daily_dish.image_crop_x = (daily_dish.image_dimensions["original"][0]-daily_dish.image_crop_w).to_f/2
-          daily_dish.image_crop_y = (daily_dish.image_dimensions["original"][1]-daily_dish.image_crop_h).to_f/2
+      
+      daily_dish.update_attributes(params.permit(:image, :title, :price))
+      
+      if params[:image]
+        if daily_dish.image_dimensions["original"][1] >= daily_dish.image_dimensions["original"][0]
+          daily_dish.image_crop_w = daily_dish.image_dimensions["original"].min
+          daily_dish.image_crop_h = daily_dish.image_crop_w/(daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)
+        else
+          daily_dish.image_crop_h = daily_dish.image_dimensions["original"].min
+          daily_dish.image_crop_w = (daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)*daily_dish.image_crop_h
         end
-        daily_dish.save
-        
-        render :json => {:status => "success"}
-        return
+        daily_dish.image_crop_x = (daily_dish.image_dimensions["original"][0]-daily_dish.image_crop_w).to_f/2
+        daily_dish.image_crop_y = (daily_dish.image_dimensions["original"][1]-daily_dish.image_crop_h).to_f/2
       end
+      daily_dish.save
+      
+      render :json => {:status => "success"}
+      return
     end
     render :json => {:status => "invalid"}
   end
@@ -72,7 +73,7 @@ class App::DailyciousController < ApplicationController
   def sortdailydish
     if @user && !params.values_at(:daily_dish_ids).include?(nil)
       params[:daily_dish_ids].each do |daily_dish_id|
-        if DailyDish.exists?(daily_dish_id[0].to_i) && DailyDish.find(daily_dish_id[0].to_i).user == @user
+        if DailyDish.exists?(daily_dish_id[0].to_i) && DailyDish.find(daily_dish_id[0].to_i).restaurant.user == @user
           DailyDish.find(daily_dish_id[0].to_i).update_attributes({
             :position => daily_dish_id[1].to_i
           })
@@ -130,15 +131,15 @@ class App::DailyciousController < ApplicationController
   def map
     if !params.values_at(:q).include?(nil)
       @req_locations = Location.where([
-        "user_id IN (?)",
+        "restaurant_id IN (?)",
         DailyDish.find(
           :all,
-          :select => "user_id",
+          :select => "restaurant_id",
           :conditions => [
             "display_date = (?)",
             Date.today.to_datetime
           ]
-        ).map{|d| d.user_id}
+        ).map{|d| d.restaurant_id}
       ]).in_bounds(
         [
           [
@@ -177,19 +178,19 @@ class App::DailyciousController < ApplicationController
       suggestions = DailyDish.unscoped.find(
         :all,
         :select => ActiveRecord::Base.send(:sanitize_sql_array,[
-          "CASE WHEN LOWER(users.name) LIKE (?) THEN users.name WHEN category_translations.title IS NOT NULL THEN category_translations.title ELSE daily_dishes.title END AS suggestion",
+          "CASE WHEN LOWER(restaurants.name) LIKE (?) THEN restaurants.name WHEN category_translations.title IS NOT NULL THEN category_translations.title ELSE daily_dishes.title END AS suggestion",
           query
         ]),
         :joins => [
-          "INNER JOIN users ON users.id = daily_dishes.user_id",
-          "LEFT JOIN categories_users ON categories_users.user_id = daily_dishes.user_id",
+          "INNER JOIN restaurants ON restaurants.id = daily_dishes.restaurant_id",
+          "LEFT JOIN categories_restaurants ON categories_restaurants.restaurant_id = daily_dishes.restaurant_id",
           ActiveRecord::Base.send(:sanitize_sql_array,[
-            "LEFT JOIN category_translations ON category_translations.category_id = categories_users.category_id AND LOWER(category_translations.title) LIKE (?)",
+            "LEFT JOIN category_translations ON category_translations.category_id = categories_restaurants.category_id AND LOWER(category_translations.title) LIKE (?)",
             query
           ])
         ],
         :conditions => [
-          "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.user_id IN (?))",
+          "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.restaurant_id IN (?))",
           Date.today.to_datetime,
           "#{query}",
           User.find(
@@ -200,9 +201,9 @@ class App::DailyciousController < ApplicationController
             ]
           ).map{|u| u.id}.concat(
             ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
-              "SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
+              "SELECT restaurant_id FROM categories_users, category_translations WHERE categories_restaurants.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
               query
-            ])).map{|u| u["user_id"]}
+            ])).map{|u| u["restaurant_id"]}
           )
         ],
         :group => "suggestion",
@@ -220,20 +221,20 @@ class App::DailyciousController < ApplicationController
       query = "%#{params[:q].gsub("+"," ").downcase}%"
       
       @req_locations = Location.where(
-        ["user_id IN (?)",
+        ["restaurant_id IN (?)",
           DailyDish.unscoped.find(
             :all,
-            :select => "daily_dishes.user_id",
+            :select => "daily_dishes.restaurant_id",
             :joins => [
-              "INNER JOIN users ON users.id = daily_dishes.user_id",
-              "LEFT JOIN categories_users ON categories_users.user_id = daily_dishes.user_id",
+              "INNER JOIN restaurants ON restaurants.id = daily_dishes.restaurant_id",
+              "LEFT JOIN categories_restaurants ON categories_restaurants.restaurant_id = daily_dishes.restaurant_id",
               ActiveRecord::Base.send(:sanitize_sql_array,[
-                "LEFT JOIN category_translations ON category_translations.category_id = categories_users.category_id AND LOWER(category_translations.title) LIKE (?)",
+                "LEFT JOIN category_translations ON category_translations.category_id = categories_restaurants.category_id AND LOWER(category_translations.title) LIKE (?)",
                 query
               ])
             ],
             :conditions => [
-              "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.user_id IN (?))",
+              "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.restaurant_id IN (?))",
               Date.today.to_datetime,
               "#{query}",
               User.find(
@@ -244,13 +245,13 @@ class App::DailyciousController < ApplicationController
                 ]
               ).map{|u| u.id}.concat(
                 ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
-                  "SELECT user_id FROM categories_users, category_translations WHERE categories_users.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
+                  "SELECT restaurant_id FROM categories_restaurants, category_translations WHERE categories_restaurants.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
                   query
                 ])).map{|u| u["user_id"]}
               )
             ],
-            :group => "daily_dishes.user_id"
-          ).map{|u| u.user_id}
+            :group => "daily_dishes.restaurant_id"
+          ).map{|u| u.restaurant_id}
         ]
       ).sort_by do |e|
         distance = e.distance_to([

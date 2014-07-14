@@ -1,12 +1,12 @@
 <%=
 raw(Jsonify::Builder.plain do |j|
   
-  j.id                         @user.location.id
+  j.id                         @user.restaurant.location.id
   
   date = Date.today
   date += @add_weeks*7
   
-  j.daily_dishes(@user.daily_dishes.find(
+  j.daily_dishes(@user.restaurant.daily_dishes.find(
     :all,
     :conditions => [
       "display_date >= (?) AND display_date <= (?)",

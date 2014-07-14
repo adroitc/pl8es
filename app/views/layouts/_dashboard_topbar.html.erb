@@ -5,7 +5,7 @@
       <!-- Profile Info -->
       <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
         <a href="<%=url_for :controller => "profile", :action => "index" %>">
-          <img src="<%=@user.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
+          <img src="<%=@user.restaurant.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
           <span style="font-size:20px"><%=@user.name %> [<%=@user.email %>]</span>
         </a>
       </li>

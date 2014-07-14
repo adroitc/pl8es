@@ -3,7 +3,7 @@ raw(Jsonify::Builder.plain do |j|
   
   j.status                     "success"
   
-  j.content_menues(@req_user.menus) do |menu|
+  j.content_menues(@req_restaurant.menus) do |menu|
     j.title                      menu.title
     j.from_time                  menu.from_time
     j.to_time                    menu.to_time
@@ -116,7 +116,7 @@ raw(Jsonify::Builder.plain do |j|
     
   end
   
-  j.daily_dishes(@req_user.daily_dishes.where("display_date BETWEEN ? AND ?", Date.today.to_datetime, (Date.today+7).to_datetime)) do |daily_dish|
+  j.daily_dishes(@req_restaurant.daily_dishes.where("display_date BETWEEN ? AND ?", Date.today.to_datetime, (Date.today+7).to_datetime)) do |daily_dish|
     j.id                         daily_dish.id
     j.display_date               daily_dish.display_date.strftime("%d-%m-%Y")
     j.image_fingerprint          daily_dish.image_fingerprint
@@ -126,47 +126,44 @@ raw(Jsonify::Builder.plain do |j|
   end
   
   j.content_restaurant do
-    j.name                       @req_user.name
-    j.address                    @req_user.location.address
-    j.city                       @req_user.location.city
-    j.country                    @req_user.location.country
-    j.zip                        @req_user.location.zip
-    j.logo_image_fingerprint     @req_user.logo_image_fingerprint
-    j.logo_image_url             @req_user.logo_image.present? ? @req_user.logo_image.url(:cropped_default_retina) : nil
-    j.restaurant_image_fingerprint  @req_user.restaurant_image_fingerprint
-    j.restaurant_image_url       @req_user.restaurant_image.present? ? @req_user.restaurant_image.url(:cropped_default_retina) : nil
-    j.appmain_image_fingerprint  @req_user.appmain_image_fingerprint
-    j.appmain_image_url          @req_user.appmain_image.present? ? @req_user.appmain_image.url(:cropped_default_retina) : nil
-    j.splashscreen_image_fingerprint  @req_user.splashscreen_image_fingerprint
-    j.splashscreen_image_url     @req_user.splashscreen_image.present? ? @req_user.splashscreen_image.url(:cropped_default_retina) : nil
+    j.name                       @req_restaurant.restaurant.name
+    j.address                    @req_restaurant.restaurant.location.address
+    j.city                       @req_restaurant.restaurant.location.city
+    j.country                    @req_restaurant.restaurant.location.country
+    j.zip                        @req_restaurant.restaurant.location.zip
+    j.logo_image_fingerprint     @req_restaurant.restaurant.logo_image_fingerprint
+    j.logo_image_url             @req_restaurant.restaurant.logo_image.present? ? @req_restaurant.logo_image.url(:cropped_default_retina) : nil
+    j.restaurant_image_fingerprint  @req_restaurant.restaurant.restaurant_image_fingerprint
+    j.restaurant_image_url       @req_restaurant.restaurant.restaurant_image.present? ? @req_restaurant.restaurant_image.url(:cropped_default_retina) : nil
+    j.appmain_image_fingerprint  @req_restaurant.restaurant.appmain_image_fingerprint
+    j.appmain_image_url          @req_restaurant.restaurant.appmain_image.present? ? @req_restaurant.appmain_image.url(:cropped_default_retina) : nil
+    j.splashscreen_image_fingerprint  @req_restaurant.restaurant.splashscreen_image_fingerprint
+    j.splashscreen_image_url     @req_restaurant.restaurant.splashscreen_image.present? ? @req_restaurant.splashscreen_image.url(:cropped_default_retina) : nil
     j.currency                   "EUR"
   end
   
   j.content_style do
-    j.font_name_navigation       @req_user.supportedFont.name_navigation
-    j.font_size_navigation       @req_user.supportedFont.size_navigation
+    j.font_name_navigation       @req_restaurant.restaurant.supportedFont.name_navigation
+    j.font_size_navigation       @req_restaurant.restaurant.supportedFont.size_navigation
     
-    j.font_name_heading          @req_user.supportedFont.name_heading
-    j.font_size_heading          @req_user.supportedFont.size_heading
+    j.font_name_heading          @req_restaurant.restaurant.supportedFont.name_heading
+    j.font_size_heading          @req_restaurant.restaurant.supportedFont.size_heading
     
-    j.font_name_heading_small    @req_user.supportedFont.name_heading_small
-    j.font_size_heading_small    @req_user.supportedFont.size_heading_small
+    j.font_name_heading_small    @req_restaurant.restaurant.supportedFont.name_heading_small
+    j.font_size_heading_small    @req_restaurant.restaurant.supportedFont.size_heading_small
     
-    j.font_name_description      @req_user.supportedFont.name_description
-    j.font_size_description      @req_user.supportedFont.size_description
+    j.font_name_description      @req_restaurant.restaurant.supportedFont.name_description
+    j.font_size_description      @req_restaurant.restaurant.supportedFont.size_description
     
-    j.font_name_price            @req_user.supportedFont.name_price
-    j.font_size_price            @req_user.supportedFont.size_price
+    j.font_name_price            @req_restaurant.restaurant.supportedFont.name_price
+    j.font_size_price            @req_restaurant.restaurant.supportedFont.size_price
     
-    j.font_name_card_tab_title   @req_user.supportedFont.name_card_tab_title
-    j.font_size_card_tab_title   @req_user.supportedFont.size_card_tab_title
+    j.font_name_card_tab_title   @req_restaurant.restaurant.supportedFont.name_card_tab_title
+    j.font_size_card_tab_title   @req_restaurant.restaurant.supportedFont.size_card_tab_title
     
-    j.background_type            @req_user.background_type
+    j.background_type            @req_restaurant.background_type
     
-    menuColor = @req_user.menuColor
-    if @req_user.menuColorTemplate.present?
-      menuColor = @req_user.menuColorTemplate
-    end
+    menuColor = @req_restaurant.restaurant.menuColorTemplate.present? ? @req_restaurant.restaurant.menuColorTemplate : @req_restaurant.restaurant.menuColor
     j.background                 menuColor.background
     j.bar_background             menuColor.bar_background
     

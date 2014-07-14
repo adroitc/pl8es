@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714132950) do
+ActiveRecord::Schema.define(version: 20140714140140) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -287,6 +287,61 @@ ActiveRecord::Schema.define(version: 20140714132950) do
     t.integer  "supportedFont_id"
     t.integer  "defaultMenu_id"
     t.string   "email"
+    t.string   "preview_image_file_name"
+    t.string   "preview_image_content_type"
+    t.integer  "preview_image_file_size"
+    t.datetime "preview_image_updated_at"
+    t.string   "preview_image_dimensions"
+    t.string   "preview_image_fingerprint"
+    t.integer  "preview_image_crop_w"
+    t.integer  "preview_image_crop_h"
+    t.integer  "preview_image_crop_x"
+    t.integer  "preview_image_crop_y"
+    t.boolean  "preview_image_processed",         default: true
+    t.string   "appmain_image_file_name"
+    t.string   "appmain_image_content_type"
+    t.integer  "appmain_image_file_size"
+    t.datetime "appmain_image_updated_at"
+    t.string   "appmain_image_dimensions"
+    t.string   "appmain_image_fingerprint"
+    t.integer  "appmain_image_crop_w"
+    t.integer  "appmain_image_crop_h"
+    t.integer  "appmain_image_crop_x"
+    t.integer  "appmain_image_crop_y"
+    t.boolean  "appmain_image_processed",         default: true
+    t.string   "logo_image_file_name"
+    t.string   "logo_image_content_type"
+    t.integer  "logo_image_file_size"
+    t.datetime "logo_image_updated_at"
+    t.string   "logo_image_dimensions"
+    t.string   "logo_image_fingerprint"
+    t.integer  "logo_image_crop_w"
+    t.integer  "logo_image_crop_h"
+    t.integer  "logo_image_crop_x"
+    t.integer  "logo_image_crop_y"
+    t.boolean  "logo_image_processed",            default: true
+    t.string   "splashscreen_image_file_name"
+    t.string   "splashscreen_image_content_type"
+    t.integer  "splashscreen_image_file_size"
+    t.datetime "splashscreen_image_updated_at"
+    t.string   "splashscreen_image_dimensions"
+    t.string   "splashscreen_image_fingerprint"
+    t.integer  "splashscreen_image_crop_w"
+    t.integer  "splashscreen_image_crop_h"
+    t.integer  "splashscreen_image_crop_x"
+    t.integer  "splashscreen_image_crop_y"
+    t.boolean  "splashscreen_image_processed",    default: true
+    t.string   "restaurant_image_file_name"
+    t.string   "restaurant_image_content_type"
+    t.integer  "restaurant_image_file_size"
+    t.datetime "restaurant_image_updated_at"
+    t.string   "restaurant_image_dimensions"
+    t.string   "restaurant_image_fingerprint"
+    t.integer  "restaurant_image_crop_w"
+    t.integer  "restaurant_image_crop_h"
+    t.integer  "restaurant_image_crop_x"
+    t.integer  "restaurant_image_crop_y"
+    t.boolean  "restaurant_image_processed",      default: true
   end
 
   create_table "supported_fonts", force: true do |t|
@@ -316,52 +371,11 @@ ActiveRecord::Schema.define(version: 20140714132950) do
     t.datetime "last_login"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "restaurant_image_file_name"
-    t.string   "restaurant_image_content_type"
-    t.integer  "restaurant_image_file_size"
-    t.datetime "restaurant_image_updated_at"
-    t.string   "restaurant_image_dimensions"
-    t.string   "logo_image_file_name"
-    t.string   "logo_image_content_type"
-    t.integer  "logo_image_file_size"
-    t.datetime "logo_image_updated_at"
-    t.text     "logo_image_dimensions",           limit: 255
-    t.string   "appmain_image_file_name"
-    t.string   "appmain_image_content_type"
-    t.integer  "appmain_image_file_size"
-    t.datetime "appmain_image_updated_at"
-    t.text     "appmain_image_dimensions",        limit: 255
-    t.text     "restaurant_image_fingerprint",    limit: 255
-    t.string   "logo_image_fingerprint"
-    t.string   "appmain_image_fingerprint"
-    t.integer  "restaurant_image_crop_w"
-    t.integer  "restaurant_image_crop_h"
-    t.integer  "restaurant_image_crop_x"
-    t.integer  "restaurant_image_crop_y"
-    t.integer  "logo_image_crop_w"
-    t.integer  "logo_image_crop_h"
-    t.integer  "logo_image_crop_x"
-    t.integer  "logo_image_crop_y"
-    t.integer  "appmain_image_crop_w"
-    t.integer  "appmain_image_crop_h"
-    t.integer  "appmain_image_crop_x"
-    t.integer  "appmain_image_crop_y"
-    t.boolean  "restaurant_image_crop_processed",             default: true
-    t.boolean  "logo_image_crop_processed",                   default: true
-    t.boolean  "appmain_image_crop_processed",                default: true
-    t.string   "splashscreen_image_file_name"
-    t.string   "splashscreen_image_content_type"
-    t.integer  "splashscreen_image_file_size"
-    t.datetime "splashscreen_image_updated_at"
-    t.text     "splashscreen_image_dimensions",   limit: 255
-    t.string   "splashscreen_image_fingerprint"
-    t.integer  "splashscreen_image_crop_w"
-    t.integer  "splashscreen_image_crop_h"
-    t.integer  "splashscreen_image_crop_x"
-    t.integer  "splashscreen_image_crop_y"
-    t.boolean  "splashscreen_image_processed",                default: true
+    t.boolean  "restaurant_image_crop_processed", default: true
+    t.boolean  "logo_image_crop_processed",       default: true
+    t.boolean  "appmain_image_crop_processed",    default: true
     t.string   "background_type"
-    t.boolean  "isAdmin",                                     default: false
+    t.boolean  "isAdmin",                         default: false
   end
 
   create_table "wine_translations", force: true do |t|

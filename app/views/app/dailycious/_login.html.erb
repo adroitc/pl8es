@@ -2,23 +2,23 @@
 raw(Jsonify::Builder.plain do |j|
   
   j.location do
-    j.id                         @user.location.id
+    j.id                         @user.restaurant.location.id
     
-    j.restaurant_image_url       @user.location.user.logo_image.present? ? @user.location.user.logo_image.url(:cropped_dailycious_retina) : nil
-    j.restaurant_image_fingerprint  @user.location.user.logo_image.present? ? @user.location.user.logo_image_fingerprint : nil
+    j.restaurant_image_url       @user.restaurant.location.user.logo_image.present? ? @user.location.user.logo_image.url(:cropped_dailycious_retina) : nil
+    j.restaurant_image_fingerprint  @user.restaurant.location.user.logo_image.present? ? @user.restaurant.location.user.logo_image_fingerprint : nil
 
-    j.name                       @user.location.user.name
+    j.name                       @user.restaurant.location.user.name
   
-    j.address                    @user.location.address
-    j.zip                        @user.location.zip
-    j.city                       @user.location.city
-    j.country                    @user.location.country
+    j.address                    @user.restaurant.location.address
+    j.zip                        @user.restaurant.location.zip
+    j.city                       @user.restaurant.location.city
+    j.country                    @user.restaurant.location.country
     
-    j.telephone                  @user.location.user.telephone
-    j.email                      @user.location.user.email
-    j.website                    @user.location.user.website
+    j.telephone                  @user.restaurant.location.user.telephone
+    j.email                      @user.restaurant.location.user.email
+    j.website                    @user.restaurant.location.user.website
     
-    daily_dishes_count = @user.location.user.daily_dishes.find(
+    daily_dishes_count = @user.restaurant.location.user.daily_dishes.find(
       :all,
       :conditions => [
         "display_date = (?)",

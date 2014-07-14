@@ -4,10 +4,10 @@
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
 		<h4 class="margin-top-none">Upload Logo</h4>
-    <%=neon_imagecrop :image => @user.logo_image %>
+    <%=neon_imagecrop :image => @user.restaurant.logo_image %>
     
 		<h4 class="margin-top-none">Upload Restaurant image</h4>
-    <%=neon_imagecrop :image => @user.restaurant_image %>
+    <%=neon_imagecrop :image => @user.restaurant.restaurant_image %>
 	</div>
   <div class="col-sm-6">
     <div class="col-sm-12 form-group" style="padding:0px;">

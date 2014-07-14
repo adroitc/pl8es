@@ -36,7 +36,7 @@
   		<label for="form-background_type_image" class="control-label"><%=t("menumalist.design_background_image") %></label>
       <br />
       <br />
-      <%=neon_imagecrop :image => @user.appmain_image %>
+      <%=neon_imagecrop :image => @user.restaurant.appmain_image %>
     </div>
   </div>
   <div class="col-md-4">
@@ -88,7 +88,7 @@
   	<div class="form-group">
   		<label for="field-1" class="control-label"><%=t("menumalist.design_splashscreen_image") %></label>
       <br />
-      <%=neon_imagecrop :image => @user.splashscreen_image %>
+      <%=neon_imagecrop :image => @user.restaurant.splashscreen_image %>
     </div>
   </div>
 </div>

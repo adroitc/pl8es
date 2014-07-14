@@ -1,8 +1,8 @@
 class AppController < ApplicationController
   
   def menumalist
-    if User.find_by_download_code(params[:user_download_code]) && request.headers["Device-Id"] && request.headers["Device-App"] && request.headers["Device-Version"] && request.headers["Device-Type"] && request.headers["Device-System"]
-      @req_user = User.find_by_download_code(params[:user_download_code])
+    if Restaurant.find_by_download_code(params[:user_download_code]) && request.headers["Device-Id"] && request.headers["Device-App"] && request.headers["Device-Version"] && request.headers["Device-Type"] && request.headers["Device-System"]
+      @req_restaurant = Restaurant.find_by_download_code(params[:user_download_code])
       
       request_partial = render_to_string(
         :partial => "menumalist"
@@ -27,7 +27,7 @@ class AppController < ApplicationController
         end
       else
         Device.create([{
-          :user => @req_user,
+          :user => @req_restaurant.user,
           :device_id => request.headers["Device-Id"],
           :device_app => request.headers["Device-App"],
           :device_version => request.headers["Device-Version"],
