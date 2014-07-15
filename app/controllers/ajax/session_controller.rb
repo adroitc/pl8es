@@ -13,12 +13,12 @@ class Ajax::SessionController < ApplicationController
           :last_login => DateTime.now,
           :background_type => "color",
           :restaurant => Restaurant.create({
-            :default_language => Language.first,
             :location => Location.create(),
+            :default_language => Language.first,
             :menuColorTemplate => MenuColorTemplate.first,
             :menuColor => MenuColor.create(),
-            :download_code => download_code,
-            :supportedFont => SupportedFont.first
+            :supportedFont => SupportedFont.first,
+            :download_code => download_code
           })
         })
         
