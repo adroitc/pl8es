@@ -17,6 +17,12 @@ raw(Jsonify::Builder.plain do |j|
     j.telephone                  @user.restaurant.location.user.telephone
     j.email                      @user.restaurant.location.user.email
     j.website                    @user.restaurant.location.user.website
+  
+    j.categories(@req_location.restaurant.categories) do |category|
+      category.category_lang.each do |key, value|
+        j[key] = value
+      end
+    end
     
     daily_dishes_count = @user.restaurant.location.user.daily_dishes.find(
       :all,
