@@ -23,7 +23,7 @@ class RemoveOldUserImageColumns < ActiveRecord::Migration
     remove_column :users, :splashscreen_image_file_size, :integer
     remove_column :users, :splashscreen_image_updated_at, :datetime
     remove_column :users, :splashscreen_image_dimensions, :string
-    remove_column :users, :
+    
     remove_column :users, :splashscreen_image_processed, :boolean
   end
 end
