@@ -15,7 +15,7 @@ class ReplaceUserReferencesWithRestaurant < ActiveRecord::Migration
     remove_reference :menu_colors, :user
     add_reference :menu_colors, :restaurant
 
-    drop_table :menu_labels
+    #drop_table :menu_labels
     #MenuLabel.drop_translation_table!
 
     remove_reference :menus, :user

@@ -60,12 +60,14 @@ User.create([
   {
     :email => "marc@roemer.io",
     :password => "lol123lol",
-    :name => "Marc's restaurant",
-    :location => Location.create(),
-    :background_type => "color",
-    :menuColor => MenuColor.create(),
-    :download_code => "8D34C8",
-    :supportedFont => SupportedFont.first,
-    :default_language => Language.first
+    :restaurant => Restaurant.create(
+      :name => "Marc's restaurant",
+      :location => Location.create(),
+      :background_type => "color",
+      :menuColor => MenuColor.create(),
+      :download_code => "8D34C8",
+      :supportedFont => SupportedFont.first,
+      :default_language => Language.first
+    )
   }
 ])
