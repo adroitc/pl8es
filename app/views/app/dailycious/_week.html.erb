@@ -1,12 +1,12 @@
 <%=
 raw(Jsonify::Builder.plain do |j|
   
-  j.id                         @user.location.id
+  j.id                         @user.restaurant.location.id
   
   date = Date.today
   date += @add_weeks*7
   
-  j.daily_dishes(@user.daily_dishes.find(
+  j.daily_dishes(@user.restaurant.daily_dishes.find(
     :all,
     :conditions => [
       "display_date >= (?) AND display_date <= (?)",
@@ -19,7 +19,7 @@ raw(Jsonify::Builder.plain do |j|
     j.image_small_url            daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil
     j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
     j.title                      daily_dish.title
-    j.price                      daily_dish.price
+    j.price                      ("%.2f" % daily_dish.price).gsub(".", ",")
   end
   
 end)

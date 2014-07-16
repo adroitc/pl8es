@@ -1,4 +1,5 @@
 class MenuColorTemplate < ActiveRecord::Base
+  
   has_attached_file :preview_image, {
     :styles => {
       :original_cropping => {
@@ -12,9 +13,11 @@ class MenuColorTemplate < ActiveRecord::Base
       }
     }
   }
+  
   validates_attachment_content_type :preview_image, :content_type => /\Aimage\/.*\Z/
   validates :preview_image, :dimensions => {
     :width => 288,
     :height => 216
   }
+  
 end

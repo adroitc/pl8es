@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :restaurant
   
   attr_accessor :distance
   acts_as_mappable :default_units => :kms,
@@ -11,16 +11,14 @@ class Location < ActiveRecord::Base
   validates :address, :length => {
     :maximum => 250
   }
-  
   validates :zip, :length => {
     :maximum => 28
   }
-  
   validates :city, :length => {
     :maximum => 250
   }
-  
   validates :country, :length => {
     :maximum => 250
   }
+  
 end

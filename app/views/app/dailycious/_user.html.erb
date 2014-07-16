@@ -3,10 +3,10 @@ raw(Jsonify::Builder.plain do |j|
   
   j.id                         @req_location.id
   
-  j.restaurant_image_url       @req_location.user.logo_image.present? ? @req_location.user.logo_image.url(:cropped_dailycious_retina) : nil
-  j.restaurant_image_fingerprint  @req_location.user.logo_image.present? ? @req_location.user.logo_image_fingerprint : nil
+  j.restaurant_image_url       @req_location.restaurant.logo_image.present? ? @req_location.restaurant.logo_image.url(:cropped_dailycious_retina) : nil
+  j.restaurant_image_fingerprint  @req_location.restaurant.logo_image.present? ? @req_location.restaurant.logo_image_fingerprint : nil
 
-  j.name                       @req_location.user.name
+  j.name                       @req_location.restaurant.name
   
   j.address                    @req_location.address
   j.zip                        @req_location.zip
@@ -16,17 +16,17 @@ raw(Jsonify::Builder.plain do |j|
   j.latitude                   @req_location.latitude
   j.longitude                  @req_location.longitude
 
-  j.telephone                  @req_location.user.telephone
-  j.email                      @req_location.user.email
-  j.website                    @req_location.user.website
+  j.telephone                  @req_location.restaurant.telephone
+  j.email                      @req_location.restaurant.email
+  j.website                    @req_location.restaurant.website
   
-  j.categories(@req_location.user.categories) do |category|
+  j.categories(@req_location.restaurant.categories) do |category|
     category.category_lang.each do |key, value|
       j[key] = value
     end
   end
   
-  j.daily_dishes(@req_location.user.daily_dishes.find(
+  j.daily_dishes(@req_location.restaurant.daily_dishes.find(
     :all,
     :conditions => [
       "display_date = (?)",
@@ -38,7 +38,7 @@ raw(Jsonify::Builder.plain do |j|
     j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
     j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
     j.title                      daily_dish.title
-    j.price                      daily_dish.price
+    j.price                      ("%.2f" % daily_dish.price).gsub(".", ",")
   end
   
 end)

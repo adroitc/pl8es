@@ -4,10 +4,10 @@ raw(Jsonify::Builder.plain do |j|
   j.locations(@req_locations) do |location|
     j.id                         location.id
     
-    j.restaurant_image_url       location.user.logo_image.present? ? location.user.logo_image.url(:cropped_dailycious_retina) : nil
-    j.restaurant_image_fingerprint  location.user.logo_image.present? ? location.user.logo_image_fingerprint : nil
+    j.restaurant_image_url       location.restaurant.logo_image.present? ? location.restaurant.logo_image.url(:cropped_dailycious_retina) : nil
+    j.restaurant_image_fingerprint  location.restaurant.logo_image.present? ? location.restaurant.logo_image_fingerprint : nil
 
-    j.name                       location.user.name
+    j.name                       location.restaurant.name
     
     if location.distance
       j.distance                   location.distance
@@ -15,7 +15,7 @@ raw(Jsonify::Builder.plain do |j|
     j.latitude                   location.latitude
     j.longitude                  location.longitude
     
-    daily_dishes_count = location.user.daily_dishes.find(
+    daily_dishes_count = location.restaurant.daily_dishes.find(
       :all,
       :conditions => [
         "display_date = (?)",
@@ -26,12 +26,12 @@ raw(Jsonify::Builder.plain do |j|
     
     if daily_dishes_count > 0
       j.daily_dish do
-        daily_dish = location.user.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
+        daily_dish = location.restaurant.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
         j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil
         j.image_small_url            daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil
         j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
         j.title                      daily_dish.title
-        j.price                      daily_dish.price
+        j.price                      ("%.2f" % daily_dish.price).gsub(".", ",")
       end
     end
   end

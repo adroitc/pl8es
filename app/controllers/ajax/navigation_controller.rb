@@ -3,8 +3,8 @@ class Ajax::NavigationController < ApplicationController
   def addnavigation
     if @user && !params.values_at(:menu_id, :title, :style).include?(nil)
       languages = Language.find_all_by_locale(params[:title].keys)
-      if @user.menus.exists?(params[:menu_id]) && languages.count > 0 && languages.count == params[:title].count
-        menu = @user.menus.find(params[:menu_id])
+      if @user.restaurant.menus.exists?(params[:menu_id]) && languages.count > 0 && languages.count == params[:title].count
+        menu = @user.restaurant.menus.find(params[:menu_id])
         
         new_navigation = Navigation.create(params.permit(:style).merge({
           :menu => menu
@@ -48,7 +48,7 @@ class Ajax::NavigationController < ApplicationController
   end
   
   def editnavigation
-    if @user && !params.values_at(:navigation_id, :title, :style).include?(nil) && Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.user == @user && languages.count > 0 && languages.count == params[:title].count
+    if @user && !params.values_at(:navigation_id, :title, :style).include?(nil) && Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.restaurant.user == @user && languages.count > 0 && languages.count == params[:title].count
       navigation = Navigation.find(params[:navigation_id])
       
       if params[:delete] == "true"
@@ -111,7 +111,7 @@ class Ajax::NavigationController < ApplicationController
   def sortnavigation
     if @user && !params.values_at(:navigation_ids).include?(nil)
       params[:navigation_ids].each do |navigation_id|
-        if Navigation.exists?(navigation_id[0].to_i) && Navigation.find(navigation_id[0].to_i).menu.user == @user
+        if Navigation.exists?(navigation_id[0].to_i) && Navigation.find(navigation_id[0].to_i).menu.restaurant.user == @user
           navigation = Navigation.find(navigation_id[0].to_i)
           navigation.position = navigation_id[1].to_i
           navigation.save

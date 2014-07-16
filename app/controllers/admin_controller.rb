@@ -33,12 +33,6 @@ class AdminController < ApplicationController
     end
   end
   
-  def menulabels
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
   def menucolortemplates
     if !(@user && @user.isAdmin)
       raise ActionController::RoutingError.new("Not Found")

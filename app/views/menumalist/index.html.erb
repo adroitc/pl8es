@@ -21,7 +21,7 @@
       			<i class="glyphicon glyphicon-download"></i>
       		</div>
       		<div class="num">
-      			<h2><%=@user.download_code %></h2>
+      			<h2><%=@user.restaurant.download_code %></h2>
       		</div>
       		<div class="title">
       			<p><%=t("menumalist.download_code_title") %></p>
@@ -69,7 +69,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @user.menus.each do |menu| %>
+            <% @user.restaurant.menus.each do |menu| %>
             <tr style="font-size: 18px;">
               <td>
                 <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
@@ -130,6 +130,6 @@ $(document).ready(function(){
 </script>
 <%=render :partial => "modal_design", :locals => {:navigation => Navigation.first} %>
 <%=render :partial => "modal_addmenu" %>
-<% @user.menus.each do |menu| %>
+<% @user.restaurant.menus.each do |menu| %>
 <%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>
 <% end %>

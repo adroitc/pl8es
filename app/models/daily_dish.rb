@@ -1,5 +1,5 @@
 class DailyDish < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :restaurant
   
   default_scope :order => "position, id"
   
@@ -31,16 +31,15 @@ class DailyDish < ActiveRecord::Base
       }
     }
   }
+  
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates :image, :dimensions => {
     :width => 640,
     :height => 640
   }
-  
   validates :title, :length => {
     :maximum => 60
   }
-  
   validates :price, :length => {
     :maximum => 7
   }

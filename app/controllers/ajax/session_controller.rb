@@ -11,13 +11,15 @@ class Ajax::SessionController < ApplicationController
         end
         @user.update_attributes({
           :last_login => DateTime.now,
-          :default_language => Language.first,
-          :location => Location.create(),
           :background_type => "color",
-          :menuColorTemplate => MenuColorTemplate.first,
-          :menuColor => MenuColor.create(),
-          :download_code => download_code,
-          :supportedFont => SupportedFont.first
+          :restaurant => Restaurant.create({
+            :location => Location.create(),
+            :default_language => Language.first,
+            :menuColorTemplate => MenuColorTemplate.first,
+            :menuColor => MenuColor.create(),
+            :supportedFont => SupportedFont.first,
+            :download_code => download_code
+          })
         })
         
         session[:user_id] = @user.id
@@ -39,7 +41,7 @@ class Ajax::SessionController < ApplicationController
         })
         session[:user_id] = @user.id
         if @user.isAdmin
-        session[:admin_id] = @user.id
+          session[:admin_id] = @user.id
         end
         
         render :json => {:status => "success"}

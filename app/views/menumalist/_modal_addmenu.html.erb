@@ -5,7 +5,9 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
-			<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="" data-validate="maxlength[28]" required>
+      <div class="col-md-12 input-group">
+		  	<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="" data-validate="maxlength[28]" required>
+      </div>
 		</div>
 	</div>
 </div>
@@ -13,24 +15,25 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label class="control-label"><%=t("menumalist.menu_default") %></label>
-      <br />
-      <span class="pl8es_c_toggledefaultmenu">
-        <button type="button" class="btn btn-green btn-icon disabled icon-left">
-        	<%=t("menumalist.menu_default_default") %>
-        	<i class="entypo-flag"></i>
-        </button>
-      </span>
-      <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
-        <button type="button" class="btn btn-default btn-icon icon-left">
-        	<%=t("menumalist.menu_default_make_default") %>
-        	<i class="entypo-flag"></i>
-        </button>
-      </a>
-      <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
-        <button type="button" class="btn btn-warning btn-xs">
-        	<%=t("menumalist.menu_default_default_undo") %>
-        </button>
-      </a>
+      <div class="col-md-12 input-group">
+        <span class="pl8es_c_toggledefaultmenu">
+          <button type="button" class="btn btn-green btn-icon disabled icon-left">
+          	<%=t("menumalist.menu_default_default") %>
+          	<i class="entypo-flag"></i>
+          </button>
+        </span>
+        <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
+          <button type="button" class="btn btn-default btn-icon icon-left">
+          	<%=t("menumalist.menu_default_make_default") %>
+          	<i class="entypo-flag"></i>
+          </button>
+        </a>
+        <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
+          <button type="button" class="btn btn-warning btn-xs">
+          	<%=t("menumalist.menu_default_default_undo") %>
+          </button>
+        </a>
+      </div>
 		</div>
 	</div>
 </div>

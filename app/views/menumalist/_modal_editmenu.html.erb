@@ -6,7 +6,9 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
-			<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>" data-validate="maxlength[28]" required>
+      <div class="col-md-12 input-group">
+			  <input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>" data-validate="maxlength[28]" required>
+      </div>
 		</div>
 	</div>
 </div>
@@ -14,24 +16,25 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label class="control-label"><%=t("menumalist.menu_default") %></label>
-      <br />
-      <span class="pl8es_c_toggledefaultmenu">
-        <button type="button" class="btn btn-green btn-icon disabled icon-left">
-        	<%=t("menumalist.menu_default_default") %>
-        	<i class="entypo-flag"></i>
-        </button>
-      </span>
-      <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
-        <button type="button" class="btn btn-default btn-icon icon-left">
-        	<%=t("menumalist.menu_default_make_default") %>
-        	<i class="entypo-flag"></i>
-        </button>
-      </a>
-      <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
-        <button type="button" class="btn btn-warning btn-xs">
-        	<%=t("menumalist.menu_default_default_undo") %>
-        </button>
-      </a>
+      <div class="col-md-12 input-group">
+        <span class="pl8es_c_toggledefaultmenu">
+          <button type="button" class="btn btn-green btn-icon disabled icon-left">
+          	<%=t("menumalist.menu_default_default") %>
+          	<i class="entypo-flag"></i>
+          </button>
+        </span>
+        <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
+          <button type="button" class="btn btn-default btn-icon icon-left">
+          	<%=t("menumalist.menu_default_make_default") %>
+          	<i class="entypo-flag"></i>
+          </button>
+        </a>
+        <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
+          <button type="button" class="btn btn-warning btn-xs">
+          	<%=t("menumalist.menu_default_default_undo") %>
+          </button>
+        </a>
+      </div>
 		</div>
 	</div>
 </div>
@@ -40,7 +43,7 @@
 		<label for="field-1" class="control-label"><%=t("menumalist.menu_time") %></label>
   </div>
 	<div class="col-md-12">
-  	<div class="col-md-6 input-group" style="padding-left:0px;">
+  	<div class="col-md-6">
 			<label for="form-from_time" class="control-label"><%=t("menumalist.menu_from") %></label>
       <div class="input-group">
   	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.from_time %>" data-show-meridian="false" data-minute-step="5" />
@@ -49,10 +52,10 @@
   	    </div>
       </div>
     </div>
-  	<div class="col-md-6 input-group" style="padding-right:0px;">
+  	<div class="col-md-6">
 			<label for="form-to_time" class="control-label"><%=t("menumalist.menu_to") %></label>
       <div class="input-group">
-  	    <input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.to_time %>" data-show-meridian="false" data-minute-step="5" />
+  	   	<input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.to_time %>" data-show-meridian="false" data-minute-step="5" />
   	    <div class="input-group-addon">
   	    	<a href="#"><i class="entypo-clock"></i></a>
   	    </div>
@@ -64,7 +67,7 @@
 	<div class="col-md-12">
 		<label for="form-languages" class="control-label">Select default language</label>
     <br />
-	  <select name="default_language" id="form-default_language" class="col-md-4 select2" data-allow-clear="false" data-placeholder="Select default language" style="padding:0px;">
+	  <select name="default_language" id="form-default_language" class="col-md-12 select2" data-allow-clear="false" data-placeholder="Select default language">
       <% Language.all.each do |language| %>
 	  	<option value="<%=language.id %>" <%="selected" if menu.default_language == language %>><%=language.title.capitalize %></option>
       <% end %>

@@ -1,15 +1,15 @@
 class Dish < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :restaurant
   belongs_to :menu
   belongs_to :navigation
   has_many :wines
   belongs_to :dishsuggestion_1, :class_name => "Dish"
   belongs_to :dishsuggestion_2, :class_name => "Dish"
   has_and_belongs_to_many :ingredients
+
+  default_scope :order => "position, id"
   
   translates :title, :description, :drinks, :sides
-  
-  default_scope :order => "position, id"
   
   has_attached_file :image, {
     :styles => {
@@ -49,28 +49,24 @@ class Dish < ActiveRecord::Base
       }
     }
   }
+  
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates :image, :dimensions => {
     :width => 1680,
     :height => 1120
   }
-  
   validates :title, :length => {
     :maximum => 28
   }
-  
   validates :description, :length => {
     :maximum => 700
   }
-  
   validates :price, :length => {
     :maximum => 7
   }
-  
   validates :drinks, :length => {
     :maximum => 250
   }
-  
   validates :sides, :length => {
     :maximum => 250
   }

@@ -7,37 +7,37 @@
       <label for="form-email" class="col-sm-12 control-label"><strong>Default language</strong></label>
   	  <select name="default_language" id="form-default_language" class="col-md-4 select2" data-allow-clear="false" data-placeholder="Select default language">
         <% Language.all.each do |language| %>
-  	  	<option value="<%=language.id %>" <%="selected" if @user.default_language == language %>><%=language.title.capitalize %></option>
+  	  	<option value="<%=language.id %>" <%="selected" if @user.restaurant.default_language == language %>><%=language.title.capitalize %></option>
         <% end %>
   	  </select>
     </div>
     <div class="col-sm-12 form-group" style="padding:0px;">
       <label for="form-email" class="control-label"><strong>Email</strong></label>
-	    <input name="email" type="text" class="form-control" id="form-email" placeholder="Email" data-validate="maxlength[28]" value="<%=@user.email %>" required>
+	    <input name="email" type="text" class="form-control" id="form-email" placeholder="Email" data-validate="maxlength[28]" value="<%=@user.restaurant.email %>" required>
     </div>
     <div class="col-sm-12 form-group" style="padding:0px;">
       <label for="form-address" class="control-label"><strong>Address</strong></label>
-	    <input name="address" type="text" class="form-control" id="form-address" placeholder="Address" data-validate="validaddress" value="<%=@user.location.address %>" required>
+	    <input name="address" type="text" class="form-control" id="form-address" placeholder="Address" data-validate="validaddress" value="<%=@user.restaurant.location.address %>" required>
     </div>
     <div class="col-sm-4 form-group" style="padding-left:0px;">
       <label for="form-zip" class="control-label"><strong>Zip code</strong></label>
-	    <input name="zip" type="text" class="form-control" id="form-zip" placeholder="Zip code" data-validate="maxlength[28]" value="<%=@user.location.zip %>" required>
+	    <input name="zip" type="text" class="form-control" id="form-zip" placeholder="Zip code" data-validate="maxlength[28]" value="<%=@user.restaurant.location.zip %>" required>
     </div>
     <div class="col-sm-4 form-group" style="padding:0px;">
       <label for="form-city" class="control-label"><strong>City</strong></label>
-	    <input name="city" type="text" class="form-control" id="form-city" placeholder="City" data-validate="maxlength[28]" value="<%=@user.location.city %>" required>
+	    <input name="city" type="text" class="form-control" id="form-city" placeholder="City" data-validate="maxlength[28]" value="<%=@user.restaurant.location.city %>" required>
     </div>
     <div class="col-sm-4 form-group" style="padding-right:0px;">
       <label for="form-country" class="control-label"><strong>Country</strong></label>
-	    <input name="country" type="text" class="form-control" id="form-country" placeholder="Country" data-validate="maxlength[28]" value="<%=@user.location.country %>" required>
+	    <input name="country" type="text" class="form-control" id="form-country" placeholder="Country" data-validate="maxlength[28]" value="<%=@user.restaurant.location.country %>" required>
     </div>
     <div class="col-sm-6 form-group" style="padding-left:0px;">
       <label for="form-website" class="control-label"><strong>Website</strong></label>
-	    <input name="website" type="text" class="form-control" id="form-website" placeholder="Website" data-validate="maxlength[250]" value="<%=@user.website %>">
+	    <input name="website" type="text" class="form-control" id="form-website" placeholder="Website" data-validate="maxlength[250]" value="<%=@user.restaurant.website %>">
     </div>
     <div class="col-sm-6 form-group" style="padding-right:0px;">
       <label for="form-telephone" class="control-label"><strong>Telephone</strong></label>
-	    <input name="telephone" type="text" class="form-control" id="form-telephone" placeholder="Telephone" data-validate="maxlength[28]" value="<%=@user.telephone %>">
+	    <input name="telephone" type="text" class="form-control" id="form-telephone" placeholder="Telephone" data-validate="maxlength[28]" value="<%=@user.restaurant.telephone %>">
     </div>
   </div>
 </div>
