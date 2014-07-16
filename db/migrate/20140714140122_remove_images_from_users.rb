@@ -1,6 +1,6 @@
 class RemoveImagesFromUsers < ActiveRecord::Migration
   def change
-    remove_attachment :users, :preview_image
+    #remove_attachment :users, :preview_image
     remove_column :users, :preview_image_fingerprint, :string
     remove_column :users, :preview_image_crop_w, :integer
     remove_column :users, :preview_image_crop_h, :integer
