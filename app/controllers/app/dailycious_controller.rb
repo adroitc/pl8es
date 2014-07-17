@@ -96,13 +96,36 @@ class App::DailyciousController < ApplicationController
   end
   
   def defaults
-    render :partial => "defaults"
+    if request.headers["Device-Id"] && request.headers["Device-App"] && request.headers["Device-Version"] && request.headers["Device-Type"] && request.headers["Device-System"]
+      if Device.exists?(:device_id => request.headers["Device-Id"])
+        device = Device.find_by_device_id(request.headers["Device-Id"])
+        device.update_attributes({
+          :device_app => request.headers["Device-App"],
+          :device_version => request.headers["Device-Version"],
+          :device_type => request.headers["Device-Type"],
+          :device_system => request.headers["Device-System"]
+        })
+        device.touch
+      else
+        Device.create([{
+          :device_id => request.headers["Device-Id"],
+          :device_app => request.headers["Device-App"],
+          :device_version => request.headers["Device-Version"],
+          :device_type => request.headers["Device-Type"],
+          :device_system => request.headers["Device-System"]
+        }])
+      end
+      
+      render :partial => "defaults"
+      return
+    end
+    render :json => {:status => "invalid"}
   end
   
   def favorites
     if !params.values_at(:q).include?(nil)
       @req_locations = Location.where([
-        "id IN (?) AND user_id IN (?)",
+        "restaurant_id IN (?) AND user_id IN (?)",
         params[:q].split(",").drop(2),
         DailyDish.find(
           :all,
@@ -269,8 +292,8 @@ class App::DailyciousController < ApplicationController
   end
   
   def user
-    if !params.values_at(:q).include?(nil) && Location.exists?(params[:q])
-      @req_location = Location.find(params[:q])
+    if !params.values_at(:q).include?(nil) && Restaurant.exists?(params[:q])
+      @req_location = Restaurant.find(params[:q]).location
       
       render :partial => "user"
       return

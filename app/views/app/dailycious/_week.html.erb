@@ -1,7 +1,7 @@
 <%=
 raw(Jsonify::Builder.plain do |j|
   
-  j.id                         @user.restaurant.location.id
+  j.id                         @user.restaurant.id
   
   date = Date.today
   date += @add_weeks*7

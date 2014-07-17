@@ -11,6 +11,8 @@ class Restaurant < ActiveRecord::Base
   belongs_to :defaultMenu, :class_name => "Menu"
   has_many :menus
   has_many :dishes
+  has_many :favoriteRestaurants
+  has_many :devices, :through => :favoriteRestaurants
   
   translates :description
   
