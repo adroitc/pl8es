@@ -193,7 +193,7 @@ class App::DailyciousController < ApplicationController
           "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.restaurant_id IN (?))",
           Date.today.to_datetime,
           "#{query}",
-          User.find(
+          Restaurant.find(
             :all,
             :select => "id",
             :conditions => ["LOWER(name) LIKE (?)",
@@ -237,7 +237,7 @@ class App::DailyciousController < ApplicationController
               "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.restaurant_id IN (?))",
               Date.today.to_datetime,
               "#{query}",
-              User.find(
+              Restaurant.find(
                 :all,
                 :select => "id",
                 :conditions => ["LOWER(name) LIKE (?)",
@@ -247,7 +247,7 @@ class App::DailyciousController < ApplicationController
                 ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
                   "SELECT restaurant_id FROM categories_restaurants, category_translations WHERE categories_restaurants.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
                   query
-                ])).map{|u| u["user_id"]}
+                ])).map{|u| u["restaurant_id"]}
               )
             ],
             :group => "daily_dishes.restaurant_id"
