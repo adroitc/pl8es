@@ -98,7 +98,7 @@ class Ajax::ProfileController < ApplicationController
       if params[:restaurant_image]
         if @user.restaurant.restaurant_image_dimensions["original"][1] >= @user.restaurant.restaurant_image_dimensions["original"][0]
           @user.restaurant.restaurant_image_crop_w = @user.restaurant.restaurant_image_dimensions["original"].min
-          @user.restaurant.restaurant_image_crop_h = @user.restaurant_image_crop_w/(@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][1].to_f)
+          @user.restaurant.restaurant_image_crop_h = @user.restaurant.restaurant_image_crop_w/(@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][1].to_f)
         else
           @user.restaurant.restaurant_image_crop_h = @user.restaurant.restaurant_image_dimensions["original"].min
           @user.restaurant.restaurant_image_crop_w = (@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][1].to_f)*@user.restaurant.restaurant_image_crop_h
