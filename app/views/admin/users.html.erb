@@ -47,13 +47,13 @@
                 <%=user.devices.actives.count %>
               </td>
               <td>
-                <%=user.menus.count %>
+                <%=user.restaurant.menus.count %>
               </td>
               <td>
-                <%=user.dishes.count %>
+                <%=user.restaurant.dishes.count %>
               </td>
               <td>
-                <%=user.daily_dishes.where(:display_date => Date.today).count %> (<%=user.daily_dishes.count %>)
+                <%=user.restaurant.daily_dishes.where(:display_date => Date.today).count %> (<%=user.restaurant.daily_dishes.count %>)
               </td>
             </tr>
             <% end %>
