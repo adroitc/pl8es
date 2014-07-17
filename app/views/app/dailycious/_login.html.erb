@@ -18,7 +18,7 @@ raw(Jsonify::Builder.plain do |j|
     j.email                      @user.restaurant.email
     j.website                    @user.restaurant.website
   
-    j.categories(@req_location.restaurant.categories) do |category|
+    j.categories(@user.restaurant.categories) do |category|
       category.category_lang.each do |key, value|
         j[key] = value
       end
