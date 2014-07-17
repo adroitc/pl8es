@@ -36,8 +36,10 @@ class Ajax::ProfileController < ApplicationController
         render :json => {:status => "success"}
         return
       end
+      render :json => {:status => "invalid-2"}
+      return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:status => "invalid-1"}
   end
   
   def editdescription
