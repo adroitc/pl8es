@@ -33,7 +33,7 @@ class Ajax::ProfileController < ApplicationController
           :longitude => google_results[0]["geometry"]["location"]["lng"].to_f
         }))
         
-        render :json => {:status => "success"}
+        render :json => {:status => "success", :user => @user.restaurant}
         return
       end
       render :json => {:status => "invalid-2"}
