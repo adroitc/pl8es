@@ -7,7 +7,7 @@ class ReplaceUserReferencesWithRestaurant < ActiveRecord::Migration
     add_reference :dishes, :restaurant
 
     drop_table :languages_users
-    User.drop_translation_table!
+    #User.drop_translation_table!
 
     remove_reference :locations, :user
     add_reference :locations, :restaurant

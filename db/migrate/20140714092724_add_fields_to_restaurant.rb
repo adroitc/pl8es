@@ -4,11 +4,11 @@ class AddFieldsToRestaurant < ActiveRecord::Migration
 			t.belongs_to :language
 			t.belongs_to :restaurant
 		end
-    User.create_translation_table! :description => :string
+    #User.create_translation_table! :description => :string
   end
   
   def down
     drop_table :languages_restaurants
-    User.drop_translation_table!
+    #User.drop_translation_table!
   end
 end

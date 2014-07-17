@@ -6,12 +6,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  translates :description
-  
   validates :email, :uniqueness => true, :length => {
-    :maximum => 28
-  }
-  validates :name, :length => {
     :maximum => 28
   }
   

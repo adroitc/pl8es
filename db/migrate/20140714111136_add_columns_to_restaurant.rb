@@ -3,6 +3,6 @@ class AddColumnsToRestaurant < ActiveRecord::Migration
     #remove_reference :users, :defaultMenu
     add_reference :restaurants, :defaultMenu
 
-    User.drop_translation_table!
+    #User.drop_translation_table!
   end
 end

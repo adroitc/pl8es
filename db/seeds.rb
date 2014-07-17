@@ -29,15 +29,6 @@ Language.create([
   }
 ])
 
-MenuLabel.create([
-  {
-    title: "Lunch"
-  },
-  {
-    title: "Dinner"
-  }
-])
-
 SupportedFont.create([
   {
     :title => "GillSans",
