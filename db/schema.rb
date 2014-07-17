@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716172735) do
+ActiveRecord::Schema.define(version: 20140717115716) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -324,7 +324,7 @@ ActiveRecord::Schema.define(version: 20140716172735) do
     t.integer  "logo_image_crop_h"
     t.integer  "logo_image_crop_x"
     t.integer  "logo_image_crop_y"
-    t.boolean  "logo_image_processed",            default: true
+    t.boolean  "logo_image_crop_processed",       default: true
     t.string   "splashscreen_image_file_name"
     t.string   "splashscreen_image_content_type"
     t.integer  "splashscreen_image_file_size"
@@ -346,7 +346,7 @@ ActiveRecord::Schema.define(version: 20140716172735) do
     t.integer  "restaurant_image_crop_h"
     t.integer  "restaurant_image_crop_x"
     t.integer  "restaurant_image_crop_y"
-    t.boolean  "restaurant_image_processed",      default: true
+    t.boolean  "restaurant_image_crop_processed", default: true
     t.string   "background_type"
   end
 
