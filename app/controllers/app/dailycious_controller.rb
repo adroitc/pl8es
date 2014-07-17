@@ -201,7 +201,7 @@ class App::DailyciousController < ApplicationController
             ]
           ).map{|u| u.id}.concat(
             ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
-              "SELECT restaurant_id FROM categories_users, category_translations WHERE categories_restaurants.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
+              "SELECT restaurant_id FROM categories_restaurants, category_translations WHERE categories_restaurants.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
               query
             ])).map{|u| u["restaurant_id"]}
           )
