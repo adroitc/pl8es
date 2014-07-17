@@ -4,10 +4,10 @@ raw(Jsonify::Builder.plain do |j|
   j.location do
     j.id                         @user.restaurant.location.id
     
-    j.restaurant_image_url       @user.restaurant.location.user.logo_image.present? ? @user.location.user.logo_image.url(:cropped_dailycious_retina) : nil
-    j.restaurant_image_fingerprint  @user.restaurant.location.user.logo_image.present? ? @user.restaurant.location.user.logo_image_fingerprint : nil
+    j.restaurant_image_url       @user.restaurant.logo_image.present? ? @user.location.user.logo_image.url(:cropped_dailycious_retina) : nil
+    j.restaurant_image_fingerprint  @user.restaurant.logo_image.present? ? @user.restaurant.location.user.logo_image_fingerprint : nil
 
-    j.name                       @user.restaurant.location.user.name
+    j.name                       @user.restaurant.name
   
     j.address                    @user.restaurant.location.address
     j.zip                        @user.restaurant.location.zip
@@ -24,7 +24,7 @@ raw(Jsonify::Builder.plain do |j|
       end
     end
     
-    daily_dishes_count = @user.restaurant.location.user.daily_dishes.find(
+    daily_dishes_count = @user.restaurant.daily_dishes.find(
       :all,
       :conditions => [
         "display_date = (?)",
