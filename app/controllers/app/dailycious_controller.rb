@@ -137,8 +137,19 @@ class App::DailyciousController < ApplicationController
   
   def map
     if !params.values_at(:q).include?(nil)
-      restaurants = Restaurant.where([
-        "id IN (?)",
+      #restaurants = Restaurant.where([
+      #  "id IN (?)",
+      #  DailyDish.find(
+      #    :all,
+      #    :select => "restaurant_id",
+      #    :conditions => [
+      #      "display_date = (?)",
+      #      Date.today.to_datetime
+      #    ]
+      #  ).map{|d| d.restaurant_id}
+      #])
+      locations = Location.where([
+        "restaurant_id IN (?)",
         DailyDish.find(
           :all,
           :select => "restaurant_id",
@@ -148,7 +159,7 @@ class App::DailyciousController < ApplicationController
           ]
         ).map{|d| d.restaurant_id}
       ])
-      @req_locations = restaurants.map{|r| r.location}.in_bounds(
+      @req_locations = locations.in_bounds(#restaurants.map{|r| r.location}.in_bounds(
         [
           [
             params[:q].split(",")[2].to_f,
