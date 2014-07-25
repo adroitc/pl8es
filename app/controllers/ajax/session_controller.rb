@@ -6,19 +6,20 @@ class Ajax::SessionController < ApplicationController
       
       if @user.errors.count == 0 && !@user.blank?
         download_code = SecureRandom.hex(3).upcase
-        while User.find_by_download_code(download_code).present?
+        while Restaurant.find_by_download_code(download_code).present?
           download_code = SecureRandom.hex(3).upcase
         end
         @user.update_attributes({
           :last_login => DateTime.now,
-          :background_type => "color",
           :restaurant => Restaurant.create({
+            :name => params[:name],
             :location => Location.create(),
             :default_language => Language.first,
             :menuColorTemplate => MenuColorTemplate.first,
             :menuColor => MenuColor.create(),
             :supportedFont => SupportedFont.first,
-            :download_code => download_code
+            :download_code => download_code,
+            :background_type => "color"
           })
         })
         
