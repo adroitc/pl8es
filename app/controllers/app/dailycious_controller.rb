@@ -119,7 +119,7 @@ class App::DailyciousController < ApplicationController
           ]
         ).map{|d| d.restaurant_id}
       ])
-      device.first.restaurants = restaurants
+      device.restaurants = restaurants
       @req_locations = restaurants.map{|r| r.location}.sort_by do |e|
         distance = e.distance_to([
           params[:q].split(",")[0].to_f,
