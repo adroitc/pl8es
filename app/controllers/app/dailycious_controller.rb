@@ -96,8 +96,8 @@ class App::DailyciousController < ApplicationController
   end
   
   def defaults
-    if device = Device.validHeader(request.headers)
-      
+    device = Device.validHeader(request.headers)
+    if device
       render :partial => "defaults"
       return
     end
@@ -105,7 +105,8 @@ class App::DailyciousController < ApplicationController
   end
   
   def favorites
-    if device = Device.validHeader(request.headers) && !params.values_at(:q).include?(nil)
+    device = Device.validHeader(request.headers)
+    if device && !params.values_at(:q).include?(nil)
       restaurants = Restaurant.where([
         "id IN (?) AND id IN (?)",
         params[:q].split(",").drop(2),
