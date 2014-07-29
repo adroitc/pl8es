@@ -2,6 +2,83 @@ class App::DailyciousController < ApplicationController
   
   skip_before_filter  :verify_authenticity_token
   
+  def signup
+    device = Device.validHeader(request.headers)
+    if device && !@user && !params.values_at(:name, :logo, :address, :zip, :city, :country, :email, :password).include?(nil)
+      @user = User.create(params.permit(:name, :email, :password))
+      
+      if @user.errors.count == 0 && !@user.blank?
+        download_code = SecureRandom.hex(3).upcase
+        while Restaurant.find_by_download_code(download_code).present?
+          download_code = SecureRandom.hex(3).upcase
+        end
+        
+        google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
+        google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
+        google_req = Net::HTTP::Get.new(google_url.request_uri)
+        google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
+          http.request(google_req)
+        }
+        google_results = JSON.parse(google_res.body)["results"]
+        if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
+          params[:address] = google_results[0]["address_components"].find_all{|item|
+            item["types"] == ["route"]
+          }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
+            item["types"] == ["street_number"]
+          }[0]["long_name"]
+          params[:zip] = google_results[0]["address_components"].find_all{|item|
+            item["types"] == ["postal_code"]
+          }[0]["long_name"]
+          params[:city] = google_results[0]["address_components"].find_all{|item|
+            item["types"] == ["locality", "political"]
+          }[0]["long_name"]
+          params[:country] = google_results[0]["address_components"].find_all{|item|
+            item["types"] == ["country", "political"]
+          }[0]["long_name"]
+          
+          @user.update_attributes({
+            :last_login => DateTime.now,
+            :restaurant => Restaurant.create({
+              :name => params[:name],
+              :logo => params[:logo],
+              :location => Location.create(params.permit(:address, :zip, :city, :country)),
+              :default_language => Language.first,
+              :menuColorTemplate => MenuColorTemplate.first,
+              :menuColor => MenuColor.create(),
+              :supportedFont => SupportedFont.first,
+              :download_code => download_code,
+              :background_type => "color"
+            })
+          })
+          device.update_attributes({
+            :user => @user
+          })
+          
+          restaurant = @user.restaurant
+          if params[:logo]
+            if restaurant.logo_dimensions["original"][1] >= restaurant.logo_dimensions["original"][0]
+              restaurant.logo_crop_w = restaurant.logo_dimensions["original"].min
+              restaurant.logo_crop_h = restaurant.logo_crop_w/(restaurant.logo_dimensions["cropped_default_retina"][0].to_f/restaurant.logo_dimensions["cropped_default_retina"][1].to_f)
+            else
+              restaurant.logo_crop_h = restaurant.logo_dimensions["original"].min
+              restaurant.logo_crop_w = (restaurant.logo_dimensions["cropped_default_retina"][0].to_f/restaurant.logo_dimensions["cropped_default_retina"][1].to_f)*restaurant.logo_crop_h
+            end
+            restaurant.logo_crop_x = (restaurant.logo_dimensions["original"][0]-restaurant.logo_crop_w).to_f/2
+            restaurant.logo_crop_y = (restaurant.logo_dimensions["original"][1]-restaurant.logo_crop_h).to_f/2
+          
+            restaurant.save
+          end
+          
+          session[:user_id] = @user.id
+        
+          render :json => {:status => "success"}
+          return
+        end
+      end
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def login
     if !params.values_at(:email, :password).include?(nil)
       @user = User.find_by_email_and_password(params[:email], params[:password])
