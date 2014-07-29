@@ -4,9 +4,9 @@ class App::DailyciousController < ApplicationController
   
   def signup
     device = Device.validHeader(request.headers)
-    if device && !@user && !params.values_at(:name, :logo, :address, :zip, :city, :country, :email, :password).include?(nil)
+    if device && !@user && !params.values_at(:name, :logo_image, :address, :zip, :city, :country, :email, :password).include?(nil)
       @user = User.create(params.permit(:name, :email, :password))
-      
+      puts "----------first step"
       if @user.errors.count == 0 && !@user.blank?
         download_code = SecureRandom.hex(3).upcase
         while Restaurant.find_by_download_code(download_code).present?
@@ -54,28 +54,26 @@ class App::DailyciousController < ApplicationController
             :user => @user
           })
           
-          restaurant = @user.restaurant
           if params[:logo_image]
-            if restaurant.logo_dimensions["original"][1] >= restaurant.logo_dimensions["original"][0]
-              restaurant.logo_crop_w = restaurant.logo_dimensions["original"].min
-              restaurant.logo_crop_h = restaurant.logo_crop_w/(restaurant.logo_dimensions["cropped_default_retina"][0].to_f/restaurant.logo_dimensions["cropped_default_retina"][1].to_f)
+            if @user.restaurant.logo_image_dimensions["original"][1] >= @user.restaurant.logo_image_dimensions["original"][0]
+              @user.restaurant.logo_image_crop_w = @user.restaurant.logo_image_dimensions["original"].min
+              @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_crop_w/(@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)
             else
-              restaurant.logo_crop_h = restaurant.logo_dimensions["original"].min
-              restaurant.logo_crop_w = (restaurant.logo_dimensions["cropped_default_retina"][0].to_f/restaurant.logo_dimensions["cropped_default_retina"][1].to_f)*restaurant.logo_crop_h
+              @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_dimensions["original"].min
+              @user.restaurant.logo_image_crop_w = (@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)*@user.restaurant.logo_image_crop_h
             end
-            restaurant.logo_crop_x = (restaurant.logo_dimensions["original"][0]-restaurant.logo_crop_w).to_f/2
-            restaurant.logo_crop_y = (restaurant.logo_dimensions["original"][1]-restaurant.logo_crop_h).to_f/2
-          
-            restaurant.save
+            @user.restaurant.logo_image_crop_x = (@user.restaurant.logo_image_dimensions["original"][0]-@user.restaurant.logo_image_crop_w).to_f/2
+            @user.restaurant.logo_image_crop_y = (@user.restaurant.logo_image_dimensions["original"][1]-@user.restaurant.logo_image_crop_h).to_f/2
           end
           
           session[:user_id] = @user.id
         
-          render :json => {:status => "success"}
+          render :partial => "login"
           return
         end
       end
     end
+    puts "failed"+device.to_json.to_s
     render :json => {:status => "invalid"}
   end
   
