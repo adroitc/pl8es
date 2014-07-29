@@ -4,6 +4,7 @@ Pl8es::Application.routes.draw do
   get "/app/menumalist/:user_download_code" => "app#menumalist"
   
   #post
+  post "/app/dailycious/signup" => "app/dailycious#signup"
   post "/app/dailycious/login" => "app/dailycious#login"
   post "/app/dailycious/add" => "app/dailycious#adddailydish"
   post "/app/dailycious/edit" => "app/dailycious#editdailydish"
