@@ -122,18 +122,8 @@ class App::DailyciousController < ApplicationController
           item["types"] == ["country", "political"]
         }[0]["long_name"]
         
-        @user.update_attributes({
-          :last_login => DateTime.now,
-          :restaurant => Restaurant.create(params.permit(:name, :logo_image).merge({
-            :location => Location.create(params.permit(:address, :zip, :city, :country)),
-            :default_language => Language.first,
-            :menuColorTemplate => MenuColorTemplate.first,
-            :menuColor => MenuColor.create(),
-            :supportedFont => SupportedFont.first,
-            :download_code => download_code,
-            :background_type => "color"
-          }))
-        })
+        @user.restaurant.update_attributes(params.permit(:name, :logo_image))
+        @user.restaurant.location.update_attributes(params.permit(:address, :zip, :city, :country))
         
         if params[:logo_image]
           if @user.restaurant.logo_image_dimensions["original"][1] >= @user.restaurant.logo_image_dimensions["original"][0]
