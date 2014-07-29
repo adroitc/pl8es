@@ -38,9 +38,7 @@ class App::DailyciousController < ApplicationController
           
           @user.update_attributes({
             :last_login => DateTime.now,
-            :restaurant => Restaurant.create({
-              :name => params[:name],
-              :logo_image => params[:logo_image],
+            :restaurant => Restaurant.create(params.permit(:name, :logo_image).merge({
               :location => Location.create(params.permit(:address, :zip, :city, :country)),
               :default_language => Language.first,
               :menuColorTemplate => MenuColorTemplate.first,
@@ -48,7 +46,7 @@ class App::DailyciousController < ApplicationController
               :supportedFont => SupportedFont.first,
               :download_code => download_code,
               :background_type => "color"
-            })
+            }))
           })
           device.update_attributes({
             :user => @user
@@ -126,9 +124,7 @@ class App::DailyciousController < ApplicationController
         
         @user.update_attributes({
           :last_login => DateTime.now,
-          :restaurant => Restaurant.create({
-            :name => params[:name],
-            :logo_image => params[:logo_image],
+          :restaurant => Restaurant.create(params.permit(:name, :logo_image).merge({
             :location => Location.create(params.permit(:address, :zip, :city, :country)),
             :default_language => Language.first,
             :menuColorTemplate => MenuColorTemplate.first,
@@ -136,7 +132,7 @@ class App::DailyciousController < ApplicationController
             :supportedFont => SupportedFont.first,
             :download_code => download_code,
             :background_type => "color"
-          })
+          }))
         })
         
         if params[:logo_image]
@@ -155,7 +151,6 @@ class App::DailyciousController < ApplicationController
         return
       end
     end
-    
     render :json => {:status => "invalid"}
   end
   
