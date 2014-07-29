@@ -15,6 +15,8 @@ raw(Jsonify::Builder.plain do |j|
   
   j.latitude                   @req_location.latitude
   j.longitude                  @req_location.longitude
+  
+  j.favorites                  @req_location.restaurant.favoriteRestaurants.count
 
   j.telephone                  @req_location.restaurant.telephone
   j.email                      @req_location.restaurant.email

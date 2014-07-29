@@ -15,6 +15,8 @@ raw(Jsonify::Builder.plain do |j|
     j.latitude                   location.latitude
     j.longitude                  location.longitude
     
+    j.favorites                  location.restaurant.favoriteRestaurants.count
+    
     daily_dishes_count = location.restaurant.daily_dishes.find(
       :all,
       :conditions => [
