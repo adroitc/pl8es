@@ -6,6 +6,7 @@ Pl8es::Application.routes.draw do
   #post
   post "/app/dailycious/signup" => "app/dailycious#signup"
   post "/app/dailycious/login" => "app/dailycious#login"
+  post "/app/dailycious/profile" => "app/dailycious#profile"
   post "/app/dailycious/add" => "app/dailycious#adddailydish"
   post "/app/dailycious/edit" => "app/dailycious#editdailydish"
   post "/app/dailycious/sort" => "app/dailycious#sortdailydish"

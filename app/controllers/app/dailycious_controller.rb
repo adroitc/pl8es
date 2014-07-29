@@ -4,9 +4,9 @@ class App::DailyciousController < ApplicationController
   
   def signup
     device = Device.validHeader(request.headers)
-    if device && !@user && !params.values_at(:name, :logo_image, :address, :zip, :city, :country, :email, :password).include?(nil)
+    if device && !@user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
       @user = User.create(params.permit(:name, :email, :password))
-      puts "----------first step"
+      
       if @user.errors.count == 0 && !@user.blank?
         download_code = SecureRandom.hex(3).upcase
         while Restaurant.find_by_download_code(download_code).present?
@@ -73,13 +73,18 @@ class App::DailyciousController < ApplicationController
         end
       end
     end
-    puts "failed"+device.to_json.to_s
+    
     render :json => {:status => "invalid"}
   end
   
   def login
-    if !params.values_at(:email, :password).include?(nil)
+    device = Device.validHeader(request.headers)
+    if device && !params.values_at(:email, :password).include?(nil)
       @user = User.find_by_email_and_password(params[:email], params[:password])
+
+      device.update_attributes({
+        :user => @user
+      })
       
       if !@user.blank?
         session[:user_id] = @user.id
@@ -91,6 +96,66 @@ class App::DailyciousController < ApplicationController
       render :partial => "login"
       return
     end
+    render :json => {:status => "invalid"}
+  end
+  
+  def profile
+    if @user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
+      google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
+      google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
+      google_req = Net::HTTP::Get.new(google_url.request_uri)
+      google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
+        http.request(google_req)
+      }
+      google_results = JSON.parse(google_res.body)["results"]
+      if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
+        params[:address] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["route"]
+        }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["street_number"]
+        }[0]["long_name"]
+        params[:zip] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["postal_code"]
+        }[0]["long_name"]
+        params[:city] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["locality", "political"]
+        }[0]["long_name"]
+        params[:country] = google_results[0]["address_components"].find_all{|item|
+          item["types"] == ["country", "political"]
+        }[0]["long_name"]
+        
+        @user.update_attributes({
+          :last_login => DateTime.now,
+          :restaurant => Restaurant.create({
+            :name => params[:name],
+            :logo_image => params[:logo_image],
+            :location => Location.create(params.permit(:address, :zip, :city, :country)),
+            :default_language => Language.first,
+            :menuColorTemplate => MenuColorTemplate.first,
+            :menuColor => MenuColor.create(),
+            :supportedFont => SupportedFont.first,
+            :download_code => download_code,
+            :background_type => "color"
+          })
+        })
+        
+        if params[:logo_image]
+          if @user.restaurant.logo_image_dimensions["original"][1] >= @user.restaurant.logo_image_dimensions["original"][0]
+            @user.restaurant.logo_image_crop_w = @user.restaurant.logo_image_dimensions["original"].min
+            @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_crop_w/(@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)
+          else
+            @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_dimensions["original"].min
+            @user.restaurant.logo_image_crop_w = (@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)*@user.restaurant.logo_image_crop_h
+          end
+          @user.restaurant.logo_image_crop_x = (@user.restaurant.logo_image_dimensions["original"][0]-@user.restaurant.logo_image_crop_w).to_f/2
+          @user.restaurant.logo_image_crop_y = (@user.restaurant.logo_image_dimensions["original"][1]-@user.restaurant.logo_image_crop_h).to_f/2
+        end
+        
+        render :partial => "login"
+        return
+      end
+    end
+    puts "failed"+device.to_json.to_s
     render :json => {:status => "invalid"}
   end
   
