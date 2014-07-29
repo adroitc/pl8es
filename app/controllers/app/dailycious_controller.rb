@@ -40,7 +40,7 @@ class App::DailyciousController < ApplicationController
             :last_login => DateTime.now,
             :restaurant => Restaurant.create({
               :name => params[:name],
-              :logo_image => params[:logo],
+              :logo_image => params[:logo_image],
               :location => Location.create(params.permit(:address, :zip, :city, :country)),
               :default_language => Language.first,
               :menuColorTemplate => MenuColorTemplate.first,
@@ -55,7 +55,7 @@ class App::DailyciousController < ApplicationController
           })
           
           restaurant = @user.restaurant
-          if params[:logo]
+          if params[:logo_image]
             if restaurant.logo_dimensions["original"][1] >= restaurant.logo_dimensions["original"][0]
               restaurant.logo_crop_w = restaurant.logo_dimensions["original"].min
               restaurant.logo_crop_h = restaurant.logo_crop_w/(restaurant.logo_dimensions["cropped_default_retina"][0].to_f/restaurant.logo_dimensions["cropped_default_retina"][1].to_f)
