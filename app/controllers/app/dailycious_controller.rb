@@ -141,7 +141,7 @@ class App::DailyciousController < ApplicationController
         return
       end
     end
-    render :json => {:status => "invalid", :user => @user}
+    render :json => {:status => "invalid", :user => params.values_at(:name, :address, :zip, :city, :country)}
   end
   
   def adddailydish
