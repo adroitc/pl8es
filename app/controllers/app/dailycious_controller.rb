@@ -40,7 +40,7 @@ class App::DailyciousController < ApplicationController
             :last_login => DateTime.now,
             :restaurant => Restaurant.create({
               :name => params[:name],
-              :logo => params[:logo],
+              :logo_image => params[:logo],
               :location => Location.create(params.permit(:address, :zip, :city, :country)),
               :default_language => Language.first,
               :menuColorTemplate => MenuColorTemplate.first,
