@@ -141,7 +141,7 @@ class App::DailyciousController < ApplicationController
         return
       end
     end
-    render :json => {:status => "invalid", :user => @user}
+    render :json => {:status => "invalid"}
   end
   
   def adddailydish
