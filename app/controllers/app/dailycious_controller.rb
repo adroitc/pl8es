@@ -100,7 +100,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def profile
-    if @user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
+    if @user && !params.values_at(:name, :address, :zip, :city, :country).include?(nil)
       google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
       google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
       google_req = Net::HTTP::Get.new(google_url.request_uri)
@@ -155,7 +155,7 @@ class App::DailyciousController < ApplicationController
         return
       end
     end
-    puts "failed"+device.to_json.to_s
+    
     render :json => {:status => "invalid"}
   end
   
