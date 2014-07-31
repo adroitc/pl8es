@@ -56,8 +56,13 @@
 $(document).ready(function()
 {
   $(".pl8es_c_ajaxform").each(function(){
-    pl8es_i_ajaxform($(this),function(){
-      location.reload();
+    pl8es_i_ajaxform($(this),function(r){
+      if (r["redirect"]){
+        window.location.href = r["redirect"];
+      }
+      else{
+        location.reload();
+      }
     })
   });
   $(".pl8es_c_ajaxform_noreload").each(function(){

@@ -17,7 +17,7 @@ var neonRegister = neonRegister || {};
 		neonRegister.$steps_list = neonRegister.$steps.find(".step");
 		neonRegister.step = 'step-1'; // current step
 		
-		
+		/*
 		neonRegister.$container.validate({
 			rules: {
 				name: {
@@ -88,13 +88,7 @@ var neonRegister = neonRegister || {};
 							success: function(response)
 							{
 								// From response you can fetch the data object retured
-								/*var name = response.submitted_data.name,
-									phone = response.submitted_data.phone,
-									birthdate = response.submitted_data.birthdate,
-									username = response.submitted_data.username,
-									email = response.submitted_data.email,
-                  // password = response.submitted_data.password;*/
-
+                
   							var status = response.status;
 								
 								// Form is fully completed, we update the percentage
@@ -134,7 +128,8 @@ var neonRegister = neonRegister || {};
 				});
 			}
 		});
-	
+    */
+    
 		// Steps Handler
 		neonRegister.$steps.find('[data-step]').on('click', function(ev)
 		{

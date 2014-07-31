@@ -1094,14 +1094,14 @@ var public_vars = public_vars || {};
 						
 						if($.inArray(rule, ['required', 'url', 'email', 'number', 'date', 'creditcard', 'filedimension', 'validaddress']) != -1)
 						{
-							opts['rules'][name][rule] = true;
-							
-							message = $field.data('message-' + rule);
-							
-							if(message)
-							{
-								opts['messages'][name][rule] = message;
-							}
+						  opts['rules'][name][rule] = true;
+              
+						  message = $field.data('message-' + rule);
+						  
+						  if(message)
+						  {
+						  	opts['messages'][name][rule] = message;
+						  }
 						}
 						// Parameter Value (#1 parameter)
 						else 
