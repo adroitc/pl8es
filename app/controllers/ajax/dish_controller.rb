@@ -3,8 +3,8 @@ class Ajax::DishController < ApplicationController
   # get methods
   def dish
     if @user && Dish.exists?(params[:id]) && Dish.find(params[:id]).menu.restaurant.user == User.find(session[:user_id])
-      current_locale = I18n.locale
       
+      current_locale = I18n.locale
       I18n.locale = params[:language_locale]
       render :json => {
         :status => "success",
@@ -20,7 +20,6 @@ class Ajax::DishController < ApplicationController
           :image_url => Dish.find(params[:id]).image.url(:cropped_grid_retina)
         )
       }
-      
       I18n.locale = current_locale
       
       return
@@ -55,13 +54,11 @@ class Ajax::DishController < ApplicationController
       end
       
       current_locale = I18n.locale
-      
       languages.each do |language|
         I18n.locale = language.locale
         new_dish.title = params[:title][language.locale]
         new_dish.description = params[:description][language.locale]
       end
-      
       I18n.locale = current_locale
       
       new_dish.save
@@ -114,7 +111,6 @@ class Ajax::DishController < ApplicationController
         dish.price = params[:price]
         
         current_locale = I18n.locale
-        
         languages.each do |language|
           I18n.locale = language.locale
           dish.attributes = {
@@ -124,7 +120,6 @@ class Ajax::DishController < ApplicationController
             :sides => params[:sides][language.locale]
           }
         end
-        
         I18n.locale = current_locale
         
         params[:dishsuggestions].each_with_index do |dishsuggestion, i|

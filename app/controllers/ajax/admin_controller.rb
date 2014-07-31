@@ -25,12 +25,10 @@ class Ajax::AdminController < ApplicationController
       new_category = Category.create()
       
       current_locale = I18n.locale
-      
       Language.all.each do |language|
         I18n.locale = language.locale
         new_category.title = params[:title][language.locale]
       end
-      
       I18n.locale = current_locale
       
       new_category.save
@@ -46,12 +44,10 @@ class Ajax::AdminController < ApplicationController
       category = Category.find(params[:category_id])
       
       current_locale = I18n.locale
-      
       Language.all.each do |language|
         I18n.locale = language.locale
         category.title = params[:title][language.locale]
       end
-      
       I18n.locale = current_locale
       
       category.save

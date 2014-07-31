@@ -43,7 +43,9 @@ class ApplicationController < ActionController::Base
       @user = User.find(session[:user_id])
     end
     
-    I18n.locale = params[:locale]
+    if params[:locale]
+      I18n.locale = params[:locale]
+    end
   end
   
 end

@@ -51,12 +51,10 @@ class Ajax::ProfileController < ApplicationController
       languages = Language.find_all_by_locale(params[:description].keys)
       
       current_locale = I18n.locale
-      
       languages.each do |language|
         I18n.locale = language.locale
         @user.restaurant.description = params[:description][language.locale]
       end
-      
       I18n.locale = current_locale
       
       @user.restaurant.categories = []

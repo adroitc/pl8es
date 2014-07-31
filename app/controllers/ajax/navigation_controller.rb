@@ -25,12 +25,10 @@ class Ajax::NavigationController < ApplicationController
         end
         
         current_locale = I18n.locale
-        
         languages.each do |language|
           I18n.locale = language.locale
           new_navigation.title = params[:title][language.locale]
         end
-        
         I18n.locale = current_locale
         
         if params[:navigation_id] && menu.navigations.exists?(params[:navigation_id])
@@ -91,12 +89,10 @@ class Ajax::NavigationController < ApplicationController
         end
         
         current_locale = I18n.locale
-        
         languages.each do |language|
           I18n.locale = language.locale
           navigation.title = params[:title][language.locale]
         end
-        
         I18n.locale = current_locale
         
         navigation.save
