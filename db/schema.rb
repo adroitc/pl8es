@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717145340) do
+ActiveRecord::Schema.define(version: 20140801143106) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 20140717145340) do
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale"
+
+  create_table "clients", force: true do |t|
+    t.integer  "restaurant_id"
+    t.string   "device_id"
+    t.string   "device_app"
+    t.string   "device_version"
+    t.string   "device_type"
+    t.string   "device_system"
+    t.string   "request_hash"
+    t.datetime "request_update"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "daily_dishes", force: true do |t|
     t.string   "title"
@@ -63,10 +76,9 @@ ActiveRecord::Schema.define(version: 20140717145340) do
     t.string   "device_version"
     t.string   "device_type"
     t.string   "device_system"
-    t.string   "request_hash"
-    t.datetime "request_update"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "restaurant_id"
   end
 
   create_table "dish_translations", force: true do |t|
