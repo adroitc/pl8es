@@ -5,7 +5,7 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
-      <div class="col-md-12 input-group">
+      <div class="form-group">
 		  	<input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="" data-validate="maxlength[28]" required>
       </div>
 		</div>
@@ -15,7 +15,7 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label class="control-label"><%=t("menumalist.menu_default") %></label>
-      <div class="col-md-12 input-group">
+      <div class="input-group">
         <span class="pl8es_c_toggledefaultmenu">
           <button type="button" class="btn btn-green btn-icon disabled icon-left">
           	<%=t("menumalist.menu_default_default") %>
@@ -38,14 +38,11 @@
 	</div>
 </div>
 <div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
-	<div class="col-md-12">
-		<label for="field-1" class="control-label"><%=t("menumalist.menu_time") %></label>
-  </div>
-	<div class="col-md-12">
+	<div class="">
   	<div class="col-md-6 input-group">
 			<label for="form-from_time" class="control-label"><%=t("menumalist.menu_from") %></label>
       <div class="input-group">
-  	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="16:00" data-show-meridian="false" data-minute-step="5" />
+  	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="16:00" data-show-meridian="false" data-minute-step="5" palceholder="<%=t("menumalist.menu_from_placeholder") %>" />
   	    <div class="input-group-addon">
   	    	<a href="#"><i class="entypo-clock"></i></a>
   	    </div>
@@ -54,7 +51,7 @@
   	<div class="col-md-6">
 			<label for="form-to_time" class="control-label"><%=t("menumalist.menu_to") %></label>
       <div class="input-group">
-  	   	<input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="23:30" data-show-meridian="false" data-minute-step="5" />
+  	   	<input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="23:30" data-show-meridian="false" data-minute-step="5" palceholder="<%=t("menumalist.menu_to_placeholder") %>" />
   	    <div class="input-group-addon">
   	    	<a href="#"><i class="entypo-clock"></i></a>
   	    </div>
@@ -64,9 +61,9 @@
 </div>
 <div class="row" style="margin-bottom:14px;">
 	<div class="col-md-12">
-		<label for="form-languages" class="control-label">Select default language</label>
+		<label for="form-languages" class="control-label"><%=t("menumalist.menu_default_language") %></label>
     <br />
-	  <select name="default_language" id="form-default_language" class="col-md-12 select2" data-allow-clear="false" data-placeholder="Select default language">
+	  <select name="default_language" id="form-default_language" class="select2" data-allow-clear="false" data-placeholder="<%=t("menumalist.menu_default_language_select") %>">
       <% Language.all.each do |language| %>
 	  	<option value="<%=language.id %>" <%="selected" if language == Language.first %>><%=language.title.capitalize %></option>
       <% end %>
@@ -76,7 +73,8 @@
 <div class="row" style="margin-bottom:14px;">
 	<div class="col-md-12">
 		<label for="form-languages" class="control-label"><%=t("menumalist.menu_languages") %></label>
-    <br />
+  </div>
+	<div class="">
     <%
     Language.all.each do |language|
     %>

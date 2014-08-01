@@ -8,10 +8,15 @@
     <%=render :partial => "layouts/dashboard_topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>"><i class="entypo-home"></i>Dashboard</a>
+        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+          <i class="entypo-home"></i>
+          <%=t("layouts.menu.dashboard") %>
+        </a>
       </li>
       <li class="active">
-        <strong>Dailycious</strong>
+        <strong>
+          <%=t("layouts.menu.dailycious") %>
+        </strong>
       </li>
     </ol>
     <div class="row">
@@ -30,7 +35,7 @@
     	  </div>
     	</div>
     </div>
-    <h2>All daily dishes of the week</h2>
+    <h2><%=t("dailycious.dailycious_title") %></h2>
     <br />
     <%
     date = Date.today
@@ -43,7 +48,7 @@
         <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i-1) %>">
 				  <button type="button" class="col-md-3 btn btn-white">
             <i class="entypo-left-dir"></i>
-            Last week
+            <%=t("dailycious.last_week") %>
           </button>
         </a>
 				<button type="button" class="col-md-6 btn btn-white" disabled>
@@ -53,7 +58,7 @@
         </button>
         <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i+1) %>">
 				  <button type="button" class="col-md-3 btn btn-white">
-            Next week
+            <%=t("dailycious.next_week") %>
             <i class="entypo-right-dir"></i>
           </button>
         </a>

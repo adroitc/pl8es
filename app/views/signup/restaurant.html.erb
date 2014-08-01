@@ -30,7 +30,7 @@
 								<div class="input-group-addon">
 									<i class="entypo-user"></i>
 								</div>
-                <input name="address" type="text" class="form-control" id="form-address" placeholder="Address" data-validate="validaddress" data-message-required="<%=I18n.t("errors.required") %>" value="<%=session[:signup] != nil ? session[:signup][:address] : nil %>" required>
+                <input name="address" type="text" class="form-control" id="form-address" placeholder="<%=t("signup.address_placeholder") %>" data-validate="validaddress" data-message-required="<%=t("validation.required") %>" data-message-validaddress="<%=t("validation.validaddress") %>" value="<%=session[:signup] != nil ? session[:signup][:address] : nil %>" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -38,7 +38,7 @@
 								<div class="input-group-addon">
 									<i class="entypo-user"></i>
 								</div>
-                <input name="zip" type="text" class="form-control" id="form-zip" placeholder="Zip code" data-validate="maxlength[28]" value="<%=session[:signup] != nil ? session[:signup][:zip] : nil %>" required>
+                <input name="zip" type="text" class="form-control" id="form-zip" placeholder="<%=t("signup.zip_placeholder") %>" data-validate="maxlength[28]" value="<%=session[:signup] != nil ? session[:signup][:zip] : nil %>" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -46,7 +46,7 @@
 								<div class="input-group-addon">
 									<i class="entypo-user"></i>
 								</div>
-                <input name="city" type="text" class="form-control" id="form-city" placeholder="City" data-validate="maxlength[28]" value="<%=session[:signup] != nil ? session[:signup][:city] : nil %>" required>
+                <input name="city" type="text" class="form-control" id="form-city" placeholder="<%=t("signup.city_placeholder") %>" data-validate="maxlength[28]" value="<%=session[:signup] != nil ? session[:signup][:city] : nil %>" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -54,13 +54,13 @@
 								<div class="input-group-addon">
 									<i class="entypo-user"></i>
 								</div>
-                <input name="country" type="text" class="form-control" id="form-country" placeholder="Country" data-validate="maxlength[28]" value="<%=session[:signup] != nil ? session[:signup][:country] : nil %>" required>
+                <input name="country" type="text" class="form-control" id="form-country" placeholder="<%=t("signup.country_placeholder") %>" data-validate="maxlength[28]" value="<%=session[:signup] != nil ? session[:signup][:country] : nil %>" required>
 							</div>
 						</div>
 						<div class="form-group">
               <button type="submit" class="btn btn-primary btn-block btn-login">
                 <i class="entypo-right-open-mini"></i>
-                Continue
+                <%=t("signup.continue") %>
               </button>
 						</div>
 					</div>

@@ -8,10 +8,15 @@
     <%=render :partial => "layouts/dashboard_topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>"><i class="entypo-home"></i>Dashboard</a>
+        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+          <i class="entypo-home"></i>
+          <%=t("layouts.menu.dashboard") %>
+        </a>
       </li>
       <li class="active">
-        <strong><%=t("menumalist.all_menus") %></strong>
+        <strong>
+          <%=t("menumalist.menumalist") %>
+        </strong>
       </li>
     </ol>
     <div class="row">
@@ -34,7 +39,7 @@
     	 		<div class="num" data-start="0" data-end="<%=@user.devices.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
           <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
     	 		<h3><%=t("menumalist.installations") %></h3>
-          <p><%=t("menumalist.installations_on_iPad") %>
+          <p><%=t("menumalist.installations_on_iPads") %>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
               <%=t("menumalist.installations_want_more") %>
               <i class="entypo-plus"></i>
@@ -55,7 +60,7 @@
     	  </div>
     	</div>
     </div>
-    <h2><%=t("menumalist.all_menus") %></h2>
+    <h2><%=t("menumalist.menumalist_title") %></h2>
     <br />
     <div class="row">
       <div class="col-md-12">

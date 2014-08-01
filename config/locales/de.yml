@@ -1,4 +1,8 @@
 de:
+  validation:
+    required: "DE--This field is required."
+    minlength: "DE--Please enter at least %{l} characters."
+    
   errors:
     required: "DE--Dieses Feld ist Pflicht."
     minlength: "DE--Geben Sie mind. %{a} Zeichen ein."
@@ -23,9 +27,9 @@ de:
     logging_in: "DE--logging in ..."
     email: "DE--E-Mail"
     password: "DE--Choose Password"
-    login: "DE--Login"
-    invalid: "DE--Invalid login"
-    invalid_2: "DE--Enter a valid email and password combination."
+    login: "DE--Anmelden"
+    invalid_title: "DE--Invalid login"
+    invalid_msg: "DE--Enter a valid email and password combination."
     forgot_password: "DE--Forgot your password?"
     footer_tos: "DE--ToS"
     footer_policy: "DE--Privacy Policy."

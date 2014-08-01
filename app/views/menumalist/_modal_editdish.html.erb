@@ -32,7 +32,9 @@
       <div class="row">
 	    	<div class="col-md-12" style="display:inline-block;">
 	    		<ul class="nav nav-tabs right-aligned">
+            <% if 1==2 %>
 	    			<li class="active"><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-wines" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_wines") %><% I18n.locale = language.locale %></a></li>
+            <% end %>
 	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-dishes" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_dishes") %><% I18n.locale = language.locale %></a></li>
 	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-drinks" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_drinks") %><% I18n.locale = language.locale %></a></li>
 	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-sides" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_sides") %><% I18n.locale = language.locale %></a></li>
@@ -41,6 +43,7 @@
         </div>
 	    	<div class="col-md-12">
 	    		<div class="tab-content">
+            <% if 1==2 %>
 	    			<div class="tab-pane active" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-wines">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<% I18n.locale = current_locale %><%=t("menumalist.dish_wines_text") %><% I18n.locale = language.locale %>
@@ -49,6 +52,7 @@
 	    				  <p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted.</p>
               </div>
 	    			</div>
+            <% end %>
 	    			<div class="tab-pane" id="v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-dishes">
               <div class="col-md-12" style="margin-bottom:10px;">
       					<% I18n.locale = current_locale %><%=t("menumalist.dish_dishes_text") %><% I18n.locale = language.locale %>

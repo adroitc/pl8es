@@ -8,15 +8,22 @@
     <%=render :partial => "layouts/dashboard_topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>"><i class="entypo-home"></i>Dashboard</a>
+        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+          <i class="entypo-home"></i>
+          <%=t("layouts.menu.dashboard") %>
+        </a>
       </li>
       <li class="">
-        <a href="<%=url_for :controller => "menumalist", :action => "index" %>"><%=t("menumalist.all_menus") %></a>
+        <a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+          <%=t("menumalist.menumalist") %>
+        </a>
       </li>
       <li class="active">
         <strong><%=@menu.title %></strong>
       </li>
     </ol>
+    <h2><%=@menu.title %></h2>
+    <br />
     <div class="row gallery-env draggable-portlets">
       <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
       <input type="hidden" name="menu_id" value="<%=@menu.id %>">

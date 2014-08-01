@@ -3,38 +3,32 @@
   <li class="<%="active" if params[:controller] == "admin" %>">
   	<a href="<%=url_for :controller => "admin", :action => "index" %>">
   		<i class="entypo-gauge"></i>
-  		<span>Admin</span>
+  		<span><%=t("layouts.menu.admin") %></span>
   	</a>
   </li>
   <% end %>
   <li class="<%="active" if params[:controller] == "dashboard" %>">
   	<a href="<%=url_for :controller => "dashboard", :action => "index" %>">
   		<i class="entypo-gauge"></i>
-  		<span>Dashboard</span>
+  		<span><%=t("layouts.menu.dashboard") %></span>
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "profile" %>">
   	<a href="<%=url_for :controller => "profile", :action => "index" %>">
   		<i class="entypo-user"></i>
-  		<span>Restaurant</span>
+  		<span><%=t("layouts.menu.restaurant") %></span>
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "menumalist" %>">
   	<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
   		<i class="entypo-layout"></i>
-  		<span>Speisekarten</span>
+  		<span><%=t("layouts.menu.menumalist") %></span>
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "dailycious" %>">
   	<a href="<%=url_for :controller => "dailycious", :action => "index" %>">
   		<i class="entypo-newspaper"></i>
-  		<span>Tagesmenüs</span>
-  	</a>
-  </li>
-  <li>
-  	<a href="mailbox.html">
-  		<i class="entypo-mail"></i>
-  		<span>Weinkarte</span>
+  		<span><%=t("layouts.menu.dailycious") %></span>
   	</a>
   </li>
 </ul>
