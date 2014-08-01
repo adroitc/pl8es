@@ -60,8 +60,6 @@ de:
     
     topbar:
       logout: "Abmelden"
-    
-    breadcrumbs:
   
   profile:
     menu:"DE--Speisekarte"

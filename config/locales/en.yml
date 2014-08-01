@@ -60,8 +60,6 @@ en:
     
     topbar:
       logout: "Logout"
-    
-    breadcrumbs:
   
   profile:
     menu: "Menu"
