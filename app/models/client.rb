@@ -3,9 +3,9 @@ class Client < ActiveRecord::Base
   
 	def self.validHeader(header)
     if header["Device-Id"] && header["Device-App"] && header["Device-Version"] && header["Device-Type"] && header["Device-System"]
-      if Device.exists?(:device_id => header["Device-Id"])
-        device = Device.find_by_device_id(header["Device-Id"])
-        device.update_attributes({
+      if Client.exists?(:device_id => header["Device-Id"])
+        client = Client.find_by_device_id(header["Device-Id"])
+        client.update_attributes({
           :device_app => header["Device-App"],
           :device_version => header["Device-Version"],
           :device_type => header["Device-Type"],
@@ -13,7 +13,7 @@ class Client < ActiveRecord::Base
         })
         device.touch
       else
-        device = Device.create([{
+        client = Client.create([{
           :device_id => header["Device-Id"],
           :device_app => header["Device-App"],
           :device_version => header["Device-Version"],
@@ -21,7 +21,7 @@ class Client < ActiveRecord::Base
           :device_system => header["Device-System"]
         }])
       end
-      return device
+      return client
     end
 		return nil
 	end

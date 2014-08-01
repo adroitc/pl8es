@@ -12,6 +12,7 @@ class AppController < ApplicationController
       
       if client.request_hash != request_hash
         client.update_attributes({
+          :restaurant => @req_restaurant,
           :request_hash => request_hash
         })
       else
