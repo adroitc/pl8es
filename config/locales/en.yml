@@ -31,8 +31,8 @@ en:
   login:
     welcome: "EN--Dear user, log in to access the admin area!"
     logging_in: "EN--logging in ..."
-    email: "EN--Email"
-    password: "EN--Choose Password"
+    email_placeholder: "EN--Email"
+    password_placeholder: "EN--Choose Password"
     login: "EN--Login"
     signup: "EN--Signup"
     invalid_title: "EN--Invalid login"
