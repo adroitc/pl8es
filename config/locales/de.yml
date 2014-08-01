@@ -47,8 +47,8 @@ de:
     image_input_select_different: "Anderes Bild auswählen"
     image_input_change: "Ändern"
     delete: "Löschen"
-    delete_cancel:"DE--Abbrechen"
-    delete_confirm:"DE--Ja, dauerhaft löschen"
+    delete_cancel: "Abbrechen"
+    delete_confirm: "Ja, dauerhaft löschen"
     
   layouts:
     menu:

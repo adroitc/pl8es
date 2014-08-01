@@ -47,8 +47,8 @@ en:
     image_input_select_different: "Select different image"
     image_input_change: "Change"
     delete: "Delete"
-    delete_cancel:"EN--Cancel"
-    delete_confirm:"EN--Yes, delete permanently"
+    delete_cancel: "Cancel"
+    delete_confirm: "Yes, delete permanently"
     
   layouts:
     menu:
