@@ -62,9 +62,9 @@ de:
       logout: "Abmelden"
   
   profile:
-    menu:"DE--Speisekarte"
+    menu: "Speisekarte"
     menus: "Speisekarten"
-    dish:"DE-Mittagsgerich"
+    dish: "Mittagsgerich"
     dishes: "Mittagsgerichte"
     account_settings: "Kontoeinstellungen"
     restaurant_description: "Restaurantbeschreibung"
@@ -107,7 +107,7 @@ de:
     menumalist_title: "Menumalist - alle Speisekarten"
     download_code_title: "Das ist Ihr Download-Code. Geben Sie diesen Code in der Menumalist iPad App ein, um Ihre Speisekarte zu sehen."
     installation: "Installation"
-    installation_on_iPad:"DE--am iPad"
+    installation_on_iPad: "am iPad"
     installations: "Installationen"
     installations_on_iPads: "auf iPads"
     installations_want_more: "Wollen Sie mehr?"
