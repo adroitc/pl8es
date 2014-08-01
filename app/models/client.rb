@@ -11,7 +11,7 @@ class Client < ActiveRecord::Base
           :device_type => header["Device-Type"],
           :device_system => header["Device-System"]
         })
-        device.touch
+        client.touch
       else
         client = Client.create([{
           :device_id => header["Device-Id"],
