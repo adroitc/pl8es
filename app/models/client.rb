@@ -13,13 +13,13 @@ class Client < ActiveRecord::Base
         })
         client.touch
       else
-        client = Client.create([{
+        client = Client.create({
           :device_id => header["Device-Id"],
           :device_app => header["Device-App"],
           :device_version => header["Device-Version"],
           :device_type => header["Device-Type"],
           :device_system => header["Device-System"]
-        }])
+        })
       end
       return client
     end

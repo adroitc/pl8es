@@ -15,13 +15,13 @@ class Device < ActiveRecord::Base
         })
         device.touch
       else
-        device = Device.create([{
+        device = Device.create({
           :device_id => header["Device-Id"],
           :device_app => header["Device-App"],
           :device_version => header["Device-Version"],
           :device_type => header["Device-Type"],
           :device_system => header["Device-System"]
-        }])
+        })
       end
       return device
     end
