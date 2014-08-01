@@ -40,7 +40,7 @@ raw(Jsonify::Builder.plain do |j|
     j.image_url                  daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : nil
     j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
     j.title                      daily_dish.title
-    j.price                      ("%.2f" % daily_dish.price).gsub(".", ",")
+    j.price                      ("%.2f" % daily_dish.price.gsub(",", ".")).gsub(".", ",")
   end
   
 end)
