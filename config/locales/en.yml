@@ -107,7 +107,7 @@ en:
     menumalist_title: "Menumalist - all menus"
     download_code_title: "This is your download-code. Enter it on the Menumalist iPad app to view your menus."
     installation: "installation"
-    installation_on_iPad:"DE--on iPad"
+    installation_on_iPad:: "on iPad"
     installations: "installations"
     installations_on_iPads: "on iPads"
     installations_want_more: "want more?"
