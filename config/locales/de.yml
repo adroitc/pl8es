@@ -205,5 +205,5 @@ de:
     daily_dish_upload_image: "Bild hochladen"
     daily_dish_title: "Name"
     daily_dish_title_placeholder: "Name"
-    daily_dish_placeholder: "Preis"
-    daily_dish_placeholder_placeholder: "Preis"
+    daily_dish_price_placeholder: "Preis"
+    daily_dish_price_placeholder_placeholder: "Preis"
