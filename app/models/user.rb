@@ -1,10 +1,6 @@
 class User < ActiveRecord::Base
   has_one :restaurant
-  has_many :devices do
-    def actives()
-      where(["updated_at >= (?)", DateTime.now-31.days])
-    end
-  end
+  has_many :devices
   
   validates :email, :uniqueness => true, :length => {
     :maximum => 28

@@ -9,6 +9,14 @@ class Restaurant < ActiveRecord::Base
   belongs_to :menuColorTemplate
   belongs_to :supportedFont
   belongs_to :defaultMenu, :class_name => "Menu"
+  has_many :clients do
+    def actives()
+      where([
+        "updated_at >= (?)",
+        DateTime.now-31.days
+      ])
+    end
+  end
   has_many :menus
   has_many :dishes
   has_many :favoriteRestaurants
