@@ -129,6 +129,7 @@ class Ajax::SessionController < ApplicationController
         @user.update_attributes({
           :last_login => DateTime.now
         })
+        
         session[:user_id] = @user.id
         if @user.isAdmin
           session[:admin_id] = @user.id

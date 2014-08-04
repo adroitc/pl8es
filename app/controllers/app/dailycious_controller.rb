@@ -3,8 +3,7 @@ class App::DailyciousController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   
   def signup
-    device = Device.validHeader(request.headers)
-    if device && !@user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
+    if @device && !@user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
       @user = User.create(params.permit(:name, :email, :password))
       
       if @user.errors.count == 0 && !@user.blank?
@@ -48,7 +47,7 @@ class App::DailyciousController < ApplicationController
               :background_type => "color"
             }))
           })
-          device.update_attributes({
+          @device.update_attributes({
             :user => @user
           })
           
@@ -76,15 +75,13 @@ class App::DailyciousController < ApplicationController
   end
   
   def login
-    device = Device.validHeader(request.headers)
-    if device && !params.values_at(:email, :password).include?(nil)
+    if @device && !@user && !params.values_at(:email, :password).include?(nil)
       @user = User.find_by_email_and_password(params[:email], params[:password])
-
-      device.update_attributes({
-        :user => @user
-      })
       
       if !@user.blank?
+        @device.update_attributes({
+          :user => @user
+        })
         session[:user_id] = @user.id
         
         render :partial => "login"
@@ -98,7 +95,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def profile
-    if @user && !params.values_at(:name, :address, :zip, :city, :country).include?(nil)
+    if @device && @user && !params.values_at(:name, :address, :zip, :city, :country).include?(nil)
       google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
       google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
       google_req = Net::HTTP::Get.new(google_url.request_uri)
@@ -145,7 +142,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def adddailydish
-    if @user && !params.values_at(:display_date, :title, :price).include?(nil)
+    if @device && @user && !params.values_at(:display_date, :title, :price).include?(nil)
       new_daily_dish = DailyDish.create(params.permit(:display_date, :image, :title, :price).merge({
         :restaurant => @user.restaurant
       }))
@@ -171,7 +168,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def editdailydish
-    if @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id]) && DailyDish.find(params[:daily_dish_id]).restaurant.user == @user
+    if @device && @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id]) && DailyDish.find(params[:daily_dish_id]).restaurant.user == @user
       daily_dish = DailyDish.find(params[:daily_dish_id])
       
       daily_dish.update_attributes(params.permit(:image, :title, :price))
@@ -196,7 +193,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def sortdailydish
-    if @user && !params.values_at(:daily_dish_ids).include?(nil)
+    if @device && @user && !params.values_at(:daily_dish_ids).include?(nil)
       params[:daily_dish_ids].each do |daily_dish_id|
         if DailyDish.exists?(daily_dish_id[0].to_i) && DailyDish.find(daily_dish_id[0].to_i).restaurant.user == @user
           DailyDish.find(daily_dish_id[0].to_i).update_attributes({
@@ -212,7 +209,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def week
-    if @user && !params.values_at(:q).include?(nil)
+    if @device && @user && !params.values_at(:q).include?(nil)
       @add_weeks = params[:q].to_i
       render :partial => "week"
       return
@@ -221,8 +218,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def defaults
-    device = Device.validHeader(request.headers)
-    if device
+    if @device
       render :partial => "defaults"
       return
     end
@@ -230,8 +226,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def favorites
-    device = Device.validHeader(request.headers)
-    if device && !params.values_at(:q).include?(nil)
+    if @device && !params.values_at(:q).include?(nil)
       restaurants = Restaurant.where([
         "id IN (?) AND id IN (?)",
         params[:q].split(",").drop(2),
@@ -244,7 +239,7 @@ class App::DailyciousController < ApplicationController
           ]
         ).map{|d| d.restaurant_id}
       ])
-      device.restaurants = restaurants
+      @device.restaurants = restaurants
       @req_locations = restaurants.map{|r| r.location}.sort_by do |e|
         distance = e.distance_to([
           params[:q].split(",")[0].to_f,
@@ -262,7 +257,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def map
-    if !params.values_at(:q).include?(nil)
+    if @device && !params.values_at(:q).include?(nil)
       #restaurants = Restaurant.where([
       #  "id IN (?)",
       #  DailyDish.find(
@@ -317,7 +312,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def suggestions
-    if !params.values_at(:q).include?(nil) && params[:q].length > 0
+    if @device && !params.values_at(:q).include?(nil) && params[:q].length > 0
       query = "%#{params[:q].gsub("+"," ").downcase}%"
       
       suggestions = DailyDish.unscoped.find(
@@ -362,7 +357,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def search
-    if !params.values_at(:q).include?(nil) && params[:q].length > 0
+    if @device && !params.values_at(:q).include?(nil) && params[:q].length > 0
       query = "%#{params[:q].gsub("+"," ").downcase}%"
       
       @req_locations = Location.where(
@@ -414,7 +409,7 @@ class App::DailyciousController < ApplicationController
   end
   
   def user
-    if !params.values_at(:q).include?(nil) && Restaurant.exists?(params[:q])
+    if @device && !params.values_at(:q).include?(nil) && Restaurant.exists?(params[:q])
       @req_location = Restaurant.find(params[:q]).location
       
       render :partial => "user"
