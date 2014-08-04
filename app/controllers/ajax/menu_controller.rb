@@ -27,7 +27,7 @@ class Ajax::MenuController < ApplicationController
   end
   
   def editmenu
-    if @user && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language).include?(nil) && @user.menus.exists?(params[:menu_id]) && Language.exists?(params[:default_language].to_i)
+    if @user && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id]) && Language.exists?(params[:default_language].to_i)
       menu = @user.restaurant.menus.find(params[:menu_id])
       
       if params[:delete] == "true"
