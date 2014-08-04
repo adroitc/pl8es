@@ -10,7 +10,7 @@ Pl8es::Application.routes.draw do
   get "/app/dailycious/suggestions" => "app/dailycious#suggestions"
   get "/app/dailycious/search" => "app/dailycious#search"
   get "/app/dailycious/user" => "app/dailycious#user"
-  get "/app/menumalist/:user_download_code" => "app#menumalist"
+  get "/app/menumalist/:user_download_code" => "app/menumalist#index"
   
   #app-post
   post "/app/dailycious/signup" => "app/dailycious#signup"
