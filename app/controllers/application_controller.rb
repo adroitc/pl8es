@@ -78,12 +78,13 @@ class ApplicationController < ActionController::Base
     end
     Request.create(params.permit(:controller, :action).merge({
       :session => @session,
-      :params => "#{params.to_json({
+      :params => params.to_json({
         :except => [
           :controller,
-          :action
+          :action,
+          :password
         ]
-      })}".html_safe
+      })
     }))
     
     #language
