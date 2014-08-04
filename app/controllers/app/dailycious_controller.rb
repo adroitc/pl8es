@@ -79,9 +79,11 @@ class App::DailyciousController < ApplicationController
       @user = User.find_by_email_and_password(params[:email], params[:password])
       
       if !@user.blank?
-        @device.update_attributes({
-          :user => @user
-        })
+        if @device
+          @device.update_attributes({
+            :user => @user
+          })
+        end
         session[:user_id] = @user.id
         
         render :partial => "login"

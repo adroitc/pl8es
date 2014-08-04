@@ -40,23 +40,23 @@ class ApplicationController < ActionController::Base
   private
   def set_current_locale
     #device
-    if Device.validHeader(@_headers)
-      if Device.exists?(:device_id => header["Device-Id"])
-        @device = Device.find_by_device_id(@_headers["Device-Id"])
+    if Device.validHeader(request.headers)
+      if Device.exists?(:device_id => request.headers["Device-Id"])
+        @device = Device.find_by_device_id(request.headers["Device-Id"])
         @device.update_attributes({
-          :device_app => @_headers["Device-App"],
-          :device_version => @_headers["Device-Version"],
-          :device_type => @_headers["Device-Type"],
-          :device_system => @_headers["Device-System"]
+          :device_app => request.headers["Device-App"],
+          :device_version => request.headers["Device-Version"],
+          :device_type => request.headers["Device-Type"],
+          :device_system => request.headers["Device-System"]
         })
         @device.touch
       else
         @device = Device.create({
-          :device_id => @_headers["Device-Id"],
-          :device_app => @_headers["Device-App"],
-          :device_version => @_headers["Device-Version"],
-          :device_type => @_headers["Device-Type"],
-          :device_system => @_headers["Device-System"]
+          :device_id => request.headers["Device-Id"],
+          :device_app => request.headers["Device-App"],
+          :device_version => request.headers["Device-Version"],
+          :device_type => request.headers["Device-Type"],
+          :device_system => request.headers["Device-System"]
         })
       end
     end
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
     end
     
     #session + request
-    if Session.logsSession(session, @_headers)
+    if Session.logsSession(session, request.headers)
       @session = Session.find(session[:user_session_id])
     elsif @user || @device
       @session = Session.create({
