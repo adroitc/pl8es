@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804091921) do
+ActiveRecord::Schema.define(version: 20140804143334) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -383,6 +383,7 @@ ActiveRecord::Schema.define(version: 20140804091921) do
     t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
   end
 
   create_table "supported_fonts", force: true do |t|

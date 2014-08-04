@@ -39,11 +39,19 @@ class ApplicationController < ActionController::Base
 
   private
   def set_current_locale
+    #user
+    if User.loggedIn(session)
+      @user = User.find(session[:user_id])
+    elsif request.headers["Token"] && !Session.find_by_token(request.headers["Token"]).blank?
+      @user = Session.find_by_token(request.headers["Token"]).user
+    end
+    
     #device
     if Device.validHeader(request.headers)
       if Device.exists?(:device_id => request.headers["Device-Id"])
         @device = Device.find_by_device_id(request.headers["Device-Id"])
         @device.update_attributes({
+          :user => @user,
           :device_app => request.headers["Device-App"],
           :device_version => request.headers["Device-Version"],
           :device_type => request.headers["Device-Type"],
@@ -52,6 +60,7 @@ class ApplicationController < ActionController::Base
         @device.touch
       else
         @device = Device.create({
+          :user => @user,
           :device_id => request.headers["Device-Id"],
           :device_app => request.headers["Device-App"],
           :device_version => request.headers["Device-Version"],
@@ -61,18 +70,18 @@ class ApplicationController < ActionController::Base
       end
     end
     
-    #user
-    if User.loggedIn(session)
-      @user = User.find(session[:user_id])
-    end
-    
     #session + request
     if Session.logsSession(session, request.headers)
       @session = Session.find(session[:user_session_id])
     elsif @user || @device
+      token = SecureRandom.hex(32).upcase
+      while Session.find_by_token(token).present?
+        token = SecureRandom.hex(32).upcase
+      end
       @session = Session.create({
-        :user => @user,
-        :device => @device
+        :user => @user != nil ? @user : @device.user,
+        :device => @device,
+        :token => token
       })
       session[:user_session_id] = @session.id
     end
