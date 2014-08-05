@@ -33,9 +33,9 @@
 	    	<div class="col-md-12" style="display:inline-block;">
 	    		<ul class="nav nav-tabs right-aligned">
             <% if 1==2 %>
-	    			<li class="active"><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-wines" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_wines") %><% I18n.locale = language.locale %></a></li>
+	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-wines" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_wines") %><% I18n.locale = language.locale %></a></li>
             <% end %>
-	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-dishes" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_dishes") %><% I18n.locale = language.locale %></a></li>
+	    			<li class="active"><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-dishes" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_dishes") %><% I18n.locale = language.locale %></a></li>
 	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-drinks" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_drinks") %><% I18n.locale = language.locale %></a></li>
 	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-sides" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_sides") %><% I18n.locale = language.locale %></a></li>
 	    			<li><a href="#v2-editdish-tab-<%=language.locale %>-suggestions-<%=dish.id %>-ingredients" data-toggle="tab"><% I18n.locale = current_locale %><%=t("menumalist.dish_ingredients") %><% I18n.locale = language.locale %></a></li>

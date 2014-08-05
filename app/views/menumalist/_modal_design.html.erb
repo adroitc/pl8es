@@ -18,10 +18,6 @@
 <div id="form-menu_color_custom" class="row">
   <div class="col-md-4">
   	<div class="form-group">
-      <input class="icheck-2-radio" type="radio" id="form-background_type_color" name="background_type" value="color" <%="checked" if @user.restaurant.background_type == "color" %>>
-  		<label for="form-background_type_color" class="control-label"><%=t("menumalist.design_background_color") %></label>
-      <br />
-      <br />
 			<div class="input-group">
 				<div class="input-group-addon">
 					<a href="#"><i class="color-preview"></i></a>
@@ -32,10 +28,6 @@
   </div>
   <div class="col-md-6 col-md-offset-2">
   	<div class="form-group">
-      <input class="icheck-2-radio" type="radio" id="form-background_type_image" name="background_type" value="image" <%="checked" if @user.restaurant.background_type == "image" %>>
-  		<label for="form-background_type_image" class="control-label"><%=t("menumalist.design_background_image") %></label>
-      <br />
-      <br />
       <%=neon_imagecrop :image => @user.restaurant.appmain_image %>
     </div>
   </div>

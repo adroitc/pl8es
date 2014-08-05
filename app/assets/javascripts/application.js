@@ -89,26 +89,28 @@ $(document).ready(function()
   });
   
   function pl8es_f_setupinputchanger(t){
-    var f = "change";
-    if (t.hasClass("icheck-2-checkbox") && t.attr("type") == "checkbox"){
-      f = "ifChanged"
-    }
-    t.one(f, function(){
-      t.closest("form").find(t[0].tagName+"[name='"+t.attr("name")+"']").not(t).each(function(){
-        if (t.hasClass("icheck-2-checkbox") && t.attr("type") == "checkbox"){
-          if (t.parent().hasClass("checked")){
-            $(this).iCheck("uncheck");
+    if (t.attr("type") != "radio"){
+      var f = "change";
+      if (t.hasClass("icheck-2-checkbox") && t.attr("type") == "checkbox"){
+        f = "ifChanged"
+      }
+      t.one(f, function(){
+        t.closest("form").find(t[0].tagName+"[name='"+t.attr("name")+"']").not(t).each(function(){
+          if (t.hasClass("icheck-2-checkbox") && t.attr("type") == "checkbox"){
+            if (t.parent().hasClass("checked")){
+              $(this).iCheck("uncheck");
+            }
+            else{
+              $(this).iCheck("check");
+            }
           }
           else{
-            $(this).iCheck("check");
+            $(this).val(t.val()).trigger("change");
           }
-        }
-        else{
-          $(this).val(t.val()).trigger("change");
-        }
+        });
+        pl8es_f_setupinputchanger(t);
       });
-      pl8es_f_setupinputchanger(t);
-    });
+    }
   }
   $("input[type!='checkbox'], select").each(function(){
     pl8es_f_setupinputchanger($(this));
