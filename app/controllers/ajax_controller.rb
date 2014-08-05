@@ -8,6 +8,7 @@ class AjaxController < ApplicationController
         @user.restaurant.menuColorTemplate = nil
       end
       @user.restaurant.background_type = params[:background_type]
+      @user.restaurant.save
       
       @user.restaurant.menuColor.update_attributes(
         params.permit(:background, :bar_background, :nav_text, :nav_text_active).merge({
