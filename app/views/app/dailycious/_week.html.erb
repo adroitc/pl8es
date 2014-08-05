@@ -1,6 +1,8 @@
 <%=
 raw(Jsonify::Builder.plain do |j|
   
+  j.token                      @session.token
+  
   j.id                         @user.restaurant.id
   
   date = Date.today

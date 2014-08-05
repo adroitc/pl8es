@@ -112,6 +112,17 @@ class Ajax::SessionController < ApplicationController
           })
         })
         
+        if @device
+          @device.update_attributes({
+            :user => @user
+          })
+        end
+        if @session
+          @session.update_attributes({
+            :user => @user
+          })
+        end
+        
         session[:user_id] = @user.id
         
         render :json => {:status => "success", :redirect => url_for(:controller => "/profile", :action => "index")}
@@ -129,6 +140,17 @@ class Ajax::SessionController < ApplicationController
         @user.update_attributes({
           :last_login => DateTime.now
         })
+        
+        if @device
+          @device.update_attributes({
+            :user => @user
+          })
+        end
+        if @session
+          @session.update_attributes({
+            :user => @user
+          })
+        end
         
         session[:user_id] = @user.id
         if @user.isAdmin

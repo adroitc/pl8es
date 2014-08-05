@@ -1,6 +1,8 @@
 <%=
 raw(Jsonify::Builder.plain do |j|
   
+  j.token                      @session.token
+  
   j.locations(@req_locations) do |location|
     j.id                         location.restaurant.id
     

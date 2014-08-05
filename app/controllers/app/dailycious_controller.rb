@@ -47,9 +47,17 @@ class App::DailyciousController < ApplicationController
               :background_type => "color"
             }))
           })
-          @device.update_attributes({
-            :user => @user
-          })
+          
+          if @device
+            @device.update_attributes({
+              :user => @user
+            })
+          end
+          if @session
+            @session.update_attributes({
+              :user => @user
+            })
+          end
           
           if params[:logo_image]
             if @user.restaurant.logo_image_dimensions["original"][1] >= @user.restaurant.logo_image_dimensions["original"][0]
@@ -62,7 +70,7 @@ class App::DailyciousController < ApplicationController
             @user.restaurant.logo_image_crop_x = (@user.restaurant.logo_image_dimensions["original"][0]-@user.restaurant.logo_image_crop_w).to_f/2
             @user.restaurant.logo_image_crop_y = (@user.restaurant.logo_image_dimensions["original"][1]-@user.restaurant.logo_image_crop_h).to_f/2
           end
-          
+
           session[:user_id] = @user.id
         
           render :partial => "login"
@@ -71,24 +79,36 @@ class App::DailyciousController < ApplicationController
       end
     end
     
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def login
-    if @device && !@user && !params.values_at(:email, :password).include?(nil)
+    if @device && !params.values_at(:email, :password).include?(nil)
       @user = User.find_by_email_and_password(params[:email], params[:password])
-      
       if !@user.blank?
+        
+        if @device
+          @device.update_attributes({
+            :user => @user
+          })
+        end
+        if @session
+          @session.update_attributes({
+            :user => @user
+          })
+        end
+        
         session[:user_id] = @user.id
         
         render :partial => "login"
         return
       end
-    elsif @user
+    elsif @device && @user
+      
       render :partial => "login"
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def profile
@@ -135,7 +155,7 @@ class App::DailyciousController < ApplicationController
         return
       end
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def adddailydish
@@ -158,10 +178,10 @@ class App::DailyciousController < ApplicationController
         new_daily_dish.save
       end
       
-      render :json => {:status => "success"}
+      render :json => {:token => @session.token, :status => "success"}
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def editdailydish
@@ -183,10 +203,10 @@ class App::DailyciousController < ApplicationController
       end
       daily_dish.save
       
-      render :json => {:status => "success"}
+      render :json => {:token => @session.token, :status => "success"}
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def sortdailydish
@@ -199,10 +219,10 @@ class App::DailyciousController < ApplicationController
         end
       end
       
-      render :json => {:status => "success"}
+      render :json => {:token => @session.token, :status => "success"}
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def week
@@ -211,7 +231,7 @@ class App::DailyciousController < ApplicationController
       render :partial => "week"
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def defaults
@@ -219,7 +239,7 @@ class App::DailyciousController < ApplicationController
       render :partial => "defaults"
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def favorites
@@ -250,7 +270,7 @@ class App::DailyciousController < ApplicationController
       render :partial => "map"
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def map
@@ -305,7 +325,7 @@ class App::DailyciousController < ApplicationController
       render :partial => "map"
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def suggestions
@@ -347,10 +367,10 @@ class App::DailyciousController < ApplicationController
         :order => "suggestion"
       ).map{|u| u.suggestion}
       
-      render :json => {:suggestions => suggestions}
+      render :json => {:token => @session.token, :suggestions => suggestions}
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def search
@@ -402,7 +422,7 @@ class App::DailyciousController < ApplicationController
       render :partial => "map"
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
   def user
@@ -412,7 +432,7 @@ class App::DailyciousController < ApplicationController
       render :partial => "user"
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:token => @session.token, :status => "invalid"}
   end
   
 end
