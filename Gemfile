@@ -67,8 +67,11 @@ gem "aws-sdk"
 gem "paperclip-dimension"
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
-#location
+# location
 gem "geokit-rails"
+
+# rest
+gem "rest-client"
 
 group :assets do
   gem "therubyracer"

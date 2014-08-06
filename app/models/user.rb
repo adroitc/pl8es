@@ -14,4 +14,13 @@ class User < ActiveRecord::Base
 		return false
 	end
   
+  def sendMail(subject, content)
+    RestClient.post "https://api:#{ENV["MAILGUN_API"]}"\
+    "@api.mailgun.net/v2/pl8.cc/messages",
+      :from => "dailycious <hi@pl8.cc>",
+      :to => email,
+      :subject => "Hello",
+      :text => "Hello World!"
+  end
+  
 end
