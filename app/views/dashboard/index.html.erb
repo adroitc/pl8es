@@ -43,7 +43,7 @@
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=requests_this_7days %>" data-duration="1500" data-delay="0"></div>
+  		  	<div class="num" data-start="0" data-end="<%=requests_this_7days %>" data-duration="1500" data-delay="0">0</div>
 			  
   		  	<h3>visits</h3>
   		  	<p>in the last 7 days</p>
@@ -52,7 +52,7 @@
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0"></div>
+  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0">0</div>
 			  
   		  	<h3>favorites</h3>
   		  	<p><%=@user.restaurant.name %></p>
@@ -64,7 +64,7 @@
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.daily_dishes.where([
                  "display_date > (?)",
                  Date.today-7
-               ]).count %>" data-duration="1500" data-delay="0"></div>
+               ]).count %>" data-duration="1500" data-delay="0">0</div>
 			  
   		  	<h3>daily dishes</h3>
   		  	<p>published in the last 7 days</p>
@@ -124,7 +124,7 @@
                  "created_at >= (?) AND created_at <= (?)",
                  Date.today-7,
                  Date.today
-  		  	     ]).count %>" data-duration="1500" data-delay="0"></div>
+  		  	     ]).count %>" data-duration="1500" data-delay="0">0</div>
 			  
   		  	<h3>new favorites</h3>
   		  	<p>in the last 7 days</p>
@@ -150,7 +150,7 @@
       <div class="col-sm-4">
     	 	<div class="tile-stats tile-white">
     	 		<div class="icon"><i class="entypo-monitor"></i></div>
-    	 		<div class="num" data-start="0" data-end="<%=@user.restaurant.clients.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;"><%=@user.restaurant.clients.actives.count %></div>
+    	 		<div class="num" data-start="0" data-end="<%=@user.restaurant.clients.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
           <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
     	 		<h3><%=@user.restaurant.clients.actives.count == 1 ? t("menumalist.installation") : t("menumalist.installations") %></h3>
           <p><%=@user.restaurant.clients.actives.count == 1 ? t("menumalist.installation_on_iPad") : t("menumalist.installations_on_iPads") %>
