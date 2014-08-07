@@ -24,9 +24,9 @@
         :q => @user.id.to_s
       }.to_json
     }).where([
-      "created_at >= (?) AND created_at < (?)", 
-      Date.today-14,
-      Date.today-7
+      "created_at >= (?) AND created_at <= (?)", 
+      Date.today-13,
+      Date.today-6
     ]).count
     requests_this_7days = Request.where({
       :controller => "app/dailycious",
@@ -35,8 +35,8 @@
         :q => @user.id.to_s
       }.to_json
     }).where([
-      "created_at > (?)",
-      Date.today-7
+      "created_at >= (?)",
+      Date.today-6
     ]).count
     %>
     <div class="row">
@@ -93,14 +93,14 @@
           :q => 1.to_s
         }.to_json
       }).where([
-        "created_at > (?)",
-        Date.today-14
+        "created_at >= (?)",
+        Date.today-13
       ]).group("date(created_at)").count
       %>
       <script type="text/javascript">
       jQuery(document).ready(function($) 
       {
-        $(".weekly-visitors").sparkline(<%=requests_this_7days_peaks.keys.sort.map{|r| requests_this_7days_peaks[r]}.to_json %>,{
+        $(".weekly-visitors").sparkline(<%=(Date.today-13..Date.today).map{|r| requests_this_7days_peaks[r].to_i}.to_json %>,{
       	    type: "line",
       	    width: "100%",
       	    height: "55",
