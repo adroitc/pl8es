@@ -84,9 +84,7 @@ class Ajax::SessionController < ApplicationController
   
   def signup_user
     if !@user && session[:signup] && !params.values_at(:email, :password).include?(nil)
-      @user = User.create(params.permit(:email, :password).merge({
-        :name => session[:signup][:name]
-      }))
+      @user = User.create(params.permit(:email, :password)
       
       if @user.errors.count == 0 && !@user.blank?
         download_code = SecureRandom.hex(3).upcase
