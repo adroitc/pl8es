@@ -37,16 +37,18 @@ class ApplicationController < ActionController::Base
       })
       session[:user_session_id] = @session.id
     end
-    Request.create(params.permit(:controller, :action).merge({
-      :session => @session,
-      :params => params.to_json({
-        :except => [
-          :controller,
-          :action,
-          :password
-        ]
-      })
-    }))
+    if !(params[:controller] == "app/dailycious" && params[:action] == "map")
+      Request.create(params.permit(:controller, :action).merge({
+        :session => @session,
+        :params => params.to_json({
+          :except => [
+            :controller,
+            :action,
+            :password
+          ]
+        })
+      }))
+    end
     @session.touch
 
     #device
