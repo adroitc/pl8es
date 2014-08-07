@@ -82,9 +82,41 @@
     		<div class="tile-stats tile-white stat-tile">
     			<h3><%=([requests_this_7days-requests_last_7days, 0].max/[requests_last_7days, 1].max)*100.0 %>% more </h3>
     			<p>visits this week</p>
-    			<span class="daily-visitors"></span>
+    			<span class="weekly-visitors"></span>
     		</div>		
     	</div>
+      <%
+      requests_this_7days_peaks = Request.select("date(created_at)").where({
+        :controller => "app/dailycious",
+        :action => "user",
+        :params => {
+          :q => 1.to_s
+        }.to_json
+      }).where([
+        "created_at > (?)",
+        Date.today-14
+      ]).group("date(created_at)").count
+      %>
+      <script type="text/javascript">
+      jQuery(document).ready(function($) 
+      {
+        $(".weekly-visitors").sparkline([<%=requests_this_7days_peaks.keys.sort.map{|r| requests_this_7days_peaks[r]}.to_json %>],{
+      	    type: "line",
+      	    width: "100%",
+      	    height: "55",
+      	    lineColor: "#ff4e50",
+      	    fillColor: "#ffd2d3",
+      	    lineWidth: 2,
+      	    spotColor: "#a9282a",
+      	    minSpotColor: "#a9282a",
+      	    maxSpotColor: "#a9282a",
+      	    highlightSpotColor: "#a9282a",
+      	    highlightLineColor: "#f4c3c4",
+      	    spotRadius: 2,
+      	    drawNormalOnTop: true
+        });
+      });
+      </script>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
