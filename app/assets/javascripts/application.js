@@ -43,6 +43,7 @@
 //= require "daterangepicker/moment.min"
 //= require "daterangepicker/daterangepicker"
 //= require "toastr"
+//= require "jquery.sparkline.min"
 
 //= require "neon-custom"
 // require "neon-demo"
