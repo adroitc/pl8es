@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804152439) do
+ActiveRecord::Schema.define(version: 20140807123143) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20140804152439) do
     t.string   "image_fingerprint"
     t.integer  "position"
     t.integer  "restaurant_id"
-    t.integer  "old_user_id"
   end
 
   create_table "devices", force: true do |t|
@@ -117,7 +116,6 @@ ActiveRecord::Schema.define(version: 20140804152439) do
     t.boolean  "image_crop_processed",             default: true
     t.integer  "ingredients_id"
     t.integer  "restaurant_id"
-    t.integer  "old_user_id"
   end
 
   create_table "dishes_ingredients", force: true do |t|
@@ -175,7 +173,6 @@ ActiveRecord::Schema.define(version: 20140804152439) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "restaurant_id"
-    t.integer  "old_user_id"
   end
 
   create_table "menu_color_templates", force: true do |t|
@@ -248,7 +245,6 @@ ActiveRecord::Schema.define(version: 20140804152439) do
     t.datetime "updated_at"
     t.integer  "default_language_id"
     t.integer  "restaurant_id"
-    t.integer  "old_user_id"
   end
 
   create_table "navigation_translations", force: true do |t|
@@ -282,7 +278,6 @@ ActiveRecord::Schema.define(version: 20140804152439) do
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
     t.boolean  "image_crop_processed",             default: true
-    t.integer  "old_user_id"
   end
 
   create_table "requests", force: true do |t|
@@ -405,7 +400,6 @@ ActiveRecord::Schema.define(version: 20140804152439) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "name"
     t.string   "email"
     t.string   "password"
     t.string   "first_name"
