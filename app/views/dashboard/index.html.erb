@@ -17,36 +17,36 @@
     <h2><%=t("layouts.menu.dailycious") %></h2>
     <br />
     <%
-    requests_last_week = Request.where({
+    requests_last_7days = Request.where({
       :controller => "app/dailycious",
       :action => "user",
       :params => {
         :q => @user.id.to_s
       }.to_json
     }).where([
-      "created_at >= (?) AND created_at <= (?)", 
-      Date.today.ago(1.week).beginning_of_week,
-      Date.today.beginning_of_week
+      "created_at >= (?) AND created_at < (?)", 
+      Date.today-14,
+      Date.today-7
     ]).count
-    requests_this_week = Request.where({
+    requests_this_7days = Request.where({
       :controller => "app/dailycious",
       :action => "user",
       :params => {
         :q => @user.id.to_s
       }.to_json
     }).where([
-      "created_at >= (?)",
-      Date.today.beginning_of_week
+      "created_at > (?)",
+      Date.today-7
     ]).count
     %>
     <div class="row">
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=requests_this_week %>" data-duration="1500" data-delay="0"><%=requests_this_week %></div>
+  		  	<div class="num" data-start="0" data-end="<%=requests_this_week %>" data-duration="1500" data-delay="0"><%=requests_this_7days %></div>
 			  
   		  	<h3>visits</h3>
-  		  	<p>this week</p>
+  		  	<p>in the last 7 days</p>
   		  </div>
   		</div>
       <div class="col-sm-4">
@@ -58,17 +58,12 @@
   		  	<p><%=@user.restaurant.name %></p>
   		  </div>
   		</div>
-      <%
-      date = Date.today
-      date -= 7
-      %>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0"><%=@user.restaurant.daily_dishes.where([
-                 "display_date >= (?) AND display_date <= (?)",
-                 Date.today-7,
-                 Date.today
+                 "display_date >",
+                 Date.today-7
                ]).count %></div>
 			  
   		  	<h3>daily dishes</h3>
@@ -85,7 +80,7 @@
     <div class="row">
     	<div class="col-md-4">
     		<div class="tile-stats tile-white stat-tile">
-    			<h3><%=([requests_this_week-requests_last_week, 0].max/[requests_last_week, 1].max)*100.0 %>% more </h3>
+    			<h3><%=([requests_this_7days-requests_last_7days, 0].max/[requests_last_7days, 1].max)*100.0 %>% more </h3>
     			<p>visits this week</p>
     			<span class="daily-visitors"></span>
     		</div>		
