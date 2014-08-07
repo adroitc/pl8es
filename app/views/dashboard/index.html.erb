@@ -100,7 +100,7 @@
       <script type="text/javascript">
       jQuery(document).ready(function($) 
       {
-        $(".weekly-visitors").sparkline([<%=requests_this_7days_peaks.keys.sort.map{|r| requests_this_7days_peaks[r]}.to_json %>],{
+        $(".weekly-visitors").sparkline(<%=requests_this_7days_peaks.keys.sort.map{|r| requests_this_7days_peaks[r]}.to_json %>,{
       	    type: "line",
       	    width: "100%",
       	    height: "55",
