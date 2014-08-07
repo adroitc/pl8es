@@ -43,7 +43,7 @@
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=requests_this_7days %>" data-duration="1500" data-delay="0"><%=requests_this_7days %></div>
+  		  	<div class="num" data-start="0" data-end="<%=requests_this_7days %>" data-duration="1500" data-delay="0"></div>
 			  
   		  	<h3>visits</h3>
   		  	<p>in the last 7 days</p>
@@ -52,7 +52,7 @@
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0"><%=@user.restaurant.favoriteRestaurants.count %></div>
+  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0"></div>
 			  
   		  	<h3>favorites</h3>
   		  	<p><%=@user.restaurant.name %></p>
@@ -61,10 +61,10 @@
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0"><%=@user.restaurant.daily_dishes.where([
+  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.daily_dishes.where([
                  "display_date > (?)",
                  Date.today-7
-               ]).count %></div>
+               ]).count %>" data-duration="1500" data-delay="0"></div>
 			  
   		  	<h3>daily dishes</h3>
   		  	<p>published in the last 7 days</p>
@@ -120,11 +120,11 @@
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0"><%=@user.restaurant.favoriteRestaurants.where([
+  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.where([
                  "created_at >= (?) AND created_at <= (?)",
                  Date.today-7,
                  Date.today
-  		  	     ]).count %></div>
+  		  	     ]).count %>" data-duration="1500" data-delay="0"></div>
 			  
   		  	<h3>new favorites</h3>
   		  	<p>in the last 7 days</p>
