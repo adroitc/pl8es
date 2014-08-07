@@ -17,8 +17,27 @@
     <h2><%=t("layouts.menu.dailycious") %></h2>
     <br />
     <%
-    requests_last_week = Request.where({:controller => "app/dailycious", :action => "user", :params => "{\"q\":\"1\"}"}).where(["created_at >= (?) AND created_at <= (?)",  Date.today.ago(1.week).beginning_of_week, Date.today.beginning_of_week]).count
-    requests_this_week = Request.where({:controller => "app/dailycious", :action => "user", :params => "{\"q\":\"1\"}"}).where(["created_at >= (?)", Date.today.beginning_of_week]).count
+    requests_last_week = Request.where({
+      :controller => "app/dailycious",
+      :action => "user",
+      :params => {
+        :q => @user.id.to_s
+      }.to_json
+    }).where([
+      "created_at >= (?) AND created_at <= (?)", 
+      Date.today.ago(1.week).beginning_of_week,
+      Date.today.beginning_of_week
+    ]).count
+    requests_this_week = Request.where({
+      :controller => "app/dailycious",
+      :action => "user",
+      :params => {
+        :q => @user.id.to_s
+      }.to_json
+    }).where([
+      "created_at >= (?)",
+      Date.today.beginning_of_week
+    ]).count
     %>
     <div class="row">
       <div class="col-sm-4">
