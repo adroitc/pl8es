@@ -62,7 +62,7 @@
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0"><%=@user.restaurant.daily_dishes.where([
-                 "display_date >",
+                 "display_date > (?)",
                  Date.today-7
                ]).count %></div>
 			  
