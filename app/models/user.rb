@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
     "@api.mailgun.net/v2/pl8.cc/messages",
       :from => "dailycious <hi@pl8.cc>",
       :to => email,
-      :subject => "Hello",
-      :text => "Hello World!"
+      :subject => subject,
+      :text => content
   end
   
 end

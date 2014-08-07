@@ -16,14 +16,18 @@
     </ol>
     <h2><%=t("layouts.menu.dailycious") %></h2>
     <br />
+    <%
+    requests_last_week = Request.where({:controller => "app/dailycious", :action => "user", :params => "{\"q\":\"1\"}"}).where(["created_at >= (?) AND created_at <= (?)",  Date.today.ago(1.week).beginning_of_week, Date.today.beginning_of_week]).count
+    requests_this_week = Request.where({:controller => "app/dailycious", :action => "user", :params => "{\"q\":\"1\"}"}).where(["created_at >= (?)", Date.today.beginning_of_week]).count
+    %>
     <div class="row">
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num" data-start="0" data-end="83" data-duration="1500" data-delay="0">0</div>
+  		  	<div class="num" data-start="0" data-end="<%=requests_this_week %>" data-duration="1500" data-delay="0"><%=requests_this_week %></div>
 			  
-  		  	<h3>"visits"</h3>
-  		  	<p>requests</p>
+  		  	<h3>visits</h3>
+  		  	<p>this week</p>
   		  </div>
   		</div>
       <div class="col-sm-4">
@@ -62,8 +66,8 @@
     <div class="row">
     	<div class="col-md-4">
     		<div class="tile-stats tile-white stat-tile">
-    			<h3>15% more </h3>
-    			<p>"visits" this month</p>
+    			<h3><%=([requests_this_week-requests_last_week, 0].max/[requests_last_week, 1].max)*100.0 %>% more </h3>
+    			<p>visits this week</p>
     			<span class="daily-visitors"></span>
     		</div>		
     	</div>
