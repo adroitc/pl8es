@@ -105,7 +105,7 @@ class Ajax::AdminController < ApplicationController
       if params[:delete] == "true"
         navigation.destroy
       else
-        menuColorTemplate.attributes = params.permit(:background, :bar_background, :nav_text, :nav_text_active).merge({
+        menuColorTemplate.update_attributes(params.permit(:preview_image, :background, :bar_background, :nav_text, :nav_text_active).merge({
           bev_background: params[:nav_text],
           bev_background_selected: params[:bar_background],
           bev_background_active: params[:bar_background],
@@ -126,39 +126,8 @@ class Ajax::AdminController < ApplicationController
           sub_text: params[:nav_text],
           sub_text_selected: params[:nav_text_active],
           sub_text_active: params[:nav_text_active]
-        })
-        
-        if params[:preview_image]
-          menuColorTemplate.preview_image = params[:preview_image]
-          
-          if menuColorTemplate.preview_image.present?
-            if menuColorTemplate.preview_image_dimensions["original"][1] >= menuColorTemplate.preview_image_dimensions["original"][0]
-              menuColorTemplate.preview_image_crop_w = menuColorTemplate.preview_image_dimensions["original"].min
-              menuColorTemplate.preview_image_crop_h = menuColorTemplate.preview_image_crop_w/(menuColorTemplate.preview_image_dimensions["cropped_default_retina"][0].to_f/menuColorTemplate.preview_image_dimensions["cropped_default_retina"][1].to_f)
-            else
-              menuColorTemplate.preview_image_crop_h = menuColorTemplate.preview_image_dimensions["original"].min
-              menuColorTemplate.preview_image_crop_w = (menuColorTemplate.preview_image_dimensions["cropped_default_retina"][0].to_f/menuColorTemplate.preview_image_dimensions["cropped_default_retina"][1].to_f)*menuColorTemplate.preview_image_crop_h
-            end
-            menuColorTemplate.preview_image_crop_x = (menuColorTemplate.preview_image_dimensions["original"][0]-menuColorTemplate.preview_image_crop_w).to_f/2
-            menuColorTemplate.preview_image_crop_y = (menuColorTemplate.preview_image_dimensions["original"][1]-menuColorTemplate.preview_image_crop_h).to_f/2
-          end
-        elsif !params.values_at(:preview_image_crop_w, :preview_image_crop_h, :preview_image_crop_x, :preview_image_crop_y).include?(nil)
-          if params[:preview_image_crop_w].to_i+params[:image_crop_x].to_i > menuColorTemplate.preview_image_dimensions["original"][0]
-            params[:preview_image_crop_x] = menuColorTemplate.preview_image_dimensions["original"][0]-params[:preview_image_crop_w].to_i
-          end
-          if params[:preview_image_crop_h].to_i+params[:image_crop_y].to_i > menuColorTemplate.preview_image_dimensions["original"][1]
-            params[:preview_image_crop_y] = menuColorTemplate.preview_image_dimensions["original"][1]-params[:preview_image_crop_h].to_i
-          end
-          menuColorTemplate.attributes = params.permit(:preview_image_crop_w, :preview_image_crop_h, :preview_image_crop_x, :preview_image_crop_y)
-          if menuColorTemplate.preview_image_crop_w_changed? || menuColorTemplate.preview_image_crop_h_changed? || menuColorTemplate.preview_image_crop_x_changed? || menuColorTemplate.preview_image_crop_y_changed?
-            menuColorTemplate.save
-            menuColorTemplate.update_attributes({:preview_image_crop_processed => false})
-            menuColorTemplate.preview_image.reprocess!
-            menuColorTemplate.update_attributes({:preview_image_crop_processed => true})
-          end
-        end
-        
-        menuColorTemplate.save
+        }))
+        menuColorTemplate.preview_image.image.set_crop_values_for_instance(params.permit(:preview_image, :preview_image_crop_w, :preview_image_crop_h, :preview_image_crop_x, :preview_image_crop_y))
       end
       
       render :json => {:status => "success"}

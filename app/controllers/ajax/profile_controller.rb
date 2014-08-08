@@ -46,7 +46,7 @@ class Ajax::ProfileController < ApplicationController
   
   def editdescription
     if @user && !params.values_at(:name, :description, :categories).include?(nil)
-      @user.restaurant.attributes = params.permit(:logo_image, :restaurant_image, :name)
+      @user.restaurant.update_attributes(params.permit(:logo_image, :restaurant_image, :name))
       
       languages = Language.find_all_by_locale(params[:description].keys)
       
@@ -65,63 +65,13 @@ class Ajax::ProfileController < ApplicationController
         end
       end
       
-      if params[:logo_image]
-        if @user.restaurant.logo_image_dimensions["original"][1] >= @user.restaurant.logo_image_dimensions["original"][0]
-          @user.restaurant.logo_image_crop_w = @user.restaurant.logo_image_dimensions["original"].min
-          @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_crop_w/(@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)
-        else
-          @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_dimensions["original"].min
-          @user.restaurant.logo_image_crop_w = (@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)*@user.restaurant.logo_image_crop_h
-        end
-        @user.restaurant.logo_image_crop_x = (@user.restaurant.logo_image_dimensions["original"][0]-@user.restaurant.logo_image_crop_w).to_f/2
-        @user.restaurant.logo_image_crop_y = (@user.restaurant.logo_image_dimensions["original"][1]-@user.restaurant.logo_image_crop_h).to_f/2
-      elsif !params.values_at(:logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y).include?(nil)
-        if params[:logo_image_crop_w].to_i+params[:logo_image_crop_x].to_i > @user.restaurant.logo_image_dimensions["original"][0]
-          params[:logo_image_crop_x] = @user.restaurant.logo_image_dimensions["original"][0]-params[:logo_image_crop_w].to_i
-        end
-        if params[:logo_image_crop_h].to_i+params[:logo_image_crop_y].to_i > @user.restaurant.logo_image_dimensions["original"][1]
-          params[:logo_image_crop_y] = @user.restaurant.logo_image_dimensions["original"][1]-params[:logo_image_crop_h].to_i
-        end
-        
-        @user.restaurant.attributes = params.permit(:logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y)
-        if @user.restaurant.logo_image_crop_w_changed? || @user.restaurant.logo_image_crop_h_changed? || @user.restaurant.restaurant.logo_image_crop_x_changed? || @user.restaurant.logo_image_crop_y_changed?
-          @user.restaurant.save
-          @user.restaurant.update_attributes({:logo_image_crop_processed => false})
-          @user.restaurant.logo_image.reprocess!
-          @user.restaurant.update_attributes({:logo_image_crop_processed => true})
-        else
-        end
-      end
-      
-      if params[:restaurant_image]
-        if @user.restaurant.restaurant_image_dimensions["original"][1] >= @user.restaurant.restaurant_image_dimensions["original"][0]
-          @user.restaurant.restaurant_image_crop_w = @user.restaurant.restaurant_image_dimensions["original"].min
-          @user.restaurant.restaurant_image_crop_h = @user.restaurant.restaurant_image_crop_w/(@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][1].to_f)
-        else
-          @user.restaurant.restaurant_image_crop_h = @user.restaurant.restaurant_image_dimensions["original"].min
-          @user.restaurant.restaurant_image_crop_w = (@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.restaurant_image_dimensions["cropped_default_retina"][1].to_f)*@user.restaurant.restaurant_image_crop_h
-        end
-        @user.restaurant.restaurant_image_crop_x = (@user.restaurant.restaurant_image_dimensions["original"][0]-@user.restaurant.restaurant_image_crop_w).to_f/2
-        @user.restaurant.restaurant_image_crop_y = (@user.restaurant.restaurant_image_dimensions["original"][1]-@user.restaurant.restaurant_image_crop_h).to_f/2
-      elsif !params.values_at(:restaurant_image_crop_w, :restaurant_image_crop_h, :restaurant_image_crop_x, :restaurant_image_crop_y).include?(nil)
-        if params[:restaurant_image_crop_w].to_i+params[:restaurant_image_crop_x].to_i > @user.restaurant.restaurant_image_dimensions["original"][0]
-          params[:restaurant_image_crop_x] = @user.restaurant.restaurant_image_dimensions["original"][0]-params[:restaurant_image_crop_w].to_i
-        end
-        if params[:restaurant_image_crop_h].to_i+params[:restaurant_image_crop_y].to_i > @user.restaurant.restaurant_image_dimensions["original"][1]
-          params[:restaurant_image_crop_y] = @user.restaurant.restaurant_image_dimensions["original"][1]-params[:restaurant_image_crop_h].to_i
-        end
-        
-        @user.restaurant.attributes = params.permit(:restaurant_image_crop_w, :restaurant_image_crop_h, :restaurant_image_crop_x, :restaurant_image_crop_y)
-        if @user.restaurant.restaurant_image_crop_w_changed? || @user.restaurant.restaurant_image_crop_h_changed? || @user.restaurant.restaurant_image_crop_x_changed? || @user.restaurant.restaurant_image_crop_y_changed?
-          @user.restaurant.save
-          @user.restaurant.update_attributes({:restaurant_image_crop_processed => false})
-          @user.restaurant.logo_image.reprocess!
-          @user.restaurant.update_attributes({:restaurant_image_crop_processed => true})
-        else
-        end
-      end
-      
       @user.restaurant.save
+      
+      @user.restaurant.update_attributes(params.permit(:logo_image))
+      @user.restaurant.logo_image.image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
+      
+      @user.restaurant.update_attributes(params.permit(:restaurant_image))
+      @user.restaurant.restaurant_image.image.set_crop_values_for_instance(params.permit(:restaurant_image, :restaurant_image_crop_w, :restaurant_image_crop_h, :restaurant_image_crop_x, :restaurant_image_crop_y))
       
       render :json => {:status => "success"}
       return
