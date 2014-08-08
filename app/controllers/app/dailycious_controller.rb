@@ -70,6 +70,8 @@ class App::DailyciousController < ApplicationController
             @user.restaurant.logo_image_crop_x = (@user.restaurant.logo_image_dimensions["original"][0]-@user.restaurant.logo_image_crop_w).to_f/2
             @user.restaurant.logo_image_crop_y = (@user.restaurant.logo_image_dimensions["original"][1]-@user.restaurant.logo_image_crop_h).to_f/2
           end
+          
+          @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
 
           session[:user_id] = @user.id
         

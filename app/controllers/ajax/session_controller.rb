@@ -121,6 +121,8 @@ class Ajax::SessionController < ApplicationController
           })
         end
         
+        @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
+        
         session[:user_id] = @user.id
         
         render :json => {:status => "success", :redirect => url_for(:controller => "/profile", :action => "index")}
