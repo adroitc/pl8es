@@ -84,30 +84,30 @@ class Ajax::SessionController < ApplicationController
   
   def signup_user
     if !@user && session[:signup] && !params.values_at(:email, :password).include?(nil)
-      @user = User.create(params.permit(:email, :password))
+      @user = User.create(params.permit(:email, :password).merge({
+        :last_login => DateTime.now,
+        :product_referer => session[:signup][:product_referer]
+      }))
       
       if @user.errors.count == 0 && !@user.blank?
         download_code = SecureRandom.hex(3).upcase
         while Restaurant.find_by_download_code(download_code).present?
           download_code = SecureRandom.hex(3).upcase
         end
-        @user.update_attributes({
-          :last_login => DateTime.now,
-          :restaurant => Restaurant.create({
-            :name => session[:signup][:name],
-            :location => Location.create({
-              :address => session[:signup][:address],
-              :zip => session[:signup][:zip],
-              :city => session[:signup][:city],
-              :country => session[:signup][:country]
-            }),
-            :default_language => Language.first,
-            :menuColorTemplate => MenuColorTemplate.first,
-            :menuColor => MenuColor.create(),
-            :supportedFont => SupportedFont.first,
-            :download_code => download_code,
-            :background_type => "color"
-          })
+        @user.restaurant = Restaurant.create({
+          :name => session[:signup][:name],
+          :location => Location.create({
+            :address => session[:signup][:address],
+            :zip => session[:signup][:zip],
+            :city => session[:signup][:city],
+            :country => session[:signup][:country]
+          }),
+          :default_language => Language.first,
+          :menuColorTemplate => MenuColorTemplate.first,
+          :menuColor => MenuColor.create(),
+          :supportedFont => SupportedFont.first,
+          :download_code => download_code,
+          :background_type => "color"
         })
         
         if @device
@@ -121,7 +121,9 @@ class Ajax::SessionController < ApplicationController
           })
         end
         
-        @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
+        if @user.product_referer == "d"
+          @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
+        end
         
         session[:user_id] = @user.id
         

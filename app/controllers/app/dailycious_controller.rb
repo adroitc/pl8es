@@ -4,7 +4,10 @@ class App::DailyciousController < ApplicationController
   
   def signup
     if @device && !@user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
-      @user = User.create(params.permit(:name, :email, :password))
+      @user = User.create(params.permit(:email, :password).merge({
+        :last_login => DateTime.now,
+        :product_referer => "d"
+      }))
       
       if @user.errors.count == 0 && !@user.blank?
         download_code = SecureRandom.hex(3).upcase
@@ -35,18 +38,15 @@ class App::DailyciousController < ApplicationController
             item["types"] == ["country", "political"]
           }[0]["long_name"]
           
-          @user.update_attributes({
-            :last_login => DateTime.now,
-            :restaurant => Restaurant.create(params.permit(:name, :logo_image).merge({
-              :location => Location.create(params.permit(:address, :zip, :city, :country)),
-              :default_language => Language.first,
-              :menuColorTemplate => MenuColorTemplate.first,
-              :menuColor => MenuColor.create(),
-              :supportedFont => SupportedFont.first,
-              :download_code => download_code,
-              :background_type => "color"
-            }))
-          })
+          @user.restaurant = Restaurant.create(params.permit(:name, :logo_image).merge({
+            :location => Location.create(params.permit(:address, :zip, :city, :country)),
+            :default_language => Language.first,
+            :menuColorTemplate => MenuColorTemplate.first,
+            :menuColor => MenuColor.create(),
+            :supportedFont => SupportedFont.first,
+            :download_code => download_code,
+            :background_type => "color"
+          }))
           
           if @device
             @device.update_attributes({
