@@ -3,12 +3,13 @@ class User < ActiveRecord::Base
   has_many :devices
   has_many :sessions
   
-  validates :email, :uniqueness => true, :length => {
-    :minimum => 6
+  validates :email, :presence => true, :uniqueness => true, :length => {
+    :minimum => 6,
+    :maximum => 255
   }
-  
-  validates :password, :length => {
-    :minimum => 8
+  validates :password, :presence => true, :length => {
+    :minimum => 8,
+    :maximum => 255
   }
   
   has_secure_password

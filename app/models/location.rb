@@ -8,17 +8,17 @@ class Location < ActiveRecord::Base
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
   
-  validates :address, :length => {
-    :maximum => 250
+  validates :address, :presence => true, :length => {
+    :maximum => 255
   }
-  validates :zip, :length => {
-    :maximum => 28
+  validates :zip, :presence => true, :length => {
+    :maximum => 255
   }
-  validates :city, :length => {
-    :maximum => 250
+  validates :city, :presence => true, :length => {
+    :maximum => 255
   }
-  validates :country, :length => {
-    :maximum => 250
+  validates :country, :presence => true, :length => {
+    :maximum => 255
   }
   
 end
