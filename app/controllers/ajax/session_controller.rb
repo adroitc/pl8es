@@ -138,7 +138,7 @@ class Ajax::SessionController < ApplicationController
     if !params.values_at(:email, :password).include?(nil)
       @user = User.find_by_email(params[:email])
       
-      if !@user.blank? && @user.authenticate(params[:password]))
+      if !@user.blank? && @user.authenticate(params[:password])
         @user.update_attributes({
           :last_login => DateTime.now
         })

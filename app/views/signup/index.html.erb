@@ -30,7 +30,7 @@
 								<div class="input-group-addon">
 									<i class="entypo-user"></i>
 								</div>
-								<input type="text" class="form-control" name="name" id="form-name" placeholder="<%=t("signup.restaurant_name_placeholder") %>" autocomplete="off" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"3"}) %>" value="<%=session[:signup] != nil ? session[:signup][:name] : nil %>" required>
+								<input type="text" class="form-control" name="name" id="form-name" placeholder="<%=t("signup.restaurant_name_placeholder") %>" autocomplete="off" data-validate="minlength[4]" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>" value="<%=session[:signup] != nil ? session[:signup][:name] : nil %>">
 							</div>
 						</div>
 						<div class="form-group">

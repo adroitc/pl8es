@@ -6,6 +6,7 @@ en:
   validation:
     required: "This field is required."
     minlength: "Please enter at least %{l} characters."
+    maxlength: "SUSI-Please enter at most %{l} characters."
     validaddress: "Please enter a valid address."
   
   errors:

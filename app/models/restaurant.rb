@@ -25,7 +25,12 @@ class Restaurant < ActiveRecord::Base
   translates :description
   
   validates :name, :length => {
-    :maximum => 28
+    :minimum => 4,
+    :maximum => 40
+  }
+  validates :description, :length => {
+    :minimum => 0,
+    :maximum => 400
   }
   
   has_attached_file :logo_image, {
