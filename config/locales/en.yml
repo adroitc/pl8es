@@ -4,11 +4,12 @@ en:
     signup_dailycious_msg: "Dear %{n},\n\nWelcome to dailycious!\n\nTo get started:\n\n- complete registration by entering your restaurant logo : http://app.pl8.cc/dailycious\n- download the app : http://dailycious.co/app\n- start publishing your delicious dishes http://app.pl8.cc/dailycious\n\nEnjoy dailycious!\n\nYour dailycious team."
   
   validation:
-    required: "This field is required."
+    required: "SUSI-This field is required."
     minlength: "SUSI-Please enter at least %{l} characters."
     maxlength: "SUSI-Please enter at most %{l} characters."
-    validaddress: "Please enter a valid address."
-    email: "SUSI-Please enter a valid email"
+    validaddress: "SUSI-Please enter a valid address."
+    email: "SUSI-Please enter a valid email."
+    url: "SUSI-Please enter a valid url."
   
   errors:
     required: "This field is required."

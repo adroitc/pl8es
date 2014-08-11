@@ -1,7 +1,13 @@
 class Ajax::ProfileController < ApplicationController
   
   def editsettings
-    if @user && !params.values_at(:default_language, :email, :address, :zip, :city, :country).include?(nil) && Language.exists?(params[:default_language])
+    if @user && !params.values_at(:default_language, :address, :zip, :city, :country, :email).include?(nil) && Language.exists?(params[:default_language])
+
+      @user.update_attributes(params.permit(:email))
+      @user.restaurant.update_attributes(params.permit(:email, :website, :telephone).merge({
+        :default_language => Language.find(params[:default_language])
+      }))
+      
       google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
       google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
       google_req = Net::HTTP::Get.new(google_url.request_uri)
@@ -25,23 +31,16 @@ class Ajax::ProfileController < ApplicationController
           item["types"] == ["country", "political"]
         }[0]["long_name"]
         
-        @user.restaurant.update(params.permit(:email, :website, :telephone).merge({
-          :default_language => Language.find(params[:default_language])
-        }))
-        @user.restaurant.save
-        @user.restaurant.location.update(params.permit(:address, :zip, :city, :country).merge({
+        @user.restaurant.location.update_attributes(params.permit(:address, :zip, :city, :country).merge({
           :latitude => google_results[0]["geometry"]["location"]["lat"].to_f,
           :longitude => google_results[0]["geometry"]["location"]["lng"].to_f
         }))
-        @user.restaurant.location.save
         
         render :json => {:status => "success"}
         return
       end
-      render :json => {:status => "invalid-2"}
-      return
     end
-    render :json => {:status => "invalid-1"}
+    render :json => {:status => "invalid"}
   end
   
   def editdescription

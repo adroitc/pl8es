@@ -15,7 +15,7 @@ var neonLogin = neonLogin || {};
 		neonLogin.$container = $("#form_login");
     
 		
-		
+		/*
 		// Login Form & Validation
 		neonLogin.$container.validate({
 			rules: {
@@ -52,10 +52,6 @@ var neonLogin = neonLogin || {};
 			
 			submitHandler: function(ev)
 			{
-				/* 
-					Updated on v1.1.4
-					Login form now processes the login data, here is the file: data/sample-login-form.php
-				*/
 				
 				$(".login-page").addClass('logging-in'); // This will hide the login form and init the progress bar
 					
@@ -125,7 +121,7 @@ var neonLogin = neonLogin || {};
 			}
 		});
 		
-		
+		*/
 		
 		
 		// Lockscreen & Validation

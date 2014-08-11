@@ -134,7 +134,7 @@ $(document).ready(function()
     return !$(e).data("validaddress-error");
   }, "Please use a valid address.");
   
-  jQuery.validator.addMethod("password", function(v,e){
+  jQuery.validator.addMethod("securepassword", function(v,e){
     var regex = [new RegExp("[A-Z]"), new RegExp("[a-z]"), new RegExp("[0-9]")];
     return ($(e).val().match(regex[0]) &&
             $(e).val().match(regex[1]) &&
@@ -201,7 +201,7 @@ function pl8es_i_ajaxform(f,a)
         d.append(s2_id+"["+i+"]", $.trim($(this).text()));
       });
     }
-    if (f.find("input[data-validate~='validaddress']").size() > 0){
+    if (f.find("input[data-validate*='validaddress']").size() > 0){
       function addr_inputval(n){
         return $(f).find("input[name='"+n+"']").val().replace(" ","+")+",";
       }

@@ -29,7 +29,6 @@ class Restaurant < ActiveRecord::Base
     :maximum => 75
   }
   validates :description, :length => {
-    :minimum => 0,
     :maximum => 400
   }
   

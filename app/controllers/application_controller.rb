@@ -81,6 +81,11 @@ class ApplicationController < ActionController::Base
     #language
     if params[:locale]
       I18n.locale = params[:locale]
+      if @user && Language.exists?(:locale => params[:locale])
+        @user.restaurant.update_attributes(:default_language => Language.find(:locale => params[:locale]))
+      end
+    elsif @user
+      I18n.locale = @user.restaurant.default_language.locale
     end
   end
   

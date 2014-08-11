@@ -27,5 +27,7 @@ module Pl8es
     config.assets.version = "1.01"
     
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    
+    config.i18n.fallbacks =[:en, :de, :fr]
   end
 end

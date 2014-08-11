@@ -21,7 +21,7 @@
 				<h3><%=t("login.invalid_title") %></h3>
 				<p><%=t("login.invalid_msg") %></p>
 			</div>
-      <%= form_tag({:controller => "ajax/session", :action => "login"}, {:role => "form", :id => "form_login"}) do %>
+      <%= form_tag({:controller => "ajax/session", :action => "login"}, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
