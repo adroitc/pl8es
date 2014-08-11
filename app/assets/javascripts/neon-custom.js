@@ -1092,7 +1092,7 @@ var public_vars = public_vars || {};
 							opts['messages'][name] = {};
 						}
 						
-						if($.inArray(rule, ['required', 'url', 'email', 'number', 'date', 'creditcard', 'filedimension', 'validaddress', 'securepassword']) != -1)
+						if($.inArray(rule, ['required', 'url', 'email', 'number', 'date', 'creditcard', 'filedimension', 'validaddress', 'securepassword', 'hexcolor']) != -1)
 						{
 						  opts['rules'][name][rule] = true;
               

@@ -141,6 +141,10 @@ $(document).ready(function()
             $(e).val().match(regex[2]))
   }, "Your password has to include lowercase, uppercase and a number.");
   
+  jQuery.validator.addMethod("hexcolor", function(v,e){
+    return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test($(e).val())
+  }, "Please use a valid color code.");
+  
   $("input[type='file']").each(function(){
     var f = $(this).closest("form");
     var file_input = $(this);
