@@ -11,6 +11,7 @@ en:
     email: "SUSI-Please enter a valid email."
     url: "SUSI-Please enter a valid url."
     hexcolor: "SUSI-Please enter a valid url."
+    time: "SUSI-Please enter a valid time."
   
   errors:
     required: "This field is required."

@@ -9,7 +9,16 @@ class Menu < ActiveRecord::Base
   has_many :beverages
 
   validates :title, :length => {
-    :maximum => 28
+    :minimum => 4,
+    :maximum => 75
+  }
+  validates :from_time, :length => {
+    :minimum => 4,
+    :maximum => 7
+  }
+  validates :to_time, :length => {
+    :minimum => 4,
+    :maximum => 7
   }
   
 end

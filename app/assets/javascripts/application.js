@@ -143,7 +143,11 @@ $(document).ready(function()
   
   jQuery.validator.addMethod("hexcolor", function(v,e){
     return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test($(e).val())
-  }, "Please use a valid color code.");
+  }, "Please enter a valid color code.");
+  
+  jQuery.validator.addMethod("time", function(v,e){
+    return /(^(?:[01]?[0-9]|2[0-3]):[0-5][0-9]$)/i.test($(e).val())
+  }, "Please enter a valid time.");
   
   $("input[type='file']").each(function(){
     var f = $(this).closest("form");
