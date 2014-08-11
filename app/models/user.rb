@@ -4,7 +4,11 @@ class User < ActiveRecord::Base
   has_many :sessions
   
   validates :email, :uniqueness => true, :length => {
-    :maximum => 28
+    :minimum => 6
+  }
+  
+  validates :password, :length => {
+    :minimum => 8
   }
   
   has_secure_password

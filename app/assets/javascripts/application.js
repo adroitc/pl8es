@@ -134,6 +134,13 @@ $(document).ready(function()
     return !$(e).data("validaddress-error");
   }, "Please use a valid address.");
   
+  jQuery.validator.addMethod("password", function(v,e){
+    var regex = [new RegExp("[A-Z]"), new RegExp("[a-z]"), new RegExp("[0-9]")];
+    return ($(e).val().match(regex[0]) &&
+            $(e).val().match(regex[1]) &&
+            $(e).val().match(regex[2]))
+  }, "Your password has to include lowercase, uppercase and a number.");
+  
   $("input[type='file']").each(function(){
     var f = $(this).closest("form");
     var file_input = $(this);
