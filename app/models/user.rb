@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
     :maximum => 28
   }
   
+  has_secure_password
+  
 	def self.loggedIn(session)
 		if session[:user_id] && User.exists?(session[:user_id])
 			return true
