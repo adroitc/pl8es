@@ -20,13 +20,5 @@ class Location < ActiveRecord::Base
   validates :country, :presence => true, :length => {
     :maximum => 255
   }
-  validates :website, :presence => true, :length => {
-    :minimum => 6,
-    :maximum => 18
-  }
-  validates :telephone, :presence => true, :length => {
-    :minimum => 6,
-    :maximum => 255
-  }
   
 end

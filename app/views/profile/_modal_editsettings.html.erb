@@ -39,6 +39,14 @@
       <label for="form-telephone" class="control-label"><strong><%=t("profile.account_telephone") %></strong></label>
 	    <input name="telephone" type="text" class="form-control" id="form-telephone" placeholder="<%=t("profile.account_telephone_placeholder") %>" value="<%=@user.restaurant.telephone %>" data-validate="minlength[6],maxlength[18]" data-message-minlength="<%=t("validation.minlength",{l:"6"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"18"}) %>">
     </div>
+    <div class="col-sm-4 form-group" style="padding-left:0px;">
+      <label for="form-password_old" class="control-label"><strong><%=t("profile.account_change_password_old") %></strong></label>
+	    <input name="password_old" type="password" class="form-control" id="form-password_old" placeholder="<%=t("profile.account_change_password_old_placeholder") %>">
+    </div>
+    <div class="col-sm-4 form-group" style="padding-left:0px;">
+      <label for="form-password_new" class="control-label"><strong><%=t("profile.account_change_password_new") %></strong></label>
+	    <input name="password_new" type="password" class="form-control" id="form-password_new" placeholder="<%=t("profile.account_change_password_new_placeholder") %>" data-validate="minlength[8],maxlength[255],secpass" data-message-minlength="<%=t("validation.minlength",{l:"8"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>" data-message-secpass="<%=t("validation.securepassword") %>">
+    </div>
   </div>
 </div>
 <% end %>

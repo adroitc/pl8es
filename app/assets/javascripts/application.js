@@ -134,11 +134,14 @@ $(document).ready(function()
     return !$(e).data("validaddress-error");
   }, "Please use a valid address.");
   
-  jQuery.validator.addMethod("securepassword", function(v,e){
+  jQuery.validator.addMethod("secpass", function(v,e){
+    if ($(e).val().length == 0){
+      return true;
+    }
     var regex = [new RegExp("[A-Z]"), new RegExp("[a-z]"), new RegExp("[0-9]")];
     return ($(e).val().match(regex[0]) &&
             $(e).val().match(regex[1]) &&
-            $(e).val().match(regex[2]))
+            $(e).val().match(regex[2]));
   }, "Your password has to include lowercase, uppercase and a number.");
   
   jQuery.validator.addMethod("hexcolor", function(v,e){

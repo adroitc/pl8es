@@ -99,6 +99,10 @@ en:
     account_website_placeholder: "http://restaurant.com"
     account_telephone: "Telephone"
     account_telephone_placeholder: "+1 123456789"
+    account_change_password_old: "Change password"
+    account_change_password_old_placeholder: "Old password"
+    account_change_password_new: "Choose new new password"
+    account_change_password_new_placeholder: "New password"
     
     restaurant_description_modal_title: "Edit description"
     restaurant_description_modal_cancel: "Cancel"

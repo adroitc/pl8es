@@ -1,12 +1,19 @@
 class Ajax::ProfileController < ApplicationController
   
   def editsettings
-    if @user && !params.values_at(:default_language, :address, :zip, :city, :country, :email).include?(nil) && Language.exists?(params[:default_language])
+    if @user && !params.values_at(:default_language, :address, :zip, :city, :country, :email, :password_old, :password_new).include?(nil) && Language.exists?(params[:default_language])
 
       @user.update_attributes(params.permit(:email))
       @user.restaurant.update_attributes(params.permit(:email, :website, :telephone).merge({
         :default_language => Language.find(params[:default_language])
       }))
+      
+      if @user.authenticate(params[:password_old])
+        @user.update_attributes({
+          :password => params[:password_new],
+          :password_confirmation => params[:password_new]
+        })
+      end
       
       google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
       google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
@@ -67,10 +74,10 @@ class Ajax::ProfileController < ApplicationController
       @user.restaurant.save
       
       @user.restaurant.update_attributes(params.permit(:logo_image))
-      @user.restaurant.logo_image.image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
+      @user.restaurant.logo_image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
       
       @user.restaurant.update_attributes(params.permit(:restaurant_image))
-      @user.restaurant.restaurant_image.image.set_crop_values_for_instance(params.permit(:restaurant_image, :restaurant_image_crop_w, :restaurant_image_crop_h, :restaurant_image_crop_x, :restaurant_image_crop_y))
+      @user.restaurant.restaurant_image.set_crop_values_for_instance(params.permit(:restaurant_image, :restaurant_image_crop_w, :restaurant_image_crop_h, :restaurant_image_crop_x, :restaurant_image_crop_y))
       
       render :json => {:status => "success"}
       return

@@ -31,6 +31,14 @@ class Restaurant < ActiveRecord::Base
   validates :description, :length => {
     :maximum => 400
   }
+  validates :website, :presence => true, :length => {
+    :minimum => 6,
+    :maximum => 18
+  }
+  validates :telephone, :presence => true, :length => {
+    :minimum => 6,
+    :maximum => 255
+  }
   
   has_attached_file :logo_image, {
     :styles => {
