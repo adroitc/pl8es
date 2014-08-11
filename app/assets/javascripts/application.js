@@ -149,6 +149,10 @@ $(document).ready(function()
     return /(^(?:[01]?[0-9]|2[0-3]):[0-5][0-9]$)/i.test($(e).val())
   }, "Please enter a valid time.");
   
+  jQuery.validator.addMethod("price", function(v,e){
+    return /(^[0-9\,]*$)/i.test($(e).val())
+  }, "Please enter a valid price.");
+  
   $("input[type='file']").each(function(){
     var f = $(this).closest("form");
     var file_input = $(this);

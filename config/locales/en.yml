@@ -9,9 +9,11 @@ en:
     maxlength: "SUSI-Please enter at most %{l} characters."
     validaddress: "SUSI-Please enter a valid address."
     email: "SUSI-Please enter a valid email."
+    securepassword: "SUSI-Your password has to include lowercase, uppercase and a number."
     url: "SUSI-Please enter a valid url."
     hexcolor: "SUSI-Please enter a valid url."
     time: "SUSI-Please enter a valid time."
+    price: "SUSI-Please enter a valid price."
   
   errors:
     required: "This field is required."
