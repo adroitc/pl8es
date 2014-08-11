@@ -88,7 +88,7 @@ class App::DailyciousController < ApplicationController
     if @device && !params.values_at(:email, :password).include?(nil)
       @user = User.find_by_email(params[:email])
       
-      if !@user.blank? && @user.authenticate(params[:password]))
+      if !@user.blank? && @user.authenticate(params[:password])
         
         if @device
           @device.update_attributes({
