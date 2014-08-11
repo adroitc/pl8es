@@ -163,6 +163,8 @@ class App::DailyciousController < ApplicationController
   
   def adddailydish
     if @device && @user && !params.values_at(:display_date, :title, :price).include?(nil)
+      params[:price] = ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
+      
       new_daily_dish = DailyDish.create(params.permit(:display_date, :image, :title, :price).merge({
         :restaurant => @user.restaurant
       }))
@@ -190,6 +192,8 @@ class App::DailyciousController < ApplicationController
   def editdailydish
     if @device && @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id]) && DailyDish.find(params[:daily_dish_id]).restaurant.user == @user
       daily_dish = DailyDish.find(params[:daily_dish_id])
+      
+      params[:price] = ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
       
       daily_dish.update_attributes(params.permit(:image, :title, :price))
       
