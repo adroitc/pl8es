@@ -18,7 +18,7 @@
     %>
     <span class="tab-pane <%="active" if menu.default_language == language %> form-group" id="modal-addnavigation-lang-<%=language.locale %>">
       <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if menu.default_language == language %></label>
-		  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" data-validate="maxlength[28]" <%="required" if menu.default_language == language %>>
+		  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" <%="required" if menu.default_language == language %> data-validate="minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
     </span>
     <%
     end

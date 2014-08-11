@@ -7,7 +7,7 @@ class Menu < ActiveRecord::Base
   has_many :navigations
   has_many :dishes
   has_many :beverages
-
+  
   validates :title, :length => {
     :minimum => 4,
     :maximum => 75

@@ -9,6 +9,11 @@ class Navigation < ActiveRecord::Base
   
   default_scope :order => "position, id"
   
+  validates :title, :length => {
+    :minimum => 4,
+    :maximum => 40
+  }
+  
   has_attached_file :image, {
     :styles => {
       :original_cropping => {
@@ -32,9 +37,6 @@ class Navigation < ActiveRecord::Base
   validates :image, :dimensions => {
     :width => 828,
     :height => 552
-  }
-  validates :title, :length => {
-    :maximum => 28
   }
 
   def navigation_lang
