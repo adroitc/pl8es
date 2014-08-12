@@ -92,7 +92,11 @@
      	</section>
       <section class="profile-feed">
       	<div class="profile-stories">
-          <% @user.restaurant.daily_dishes.where(["display_date >= (?)", DateTime.now-7.days]).reverse.each do |daily_dish_level| %>
+          <% @user.restaurant.daily_dishes.where([
+            "display_date >= (?) AND display_date < (?)",
+            DateTime.now-7.days,
+            DateTime.now
+          ]).reverse.each do |daily_dish_level| %>
           <% daily_dishes = @user.restaurant.daily_dishes.where(["display_date = (?)", daily_dish_level.display_date]) %>
           <article class="story">
           	<div class="story-content" style="width:100%;">
