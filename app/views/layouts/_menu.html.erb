@@ -19,16 +19,16 @@
   		<span><%=t("layouts.menu.restaurant") %></span>
   	</a>
   </li>
-  <li class="<%="active" if params[:controller] == "menumalist" %>">
-  	<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
-  		<i class="entypo-layout"></i>
-  		<span><%=t("layouts.menu.menumalist") %></span>
-  	</a>
-  </li>
   <li class="<%="active" if params[:controller] == "dailycious" %>">
   	<a href="<%=url_for :controller => "dailycious", :action => "index" %>">
   		<i class="entypo-newspaper"></i>
   		<span><%=t("layouts.menu.dailycious") %></span>
+  	</a>
+  </li>
+  <li class="<%="active" if params[:controller] == "menumalist" %>">
+  	<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+  		<i class="entypo-layout"></i>
+  		<span><%=t("layouts.menu.menumalist") %></span>
   	</a>
   </li>
 </ul>

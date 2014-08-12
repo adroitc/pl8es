@@ -54,11 +54,11 @@
       <div class="row">
           <div class="col-sm-12">
             <div class="profile-buttons">
-            	<a href="javascript:;" onclick="jQuery('#modal-editsettings').modal('show');" class="btn btn-default" style="margin-right:12px;">
+            	<a href="javascript:;" onclick="jQuery('#modal-editsettings').modal('show');" class="btn btn-white btn-icon icon-left" style="margin-right:12px;">
             		<i class="entypo-cog"></i>
             		<%=t("profile.account_settings") %>
             	</a>
-            	<a href="javascript:;" onclick="jQuery('#modal-editdescription').modal('show');" class="btn btn-default">
+            	<a href="javascript:;" onclick="jQuery('#modal-editdescription').modal('show');" class="btn btn-white btn-icon icon-left">
             		<i class="entypo-brush"></i>
             		<%=t("profile.restaurant_description") %>
             	</a>
@@ -90,6 +90,43 @@
      			</div>
      		</div>
      	</section>
+      <section class="profile-feed">
+      	<div class="profile-stories">
+          <% @user.restaurant.daily_dishes.where(["display_date >= (?)", DateTime.now-7.days]).group("display_date").order("display_date ASC").each do |daily_dish_level| %>
+          <%
+            daily_dishes = @user.restaurant.daily_dishes.where(["display_date = (?)", daily_dish_level.display_date])
+          %>
+          <article class="story">
+          	<div class="story-content" style="width:100%;">
+          		<header>
+          			<div class="publisher">
+          				<strong><%=@user.restaurant.name %></strong> published <%=daily_dishes.count %> daily dish
+          				<em><%=(DateTime.now.to_date-daily_dish_level.display_date.to_date).to_i %> days ago</em>
+          			</div>
+          			<div class="story-type">
+          				<i class="entypo-newspaper"></i>
+          			</div>
+          		</header>
+          		<div class="story-main-content">
+          			<div class="row">
+                  <% daily_dishes.each do |daily_dish| %>
+          				<div class="col-sm-3">
+                    <img class="img-responsive img-rounded full-width" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : "http://placehold.it/400x400" %>" />
+          				</div>
+                  <% end %>
+          			</div>
+          		</div>
+          	</div>
+          </article>
+          <% end %>
+      		<div class="text-center">
+      			<a href="#" class="btn btn-white btn-icon icon-left">
+      				<i class="entypo-hourglass"></i>
+      				Load More …
+      			</a>
+      		</div>
+      	</div>
+      </section>
     </div>
     <%=render :partial => "layouts/footer" %>
   </div>
