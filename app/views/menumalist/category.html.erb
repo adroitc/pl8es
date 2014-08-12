@@ -1,11 +1,11 @@
 <% content_for :body_class, "page-body" %>
 <div class="page-container">
   <div class="sidebar-menu">
-    <%=render :partial => "layouts/dashboard_menuheader" %>
-    <%=render :partial => "layouts/dashboard_menu" %>
+    <%=render :partial => "layouts/menuheader" %>
+    <%=render :partial => "layouts/menu" %>
   </div>
   <div class="main-content">
-    <%=render :partial => "layouts/dashboard_topbar" %>
+    <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
         <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
@@ -58,6 +58,7 @@
       <%=render :partial => "neon/panel_add", :locals => {:panel_size => 4, :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');"} %>
       <% end %>
     </div>
+    <%=render :partial => "layouts/footer" %>
   </div>
 </div>
 <script type="text/javascript">
