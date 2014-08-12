@@ -159,7 +159,7 @@ class Ajax::SessionController < ApplicationController
           session[:admin_id] = @user.id
         end
         
-        render :json => {:status => "success", :redirect => url_for(:controller => "/profile", :action => "index")}
+        render :json => {:status => "success", :redirect => url_for(:controller => "/dashboard", :action => "index")}
         return
       end
     end
