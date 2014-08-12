@@ -1,9 +1,11 @@
 <% content_for :body_class, "page-body" %>
-<div class="page-container">
+<div class="page-container" style="<%="padding-left:0px;" if @user == nil %>">
+  <% if @user %>
   <div class="sidebar-menu">
     <%=render :partial => "layouts/menuheader" %>
     <%=render :partial => "layouts/menu" %>
   </div>
+  <% end %>
   <div class="main-content">
     <% if @user %>
     <%=render :partial => "layouts/topbar" %>
