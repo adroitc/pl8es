@@ -92,10 +92,8 @@
      	</section>
       <section class="profile-feed">
       	<div class="profile-stories">
-          <% @user.restaurant.daily_dishes.where(["display_date >= (?)", DateTime.now-7.days]).group("display_date").order("display_date ASC").each do |daily_dish_level| %>
-          <%
-            daily_dishes = @user.restaurant.daily_dishes.where(["display_date = (?)", daily_dish_level.display_date])
-          %>
+          <% @user.restaurant.daily_dishes.where(["display_date >= (?)", DateTime.now-7.days]).reverse.each do |daily_dish_level| %>
+          <% daily_dishes = @user.restaurant.daily_dishes.where(["display_date = (?)", daily_dish_level.display_date]) %>
           <article class="story">
           	<div class="story-content" style="width:100%;">
           		<header>
@@ -119,12 +117,6 @@
           	</div>
           </article>
           <% end %>
-      		<div class="text-center">
-      			<a href="#" class="btn btn-white btn-icon icon-left">
-      				<i class="entypo-hourglass"></i>
-      				Load More …
-      			</a>
-      		</div>
       	</div>
       </section>
     </div>
