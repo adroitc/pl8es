@@ -104,6 +104,7 @@ Pl8es::Application.routes.draw do
   
   #profile
   resources :profile, :only => []
+  get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
   get "/restaurant" => "profile#index"
   
   #menumalist

@@ -5,6 +5,7 @@
     <%=render :partial => "layouts/menu" %>
   </div>
   <div class="main-content">
+    <% if @user %>
     <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
@@ -17,40 +18,42 @@
         <strong><%=t("layouts.menu.restaurant") %></strong>
       </li>
     </ol>
+    <% end %>
     <div class="profile-env">
      	<header class="row" style="height:100px;">
      		<div class="col-sm-2">
-     			<img src="<%=@user.restaurant.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
+     			<img src="<%=@visit_restaurant.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
      		</div>
      		<div class="col-sm-10">
      			<ul class="profile-info-sections">
      				<li>
      					<div class="profile-name">
      						<strong style="color:#000">
-     							<%=@user.restaurant.name %>
+     							<%=@visit_restaurant.name %>
                 </strong>
      						<span>
-     							<%=@user.restaurant.email %>
+     							<%=@visit_restaurant.email %>
      						</span>
      					</div>
      				</li>
      				<li>
      					<div class="profile-stat">
-     						<h3><%=@user.restaurant.menus.count %></h3>
+     						<h3><%=@visit_restaurant.menus.count %></h3>
      						<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
-                  <span><%=@user.restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %></span>
+                  <span><%=@visit_restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %></span>
                 </a>
      					</div>
      				</li>
      				<li>
      					<div class="profile-stat">
-     						<h3><%=@user.restaurant.dishes.count %></h3>
-     						<span><%=@user.restaurant.dishes.count == 1 ? t("profile.dish") : t("profile.dishes") %></span>
+     						<h3><%=@visit_restaurant.dishes.count %></h3>
+     						<span><%=@visit_restaurant.dishes.count == 1 ? t("profile.dish") : t("profile.dishes") %></span>
      					</div>
      				</li>
      			</ul>
      		</div>
      	</header>
+      <% if @user && @user.restaurant == @visit_restaurant %>
       <div class="row">
         <div class="col-sm-12">
           <div class="profile-buttons">
@@ -65,25 +68,26 @@
           </div>
         </div>
       </div>
+      <% end %>
      	<header class="row" style="margin-bottom:60px;">
      		<img src="<%=@user.restaurant.restaurant_image.url(:cropped_default_retina) %>" alt="" class="col-sm-4" />
      		<div class="col-sm-8">
           <br />
-          <%=@user.restaurant.description %>
+          <%=@visit_restaurant.description %>
      		</div>
      	</header>
      	<section class="profile-info-tabs">
      		<div class="row">
      			<div class="col-sm-offset-2 col-sm-10">
      				<ul class="user-details">
-              <% if @user.restaurant.categories.count >= 1 %>
+              <% if @visit_restaurant.categories.count >= 1 %>
      					<li>
-                <%=@user.restaurant.categories.first.title %>
+                <%=@visit_restaurant.categories.first.title %>
      					</li>
               <% end %>
-              <% if @user.restaurant.categories.count == 2 %>
+              <% if @visit_restaurant.categories.count == 2 %>
      					<li>
-                <%=@user.restaurant.categories.last.title %>
+                <%=@visit_restaurant.categories.last.title %>
      					</li>
               <% end %>
      				</ul>
@@ -92,17 +96,17 @@
      	</section>
       <section class="profile-feed">
       	<div class="profile-stories">
-          <% @user.restaurant.daily_dishes.where([
+          <% @visit_restaurant.daily_dishes.where([
             "display_date >= (?) AND display_date < (?)",
             DateTime.now-7.days,
             DateTime.now
           ]).reverse.each do |daily_dish_level| %>
-          <% daily_dishes = @user.restaurant.daily_dishes.where(["display_date = (?)", daily_dish_level.display_date]) %>
+          <% daily_dishes = @visit_restaurant.daily_dishes.where(["display_date = (?)", daily_dish_level.display_date]) %>
           <article class="story">
           	<div class="story-content" style="width:100%;">
           		<header>
           			<div class="publisher">
-          				<strong><%=@user.restaurant.name %></strong> published <%=daily_dishes.count %> daily dish
+          				<strong><%=@visit_restaurant.name %></strong> published <%=daily_dishes.count %> daily dish
           				<em><%=(DateTime.now.to_date-daily_dish_level.display_date.to_date).to_i %> days ago</em>
           			</div>
           			<div class="story-type">
@@ -127,5 +131,7 @@
     <%=render :partial => "layouts/footer" %>
   </div>
 </div>
+<% if @user && @user.restaurant == @visit_restaurant %>
 <%=render :partial => "modal_editsettings" %>
 <%=render :partial => "modal_editdescription" %>
+<% end %>
