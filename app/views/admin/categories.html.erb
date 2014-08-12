@@ -28,7 +28,9 @@
             </tr>
           </thead>
           <tbody>
-            <% Category.includes(:translations).find(:all, :order => "category_translations.title").each do |category| %>
+            <% Category.all.sort_by{|supportedFont|
+              supportedFont.title
+            }.each do |category| %>
             <tr style="font-size: 18px;">
               <td>
                 <a href="javascript:;" onclick="jQuery('#modal-editcategory-<%=category.id %>').modal('show');">

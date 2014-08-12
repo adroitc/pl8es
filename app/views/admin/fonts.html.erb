@@ -28,7 +28,9 @@
             </tr>
           </thead>
           <tbody>
-            <% SupportedFont.all.each do |supportedFont| %>
+            <% SupportedFont.all.sort_by{|supportedFont|
+              supportedFont.title
+            }.each do |supportedFont| %>
             <tr style="font-size: 18px;">
               <td>
                 <a href="javascript:;" onclick="jQuery('#modal-editfont-<%=supportedFont.id %>').modal('show');">
