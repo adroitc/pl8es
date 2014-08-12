@@ -69,8 +69,12 @@ class App::DailyciousController < ApplicationController
           render :partial => "login"
           return
         end
+        render :json => {:token => @session.token, :status => "invalid", :errors => {
+          :address => ["is invalid"]
+        }}
+        return
       end
-      render :json => {:token => @session.token, :status => "invalid", :errors => @user.errors}
+      render :json => {:token => @session.token, :status => "invalid", :errors => @user.errors.messages}
       return
     end
     render :json => {:token => @session.token, :status => "invalid"}
