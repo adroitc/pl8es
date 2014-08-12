@@ -127,7 +127,7 @@ class Ajax::AdminController < ApplicationController
           sub_text_selected: params[:nav_text_active],
           sub_text_active: params[:nav_text_active]
         }))
-        menuColorTemplate.preview_image.image.set_crop_values_for_instance(params.permit(:preview_image, :preview_image_crop_w, :preview_image_crop_h, :preview_image_crop_x, :preview_image_crop_y))
+        menuColorTemplate.preview_image.set_crop_values_for_instance(params.permit(:preview_image, :preview_image_crop_w, :preview_image_crop_h, :preview_image_crop_x, :preview_image_crop_y))
       end
       
       render :json => {:status => "success"}
