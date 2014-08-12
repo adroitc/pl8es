@@ -59,15 +59,15 @@
      				<ul class="user-details">
      					<li>
                 <i class="entypo-location"></i>
-                <%=@user.restaurant.location.address %>
+                <%=@visit_restaurant.location.address %>
      					</li>
      					<li>
                 <i class="entypo-location"></i>
-                <%=@user.restaurant.location.zip %>, <%=@user.restaurant.location.city %>
+                <%=@visit_restaurant.location.zip %>, <%=@user.restaurant.location.city %>
      					</li>
      					<li>
                 <i class="entypo-location"></i>
-                <%=@user.restaurant.location.country %>
+                <%=@visit_restaurant.location.country %>
      					</li>
               <% if @visit_restaurant.categories.count >= 1 %>
      					<li>
