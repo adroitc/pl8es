@@ -138,22 +138,19 @@ $(document).ready(function()
     if ($(e).val().length == 0){
       return true;
     }
-    var regex = [new RegExp("[A-Z]"), new RegExp("[a-z]"), new RegExp("[0-9]")];
-    return ($(e).val().match(regex[0]) &&
-            $(e).val().match(regex[1]) &&
-            $(e).val().match(regex[2]));
+    return /\A^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$\Z/.test($(e).val());
   }, "Your password has to include lowercase, uppercase and a number.");
   
   jQuery.validator.addMethod("hexcolor", function(v,e){
-    return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test($(e).val())
+    return /\A(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)\Z/.test($(e).val())
   }, "Please enter a valid color code.");
   
   jQuery.validator.addMethod("time", function(v,e){
-    return /(^(?:[01]?[0-9]|2[0-3]):[0-5][0-9]$)/i.test($(e).val())
+    return /\A(^(?:[01]?[0-9]|2[0-3]):[0-5][0-9]$)\Z/.test($(e).val())
   }, "Please enter a valid time.");
   
   jQuery.validator.addMethod("price", function(v,e){
-    return /(^[0-9\,]*$)/i.test($(e).val())
+    return /\A(^[0-9\,]*$)\Z/.test($(e).val())
   }, "Please enter a valid price.");
   
   $("input[type='file']").each(function(){

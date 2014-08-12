@@ -5,6 +5,7 @@ class App::DailyciousController < ApplicationController
   def signup
     if @device && !@user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
       @user = User.create(params.permit(:email, :password).merge({
+        :password_confirmation => params[:password],
         :last_login => DateTime.now,
         :product_referer => "d"
       }))
@@ -59,17 +60,7 @@ class App::DailyciousController < ApplicationController
             })
           end
           
-          if params[:logo_image]
-            if @user.restaurant.logo_image_dimensions["original"][1] >= @user.restaurant.logo_image_dimensions["original"][0]
-              @user.restaurant.logo_image_crop_w = @user.restaurant.logo_image_dimensions["original"].min
-              @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_crop_w/(@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)
-            else
-              @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_dimensions["original"].min
-              @user.restaurant.logo_image_crop_w = (@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)*@user.restaurant.logo_image_crop_h
-            end
-            @user.restaurant.logo_image_crop_x = (@user.restaurant.logo_image_dimensions["original"][0]-@user.restaurant.logo_image_crop_w).to_f/2
-            @user.restaurant.logo_image_crop_y = (@user.restaurant.logo_image_dimensions["original"][1]-@user.restaurant.logo_image_crop_h).to_f/2
-          end
+          @user.restaurant.logo_image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
           
           @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
 
@@ -79,8 +70,9 @@ class App::DailyciousController < ApplicationController
           return
         end
       end
+      render :json => {:token => @session.token, :status => "invalid", :errors => @user.errors}
+      return
     end
-    
     render :json => {:token => @session.token, :status => "invalid"}
   end
   

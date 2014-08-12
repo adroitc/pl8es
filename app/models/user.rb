@@ -3,16 +3,20 @@ class User < ActiveRecord::Base
   has_many :devices
   has_many :sessions
   
+  has_secure_password
+  
   validates :email, :presence => true, :uniqueness => true, :length => {
     :minimum => 6,
     :maximum => 255
+  }, :format => {
+    :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9\.-]+\.[A-Za-z]+\Z/
   }
-  #validates :password, :presence => true, :length => {
-  #  :minimum => 8,
-  #  :maximum => 255
-  #}
-  
-  has_secure_password
+  validates :password, :allow_blank => true, :presence => true, :length => {
+    :minimum => 8,
+    :maximum => 255
+  }, :format => {
+    :with => /\A^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$\Z/
+  }
   
 	def self.loggedIn(session)
 		if session[:user_id] && User.exists?(session[:user_id])
