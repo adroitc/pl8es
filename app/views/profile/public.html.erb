@@ -53,6 +53,26 @@
      			</ul>
      		</div>
      	</header>
+     	<section class="profile-info-tabs">
+     		<div class="row">
+     			<div class="col-sm-offset-2 col-sm-10">
+     				<ul class="user-details">
+              <% if @visit_restaurant.categories.count >= 1 %>
+     					<li>
+                <i class="entypo-user"></i>
+                <%=@visit_restaurant.categories.first.title %>
+     					</li>
+              <% end %>
+              <% if @visit_restaurant.categories.count == 2 %>
+     					<li>
+                <i class="entypo-user"></i>
+                <%=@visit_restaurant.categories.last.title %>
+     					</li>
+              <% end %>
+     				</ul>
+     			</div>
+     		</div>
+     	</section>
       <% if @user && @user.restaurant == @visit_restaurant %>
       <div class="row">
         <div class="col-sm-12">
@@ -76,24 +96,6 @@
           <%=@visit_restaurant.description %>
      		</div>
      	</header>
-     	<section class="profile-info-tabs">
-     		<div class="row">
-     			<div class="col-sm-offset-2 col-sm-10">
-     				<ul class="user-details">
-              <% if @visit_restaurant.categories.count >= 1 %>
-     					<li>
-                <%=@visit_restaurant.categories.first.title %>
-     					</li>
-              <% end %>
-              <% if @visit_restaurant.categories.count == 2 %>
-     					<li>
-                <%=@visit_restaurant.categories.last.title %>
-     					</li>
-              <% end %>
-     				</ul>
-     			</div>
-     		</div>
-     	</section>
       <section class="profile-feed">
       	<div class="profile-stories">
           <% @visit_restaurant.daily_dishes.where([
