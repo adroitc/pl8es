@@ -42,6 +42,9 @@ Pl8es::Application.routes.draw do
   post "/a/menucolortemplate/add" => "ajax/admin#addmenucolortemplate"
   post "/a/menucolortemplate/edit" => "ajax/admin#editmenucolortemplate"
   
+  post "/a/ingredients/add" => "ajax/admin#addingredient"
+  post "/a/ingredients/edit" => "ajax/admin#editingredient"
+  
   #ajax/profile
   resources :ajax_profile, :only => []
   post "/a/profile/editsettings" => "ajax/profile#editsettings"
@@ -94,9 +97,10 @@ Pl8es::Application.routes.draw do
   get "/admin" => "admin#index"
   get "/admin/users" => "admin#users"
   get "/admin/userswitch/:user_id" => "admin#user_switch"
-  get "/admin/fonts" => "admin#fonts"
   get "/admin/tags" => "admin#categories"
   get "/admin/menucolortemplates" => "admin#menucolortemplates"
+  get "/admin/fonts" => "admin#fonts"
+  get "/admin/ingredients" => "admin#ingredients"
   
   #dashboard
   resources :dashboard, :only => []

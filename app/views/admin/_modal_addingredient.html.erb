@@ -1,0 +1,32 @@
+<%= neon_modal :id => "addingredient", :width => "678px", :title => "Add ingredient", :languages => Language.all, :default_language => Language.first do |m| %>
+<%= form_tag({:controller => "ajax/admin", :action => "addingredient"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "addingredient"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="tab-content">
+      <%
+      current_locale = I18n.locale
+      Language.all.each do |language|
+        I18n.locale = language.locale
+      %>
+      <div class="tab-pane <%="active" if Language.first == language %> form-group" id="modal-addingredient-lang-<%=language.locale %>">
+        <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if Language.first == language %></label>
+			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Title" data-validate="maxlength[28]" <%="required" if Language.first == language %>>
+      </div>
+      <%
+      end
+      I18n.locale = current_locale
+      %>
+		</div>
+	</div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-info btn-icon icon-left">
+	<i class="entypo-plus"></i>
+	Add ingredient
+</button>
+<% end %>
+<% end %>
+<% end %>

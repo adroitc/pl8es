@@ -14,36 +14,36 @@
         <a href="<%=url_for :controller => "admin", :action => "index" %>">Admin</a>
       </li>
       <li class="active">
-        <strong>All tags</strong>
+        <strong>All ingredients</strong>
       </li>
     </ol>
-    <h2>All tags</h2>
+    <h2>All ingredients</h2>
     <br />
     <div class="row">
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <thead>
             <tr>
-              <th width="40%">Tag</th>
+              <th width="40%">Font</th>
             </tr>
           </thead>
           <tbody>
-            <% Category.all.sort_by{|category|
-              category.title
-            }.each do |category| %>
+            <% Ingredient.all.sort_by{|ingredient|
+              ingredient.title
+            }.each do |ingredient| %>
             <tr style="font-size: 18px;">
               <td>
-                <a href="javascript:;" onclick="jQuery('#modal-editcategory-<%=category.id %>').modal('show');">
-                  <%=category.title %>
+                <a href="javascript:;" onclick="jQuery('#modal-editingredient-<%=ingredient.id %>').modal('show');">
+                  <%=ingredient.title %>
                 </a>
               </td>
             </tr>
             <% end %>
           </tbody>
         </table>
-        <a href="javascript:;" onclick="jQuery('#modal-addcategory').modal('show');">
+        <a href="javascript:;" onclick="jQuery('#modal-addingredient').modal('show');">
           <button type="button" class="btn btn-info btn-icon icon-left">
-          	Add tag
+          	Add Ingredient
           	<i class="entypo-plus"></i>
           </button>
         </a>
@@ -52,9 +52,9 @@
     <%=render :partial => "layouts/footer" %>
   </div>
 </div>
-<%=render :partial => "modal_addcategory" %>
-<% Category.all.sort_by{|category|
-              category.title
-            }.each do |category| %>
-<%=render :partial => "modal_editcategory", :locals => {:category => category} %>
+<%=render :partial => "modal_addingredient" %>
+<% Ingredient.all.sort_by{|ingredient|
+              ingredient.title
+            }.each do |ingredient| %>
+<%=render :partial => "modal_editingredient", :locals => {:ingredient => ingredient} %>
 <% end %>

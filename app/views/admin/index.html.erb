@@ -67,6 +67,19 @@
           </p></a>
     	  </div>
     	</div>
+      <div class="col-sm-4">
+    	 	<div class="tile-stats tile-orange">
+    	 		<div class="icon"><i class="entypo-quote"></i></div>
+    	 		<div class="num" data-start="0" data-end="<%=Ingredient.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+    	 		<h3>ingredients</h3>
+          <a href="<%=url_for :controller => "admin", :action => "ingredients" %>"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              view all ingredients
+              <i class="entypo-bucket"></i>
+            </button>
+          </p></a>
+    	  </div>
+    	</div>
     </div>
     <%=render :partial => "layouts/footer" %>
   </div>

@@ -1,30 +1,5 @@
 class Ajax::AdminController < ApplicationController
   
-  def addfont
-    if @user && @user.isAdmin && !params.values_at(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil)
-      SupportedFont.create(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
-      
-      render :json => {:status => "success"}
-      return
-    end
-    render :json => {:status => "invalid"}
-  end
-  
-  def editfont
-    if @user && @user.isAdmin && !params.values_at(:supportedFont_id, :title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil) && SupportedFont.exists?(params[:supportedFont_id])
-      
-      if params[:delete] == "true"
-        navigation.destroy
-      else
-        SupportedFont.find(params[:supportedFont_id]).update_attributes(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
-      end
-      
-      render :json => {:status => "success"}
-      return
-    end
-    render :json => {:status => "invalid"}
-  end
-  
   def addcategory
     if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
       new_category = Category.create()
@@ -49,7 +24,7 @@ class Ajax::AdminController < ApplicationController
       category = Category.find(params[:category_id])
       
       if params[:delete] == "true"
-        navigation.destroy
+        category.destroy
       else
         current_locale = I18n.locale
         Language.all.each do |language|
@@ -103,7 +78,7 @@ class Ajax::AdminController < ApplicationController
       menuColorTemplate = MenuColorTemplate.find(params[:menuColorTemplate_id])
       
       if params[:delete] == "true"
-        navigation.destroy
+        menuColorTemplate.destroy
       else
         menuColorTemplate.update_attributes(params.permit(:preview_image, :background, :bar_background, :nav_text, :nav_text_active).merge({
           bev_background: params[:nav_text],
@@ -132,6 +107,74 @@ class Ajax::AdminController < ApplicationController
       
       render :json => {:status => "success"}
       return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def addfont
+    if @user && @user.isAdmin && !params.values_at(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil)
+      SupportedFont.create(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def editfont
+    if @user && @user.isAdmin && !params.values_at(:supportedFont_id, :title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil) && SupportedFont.exists?(params[:supportedFont_id])
+      supportedFont = SupportedFont.find(params[:supportedFont_id])
+      
+      if params[:delete] == "true"
+        supportedFont.destroy
+      else
+        supportedFont.update_attributes(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
+      end
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def addingredient
+    if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
+      new_ingredient = Ingredient.create()
+      
+      current_locale = I18n.locale
+      Language.all.each do |language|
+        I18n.locale = language.locale
+        new_ingredient.title = params[:title][language.locale]
+      end
+      I18n.locale = current_locale
+      
+      new_ingredient.save
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def editingredient
+    if @user && @user.isAdmin && !params.values_at(:ingredient_id, :title).include?(nil) && Ingredient.exists?(params[:ingredient_id])
+      ingredient = Ingredient.find(params[:ingredient_id])
+      
+      if params[:delete] == "true"
+        ingredient.destroy
+      else
+        current_locale = I18n.locale
+        Language.all.each do |language|
+          I18n.locale = language.locale
+          ingredient.title = params[:title][language.locale]
+        end
+        I18n.locale = current_locale
+        
+        ingredient.save
+        
+        render :json => {:status => "success"}
+        return
+      end
     end
     render :json => {:status => "invalid"}
   end

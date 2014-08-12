@@ -21,12 +21,6 @@ class AdminController < ApplicationController
     end
   end
   
-  def fonts
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
   def categories
     if !(@user && @user.isAdmin)
       raise ActionController::RoutingError.new("Not Found")
@@ -34,6 +28,18 @@ class AdminController < ApplicationController
   end
   
   def menucolortemplates
+    if !(@user && @user.isAdmin)
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
+  
+  def fonts
+    if !(@user && @user.isAdmin)
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
+  
+  def ingredients
     if !(@user && @user.isAdmin)
       raise ActionController::RoutingError.new("Not Found")
     end
