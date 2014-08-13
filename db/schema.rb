@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140813070650) do
   create_table "beverage_navigations", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "beveragePage_id"
+    t.integer  "beverage_page_id"
   end
 
   create_table "beverage_pages", force: true do |t|

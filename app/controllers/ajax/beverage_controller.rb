@@ -55,7 +55,7 @@ class Ajax::BeverageController < ApplicationController
       beverage_page = @user.restaurant.beveragePages.find(params[:beverage_page_id])
       
       new_baverage_navigation = BeverageNavigation.create({
-        :beveragePage => beverage_page
+        :beveragePage_id => beverage_page.id
       })
 
       languages = Language.find_all_by_locale(params[:title].keys)
