@@ -13,11 +13,6 @@ class BeveragePage < ActiveRecord::Base
         :geometry => "286x286",
         :format => :png
       },
-      :cropped_website => {
-        :geometry => "108x72#",
-        :format => :png,
-        :processors => [:cropper]
-      },
       #:cropped_default => {
       #  :geometry => "642x252#",
       #  :format => :png,

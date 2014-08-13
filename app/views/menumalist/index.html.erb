@@ -113,68 +113,44 @@
     <br />
     <h3><%=t("menumalist.beverage_pages_title") %></h3>
     <br />
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-striped responsive">
-          <thead>
-            <tr>
-              <th width=""><%=t("menumalist.beverage_page") %></th>
-              <th width="60px;" style="width:60px;"></th>
-              <th width="144px;" style="width:144px;"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @user.restaurant.beveragePages.each do |beverage_page| %>
-            <tr style="font-size: 18px;">
-              <td style="vertical-align:middle;">
-                <a href="">
-                  <%=beverage_page.title %>
-                </a>
-              </td>
-              <td style="vertical-align:middle;">
-                <span class="pl8es_c_table-toolbar">
-                  <a href="javascript:;" onclick="jQuery('#modal-editbeveragepage-<%=beverage_page.id %>').modal('show');">
-                    <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
-                      <i class="entypo-cog"></i>
-                    </button>
-                  </a>
-                <span>
-              </td>
-              <td>
-                <a href="javascript:;" onclick="jQuery('#modal-editbeveragepage-<%=beverage_page.id %>').modal('show');">
-                  <img src="<%=beverage_page.image.url(:cropped_default_retina) %>" width="108" height="72">
-                </a>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <a href="javascript:;" onclick="jQuery('#modal-addbeveragepage').modal('show');">
-          <button type="button" class="btn btn-info btn-icon icon-left">
-          	<%=t("menumalist.add_new_beverage_page") %>
-          	<i class="entypo-plus"></i>
-          </button>
-        </a>
-      </div>
+    <div class="row gallery-env draggable-portlets">
+      <%= form_tag({:controller => "ajax/beverage_page", :action => "sortbeveragepage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeveragepage"}) do %>
+        <span class="sorted ui-sortable">
+          <% @user.restaurant.beveragePages.each do |beverage_page| %>
+          <%=render :partial => "neon/beverage_page_panel", :locals => {:beverage_page => beverage_page} %>
+          <% end %>
+        </span>
+      <% end %>
+      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-addbeveragepage').modal('show');"} %>
     </div>
     <%=render :partial => "layouts/footer" %>
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){
-  $("form").each(function(){
-    var f = $(this);
-    var d = f.find("select[name='default_language']");
-    d.on("change",function(){
-      f.find("input[name^='languages']").each(function(){
-        $(this).iCheck("enable");
-      });
-      $("input[name='languages["+d.val()+"]']").each(function(){
-        $(this).iCheck("check").iCheck("disable");
-      });
-    });
-  });
-});
+	jQuery(document).ready(function($)
+	{
+		$(function(){
+			var $draggable_portlets = $(".draggable-portlets");
+			
+			$(".draggable-portlets .sorted").sortable({
+				connectWith: ".draggable-portlets .sorted",
+				handle: '.panel-heading',
+				start: function()
+				{
+					$draggable_portlets.addClass('dragging');
+				},
+				stop: function()
+				{
+          $("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+            $(this).val(i);
+          });
+					$draggable_portlets.removeClass('dragging');
+          $("#form_sortnavigation").submit();
+				}
+			});
+			$(".draggable-portlets .sorted .panel-heading").disableSelection();
+		});
+	});
 </script>
 <%=render :partial => "modal_design", :locals => {:navigation => Navigation.first} %>
 <%=render :partial => "modal_addmenu" %>

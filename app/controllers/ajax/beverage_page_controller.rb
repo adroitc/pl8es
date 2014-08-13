@@ -34,4 +34,20 @@ class Ajax::BeveragePageController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
+  def sortbeveragepage
+    if @user && !params.values_at(:beverage_page_ids).include?(nil)
+      #params[:navigation_ids].each do |navigation_id|
+      #  if Navigation.exists?(navigation_id[0].to_i) && Navigation.find(navigation_id[0].to_i).menu.restaurant.user == @user
+      #    navigation = Navigation.find(navigation_id[0].to_i)
+      #    navigation.position = navigation_id[1].to_i
+      #    navigation.save
+      #  end
+      #end
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
 end
