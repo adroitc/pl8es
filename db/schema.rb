@@ -13,6 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20140813061905) do
 
+  create_table "beverage_amount_translations", force: true do |t|
+    t.integer  "beverage_amount_id", null: false
+    t.string   "locale",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "beverage_amount_translations", ["beverage_amount_id"], name: "index_beverage_amount_translations_on_beverage_amount_id"
+  add_index "beverage_amount_translations", ["locale"], name: "index_beverage_amount_translations_on_locale"
+
   create_table "beverage_amounts", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
