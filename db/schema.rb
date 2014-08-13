@@ -11,7 +11,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811133440) do
+ActiveRecord::Schema.define(version: 20140813064752) do
+
+  create_table "beverage_amount_translations", force: true do |t|
+    t.integer  "beverage_amount_id", null: false
+    t.string   "locale",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "beverage_amount_translations", ["beverage_amount_id"], name: "index_beverage_amount_translations_on_beverage_amount_id"
+  add_index "beverage_amount_translations", ["locale"], name: "index_beverage_amount_translations_on_locale"
+
+  create_table "beverage_amounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "beverage_navigation_translations", force: true do |t|
+    t.integer  "beverage_navigation_id", null: false
+    t.string   "locale",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "beverage_navigation_translations", ["beverage_navigation_id"], name: "index_1cfc283b491f788097bd8f375227f08f4e1a832b"
+  add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale"
+
+  create_table "beverage_navigations", force: true do |t|
+    t.integer  "beverage_page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "beverage_pages", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "beverage_translations", force: true do |t|
+    t.integer  "beverage_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "beverage_translations", ["beverage_id"], name: "index_beverage_translations_on_beverage_id"
+  add_index "beverage_translations", ["locale"], name: "index_beverage_translations_on_locale"
+
+  create_table "beverages", force: true do |t|
+    t.integer  "beverage_amount_id"
+    t.string   "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -202,13 +259,13 @@ ActiveRecord::Schema.define(version: 20140811133440) do
     t.string   "preview_image_content_type"
     t.integer  "preview_image_file_size"
     t.datetime "preview_image_updated_at"
-    t.text     "preview_image_dimensions",   limit: 255
+    t.text     "preview_image_dimensions",     limit: 255
     t.string   "preview_image_fingerprint"
     t.integer  "preview_image_crop_w"
     t.integer  "preview_image_crop_h"
     t.integer  "preview_image_crop_x"
     t.integer  "preview_image_crop_y"
-    t.boolean  "preview_image_processed",                default: true
+    t.boolean  "preview_image_crop_processed",             default: true
   end
 
   create_table "menu_colors", force: true do |t|
@@ -324,7 +381,7 @@ ActiveRecord::Schema.define(version: 20140811133440) do
     t.integer  "preview_image_crop_h"
     t.integer  "preview_image_crop_x"
     t.integer  "preview_image_crop_y"
-    t.boolean  "preview_image_processed",         default: true
+    t.boolean  "preview_image_crop_processed",      default: true
     t.string   "appmain_image_file_name"
     t.string   "appmain_image_content_type"
     t.integer  "appmain_image_file_size"
@@ -335,7 +392,7 @@ ActiveRecord::Schema.define(version: 20140811133440) do
     t.integer  "appmain_image_crop_h"
     t.integer  "appmain_image_crop_x"
     t.integer  "appmain_image_crop_y"
-    t.boolean  "appmain_image_processed",         default: true
+    t.boolean  "appmain_image_crop_processed",      default: true
     t.string   "logo_image_file_name"
     t.string   "logo_image_content_type"
     t.integer  "logo_image_file_size"
@@ -346,7 +403,7 @@ ActiveRecord::Schema.define(version: 20140811133440) do
     t.integer  "logo_image_crop_h"
     t.integer  "logo_image_crop_x"
     t.integer  "logo_image_crop_y"
-    t.boolean  "logo_image_crop_processed",       default: true
+    t.boolean  "logo_image_crop_processed",         default: true
     t.string   "splashscreen_image_file_name"
     t.string   "splashscreen_image_content_type"
     t.integer  "splashscreen_image_file_size"
@@ -357,7 +414,7 @@ ActiveRecord::Schema.define(version: 20140811133440) do
     t.integer  "splashscreen_image_crop_h"
     t.integer  "splashscreen_image_crop_x"
     t.integer  "splashscreen_image_crop_y"
-    t.boolean  "splashscreen_image_processed",    default: true
+    t.boolean  "splashscreen_image_crop_processed", default: true
     t.string   "restaurant_image_file_name"
     t.string   "restaurant_image_content_type"
     t.integer  "restaurant_image_file_size"
@@ -368,7 +425,7 @@ ActiveRecord::Schema.define(version: 20140811133440) do
     t.integer  "restaurant_image_crop_h"
     t.integer  "restaurant_image_crop_x"
     t.integer  "restaurant_image_crop_y"
-    t.boolean  "restaurant_image_crop_processed", default: true
+    t.boolean  "restaurant_image_crop_processed",   default: true
     t.string   "background_type"
   end
 
