@@ -28,14 +28,14 @@ class Restaurant < ActiveRecord::Base
     :minimum => 4,
     :maximum => 75
   }
-  validates :description, :length => {
+  validates :description, :allow_blank => false, :length => {
     :maximum => 400
   }
-  validates :website, :presence => true, :length => {
+  validates :website, :allow_blank => true, :presence => true, :length => {
     :minimum => 6,
     :maximum => 18
   }
-  validates :telephone, :presence => true, :length => {
+  validates :telephone, :allow_blank => true, :presence => true, :length => {
     :minimum => 6,
     :maximum => 255
   }

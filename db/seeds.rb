@@ -49,11 +49,20 @@ SupportedFont.create([
 
 User.create([
   {
+    :isAdmin => true,
     :email => "marc@roemer.io",
-    :password => "lol123lol",
+    :password => "Lol123lol",
+    :password_confirmation => "Lol123lol",
     :restaurant => Restaurant.create(
       :name => "Marc's restaurant",
-      :location => Location.create(),
+      :location => Location.create(
+        :latitude => 48.2087105,
+        :longitude => 16.372654,
+        :address => "Erdbergstraße 10",
+        :zip => "1030",
+        :city => "Vienna",
+        :country => "Austria"
+      ),
       :background_type => "color",
       :menuColor => MenuColor.create(),
       :download_code => "8D34C8",
