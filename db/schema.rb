@@ -11,7 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811133440) do
+ActiveRecord::Schema.define(version: 20140813061905) do
+
+  create_table "beverage_amounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "beverage_navigation_translations", force: true do |t|
+    t.integer  "beverage_navigation_id", null: false
+    t.string   "locale",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "beverage_navigation_translations", ["beverage_navigation_id"], name: "index_1cfc283b491f788097bd8f375227f08f4e1a832b"
+  add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale"
+
+  create_table "beverage_navigations", force: true do |t|
+    t.integer  "beverage_page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "beverage_pages", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "beverage_translations", force: true do |t|
+    t.integer  "beverage_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "beverage_translations", ["beverage_id"], name: "index_beverage_translations_on_beverage_id"
+  add_index "beverage_translations", ["locale"], name: "index_beverage_translations_on_locale"
+
+  create_table "beverages", force: true do |t|
+    t.integer  "beverage_amount_id"
+    t.string   "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
