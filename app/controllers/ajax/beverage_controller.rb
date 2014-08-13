@@ -79,7 +79,7 @@ class Ajax::BeverageController < ApplicationController
       beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
       
       if params[:delete] == "true"
-        baverage_navigation.destroy
+        beverage_navigation.destroy
       else
         languages = Language.find_all_by_locale(params[:title].keys)
         
