@@ -116,7 +116,7 @@
       </div>
     </div>
     <br />
-    <h2><%=t("menumalist.beverages_title") %></h2>
+    <h3><%=t("menumalist.beverages_title") %></h3>
     <br />
     <div class="row">
       <div class="col-md-12">
@@ -163,9 +163,9 @@
             <% end %>
           </tbody>
         </table>
-        <a href="javascript:;" onclick="jQuery('#modal-addmenu').modal('show');">
+        <a href="javascript:;" onclick="jQuery('#modal-addbeveragepage').modal('show');">
           <button type="button" class="btn btn-info btn-icon icon-left">
-          	<%=t("menumalist.add_new_menu") %>
+          	<%=t("menumalist.add_new_beverage_page") %>
           	<i class="entypo-plus"></i>
           </button>
         </a>
@@ -195,3 +195,4 @@ $(document).ready(function(){
 <% @user.restaurant.menus.each do |menu| %>
 <%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>
 <% end %>
+<%=render :partial => "modal_addbeveragepage" %>
