@@ -1,5 +1,5 @@
 <%= neon_modal :id => "addbeveragepage", :width => "678px", :title => t("menumalist.beverage_page_modal_add_title") do |m| %>
-<%= form_tag({:controller => "ajax/navigation", :action => "addnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addnavigation"}) do %>
+<%= form_tag({:controller => "ajax/beverage_page", :action => "addbeveragepage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addbeveragepage"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6 hidden-xs">

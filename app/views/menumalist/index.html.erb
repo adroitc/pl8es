@@ -68,7 +68,7 @@
           <thead>
             <tr>
               <th width="40%"><%=t("menumalist.menu") %></th>
-              <th width="180px;" style="width:180px;"></th>
+              <th width="120px;" style="width:120px;"></th>
               <th width=""><%=t("menumalist.categories") %></th>
               <th width=""><%=t("menumalist.dishes") %></th>
             </tr>
@@ -84,11 +84,6 @@
               </td>
               <td>
                 <span class="pl8es_c_table-toolbar">
-                  <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
-                    <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                      <i class="entypo-pencil"></i>
-                    </button>
-                  </a>
                   <a href="javascript:;" onclick="pl8es_f_duplicate(<%=menu.id %>);">
                     <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Duplicate">
                       <i class="entypo-docs"></i>
@@ -116,49 +111,40 @@
       </div>
     </div>
     <br />
-    <h3><%=t("menumalist.beverages_title") %></h3>
+    <h3><%=t("menumalist.beverage_pages_title") %></h3>
     <br />
     <div class="row">
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <thead>
             <tr>
-              <th width="40%"><%=t("menumalist.menu") %></th>
-              <th width="180px;" style="width:180px;"></th>
-              <th width=""><%=t("menumalist.categories") %></th>
-              <th width=""><%=t("menumalist.dishes") %></th>
+              <th width=""><%=t("menumalist.beverage_page") %></th>
+              <th width="60px;" style="width:60px;"></th>
+              <th width="144px;" style="width:144px;"></th>
             </tr>
           </thead>
           <tbody>
-            <% @user.restaurant.menus.each do |menu| %>
+            <% @user.restaurant.beveragePages.each do |beverage_page| %>
             <tr style="font-size: 18px;">
-              <td>
-                <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
-                  <%=menu.title %>
-                  <span class="badge badge-primary"><%=menu.from_time %> - <%=menu.to_time %></span>
+              <td style="vertical-align:middle;">
+                <a href="">
+                  <%=beverage_page.title %>
                 </a>
               </td>
-              <td>
+              <td style="vertical-align:middle;">
                 <span class="pl8es_c_table-toolbar">
-                  <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
-                    <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                      <i class="entypo-pencil"></i>
-                    </button>
-                  </a>
-                  <a href="javascript:;" onclick="pl8es_f_duplicate(<%=menu.id %>);">
-                    <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Duplicate">
-                      <i class="entypo-docs"></i>
-                    </button>
-                  </a>
-                  <a href="javascript:;" onclick="jQuery('#modal-editmenu-<%=menu.id %>').modal('show');">
+                  <a href="javascript:;" onclick="jQuery('#modal-editbeveragepage-<%=beverage_page.id %>').modal('show');">
                     <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
                       <i class="entypo-cog"></i>
                     </button>
                   </a>
                 <span>
               </td>
-              <td><a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
-              <td><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></td>
+              <td>
+                <a href="javascript:;" onclick="jQuery('#modal-editbeveragepage-<%=beverage_page.id %>').modal('show');">
+                  <img src="<%=beverage_page.image.url(:cropped_default_retina) %>" width="108" height="72">
+                </a>
+              </td>
             </tr>
             <% end %>
           </tbody>
@@ -196,3 +182,6 @@ $(document).ready(function(){
 <%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>
 <% end %>
 <%=render :partial => "modal_addbeveragepage" %>
+<% @user.restaurant.beveragePages.each do |beverage_page| %>
+<%=render :partial => "modal_editbeveragepage", :locals => {:beverage_page => beverage_page} %>
+<% end %>

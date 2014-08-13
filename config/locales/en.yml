@@ -134,6 +134,8 @@ en:
     add_new_menu: "Add menu"
     add_new_category: "Add category"
     add_new_dish: "Add dish"
+    beverage_pages_title: "Beverage pages"
+    beverage_page: "Beverage page"
     
     design_modal_title: "Change design"
     design_modal_cancel: "Cancel"
@@ -165,6 +167,16 @@ en:
     menu_default_language: "Default language"
     menu_default_language_select: "Select default language"
     menu_languages: "Select supported languages"
+    
+    beverage_page_modal_add_title: "Add beverage page"
+    beverage_page_modal_edit_title: "Edit beverage page"
+    beverage_page_modal_add_cancel: "Cancel"
+    beverage_page_modal_add_submit: "Add beverage page"
+    beverage_page_modal_edit_cancel: "Cancel"
+    beverage_page_modal_edit_submit: "Edit beverage page"
+    beverage_page_upload_image: "Upload image"
+    beverage_page_title: "Beverage page title"
+    beverage_page_title_placeholder: "Title"
     
     navigation_modal_add_title: "Add category"
     navigation_modal_edit_title: "Edit category"

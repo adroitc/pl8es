@@ -72,6 +72,10 @@ Pl8es::Application.routes.draw do
   post "/a/dish/edit" => "ajax/dish#editdish"
   post "/a/dish/sort" => "ajax/dish#sortdish"
   
+  resources :ajax_beverage_page, :only => []
+  post "/a/beveragepage/add" => "ajax/beverage_page#addbeveragepage"
+  post "/a/beveragepage/edit" => "ajax/beverage_page#editbeveragepage"
+  
   #ajax/daily_dish
   resources :ajax_daily_dish, :only => []
   post "/a/dailydish/add" => "ajax/daily_dish#adddailydish"
