@@ -64,7 +64,12 @@ User.create([
         :country => "Austria"
       ),
       :background_type => "color",
-      :menuColor => MenuColor.create(),
+      :menuColor => MenuColor.create(
+        :background => "#000000"
+        :bar_background => "#000000"
+        :nav_text => "#000000"
+        :nav_text_active => "#000000"
+      ),
       :download_code => "8D34C8",
       :supportedFont => SupportedFont.first,
       :default_language => Language.first
