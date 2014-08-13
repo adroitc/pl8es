@@ -1,6 +1,6 @@
 class BeveragePage < ActiveRecord::Base
   belongs_to :restaurant
-  has_many :beverageNavigations
+  has_many :beverage_navigations
   
   validates :title, :presence => true, :length => {
     :maximum => 40

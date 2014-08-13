@@ -35,11 +35,11 @@
           </thead>
           <tbody>
             <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
-              <% @beverage_page.beverageNavigations.each do |beverage_navigation| %>
+              <% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
               <tr style="font-size: 18px;">
                 <td>
                   <a href="">
-                    <%=beverage_navigation.translated_attributes.to_json %>
+                    <%=beverage_navigation.title %>
                   </a>
                 </td>
                 <td>
@@ -94,6 +94,6 @@
 	});
 </script>
 <%=render :partial => "modal_addbeveragenavigation", :locals => {:beverage_page => @beverage_page} %>
-<% @beverage_page.beverageNavigations.each do |beverage_navigation| %>
+<% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
 <%=render :partial => "modal_editbeveragenavigation", :locals => {:beverage_navigation => beverage_navigation} %>
 <% end %>

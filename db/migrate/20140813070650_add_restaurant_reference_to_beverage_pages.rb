@@ -1,7 +1,6 @@
 class AddRestaurantReferenceToBeveragePages < ActiveRecord::Migration
   def change
-    add_reference :beverage_navigations, :beveragePage
-    add_reference :beverages, :beverageNavigation
-    add_reference :beverages, :beverageAmount
+    add_reference :beverages, :beverage_navigation
+    add_reference :beverages, :beverage_amount
   end
 end

@@ -54,9 +54,8 @@ class Ajax::BeverageController < ApplicationController
     if @user && !params.values_at(:beverage_page_id, :title).include?(nil) && @user.restaurant.beveragePages.exists?(params[:beverage_page_id])
       beverage_page = @user.restaurant.beveragePages.find(params[:beverage_page_id])
       
-      new_baverage_navigation = BeverageNavigation.create({
-        :beveragePage_id => beverage_page.id
-      })
+      new_baverage_navigation = BeverageNavigation.create()
+      beverage_page.beverage_navigations.push(new_baverage_navigation)
 
       languages = Language.find_all_by_locale(params[:title].keys)
       
@@ -67,6 +66,8 @@ class Ajax::BeverageController < ApplicationController
       end
       I18n.locale = current_locale
       
+      new_baverage_navigation.save
+      
       render :json => {:status => "success"}
       return
     end
@@ -74,7 +75,7 @@ class Ajax::BeverageController < ApplicationController
   end
   
   def editbeveragenavigation
-    if @user && !params.values_at(:beverage_navigation_id, :title).include?(nil) && BeveragePage.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beveragePage.restaurant.user == @user
+    if @user && !params.values_at(:beverage_navigation_id, :title).include?(nil) && BeverageNavigation.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beverage_page.restaurant.user == @user
       beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
       
       if params[:delete] == "true"
@@ -95,7 +96,7 @@ class Ajax::BeverageController < ApplicationController
       render :json => {:status => "success"}
       return
     end
-    render :json => {:status => "invalid"}
+    render :json => {:status => "invalid", :params => params}
   end
   
 end

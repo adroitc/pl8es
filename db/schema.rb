@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20140813070650) do
   add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale"
 
   create_table "beverage_navigations", force: true do |t|
+    t.integer  "beverage_page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "beverage_page_id"
   end
 
   create_table "beverage_pages", force: true do |t|
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20140813070650) do
     t.string   "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "beverageNavigation_id"
-    t.integer  "beverageAmount_id"
+    t.integer  "beverage_navigation_id"
+    t.integer  "beverage_amount_id"
   end
 
   create_table "categories", force: true do |t|

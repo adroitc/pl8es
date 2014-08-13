@@ -1,5 +1,5 @@
 class BeverageNavigation < ActiveRecord::Base
-  belongs_to :beveragePage
+  belongs_to :beverage_page
   has_many :beverages
   
   translates :title
