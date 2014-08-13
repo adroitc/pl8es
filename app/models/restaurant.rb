@@ -19,6 +19,7 @@ class Restaurant < ActiveRecord::Base
   end
   has_many :menus
   has_many :dishes
+  has_many :beveragePages
   has_many :favoriteRestaurants
   has_many :devices, :through => :favoriteRestaurants
   
