@@ -75,9 +75,7 @@
 		<label for="form-languages" class="control-label"><%=t("menumalist.menu_languages") %></label>
   </div>
 	<div class="">
-    <%
-    Language.all.each do |language|
-    %>
+    <% Language.all.each do |language| %>
     <div class="col-sm-3">
       <input class="icheck-2-checkbox" type="checkbox" id="form-language-<%=language.id %>" name="languages[<%=language.id %>]" <%="disabled checked" if language == Language.first %>>
       <label for="form-language-<%=language.id %>"><%=language.title.capitalize %></label>

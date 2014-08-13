@@ -1,4 +1,4 @@
-class Ajax::BeveragePageController < ApplicationController
+class Ajax::BeverageController < ApplicationController
   
   def addbeveragepage
     if @user && !params.values_at(:title).include?(nil)
@@ -44,6 +44,54 @@ class Ajax::BeveragePageController < ApplicationController
       #  end
       #end
       
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def addbeveragenavigation
+    if @user && !params.values_at(:beverage_page_id, :title).include?(nil) && @user.restaurant.beveragePages.exists?(params[:beverage_page_id])
+      beverage_page = @user.restaurant.beveragePages.find(params[:beverage_page_id])
+      
+      new_baverage_navigation = BeverageNavigation.create({
+        :beveragePage => beverage_page
+      })
+
+      languages = Language.find_all_by_locale(params[:title].keys)
+      
+      current_locale = I18n.locale
+      languages.each do |language|
+        I18n.locale = language.locale
+        new_baverage_navigation.title = params[:title][language.locale]
+      end
+      I18n.locale = current_locale
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def editbeveragenavigation
+    if @user && !params.values_at(:beverage_navigation_id, :title).include?(nil) && BeveragePage.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beveragePage.restaurant.user == @user
+      beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
+      
+      if params[:delete] == "true"
+        baverage_navigation.destroy
+      else
+        languages = Language.find_all_by_locale(params[:title].keys)
+        
+        current_locale = I18n.locale
+        languages.each do |language|
+          I18n.locale = language.locale
+          beverage_navigation.title = params[:title][language.locale]
+        end
+        I18n.locale = current_locale
+        
+        beverage_navigation.save
+      end
+        
       render :json => {:status => "success"}
       return
     end

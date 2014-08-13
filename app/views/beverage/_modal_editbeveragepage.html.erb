@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editbeveragepage-#{beverage_page.id}", :width => "678px", :title => t("menumalist.beverage_page_modal_edit_title") do |m| %>
-<%= form_tag({:controller => "ajax/beverage_page", :action => "editbeveragepage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editbeveragepage"}) do %>
+<%= form_tag({:controller => "ajax/beverage", :action => "editbeveragepage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editbeveragepage"}) do %>
 <input name="beverage_page_id" type="hidden" id="form-navigation_id" value="<%=beverage_page.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-sm-6 tab-content">
     <label for="form-title" class="control-label"><strong><%=t("menumalist.beverage_page_title") %></strong></label>
-	  <input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.beverage_page_title_placeholder") %>" value="<%=beverage_page.title %>" required data-validate="minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
+	  <input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.beverage_page_title_placeholder") %>" value="<%=beverage_page.title %>" required data-validate="maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
 	</div>
 </div>
 <% end %>

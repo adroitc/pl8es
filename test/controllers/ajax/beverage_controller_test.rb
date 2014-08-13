@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Ajax::BeveragePageControllerTest < ActionController::TestCase
+class Ajax::BeverageControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

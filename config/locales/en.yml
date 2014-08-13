@@ -177,6 +177,8 @@ en:
     beverage_page_upload_image: "Upload image"
     beverage_page_title: "Beverage page title"
     beverage_page_title_placeholder: "Title"
+    beverage_navigation_title: "Beverage navigation title"
+    beverage_navigation_title_placeholder: "Title"
     
     navigation_modal_add_title: "Add category"
     navigation_modal_edit_title: "Edit category"

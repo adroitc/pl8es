@@ -1,7 +1,6 @@
 class CreateBeverages < ActiveRecord::Migration
   def up
     create_table :beverages do |t|
-      t.references :beverage_amount
       
       t.string :price
 

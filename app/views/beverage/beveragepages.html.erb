@@ -1,0 +1,99 @@
+<% content_for :body_class, "page-body" %>
+<div class="page-container">
+  <div class="sidebar-menu">
+    <%=render :partial => "layouts/menuheader" %>
+    <%=render :partial => "layouts/menu" %>
+  </div>
+  <div class="main-content">
+    <%=render :partial => "layouts/topbar" %>
+    <ol class="breadcrumb bc-3">
+      <li>
+        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+          <i class="entypo-home"></i>
+          <%=t("layouts.menu.dashboard") %>
+        </a>
+      </li>
+      <li class="">
+        <a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+          <%=t("menumalist.menu.menumalist") %>
+        </a>
+      </li>
+      <li class="active">
+        <strong><%=@beverage_page.title %></strong>
+      </li>
+    </ol>
+    <h2><%=@beverage_page.title %></h2>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-striped responsive">
+          <thead>
+            <tr>
+              <th><%=t("menumalist.beverage_navigation") %></th>
+              <th width="120px;" style="width:120px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+              <% @beverage_page.beverageNavigations.each do |beverage_navigation| %>
+              <tr style="font-size: 18px;">
+                <td>
+                  <a href="">
+                    <%=beverage_navigation.translated_attributes.to_json %>
+                  </a>
+                </td>
+                <td>
+                  <span class="pl8es_c_table-toolbar">
+                    <a href="javascript:;" onclick="jQuery('#modal-editbeveragenavigation-<%=beverage_navigation.id %>').modal('show');">
+                      <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                        <i class="entypo-cog"></i>
+                      </button>
+                    </a>
+                  <span>
+                </td>
+              </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+        <a href="javascript:;" onclick="jQuery('#modal-addbeveragenavigation').modal('show');">
+          <button type="button" class="btn btn-info btn-icon icon-left">
+          	<%=t("menumalist.add_new_beverage_navigation") %>
+          	<i class="entypo-plus"></i>
+          </button>
+        </a>
+      </div>
+    </div>
+    <%=render :partial => "layouts/footer" %>
+  </div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($)
+	{
+		$(function(){
+			var $draggable_portlets = $(".draggable-portlets");
+			
+			$(".draggable-portlets .sorted").sortable({
+				connectWith: ".draggable-portlets .sorted",
+				handle: '.panel-heading',
+				start: function()
+				{
+					$draggable_portlets.addClass('dragging');
+				},
+				stop: function()
+				{
+          $("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+            $(this).val(i);
+          });
+					$draggable_portlets.removeClass('dragging');
+          $("#form_sortnavigation").submit();
+				}
+			});
+			$(".draggable-portlets .sorted .panel-heading").disableSelection();
+		});
+	});
+</script>
+<%=render :partial => "modal_addbeveragenavigation", :locals => {:beverage_page => @beverage_page} %>
+<% @beverage_page.beverageNavigations.each do |beverage_navigation| %>
+<%=render :partial => "modal_editbeveragenavigation", :locals => {:beverage_navigation => beverage_navigation} %>
+<% end %>

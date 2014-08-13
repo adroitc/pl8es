@@ -1,0 +1,2 @@
+module BeverageHelper
+end

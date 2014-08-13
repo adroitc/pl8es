@@ -1,7 +1,6 @@
 class CreateBeverageNavigations < ActiveRecord::Migration
   def up
     create_table :beverage_navigations do |t|
-      t.references :beverage_page
       
       t.timestamps
     end

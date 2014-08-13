@@ -1,0 +1,31 @@
+<%= neon_modal :id => "addbeveragenavigation", :width => "678px", :title => t("menumalist.navigation_modal_add_title"), :languages => @user.restaurant.menu_languages, :default_language => nil do |m| %>
+<%= form_tag({:controller => "ajax/beverage", :action => "addbeveragenavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addbeveragenavigation"}) do %>
+<input name="beverage_page_id" type="hidden" id="form-beverage_page_id" value="<%=beverage_page.id %>">
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-sm-12 tab-content">
+    <%
+    current_locale = I18n.locale
+    @user.restaurant.menu_languages.each do |language|
+      I18n.locale = language.locale
+    %>
+    <span class="tab-pane <%="active" if @user.restaurant.menu_languages.first == language %> form-group" id="modal-addbeveragenavigation-lang-<%=language.locale %>">
+      <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.menu_default_languages_include(language.id) %></label>
+		  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" <%="required" if @user.restaurant.menu_default_languages_include(language.id) %> data-validate="maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
+    </span>
+    <%
+    end
+    I18n.locale = current_locale
+    %>
+	</div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("menumalist.navigation_modal_add_cancel") %></button>
+<button type="submit" class="btn btn-info btn-icon icon-left">
+	<i class="entypo-plus"></i>
+	<%=t("menumalist.navigation_modal_add_submit") %>
+</button>
+<% end %>
+<% end %>
+<% end %>

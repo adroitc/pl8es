@@ -72,10 +72,13 @@ Pl8es::Application.routes.draw do
   post "/a/dish/edit" => "ajax/dish#editdish"
   post "/a/dish/sort" => "ajax/dish#sortdish"
   
-  resources :ajax_beverage_page, :only => []
-  post "/a/beveragepage/add" => "ajax/beverage_page#addbeveragepage"
-  post "/a/beveragepage/edit" => "ajax/beverage_page#editbeveragepage"
-  post "/a/beveragepage/sort" => "ajax/beverage_page#sortbeveragepage"
+  resources :ajax_beverage, :only => []
+  post "/a/beveragepage/add" => "ajax/beverage#addbeveragepage"
+  post "/a/beveragepage/edit" => "ajax/beverage#editbeveragepage"
+  post "/a/beveragepage/sort" => "ajax/beverage#sortbeveragepage"
+  post "/a/beveragenavigation/add" => "ajax/beverage#addbeveragenavigation"
+  post "/a/beveragenavigation/edit" => "ajax/beverage#editbeveragenavigation"
+  post "/a/beveragenavigation/sort" => "ajax/beverage#sortbeveragenavigation"
   
   #ajax/daily_dish
   resources :ajax_daily_dish, :only => []
@@ -122,6 +125,10 @@ Pl8es::Application.routes.draw do
   get "/menumalist/:menu_title/:menu_id" => "menumalist#categories"
   get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menumalist#category"
   get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menumalist#category"
+  
+  #beverage
+  resources :beverage, :only => []
+  get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepages"
   
   #dailycious
   resources :dailycious, :only => []

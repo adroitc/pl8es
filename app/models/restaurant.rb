@@ -29,7 +29,7 @@ class Restaurant < ActiveRecord::Base
     :minimum => 4,
     :maximum => 75
   }
-  validates :description, :allow_blank => false, :length => {
+  validates :description, :allow_blank => true, :length => {
     :maximum => 400
   }
   validates :website, :allow_blank => true, :presence => true, :length => {
@@ -140,6 +140,10 @@ class Restaurant < ActiveRecord::Base
       menu_languages.push(default_language)
     end
     menu_languages
+  end
+  
+  def menu_default_languages_include(id)
+    Menu.all.map{|m| m.default_language}.uniq{|l| x.id}.find_all{|l| l.id = id}.count > 0
   end
   
 end

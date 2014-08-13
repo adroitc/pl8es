@@ -12,7 +12,7 @@ module NeonHelper
       opts[:languages].each do |language|
         set_active = (language == opts[:default_language]) || (opts[:default_language] == nil && language == opts[:languages].first)
         output_languages += raw %(
-  			<li class="#{"active" if language == opts[:default_language]}">
+  			<li class="#{"active" if set_active}">
           <a href="#modal-#{opts[:id]}-lang-#{language.locale}" data-toggle="tab">
             #{language.title.capitalize}#{" (Default)" if language == opts[:default_language]}
   				</a>
