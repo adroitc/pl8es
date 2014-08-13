@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813065857) do
+ActiveRecord::Schema.define(version: 20140813070650) do
 
   create_table "beverage_amount_translations", force: true do |t|
     t.integer  "beverage_amount_id", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140813065857) do
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
     t.boolean  "image_crop_processed", default: true
+    t.integer  "restaurant_id"
   end
 
   create_table "beverage_translations", force: true do |t|
