@@ -128,7 +128,8 @@ Pl8es::Application.routes.draw do
   
   #beverage
   resources :beverage, :only => []
-  get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepages"
+  get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepage"
+  get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation"
   
   #dailycious
   resources :dailycious, :only => []
