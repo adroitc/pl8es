@@ -176,7 +176,7 @@ class Ajax::BeverageController < ApplicationController
         end
       end
       
-      render :json => {:status => "success"}
+      render :json => {:status => "success", :test => params}
       return
     end
     render :json => {:status => "invalid"}

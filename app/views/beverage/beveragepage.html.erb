@@ -34,14 +34,14 @@
             </tr>
           </thead>
           <tbody class="sorted ui-sortable">
-            <%= form_tag({:controller => "ajax/navigation", :action => "sortbeveragenavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeveragenavigation"}) do %>
+            <%= form_tag({:controller => "ajax/beverage", :action => "sortbeveragenavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeveragenavigation"}) do %>
               <% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
               <tr style="font-size: 18px;">
                 <td>
                   <a href="<%=url_for :controller => "beverage", :action => "beveragenavigation", :beverage_page_title => @beverage_page.title.gsub(" ", "-"), :beverage_page_id => @beverage_page.id, :beverage_navigation_title => beverage_navigation.title.gsub(" ", "-"), :beverage_navigation_id => beverage_navigation.id %>">
                     <%=beverage_navigation.title %>
                   </a>
-                  <input type="hidden" name="beverage_navigation_ids[<%=beverage.id %>]" value="">
+                  <input type="hidden" name="beverage_navigation_ids[<%=beverage_navigation.id %>]" value="">
                 </td>
                 <td>
                   <span class="pl8es_c_table-toolbar">
@@ -82,7 +82,7 @@
 				},
 				stop: function()
 				{
-          $("#form_sortbeveragenavigation .panel input[name^='beverage_navigation_ids[']").each(function(i){
+          $("#form_sortbeveragenavigation input[name^='beverage_navigation_ids[']").each(function(i){
             $(this).val(i);
           });
 					$draggable_portlets.removeClass('dragging');

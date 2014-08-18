@@ -2,6 +2,8 @@ class BeveragePage < ActiveRecord::Base
   belongs_to :restaurant
   has_many :beverage_navigations
   
+  default_scope :order => "position, id"
+  
   validates :title, :presence => true, :length => {
     :maximum => 40
   }

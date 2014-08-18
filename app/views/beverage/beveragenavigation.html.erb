@@ -86,7 +86,7 @@
 				},
 				stop: function()
 				{
-          $("#form_sortbeverage .panel input[name^='beverage_ids[']").each(function(i){
+          $("#form_sortbeverage input[name^='beverage_ids[']").each(function(i){
             $(this).val(i);
           });
 					$draggable_portlets.removeClass('dragging');
