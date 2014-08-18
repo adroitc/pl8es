@@ -146,7 +146,7 @@ $(document).ready(function()
   }, "Please enter a valid color code.");
   
   jQuery.validator.addMethod("time", function(v,e){
-    return /\A(^(?:[01]?[0-9]|2[0-3]):[0-5][0-9]$)\Z/.test($(e).val())
+    return /(^(?:[01]?[0-9]|2[0-3]):[0-5][0-9]$)/.test($(e).val())
   }, "Please enter a valid time.");
   
   jQuery.validator.addMethod("price", function(v,e){
