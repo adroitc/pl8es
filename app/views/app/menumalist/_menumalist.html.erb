@@ -114,6 +114,26 @@ raw(Jsonify::Builder.plain do |j|
       
     end
     
+    j.beverage_pages(menu.beverage_pages) do |beverage_page|
+      j.id                         beverage_page.id
+      j.image_url                  beverage_page.image.present? ? navigation.image.url(:cropped_default_retina) : nil
+      j.image_fingerprint          beverage_page.image_fingerprint
+      
+      j.beverage_pages(beverage_page.beverage_navigations) do |beverage_navigation|
+        j.id                         beverage_navigation.id
+        j.beverage_page_lang         beverage_navigation.beverage_navigation_lang
+      
+        j.beverages(beverage_navigation.beverages) do |beverages|
+          j.id                         beverages.id
+          j.beverages_lang             beverages.beverage_lang
+          j.price                      beverages.price
+          j.amount                     beverages.amount
+        end
+        
+      end
+      
+    end
+    
   end
   
   j.daily_dishes(@req_restaurant.daily_dishes.where("display_date BETWEEN ? AND ?", Date.today.to_datetime, (Date.today+7).to_datetime)) do |daily_dish|
@@ -140,6 +160,7 @@ raw(Jsonify::Builder.plain do |j|
     j.splashscreen_image_fingerprint  @req_restaurant.splashscreen_image_fingerprint
     j.splashscreen_image_url     @req_restaurant.splashscreen_image.present? ? @req_restaurant.splashscreen_image.url(:cropped_default_retina) : nil
     j.currency                   "EUR"
+    j.beverage_scale             "L"
   end
   
   j.content_style do
