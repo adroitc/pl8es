@@ -116,10 +116,10 @@ class Ajax::BeverageController < ApplicationController
   end
   
   def addbeverage
-    if @user && !params.values_at(:beverage_navigation_id, :title, :price).include?(nil) && BeverageNavigation.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beverage_page.restaurant.user == @user
+    if @user && !params.values_at(:beverage_navigation_id, :title, :price, :amount).include?(nil) && BeverageNavigation.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beverage_page.restaurant.user == @user
       beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
       
-      new_baverage = Beverage.create(params.permit(:price))
+      new_baverage = Beverage.create(params.permit(:price, :amount))
       beverage_navigation.beverages.push(new_baverage)
 
       languages = Language.find_all_by_locale(params[:title].keys)
@@ -140,13 +140,13 @@ class Ajax::BeverageController < ApplicationController
   end
   
   def editbeverage
-    if @user && !params.values_at(:beverage_id, :title, :price).include?(nil) && Beverage.exists?(params[:beverage_id]) && Beverage.find(params[:beverage_id]).beverage_navigation.beverage_page.restaurant.user == @user
+    if @user && !params.values_at(:beverage_id, :title, :price, :amount).include?(nil) && Beverage.exists?(params[:beverage_id]) && Beverage.find(params[:beverage_id]).beverage_navigation.beverage_page.restaurant.user == @user
       beverage = Beverage.find(params[:beverage_id])
       
       if params[:delete] == "true"
         beverage.destroy
       else
-        beverage.attributes = params.permit(:price)
+        beverage.attributes = params.permit(:price, :amount)
         
         languages = Language.find_all_by_locale(params[:title].keys)
         

@@ -14,6 +14,7 @@ en:
     hexcolor: "SUSI-Please enter a valid url."
     time: "SUSI-Please enter a valid time."
     price: "SUSI-Please enter a valid price."
+    beverageamount: "SUSI-Please enter a valid amount."
   
   errors:
     required: "This field is required."
@@ -201,6 +202,8 @@ en:
     beverage_title_placeholder: "Title"
     beverage_price: "Beverage price"
     beverage_price_placeholder: "3,00"
+    beverage_amount_in_l: "Beverage amount in liters"
+    beverage_amount_in_l_placeholder: "0,5"
     
     navigation_modal_add_title: "Add category"
     navigation_modal_edit_title: "Edit category"

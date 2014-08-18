@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818113449) do
+ActiveRecord::Schema.define(version: 20140818115952) do
 
   create_table "beverage_amount_translations", force: true do |t|
     t.integer  "beverage_amount_id", null: false
@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 20140818113449) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "beverage_navigation_id"
-    t.integer  "beverage_amount_id"
     t.integer  "position"
+    t.string   "amount"
   end
 
   create_table "categories", force: true do |t|

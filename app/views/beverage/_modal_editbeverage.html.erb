@@ -14,9 +14,13 @@
         <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.menu_default_languages_include(language.id) %></label>
 		    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=beverage.title %>" <%="required" if @user.restaurant.menu_default_languages_include(language.id) %> data-validate="maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
       </div>
-      <div class="col-md-6 form-group" style="padding:0px;">
+      <div class="col-md-6 form-group" style="padding-left:0px;">
         <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_price") %><% I18n.locale = language.locale %></strong></label>
-        <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_price_placeholder") %><% I18n.locale = language.locale %>" value="<%=beverage.price %>" <%="required" if @user.restaurant.menu_default_languages_include(language.id) %> data-validate="maxlength[7],price" data-validate="maxlength[400]" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>" data-message-price="<%=t("validation.price") %>">
+        <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_price_placeholder") %><% I18n.locale = language.locale %>" value="<%=beverage.price %>" <%="required" if @user.restaurant.menu_default_languages_include(language.id) %> data-validate="maxlength[7],price" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-price="<%=t("validation.price") %>">
+      </div>
+      <div class="col-md-6 form-group" style="padding-right:0px;">
+        <label for="form-amount" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_amount_in_l") %><% I18n.locale = language.locale %></strong></label>
+        <input name="amount" type="text" class="form-control" id="form-amount" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_amount_in_l_placeholder") %><% I18n.locale = language.locale %>" value="<%=beverage.amount %>" <%="required" if @user.restaurant.menu_default_languages_include(language.id) %> data-validate="maxlength[7],beverageamount" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-beverageamount="<%=t("validation.beverageamount") %>">
       </div>
     </span>
     <%
