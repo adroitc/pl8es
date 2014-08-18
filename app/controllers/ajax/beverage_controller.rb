@@ -96,7 +96,58 @@ class Ajax::BeverageController < ApplicationController
       render :json => {:status => "success"}
       return
     end
-    render :json => {:status => "invalid", :params => params}
+    render :json => {:status => "invalid"}
+  end
+  
+  def addbeverage
+    if @user && !params.values_at(:beverage_navigation_id, :title, :price).include?(nil) && BeverageNavigation.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beverage_page.restaurant.user == @user
+      beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
+      
+      new_baverage = Beverage.create(params.permit(:price))
+      beverage_navigation.beverages.push(new_baverage)
+
+      languages = Language.find_all_by_locale(params[:title].keys)
+      
+      current_locale = I18n.locale
+      languages.each do |language|
+        I18n.locale = language.locale
+        new_baverage.title = params[:title][language.locale]
+      end
+      I18n.locale = current_locale
+      
+      new_baverage.save
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def editbeverage
+    if @user && !params.values_at(:beverage_id, :title, :price).include?(nil) && Beverage.exists?(params[:beverage_id]) && Beverage.find(params[:beverage_id]).beverage_navigation.beverage_page.restaurant.user == @user
+      beverage = Beverage.find(params[:beverage_id])
+      
+      if params[:delete] == "true"
+        beverage.destroy
+      else
+        beverage.attributes = params.permit(:price)
+        
+        languages = Language.find_all_by_locale(params[:title].keys)
+        
+        current_locale = I18n.locale
+        languages.each do |language|
+          I18n.locale = language.locale
+          beverage.title = params[:title][language.locale]
+        end
+        I18n.locale = current_locale
+        
+        beverage.save
+      end
+        
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
   end
   
 end

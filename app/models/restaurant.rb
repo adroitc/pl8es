@@ -143,7 +143,7 @@ class Restaurant < ActiveRecord::Base
   end
   
   def menu_default_languages_include(id)
-    Menu.all.map{|m| m.default_language}.uniq{|l| x.id}.find_all{|l| l.id = id}.count > 0
+    (Menu.all.map{|m| m.default_language}.uniq{|l| x.id}.find_all{|l| l.id = id}.count > 0) || (Menu.all.map{|m| m.default_language}.uniq{|l| x.id}.find_all{|l| l.id = id}.count == 0 && menu_languages.count == 1 && menu_languages.find_all{|l| l.id = id}.count == 1)
   end
   
 end

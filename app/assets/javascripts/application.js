@@ -150,7 +150,7 @@ $(document).ready(function()
   }, "Please enter a valid time.");
   
   jQuery.validator.addMethod("price", function(v,e){
-    return /\A(^[0-9\,]*$)\Z/.test($(e).val())
+    return /(^[0-9\,]*$)/.test($(e).val())
   }, "Please enter a valid price.");
   
   $("input[type='file']").each(function(){

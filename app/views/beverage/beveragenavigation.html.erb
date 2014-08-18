@@ -18,47 +18,54 @@
           <%=t("menumalist.menu.menumalist") %>
         </a>
       </li>
+      <li>
+        <a href="<%=url_for :controller => "beverage", :action => "beveragepage", :beverage_page_title => @beverage_navigation.beverage_page.title.gsub(" ", "-"), :beverage_page_id => @beverage_navigation.beverage_page.id %>">
+          <%=@beverage_navigation.beverage_page.title %>
+        </a>
+      </li>
       <li class="active">
-        <strong><%=@beverage_page.title %></strong>
+        <strong><%=@beverage_navigation.title %></strong>
       </li>
     </ol>
-    <h2><%=@beverage_page.title %></h2>
+    <h2><%=@beverage_navigation.title %></h2>
     <br />
     <div class="row">
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <thead>
             <tr>
-              <th><%=t("menumalist.beverage_navigation") %></th>
+              <th><%=t("menumalist.beverage") %></th>
               <th width="120px;" style="width:120px;"></th>
             </tr>
           </thead>
           <tbody>
             <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
-              <% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
-              <tr style="font-size: 18px;">
-                <td>
-                  <a href="">
-                    <%=beverage_navigation.title %>
-                  </a>
-                </td>
-                <td>
-                  <span class="pl8es_c_table-toolbar">
-                    <a href="javascript:;" onclick="jQuery('#modal-editbeveragenavigation-<%=beverage_navigation.id %>').modal('show');">
-                      <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
-                        <i class="entypo-cog"></i>
-                      </button>
+              <span class="sorted ui-sortable">
+                <% @beverage_navigation.beverages.each do |beverage| %>
+                <tr style="font-size: 18px;">
+                  <td>
+                    <a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
+                      <%=beverage.title %>
                     </a>
-                  <span>
-                </td>
-              </tr>
-              <% end %>
+                  </td>
+                  <td>
+                    <span class="pl8es_c_table-toolbar">
+                      <a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
+                        <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                          <i class="entypo-cog"></i>
+                        </button>
+                      </a>
+                    <span>
+                  </td>
+                </tr>
+                <% end %>
+              </span>
             <% end %>
           </tbody>
         </table>
-        <a href="javascript:;" onclick="jQuery('#modal-addbeveragenavigation').modal('show');">
+        <a href="javascript:;" onclick="jQuery('#modal-addbeverage').modal('show');">
           <button type="button" class="btn btn-info btn-icon icon-left">
-          	<%=t("menumalist.add_new_beverage_navigation") %>
+          	<%=t("menumalist.add_new_beverage") %>
           	<i class="entypo-plus"></i>
           </button>
         </a>
@@ -93,7 +100,7 @@
 		});
 	});
 </script>
-<%=render :partial => "modal_addbeveragenavigation", :locals => {:beverage_page => @beverage_page} %>
-<% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
-<%=render :partial => "modal_editbeveragenavigation", :locals => {:beverage_navigation => beverage_navigation} %>
+<%=render :partial => "modal_addbeverage", :locals => {:beverage_navigation => @beverage_navigation} %>
+<% @beverage_navigation.beverages.each do |beverage| %>
+<%=render :partial => "modal_editbeverage", :locals => {:beverage => beverage} %>
 <% end %>

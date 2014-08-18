@@ -43,7 +43,12 @@ class App::DailyciousController < ApplicationController
             :location => Location.create(params.permit(:address, :zip, :city, :country)),
             :default_language => Language.first,
             :menuColorTemplate => MenuColorTemplate.first,
-            :menuColor => MenuColor.create(),
+            :menuColor => MenuColor.create(
+              :background => "#000000",
+              :bar_background => "#000000",
+              :nav_text => "#ffffff",
+              :nav_text_active => "#999999"
+            ),
             :supportedFont => SupportedFont.first,
             :download_code => download_code,
             :background_type => "color"
