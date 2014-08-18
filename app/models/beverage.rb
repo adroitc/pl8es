@@ -10,7 +10,7 @@ class Beverage < ActiveRecord::Base
     all_translated_attributes_hash = {}
     
     current_locale = I18n.locale
-    navigation.menu.languages.each do |language|
+    beverage_navigation.beverage_page.menu.languages.each do |language|
       I18n.locale = language.locale
       
       all_translated_attributes_hash[language.locale] = translated_attributes
