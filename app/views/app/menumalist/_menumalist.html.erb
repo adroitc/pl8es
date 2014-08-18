@@ -116,7 +116,7 @@ raw(Jsonify::Builder.plain do |j|
     
     j.beverage_pages(@req_restaurant.beveragePages) do |beverage_page|
       j.id                         beverage_page.id
-      j.image_url                  beverage_page.image.present? ? navigation.image.url(:cropped_default_retina) : nil
+      j.image_url                  beverage_page.image.present? ? beverage_page.image.url(:cropped_default_retina) : nil
       j.image_fingerprint          beverage_page.image_fingerprint
       
       j.beverage_pages(beverage_page.beverage_navigations) do |beverage_navigation|
