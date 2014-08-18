@@ -139,7 +139,7 @@ class Restaurant < ActiveRecord::Base
     if !menu_languages.include?(default_language) && default_language != nil
       menu_languages.push(default_language)
     end
-    menu_languages
+    menu_languages.sort_by{|l| l.id}
   end
   
   def menu_default_languages_include(id)
