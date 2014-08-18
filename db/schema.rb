@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813070650) do
+ActiveRecord::Schema.define(version: 20140818113449) do
 
   create_table "beverage_amount_translations", force: true do |t|
     t.integer  "beverage_amount_id", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140813070650) do
     t.integer  "beverage_page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   create_table "beverage_pages", force: true do |t|
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 20140813070650) do
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
     t.boolean  "image_crop_processed", default: true
+    t.integer  "position"
   end
 
   create_table "beverage_translations", force: true do |t|
@@ -81,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140813070650) do
     t.datetime "updated_at"
     t.integer  "beverage_navigation_id"
     t.integer  "beverage_amount_id"
+    t.integer  "position"
   end
 
   create_table "categories", force: true do |t|

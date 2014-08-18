@@ -36,13 +36,13 @@ class Ajax::BeverageController < ApplicationController
   
   def sortbeveragepage
     if @user && !params.values_at(:beverage_page_ids).include?(nil)
-      #params[:navigation_ids].each do |navigation_id|
-      #  if Navigation.exists?(navigation_id[0].to_i) && Navigation.find(navigation_id[0].to_i).menu.restaurant.user == @user
-      #    navigation = Navigation.find(navigation_id[0].to_i)
-      #    navigation.position = navigation_id[1].to_i
-      #    navigation.save
-      #  end
-      #end
+      params[:beverage_page_ids].each do |beverage_page_id|
+        if BeveragePage.exists?(beverage_page_id[0].to_i) && BeveragePage.find(beverage_page_id[0].to_i).restaurant.user == @user
+          beverage_page = BeveragePage.find(beverage_page_id[0].to_i)
+          beverage_page.position = beverage_page_id[1].to_i
+          beverage_page.save
+        end
+      end
       
       render :json => {:status => "success"}
       return
@@ -99,6 +99,22 @@ class Ajax::BeverageController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
+  def sortbeveragenavigation
+    if @user && !params.values_at(:beverage_navigation_ids).include?(nil)
+      params[:beverage_navigation_ids].each do |beverage_navigation_id|
+        if BeverageNavigation.exists?(beverage_navigation_id[0].to_i) && BeverageNavigation.find(beverage_navigation_id[0].to_i).beverage_page.restaurant.user == @user
+          beverage_navigation = BeverageNavigation.find(beverage_navigation_id[0].to_i)
+          beverage_navigation.position = beverage_navigation_id[1].to_i
+          beverage_navigation.save
+        end
+      end
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def addbeverage
     if @user && !params.values_at(:beverage_navigation_id, :title, :price).include?(nil) && BeverageNavigation.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beverage_page.restaurant.user == @user
       beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
@@ -144,6 +160,22 @@ class Ajax::BeverageController < ApplicationController
         beverage.save
       end
         
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def sortbeverage
+    if @user && !params.values_at(:beverage_ids).include?(nil)
+      params[:beverage_ids].each do |beverage_ids|
+        if Beverage.exists?(beverage_ids[0].to_i) && Beverage.find(beverage_ids[0].to_i).beverage_navigation.beverage_page.restaurant.user == @user
+          beverage = Beverage.find(beverage_ids[0].to_i)
+          beverage.position = beverage_ids[1].to_i
+          beverage.save
+        end
+      end
+      
       render :json => {:status => "success"}
       return
     end

@@ -31,38 +31,37 @@
     <br />
     <div class="row">
       <div class="col-md-12">
-        <table class="table table-striped responsive">
-          <thead>
-            <tr>
-              <th><%=t("menumalist.beverage") %></th>
-              <th width="120px;" style="width:120px;"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
-              <span class="sorted ui-sortable">
-                <% @beverage_navigation.beverages.each do |beverage| %>
-                <tr style="font-size: 18px;">
-                  <td>
+        <%= form_tag({:controller => "ajax/beverage", :action => "sortbeverage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeverage"}) do %>
+          <table class="table table-striped responsive draggable-portlets">
+            <thead>
+              <tr>
+                <th><%=t("menumalist.beverage") %></th>
+                <th width="120px;" style="width:120px;"></th>
+              </tr>
+            </thead>
+            <tbody class="sorted ui-sortable">
+              <% @beverage_navigation.beverages.each do |beverage| %>
+              <tr style="font-size: 18px;">
+                <td>
+                  <a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
+                    <%=beverage.title %>
+                  </a>
+                  <input type="hidden" name="beverage_ids[<%=beverage.id %>]" value="">
+                </td>
+                <td>
+                  <span class="pl8es_c_table-toolbar">
                     <a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
-                      <%=beverage.title %>
+                      <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                        <i class="entypo-cog"></i>
+                      </button>
                     </a>
-                  </td>
-                  <td>
-                    <span class="pl8es_c_table-toolbar">
-                      <a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
-                        <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
-                          <i class="entypo-cog"></i>
-                        </button>
-                      </a>
-                    <span>
-                  </td>
-                </tr>
-                <% end %>
-              </span>
-            <% end %>
-          </tbody>
-        </table>
+                  <span>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
         <a href="javascript:;" onclick="jQuery('#modal-addbeverage').modal('show');">
           <button type="button" class="btn btn-info btn-icon icon-left">
           	<%=t("menumalist.add_new_beverage") %>
@@ -79,24 +78,22 @@
 	{
 		$(function(){
 			var $draggable_portlets = $(".draggable-portlets");
-			
 			$(".draggable-portlets .sorted").sortable({
 				connectWith: ".draggable-portlets .sorted",
-				handle: '.panel-heading',
 				start: function()
 				{
 					$draggable_portlets.addClass('dragging');
 				},
 				stop: function()
 				{
-          $("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+          $("#form_sortbeverage .panel input[name^='beverage_ids[']").each(function(i){
             $(this).val(i);
           });
 					$draggable_portlets.removeClass('dragging');
-          $("#form_sortnavigation").submit();
+          $("#form_sortbeverage").submit();
 				}
 			});
-			$(".draggable-portlets .sorted .panel-heading").disableSelection();
+			//$(".draggable-portlets .sorted .panel-heading").disableSelection();
 		});
 	});
 </script>

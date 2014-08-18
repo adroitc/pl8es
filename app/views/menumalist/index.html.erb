@@ -141,11 +141,11 @@
 				},
 				stop: function()
 				{
-          $("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+          $("#form_sortbeveragepage .panel input[name^='beverage_page_ids[']").each(function(i){
             $(this).val(i);
           });
 					$draggable_portlets.removeClass('dragging');
-          $("#form_sortnavigation").submit();
+          $("#form_sortbeveragepage").submit();
 				}
 			});
 			$(".draggable-portlets .sorted .panel-heading").disableSelection();

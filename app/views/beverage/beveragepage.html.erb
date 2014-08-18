@@ -26,35 +26,34 @@
     <br />
     <div class="row">
       <div class="col-md-12">
-        <table class="table table-striped responsive">
+        <table class="table table-striped responsive draggable-portlets">
           <thead>
             <tr>
               <th><%=t("menumalist.beverage_navigation") %></th>
               <th width="120px;" style="width:120px;"></th>
             </tr>
           </thead>
-          <tbody>
-            <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
-              <span class="sorted ui-sortable">
-                <% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
-                <tr style="font-size: 18px;">
-                  <td>
-                    <a href="<%=url_for :controller => "beverage", :action => "beveragenavigation", :beverage_page_title => @beverage_page.title.gsub(" ", "-"), :beverage_page_id => @beverage_page.id, :beverage_navigation_title => beverage_navigation.title.gsub(" ", "-"), :beverage_navigation_id => beverage_navigation.id %>">
-                      <%=beverage_navigation.title %>
+          <tbody class="sorted ui-sortable">
+            <%= form_tag({:controller => "ajax/navigation", :action => "sortbeveragenavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeveragenavigation"}) do %>
+              <% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
+              <tr style="font-size: 18px;">
+                <td>
+                  <a href="<%=url_for :controller => "beverage", :action => "beveragenavigation", :beverage_page_title => @beverage_page.title.gsub(" ", "-"), :beverage_page_id => @beverage_page.id, :beverage_navigation_title => beverage_navigation.title.gsub(" ", "-"), :beverage_navigation_id => beverage_navigation.id %>">
+                    <%=beverage_navigation.title %>
+                  </a>
+                  <input type="hidden" name="beverage_navigation_ids[<%=beverage.id %>]" value="">
+                </td>
+                <td>
+                  <span class="pl8es_c_table-toolbar">
+                    <a href="javascript:;" onclick="jQuery('#modal-editbeveragenavigation-<%=beverage_navigation.id %>').modal('show');">
+                      <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                        <i class="entypo-cog"></i>
+                      </button>
                     </a>
-                  </td>
-                  <td>
-                    <span class="pl8es_c_table-toolbar">
-                      <a href="javascript:;" onclick="jQuery('#modal-editbeveragenavigation-<%=beverage_navigation.id %>').modal('show');">
-                        <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
-                          <i class="entypo-cog"></i>
-                        </button>
-                      </a>
-                    <span>
-                  </td>
-                </tr>
-                <% end %>
-              </span>
+                  <span>
+                </td>
+              </tr>
+              <% end %>
             <% end %>
           </tbody>
         </table>
@@ -77,18 +76,17 @@
 			
 			$(".draggable-portlets .sorted").sortable({
 				connectWith: ".draggable-portlets .sorted",
-				handle: '.panel-heading',
 				start: function()
 				{
 					$draggable_portlets.addClass('dragging');
 				},
 				stop: function()
 				{
-          $("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+          $("#form_sortbeveragenavigation .panel input[name^='beverage_navigation_ids[']").each(function(i){
             $(this).val(i);
           });
 					$draggable_portlets.removeClass('dragging');
-          $("#form_sortnavigation").submit();
+          $("#form_sortbeveragenavigation").submit();
 				}
 			});
 			$(".draggable-portlets .sorted .panel-heading").disableSelection();
