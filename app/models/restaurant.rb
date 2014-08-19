@@ -22,6 +22,8 @@ class Restaurant < ActiveRecord::Base
   has_many :beveragePages
   has_many :favoriteRestaurants
   has_many :devices, :through => :favoriteRestaurants
+  has_one :dailycious_plan
+  has_many :dailycious_credits
   
   translates :description
   

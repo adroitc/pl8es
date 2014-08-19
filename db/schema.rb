@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818115952) do
+ActiveRecord::Schema.define(version: 20140819064418) do
 
   create_table "beverage_amount_translations", force: true do |t|
     t.integer  "beverage_amount_id", null: false
@@ -139,6 +139,19 @@ ActiveRecord::Schema.define(version: 20140818115952) do
     t.string   "image_fingerprint"
     t.integer  "position"
     t.integer  "restaurant_id"
+  end
+
+  create_table "dailycious_credits", force: true do |t|
+    t.integer  "restaurant_id"
+    t.integer  "payment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dailycious_plans", force: true do |t|
+    t.integer  "restaurant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "devices", force: true do |t|
@@ -351,6 +364,13 @@ ActiveRecord::Schema.define(version: 20140818115952) do
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
     t.boolean  "image_crop_processed",             default: true
+  end
+
+  create_table "payments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "dailycious_plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "requests", force: true do |t|
