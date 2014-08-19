@@ -131,7 +131,7 @@ raw(Jsonify::Builder.plain do |j|
       j.beverages(beverage_navigation.beverages) do |beverages|
         
         j.id                         beverages.id
-        j.beverages_lang             beverages.beverage_lang
+        j.beverage_lang             beverages.beverage_lang
         j.price                      beverages.price
         j.amount                     beverages.amount
       end
@@ -164,7 +164,6 @@ raw(Jsonify::Builder.plain do |j|
     j.splashscreen_image_fingerprint  @req_restaurant.splashscreen_image_fingerprint
     j.splashscreen_image_url     @req_restaurant.splashscreen_image.present? ? @req_restaurant.splashscreen_image.url(:cropped_default_retina) : nil
     j.currency                   "EUR"
-    j.beverage_scale             "L"
   end
   
   j.content_style do
@@ -212,6 +211,8 @@ raw(Jsonify::Builder.plain do |j|
     j.sub_text                   menuColor.sub_text
     j.sub_text_selected          menuColor.sub_text_selected
     j.sub_text_selected          menuColor.sub_text_active
+
+    j.beverage_unit              "L"
   end
   
 end)
