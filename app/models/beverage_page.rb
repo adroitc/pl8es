@@ -20,7 +20,7 @@ class BeveragePage < ActiveRecord::Base
       #  :processors => [:cropper]
       #},
       :cropped_default_retina => {
-        :geometry => "1284x504#",
+        :geometry => "1292x512#",
         :format => :png,
         :processors => [:cropper]
       }
