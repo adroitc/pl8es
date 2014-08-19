@@ -4,6 +4,8 @@ class CreateDailyciousCredits < ActiveRecord::Migration
       t.references :restaurant
       t.references :payment
       
+      t.date :usage_date
+      
       t.timestamps
     end
   end

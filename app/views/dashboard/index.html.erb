@@ -130,6 +130,20 @@
   		  	<p>in the last 7 days</p>
   		  </div>
   		</div>
+      <div class="col-sm-4">
+  		  <div class="tile-stats tile-white tile-white-primary">
+  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.count %>" data-duration="1500" data-delay="0">0</div>
+			  
+  		  	<h3>dailys</h3>
+          <a href="<%=url_for :controller => "dailycious", :action => "index" %>"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              get more
+              <i class="entypo-plus"></i>
+            </button>
+          </p></a>
+  		  </div>
+  		</div>
     </div>
     <h2><%=t("layouts.menu.menumalist") %></h2>
     <br />
