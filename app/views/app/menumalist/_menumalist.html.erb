@@ -126,12 +126,12 @@ raw(Jsonify::Builder.plain do |j|
     j.beverage_navigations(beverage_page.beverage_navigations) do |beverage_navigation|
       
       j.id                         beverage_navigation.id
-      j.beverage_page_lang         beverage_navigation.beverage_navigation_lang
+      j.beverage_navigation_lang   beverage_navigation.beverage_navigation_lang
     
       j.beverages(beverage_navigation.beverages) do |beverages|
         
         j.id                         beverages.id
-        j.beverage_lang             beverages.beverage_lang
+        j.beverage_lang              beverages.beverage_lang
         j.price                      beverages.price
         j.amount                     beverages.amount
       end
