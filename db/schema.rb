@@ -354,6 +354,11 @@ ActiveRecord::Schema.define(version: 20140819064418) do
   create_table "payments", force: true do |t|
     t.integer  "user_id"
     t.integer  "dailycious_plan_id"
+    t.string   "paypal_token"
+    t.string   "paypal_payer_id"
+    t.integer  "quantity"
+    t.string   "amount"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

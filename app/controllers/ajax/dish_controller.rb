@@ -32,7 +32,6 @@ class Ajax::DishController < ApplicationController
     if @user && !params.values_at(:navigation_id, :title, :description, :price).include?(nil) && Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.restaurant.user == @user
       languages = Language.find_all_by_locale(params[:title].keys)
       
-      navigation = Navigation.find(params[:navigation_id])
       new_dish = Dish.create(params.permit(:price).merge({
         :user => @user,
         :menu => navigation.menu,

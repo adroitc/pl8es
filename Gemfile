@@ -51,6 +51,9 @@ end
 
 gem "jquery-ui-rails"
 
+# payment
+gem "paypal-express"
+
 # json
 gem "jsonify"
 

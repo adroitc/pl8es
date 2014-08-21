@@ -7,9 +7,9 @@
       <label class="control-label">Colors</label>
   		<ul id="form-menu_color" class="ui-selectable">
         <% MenuColorTemplate.all.each do |menuColorTemplate| %>
-        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;background-image:url(<%=menuColorTemplate.preview_image.url(:cropped_default_retina) %>);background-size:cover;color:transparent;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == menuColorTemplate %>"><%=menuColorTemplate.id %></li>
+        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;background-image:url(<%=menuColorTemplate.preview_image.url(:cropped_default_retina) %>);background-size:cover;color:transparent;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == menuColorTemplate %>" data-id="<%=menuColorTemplate.id %>"></li>
         <% end %>
-        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == nil %>">custom</li>
+        <li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == nil %>" data-id="0">custom</li>
       </ul>
       <input name="menuColorTemplate_id" type="hidden" id="form-menuColorTemplate_id" value="<%=@user.restaurant.menuColorTemplate.id if @user.restaurant.menuColorTemplate %>">
 		</div>
@@ -97,7 +97,7 @@ $("#form-menu_color.ui-selectable").each(function(){
       $("#form-menu_color_custom").show();
     }
     else{
-      $("#form-menuColorTemplate_id").val(s.find("li").eq(i).html());
+      $("#form-menuColorTemplate_id").val(s.find("li").eq(i).data("id"));
       $.each(menucolors[i],function(k,v){
         $("input[name='"+k+"']").val(v).closest(".input-group").find(".input-group-addon .color-preview").css("background-color",v);
       });
