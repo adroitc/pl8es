@@ -21,19 +21,19 @@
     </ol>
     <div class="row">
       <div class="col-sm-4">
-    	 	<div class="tile-stats tile-white">
-    	 		<div class="icon"><i class="entypo-monitor"></i></div>
-    	 		<div class="num" data-start="0" data-end="1" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
-          <span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
-    	 		<h3><%=t("menumalist.installations") %></h3>
-          <p><%=t("menumalist.installations_on_iPad") %>
+  		  <div class="tile-stats tile-white tile-white-primary">
+  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
+			  
+  		  	<h3>dailis</h3>
+          <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show');"><p>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              <%=t("menumalist.installations_want_more") %>
+              get more
               <i class="entypo-plus"></i>
             </button>
-          </p>
-    	  </div>
-    	</div>
+          </p></a>
+  		  </div>
+  		</div>
     </div>
     <h2><%=t("dailycious.dailycious_title") %></h2>
     <br />
@@ -74,19 +74,28 @@
               current_date = (date.beginning_of_week+i)
             %>
             <tr style="font-size: 18px;">
+              <%
+              todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
+              %>
               <td width="100px;">
                 <%=current_date.strftime("%A") %>
               </td>
               <td class="row gallery-env draggable-portlets">
                 <%= form_tag({:controller => "ajax/daily_dish", :action => "sortdailydish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
                 <span class="sorted ui-sortable">
-                  <% @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
+                  <% todays_daily_dishes.each do |daily_dish| %>
                   <%=render :partial => "neon/daily_dish_panel", :locals => {:daily_dish => daily_dish} %>
                   <% end %>
                 </span>
                 <% end %>
-                <% if !current_date.past? %>
-                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
+                <%
+                if !current_date.past?
+                  add_dish_modal_js = "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"
+                  if todays_daily_dishes.count == 1 && @user.restaurant.dailycious_credits.valid_credits.count == 0
+                    add_dish_modal_js = "jQuery('#modal-dacreditplan').modal('show');"
+                  end
+                %>
+                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => add_dish_modal_js} %>
                 <% end %>
               </td>
             </tr>
@@ -124,6 +133,7 @@
 		});
 	});
 </script>
+<%=render :partial => "modal_creditplan" %>
 <%=render :partial => "modal_adddailydish" %>
 <%
 for i in 0..6

@@ -49,6 +49,14 @@ class Ajax::PaymentController < ApplicationController
       payment.update_attributes({
         :paypal_payer_id => params[:PayerID]
       })
+      if response.ack == "Success" && payment.description == "dailycious - dailys (credits)"
+        for i in 1..payment.quantity
+          DailyciousCredit.create(
+            :restaurant => @user.restaurant,
+            :payment => payment
+          )
+        end
+      end
       
       redirect_to :controller => "/dailycious", :action => "index"
       return

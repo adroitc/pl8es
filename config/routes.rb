@@ -47,10 +47,10 @@ Pl8es::Application.routes.draw do
   
   resources :ajax_payment, :only => []
   #ajax_dish-post
-  post "/a/pay/dasetupcreditplan" => "ajax/payment#dasetupcreditplan"
+  post "/a/buy/dasetupcreditplan" => "ajax/payment#dasetupcreditplan"
   
   #ajax_dish-get
-  get "/a/pay/datransfercreditplan" => "ajax/payment#datransfercreditplan"
+  get "/a/buy/datransfercreditplan" => "ajax/payment#datransfercreditplan"
   
   #ajax/profile
   resources :ajax_profile, :only => []
