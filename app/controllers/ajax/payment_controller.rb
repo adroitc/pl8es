@@ -56,6 +56,19 @@ class Ajax::PaymentController < ApplicationController
             :payment => payment
           )
         end
+        
+        last_daily_dish = @user.restaurant.daily_dishes.last
+        
+        if last_daily_dish
+          todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => last_daily_dish.display_date.to_date)
+          todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => last_daily_dish.display_date)
+          
+          if todays_daily_dishes.count > todays_dailycious_credits.count+1
+            @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
+              :usage_date => last_daily_dish.display_date.to_date
+            })
+          end
+        end
       end
       
       redirect_to :controller => "/dailycious", :action => "index"

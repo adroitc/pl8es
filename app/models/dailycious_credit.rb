@@ -6,8 +6,4 @@ class DailyciousCredit < ActiveRecord::Base
     where(:usage_date => nil)
   end
   
-  def self.todays_credits
-    where(:usage_date => Date.today)
-  end
-  
 end

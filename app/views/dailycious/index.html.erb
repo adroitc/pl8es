@@ -75,6 +75,7 @@
             %>
             <tr style="font-size: 18px;">
               <%
+              todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => current_date)
               todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
               %>
               <td width="100px;">
@@ -83,20 +84,22 @@
               <td class="row gallery-env draggable-portlets">
                 <%= form_tag({:controller => "ajax/daily_dish", :action => "sortdailydish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
                 <span class="sorted ui-sortable">
-                  <% todays_daily_dishes.each do |daily_dish| %>
-                  <%=render :partial => "neon/daily_dish_panel", :locals => {:daily_dish => daily_dish} %>
+                  <%=render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
+                  <% todays_dailycious_credits.each_with_index do |dailycious_credit, index| %>
+                    <%=render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[index+1]}) if todays_daily_dishes[index+1] %>
                   <% end %>
                 </span>
                 <% end %>
                 <%
                 if !current_date.past?
-                  add_dish_modal_js = "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"
-                  if todays_daily_dishes.count == 1 && @user.restaurant.dailycious_credits.valid_credits.count == 0
-                    add_dish_modal_js = "jQuery('#modal-dacreditplan').modal('show');"
-                  end
+                  if todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count == 0
                 %>
-                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => add_dish_modal_js} %>
-                <% end %>
+                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#modal-buydailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
+                <%
+                  else
+                %>
+                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
+                <% end end %>
               </td>
             </tr>
             <% end %>
@@ -135,6 +138,7 @@
 </script>
 <%=render :partial => "modal_creditplan" %>
 <%=render :partial => "modal_adddailydish" %>
+<%=render :partial => "modal_buydailydish" %>
 <%
 for i in 0..6
   current_date = (date.beginning_of_week+i)

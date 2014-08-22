@@ -5,7 +5,8 @@ class Ajax::NavigationController < ApplicationController
       menu = @user.restaurant.menus.find(params[:menu_id])
       
       new_navigation = Navigation.create(params.permit(:style).merge({
-        :menu => menu
+        :menu => menu,
+        :position =>menu.navigations.unscoped.last != nil ? menu.navigations.unscoped.last.id : 0
       }))
 
       languages = Language.find_all_by_locale(params[:title].keys)
@@ -20,7 +21,7 @@ class Ajax::NavigationController < ApplicationController
       if params[:navigation_id] && menu.navigations.exists?(params[:navigation_id])
         new_navigation.update_attributes({
           :level => 1,
-          :navigation => menu.navigations.find(params[:navigation_id])
+          :navigation => menu.navigations.find(params[:navigation_id]),
         })
       end
       

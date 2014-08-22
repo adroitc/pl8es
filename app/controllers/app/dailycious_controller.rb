@@ -166,10 +166,11 @@ class App::DailyciousController < ApplicationController
     if @device && @user && !params.values_at(:display_date, :title, :price).include?(nil)
       params[:price] = ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
       
-      todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)
+      todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => params[:display_date].to_date)
+      todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => params[:display_date].to_datetime)
       
       if todays_daily_dishes.count == 0 || (todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count > 0)
-        if todays_daily_dishes.count > @user.restaurant.dailycious_credits.todays_credits.count
+        if todays_daily_dishes.count > todays_dailycious_credits.count
           @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
             :usage_date => params[:display_date]
           })

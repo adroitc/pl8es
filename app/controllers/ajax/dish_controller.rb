@@ -36,6 +36,7 @@ class Ajax::DishController < ApplicationController
         :user => @user,
         :menu => navigation.menu,
         :navigation =>  Navigation.find(params[:navigation_id]),
+        :position => navigation.dishes.unscoped.last != nil ? navigation.dishes.unscoped.last.id : 0
       }))
       
       new_dish.update_attributes(params.permit(:image))
