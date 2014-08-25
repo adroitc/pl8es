@@ -92,14 +92,13 @@
                 <% end %>
                 <%
                 if !current_date.past?
+                  dailydish_add_modal = "#modal-adddailydish"
                   if todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count == 0
+                    dailydish_add_modal = "#modal-buydailydish"
+                  end
                 %>
-                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#modal-buydailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
-                <%
-                  else
-                %>
-                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
-                <% end end %>
+                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#{dailydish_add_modal}').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
+                <% end %>
               </td>
             </tr>
             <% end %>
