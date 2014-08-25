@@ -72,7 +72,8 @@ User.create([
       ),
       :download_code => "8D34C8",
       :supportedFont => SupportedFont.first,
-      :default_language => Language.first
+      :default_language => Language.first,
+      :dailycious_plan => DailyciousPlan.create()
     )
   }
 ])

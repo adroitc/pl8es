@@ -135,6 +135,10 @@ ActiveRecord::Schema.define(version: 20140819064418) do
 
   create_table "dailycious_plans", force: true do |t|
     t.integer  "restaurant_id"
+    t.string   "paypal_profile_id"
+    t.string   "paypal_profile_status"
+    t.boolean  "activated",             default: false
+    t.date     "setup_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -356,8 +360,9 @@ ActiveRecord::Schema.define(version: 20140819064418) do
     t.integer  "dailycious_plan_id"
     t.string   "paypal_token"
     t.string   "paypal_payer_id"
+    t.boolean  "recurring",          default: false
     t.integer  "quantity"
-    t.string   "amount"
+    t.decimal  "amount"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"

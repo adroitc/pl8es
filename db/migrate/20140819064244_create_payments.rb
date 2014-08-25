@@ -7,8 +7,9 @@ class CreatePayments < ActiveRecord::Migration
       t.string :paypal_token
       t.string :paypal_payer_id
       
+      t.boolean :recurring, :default => false
       t.integer :quantity
-      t.string :amount
+      t.decimal :amount
       t.string :description
       
       t.timestamps

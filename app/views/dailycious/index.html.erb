@@ -20,6 +20,21 @@
       </li>
     </ol>
     <div class="row">
+      <% if @user.restaurant.dailycious_plan.status > 1 %>
+      <div class="col-sm-4">
+  		  <div class="tile-stats tile-white tile-white-primary">
+  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="num">unlimited</div>
+  		  	<h3>dailis</h3>
+          <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
+            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+              change plan
+              <i class="entypo-plus"></i>
+            </button>
+          </p></a>
+  		  </div>
+  		</div>
+      <% else %>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
@@ -34,6 +49,7 @@
           </p></a>
   		  </div>
   		</div>
+      <% end %>
     </div>
     <h2><%=t("dailycious.dailycious_title") %></h2>
     <br />
