@@ -20,7 +20,7 @@ class Ajax::PaymentController < ApplicationController
       })
       response = paypal_req.setup(
         payment.paypal_payment_request,
-        url_for(:only_path => false, :controller => "ajax/payment", :action => "datransfercreditplan"),
+        url_for({:only_path => false, :controller => "ajax/payment", :action => "datransfercreditplan"}.merge(params.permit(:buydailydish))),
         url_for(:only_path => false, :controller => "/dailycious", :action => "index")
       )
       payment.update_attributes({
@@ -63,7 +63,7 @@ class Ajax::PaymentController < ApplicationController
           todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => last_daily_dish.display_date.to_date)
           todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => last_daily_dish.display_date)
           
-          if todays_daily_dishes.count > todays_dailycious_credits.count+1
+          if todays_daily_dishes.count > todays_dailycious_credits.count+1 && params[:buydailydish] && params[:buydailydish] == "1"
             @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
               :usage_date => last_daily_dish.display_date.to_date
             })

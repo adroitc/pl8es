@@ -26,7 +26,7 @@
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
 			  
   		  	<h3>dailis</h3>
-          <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show');"><p>
+          <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
               get more
               <i class="entypo-plus"></i>
@@ -95,10 +95,11 @@
                   dailydish_add_modal = "#modal-adddailydish"
                   if todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count == 0
                     dailydish_add_modal = "#modal-buydailydish"
-                  end
                 %>
-                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#{dailydish_add_modal}').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
-                <% end %>
+                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#modal-buydailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
+                <% else %>
+                <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 0, :js_onclick => " jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');"} %>
+                <% end end %>
               </td>
             </tr>
             <% end %>
