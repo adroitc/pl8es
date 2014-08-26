@@ -9,80 +9,65 @@ class App::DailyciousController < ApplicationController
         :last_login => DateTime.now,
         :product_referer => "d"
       }))
-      
-      if @user.errors.count == 0 && !@user.blank?
+      download_code = SecureRandom.hex(3).upcase
+      while Restaurant.find_by_download_code(download_code).present?
         download_code = SecureRandom.hex(3).upcase
-        while Restaurant.find_by_download_code(download_code).present?
-          download_code = SecureRandom.hex(3).upcase
+      end
+      restaurant = Restaurant.create(params.permit(:name, :logo_image).merge({
+        :user => @user,
+        :default_language => Language.first,
+        :menuColorTemplate => MenuColorTemplate.first,
+        :supportedFont => SupportedFont.first,
+        :download_code => download_code,
+        :background_type => "color"
+      }))
+      address = Location.validate_address({:address => "test"})
+      
+      if @user.errors.count == 0 && restaurant.errors.count == 0 && address != nil
+        restaurant.update_attributes({
+          :location => Location.create(address),
+          :menuColor => MenuColor.create(
+            :background => "#000000",
+            :bar_background => "#000000",
+            :nav_text => "#ffffff",
+            :nav_text_active => "#999999"
+          )
+        })
+        
+        if @device
+          @device.update_attributes({
+            :user => @user
+          })
+        end
+        if @session
+          @session.update_attributes({
+            :user => @user
+          })
         end
         
-        google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
-        google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
-        google_req = Net::HTTP::Get.new(google_url.request_uri)
-        google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
-          http.request(google_req)
-        }
-        google_results = JSON.parse(google_res.body)["results"]
-        if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
-          params[:address] = google_results[0]["address_components"].find_all{|item|
-            item["types"] == ["route"]
-          }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
-            item["types"] == ["street_number"]
-          }[0]["long_name"]
-          params[:zip] = google_results[0]["address_components"].find_all{|item|
-            item["types"] == ["postal_code"]
-          }[0]["long_name"]
-          params[:city] = google_results[0]["address_components"].find_all{|item|
-            item["types"] == ["locality", "political"]
-          }[0]["long_name"]
-          params[:country] = google_results[0]["address_components"].find_all{|item|
-            item["types"] == ["country", "political"]
-          }[0]["long_name"]
-          
-          @user.restaurant = Restaurant.create(params.permit(:name, :logo_image).merge({
-            :location => Location.create(params.permit(:address, :zip, :city, :country)),
-            :default_language => Language.first,
-            :menuColorTemplate => MenuColorTemplate.first,
-            :menuColor => MenuColor.create(
-              :background => "#000000",
-              :bar_background => "#000000",
-              :nav_text => "#ffffff",
-              :nav_text_active => "#999999"
-            ),
-            :supportedFont => SupportedFont.first,
-            :download_code => download_code,
-            :background_type => "color"
-          }))
-          
-          if @device
-            @device.update_attributes({
-              :user => @user
-            })
-          end
-          if @session
-            @session.update_attributes({
-              :user => @user
-            })
-          end
-          
-          @user.restaurant.logo_image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
-          
-          @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
+        @user.restaurant.logo_image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
+        
+        @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
 
-          session[:user_id] = @user.id
+        session[:user_id] = @user.id
         
-          render :partial => "login"
-          return
-        end
-        render :json => {:token => @session.token, :status => "invalid", :errors => {
-          :address => ["is invalid"]
-        }}
+        render :partial => "login"
         return
       end
-      render :json => {:token => @session.token, :status => "invalid", :errors => @user.errors.messages}
+      render :json => {
+        :token => @session.token,
+        :status => "invalid",
+        :errors => {
+          :user => @user.errors.messages,
+          :restaurant => restaurant.errors.messages
+        }
+      }
       return
     end
-    render :json => {:token => @session.token, :status => "invalid"}
+    render :json => {
+      :token => @session.token,
+      :status => "invalid"
+    }
   end
   
   def login
@@ -107,12 +92,22 @@ class App::DailyciousController < ApplicationController
         render :partial => "login"
         return
       end
+      render :json => {
+        :token => @session.token,
+        :status => "invalid",
+        :errors => {
+          :user => ["invalid emailpass combination"]
+        }
+      }
     elsif @device && @user
       
       render :partial => "login"
       return
     end
-    render :json => {:token => @session.token, :status => "invalid"}
+    render :json => {
+      :token => @session.token,
+      :status => "invalid"
+    }
   end
   
   def profile
