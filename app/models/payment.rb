@@ -4,32 +4,40 @@ class Payment < ActiveRecord::Base
   has_many :dailycious_credits
   
   def paypal_payment_request
-    Paypal::Payment::Request.new(
-      :currency_code => :EUR,
-      :description   => description,
-      #:quantity      => quantity,
-      :amount        => Paypal::Payment::Common::Amount.new(
-        :item => quantity,
-        :tax =>  quantity*0.2,
-        :ship_disc => 10.0,
-        :total => quantity*1.2
-      ),
-      :items         => [{
-        :quantity => quantity,
-        :name => 'Item1',
-        :description => 'Awesome Item 1!',
-        :amount => 1.0
-      }]
-    )
-  end
-  
-  def paypal_payment_recurring_request
-    Paypal::Payment::Request.new(
-      :currency_code => :EUR,
-      :billing_type  => :RecurringPayments,
-      :billing_agreement_description => description,
-      :amount        => amount
-    )
+    if !recurring
+      Paypal::Payment::Request.new(
+        :currency_code => :EUR,
+        :description => description,
+        :amount => Paypal::Payment::Common::Amount.new(
+          :item => amount,
+          :tax =>  amount*0.2,
+          :total => amount*1.2
+        ),
+        :items => [{
+          :quantity => 1,
+          :name => I18n.t("payment.paypal_item_dailycious_credits_title",{:c => quantity}),
+          :description => I18n.t("payment.paypal_item_dailycious_credits_description",{:c => quantity}),
+          :amount => amount
+        }]
+      )
+    else
+      Paypal::Payment::Request.new(
+        #:currency_code => :EUR,
+        :billing_type => "RecurringPayments",
+        :billing_agreement_description => description,
+        #:amount => Paypal::Payment::Common::Amount.new(
+        #  :item => amount,
+        #  :tax =>  amount*0.2,
+        #  :total => amount*1.2
+        #),
+        #:items => [{
+        #  :quantity => 1,
+        #  :name => "UNLIMITED dailis",
+        #  :description => 'valid to add UNLIMITED secundary daily dish',
+        #  :amount => amount
+        #}]
+      )
+    end
   end
   
   def paypal_payment_recurring_profile
@@ -41,7 +49,13 @@ class Payment < ActiveRecord::Base
         :period        => :Month,
         :frequency     => 1,
         :amount        => amount,
-      }
+      },
+      :items => [{
+        :quantity => 1,
+        :name => "UNLIMITED dailis",
+        :description => 'valid to add UNLIMITED secundary daily dish',
+        :amount => amount
+      }]
     )
   end
   

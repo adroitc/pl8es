@@ -30,6 +30,7 @@ class Location < ActiveRecord::Base
         http.request(google_req)
       }
       google_results = JSON.parse(google_res.body)["results"]
+      if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
         return {
           :address => google_results[0]["address_components"].find_all{|item|
             item["types"] == ["route"]

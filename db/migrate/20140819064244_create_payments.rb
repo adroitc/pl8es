@@ -4,6 +4,8 @@ class CreatePayments < ActiveRecord::Migration
       t.references :user
       t.references :dailycious_plan
       
+      t.string :paypal_payment_id
+      
       t.string :paypal_token
       t.string :paypal_payer_id
       

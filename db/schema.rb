@@ -358,6 +358,7 @@ ActiveRecord::Schema.define(version: 20140819064418) do
   create_table "payments", force: true do |t|
     t.integer  "user_id"
     t.integer  "dailycious_plan_id"
+    t.string   "paypal_payment_id"
     t.string   "paypal_token"
     t.string   "paypal_payer_id"
     t.boolean  "recurring",          default: false

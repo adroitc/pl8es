@@ -24,6 +24,8 @@ en:
   
   payment:
     paypal_payment_description: "dailycious - dailis (credits)"
+    paypal_item_dailycious_credits_title: "%{c} dailis package"
+    paypal_item_dailycious_credits_description: "equals %{c} lunch dishes"
     paypal_payment_recurring_description: "dailycious - dailis plan (credits)"
   
   signup:

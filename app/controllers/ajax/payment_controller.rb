@@ -8,36 +8,32 @@ class Ajax::PaymentController < ApplicationController
       "unlimited" => 19.00
     }
     if @user && !params.values_at(:dacreditplan).include?(nil) && payment_table[params[:dacreditplan]] != nil
+      payment_is_recurring = params[:dacreditplan].to_i == 0
+      payment = Payment.create({
+        :user => @user,
+        :recurring => payment_is_recurring,
+        :quantity => !payment_is_recurring != 0 ? params[:dacreditplan].to_i : 1,
+        :dailycious_plan => !payment_is_recurring ? nil : @user.restaurant.dailycious_plan,
+        :amount => payment_table[params[:dacreditplan]],
+        :description => !payment_is_recurring ? t("payment.paypal_payment_description") : t("payment.paypal_payment_recurring_description"),
+      })
+      if payment_is_recurring
+        @user.restaurant.dailycious_plan.update_attributes({
+          :activated => true,
+          :setup_date => Date.today
+        })
+      end
       paypal_req = Paypal::Express::Request.new(
         :username   => ENV["PAYPAL_USERNAME"],
         :password   => ENV["PAYPAL_PASSWORD"],
         :signature  => ENV["PAYPAL_SIGNATURE"]
       )
-      payment = Payment.create({
-        :user => @user,
-        :amount => payment_table[params[:dacreditplan]],
-        :description => params[:dacreditplan].to_i != 0 ? t("payment.paypal_payment_description") : t("payment.paypal_payment_recurring_description")
-      })
-      if params[:dacreditplan].to_i != 0
-        payment.update_attributes({
-          :recurring => false,
-          :quantity => params[:dacreditplan].to_i
-        })
-      else
-        @user.restaurant.dailycious_plan.update_attributes({
-          :activated => true,
-          :setup_date => Date.today
-        })
-        payment.update_attributes({
-          :recurring => true,
-          :dailycious_plan => @user.restaurant.dailycious_plan
-        })
-      end
-      paypal_payment_request = params[:dacreditplan].to_i != 0 ? payment.paypal_payment_request : payment.paypal_payment_recurring_request
       response = paypal_req.setup(
-        paypal_payment_request,
+        payment.paypal_payment_request,
         url_for({:only_path => false, :controller => "ajax/payment", :action => "datransfercreditplan"}.merge(params.permit(:buydailydish))),
-        url_for(:only_path => false, :controller => "/dailycious", :action => "index")
+        url_for(:only_path => false, :controller => "/dailycious", :action => "index"),
+        :pay_on_paypal => true,
+        :no_shipping => true
       )
       payment.update_attributes({
         :paypal_token => response.token

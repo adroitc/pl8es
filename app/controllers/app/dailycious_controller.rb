@@ -23,7 +23,7 @@ class App::DailyciousController < ApplicationController
       }))
       address = Location.validate_address({:address => "test"})
       
-      if @user.errors.count == 0 && restaurant.errors.count == 0 && address != nil
+      if @user.errors.count == 0 && restaurant.errors.count == 0 && addres != nil
         restaurant.update_attributes({
           :location => Location.create(address),
           :menuColor => MenuColor.create(
@@ -59,7 +59,10 @@ class App::DailyciousController < ApplicationController
         :status => "invalid",
         :errors => {
           :user => @user.errors.messages,
-          :restaurant => restaurant.errors.messages
+          :restaurant => restaurant.errors.messages,
+          :location => {
+            :address => address == nil ? ["is invalid"] : []
+          }
         }
       }
       return
@@ -92,16 +95,103 @@ class App::DailyciousController < ApplicationController
         render :partial => "login"
         return
       end
+      
       render :json => {
         :token => @session.token,
         :status => "invalid",
         :errors => {
-          :user => ["invalid emailpass combination"]
+          :user => {
+            :email_password => ["invalid"]
+          }
         }
       }
+      return
     elsif @device && @user
       
       render :partial => "login"
+      return
+    end
+    render :json => {
+      :token => @session.token,
+      :status => "invalid",
+      :p => params
+    }
+  end
+  
+  def profile
+    if @device && @user && !params.values_at(:name, :address, :zip, :city, :country).include?(nil)
+      address = Location.validate_address({:address => "test"})
+      
+      @user.restaurant.attributes = params.permit(:name)
+      if @user.restaurant.save && @user.restaurant.errors.count == 0 && address != nil
+        @user.restaurant.update_attributes(params.permit(:name))
+        @user.restaurant.location.update_attributes(address)
+        @user.restaurant.logo_image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
+        
+        render :partial => "login"
+        return
+      end
+    end
+    render :json => {
+      :token => @session.token,
+      :status => "invalid",
+      :errors => {
+        :restaurant => @user.restaurant.errors,
+        :location => {
+          :address => address == nil ? ["is invalid"] : []
+        }
+      }
+    }
+  end
+  
+  def adddailydish
+    if @device && @user && !params.values_at(:display_date, :title, :price).include?(nil)
+      todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => params[:display_date].to_date)
+      todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => params[:display_date].to_datetime)
+      
+      if todays_daily_dishes.count == 0 || (todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count > 0)
+      params[:price] = params[:price] == "" ? "0.00" : ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
+        new_daily_dish = DailyDish.create(params.permit(:display_date, :image, :title, :price).merge({
+          :restaurant => @user.restaurant
+        }))
+        
+        if new_daily_dish.errors.count == 0
+          if todays_daily_dishes.count > todays_dailycious_credits.count+1
+            @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
+              :usage_date => params[:display_date]
+            })
+          end
+          new_daily_dish.image.set_crop_values_for_instance(params.permit(:image))
+          
+          render :json => {
+            :token => @session.token,
+            :status => "success",
+            :output => {
+              :daily_dish_id => new_daily_dish.id
+            }
+          }
+          return
+        end
+
+        render :json => {
+          :token => @session.token,
+          :status => "invalid",
+          :errors => {
+            :daily_dish => new_daily_dish.errors
+          }
+        }
+        return
+      end
+
+      render :json => {
+        :token => @session.token,
+        :status => "invalid",
+        :errors => {
+          :daily_dish => {
+            :credits => ["none"]
+          }
+        }
+      }
       return
     end
     render :json => {
@@ -110,117 +200,36 @@ class App::DailyciousController < ApplicationController
     }
   end
   
-  def profile
-    if @device && @user && !params.values_at(:name, :address, :zip, :city, :country).include?(nil)
-      google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
-      google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
-      google_req = Net::HTTP::Get.new(google_url.request_uri)
-      google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
-        http.request(google_req)
-      }
-      google_results = JSON.parse(google_res.body)["results"]
-      if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
-        params[:address] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["route"]
-        }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["street_number"]
-        }[0]["long_name"]
-        params[:zip] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["postal_code"]
-        }[0]["long_name"]
-        params[:city] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["locality", "political"]
-        }[0]["long_name"]
-        params[:country] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["country", "political"]
-        }[0]["long_name"]
-        
-        @user.restaurant.update_attributes(params.permit(:name, :logo_image))
-        @user.restaurant.location.update_attributes(params.permit(:address, :zip, :city, :country))
-        
-        if params[:logo_image]
-          if @user.restaurant.logo_image_dimensions["original"][1] >= @user.restaurant.logo_image_dimensions["original"][0]
-            @user.restaurant.logo_image_crop_w = @user.restaurant.logo_image_dimensions["original"].min
-            @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_crop_w/(@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)
-          else
-            @user.restaurant.logo_image_crop_h = @user.restaurant.logo_image_dimensions["original"].min
-            @user.restaurant.logo_image_crop_w = (@user.restaurant.logo_image_dimensions["cropped_default_retina"][0].to_f/@user.restaurant.logo_image_dimensions["cropped_default_retina"][1].to_f)*@user.restaurant.logo_image_crop_h
-          end
-          @user.restaurant.logo_image_crop_x = (@user.restaurant.logo_image_dimensions["original"][0]-@user.restaurant.logo_image_crop_w).to_f/2
-          @user.restaurant.logo_image_crop_y = (@user.restaurant.logo_image_dimensions["original"][1]-@user.restaurant.logo_image_crop_h).to_f/2
-        end
-        
-        render :partial => "login"
-        return
-      end
-    end
-    render :json => {:token => @session.token, :status => "invalid"}
-  end
-  
-  def adddailydish
-    if @device && @user && !params.values_at(:display_date, :title, :price).include?(nil)
-      params[:price] = ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
-      
-      todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => params[:display_date].to_date)
-      todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => params[:display_date].to_datetime)
-      
-      if todays_daily_dishes.count == 0 || (todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count > 0)
-        if todays_daily_dishes.count > todays_dailycious_credits.count
-          @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
-            :usage_date => params[:display_date]
-          })
-        end
-        
-        new_daily_dish = DailyDish.create(params.permit(:display_date, :image, :title, :price).merge({
-          :restaurant => @user.restaurant
-        }))
-      
-        if params[:image]
-          if new_daily_dish.image_dimensions["original"][1] >= new_daily_dish.image_dimensions["original"][0]
-            new_daily_dish.image_crop_w = new_daily_dish.image_dimensions["original"].min
-            new_daily_dish.image_crop_h = new_daily_dish.image_crop_w/(new_daily_dish.image_dimensions["cropped_default_retina"][0].to_f/new_daily_dish.image_dimensions["cropped_default_retina"][1].to_f)
-          else
-            new_daily_dish.image_crop_h = new_daily_dish.image_dimensions["original"].min
-            new_daily_dish.image_crop_w = (new_daily_dish.image_dimensions["cropped_default_retina"][0].to_f/new_daily_dish.image_dimensions["cropped_default_retina"][1].to_f)*new_daily_dish.image_crop_h
-          end
-          new_daily_dish.image_crop_x = (new_daily_dish.image_dimensions["original"][0]-new_daily_dish.image_crop_w).to_f/2
-          new_daily_dish.image_crop_y = (new_daily_dish.image_dimensions["original"][1]-new_daily_dish.image_crop_h).to_f/2
-        
-          new_daily_dish.save
-        end
-      end
-      
-      render :json => {:token => @session.token, :status => "success"}
-      return
-    end
-    render :json => {:token => @session.token, :status => "invalid"}
-  end
-  
   def editdailydish
     if @device && @user && !params.values_at(:daily_dish_id, :title, :price).include?(nil) && DailyDish.exists?(params[:daily_dish_id]) && DailyDish.find(params[:daily_dish_id]).restaurant.user == @user
       daily_dish = DailyDish.find(params[:daily_dish_id])
       
-      params[:price] = ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
-      
-      daily_dish.update_attributes(params.permit(:image, :title, :price))
-      
-      if params[:image]
-        if daily_dish.image_dimensions["original"][1] >= daily_dish.image_dimensions["original"][0]
-          daily_dish.image_crop_w = daily_dish.image_dimensions["original"].min
-          daily_dish.image_crop_h = daily_dish.image_crop_w/(daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)
-        else
-          daily_dish.image_crop_h = daily_dish.image_dimensions["original"].min
-          daily_dish.image_crop_w = (daily_dish.image_dimensions["cropped_default_retina"][0].to_f/daily_dish.image_dimensions["cropped_default_retina"][1].to_f)*daily_dish.image_crop_h
-        end
-        daily_dish.image_crop_x = (daily_dish.image_dimensions["original"][0]-daily_dish.image_crop_w).to_f/2
-        daily_dish.image_crop_y = (daily_dish.image_dimensions["original"][1]-daily_dish.image_crop_h).to_f/2
-      end
+      params[:price] = params[:price] == "" ? "0.00" : ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
+      daily_dish.attributes = params.permit(:image, :title, :price)
       daily_dish.save
+      if daily_dish.errors.count == 0
+        daily_dish.image.set_crop_values_for_instance(params.permit(:image))
       
-      render :json => {:token => @session.token, :status => "success"}
+        render :json => {
+          :token => @session.token,
+          :status => "success"
+        }
+        return
+      end
+
+      render :json => {
+        :token => @session.token,
+        :status => "invalid",
+        :errors => {
+          :daily_dish => daily_dish.errors
+        }
+      }
       return
     end
-    render :json => {:token => @session.token, :status => "invalid"}
+    render :json => {
+      :token => @session.token,
+      :status => "invalid"
+    }
   end
   
   def sortdailydish

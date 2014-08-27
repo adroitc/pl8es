@@ -36,6 +36,8 @@ raw(Jsonify::Builder.plain do |j|
       ]
     ).count
     j.daily_dishes_count         daily_dishes_count
+    
+    j.dailycious_credits_count   @user.restaurant.dailycious_credits.count
   end
   
 end)

@@ -52,6 +52,7 @@ end
 gem "jquery-ui-rails"
 
 # payment
+gem "paypal-sdk-rest"
 gem "paypal-express"
 
 # json
