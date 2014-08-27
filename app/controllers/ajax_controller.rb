@@ -39,21 +39,9 @@ class AjaxController < ApplicationController
         @user.restaurant.supportedFont = SupportedFont.find(params[:supportedFont_id])
       end
       
-      if params[:appmain_image]
-        @user.appmain_image = params[:appmain_image]
-        
-        if @user.appmain_image_dimensions["original"][1] >= @user.appmain_image_dimensions["original"][0]
-          @user.appmain_image_crop_w = @user.appmain_image_dimensions["original"].min
-          @user.appmain_image_crop_h = @user.appmain_image_crop_w/(@user.appmain_image_dimensions["cropped_default_retina"][0].to_f/@user.appmain_image_dimensions["cropped_default_retina"][1].to_f)
-        else
-          @user.appmain_image_crop_h = @user.appmain_image_dimensions["original"].min
-          @user.appmain_image_crop_w = (@user.appmain_image_dimensions["cropped_default_retina"][0].to_f/@user.appmain_image_dimensions["cropped_default_retina"][1].to_f)*@user.appmain_image_crop_h
-        end
-        @user.appmain_image_crop_x = (@user.appmain_image_dimensions["original"][0]-@user.appmain_image_crop_w).to_f/2
-        @user.appmain_image_crop_y = (@user.appmain_image_dimensions["original"][1]-@user.appmain_image_crop_h).to_f/2
-      end
-      
-      @user.save
+      @user.restaurant.update_attributes(params.permit(:background_type, :appmain_image, :splashscreen_image))
+      @user.restaurant.appmain_image.set_crop_values_for_instance(params.permit(:appmain_image))
+      @user.restaurant.splashscreen_image.set_crop_values_for_instance(params.permit(:splashscreen_image))
       
       render :json => {:status => "success"}
       return
