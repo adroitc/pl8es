@@ -22,19 +22,15 @@ class Payment < ActiveRecord::Base
       )
     else
       Paypal::Payment::Request.new(
-        #:currency_code => :EUR,
+        :currency_code => :EUR,
         :billing_type => "RecurringPayments",
         :billing_agreement_description => description,
-        #:amount => Paypal::Payment::Common::Amount.new(
-        #  :item => amount,
-        #  :tax =>  amount*0.2,
-        #  :total => amount*1.2
-        #),
+        #:amount => 10.0
         #:items => [{
         #  :quantity => 1,
         #  :name => "UNLIMITED dailis",
         #  :description => 'valid to add UNLIMITED secundary daily dish',
-        #  :amount => amount
+        #  :amount => 10.0
         #}]
       )
     end
