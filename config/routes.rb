@@ -3,8 +3,9 @@ Pl8es::Application.routes.draw do
   #app
   resources :app, :only => []
   #app-get
-  get "/app/dailycious/week" => "app/dailycious#week"
   get "/app/dailycious/defaults" => "app/dailycious#defaults"
+  get "/app/dailycious/useragreement" => "app/dailycious#useragreement"
+  get "/app/dailycious/week" => "app/dailycious#week"
   get "/app/dailycious/favorites" => "app/dailycious#favorites"
   get "/app/dailycious/map" => "app/dailycious#map"
   get "/app/dailycious/suggestions" => "app/dailycious#suggestions"
