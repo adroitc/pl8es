@@ -27,6 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.2)
     atomic (1.1.16)
+    attr_required (1.0.0)
     aws-sdk (1.38.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -109,6 +110,16 @@ GEM
       mime-types
     paperclip-dimension (0.2.1)
       paperclip (>= 3.0)
+    paypal-express (0.6.0)
+      activesupport (>= 2.3)
+      attr_required (>= 0.0.5)
+      restclient_with_cert
+    paypal-sdk-core (0.3.0)
+      multi_json (~> 1.0)
+      xml-simple
+    paypal-sdk-rest (0.7.0)
+      paypal-sdk-core (~> 0.3.0)
+      uuidtools (~> 2.1)
     pg (0.17.1)
     polyglot (0.3.4)
     rack (1.5.2)
@@ -141,6 +152,8 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    restclient_with_cert (0.0.8)
+      rest-client (>= 1.6)
     sass (3.2.18)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
@@ -205,6 +218,8 @@ DEPENDENCIES
   mysql
   paperclip
   paperclip-dimension
+  paypal-express
+  paypal-sdk-rest
   pg
   rails (= 4.0.2)
   rails_12factor

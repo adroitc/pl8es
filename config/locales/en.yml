@@ -21,7 +21,13 @@ en:
     minlength: "Please enter at least %{l} characters."
     invalid_email: "Invalid email."
     already_exists: "This email already exists."
-    
+  
+  payment:
+    paypal_payment_description: "dailycious - dailis (credits)"
+    paypal_item_dailycious_credits_title: "%{c} dailis package"
+    paypal_item_dailycious_credits_description: "equals %{c} lunch dishes"
+    paypal_payment_recurring_description: "dailycious - dailis plan (credits)"
+  
   signup:
     welcome: "Create an account, it's free and easy to sign-up!"
     restaurant_name_placeholder: "Restaurant name"
@@ -59,9 +65,12 @@ en:
     image_input_select_different: "Select different image"
     image_input_change: "Change"
     delete: "Delete"
-    delete_cancel: "Cancel"
+    delete_cancel: "Dismiss"
     delete_confirm: "Yes, delete permanently"
-    
+    cancel_plan: "Cancel plan"
+    cancel_plan_cancel: "Dismiss"
+    cancel_plan_confirm: "Yes, cancel plan"
+  
   layouts:
     menu:
       admin: "Admin"
@@ -253,6 +262,7 @@ en:
     daily_dish_modal_add_title: "Add lunch dish"
     daily_dish_modal_edit_title: "Edit lunch dish"
     daily_dish_modal_add_cancel: "Cancel"
+    daily_dish_modal_add_submit_buy: "Buy lunch dish"
     daily_dish_modal_add_submit: "Add lunch dish"
     daily_dish_modal_edit_cancel: "Cancel"
     daily_dish_modal_edit_submit: "Save"

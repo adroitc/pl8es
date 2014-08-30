@@ -37,6 +37,7 @@ class Ajax::DishController < ApplicationController
         :restaurant => @user.restaurant,
         :menu => navigation.menu,
         :navigation => navigation,
+        :position => navigation.dishes.unscoped.last != nil ? navigation.dishes.unscoped.last.id : 0
       }))
       
       new_dish.image.set_crop_values_for_instance(params.permit(:image))

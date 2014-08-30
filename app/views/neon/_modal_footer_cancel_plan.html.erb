@@ -1,0 +1,12 @@
+<span class="pl8es-modal-delete">
+  <a href="javascript:;" onclick="pl8es_f_initdelete($(this));">
+    <button type="button" class="btn btn-danger pl8es-btn-delete"><%=t("neon.cancel_plan") %></button>
+  </a>
+  <a href="javascript:;" onclick="pl8es_f_initdelete_cancel($(this));">
+    <button type="button" class="btn btn-default pl8es-btn-delete-cancel"><%=t("neon.cancel_plan_cancel") %></button>
+  </a>
+  <a href="javascript:;" onclick="pl8es_f_initdelete_confirm($(this));">
+    <button type="button" class="btn btn-danger pl8es-btn-delete-confirm"><%=t("neon.cancel_plan_confirm") %></button>
+  </a>
+  <input class="pl8es-input-delete" type="hidden" name="delete" value="true" disabled="disabled">
+</span>

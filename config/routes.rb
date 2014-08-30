@@ -46,6 +46,13 @@ Pl8es::Application.routes.draw do
   post "/a/ingredients/add" => "ajax/admin#addingredient"
   post "/a/ingredients/edit" => "ajax/admin#editingredient"
   
+  resources :ajax_payment, :only => []
+  #ajax_dish-post
+  post "/a/buy/dasetupcreditplan" => "ajax/payment#dasetupcreditplan"
+  
+  #ajax_dish-get
+  get "/a/buy/datransfercreditplan" => "ajax/payment#datransfercreditplan"
+  
   #ajax/profile
   resources :ajax_profile, :only => []
   post "/a/profile/editsettings" => "ajax/profile#editsettings"

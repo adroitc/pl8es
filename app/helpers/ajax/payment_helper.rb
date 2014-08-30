@@ -1,0 +1,2 @@
+module Ajax::PaymentHelper
+end

@@ -1,0 +1,57 @@
+<%= neon_modal :id => "dacreditplan", :width => "678px", :title => "Dailycious credits" do |m| %>
+<%= form_tag({:controller => "ajax/payment", :action => "dasetupcreditplan"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_design"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group">
+  		<ul id="form-dacreditplan" class="ui-selectable">
+        <li class="col-sm-4" style="text-align:center;padding:4px;" data-credit="4">
+          <h1 style="display:inline;">4</h1> <h3 style="display:inline;">dailis</h3>
+          <p>equal of 4 daily dishes</p>
+          <h4>4 €</h4>
+        </li>
+        <li class="col-sm-4" style="text-align:center;padding:4px;" data-credit="20">
+          <h1 style="display:inline;">20</h1> <h3 style="display:inline;">dailis</h3>
+          <p>equal of 20 daily dishes</p>
+          <h4>15 €</h4>
+        </li>
+        <li class="col-sm-4" style="text-align:center;padding:4px;" data-credit="30">
+          <h1 style="display:inline;">30</h1> <h3 style="display:inline;">dailis</h3>
+          <p>equal of 30 daily dishes</p>
+          <h4>19 €</h4>
+        </li>
+        <li class="col-sm-4" style="text-align:center;padding:4px;" data-credit="unlimited">
+          <h1 style="display:inline;">unlimited</h1> <h3 style="display:inline;">dailis</h3>
+          <p>equal of 30 daily dishes</p>
+          <h4>19 € / mo</h4>
+        </li>
+      </ul>
+      <input name="dacreditplan" type="hidden" id="form-dacreditplan" value="<%=@user.restaurant.menuColorTemplate.id if @user.restaurant.menuColorTemplate %>">
+      <input name="buydailydish" type="hidden" id="form-buydailydish" value="0">
+    </div>
+	</div>
+</div>
+<script type="text/javascript">
+$("#form-dacreditplan.ui-selectable").each(function(){
+  $(this).selectable({
+    stop: function(event, id){
+      $(this).closest("form").find("input[name='dacreditplan']").val($(event.toElement).closest("li").data("credit"));
+      if ($("input[name='dacreditplan']").val().length > 0 &&
+          $("input[name='dacreditplan']").val() != "0")
+      {
+        $(this).closest("form").find("#form-buybutton").removeClass("hidden").show();
+      }
+    }
+  });
+})
+</script>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<% if @user.restaurant.dailycious_plan.status > 1 %>
+<%=render :partial => "neon/modal_footer_cancel_plan" %>
+<% end %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button id="form-buybutton" type="submit" class="btn btn-info hidden">Buy</button>
+<% end %>
+<% end %>
+<% end %>
