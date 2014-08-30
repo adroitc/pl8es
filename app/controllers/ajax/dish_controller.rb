@@ -34,9 +34,9 @@ class Ajax::DishController < ApplicationController
       
       navigation = Navigation.find(params[:navigation_id])
       new_dish = Dish.create(params.permit(:price).merge({
-        :user => @user,
+        :restaurant => @user.restaurant,
         :menu => navigation.menu,
-        :navigation =>  Navigation.find(params[:navigation_id]),
+        :navigation => navigation,
       }))
       
       new_dish.update_attributes(params.permit(:image))

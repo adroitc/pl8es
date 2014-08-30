@@ -24,7 +24,7 @@
 		  </div>
 		  <div class="col-md-12 form-group">
         <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>
-		    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="" <%="required" if navigation.menu.default_language == language %> data-validate="maxlength[7],price" data-validate="maxlength[400]" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>" data-message-price="<%=t("validation.price") %>>
+		    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="" <%="required" if navigation.menu.default_language == language %> data-validate="maxlength[7],price" data-validate="maxlength[400]" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>" data-message-price="<%=t("validation.price") %>">
 		  </div>
     </span>
     <%

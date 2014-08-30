@@ -103,7 +103,8 @@
 <% @navigation.sub_navigations.each do |navigation| %>
 <%=render :partial => "modal_editnavigation", :locals => {:navigation => navigation} %>
 <% end %>
-<%=render :partial => "modal_adddish", :locals => {:navigation => @navigation} %>
+<p><%=@navigation.dishes.count%></p>
 <% @navigation.dishes.each do |dish| %>
 <%=render :partial => "modal_editdish", :locals => {:dish => dish} %>
 <% end %>
+<%=render :partial => "modal_adddish", :locals => {:navigation => @navigation} %>
