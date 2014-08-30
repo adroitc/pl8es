@@ -4,8 +4,8 @@ class Ajax::NavigationController < ApplicationController
     if @user && !params.values_at(:menu_id, :title, :style).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
       menu = @user.restaurant.menus.find(params[:menu_id])
       
-      new_navigation = Navigation.create(params.permit(:style).merge({
-        :menu => menu
+      new_navigation = Navigation.create(params.permit(:image, :style).merge({
+        :menu => menu,
       }))
 
       languages = Language.find_all_by_locale(params[:title].keys)
@@ -24,7 +24,6 @@ class Ajax::NavigationController < ApplicationController
         })
       end
       
-      new_navigation.update_attributes(params.permit(:image))
       new_navigation.image.set_crop_values_for_instance(params.permit(:image))
       
       render :json => {:status => "success"}
