@@ -41,7 +41,7 @@ module Paperclip
             img_inst.update_attributes({
               "#{img_name}_crop_processed" => false
             })
-            img_inst.image.reprocess!
+            img_inst.reprocess!
             img_inst.update_attributes({
               "#{img_name}_crop_processed" => true
             })
