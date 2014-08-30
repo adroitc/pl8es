@@ -265,6 +265,14 @@ class App::DailyciousController < ApplicationController
     render :json => {:token => @session.token, :status => "invalid"}
   end
   
+  def useragreement
+    if @device
+      render :partial => "useragreement"
+      return
+    end
+    render :json => {:token => @session.token, :status => "invalid"}
+  end
+  
   def favorites
     if @device && !params.values_at(:q).include?(nil)
       restaurants = Restaurant.where([

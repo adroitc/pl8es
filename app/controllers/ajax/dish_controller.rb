@@ -33,10 +33,11 @@ class Ajax::DishController < ApplicationController
       languages = Language.find_all_by_locale(params[:title].keys)
       
       new_dish = Dish.create(params.permit(:price).merge({
-        :user => @user,
+        :restaurant => @user.restaurant,
         :menu => navigation.menu,
-        :navigation =>  Navigation.find(params[:navigation_id]),
+        :navigation =>  navigation,
         :position => navigation.dishes.unscoped.last != nil ? navigation.dishes.unscoped.last.id : 0
+        :navigation => navigation,
       }))
       
       new_dish.update_attributes(params.permit(:image))
