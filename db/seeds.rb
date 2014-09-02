@@ -54,7 +54,7 @@ User.create([
     :password => "Lol123lol",
     :password_confirmation => "Lol123lol",
     :restaurant => Restaurant.create(
-      :name => "Marc's restaurant",
+      :name => "Demo restaurant",
       :location => Location.create(
         :latitude => 48.2087105,
         :longitude => 16.372654,
@@ -70,7 +70,7 @@ User.create([
         :nav_text => "#ffffff",
         :nav_text_active => "#999999"
       ),
-      :download_code => "8D34C8",
+      :download_code => "DEMO",
       :supportedFont => SupportedFont.first,
       :default_language => Language.first,
       :dailycious_plan => DailyciousPlan.create()

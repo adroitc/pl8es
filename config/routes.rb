@@ -2,6 +2,8 @@ Pl8es::Application.routes.draw do
   
   #app
   resources :app, :only => []
+  resources :app_dailycious, :only => []
+  resources :app_menumalist, :only => []
   #app-get
   get "/app/dailycious/defaults" => "app/dailycious#defaults"
   get "/app/dailycious/useragreement" => "app/dailycious#useragreement"
@@ -20,6 +22,12 @@ Pl8es::Application.routes.draw do
   post "/app/dailycious/add" => "app/dailycious#adddailydish"
   post "/app/dailycious/edit" => "app/dailycious#editdailydish"
   post "/app/dailycious/sort" => "app/dailycious#sortdailydish"
+  
+  #web
+  resources :web, :only => []
+  resources :web_dailycious, :only => []
+  #web-get
+  get "/web/dailycious/list" => "web/dailycious#list"
   
   #ajax
   resources :ajax, :only => []

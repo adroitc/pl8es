@@ -159,10 +159,11 @@ raw(Jsonify::Builder.plain do |j|
     j.logo_image_url             @req_restaurant.logo_image.present? ? @req_restaurant.logo_image.url(:cropped_default_retina) : nil
     j.restaurant_image_fingerprint  @req_restaurant.restaurant_image_fingerprint
     j.restaurant_image_url       @req_restaurant.restaurant_image.present? ? @req_restaurant.restaurant_image.url(:cropped_default_retina) : nil
-    j.appmain_image_fingerprint  @req_restaurant.appmain_image_fingerprint
-    j.appmain_image_url          @req_restaurant.appmain_image.present? ? @req_restaurant.appmain_image.url(:cropped_default_retina) : nil
     j.splashscreen_image_fingerprint  @req_restaurant.splashscreen_image_fingerprint
     j.splashscreen_image_url     @req_restaurant.splashscreen_image.present? ? @req_restaurant.splashscreen_image.url(:cropped_default_retina) : nil
+    j.appmain_image_fingerprint  @req_restaurant.appmain_image_fingerprint
+    j.appmain_image_url          @req_restaurant.appmain_image.present? ? @req_restaurant.appmain_image.url(:cropped_default_retina) : nil
+    
     j.currency                   "EUR"
   end
   

@@ -25,7 +25,7 @@ class Payment < ActiveRecord::Base
         :currency_code => :EUR,
         :billing_type => "RecurringPayments",
         :billing_agreement_description => description,
-        #:amount => 10.0
+        :amount => 10.0
         #:items => [{
         #  :quantity => 1,
         #  :name => "UNLIMITED dailis",

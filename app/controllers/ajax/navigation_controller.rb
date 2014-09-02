@@ -4,7 +4,7 @@ class Ajax::NavigationController < ApplicationController
     if @user && !params.values_at(:menu_id, :title, :style).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
       menu = @user.restaurant.menus.find(params[:menu_id])
       
-      new_navigation = Navigation.create(params.permit(:style).merge({
+      new_navigation = Navigation.create(params.permit(:image, :style).merge({
         :menu => menu,
         :position =>menu.navigations.unscoped.last != nil ? menu.navigations.unscoped.last.id : 0
       }))
@@ -49,9 +49,8 @@ class Ajax::NavigationController < ApplicationController
         end
         I18n.locale = current_locale
         
-        navigation.style = params[:style]
+        navigation.update_attributes(params.permit(:image, :style))
         
-        navigation.update_attributes(params.permit(:image))
         navigation.image.set_crop_values_for_instance(params.permit(:image, :image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
       end
         
