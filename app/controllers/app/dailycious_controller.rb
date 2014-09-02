@@ -33,6 +33,11 @@ class App::DailyciousController < ApplicationController
             :nav_text_active => "#999999"
           )
         })
+        for i in 1..5
+          DailyciousCredit.create(
+            :restaurant => restaurant
+          )
+        end
         
         if @device
           @device.update_attributes({

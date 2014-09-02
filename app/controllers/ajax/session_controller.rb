@@ -115,6 +115,12 @@ class Ajax::SessionController < ApplicationController
           :background_type => "color"
         })
         
+        for i in 1..5
+          DailyciousCredit.create(
+            :restaurant => @user.restaurant
+          )
+        end
+        
         if @device
           @device.update_attributes({
             :user => @user
@@ -126,13 +132,16 @@ class Ajax::SessionController < ApplicationController
           })
         end
         
+        redirect_url = url_for(:controller => "/profile", :action => "index")
         if @user.product_referer == "d"
+          redirect_url = url_for(:controller => "/dailycious", :action => "index")
+          
           @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg"))
         end
         
         session[:user_id] = @user.id
         
-        render :json => {:status => "success", :redirect => url_for(:controller => "/profile", :action => "index")}
+        render :json => {:status => "success", :redirect => redirect_url}
         return
       end
     end
