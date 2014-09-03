@@ -24,8 +24,7 @@ class Payment < ActiveRecord::Base
       Paypal::Payment::Request.new(
         :currency_code => :EUR,
         :billing_type => "RecurringPayments",
-        :billing_agreement_description => description,
-        :amount => 10.0
+        :billing_agreement_description => description
         #:items => [{
         #  :quantity => 1,
         #  :name => "UNLIMITED dailis",

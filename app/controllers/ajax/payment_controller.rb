@@ -15,7 +15,7 @@ class Ajax::PaymentController < ApplicationController
         :quantity => !payment_is_recurring != 0 ? params[:dacreditplan].to_i : 1,
         :dailycious_plan => !payment_is_recurring ? nil : @user.restaurant.dailycious_plan,
         :amount => payment_table[params[:dacreditplan]],
-        :description => !payment_is_recurring ? t("payment.paypal_payment_description") : t("payment.paypal_payment_recurring_description"),
+        :description => !payment_is_recurring ? t("payment.paypal_payment_description") : "test subscription",#t("payment.paypal_payment_recurring_description"),
       })
       if payment_is_recurring
         @user.restaurant.dailycious_plan.update_attributes({
@@ -30,10 +30,8 @@ class Ajax::PaymentController < ApplicationController
       )
       response = paypal_req.setup(
         payment.paypal_payment_request,
-        url_for({:only_path => false, :controller => "ajax/payment", :action => "datransfercreditplan"}.merge(params.permit(:buydailydish))),
-        url_for(:only_path => false, :controller => "/dailycious", :action => "index"),
-        :pay_on_paypal => true,
-        :no_shipping => true
+        url_for({:host => "http://app.pl8.cc/", :controller => "ajax/payment", :action => "datransfercreditplan"}.merge(params.permit(:buydailydish))),
+        url_for(:host => "http://app.pl8.cc/", :controller => "/dailycious", :action => "index")
       )
       payment.update_attributes({
         :paypal_token => response.token
