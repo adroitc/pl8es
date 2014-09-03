@@ -122,10 +122,10 @@ class Ajax::BeverageController < ApplicationController
     if @user && !params.values_at(:beverage_navigation_id, :title, :price, :amount).include?(nil) && BeverageNavigation.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beverage_page.restaurant.user == @user
       beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
       
-      new_baverage = Beverage.create(params.permit(:price, :amount).merge({
+      new_baverage = Beverage.new(params.permit(:price, :amount).merge({
+        :beverage_navigation => beverage_navigation,
         :position => beverage_navigation.beverages.unscoped.last != nil ? beverage_navigation.beverages.unscoped.last.id : 0
       }))
-      beverage_navigation.beverages.push(new_baverage)
 
       languages = Language.find_all_by_locale(params[:title].keys)
       
