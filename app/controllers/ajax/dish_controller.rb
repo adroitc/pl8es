@@ -33,14 +33,12 @@ class Ajax::DishController < ApplicationController
       languages = Language.find_all_by_locale(params[:title].keys)
       
       navigation = Navigation.find(params[:navigation_id])
-      new_dish = Dish.create(params.permit(:image, :price).merge({
+      new_dish = Dish.new(params.permit(:image, :price).merge({
         :restaurant => @user.restaurant,
         :menu => navigation.menu,
         :navigation => navigation,
         :position => navigation.dishes.unscoped.last != nil ? navigation.dishes.unscoped.last.id : 0
       }))
-      
-      new_dish.image.set_crop_values_for_instance(params.permit(:image))
       
       current_locale = I18n.locale
       languages.each do |language|
@@ -51,6 +49,8 @@ class Ajax::DishController < ApplicationController
       I18n.locale = current_locale
       
       new_dish.save
+      
+      new_dish.image.set_crop_values_for_instance(params.permit(:image))
       
       render :json => {:status => "success"}
       return
