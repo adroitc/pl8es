@@ -6,7 +6,7 @@ class BeverageNavigation < ActiveRecord::Base
   
   translates :title
   
-  validates :title, :allow_blank => true, :length => {
+  validates :title, :presence => true, :length => {
     :maximum => 40
   }
 

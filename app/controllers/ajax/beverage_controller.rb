@@ -55,10 +55,10 @@ class Ajax::BeverageController < ApplicationController
     if @user && !params.values_at(:beverage_page_id, :title).include?(nil) && @user.restaurant.beveragePages.exists?(params[:beverage_page_id])
       beverage_page = @user.restaurant.beveragePages.find(params[:beverage_page_id])
       
-      new_baverage_navigation = BeverageNavigation.create({
+      new_baverage_navigation = BeverageNavigation.new({
+        :beverage_page => beverage_page,
         :position => beverage_page.beverage_navigations.unscoped.last != nil ? beverage_page.beverage_navigations.unscoped.last.id : 0
       })
-      beverage_page.beverage_navigations.push(new_baverage_navigation)
 
       languages = Language.find_all_by_locale(params[:title].keys)
       
