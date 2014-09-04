@@ -23,6 +23,6 @@ production:
   host: localhost
   database: pl8es_db
   username: pl8es
-  password: cg4o_K21%PyW8-irLlUA(ZG9w.HO"BFa25z4n77Jh!TR@&&bvt
+  password: 'cg4o_K21%PyW8-irLlUA(ZG9w.HO\"BFa25z4n77Jh!TR@&&bvt'
   pool: 5
   timeout: 5000
