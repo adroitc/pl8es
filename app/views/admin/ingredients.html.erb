@@ -37,6 +37,14 @@
                   <%=ingredient.title %>
                 </a>
               </td>
+              <td>
+                <a href="javascript:;" onclick="jQuery('#modal-editingredient-<%=ingredient.id %>').modal('show');">
+                  <button type="button" class="btn btn-info btn-icon icon-left">
+                  	Edit Ingredient
+                  	<i class="entypo-pencil"></i>
+                  </button>
+                </a>
+              </td>
             </tr>
             <% end %>
           </tbody>

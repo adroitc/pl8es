@@ -123,9 +123,9 @@
               </div>
               <div class="col-md-12">
                 <% Ingredient.all.each do |ingredient| %>
-                <div class="col-sm-3">
-                  <input class="icheck-2-checkbox" type="checkbox" id="form-ingredients-1" name="ingredients[<%=ingredient.id %>]" <%="checked" if dish.ingredients.exists?(ingredient.id) %>>
-                  <label for="form-ingredients-1"><%=ingredient.title %></label>
+                <div class="col-sm-4">
+                  <input class="icheck-2-checkbox" type="checkbox" id="form-ingredients-1-<%=ingredient.id %>" name="ingredients[<%=ingredient.id %>]" <%="checked" if dish.ingredients.exists?(ingredient.id) %>>
+                  <label for="form-ingredients-1-<%=ingredient.id %>"><%=ingredient.title %></label>
                 </div>
                 <% end %>
               </div>
