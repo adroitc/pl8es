@@ -5,9 +5,6 @@ ruby "2.0.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "4.0.2"
 
-# Use sqlite3 as the database for Active Record
-#gem "sqlite3"
-
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 4.0.0"
 
@@ -29,12 +26,21 @@ gem "turbolinks"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 1.2"
 
+gem "jquery-ui-rails"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem "sdoc", require: false
 end
 
+group :assets do
+  gem "therubyracer"
+  gem "less-rails"
+  gem "twitter-bootstrap-rails"
+end
+
 group :development do
+  # Use sqlite3 as the database for Active Record
   gem "sqlite3"
   
   gem "better_errors"
@@ -44,12 +50,21 @@ group :development do
 end
 
 group :production do
-  #postgresql for heroku
+  # Use postres for heroku/hetzner
   gem "pg"
+  
+  # Use rails_12factor for heroku
   gem "rails_12factor"
 end
 
-gem "jquery-ui-rails"
+# Use unicorn as the app server
+# gem "unicorn"
+
+# Use Capistrano for deployment
+# gem "capistrano", group: :development
+
+# Use debugger
+# gem "debugger", group: [:development, :test]
 
 # payment
 gem "paypal-sdk-rest"
@@ -65,7 +80,6 @@ gem "mysql"
 # languages
 gem "rename"
 gem "globalize", "~> 4.0.1"
-#gem "i18n-js"
 
 # paperclip
 gem "paperclip"
@@ -76,23 +90,5 @@ gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 # location
 gem "geokit-rails"
 
-# rest
+# RestClient
 gem "rest-client"
-
-group :assets do
-  gem "therubyracer"
-  gem "less-rails"
-  gem "twitter-bootstrap-rails"
-end
-
-# Use ActiveModel has_secure_password
-# gem "bcrypt-ruby", "~> 3.1.2"
-
-# Use unicorn as the app server
-# gem "unicorn"
-
-# Use Capistrano for deployment
-# gem "capistrano", group: :development
-
-# Use debugger
-# gem "debugger", group: [:development, :test]
