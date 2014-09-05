@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby "2.1.1"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "4.0.2"
 
@@ -27,8 +29,6 @@ group :assets do
 end
 
 group :development do
-  ruby "2.1.1"
-  
   # Use sqlite3 as the database for Active Record
   gem "sqlite3"
   
@@ -39,8 +39,6 @@ group :development do
 end
 
 group :production do
-  ruby "2.0.0"
-  
   # Use postres for heroku/hetzner
   gem "pg"
   
