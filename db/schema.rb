@@ -383,7 +383,7 @@ ActiveRecord::Schema.define(version: 20140819064418) do
     t.string   "locale",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description"
+    t.text     "description"
   end
 
   add_index "restaurant_translations", ["locale"], name: "index_restaurant_translations_on_locale"
