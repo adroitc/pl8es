@@ -22,7 +22,7 @@ production:
   adapter: postgresql
   host: localhost
   database: pl8es
-  username: pl8es_app<%=ENV["PL8ES_DB"] %>
+  username: pl8es_app
   password: <%=ENV["PL8ES_DB"] %>
   pool: 5
   timeout: 5000
