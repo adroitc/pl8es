@@ -1,3 +1,4 @@
+<% content_for :head_title, "dailycious | #{@user.restaurant.name} - #{@user.restaurant.location.zip} #{@user.restaurant.location.city}, #{@user.restaurant.location.country}" %>
 <% content_for :body_class, "page-body" %>
 <div class="page-container" style="<%="padding-left:0px;" if @user == nil %>">
   <% if @user %>
