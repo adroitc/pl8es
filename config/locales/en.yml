@@ -1,7 +1,9 @@
 en:
   email:
+    signup_menumalist_subj: "Signup at menumalist"
+    signup_menumalist_subj: "Hello <strong>{n}</strong>,\n\nWelcome to Menumalist and thanks for joining us!\n\nAccess to your Menumalist account:\n\nLogin: http://menumalist.pl8.cc\nE-mail: {e}\nPassword: **\n\nDownload Code: <strong>{c}</strong>\n\nDownload the Menumalist iPad App from the Appstore by clicking and the link below: https://itunes.apple.com/de/app/menumalist/id653834278?mt=8\n\nAnd if you encounter a problem, don't hesitate to contact our Customer Service info@menumalist.com for assistance.\n\nHappy fascinating,\n\nYour Menumalist Team"
     signup_dailycious_subj: "Signup at dailycious"
-    signup_dailycious_msg: "Dear %{n},\n\nWelcome to dailycious!\n\nTo get started:\n\n- complete registration by entering your restaurant logo : http://app.pl8.cc/dailycious\n- download the app : http://dailycious.co/app\n- start publishing your delicious dishes http://app.pl8.cc/dailycious\n\nEnjoy dailycious!\n\nYour dailycious team."
+    signup_dailycious_msg: "Dear <strong>{n}</strong>,\n\nWelcome to dailycious!\n\nTo get started:\n\n- complete registration by entering your restaurant logo : http://app.pl8.cc/dailycious\n- download the app : http://dailycious.co/app\n- start publishing your delicious dishes http://app.pl8.cc/dailycious\n\nEnjoy dailycious!\n\nYour dailycious team."
   
   validation:
     required: "SUSI-This field is required."
