@@ -94,6 +94,12 @@
                 </a>
      					</li>
               <% end %>
+              <% if @user.restaurant.telephone %>
+     					<li>
+                <i class="entypo-phone"></i>
+                <%=@user.restaurant.telephone %>
+     					</li>
+              <% end %>
      				</ul>
      			</div>
      		</div>

@@ -85,6 +85,7 @@ class Ajax::SessionController < ApplicationController
   def signup_user
     if !@user && session[:signup] && !params.values_at(:email, :password).include?(nil)
       @user = User.create(params.permit(:email, :password).merge({
+        :password_confirmation => params[:password_confirmation],
         :last_login => DateTime.now,
         :product_referer => session[:signup][:product_referer]
       }))
