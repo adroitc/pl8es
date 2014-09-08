@@ -261,3 +261,7 @@ span.pl8es-modal-delete input.pl8es-input-delete
 {
   display: none;
 }
+.neon-loading-bar span
+{
+  background-color: #68ccf0;
+}

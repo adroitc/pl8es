@@ -177,7 +177,14 @@ class Ajax::SessionController < ApplicationController
           session[:admin_id] = @user.id
         end
         
-        render :json => {:status => "success", :redirect => url_for(:controller => "/dashboard", :action => "index")}
+        redirect_url = url_for(:controller => "/profile", :action => "index")
+        if params[:product_referer] == "d"
+          redirect_url = url_for(:controller => "/dailycious", :action => "index")
+        elsif params[:product_referer] == "m"
+          redirect_url = url_for(:controller => "/menumalist", :action => "index")
+        end
+        
+        render :json => {:status => "success", :redirect => redirect_url}
         return
       end
     end
