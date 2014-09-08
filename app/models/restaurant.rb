@@ -36,7 +36,7 @@ class Restaurant < ActiveRecord::Base
   }
   validates :website, :allow_blank => true, :presence => true, :length => {
     :minimum => 6,
-    :maximum => 18
+    :maximum => 255
   }
   validates :telephone, :allow_blank => true, :presence => true, :length => {
     :minimum => 6,

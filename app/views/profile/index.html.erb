@@ -79,6 +79,14 @@
                 <%=@user.restaurant.categories.last.title %>
      					</li>
               <% end %>
+              <% if @user.restaurant.website %>
+     					<li>
+                <a href="<%=@user.restaurant.website %>" target="_blank">
+                  <i class="entypo-globe"></i>
+                  <%=@user.restaurant.website %>
+                </a>
+     					</li>
+              <% end %>
      				</ul>
      			</div>
      		</div>

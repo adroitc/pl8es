@@ -41,7 +41,7 @@
   <div class="col-sm-12">
     <div class="col-sm-4 form-group" style="padding-left:0px;">
       <label for="form-email" class="control-label"><strong><%=t("profile.account_email") %></strong></label>
-	    <input name="email" type="text" class="form-control" id="form-email" placeholder="<%=t("profile.account_email_placeholder") %>" value="<%=@user.restaurant.email %>" required data-validate="minlength[6],maxlength[255],email" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"6"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>" data-message-email="<%=t("validation.email") %>">
+	    <input name="email" type="text" class="form-control" id="form-email" placeholder="<%=t("profile.account_email_placeholder") %>" value="<%=@user.email %>" required data-validate="minlength[6],maxlength[255],email" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"6"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>" data-message-email="<%=t("validation.email") %>">
     </div>
     <div class="col-sm-4 form-group" style="padding-left:0px;padding-right:0px;">
       <label for="form-website" class="control-label"><strong><%=t("profile.account_website") %></strong></label>
