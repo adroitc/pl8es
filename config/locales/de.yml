@@ -78,7 +78,7 @@ de:
     account_settings_modal_submit: "Speichern"
     account_default_language: "Standardsprache"
     account_default_language_select: "Standardsprache festlegen"
-    account_address: "Adresse"
+    account_address_placeholder_address: "Adresse"
     account_address_placeholder: "Adresse"
     account_zip: "Postleitzahl"
     account_zip_placeholder: "Postleitzahl"

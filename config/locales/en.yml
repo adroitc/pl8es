@@ -1,22 +1,22 @@
 en:
   email:
-    signup_menumalist_subj: "Signup at menumalist"
-    signup_menumalist_subj: "Hello <strong>{n}</strong>,\n\nWelcome to Menumalist and thanks for joining us!\n\nAccess to your Menumalist account:\n\nLogin: http://menumalist.pl8.cc\nE-mail: {e}\nPassword: **\n\nDownload Code: <strong>{c}</strong>\n\nDownload the Menumalist iPad App from the Appstore by clicking and the link below: https://itunes.apple.com/de/app/menumalist/id653834278?mt=8\n\nAnd if you encounter a problem, don't hesitate to contact our Customer Service info@menumalist.com for assistance.\n\nHappy fascinating,\n\nYour Menumalist Team"
     signup_dailycious_subj: "Signup at dailycious"
     signup_dailycious_msg: "Dear <strong>{n}</strong>,\n\nWelcome to dailycious!\n\nTo get started:\n\n- complete registration by entering your restaurant logo : http://app.pl8.cc/dailycious\n- download the app : http://dailycious.co/app\n- start publishing your delicious dishes http://app.pl8.cc/dailycious\n\nEnjoy dailycious!\n\nYour dailycious team."
+    signup_menumalist_subj: "Signup at menumalist"
+    signup_menumalist_subj: "Hello <strong>{n}</strong>,\n\nWelcome to Menumalist and thanks for joining us!\n\nAccess to your Menumalist account:\n\nLogin: http://menumalist.pl8.cc\nE-mail: {e}\nPassword: **\n\nDownload Code: <strong>{c}</strong>\n\nDownload the Menumalist iPad App from the Appstore by clicking and the link below: https://itunes.apple.com/de/app/menumalist/id653834278?mt=8\n\nAnd if you encounter a problem, don't hesitate to contact our Customer Service info@menumalist.com for assistance.\n\nHappy fascinating,\n\nYour Menumalist Team"
   
   validation:
-    required: "SUSI-This field is required."
-    minlength: "SUSI-Please enter at least %{l} characters."
-    maxlength: "SUSI-Please enter at most %{l} characters."
-    validaddress: "SUSI-Please enter a valid address."
-    email: "SUSI-Please enter a valid email."
-    securepassword: "SUSI-Your password has to include lowercase, uppercase and a number."
-    url: "SUSI-Please enter a valid url."
-    hexcolor: "SUSI-Please enter a valid url."
-    time: "SUSI-Please enter a valid time."
-    price: "SUSI-Please enter a valid price."
-    beverageamount: "SUSI-Please enter a valid amount."
+    required: "This field is required."
+    minlength: "Please enter at least %{l} characters."
+    maxlength: "This field cannot have more than %{l} characters."
+    validaddress: "Please enter a valid address."
+    email: "Please enter a valid email."
+    securepassword: "Your password has to include lowercase and uppercase characters and a number."
+    url: "Please enter a valid url."
+    hexcolor: "Please enter a valid url."
+    time: "Please enter a valid time."
+    price: "Please enter a valid price."
+    beverageamount: "Please enter a valid amount."
   
   errors:
     required: "This field is required."
