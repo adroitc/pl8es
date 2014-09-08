@@ -129,35 +129,21 @@
      	</header>
       <section class="profile-feed">
       	<div class="profile-stories">
-          <% @visit_restaurant.daily_dishes.where([
-            "display_date >= (?) AND display_date < (?)",
-            DateTime.now-7.days,
-            DateTime.now
-          ]).reverse.each do |daily_dish_level| %>
-          <% daily_dishes = @visit_restaurant.daily_dishes.where(["display_date = (?)", daily_dish_level.display_date]) %>
-          <article class="story">
-          	<div class="story-content" style="width:100%;">
-          		<header>
-          			<div class="publisher">
-          				<strong><%=@visit_restaurant.name %></strong> published <%=daily_dishes.count %> daily dish
-          				<em><%=(DateTime.now.to_date-daily_dish_level.display_date.to_date).to_i %> days ago</em>
-          			</div>
-          			<div class="story-type">
-          				<i class="entypo-newspaper"></i>
-          			</div>
-          		</header>
-          		<div class="story-main-content">
-          			<div class="row">
-                  <% daily_dishes.each do |daily_dish| %>
-          				<div class="col-sm-3">
-                    <img class="img-responsive full-width unveil" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : "http://placehold.it/400x400" %>" />
-          				</div>
-                  <% end %>
-          			</div>
-          		</div>
-          	</div>
-          </article>
-          <% end %>
+          <div class="row gallery-env draggable-portlets">
+            <%
+            for i in 0..6
+              current_date = (Date.today.beginning_of_week+i)
+              todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => current_date)
+              todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
+            %>
+            <span class="sorted ui-sortable">
+              <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
+              <% todays_dailycious_credits.each_with_index do |dailycious_credit, index| %>
+                <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[index+1]}) if todays_daily_dishes[index+1] %>
+              <% end %>
+            </span>
+            <% end %>
+          </div>
       	</div>
       </section>
     </div>
