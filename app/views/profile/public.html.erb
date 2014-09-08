@@ -39,20 +39,22 @@
      						</span>
      					</div>
      				</li>
-     				<li>
-     					<div class="profile-stat">
-     						<h3><%=@visit_restaurant.menus.count %></h3>
-     						<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
-                  <span><%=@visit_restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %></span>
-                </a>
-     					</div>
-     				</li>
-     				<li>
-     					<div class="profile-stat">
-     						<h3><%=@visit_restaurant.dishes.count %></h3>
-     						<span><%=@visit_restaurant.dishes.count == 1 ? t("profile.dish") : t("profile.dishes") %></span>
-     					</div>
-     				</li>
+            <% if @user %>
+     				  <li>
+     				  	<div class="profile-stat">
+     				  		<h3><%=@visit_restaurant.menus.count %></h3>
+     				  		<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+                    <span><%=@visit_restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %></span>
+                  </a>
+     				  	</div>
+     				  </li>
+     				  <li>
+     				  	<div class="profile-stat">
+     				  		<h3><%=@visit_restaurant.dishes.count %></h3>
+     				  		<span><%=@visit_restaurant.dishes.count == 1 ? t("profile.dish") : t("profile.dishes") %></span>
+     				  	</div>
+     				  </li>
+            <% end %>
      			</ul>
      		</div>
      	</header>
