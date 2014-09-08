@@ -1,4 +1,4 @@
-<% content_for :head_title, "dailycious | #{@user.restaurant.name} - #{@user.restaurant.location.zip} #{@user.restaurant.location.city}, #{@user.restaurant.location.country}" %>
+<% content_for :head_title, "dailycious | #{@visit_restaurant.name} - #{@visit_restaurant.location.zip} #{@visit_restaurant.location.city}, #{@visit_restaurant.location.country}" %>
 <% content_for :body_class, "page-body" %>
 <div class="page-container" style="<%="padding-left:0px;" if @user == nil %>">
   <% if @user %>
@@ -86,18 +86,18 @@
                 <%=@visit_restaurant.categories.last.title %>
      					</li>
               <% end %>
-              <% if @user.restaurant.website %>
+              <% if @visit_restaurant.website %>
      					<li>
-                <a href="<%=@user.restaurant.website %>" target="_blank">
+                <a href="<%=@visit_restaurant.website %>" target="_blank">
                   <i class="entypo-globe"></i>
-                  <%=@user.restaurant.website %>
+                  <%=@visit_restaurant.website %>
                 </a>
      					</li>
               <% end %>
-              <% if @user.restaurant.telephone %>
+              <% if @visit_restaurant.telephone %>
      					<li>
                 <i class="entypo-phone"></i>
-                <%=@user.restaurant.telephone %>
+                <%=@visit_restaurant.telephone %>
      					</li>
               <% end %>
      				</ul>

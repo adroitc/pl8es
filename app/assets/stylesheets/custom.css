@@ -265,3 +265,18 @@ span.pl8es-modal-delete input.pl8es-input-delete
 {
   background-color: #68ccf0;
 }
+.pl8es_public_daily_panel_price
+{
+  position: absolute;
+  z-index: 20;
+  right: 0px;
+  margin-top: 8px;
+  margin-right: 8px;
+  line-height: 24px;
+  padding-left: 6px;
+  padding-right: 6px;
+  background-color: rgba(0,0,0,0.4);
+  color: #fff;
+  border: solid 2px rgba(255,255,255,0.4);
+  font-size: 12px;
+}
