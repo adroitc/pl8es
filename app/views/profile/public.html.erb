@@ -2,7 +2,7 @@
 <div class="page-container" style="<%="padding-left:0px;" if @user == nil %>">
   <% if @user %>
   <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader" %>
+    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-dailycious.png")} %>
     <%=render :partial => "layouts/menu" %>
   </div>
   <% end %>
