@@ -84,9 +84,20 @@ class ApplicationController < ActionController::Base
       if @user && Language.exists?(:locale => params[:locale])
         @user.restaurant.update_attributes(:default_language => Language.find(:locale => params[:locale]))
       end
+    elsif extract_locale_from_accept_language_header
+      I18n.locale = extract_locale_from_accept_language_header
+      if @user && @user.restaurant.default_language.locale != extract_locale_from_accept_language_header && Language.exists?(:locale => params[:locale])
+        @user.restaurant.update_attributes(:default_language => Language.find(:locale => extract_locale_from_accept_language_header))
+      end
     elsif @user
       I18n.locale = @user.restaurant.default_language.locale
     end
+  end
+  
+  private
+  
+  def extract_locale_from_accept_language_header
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
   
 end
