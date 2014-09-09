@@ -8,10 +8,10 @@
     <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>"><i class="entypo-home"></i>Dashboard</a>
+        <a href="<%=url_for :controller => "dashboard", :action => "index" %>"><i class="entypo-home"></i><%=t("layouts.menu.dashboard") %></a>
       </li>
       <li class="active">
-        <strong>Dashboard</strong>
+        <strong><%=t("layouts.menu.dashboard") %></strong>
       </li>
     </ol>
     <h2><%=t("layouts.menu.dailycious") %></h2>
@@ -45,8 +45,8 @@
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=requests_this_7days %>" data-duration="1500" data-delay="0">0</div>
 			  
-  		  	<h3>visits</h3>
-  		  	<p>in the last 7 days</p>
+  		  	<h3><%=t("dashboard.visits") %></h3>
+  		  	<p><%=t("dashboard.in_the_last_7_days") %></p>
   		  </div>
   		</div>
       <div class="col-sm-4">
@@ -54,7 +54,7 @@
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0">0</div>
 			  
-  		  	<h3>favorites</h3>
+  		  	<h3><%=t("dashboard.favorites") %></h3>
   		  	<p><%=@user.restaurant.name %></p>
   		  </div>
   		</div>
@@ -66,11 +66,11 @@
                  Date.today-7
                ]).count %>" data-duration="1500" data-delay="0">0</div>
 			  
-  		  	<h3>daily dishes</h3>
-  		  	<p>published in the last 7 days</p>
+  		  	<h3><%=t("dashboard.daily_dishes") %></h3>
+  		  	<p><%=t("dashboard.published_in_the_last_7_days") %></p>
           <a href="<%=url_for :controller => "dailycious", :action => "index" %>"><p>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              view all daily dishes
+              <%=t("dashboard.view_all_daily_dishes") %>
               <i class="entypo-user"></i>
             </button>
           </p></a>
@@ -80,8 +80,8 @@
     <div class="row">
     	<div class="col-md-4">
     		<div class="tile-stats tile-white stat-tile">
-    			<h3><%=([requests_this_7days-requests_last_7days, 0].max/[requests_last_7days, 1].max)*100.0 %>% more </h3>
-    			<p>visits this week</p>
+    			<h3><%=([requests_this_7days-requests_last_7days, 0].max/[requests_last_7days, 1].max)*100.0 %>% <%=t("dashboard.more") %> </h3>
+    			<p><%=t("dashboard.visits_in_the_last_7_days") %></p>
     			<span class="weekly-visitors"></span>
     		</div>		
     	</div>
@@ -126,8 +126,8 @@
                  Date.today
   		  	     ]).count %>" data-duration="1500" data-delay="0">0</div>
 			  
-  		  	<h3>new favorites</h3>
-  		  	<p>in the last 7 days</p>
+  		  	<h3><%=t("dashboard.new_favorites") %></h3>
+  		  	<p><%=t("dashboard.in_the_last_7_days") %></p>
   		  </div>
   		</div>
       <div class="col-sm-4">
@@ -135,10 +135,10 @@
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
 			  
-  		  	<h3>dailis</h3>
+  		  	<h3><%=t("dashboard.dailys") %></h3>
           <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show');"><p>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              get more
+              <%=t("dashboard.get_more") %>
               <i class="entypo-plus"></i>
             </button>
           </p></a>
@@ -179,10 +179,10 @@
     	 	<div class="tile-stats tile-white tile-white-primary">
     	 		<div class="icon"><i class="entypo-user"></i></div>
     	 		<div class="num" data-start="0" data-end="<%=@user.restaurant.menus.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
-    	 		<h3>menus</h3>
+    	 		<h3><%=t("dashboard.menus") %></h3>
           <a href="<%=url_for :controller => "menumalist", :action => "index" %>"><p>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              view all menus
+              <%=t("dashboard.view_all_menus") %>
               <i class="entypo-user"></i>
             </button>
           </p></a>

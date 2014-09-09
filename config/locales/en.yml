@@ -84,6 +84,21 @@ en:
     topbar:
       logout: "EN-Logout"
   
+  dashboard:
+    visits: "EN-visits"
+    in_the_last_7_days: "EN-in the last 7 days"
+    favorites: "EN-favorites"
+    daily_dishes: "EN-daily dishes"
+    published_in_the_last_7_days: "EN-published in the last 7 days"
+    view_all_daily_dishes: "EN-view all daily dishes"
+    more: "EN-more"
+    visits_in_the_last_7_days: "EN-visits in the last 7 days"
+    new_favorites: "EN-new favorites"
+    dailys: "EN-dailys"
+    get_more: "EN-get more"
+    menus: "EN-menus"
+    view_all_menus: "EN-view all menus"
+  
   profile:
     menu: "EN-Menu"
     menus: "EN-Menus"
