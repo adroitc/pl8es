@@ -4,7 +4,7 @@ class App::DailyciousController < ApplicationController
   
   def signup
     if @device && !@user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
-      @user = User.create(params.permit(:email, :password).merge({
+      @user = User.new(params.permit(:email, :password).merge({
         :password_confirmation => params[:password],
         :last_login => DateTime.now,
         :product_referer => "d"
@@ -13,7 +13,7 @@ class App::DailyciousController < ApplicationController
       while Restaurant.find_by_download_code(download_code).present?
         download_code = SecureRandom.hex(3).upcase
       end
-      restaurant = Restaurant.create(params.permit(:name, :logo_image).merge({
+      restaurant = Restaurant.new(params.permit(:name, :logo_image).merge({
         :user => @user,
         :default_language => Language.first,
         :menuColorTemplate => MenuColorTemplate.first,
@@ -23,7 +23,9 @@ class App::DailyciousController < ApplicationController
       }))
       address = Location.validate_address({:address => "test"})
       
-      if @user.errors.count == 0 && restaurant.errors.count == 0 && address != nil
+      if @user.valid? && @user.errors.count == 0 && restaurant.valid? && restaurant.errors.count == 0 && address != nil
+        @user.save
+        restaurant.save
         restaurant.update_attributes({
           :location => Location.create(address),
           :menuColor => MenuColor.create(
