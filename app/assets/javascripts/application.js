@@ -138,11 +138,11 @@ $(document).ready(function()
     if ($(e).val().length == 0){
       return true;
     }
-    return /\A^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$\Z/.test($(e).val());
+    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/.test($(e).val());
   }, "Your password has to include lowercase, uppercase and a number.");
   
   jQuery.validator.addMethod("hexcolor", function(v,e){
-    return /\A(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)\Z/.test($(e).val())
+    return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/.test($(e).val())
   }, "Please enter a valid color code.");
   
   jQuery.validator.addMethod("time", function(v,e){

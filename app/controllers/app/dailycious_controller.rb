@@ -127,7 +127,7 @@ class App::DailyciousController < ApplicationController
   
   def profile
     if @device && @user && !params.values_at(:name, :address, :zip, :city, :country).include?(nil)
-      address = Location.validate_address({:address => "test"})
+      address = Location.validate_address(params.permit(:address, :zip, :city, :country))
       
       @user.restaurant.attributes = params.permit(:name)
       if @user.restaurant.save && @user.restaurant.errors.count == 0 && address != nil
