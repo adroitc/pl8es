@@ -151,6 +151,8 @@ en:
     dailis: "EN-dailis"
     get_more: "EN-get more"
     change_plan: "EN-get more"
+    equal_of_n_dailis: "EN-equal of %{n} dailis"
+    unlimited: "EN-unlimited"
     
     daily_dish_modal_add_title: "EN-Add lunch dish"
     daily_dish_modal_edit_title: "EN-Edit lunch dish"
