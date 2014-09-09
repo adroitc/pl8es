@@ -21,7 +21,7 @@ class App::DailyciousController < ApplicationController
         :download_code => download_code,
         :background_type => "color"
       }))
-      address = Location.validate_address({:address => "test"})
+      address = Location.validate_address(params.permit(:address, :zip, :city, :country))
       
       if @user.valid? && @user.errors.count == 0 && restaurant.valid? && restaurant.errors.count == 0 && address != nil
         @user.save
