@@ -23,7 +23,7 @@ class App::DailyciousController < ApplicationController
       }))
       address = Location.validate_address({:address => "test"})
       
-      if @user.errors.count == 0 && restaurant.errors.count == 0 && addres != nil
+      if @user.errors.count == 0 && restaurant.errors.count == 0 && address != nil
         restaurant.update_attributes({
           :location => Location.create(address),
           :menuColor => MenuColor.create(
