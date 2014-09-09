@@ -15,17 +15,17 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <div class="col-sm-12 form-group" style="padding:0px;">
-      <label for="form-address" class="control-label"><strong><%=t("profile.account_address") %></strong></label>
-	    <input name="address" type="text" class="form-control" id="form-address" placeholder="<%=t("profile.account_address_placeholder") %>" value="<%=@user.restaurant.location.address %>" data-validate="required,maxlength[255],validaddress" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>" data-message-validaddress="<%=t("validation.validaddress") %>">
+    <div class="col-sm-4 form-group" style="padding:0px;">
+      <label for="form-address" class="control-label"><strong><%=t("profile.account_billing_contact") %></strong></label>
+	    <input name="billing_contact" type="text" class="form-control" id="form-billing_contact" placeholder="<%=t("profile.account_billing_contact_placeholder") %>" value="<%=@user.restaurant.billing_contact %>" data-validate="maxlength[255]" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>">
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <div class="col-sm-4 form-group" style="padding:0px;">
-      <label for="form-address" class="control-label"><strong><%=t("profile.account_billing_contact") %></strong></label>
-	    <input name="billing_contact" type="text" class="form-control" id="form-billing_contact" placeholder="<%=t("profile.account_billing_contact_placeholder") %>" value="<%=@user.restaurant.billing_contact %>" data-validate="maxlength[255]" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>">
+    <div class="col-sm-12 form-group" style="padding:0px;">
+      <label for="form-address" class="control-label"><strong><%=t("profile.account_address") %></strong></label>
+	    <input name="address" type="text" class="form-control" id="form-address" placeholder="<%=t("profile.account_address_placeholder") %>" value="<%=@user.restaurant.location.address %>" data-validate="required,maxlength[255],validaddress" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>" data-message-validaddress="<%=t("validation.validaddress") %>">
     </div>
   </div>
 </div>
