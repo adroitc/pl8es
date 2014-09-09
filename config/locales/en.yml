@@ -109,7 +109,13 @@ en:
       restaurant: "EN-Restaurant"
       menumalist: "EN-Menus"
       dailycious: "EN-Lunch Dishes"
-    
+  
+    public_menu:
+      map: "EN-Map"
+      for_restaurants: "EN-For restaurants"
+      blog: "EN-Blog"
+      login: "EN-Login"
+  
     topbar:
       logout: "EN-Logout"
   
