@@ -17,6 +17,7 @@ en:
     time: "EN-Please enter a valid time."
     price: "EN-Please enter a valid price."
     beverageamount: "EN-Please enter a valid amount."
+    confirm_password: "EN-Please enter the same password again."
   
   errors:
     required: "EN-This field is required."
@@ -83,6 +84,9 @@ en:
     email_placeholder: "EN-Email"
     password_placeholder: "EN-Password"
     login: "EN-Login"
+    send_forgot: "EN-Send"
+    password_new_placeholder: "EN-New password"
+    password_confirm_placeholder: "EN-Confirm Password"
     signup: "EN-Sign-up"
     invalid_title: "EN-Invalid login"
     invalid_msg: "EN-Enter a valid email and password combination."

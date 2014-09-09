@@ -27,20 +27,22 @@
 				<p><%=t("login.invalid_msg") %></p>
 			</div>
       <%= form_tag({:controller => "ajax/session", :action => "login"}, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
+        <input name="user_id" type="hidden" value="<%=params[:user_id] %>">
+        <input name="reset_token" type="hidden" value="<%=params[:reset_token] %>">
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
-							<i class="entypo-mail"></i>
+							<i class="entypo-lock"></i>
 						</div>
-						<input type="text" class="form-control" name="email" id="email" placeholder="<%=t("login.email_placeholder") %>" required data-message-required="<%=t("errors.required") %>" />
-					</div>
-				</div>
+	          <input name="password" type="password" class="form-control" id="form-password" placeholder="<%=t("login.password_new_placeholder") %>" data-validate="minlength[8],maxlength[255],secpass" data-message-minlength="<%=t("validation.minlength",{l:"8"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>" data-message-secpass="<%=t("validation.securepassword") %>">
+          </div>
+        </div>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
-							<i class="entypo-key"></i>
+							<i class="entypo-lock"></i>
 						</div>
-						<input type="password" class="form-control" name="password" id="password" placeholder="<%=t("login.password_placeholder") %>" required data-message-required="<%=t("errors.required") %>" />
+	          <input name="password_confirm" type="password" class="form-control" id="form-password_confirm" placeholder="<%=t("login.password_confirm_placeholder") %>" data-validate="equalTo[#form-password]"  data-message-equalTo="<%=t("validation.confirm_password") %>">
 					</div>
 				</div>
 				<div class="form-group">
@@ -49,21 +51,8 @@
 						<%=t("login.login") %>
 					</button>
 				</div>
-				<div class="form-group">
-          <a href="<%=url_for :controller => "signup", :action => "index" %>">
-				  	<button type="button" class="btn btn-primary btn-block btn-login">
-				  		<i class="entypo-user"></i>
-				  		<%=t("login.signup") %>
-				  	</button>
-          </a>
-				</div>
       <% end %>
 			<div class="login-bottom-links">
-				<a href="<%=url_for :controller => "login", :action => "forgot" %>" class="link" class="link">
-					<i class="entypo-lock"></i>
-					<%=t("login.forgot_password") %>
-        </a>
-				<br />
 				<a href="#"><%=t("login.footer_tos") %></a>  - <a href="#"><%=t("login.footer_policy") %></a>
 			</div>
 		</div>

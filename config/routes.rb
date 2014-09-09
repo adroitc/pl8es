@@ -39,6 +39,7 @@ Pl8es::Application.routes.draw do
   post "/a/session/signup/restaurant" => "ajax/session#signup_restaurant"
   post "/a/session/signup/user" => "ajax/session#signup_name"
   post "/a/session/login" => "ajax/session#login"
+  post "/a/session/login/forgot" => "ajax/session#login_forgot"
   
   #ajax/admin
   resources :ajax_admin, :only => []
@@ -114,6 +115,8 @@ Pl8es::Application.routes.draw do
   #login
   resources :login, :only => []
   get "/login" => "login#index"
+  get "/login/forgot" => "login#forgot"
+  get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset"
   
   #logout
   resources :logout, :only => []

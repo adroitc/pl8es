@@ -189,6 +189,57 @@ class Ajax::SessionController < ApplicationController
         render :json => {:status => "success", :redirect => redirect_url}
         return
       end
+    elsif !params.values_at(:user_id, :reset_token, :password, :password_confirm).include?(nil)
+      @user = User.find(params[:user_id])
+      
+      if !@user.blank? && @user.reset_token == params[:reset_token] && @user.reset_date < DateTime.now+24.hours
+        @user.password = params[:password]
+        @user.password_confirmation = params[:password_confirm]
+        @user.save
+        @user.update_attributes({
+          :last_login => DateTime.now
+        })
+        
+        if @device
+          @device.update_attributes({
+            :user => @user
+          })
+        end
+        if @session
+          @session.update_attributes({
+            :user => @user
+          })
+        end
+        
+        session[:user_id] = @user.id
+        if @user.isAdmin
+          session[:admin_id] = @user.id
+        end
+        
+        redirect_url = url_for(:controller => "/profile", :action => "index")
+        
+        render :json => {:status => "success", :redirect => redirect_url}
+        return
+      end
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def login_forgot
+    if !params.values_at(:email).include?(nil)
+      @user = User.find_by_email(params[:email])
+      
+      token = SecureRandom.hex(64)
+      
+      @user.update_attributes({
+        :reset_token => token,
+        :reset_date => DateTime.now
+      })
+      
+      @user.send_mail("pl8", "Forgot password", url_for(:controller => "/login", :action => "forgot_reset", :user_id => @user.id, :reset_token => token))
+      
+      render :json => {:status => "valid"}
+      return
     end
     render :json => {:status => "invalid"}
   end
