@@ -14,7 +14,7 @@ class Ajax::SessionController < ApplicationController
           :restaurant => Restaurant.create({
             :name => params[:name],
             :location => Location.create(),
-            :default_language => Language.first,
+            :default_language => Language.find_by_locale(I18n.locale.to_s) ? Language.find_by_locale(I18n.locale.to_s) : Language.first,
             :menuColorTemplate => MenuColorTemplate.first,
             :menuColor => MenuColor.create(),
             :supportedFont => SupportedFont.first,
@@ -103,7 +103,7 @@ class Ajax::SessionController < ApplicationController
             :city => session[:signup][:city],
             :country => session[:signup][:country]
           }),
-          :default_language => Language.first,
+          :default_language => Language.find_by_locale(I18n.locale.to_s) ? Language.find_by_locale(I18n.locale.to_s) : Language.first,
           :menuColorTemplate => MenuColorTemplate.first,
           :menuColor => MenuColor.create(
             :background => "#000000",
@@ -151,7 +151,6 @@ class Ajax::SessionController < ApplicationController
         return
       end
     end
-    puts "========================\n========================\n========================\n========================\n#{@user.errors.messages.to_json}\n========================\n========================\n========================\n========================"
     render :json => {:status => "invalid"}
   end
   
