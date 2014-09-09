@@ -94,8 +94,6 @@ en:
     more: "EN-more"
     visits_in_the_last_7_days: "EN-visits in the last 7 days"
     new_favorites: "EN-new favorites"
-    dailys: "EN-dailys"
-    get_more: "EN-get more"
     menus: "EN-menus"
     view_all_menus: "EN-view all menus"
   
@@ -144,6 +142,28 @@ en:
     account_primary_category_select: "EN-Select primary category"
     account_secondary_category: "EN-Secondary category"
     account_secondary_category_select: "EN-Select secondary category"
+  
+  dailycious:
+    dailycious_title: "EN-Dailycious - current week"
+    last_week: "EN-Last week"
+    next_week: "EN-Next week"
+
+    dailis: "EN-dailis"
+    get_more: "EN-get more"
+    change_plan: "EN-get more"
+    
+    daily_dish_modal_add_title: "EN-Add lunch dish"
+    daily_dish_modal_edit_title: "EN-Edit lunch dish"
+    daily_dish_modal_add_cancel: "EN-Cancel"
+    daily_dish_modal_add_submit_buy: "EN-Buy lunch dish"
+    daily_dish_modal_add_submit: "EN-Add lunch dish"
+    daily_dish_modal_edit_cancel: "EN-Cancel"
+    daily_dish_modal_edit_submit: "EN-Save"
+    daily_dish_upload_image: "EN-Upload image"
+    daily_dish_title: "EN-Title"
+    daily_dish_title_placeholder: "EN-Spaghetti Bolognaise"
+    daily_dish_price: "EN-Price"
+    daily_dish_price_placeholder: "EN-8,00"
   
   menumalist:
     menumalist_title: "EN-Menumalist - all menus"
@@ -270,21 +290,3 @@ en:
     dish_sides_placeholder: "EN-Bread"
     dish_ingredients: "EN-Ingredients"
     dish_ingredients_text: "EN-Please choose the ingredients and allergens for this dish"
-  
-  dailycious:
-    dailycious_title: "EN-Dailycious - current week"
-    last_week: "EN-Last week"
-    next_week: "EN-Next week"
-    
-    daily_dish_modal_add_title: "EN-Add lunch dish"
-    daily_dish_modal_edit_title: "EN-Edit lunch dish"
-    daily_dish_modal_add_cancel: "EN-Cancel"
-    daily_dish_modal_add_submit_buy: "EN-Buy lunch dish"
-    daily_dish_modal_add_submit: "EN-Add lunch dish"
-    daily_dish_modal_edit_cancel: "EN-Cancel"
-    daily_dish_modal_edit_submit: "EN-Save"
-    daily_dish_upload_image: "EN-Upload image"
-    daily_dish_title: "EN-Title"
-    daily_dish_title_placeholder: "EN-Spaghetti Bolognaise"
-    daily_dish_price: "EN-Price"
-    daily_dish_price_placeholder: "EN-8,00"
