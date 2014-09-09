@@ -24,6 +24,35 @@ en:
     invalid_email: "EN-Invalid email."
     already_exists: "EN-This email already exists."
   
+  date:
+    Monday: "EN-monday"
+    Tuesday: "EN-tuesday"
+    Thursday: "EN-thursday"
+    Wednesday: "EN-wednesday"
+    Friday: "EN-friday"
+    Saturday: "EN-saturday"
+    Sunday: "EN-sunday"
+
+    Mon: "EN-mon"
+    Tue: "EN-tue"
+    Thu: "EN-thu"
+    Wed: "EN-wed"
+    Fri: "EN-fri"
+    Sat: "EN-sat"
+    Sun: "EN-sun"
+    
+    January: "EN-january"
+    February: "EN-february"
+    March: "EN-march"
+    April: "EN-april"
+    May: "EN-may"
+    June: "EN-june"
+    July: "EN-july"
+    August: "EN-august"
+    September: "EN-september"
+    November: "EN-november"
+    December: "EN-december"
+  
   payment:
     paypal_payment_description: "EN-dailycious - dailis (credits)"
     paypal_item_dailycious_credits_title: "EN-%{c} dailis package"

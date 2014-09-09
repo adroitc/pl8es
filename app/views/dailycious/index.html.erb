@@ -68,9 +68,15 @@
           </button>
         </a>
 				<button type="button" class="col-md-6 btn btn-default" disabled>
-          <%=date.beginning_of_week.strftime('%a, %d %B %Y') %>
+          <%=t("date.#{date.beginning_of_week.strftime("%a")}") %>,
+          <%=date.beginning_of_week.strftime("%d") %>
+          <%=t("date.#{date.beginning_of_week.strftime("%B")}") %>
+          <%=date.beginning_of_week.strftime("%Y") %>
           -
-          <%=date.end_of_week.strftime('%a, %d %B %Y') %>
+          <%=t("date.#{date.end_of_week.strftime("%a")}") %>,
+          <%=date.end_of_week.strftime("%d") %>
+          <%=t("date.#{date.end_of_week.strftime("%B")}") %>
+          <%=date.end_of_week.strftime("%Y") %>
         </button>
         <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i+1) %>">
 				  <button type="button" class="col-md-3 btn btn-white">
@@ -95,7 +101,7 @@
               todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
               %>
               <td width="100px;">
-                <%=current_date.strftime("%A") %>
+                <%=t("date.#{current_date.strftime("%A")}") %>
               </td>
               <td class="row gallery-env draggable-portlets">
                 <%= form_tag({:controller => "ajax/daily_dish", :action => "sortdailydish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
