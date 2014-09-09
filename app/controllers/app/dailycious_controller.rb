@@ -33,7 +33,8 @@ class App::DailyciousController < ApplicationController
             :bar_background => "#000000",
             :nav_text => "#ffffff",
             :nav_text_active => "#999999"
-          )
+          ),
+          :dailycious_plan => DailyciousPlan.create()
         })
         for i in 1..5
           DailyciousCredit.create(

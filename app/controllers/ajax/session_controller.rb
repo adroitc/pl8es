@@ -113,7 +113,8 @@ class Ajax::SessionController < ApplicationController
           ),
           :supportedFont => SupportedFont.first,
           :download_code => download_code,
-          :background_type => "color"
+          :background_type => "color",
+          :dailycious_plan => DailyciousPlan.create()
         })
         
         for i in 1..5
