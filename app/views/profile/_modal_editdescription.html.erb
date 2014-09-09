@@ -22,7 +22,7 @@
       %>
       <span class="tab-pane <%="active" if language == @user.restaurant.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
         <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("profile.account_restaurant_description") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.default_language == language %></label>
-	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<%=t("profile.account_restaurant_description_placeholder") %>" <%="required" if language == @user.restaurant.default_language %> data-validate="maxlength[400]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>"><%=@user.restaurant.description %></textarea>
+	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("profile.account_restaurant_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="<%="required," if language == @user.restaurant.default_language %>maxlength[400]" data-message-required="<% I18n.locale = current_locale %><%=t("validation.required")+I18n.locale.to_s %><% I18n.locale = language.locale %>" data-message-maxlength="<% I18n.locale = current_locale %><%=t("validation.maxlength",{l:"400"})+I18n.locale.to_s %><% I18n.locale = language.locale %>"><%=@user.restaurant.description %></textarea>
       </span>
       <%
       end

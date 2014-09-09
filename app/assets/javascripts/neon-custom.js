@@ -1097,6 +1097,7 @@ var public_vars = public_vars || {};
 						  opts['rules'][name][rule] = true;
               
 						  message = $field.data('message-' + rule);
+              console.log('message-' + rule+"--"+message);
 						  
 						  if(message)
 						  {
