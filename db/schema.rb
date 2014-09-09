@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909113318) do
+ActiveRecord::Schema.define(version: 20140909140425) do
 
   create_table "beverage_navigation_translations", force: true do |t|
     t.integer  "beverage_navigation_id", null: false
@@ -367,6 +367,7 @@ ActiveRecord::Schema.define(version: 20140909113318) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "successful",         default: false
   end
 
   create_table "requests", force: true do |t|

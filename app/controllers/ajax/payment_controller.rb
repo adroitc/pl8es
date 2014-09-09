@@ -4,8 +4,8 @@ class Ajax::PaymentController < ApplicationController
     payment_table = {
       4.to_s => 4.00,
       20.to_s => 15.00,
-      30.to_s => 19.00,
-      "unlimited" => 19.00
+      30.to_s => 19.00#,
+      #"unlimited" => 19.00
     }
     if @user && !params.values_at(:dacreditplan).include?(nil) && payment_table[params[:dacreditplan]] != nil
       payment_is_recurring = params[:dacreditplan].to_i == 0
@@ -15,7 +15,7 @@ class Ajax::PaymentController < ApplicationController
         :quantity => !payment_is_recurring != 0 ? params[:dacreditplan].to_i : 1,
         :dailycious_plan => !payment_is_recurring ? nil : @user.restaurant.dailycious_plan,
         :amount => payment_table[params[:dacreditplan]],
-        :description => !payment_is_recurring ? t("payment.paypal_payment_description") : "test subscription",#t("payment.paypal_payment_recurring_description"),
+        :description => !payment_is_recurring ? t("payment.paypal_payment_description") : t("payment.paypal_payment_recurring_description"),
       })
       if payment_is_recurring
         @user.restaurant.dailycious_plan.update_attributes({
@@ -56,11 +56,15 @@ class Ajax::PaymentController < ApplicationController
         response = paypal_req.subscribe!(params[:token], payment.paypal_payment_recurring_profile)
         
         response.recurring
-        response.recurring.identifier # => profile_id
+        response.recurring.identifier
         
         render :json => response
         return
       else
+        payment.update_attributes({
+          :paypal_payer_id => params[:PayerID]
+        })
+        
         response = paypal_req.checkout!(
           params[:token],
           params[:PayerID],
@@ -68,6 +72,10 @@ class Ajax::PaymentController < ApplicationController
         )
          
         if response.ack == "Success" && payment.description == t("payment.paypal_payment_description")
+          payment.update_attributes({
+            :successful => true
+          })
+          
           for i in 1..payment.quantity
             DailyciousCredit.create(
               :restaurant => @user.restaurant,
