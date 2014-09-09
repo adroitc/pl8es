@@ -5,9 +5,8 @@
 			<a href="index.html" class="logo">
         <%
         logo = asset_path("logo-pl8.png")
-        if params[:product_referer] == "d"
-          logo = asset_path("logo-dailycious.png")
-        end
+        logo = asset_path("logo-dailycious.png") if params[:product_referer] == "d"
+        logo = asset_path("logo-menumalist.png") if params[:product_referer] == "m"
         %>
 				<img src="<%=logo %>" width="120" alt="" />
 			</a>
