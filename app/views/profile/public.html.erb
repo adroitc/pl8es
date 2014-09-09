@@ -133,8 +133,8 @@
             <%
             for i in 0..6
               current_date = (Date.today.beginning_of_week+i)
-              todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => current_date)
-              todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
+              todays_dailycious_credits = @visit_restaurant.dailycious_credits.where(:usage_date => current_date)
+              todays_daily_dishes = @visit_restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
             %>
             <span class="sorted ui-sortable">
               <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
