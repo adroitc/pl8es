@@ -6,7 +6,7 @@ class LoginController < ApplicationController
     end
   end
   
-  def login_forgot
+  def forgot
     if @user
       redirect_to :controller => "profile", :action => "index"
     end
