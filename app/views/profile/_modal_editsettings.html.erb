@@ -23,6 +23,14 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
+    <div class="col-sm-4 form-group" style="padding:0px;">
+      <label for="form-address" class="control-label"><strong><%=t("profile.account_billing_contact") %></strong></label>
+	    <input name="billing_contact" type="text" class="form-control" id="form-billing_contact" placeholder="<%=t("profile.account_billing_contact_placeholder") %>" value="<%=@user.restaurant.billing_contact %>" data-validate="maxlength[255]" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
     <div class="col-sm-4 form-group" style="padding-left:0px;">
       <label for="form-zip" class="control-label"><strong><%=t("profile.account_zip") %></strong></label>
 	    <input name="zip" type="text" class="form-control" id="form-zip" placeholder="<%=t("profile.account_zip_placeholder") %>" value="<%=@user.restaurant.location.zip %>" data-validate="required,maxlength[255]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>">

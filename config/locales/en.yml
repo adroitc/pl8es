@@ -149,6 +149,8 @@ en:
     account_settings_modal_submit: "EN-Save"
     account_default_language: "EN-Default language"
     account_default_language_select: "EN-Select default language"
+    account_billing_contact: "EN-Billing contact"
+    account_billing_contact_placeholder: "EN-Billing contact placeholder"
     account_address: "EN-Address"
     account_address_placeholder: "EN-25 Broad St"
     account_zip: "EN-Zip code"

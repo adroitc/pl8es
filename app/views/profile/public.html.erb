@@ -89,7 +89,7 @@
                 <%=@visit_restaurant.categories.last.title %>
      					</li>
               <% end %>
-              <% if @visit_restaurant.website %>
+              <% if @visit_restaurant.website && @visit_restaurant.website.length > 0 %>
      					<li>
                 <a href="<%=@visit_restaurant.website %>" target="_blank">
                   <i class="entypo-globe"></i>
@@ -97,7 +97,7 @@
                 </a>
      					</li>
               <% end %>
-              <% if @visit_restaurant.telephone %>
+              <% if @visit_restaurant.telephone && @visit_restaurant.telephone.length > 0 %>
      					<li>
                 <i class="entypo-phone"></i>
                 <%=@visit_restaurant.telephone %>
