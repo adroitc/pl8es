@@ -84,13 +84,13 @@ class Ajax::SessionController < ApplicationController
   
   def signup_user
     if !@user && session[:signup] && !params.values_at(:email, :password).include?(nil)
-      @user = User.create(params.permit(:email, :password).merge({
-        :password_confirmation => params[:password_confirmation],
+      @user = User.new(params.permit(:email, :password).merge({
+        :password_confirmation => params[:password],
         :last_login => DateTime.now,
         :product_referer => session[:signup][:product_referer]
       }))
       
-      if @user.errors.count == 0 && !@user.blank?
+      if @user.valid? && @user.errors.count == 0
         download_code = SecureRandom.hex(3).upcase
         while Restaurant.find_by_download_code(download_code).present?
           download_code = SecureRandom.hex(3).upcase
@@ -151,6 +151,7 @@ class Ajax::SessionController < ApplicationController
         return
       end
     end
+    puts "========================\n========================\n========================\n========================\n#{@user.errors.messages.to_json}\n========================\n========================\n========================\n========================"
     render :json => {:status => "invalid"}
   end
   
