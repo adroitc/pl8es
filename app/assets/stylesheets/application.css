@@ -13,6 +13,7 @@
  * jquery-ui-1.10.3.custom.min
  * require "neon.css"
  *= require "font-icons/entypo/css/entypo"
+ *= require "font-icons/font-awesome/css/font-awesome.min"
  *= require "bootstrap"
  *= require "neon-core"
  *= require "neon-theme"
