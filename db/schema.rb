@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910145820) do
+ActiveRecord::Schema.define(version: 20140910175847) do
 
   create_table "beverage_navigation_translations", force: true do |t|
     t.integer  "beverage_navigation_id", null: false
@@ -373,6 +373,7 @@ ActiveRecord::Schema.define(version: 20140910145820) do
     t.integer  "invoice_pdf_file_size"
     t.datetime "invoice_pdf_updated_at"
     t.string   "invoice_pdf_dimensions"
+    t.string   "billing_contact"
   end
 
   create_table "requests", force: true do |t|

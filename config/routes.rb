@@ -143,7 +143,8 @@ Pl8es::Application.routes.draw do
   
   #invoice
   resources :invoice, :only => []
-  get "/invoices/invoice/:payment_id" => "invoice#pdf"
+  get "/invoices" => "invoice#index"
+  #get "/invoices/invoice/:payment_id" => "invoice#pdf"
   
   #menumalist
   resources :menumalist, :only => []

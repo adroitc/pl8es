@@ -190,7 +190,7 @@
       <div id="details" class="clearfix">
         <div id="client">
           <div class="to"><%=t("payment.invoice_invoice_to") %></div>
-          <h2 class="name"><%=@payment.user.restaurant.name %></h2>
+          <h2 class="name"><%=@payment.billing_contact %></h2>
           <div class="address"><%=@payment.user.restaurant.location.address+", "+@payment.user.restaurant.location.zip+" "+@payment.user.restaurant.location.city %></div>
           <div class="address"><%=@payment.user.restaurant.location.country %></div>
           <div class="email"><a href="mailto:<%=@payment.user.email %>"><%=@payment.user.email %></a></div>

@@ -16,6 +16,7 @@ class Ajax::PaymentController < ApplicationController
         :dailycious_plan => !payment_is_recurring ? nil : @user.restaurant.dailycious_plan,
         :amount => payment_table[params[:dacreditplan]],
         :description => !payment_is_recurring ? t("payment.paypal_payment_description") : t("payment.paypal_payment_recurring_description"),
+        :billing_contact => @user.restaurant.billing_contact && @user.restaurant.billing_contact.length > 0 ? @user.restaurant.billing_contact : @user.restaurant.name
       })
       if payment_is_recurring
         @user.restaurant.dailycious_plan.update_attributes({
