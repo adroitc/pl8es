@@ -69,7 +69,6 @@ de:
     paypal_item_dailycious_credits_title: "%{c} Daili-Paket"
     paypal_item_dailycious_credits_description: "entspricht %{c} Mittagsgerichten"
     paypal_payment_recurring_description: "dailycious - Daili-Plan (Guthaben)"
-
     
   signup:
     welcome: "Richten Sie Ihr kostenloses Konto ein, in nur wenigen Schritten."
@@ -210,6 +209,7 @@ de:
     daily_dish_modal_add_title: "Mittagsgericht hinzufügen"
     daily_dish_modal_edit_title: "Mittagsgericht ändern"
     daily_dish_modal_add_cancel: "Abbrechen"
+    daily_dish_modal_add_submit_buy: "Mittagsgericht speichern"
     daily_dish_modal_add_submit: "Mittagsgericht hinzufügen"
     daily_dish_modal_edit_cancel: "Abbrechen"
     daily_dish_modal_edit_submit: "Speichern"
