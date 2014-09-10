@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
     :minimum => 8,
     :maximum => 255
   }, :format => {
-    :with => /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/
+    :with => /\A^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$\Z/
   }
   
 	def self.loggedIn(session)
