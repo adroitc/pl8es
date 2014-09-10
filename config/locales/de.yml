@@ -218,6 +218,9 @@ de:
     daily_dish_title_placeholder: "z.B. Wiener Schnitzel"
     daily_dish_price: "Preis"
     daily_dish_price_placeholder: "7,50"
+    dailycious_plan_modal_title: "Dailycious credits"
+    dailycious_plan_modal_cancel: "Cancel"
+    dailycious_plan_modal_submit: "Buy"
   
   menumalist:
     menumalist_title: "Menumalist - alle Speisekarten"

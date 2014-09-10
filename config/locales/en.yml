@@ -218,6 +218,9 @@ en:
     daily_dish_title_placeholder: "e.g. Spaghetti Bolognaise"
     daily_dish_price: "Price"
     daily_dish_price_placeholder: "8,00"
+    dailycious_plan_modal_title: "Dailycious credits"
+    dailycious_plan_modal_cancel: "Cancel"
+    dailycious_plan_modal_submit: "Buy"
   
   menumalist:
     menumalist_title: "Menumalist - all menus"

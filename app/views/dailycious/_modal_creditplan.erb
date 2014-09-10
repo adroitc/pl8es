@@ -1,4 +1,4 @@
-<%= neon_modal :id => "dacreditplan", :width => "678px", :title => "Dailycious credits" do |m| %>
+<%= neon_modal :id => "dacreditplan", :width => "678px", :title => t("dailycious.dailycious_plan_modal_title") do |m| %>
 <%= form_tag({:controller => "ajax/payment", :action => "dasetupcreditplan"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_design"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -49,8 +49,8 @@ $("#form-dacreditplan.ui-selectable").each(function(){
 <% if @user.restaurant.dailycious_plan.status > 1 %>
 <%=render :partial => "neon/modal_footer_cancel_plan" %>
 <% end %>
-<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-<button id="form-buybutton" type="submit" class="btn btn-info hidden">Buy</button>
+<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("dailycious.dailycious_plan_modal_cancel") %></button>
+<button id="form-buybutton" type="submit" class="btn btn-info hidden"><%=t("dailycious.dailycious_plan_modal_submit") %></button>
 <% end %>
 <% end %>
 <% end %>
