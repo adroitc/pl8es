@@ -247,27 +247,30 @@ footer {
         <tbody>
           <tr>
             <td class="no">01</td>
-            <td class="desc"><h3><%=@payment.description %></h3>Creating a recognizable design solution based on the company's existing visual identity</td>
-            <td class="unit">40,00€</td>
-            <td class="qty">30</td>
-            <td class="total">1 200,00€</td>
+            <td class="desc">
+              <h3><%=@payment.description %></h3>
+              <p><%=t("dailycious.equal_of_n_dailis", {:n => @payment.quantity}) %></p>
+            </td>
+            <td class="unit"><%=number_to_currency(@payment.amount/@payment.quantity, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
+            <td class="qty"><%=@payment.quantity %></td>
+            <td class="total"><%=number_to_currency(@payment.amount, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">Sub Total</td>
-            <td>5 200,00€</td>
+            <td><%=number_to_currency(@payment.amount, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">VAT 20%</td>
-            <td>1 300,00€</td>
+            <td><%=number_to_currency(@payment.amount*0.2, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">Grand Total</td>
-            <td>6 500,00€</td>
+            <td><%=number_to_currency(@payment.amount*1.2, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
         </tfoot>
       </table>

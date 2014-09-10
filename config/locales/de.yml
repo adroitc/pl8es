@@ -70,6 +70,23 @@ de:
     paypal_item_dailycious_credits_description: "entspricht %{c} Mittagsgerichten"
     paypal_payment_recurring_description: "dailycious - Daili-Plan (Guthaben)"
     
+    invoice_invoice_to: "INVOICE TO"
+    invoice_invoice: "INVOICE"
+    invoice_date_of_invoice: "Date of invoice:"
+    invoice_description: "DESCRIPTION"
+    invoice_unit_price: "UNIT PRICE"
+    invoice_quantity: "QUANTITY"
+    invoice_total: "TOTAL"
+    invoice_sub_total: "Sub Total"
+    invoice_tax_total: "MwSt"
+    invoice_grand_total: "Grand total"
+    invoice_payment_method: "ZAHLUNGSMETHODE:"
+    invoice_payment_method_paypal: "PayPal"
+    invoice_thank_you: "Thank you!"
+    invoice_notice: "NOTICE"
+    invoice_notice_msg: "A finance charge of 1.5% will be made on unpaid balances after 30 days."
+    invoice_footer: "Invoice was created on a computer and is valid without the signature and seal."
+    
   signup:
     welcome: "Richten Sie Ihr kostenloses Konto ein, in nur wenigen Schritten."
     restaurant_name_placeholder: "Restaurantname"

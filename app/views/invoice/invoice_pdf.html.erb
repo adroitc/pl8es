@@ -223,76 +223,71 @@ footer {
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-          <div class="to">INVOICE TO:</div>
+          <div class="to"><%=t("payment.invoice_invoice_to") %></div>
           <h2 class="name"><%=@payment.user.restaurant.name %></h2>
           <div class="address"><%=@payment.user.restaurant.location.address+", "+@payment.user.restaurant.location.zip+" "+@payment.user.restaurant.location.city %></div>
           <div class="address"><%=@payment.user.restaurant.location.country %></div>
           <div class="email"><a href="mailto:<%=@payment.user.email %>"><%=@payment.user.email %></a></div>
         </div>
         <div id="invoice">
-          <h1>INVOICE <%=@payment.updated_at %></h1>
-          <div class="date">Date of Invoice: DD. Month YYYY</div>
+          <h1><%=t("payment.invoice_invoice") %> <%=@payment.updated_at.strftime("%Y%m")+"-"+@payment.id.to_s.rjust(4, "0") %></h1>
+          <div class="date"><%=t("payment.invoice_date_of_invoice") %> <%=@payment.updated_at.strftime("%d. %B %Y") %></div>
         </div>
       </div>
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr style="opacity: 0.5;">
             <th class="no">#</th>
-            <th class="desc">DESCRIPTION</th>
-            <th class="unit">UNIT PRICE</th>
-            <th class="qty">QUANTITY</th>
-            <th class="total">TOTAL</th>
+            <th class="desc"><%=t("payment.invoice_description") %></th>
+            <th class="unit"><%=t("payment.invoice_unit_price") %></th>
+            <th class="qty"><%=t("payment.invoice_quantity") %></th>
+            <th class="total"><%=t("payment.invoice_total") %></th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="no">01</td>
-            <td class="desc"><h3>Website Design</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
-            <td class="unit">40,00€</td>
-            <td class="qty">30</td>
-            <td class="total">1 200,00€</td>
-          </tr>
-          <tr>
-            <td class="no">02</td>
-            <td class="desc"><h3>Website Development</h3>Developing a Content Management System-based Website</td>
-            <td class="unit">40,00€</td>
-            <td class="qty">80</td>
-            <td class="total">3 200,00€</td>
-          </tr>
-          <tr>
-            <td class="no">03</td>
-            <td class="desc"><h3>Search Engines Optimization</h3>Optimize the site for search engines (SEO)</td>
-            <td class="unit">40,00€</td>
-            <td class="qty">20</td>
-            <td class="total">800,00€</td>
+            <td class="desc">
+              <h3><%=@payment.description %></h3>
+              <p><%=t("dailycious.equal_of_n_dailis", {:n => @payment.quantity}) %></p>
+            </td>
+            <td class="unit"><%=number_to_currency(@payment.amount/@payment.quantity, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
+            <td class="qty"><%=@payment.quantity %></td>
+            <td class="total"><%=number_to_currency(@payment.amount, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="2"></td>
-            <td colspan="2">Sub Total</td>
-            <td>5 200,00€</td>
+            <td colspan="2"><%=t("payment.invoice_sub_total") %></td>
+            <td><%=number_to_currency(@payment.amount, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
           <tr>
             <td colspan="2"></td>
-            <td colspan="2">VAT 20%</td>
-            <td>1 300,00€</td>
+            <td colspan="2"><%=t("payment.invoice_tax_total") %></td>
+            <td><%=number_to_currency(@payment.amount*0.2, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
           <tr>
             <td colspan="2"></td>
-            <td colspan="2">Grand Total</td>
-            <td>6 500,00€</td>
+            <td colspan="2"><%=t("payment.invoice_grand_total") %></td>
+            <td><%=number_to_currency(@payment.amount*1.2, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
           </tr>
         </tfoot>
       </table>
-      <div id="thanks">Thank you!</div>
       <div id="notices">
-        <div>NOTICE:</div>
-        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+        <div><%=t("payment.invoice_payment_method") %></div>
+        <div class="notice"><%=t("payment.invoice_payment_method_paypal") %></div>
+      </div>
+      <br />
+      <br />
+      <div id="thanks"><%=t("payment.invoice_thank_you") %></div>
+      <div id="notices">
+        <div><%=t("payment.invoice_notice") %></div>
+        <div class="notice"><%=t("payment.invoice_notice_msg") %></div>
       </div>
     </main>
     <footer>
-      Invoice was created on a computer and is valid without the signature and seal.
+      <%=t("payment.invoice_footer") %>
     </footer>
   </body>
 </html>
