@@ -138,11 +138,13 @@ class Ajax::SessionController < ApplicationController
         if @user.product_referer == "d"
           redirect_url = url_for(:controller => "/dailycious", :action => "index")
           
-          @user.send_mail("dailycious", t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>@user.restaurant.name}))
+          @user.send_mail(t("email.signup_dailycious_send"), t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>@user.restaurant.name}))
         elsif @user.product_referer == "m"
           redirect_url = url_for(:controller => "/menumalist", :action => "index")
           
-          @user.send_mail("menumalist", t("email.signup_menumalist_subj"), t("email.signup_menumalist_msg",{:n=>@user.restaurant.name,:e=>@user.email,:c=>@user.restaurant.download_code}))
+          @user.send_mail(t("email.signup_menumalist_send"), t("email.signup_menumalist_subj"), t("email.signup_menumalist_msg",{:n=>@user.restaurant.name,:e=>@user.email,:c=>@user.restaurant.download_code}))
+        else
+          @user.send_mail(t("email.signup_pl8_send"), t("email.signup_pl8_subj"), t("email.signup_pl8_msg",{:n=>@user.restaurant.name,:e=>@user.email}))
         end
         
         session[:user_id] = @user.id
@@ -236,7 +238,7 @@ class Ajax::SessionController < ApplicationController
         :reset_date => DateTime.now
       })
       
-      @user.send_mail("pl8", "Forgot password", url_for(:controller => "/login", :action => "forgot_reset", :user_id => @user.id, :reset_token => token))
+      @user.send_mail(t("email.password_forgot_send"), t("email.password_forgot_subj"), t("email.password_forgot_msg",{:l=>url_for(:controller => "/login", :action => "forgot_reset", :user_id => @user.id, :reset_token => token)}))
       
       render :json => {:status => "valid"}
       return
