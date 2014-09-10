@@ -5,6 +5,9 @@ ruby "2.1.1"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "4.0.2"
 
+# Make sure gem is defined BEFORE any other gems that use environment variables
+gem 'dotenv-rails', :groups => [:development, :test]
+
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 4.0.0"
 
@@ -14,16 +17,13 @@ gem "uglifier", ">= 1.3.0"
 # Use CoffeeScript for .js.coffee assets and views
 gem "coffee-rails", "~> 4.0.0"
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem "therubyracer", platforms: :ruby
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem "sdoc", require: false
 end
 
 group :assets do
-  gem "therubyracer"
+  gem "therubyracer", "0.11.3"
   gem "less-rails"
   gem "twitter-bootstrap-rails"
 end
@@ -31,17 +31,17 @@ end
 group :development do
   # Use sqlite3 as the database for Active Record
   gem "sqlite3"
-  
   gem "better_errors"
   gem "binding_of_caller"
-  
-  gem "dotenv-rails"
+  gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
 end
 
 group :production do
   # Use postres for heroku/hetzner
   gem "pg"
-  
+
   # Use rails_12factor for heroku
   gem "rails_12factor"
 end
@@ -63,7 +63,6 @@ gem "jsonify"
 
 # encryption
 gem "bcrypt-ruby", :require => "bcrypt"
-#gem "mysql"
 
 # languages
 gem "rename"

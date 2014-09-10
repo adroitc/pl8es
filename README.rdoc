@@ -1,3 +1,0 @@
-== pl8.cc
-
-Official pl8.cc repository.
