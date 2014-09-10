@@ -1,6 +1,6 @@
 de:
   email:
-    signup_dailycious_send: "Dailycious"
+    signup_dailycious_send: "Dailycious Team"
     signup_dailycious_subj: "Anmeldung bei dailycious"
     signup_dailycious_msg: "Hallo %{n},\n\nWillkommen bei dailycious, schön, dass Sie da sind!\n\nJetzt einfach loslegen:\n\n- Restaurant Logo hochladen: http://app.pl8.cc/dailycious\n- App herunterladen: http://dailycious.co/app\n- Tagesgerichte publizieren http://app.pl8.cc/dailycious\n\nGenießen Sie dailycious!\n\nIhr dailycious Team"
     signup_menumalist_send: "Menumalist"
