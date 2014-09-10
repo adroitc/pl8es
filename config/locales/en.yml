@@ -221,7 +221,7 @@ en:
     change_plan: "get more"
     equal_of_n_dailis: "equals %{n} lunch dishes"
     unlimited: "unlimited"
-    payment_introduction: "We have devised these payment plans for you <\br> (excl. VAT):"
+    payment_introduction: "We have devised these payment plans for you (excl. VAT):"
     
     daily_dish_modal_add_title: "Add lunch dish"
     daily_dish_modal_edit_title: "Edit lunch dish"

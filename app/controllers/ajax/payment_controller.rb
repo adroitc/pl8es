@@ -72,27 +72,48 @@ class Ajax::PaymentController < ApplicationController
         )
          
         if response.ack == "Success" && payment.description == t("payment.paypal_payment_description")
-          payment.update_attributes({
-            :successful => true
-          })
+          @payment = payment
+          invoice_pdf_string = WickedPdf.new.pdf_from_string(
+            render_to_string("/invoice/pdf"),
+            :encoding => "utf8"
+            #:layout => false,
+            #:page_size => "Letter",
+            #:lowquality => false,
+            #:handlers => [:erb],
+            #:formats => [:html],
+            #:margin => {
+            #  :top    => 5,
+            #  :bottom => 0,
+            #  :left   => 0,
+            #  :right  => 0
+            #},
+            #:orientation => "Portrait",
+            #:disposition => "attachment"
+          )
+          @payment.save_invoice invoice_pdf_string
+          if @payment.invoice_pdf.exists?
+            payment.update_attributes({
+              :successful => true,
+            })
           
-          for i in 1..payment.quantity
-            DailyciousCredit.create(
-              :restaurant => @user.restaurant,
-              :payment => payment
-            )
-          end
+            for i in 1..payment.quantity
+              DailyciousCredit.create(
+                :restaurant => @user.restaurant,
+                :payment => payment
+              )
+            end
           
-          last_daily_dish = @user.restaurant.daily_dishes.last
+            last_daily_dish = @user.restaurant.daily_dishes.last
           
-          if last_daily_dish
-            todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => last_daily_dish.display_date.to_date)
-            todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => last_daily_dish.display_date)
+            if last_daily_dish
+              todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => last_daily_dish.display_date.to_date)
+              todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => last_daily_dish.display_date)
             
-            if todays_daily_dishes.count > todays_dailycious_credits.count+1 && params[:buydailydish] && params[:buydailydish] == "1"
-              @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
-                :usage_date => last_daily_dish.display_date.to_date
-              })
+              if todays_daily_dishes.count > todays_dailycious_credits.count+1 && params[:buydailydish] && params[:buydailydish] == "1"
+                @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
+                  :usage_date => last_daily_dish.display_date.to_date
+                })
+              end
             end
           end
         end

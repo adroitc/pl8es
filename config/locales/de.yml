@@ -221,7 +221,7 @@ de:
     change_plan: "mehr kaufen"
     equal_of_n_dailis: "entspricht %{n} Mittagsgerichten"
     unlimited: "unbegrenzten"
-    payment_introduction: "Wir haben die folgenden Pakete für Sie <\br> (exkl. MwSt):"
+    payment_introduction: "Wir haben die folgenden Pakete für Sie (exkl. MwSt):"
     
     daily_dish_modal_add_title: "Mittagsgericht hinzufügen"
     daily_dish_modal_edit_title: "Mittagsgericht ändern"

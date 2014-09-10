@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909140425) do
+ActiveRecord::Schema.define(version: 20140910145820) do
 
   create_table "beverage_navigation_translations", force: true do |t|
     t.integer  "beverage_navigation_id", null: false
@@ -361,13 +361,18 @@ ActiveRecord::Schema.define(version: 20140909140425) do
     t.string   "paypal_payment_id"
     t.string   "paypal_token"
     t.string   "paypal_payer_id"
-    t.boolean  "recurring",          default: false
+    t.boolean  "recurring",                default: false
     t.integer  "quantity"
     t.decimal  "amount"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "successful",         default: false
+    t.boolean  "successful",               default: false
+    t.string   "invoice_pdf_file_name"
+    t.string   "invoice_pdf_content_type"
+    t.integer  "invoice_pdf_file_size"
+    t.datetime "invoice_pdf_updated_at"
+    t.string   "invoice_pdf_dimensions"
   end
 
   create_table "requests", force: true do |t|

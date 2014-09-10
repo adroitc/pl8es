@@ -21,7 +21,7 @@
         <li class="col-sm-4" style="text-align:center;padding:4px;" data-credit="<%=k %>">
           <h1 style="display:inline;"><%=k %></h1> <h3 style="display:inline;"><%=t("dailycious.dailis") %></h3>
           <p><%=t("dailycious.equal_of_n_dailis", {:n => k}) %></p>
-          <h4><%=v.to_s.gsub(".",",") %>0 € <%="/mo" if k == "unlimited" %></h4>
+          <h4><%=number_to_currency(v, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %> <%="/mo" if k == "unlimited" %></h4>
         </li>
         <% end %>
       </ul>

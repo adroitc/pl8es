@@ -72,7 +72,7 @@ gem "globalize", "~> 4.0.1"
 # paperclip
 gem "paperclip"
 gem "aws-sdk"
-gem "paperclip-dimension"
+gem "paperclip-dimension", :git => "git://github.com/mroem/paperclip-dimension.git"
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
 # location

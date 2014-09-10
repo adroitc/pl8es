@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/mroem/paperclip-dimension.git
+  revision: d424c621fbbf443fa495c65d86e191754c7415ee
+  specs:
+    paperclip-dimension (0.2.1)
+      paperclip (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -110,8 +117,6 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    paperclip-dimension (0.2.1)
-      paperclip (>= 3.0)
     paypal-express (0.6.0)
       activesupport (>= 2.3)
       attr_required (>= 0.0.5)
@@ -213,7 +218,7 @@ DEPENDENCIES
   jsonify
   less-rails
   paperclip
-  paperclip-dimension
+  paperclip-dimension!
   paypal-express
   pg
   rails (= 4.0.2)
