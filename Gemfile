@@ -56,7 +56,6 @@ end
 # gem "debugger", group: [:development, :test]
 
 # payment
-gem "paypal-sdk-rest"
 gem "paypal-express"
 
 # json

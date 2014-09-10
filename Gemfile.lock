@@ -116,12 +116,6 @@ GEM
       activesupport (>= 2.3)
       attr_required (>= 0.0.5)
       restclient_with_cert
-    paypal-sdk-core (0.3.0)
-      multi_json (~> 1.0)
-      xml-simple
-    paypal-sdk-rest (0.7.0)
-      paypal-sdk-core (~> 0.3.0)
-      uuidtools (~> 2.1)
     pg (0.17.1)
     polyglot (0.3.5)
     rack (1.5.2)
@@ -195,7 +189,6 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    uuidtools (2.1.5)
     wicked_pdf (0.11.0)
       rails
     wkhtmltopdf-binary (0.9.9.3)
@@ -222,7 +215,6 @@ DEPENDENCIES
   paperclip
   paperclip-dimension
   paypal-express
-  paypal-sdk-rest
   pg
   rails (= 4.0.2)
   rails_12factor
