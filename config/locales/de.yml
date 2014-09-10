@@ -221,7 +221,7 @@ de:
     change_plan: "mehr kaufen"
     equal_of_n_dailis: "entspricht %{n} Mittagsgerichten"
     unlimited: "unbegrenzten"
-    payment_introduction: "Wir haben die folgenden Pakete für Sie."
+    payment_introduction: "Wir haben die folgenden Pakete für Sie <\br> (exkl. MwSt):"
     
     daily_dish_modal_add_title: "Mittagsgericht hinzufügen"
     daily_dish_modal_edit_title: "Mittagsgericht ändern"
@@ -235,9 +235,9 @@ de:
     daily_dish_title_placeholder: "z.B. Wiener Schnitzel"
     daily_dish_price: "Preis"
     daily_dish_price_placeholder: "7,50"
-    dailycious_plan_modal_title: "Dailycious credits"
-    dailycious_plan_modal_cancel: "Cancel"
-    dailycious_plan_modal_submit: "Buy"
+    dailycious_plan_modal_title: "Dailycious Guthaben"
+    dailycious_plan_modal_cancel: "Abbrechen"
+    dailycious_plan_modal_submit: "Kaufen"
   
   menumalist:
     menumalist_title: "Menumalist - alle Speisekarten"
