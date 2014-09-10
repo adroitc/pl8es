@@ -82,6 +82,10 @@ gem "geokit-rails"
 # RestClient
 gem "rest-client"
 
+# PDF
+gem "wicked_pdf"
+gem "wkhtmltopdf-binary"
+
 # Use jquery as the JavaScript library
 gem "jquery-rails"
 

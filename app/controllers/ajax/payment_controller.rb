@@ -30,8 +30,8 @@ class Ajax::PaymentController < ApplicationController
       )
       response = paypal_req.setup(
         payment.paypal_payment_request,
-        url_for({:host => "http://app.pl8.cc/", :controller => "ajax/payment", :action => "datransfercreditplan"}.merge(params.permit(:buydailydish))),
-        url_for(:host => "http://app.pl8.cc/", :controller => "/dailycious", :action => "index")
+        url_for({:controller => "ajax/payment", :action => "datransfercreditplan"}.merge(params.permit(:buydailydish))),
+        url_for(:controller => "/dailycious", :action => "index")
       )
       payment.update_attributes({
         :paypal_token => response.token
@@ -97,10 +97,6 @@ class Ajax::PaymentController < ApplicationController
           end
         end
       end
-
-      payment.update_attributes({
-        :paypal_payer_id => params[:PayerID]
-      })
       
       redirect_to :controller => "/dailycious", :action => "index"
       return

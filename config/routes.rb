@@ -141,6 +141,11 @@ Pl8es::Application.routes.draw do
   get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
   get "/restaurant" => "profile#index"
   
+  #invoice
+  resources :invoice, :only => []
+  get "/invoices/invoice" => "invoice#invoice"
+  get "/invoices/invoice.pdf" => "invoice#invoice_pdf"
+  
   #menumalist
   resources :menumalist, :only => []
   get "/menumalist" => "menumalist#index"
