@@ -238,6 +238,7 @@ class Ajax::SessionController < ApplicationController
         :reset_date => DateTime.now
       })
       
+      I18n.locale = @user.restaurant.default_language.locale
       @user.send_mail(t("email.password_forgot_send"), t("email.password_forgot_subj"), t("email.password_forgot_msg",{:l=>url_for(:controller => "/login", :action => "forgot_reset", :user_id => @user.id, :reset_token => token)}))
       
       render :json => {:status => "valid"}
