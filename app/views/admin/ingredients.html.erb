@@ -1,7 +1,7 @@
 <% content_for :body_class, "page-body" %>
 <div class="page-container">
   <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader" %>
+    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-pl8.png")} %>
     <%=render :partial => "layouts/menu" %>
   </div>
   <div class="main-content">
@@ -35,6 +35,14 @@
               <td>
                 <a href="javascript:;" onclick="jQuery('#modal-editingredient-<%=ingredient.id %>').modal('show');">
                   <%=ingredient.title %>
+                </a>
+              </td>
+              <td>
+                <a href="javascript:;" onclick="jQuery('#modal-editingredient-<%=ingredient.id %>').modal('show');">
+                  <button type="button" class="btn btn-info btn-icon icon-left">
+                  	Edit Ingredient
+                  	<i class="entypo-pencil"></i>
+                  </button>
                 </a>
               </td>
             </tr>

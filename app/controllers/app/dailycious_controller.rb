@@ -4,7 +4,7 @@ class App::DailyciousController < ApplicationController
   
   def signup
     if @device && !@user && !params.values_at(:name, :address, :zip, :city, :country, :email, :password).include?(nil)
-      @user = User.create(params.permit(:email, :password).merge({
+      @user = User.new(params.permit(:email, :password).merge({
         :password_confirmation => params[:password],
         :last_login => DateTime.now,
         :product_referer => "d"
@@ -13,7 +13,7 @@ class App::DailyciousController < ApplicationController
       while Restaurant.find_by_download_code(download_code).present?
         download_code = SecureRandom.hex(3).upcase
       end
-      restaurant = Restaurant.create(params.permit(:name, :logo_image).merge({
+      restaurant = Restaurant.new(params.permit(:name, :logo_image).merge({
         :user => @user,
         :default_language => Language.first,
         :menuColorTemplate => MenuColorTemplate.first,
@@ -21,9 +21,11 @@ class App::DailyciousController < ApplicationController
         :download_code => download_code,
         :background_type => "color"
       }))
-      address = Location.validate_address({:address => "test"})
+      address = Location.validate_address(params.permit(:address, :zip, :city, :country))
       
-      if @user.errors.count == 0 && restaurant.errors.count == 0 && addres != nil
+      if @user.valid? && @user.errors.count == 0 && restaurant.valid? && restaurant.errors.count == 0 && address != nil
+        @user.save
+        restaurant.save
         restaurant.update_attributes({
           :location => Location.create(address),
           :menuColor => MenuColor.create(
@@ -31,8 +33,14 @@ class App::DailyciousController < ApplicationController
             :bar_background => "#000000",
             :nav_text => "#ffffff",
             :nav_text_active => "#999999"
-          )
+          ),
+          :dailycious_plan => DailyciousPlan.create()
         })
+        for i in 1..5
+          DailyciousCredit.create(
+            :restaurant => restaurant
+          )
+        end
         
         if @device
           @device.update_attributes({
@@ -120,7 +128,7 @@ class App::DailyciousController < ApplicationController
   
   def profile
     if @device && @user && !params.values_at(:name, :address, :zip, :city, :country).include?(nil)
-      address = Location.validate_address({:address => "test"})
+      address = Location.validate_address(params.permit(:address, :zip, :city, :country))
       
       @user.restaurant.attributes = params.permit(:name)
       if @user.restaurant.save && @user.restaurant.errors.count == 0 && address != nil
@@ -306,17 +314,6 @@ class App::DailyciousController < ApplicationController
   
   def map
     if @device && !params.values_at(:q).include?(nil)
-      #restaurants = Restaurant.where([
-      #  "id IN (?)",
-      #  DailyDish.find(
-      #    :all,
-      #    :select => "restaurant_id",
-      #    :conditions => [
-      #      "display_date = (?)",
-      #      Date.today.to_datetime
-      #    ]
-      #  ).map{|d| d.restaurant_id}
-      #])
       locations = Location.where([
         "restaurant_id IN (?)",
         DailyDish.find(

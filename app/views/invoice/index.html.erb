@@ -1,0 +1,62 @@
+<% content_for :body_class, "page-body" %>
+<div class="page-container">
+  <div class="sidebar-menu">
+    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-dailycious.png")} %>
+    <%=render :partial => "layouts/menu" %>
+  </div>
+  <div class="main-content">
+    <%=render :partial => "layouts/topbar" %>
+    <ol class="breadcrumb bc-3">
+      <li>
+        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+          <i class="entypo-home"></i>
+          <%=t("layouts.menu.dashboard") %>
+        </a>
+      </li>
+      <li class="active">
+        <strong>
+          <%=t("layouts.menu.dailycious") %>
+        </strong>
+      </li>
+    </ol>
+    <h2><%=t("dailycious.dailycious_title") %></h2>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-striped responsive">
+          <tbody>
+            <tr style="font-size: 18px;">
+              <th>Date</th>
+              <th>Billing contact</th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Download</th>
+            </tr>
+            <% @user.payments.where([
+              "successful = (?)",
+              true
+            ]).order("updated_at DESC").each do |p| %>
+            <tr style="font-size: 18px;">
+              <td><%=p.updated_at.strftime("%d-%m-%Y") %></td>
+              <td><%=p.billing_contact %></td>
+              <td><%=p.description %></td>
+              <td><%=p.quantity %></td>
+              <td><%=number_to_currency(p.amount*1.2, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
+              <td>
+                <a href="<%=p.invoice_pdf.url %>" target="_blank">
+                  <button type="button" class="btn btn-info btn-icon icon-left">
+                  	Download
+                  	<i class="entypo-down-thin"></i>
+                  </button>
+                </a>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%=render :partial => "layouts/footer" %>
+  </div>
+</div>

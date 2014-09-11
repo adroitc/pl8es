@@ -5,9 +5,6 @@ ruby "2.1.1"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "4.0.2"
 
-# Use sqlite3 as the database for Active Record
-#gem "sqlite3"
-
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 4.0.0"
 
@@ -20,21 +17,19 @@ gem "coffee-rails", "~> 4.0.0"
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem "therubyracer", platforms: :ruby
 
-# Use jquery as the JavaScript library
-gem "jquery-rails"
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem "turbolinks"
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 1.2"
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem "sdoc", require: false
 end
 
+group :assets do
+  gem "therubyracer"
+  gem "less-rails"
+  gem "twitter-bootstrap-rails"
+end
+
 group :development do
+  # Use sqlite3 as the database for Active Record
   gem "sqlite3"
   
   gem "better_errors"
@@ -44,49 +39,12 @@ group :development do
 end
 
 group :production do
-  #postgresql for heroku
+  # Use postres for heroku/hetzner
   gem "pg"
+  
+  # Use rails_12factor for heroku
   gem "rails_12factor"
 end
-
-gem "jquery-ui-rails"
-
-# payment
-gem "paypal-sdk-rest"
-gem "paypal-express"
-
-# json
-gem "jsonify"
-
-# encryption
-gem "bcrypt-ruby", :require => "bcrypt"
-gem "mysql"
-
-# languages
-gem "rename"
-gem "globalize", "~> 4.0.1"
-#gem "i18n-js"
-
-# paperclip
-gem "paperclip"
-gem "aws-sdk"
-gem "paperclip-dimension"
-gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
-
-# location
-gem "geokit-rails"
-
-# rest
-gem "rest-client"
-
-group :assets do
-  gem "therubyracer"
-  gem "less-rails"
-  gem "twitter-bootstrap-rails"
-end
-
-# Use ActiveModel has_secure_password
-# gem "bcrypt-ruby", "~> 3.1.2"
 
 # Use unicorn as the app server
 # gem "unicorn"
@@ -96,3 +54,44 @@ end
 
 # Use debugger
 # gem "debugger", group: [:development, :test]
+
+# payment
+gem "paypal-express"
+
+# json
+gem "jsonify"
+
+# encryption
+gem "bcrypt-ruby", :require => "bcrypt"
+#gem "mysql"
+
+# languages
+gem "rename"
+gem "globalize", "~> 4.0.1"
+
+# paperclip
+gem "paperclip"
+gem "aws-sdk"
+gem "paperclip-dimension", :git => "git://github.com/mroem/paperclip-dimension.git"
+gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
+
+# location
+gem "geokit-rails"
+
+# RestClient
+gem "rest-client"
+
+# PDF
+gem "wicked_pdf"
+gem "wkhtmltopdf-binary"
+
+# Use jquery as the JavaScript library
+gem "jquery-rails"
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem "turbolinks"
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem "jbuilder", "~> 1.2"
+
+gem "jquery-ui-rails"

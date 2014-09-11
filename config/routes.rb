@@ -2,6 +2,8 @@ Pl8es::Application.routes.draw do
   
   #app
   resources :app, :only => []
+  resources :app_dailycious, :only => []
+  resources :app_menumalist, :only => []
   #app-get
   get "/app/dailycious/defaults" => "app/dailycious#defaults"
   get "/app/dailycious/useragreement" => "app/dailycious#useragreement"
@@ -21,6 +23,12 @@ Pl8es::Application.routes.draw do
   post "/app/dailycious/edit" => "app/dailycious#editdailydish"
   post "/app/dailycious/sort" => "app/dailycious#sortdailydish"
   
+  #web
+  resources :web, :only => []
+  resources :web_dailycious, :only => []
+  #web-get
+  get "/web/dailycious/list" => "web/dailycious#list"
+  
   #ajax
   resources :ajax, :only => []
   post "/a/design/edit" => "ajax#editdesign"
@@ -31,6 +39,7 @@ Pl8es::Application.routes.draw do
   post "/a/session/signup/restaurant" => "ajax/session#signup_restaurant"
   post "/a/session/signup/user" => "ajax/session#signup_name"
   post "/a/session/login" => "ajax/session#login"
+  post "/a/session/login/forgot" => "ajax/session#login_forgot"
   
   #ajax/admin
   resources :ajax_admin, :only => []
@@ -106,6 +115,8 @@ Pl8es::Application.routes.draw do
   #login
   resources :login, :only => []
   get "/login" => "login#index"
+  get "/login/forgot" => "login#forgot"
+  get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset"
   
   #logout
   resources :logout, :only => []
@@ -129,6 +140,11 @@ Pl8es::Application.routes.draw do
   resources :profile, :only => []
   get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
   get "/restaurant" => "profile#index"
+  
+  #invoice
+  resources :invoice, :only => []
+  get "/invoices" => "invoice#index"
+  #get "/invoices/invoice/:payment_id" => "invoice#pdf"
   
   #menumalist
   resources :menumalist, :only => []

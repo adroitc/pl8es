@@ -3,6 +3,11 @@ class Payment < ActiveRecord::Base
   belongs_to :dailycious_plan
   has_many :dailycious_credits
   
+  has_attached_file :invoice_pdf
+  
+  validates_attachment_content_type :invoice_pdf,
+        :content_type => ["application/pdf"]
+  
   def paypal_payment_request
     if !recurring
       Paypal::Payment::Request.new(
@@ -24,8 +29,7 @@ class Payment < ActiveRecord::Base
       Paypal::Payment::Request.new(
         :currency_code => :EUR,
         :billing_type => "RecurringPayments",
-        :billing_agreement_description => description,
-        #:amount => 10.0
+        :billing_agreement_description => description
         #:items => [{
         #  :quantity => 1,
         #  :name => "UNLIMITED dailis",
@@ -53,6 +57,20 @@ class Payment < ActiveRecord::Base
         :amount => amount
       }]
     )
+  end
+  
+  def save_invoice(pdf_string)
+    unique_pdf_path = updated_at.strftime("%Y%m")+"-"+id.to_s.rjust(4, "0")
+    
+    tempfile = Tempfile.new([unique_pdf_path, ".pdf"], Rails.root.join("tmp"))
+    tempfile.binmode
+    tempfile.write pdf_string
+    tempfile.close
+    
+    self.invoice_pdf = File.open tempfile.path
+    save
+
+    #tempfile.unlink
   end
   
 end

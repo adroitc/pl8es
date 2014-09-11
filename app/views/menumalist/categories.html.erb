@@ -1,7 +1,7 @@
 <% content_for :body_class, "page-body" %>
 <div class="page-container">
   <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader" %>
+    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-menumalist.png")} %>
     <%=render :partial => "layouts/menu" %>
   </div>
   <div class="main-content">

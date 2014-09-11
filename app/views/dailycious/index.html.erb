@@ -1,7 +1,7 @@
 <% content_for :body_class, "page-body" %>
 <div class="page-container">
   <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader" %>
+    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-dailycious.png")} %>
     <%=render :partial => "layouts/menu" %>
   </div>
   <div class="main-content">
@@ -25,10 +25,10 @@
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
   		  	<div class="num">unlimited</div>
-  		  	<h3>dailis</h3>
+  		  	<h3><%=t("dailycious.dailis") %></h3>
           <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              change plan
+              <%=t("dailycious.change_plan") %>
               <i class="entypo-plus"></i>
             </button>
           </p></a>
@@ -40,10 +40,10 @@
   		  	<div class="icon"><i class="entypo-suitcase"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
 			  
-  		  	<h3>dailis</h3>
+  		  	<h3><%=t("dailycious.dailis") %></h3>
           <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              get more
+              <%=t("dailycious.get_more") %>
               <i class="entypo-plus"></i>
             </button>
           </p></a>
@@ -68,9 +68,15 @@
           </button>
         </a>
 				<button type="button" class="col-md-6 btn btn-default" disabled>
-          <%=date.beginning_of_week.strftime('%a, %d %B %Y') %>
+          <%=t("date.#{date.beginning_of_week.strftime("%a")}") %>,
+          <%=date.beginning_of_week.strftime("%d") %>
+          <%=t("date.#{date.beginning_of_week.strftime("%B")}") %>
+          <%=date.beginning_of_week.strftime("%Y") %>
           -
-          <%=date.end_of_week.strftime('%a, %d %B %Y') %>
+          <%=t("date.#{date.end_of_week.strftime("%a")}") %>,
+          <%=date.end_of_week.strftime("%d") %>
+          <%=t("date.#{date.end_of_week.strftime("%B")}") %>
+          <%=date.end_of_week.strftime("%Y") %>
         </button>
         <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i+1) %>">
 				  <button type="button" class="col-md-3 btn btn-white">
@@ -95,7 +101,7 @@
               todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
               %>
               <td width="100px;">
-                <%=current_date.strftime("%A") %>
+                <%=t("date.#{current_date.strftime("%A")}") %>
               </td>
               <td class="row gallery-env draggable-portlets">
                 <%= form_tag({:controller => "ajax/daily_dish", :action => "sortdailydish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>

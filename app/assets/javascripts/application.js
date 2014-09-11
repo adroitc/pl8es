@@ -15,7 +15,7 @@
 
 //= require jquery.min
 // require jquery_ujs
-//= require jquery.ui.all
+//= require jquery-ui
 // require turbolinks
 
 //= require "bootstrap"
@@ -138,11 +138,11 @@ $(document).ready(function()
     if ($(e).val().length == 0){
       return true;
     }
-    return /\A^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$\Z/.test($(e).val());
+    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/.test($(e).val());
   }, "Your password has to include lowercase, uppercase and a number.");
   
   jQuery.validator.addMethod("hexcolor", function(v,e){
-    return /\A(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)\Z/.test($(e).val())
+    return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/.test($(e).val())
   }, "Please enter a valid color code.");
   
   jQuery.validator.addMethod("time", function(v,e){
@@ -299,15 +299,22 @@ function pl8es_f_duplicate(m){
 	  location.reload();
 	});
 }
-function pl8es_f_makedefaultmenu(){
-  $(".pl8es_c_toggledefaultmenu").show();
-  $(".pl8es_c_makedefaultmenu").hide();
-  $(".pl8es_c_revertdefaultmenu").show();
+function pl8es_f_makedefaultmenu(e){
+  console.log(e);
+  var md = e.closest(".pl8es_c_defaultmenu");
+  
+  md.find(".pl8es_c_toggledefaultmenu").show();
+  md.find(".pl8es_c_makedefaultmenu").hide();
+  md.find(".pl8es_c_revertdefaultmenu").show();
+  md.find("input").removeAttr("disabled");
 }
-function pl8es_f_revertdefaultmenu(){
-  $(".pl8es_c_toggledefaultmenu").hide();
-  $(".pl8es_c_makedefaultmenu").show();
-  $(".pl8es_c_revertdefaultmenu").hide();
+function pl8es_f_revertdefaultmenu(e){
+  var md = e.closest(".pl8es_c_defaultmenu");
+  
+  md.find(".pl8es_c_toggledefaultmenu").hide();
+  md.find(".pl8es_c_makedefaultmenu").show();
+  md.find(".pl8es_c_revertdefaultmenu").hide();
+  md.find("input").attr("disabled","disabled");
 }
 function pl8es_f_initdelete(e){
   var md = e.closest(".pl8es-modal-delete");

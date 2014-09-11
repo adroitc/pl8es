@@ -4,6 +4,9 @@ class SignupController < ApplicationController
     if @user
       redirect_to :controller => "profile", :action => "index"
     elsif params[:product_referer]
+      if !session[:signup]
+        session[:signup] = {}
+      end
       session[:signup][:product_referer] = params[:product_referer]
     end
   end

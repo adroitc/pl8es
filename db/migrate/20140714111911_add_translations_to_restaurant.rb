@@ -1,6 +1,6 @@
 class AddTranslationsToRestaurant < ActiveRecord::Migration
   def up
-    Restaurant.create_translation_table! :description => :string
+    Restaurant.create_translation_table! :description => :text
   end
   
   def down

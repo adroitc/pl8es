@@ -45,7 +45,9 @@ class Location < ActiveRecord::Base
           }[0]["long_name"],
           :country => google_results[0]["address_components"].find_all{|item|
             item["types"] == ["country", "political"]
-          }[0]["long_name"]
+          }[0]["long_name"],
+          :latitude => google_results[0]["geometry"]["location"]["lat"].to_f,
+          :longitude => google_results[0]["geometry"]["location"]["lng"].to_f
         }
       end
     end

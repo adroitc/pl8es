@@ -7,29 +7,31 @@
 		<div class="form-group">
 			<label for="form-title" class="control-label"><%=t("menumalist.menu_name") %></label>
       <div class="form-group">
-			  <input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>" required data-validate="minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
+			  <input name="title" type="text" class="form-control" id="form-title" placeholder="<%=t("menumalist.menu_name_placeholder") %>" value="<%=menu.title %>" data-validate="required,minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
       </div>
 		</div>
 	</div>
 </div>
+<% if @user.restaurant.defaultMenu != menu %>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
 			<label class="control-label"><%=t("menumalist.menu_default") %></label>
-      <div class="input-group">
+      <div class="input-group pl8es_c_defaultmenu">
+        <input type="hidden" name="default" value="true" disabled="disabled" />
         <span class="pl8es_c_toggledefaultmenu">
           <button type="button" class="btn btn-green btn-icon disabled icon-left">
           	<%=t("menumalist.menu_default_default") %>
           	<i class="entypo-flag"></i>
           </button>
         </span>
-        <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
+        <a href="javascript:;" onclick="pl8es_f_makedefaultmenu($(this));" class="pl8es_c_makedefaultmenu">
           <button type="button" class="btn btn-default btn-icon icon-left">
           	<%=t("menumalist.menu_default_make_default") %>
           	<i class="entypo-flag"></i>
           </button>
         </a>
-        <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
+        <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu($(this));" class="pl8es_c_revertdefaultmenu">
           <button type="button" class="btn btn-warning btn-xs">
           	<%=t("menumalist.menu_default_default_undo") %>
           </button>
@@ -38,12 +40,13 @@
 		</div>
 	</div>
 </div>
+<% end %>
 <div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
 	<div class="">
   	<div class="col-md-6">
 			<label for="form-from_time" class="control-label"><%=t("menumalist.menu_from") %></label>
       <div class="input-group">
-  	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.from_time %>" data-show-meridian="false" data-minute-step="5" required data-validate="time" data-message-required="<%=t("validation.required") %>" data-message-time="<%=t("validation.time") %>" />
+  	   	<input name="from_time" type="text" class="form-control timepicker" id="form-from_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.from_time %>" data-show-meridian="false" data-minute-step="5" data-validate="required,time" data-message-required="<%=t("validation.required") %>" data-message-time="<%=t("validation.time") %>" />
   	    <div class="input-group-addon">
   	    	<a href="#"><i class="entypo-clock"></i></a>
   	    </div>
@@ -52,7 +55,7 @@
   	<div class="col-md-6">
 			<label for="form-to_time" class="control-label"><%=t("menumalist.menu_to") %></label>
       <div class="input-group">
-  	   	<input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.to_time %>" data-show-meridian="false" data-minute-step="5" required data-validate="time" data-message-required="<%=t("validation.required") %>" data-message-time="<%=t("validation.time") %>" />
+  	   	<input name="to_time" type="text" class="form-control timepicker" id="form-to_time" data-template="dropdown" data-show-seconds="false" data-default-time="<%=menu.to_time %>" data-show-meridian="false" data-minute-step="5" data-validate="required,time" data-message-required="<%=t("validation.required") %>" data-message-time="<%=t("validation.time") %>" />
   	    <div class="input-group-addon">
   	    	<a href="#"><i class="entypo-clock"></i></a>
   	    </div>

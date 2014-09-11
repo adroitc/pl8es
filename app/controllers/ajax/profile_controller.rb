@@ -1,10 +1,10 @@
 class Ajax::ProfileController < ApplicationController
   
   def editsettings
-    if @user && !params.values_at(:default_language, :address, :zip, :city, :country, :email, :password_old, :password_new).include?(nil) && Language.exists?(params[:default_language])
+    if @user && !params.values_at(:default_language, :billing_contact, :address, :zip, :city, :country, :email, :password_old, :password_new).include?(nil) && Language.exists?(params[:default_language])
 
       @user.update_attributes(params.permit(:email))
-      @user.restaurant.update_attributes(params.permit(:email, :website, :telephone).merge({
+      @user.restaurant.update_attributes(params.permit(:billing_contact, :email, :website, :telephone).merge({
         :default_language => Language.find(params[:default_language])
       }))
       

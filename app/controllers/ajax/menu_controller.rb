@@ -19,8 +19,13 @@ class Ajax::MenuController < ApplicationController
         :languages => languages,
         :restaurant => @user.restaurant
       }))
+      if params[:default] == "true" || @user.restaurant.menus.count == 0
+        @user.restaurant.update_attributes({
+          :defaultMenu => new_menu
+        })
+      end
       
-      render :json => {:status => "success"}
+      render :json => {:status => "success", :p => params}
       return
     end
     render :json => {:status => "invalid"}
@@ -47,11 +52,16 @@ class Ajax::MenuController < ApplicationController
         
         menu.update_attributes(params.permit(:title, :from_time, :to_time).merge({
           :default_language => Language.find(params[:default_language].to_i),
-          :languages => languages
+          :languages => languages,
         }))
+        if params[:default] == "true"
+          @user.restaurant.update_attributes({
+            :defaultMenu => menu
+          })
+        end
       end
       
-      render :json => {:status => "success"}
+      render :json => {:status => "success", :p => params}
       return
     end
     render :json => {:status => "invalid"}

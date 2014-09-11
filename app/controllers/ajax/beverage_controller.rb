@@ -4,7 +4,7 @@ class Ajax::BeverageController < ApplicationController
     if @user && !params.values_at(:title).include?(nil)
       new_beverage_page = BeveragePage.create(params.permit(:title).merge({
         :restaurant => @user.restaurant,
-        :position => @user.restaurant.beverage_pages.unscoped.last != nil ? @user.restaurant.beverage_pages.unscoped.last.id : 0
+        :position => @user.restaurant.beveragePages.unscoped.last != nil ? @user.restaurant.beveragePages.unscoped.last.id : 0
       }))
       
       new_beverage_page.update_attributes(params.permit(:image))
@@ -55,10 +55,10 @@ class Ajax::BeverageController < ApplicationController
     if @user && !params.values_at(:beverage_page_id, :title).include?(nil) && @user.restaurant.beveragePages.exists?(params[:beverage_page_id])
       beverage_page = @user.restaurant.beveragePages.find(params[:beverage_page_id])
       
-      new_baverage_navigation = BeverageNavigation.create({
+      new_baverage_navigation = BeverageNavigation.new({
+        :beverage_page => beverage_page,
         :position => beverage_page.beverage_navigations.unscoped.last != nil ? beverage_page.beverage_navigations.unscoped.last.id : 0
       })
-      beverage_page.beverage_navigations.push(new_baverage_navigation)
 
       languages = Language.find_all_by_locale(params[:title].keys)
       
@@ -122,10 +122,10 @@ class Ajax::BeverageController < ApplicationController
     if @user && !params.values_at(:beverage_navigation_id, :title, :price, :amount).include?(nil) && BeverageNavigation.exists?(params[:beverage_navigation_id]) && BeverageNavigation.find(params[:beverage_navigation_id]).beverage_page.restaurant.user == @user
       beverage_navigation = BeverageNavigation.find(params[:beverage_navigation_id])
       
-      new_baverage = Beverage.create(params.permit(:price, :amount).merge({
+      new_baverage = Beverage.new(params.permit(:price, :amount).merge({
+        :beverage_navigation => beverage_navigation,
         :position => beverage_navigation.beverages.unscoped.last != nil ? beverage_navigation.beverages.unscoped.last.id : 0
       }))
-      beverage_navigation.beverages.push(new_baverage)
 
       languages = Language.find_all_by_locale(params[:title].keys)
       

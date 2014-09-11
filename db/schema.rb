@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819064418) do
+ActiveRecord::Schema.define(version: 20140910175847) do
 
   create_table "beverage_navigation_translations", force: true do |t|
     t.integer  "beverage_navigation_id", null: false
@@ -361,12 +361,19 @@ ActiveRecord::Schema.define(version: 20140819064418) do
     t.string   "paypal_payment_id"
     t.string   "paypal_token"
     t.string   "paypal_payer_id"
-    t.boolean  "recurring",          default: false
+    t.boolean  "recurring",                default: false
     t.integer  "quantity"
     t.decimal  "amount"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "successful",               default: false
+    t.string   "invoice_pdf_file_name"
+    t.string   "invoice_pdf_content_type"
+    t.integer  "invoice_pdf_file_size"
+    t.datetime "invoice_pdf_updated_at"
+    t.string   "invoice_pdf_dimensions"
+    t.string   "billing_contact"
   end
 
   create_table "requests", force: true do |t|
@@ -383,7 +390,7 @@ ActiveRecord::Schema.define(version: 20140819064418) do
     t.string   "locale",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description"
+    t.text     "description"
   end
 
   add_index "restaurant_translations", ["locale"], name: "index_restaurant_translations_on_locale"
@@ -459,6 +466,7 @@ ActiveRecord::Schema.define(version: 20140819064418) do
     t.integer  "restaurant_image_crop_y"
     t.boolean  "restaurant_image_crop_processed",   default: true
     t.string   "background_type"
+    t.string   "billing_contact"
   end
 
   create_table "sessions", force: true do |t|
@@ -498,6 +506,8 @@ ActiveRecord::Schema.define(version: 20140819064418) do
     t.boolean  "isAdmin",         default: false
     t.string   "product_referer"
     t.string   "password_digest"
+    t.string   "reset_token"
+    t.datetime "reset_date"
   end
 
   create_table "wine_translations", force: true do |t|

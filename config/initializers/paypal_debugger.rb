@@ -6,9 +6,9 @@ module Paypal
         puts <<-DEBUG
 #{method}
 ==========
-#{params.to_query}
+#{params.to_json}
 ----------
-#{response}
+#{CGI::parse(response).to_json}
 ==========
 
 DEBUG

@@ -9,10 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery.ui.all
+ *= require jquery-ui
  * jquery-ui-1.10.3.custom.min
  * require "neon.css"
  *= require "font-icons/entypo/css/entypo"
+ *= require "font-icons/font-awesome/css/font-awesome.min"
  *= require "bootstrap"
  *= require "neon-core"
  *= require "neon-theme"

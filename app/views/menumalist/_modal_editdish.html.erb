@@ -18,15 +18,15 @@
 	    <div class="col-sm-6">
 			  <div class="col-md-12 form-group">
           <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if dish.navigation.menu.default_language == language %></label>
-			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=dish.title %>" <%="required" if dish.navigation.menu.default_language == language %> data-validate="minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
+			    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=dish.title %>" data-validate="<%="required" if dish.navigation.menu.default_language == language %>,minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_description") %><% I18n.locale = language.locale %></strong></label>
-			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" style="height:134px;" <%="required" if dish.navigation.menu.default_language == language %> data-validate="maxlength[400]" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>"><%=dish.description %></textarea>
+			    <textarea name="description[<%=language.locale %>]" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_description_placeholder") %><% I18n.locale = language.locale %>" style="height:134px;" data-validate="<%="required" if dish.navigation.menu.default_language == language %>,maxlength[400]" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>"><%=dish.description %></textarea>
 			  </div>
 			  <div class="col-md-12 form-group">
           <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.dish_price") %><% I18n.locale = language.locale %></strong></label>
-			    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="<%=dish.price %>" <%="required" if dish.navigation.menu.default_language == language %> data-validate="maxlength[7],price" data-validate="maxlength[400]" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>" data-message-price="<%=t("validation.price") %>">
+			    <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.dish_price_placeholder") %><% I18n.locale = language.locale %>" value="<%=dish.price %>" data-validate="maxlength[7],price" data-validate="<%="required" if dish.navigation.menu.default_language == language %>,maxlength[400]" data-message-maxlength="<%=t("validation.maxlength",{l:"400"}) %>" data-message-price="<%=t("validation.price") %>">
 			  </div>
       </div>
       <div class="row">
@@ -123,9 +123,9 @@
               </div>
               <div class="col-md-12">
                 <% Ingredient.all.each do |ingredient| %>
-                <div class="col-sm-3">
-                  <input class="icheck-2-checkbox" type="checkbox" id="form-ingredients-1" name="ingredients[<%=ingredient.id %>]" <%="checked" if dish.ingredients.exists?(ingredient.id) %>>
-                  <label for="form-ingredients-1"><%=ingredient.title %></label>
+                <div class="col-sm-4">
+                  <input class="icheck-2-checkbox" type="checkbox" id="form-ingredients-1-<%=ingredient.id %>" name="ingredients[<%=ingredient.id %>]" <%="checked" if dish.ingredients.exists?(ingredient.id) %>>
+                  <label for="form-ingredients-1-<%=ingredient.id %>"><%=ingredient.title %></label>
                 </div>
                 <% end %>
               </div>
