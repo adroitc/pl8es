@@ -72,7 +72,7 @@
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <thead>
-            <tr>
+            <tr style="font-size: 16px;">
               <th width="40%"><%=t("menumalist.menu") %></th>
               <th width="120px;" style="width:120px;"></th>
               <th width=""><%=t("menumalist.categories") %></th>
@@ -81,7 +81,7 @@
           </thead>
           <tbody>
             <% @user.restaurant.menus.each do |menu| %>
-            <tr style="font-size: 18px;">
+            <tr style="font-size: 14px;">
               <td>
                 <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => menu.title.gsub(" ","-"), :menu_id => menu.id %>">
                   <%=menu.title %>

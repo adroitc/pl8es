@@ -25,7 +25,7 @@
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <tbody>
-            <tr style="font-size: 18px;">
+            <tr style="font-size: 16px;">
               <th><%=t("invoice.invoice_date") %></th>
               <th><%=t("invoice.invoice_billing_contact") %></th>
               <th><%=t("invoice.invoice_description") %></th>
@@ -37,7 +37,7 @@
               "successful = (?)",
               true
             ]).order("updated_at DESC").each do |p| %>
-            <tr style="font-size: 18px;">
+            <tr style="font-size: 14px;">
               <td><%=p.updated_at.strftime("%d-%m-%Y") %></td>
               <td><%=p.billing_contact %></td>
               <td><%=p.description %></td>
