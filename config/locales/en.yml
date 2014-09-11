@@ -13,6 +13,10 @@ en:
     password_forgot_send: "PL8 Team"
     password_forgot_subj: "New Password"
     password_forgot_msg: "This is an automatically generated email.\n\nYou have requested a new password.\nPlease click on the link and set a new password.\n\n%{l}\n\nIf you have any questions, please contact our customer service at info@pl8.cc.\n\nLet your dishes tell their story!\nYour PL8 Team"
+    
+    payment_send: ""
+    payment_subj: ""
+    payment_msg: ""
   
   validation:
     required: "This field is required."
