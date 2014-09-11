@@ -38,13 +38,29 @@
 								<input type="text" class="form-control" name="name" id="form-name" placeholder="<%=t("signup.restaurant_name_placeholder") %>" autocomplete="off" value="<%=session[:signup] != nil ? session[:signup][:name] : nil %>" required data-validate="minlength[4],maxlength[75]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"75"}) %>">
 							</div>
 						</div>
-            <p style="color:rgba(0,0,0,0.8);"><%=t("signup.aggreeing_by_signing_up") %></p>
 						<div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block btn-login">
+              <input class="icheck-2-checkbox" type="checkbox" id="form-readagreement" name="readagreement">
+              <span style="color:rgba(0,0,0,0.8);"><%=t("signup.aggreeing_by_signing_up") %></span>
+						</div>
+						<div class="form-group">
+              <button id="form-continuesignup" type="submit" class="btn btn-primary btn-block btn-login" disabled="disabled">
                 <i class="entypo-right-open-mini"></i>
                 <%=t("signup.continue") %>
               </button>
 						</div>
+            <script type="text/javascript">
+            	jQuery(document).ready(function($)
+            	{
+                $("#form-readagreement").on("ifChanged", function(e){
+                  if ($("#form-readagreement").closest("div.icheckbox_square-blue").hasClass("checked")){
+                    $("button#form-continuesignup").attr("disabled", "disabled");
+                  }
+                  else{
+                    $("button#form-continuesignup").removeAttr("disabled");
+                  }
+                });
+              });
+            </script>
 					</div>
 				</div>
       <% end %>
