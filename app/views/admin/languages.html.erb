@@ -14,53 +14,51 @@
         <a href="<%=url_for :controller => "admin", :action => "index" %>">Admin</a>
       </li>
       <li class="active">
-        <strong>All users</strong>
+        <strong>All languages</strong>
       </li>
     </ol>
-    <h2>All users</h2>
+    <h2>All languages</h2>
     <br />
     <div class="row">
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <thead>
             <tr>
-              <th>User</th>
-              <th>Email</th>
-              <th>Devices</th>
-              <th>Menus</th>
-              <th>Dishes</th>
-              <th>Daily dishes (all)</th>
+              <th>Language</th>
+              <th>Locale</th>
             </tr>
           </thead>
           <tbody>
-            <% User.all.joins(:restaurant).order("restaurants.name").each do |user| %>
-            <tr style="font-size: 16px;">
+            <% Language.all.sort_by{|language|
+              language.title
+            }.each do |language| %>
+            <tr style="font-size: 18px;">
               <td>
-                <a href="<%=url_for :controller => "admin", :action => "user_switch", :user_id => user.id %>">
-                  <%=user.restaurant.name %>
+                <a href="javascript:;" onclick="jQuery('#modal-editlanguage-<%=language.id %>').modal('show');">
+                  <%=language.title %>
                 </a>
               </td>
               <td>
-                <%=user.email %>
-              </td>
-              <td>
-                <%=user.restaurant.clients.actives.count %>
-              </td>
-              <td>
-                <%=user.restaurant.menus.count %>
-              </td>
-              <td>
-                <%=user.restaurant.dishes.count %>
-              </td>
-              <td>
-                <%=user.restaurant.daily_dishes.where(:display_date => Date.today).count %> (<%=user.restaurant.daily_dishes.count %>)
+                <%=language.locale %>
               </td>
             </tr>
             <% end %>
           </tbody>
         </table>
+        <a href="javascript:;" onclick="jQuery('#modal-addlanguage').modal('show');">
+          <button type="button" class="btn btn-info btn-icon icon-left">
+          	Add language
+          	<i class="entypo-plus"></i>
+          </button>
+        </a>
       </div>
     </div>
     <%=render :partial => "layouts/footer" %>
   </div>
 </div>
+<%=render :partial => "modal_addlanguage" %>
+<% Language.all.sort_by{|language|
+              language.title
+            }.each do |language| %>
+<%=render :partial => "modal_editlanguage", :locals => {:language => language} %>
+<% end %>

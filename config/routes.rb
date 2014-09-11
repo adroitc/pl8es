@@ -43,6 +43,9 @@ Pl8es::Application.routes.draw do
   
   #ajax/admin
   resources :ajax_admin, :only => []
+  post "/a/language/add" => "ajax/admin#addlanguage"
+  post "/a/language/edit" => "ajax/admin#editlanguage"
+  
   post "/a/font/add" => "ajax/admin#addfont"
   post "/a/font/edit" => "ajax/admin#editfont"
   
@@ -125,6 +128,7 @@ Pl8es::Application.routes.draw do
   #admin
   resources :admin, :only => []
   get "/admin" => "admin#index"
+  get "/admin/languages" => "admin#languages"
   get "/admin/users" => "admin#users"
   get "/admin/userswitch/:user_id" => "admin#user_switch"
   get "/admin/tags" => "admin#categories"

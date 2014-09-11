@@ -1,0 +1,23 @@
+<%= neon_modal :id => "addlanguage", :width => "678px", :title => "Add language" do |m| %>
+<%= form_tag({:controller => "ajax/admin", :action => "addlanguage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addfont"}) do %>
+<%=neon_modal_body do |b| %>
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-title" class="control-label"><strong>Language title</strong></label>
+		<input name="title" type="text" class="form-control" id="form-title" placeholder="Language title" data-validate="maxlength[250]">
+	</div>
+	<div class="col-sm-6 form-group">
+    <label for="form-locale" class="control-label"><strong>Language locale</strong></label>
+		<input name="locale" type="text" class="form-control" id="form-locale" placeholder="Language locale" data-validate="maxlength[250]">
+	</div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-info btn-icon icon-left">
+	<i class="entypo-plus"></i>
+	Add Language
+</button>
+<% end %>
+<% end %>
+<% end %>

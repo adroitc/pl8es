@@ -1,5 +1,31 @@
 class Ajax::AdminController < ApplicationController
   
+  def addlanguage
+    if @user && @user.isAdmin && !params.values_at(:title, :locale).include?(nil)
+      new_language = Category.create(params.permit(:title, :locale))
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def editlanguage
+    if @user && @user.isAdmin && !params.values_at(:language_id, :title, :locale).include?(nil)
+      language = Language.find(params[:language_id])
+      
+      if params[:delete] == "true"
+        language.destroy
+      else
+        language.update_attributes(params.permit(:title, :locale))
+        
+        render :json => {:status => "success"}
+        return
+      end
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def addcategory
     if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
       new_category = Category.create()

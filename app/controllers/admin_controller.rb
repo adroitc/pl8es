@@ -6,6 +6,12 @@ class AdminController < ApplicationController
     end
   end
   
+  def languages
+    if !(@user && @user.isAdmin)
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
+  
   def users
     if !(@user && @user.isAdmin)
       raise ActionController::RoutingError.new("Not Found")
