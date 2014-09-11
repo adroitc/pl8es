@@ -259,6 +259,7 @@ de:
     design: "Design"
     design_change: "Ändern"
     menu: "Speisekarte"
+    default_menu: "SUSI-Default menu"
     categories: "Kategorien"
     dishes: "Speisen"
     add_new_menu: "Speisekarte hinzufügen"

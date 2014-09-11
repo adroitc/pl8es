@@ -259,6 +259,7 @@ en:
     design: "Design"
     design_change: "Change"
     menu: "Menu"
+    default_menu: "SUSI-Default menu"
     categories: "Categories"
     dishes: "Dishes"
     add_new_menu: "Add menu"
