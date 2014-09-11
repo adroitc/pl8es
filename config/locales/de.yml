@@ -74,7 +74,6 @@ de:
     paypal_item_dailycious_credits_description: "entspricht %{c} Mittagsgerichten"
     paypal_payment_recurring_description: "dailycious - Daili-Plan (Guthaben)"
     
-    invoice_title: "Rechnungen"
     #invoice_uid_nr: "UID Nr. #"
     invoice_invoice_to: "RECHNUNG FÜR"
     invoice_invoice: "RECHNUNG"
@@ -378,3 +377,13 @@ de:
     dish_sides_placeholder: "z.B. Brot"
     dish_ingredits: "Inhaltsstoffe und Allergene"
     dish_ingredients_text: "Bitte geben Sie die Inhaltsstoffe und Allergene für diese Speise ein."
+    
+  invoice:
+    invoice_title: "Rechnungen"
+    
+    invoice_date: "SUSI-Date"
+    invoice_billing_contact: "SUSI-Billing contact"
+    invoice_description: "SUSI-Description"
+    invoice_quantity: "SUSI-Quantity"
+    invoice_total: "SUSI-Total"
+    invoice_download: "SUSI-Download"

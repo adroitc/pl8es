@@ -19,19 +19,19 @@
         </strong>
       </li>
     </ol>
-    <h2><%=t("payment.invoice_title") %></h2>
+    <h2><%=t("invoice.invoice_title") %></h2>
     <br />
     <div class="row">
       <div class="col-md-12">
         <table class="table table-striped responsive">
           <tbody>
             <tr style="font-size: 18px;">
-              <th>Date</th>
-              <th>Billing contact</th>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Download</th>
+              <th><%=t("invoice.invoice_date") %></th>
+              <th><%=t("invoice.invoice_billing_contact") %></th>
+              <th><%=t("invoice.invoice_description") %></th>
+              <th><%=t("invoice.invoice_quantity") %></th>
+              <th><%=t("invoice.invoice_total") %></th>
+              <th><%=t("invoice.invoice_download") %></th>
             </tr>
             <% @user.payments.where([
               "successful = (?)",
