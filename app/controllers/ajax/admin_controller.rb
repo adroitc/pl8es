@@ -70,7 +70,7 @@ class Ajax::AdminController < ApplicationController
   
   def addmenucolortemplate
     if @user && @user.isAdmin && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active).include?(nil)
-      MenuColorTemplate.create(params.permit(:background, :bar_background, :nav_text, :nav_text_active).merge({
+      MenuColorTemplate.create(params.permit(:preview_image, :background, :bar_background, :nav_text, :nav_text_active).merge({
         bev_background: params[:nav_text],
         bev_background_selected: params[:bar_background],
         bev_background_active: params[:bar_background],
