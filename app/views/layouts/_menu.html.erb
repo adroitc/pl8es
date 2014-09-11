@@ -31,4 +31,10 @@
   		<span><%=t("layouts.menu.menumalist") %></span>
   	</a>
   </li>
+  <li class="<%="active" if params[:controller] == "invoice" %>">
+  	<a href="<%=url_for :controller => "invoice", :action => "index" %>">
+  		<i class="entypo-layout"></i>
+  		<span><%=t("layouts.menu.invoices") %></span>
+  	</a>
+  </li>
 </ul>

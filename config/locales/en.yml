@@ -74,6 +74,7 @@ en:
     paypal_item_dailycious_credits_description: "equals %{c} lunch dishes"
     paypal_payment_recurring_description: "dailycious - dailis plan (credits)"
     
+    invoice_title: "SUSI-Invoices"
     invoice_uid_nr: "UID Nr. #"
     invoice_invoice_to: "INVOICE TO"
     invoice_invoice: "INVOICE"
@@ -145,6 +146,7 @@ en:
       restaurant: "Restaurant"
       menumalist: "Menus"
       dailycious: "Lunch Dishes"
+      invoices: "SUSI-Invoices"
       
     public_menu:
       map: "Map"

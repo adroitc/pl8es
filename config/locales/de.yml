@@ -74,6 +74,7 @@ de:
     paypal_item_dailycious_credits_description: "entspricht %{c} Mittagsgerichten"
     paypal_payment_recurring_description: "dailycious - Daili-Plan (Guthaben)"
     
+    invoice_title: "SUSI-Invoices"
     #invoice_uid_nr: "UID Nr. #"
     invoice_invoice_to: "RECHNUNG FÜR"
     invoice_invoice: "RECHNUNG"
@@ -145,6 +146,7 @@ de:
       restaurant: "Restaurant"
       menumalist: "Speisekarte"
       dailycious: "Mittagsgerichte"
+      invoices: "SUSI-Invoices"
       
     public_menu:
       map: "Karte"
