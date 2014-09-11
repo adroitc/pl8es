@@ -107,6 +107,7 @@ de:
     successful: "Sie haben sich erfolgreich registriert."
     successful_2: "Wir haben Ihnen den Bestätgigungslink per E-Mail geschickt."
     footer_return: "Zurück zur Anmeldung"
+    aggreeing_by_signing_up: "SUSI-By signing up you agree..."
     footer_tos: "AGBs"
     footer_policy: "Impressum"
   

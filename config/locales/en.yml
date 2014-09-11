@@ -107,6 +107,7 @@ en:
     successful: "You have been registered successfully."
     successful_2: "We have emailed you the confirmation link of your account."
     footer_return: "Return to Login Page"
+    aggreeing_by_signing_up: "SUSI-By signing up you agree..."
     footer_tos: "Terms of Service"
     footer_policy: "Site Notice"
   

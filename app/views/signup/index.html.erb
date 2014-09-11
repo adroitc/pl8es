@@ -38,6 +38,7 @@
 								<input type="text" class="form-control" name="name" id="form-name" placeholder="<%=t("signup.restaurant_name_placeholder") %>" autocomplete="off" value="<%=session[:signup] != nil ? session[:signup][:name] : nil %>" required data-validate="minlength[4],maxlength[75]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"75"}) %>">
 							</div>
 						</div>
+            <p style="color:rgba(0,0,0,0.8);"><%=t("signup.aggreeing_by_signing_up") %></p>
 						<div class="form-group">
               <button type="submit" class="btn btn-primary btn-block btn-login">
                 <i class="entypo-right-open-mini"></i>
