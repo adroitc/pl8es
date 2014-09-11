@@ -44,8 +44,8 @@
      				</li>
      				<li>
      					<div class="profile-stat">
-     						<h3><%=[@user.restaurant.dailycious_credits.where(:usage_date => Date.today)+1,@user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)].min %></h3>
-     						<span><%=[@user.restaurant.dailycious_credits.where(:usage_date => Date.today)+1,@user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)].min == 1 ? t("profile.dish") : t("profile.dishes") %></span>
+     						<h3><%=[@user.restaurant.dailycious_credits.where(:usage_date => Date.today).count+1,@user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime).count].min %></h3>
+     						<span><%=[@user.restaurant.dailycious_credits.where(:usage_date => Date.today).count+1,@user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime).count].min == 1 ? t("profile.dish") : t("profile.dishes") %></span>
      					</div>
      				</li>
      			</ul>
