@@ -11,9 +11,14 @@
             <% end %>
           </a>
         </header>
-        <div class="panel-heading">
+        <div class="panel-heading" style="<%="margin-top:-10px" if defined? title %>">
           <div>+</div>
         </div>
+        <% if defined? title %>
+        <div class="panel-heading" style="margin-top:24px;">
+          <div style="font-size:16px;"><%=title %></div>
+        </div>
+        <% end %>
       </article>
     </div>
   </div>

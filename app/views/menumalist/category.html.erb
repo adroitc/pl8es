@@ -52,10 +52,10 @@
       </span>
       <% end %>
       <% if @navigation.navigation == nil && @navigation.dishes.count == 0 %>
-      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-addnavigation').modal('show');"} %>
+      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-addnavigation').modal('show');", :title => t("menumalist.add_new_category"} %>
       <% end %>
       <% if @navigation.sub_navigations.count == 0 %>
-      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 4, :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');"} %>
+      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish"} %>
       <% end %>
     </div>
     <%=render :partial => "layouts/footer" %>

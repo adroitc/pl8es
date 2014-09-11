@@ -14,9 +14,9 @@ en:
     password_forgot_subj: "New Password"
     password_forgot_msg: "This is an automatically generated email.\n\nYou have requested a new password.\nPlease click on the link and set a new password.\n\n%{l}\n\nIf you have any questions, please contact our customer service at info@pl8.cc.\n\nLet your dishes tell their story!\nYour PL8 Team"
     
-    payment_send: ""
-    payment_subj: ""
-    payment_msg: ""
+    payment_send: "SUSI-"
+    payment_subj: "SUSI-"
+    payment_msg: "SUSI-"
   
   validation:
     required: "This field is required."
@@ -227,6 +227,8 @@ en:
     unlimited: "unlimited"
     payment_introduction: "We have devised these payment plans for you (excl. VAT):"
     
+    daily_dish_add: "SUSI-Add daily dish"
+    
     daily_dish_modal_add_title: "Add lunch dish"
     daily_dish_modal_edit_title: "Edit lunch dish"
     daily_dish_modal_add_cancel: "Cancel"
@@ -259,6 +261,7 @@ en:
     add_new_menu: "Add menu"
     add_new_category: "Add category"
     add_new_dish: "Add dish"
+    add_new_beverage_page: "SUSI-Add drinks page"
     beverage_pages_title: "Drinks pages"
     beverage_page: "Drinks page"
     beverage_navigation: "Drinks category"

@@ -14,9 +14,9 @@ de:
     password_forgot_subj: "Passwort zurücksetzen"
     password_forgot_msg: "Dies ist eine automatisch generierte E-Mail.\n\nSie haben ein neues Passwort angefordert.\nBitte klicken Sie auf den unten stehenden Link und geben Ihr neues Passwort ein.\n\n%{l}\n\nBei Rückfragen steht Ihnen unser Kundenservice unter info@pl8.cc gerne zur Verfügung.\n\nGuten App.etit,\nIhr PL8 Team"
     
-    payment_send: ""
-    payment_subj: ""
-    payment_msg: ""
+    payment_send: "SUSI-"
+    payment_subj: "SUSI-"
+    payment_msg: "SUSI-"
   
   validation:
     required: "Dieses Feld ist erforderlich."
@@ -227,6 +227,8 @@ de:
     unlimited: "unbegrenzten"
     payment_introduction: "Wir haben die folgenden Pakete für Sie (exkl. MwSt):"
     
+    daily_dish_add: "SUSI-Add daily dish"
+    
     daily_dish_modal_add_title: "Mittagsgericht hinzufügen"
     daily_dish_modal_edit_title: "Mittagsgericht ändern"
     daily_dish_modal_add_cancel: "Abbrechen"
@@ -259,6 +261,7 @@ de:
     add_new_menu: "Speisekarte hinzufügen"
     add_new_category: "Kategorie hinzufügen"
     add_new_dish: "Speise hinzufügen"
+    add_new_beverage_page: "SUSI-Add drinks page"
     beverage_pages_title: "Getränkeseiten"
     beverage_page: "Getränkeseite"
     beverage_navigation: "Getränkekategorie"
