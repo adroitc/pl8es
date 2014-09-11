@@ -74,6 +74,7 @@ de:
     paypal_item_dailycious_credits_description: "entspricht %{c} Mittagsgerichten"
     paypal_payment_recurring_description: "dailycious - Daili-Plan (Guthaben)"
     
+    #invoice_uid_nr: "UID Nr. #"
     invoice_invoice_to: "RECHNUNG FÜR"
     invoice_invoice: "RECHNUNG"
     invoice_date_of_invoice: "Rechnungsdatum:"

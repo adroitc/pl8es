@@ -74,6 +74,7 @@ en:
     paypal_item_dailycious_credits_description: "equals %{c} lunch dishes"
     paypal_payment_recurring_description: "dailycious - dailis plan (credits)"
     
+    invoice_uid_nr: "UID Nr. #"
     invoice_invoice_to: "INVOICE TO"
     invoice_invoice: "INVOICE"
     invoice_date_of_invoice: "Date of invoice:"
