@@ -52,7 +52,7 @@
       </span>
       <% end %>
       <% if @navigation.navigation == nil && @navigation.dishes.count == 0 %>
-      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-addnavigation').modal('show');", :title => t("menumalist.add_new_category"} %>
+      <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-addnavigation').modal('show');", :title => t("menumalist.add_new_category")} %>
       <% end %>
       <% if @navigation.sub_navigations.count == 0 %>
       <%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish")} %>
