@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910175847) do
+ActiveRecord::Schema.define(version: 20140911072448) do
 
   create_table "beverage_navigation_translations", force: true do |t|
     t.integer  "beverage_navigation_id", null: false
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140910175847) do
     t.datetime "request_update"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",         default: true
   end
 
   create_table "daily_dishes", force: true do |t|
@@ -467,6 +468,7 @@ ActiveRecord::Schema.define(version: 20140910175847) do
     t.boolean  "restaurant_image_crop_processed",   default: true
     t.string   "background_type"
     t.string   "billing_contact"
+    t.datetime "client_reset_date"
   end
 
   create_table "sessions", force: true do |t|

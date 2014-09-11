@@ -12,8 +12,9 @@ class Restaurant < ActiveRecord::Base
   has_many :clients do
     def actives()
       where([
-        "updated_at >= (?)",
-        DateTime.now-31.days
+        "updated_at >= (?) AND active = (?)",
+        DateTime.now-31.days,
+        true
       ])
     end
   end
