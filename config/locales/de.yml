@@ -107,8 +107,8 @@ de:
     successful: "Sie haben sich erfolgreich registriert."
     successful_2: "Wir haben Ihnen den Bestätgigungslink per E-Mail geschickt."
     footer_return: "Zurück zur Anmeldung"
-    footer_tos: "Nutzungsbedingungen"
-    footer_policy: "Datenschutzbestimmungen"
+    footer_tos: "AGBs"
+    footer_policy: "Impressum"
   
   login:
     welcome: "Lieber User, loggen Sie sich ein, um den Admin-Bereich zu nutzen."
@@ -123,8 +123,8 @@ de:
     invalid_title: "Ungültige Anmeldung"
     invalid_msg: "Bitte geben Sie eine gültige E-Mail und Passwort Kombination ein."
     forgot_password: "Passwort vergessen?"
-    footer_tos: "Nutzungsbedingungen"
-    footer_policy: "Datenschutzbestimmungen"
+    footer_tos: "AGBs"
+    footer_policy: "Impressum"
   
   neon:
     input_color_placeholder: "#Farbe"

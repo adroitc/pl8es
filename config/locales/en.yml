@@ -107,8 +107,8 @@ en:
     successful: "You have been registered successfully."
     successful_2: "We have emailed you the confirmation link of your account."
     footer_return: "Return to Login Page"
-    footer_tos: "ToS"
-    footer_policy: "Privacy Policy"
+    footer_tos: "Terms of Service"
+    footer_policy: "Site Notice"
   
   login:
     welcome: "Dear user, log in to access the admin area!"
@@ -123,8 +123,8 @@ en:
     invalid_title: "Invalid login"
     invalid_msg: "Enter a valid email and password combination."
     forgot_password: "Forgot your password?"
-    footer_tos: "ToS"
-    footer_policy: "Privacy Policy."
+    footer_tos: "Terms of Service"
+    footer_policy: "Site Notice"
   
   neon:
     input_color_placeholder: "#color"
