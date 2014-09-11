@@ -52,10 +52,10 @@
      				  	</div>
      				  </li>
      				  <li>
-     				  	<div class="profile-stat">
-     				  		<h3><%=@visit_restaurant.dishes.count %></h3>
-     				  		<span><%=@visit_restaurant.dishes.count == 1 ? t("profile.dish") : t("profile.dishes") %></span>
-     				  	</div>
+     					  <div class="profile-stat">
+     					  	<h3><%=[@user.restaurant.dailycious_credits.where(:usage_date => current_date)+1,@user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)].min %></h3>
+     					  	<span><%=[@user.restaurant.dailycious_credits.where(:usage_date => current_date)+1,@user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)].min == 1 ? t("profile.dish") : t("profile.dishes") %></span>
+     					  </div>
      				  </li>
             <% end %>
      			</ul>
