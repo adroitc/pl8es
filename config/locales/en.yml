@@ -382,10 +382,10 @@ en:
   invoice:
     invoice_title: "Invoices"
     
-    invoice_date: "SUSI-Date"
-    invoice_billing_contact: "SUSI-Billing contact"
-    invoice_description: "SUSI-Description"
-    invoice_quantity: "SUSI-Quantity"
-    invoice_total: "SUSI-Total"
-    invoice_download: "SUSI-Download"
+    invoice_date: "Date"
+    invoice_billing_contact: "Billing contact"
+    invoice_description: "Description"
+    invoice_quantity: "Quantity"
+    invoice_total: "Total"
+    invoice_download: "Download"
     

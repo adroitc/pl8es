@@ -382,9 +382,9 @@ de:
   invoice:
     invoice_title: "Rechnungen"
     
-    invoice_date: "SUSI-Date"
-    invoice_billing_contact: "SUSI-Billing contact"
-    invoice_description: "SUSI-Description"
-    invoice_quantity: "SUSI-Quantity"
-    invoice_total: "SUSI-Total"
-    invoice_download: "SUSI-Download"
+    invoice_date: "Datum"
+    invoice_billing_contact: "Rechnungsempfänger"
+    invoice_description: "Beschreibung"
+    invoice_quantity: "Anzahl"
+    invoice_total: "Gesamt"
+    invoice_download: "Herunterladen"
