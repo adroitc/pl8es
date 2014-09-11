@@ -165,6 +165,8 @@ raw(Jsonify::Builder.plain do |j|
     j.appmain_image_url          @req_restaurant.appmain_image.present? ? @req_restaurant.appmain_image.url(:cropped_default_retina) : nil
     
     j.currency                   "EUR"
+    
+    j.default_menu               @req_restaurant.defaultMenu.id
   end
   
   j.content_style do
