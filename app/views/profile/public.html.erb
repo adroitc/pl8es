@@ -139,12 +139,14 @@
               todays_dailycious_credits = @visit_restaurant.dailycious_credits.where(:usage_date => current_date)
               todays_daily_dishes = @visit_restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
             %>
-            <span class="sorted ui-sortable">
-              <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
-              <% todays_dailycious_credits.each_with_index do |dailycious_credit, index| %>
-                <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[index+1]}) if todays_daily_dishes[index+1] %>
-              <% end %>
-            </span>
+            <div class="row">
+              <span class="sorted ui-sortable">
+                <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
+                <% todays_dailycious_credits.each_with_index do |dailycious_credit, index| %>
+                  <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[index+1]}) if todays_daily_dishes[index+1] %>
+                <% end %>
+              </span>
+            </div>
             <% end %>
           </div>
       	</div>
