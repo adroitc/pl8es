@@ -104,6 +104,8 @@ de:
     continue: "Weiter"
     complete: "Anmeldung abschließen"
     logging_in: "Einloggen ..."
+    invalid_title: "Ungültige anmeldung"
+    invalid_msg_email: "Diese E-Mail Adresse existiert bereits."
     successful: "Sie haben sich erfolgreich registriert."
     successful_2: "Wir haben Ihnen den Bestätgigungslink per E-Mail geschickt."
     footer_return: "Zurück zur Anmeldung"

@@ -38,6 +38,7 @@ class Ajax::SessionController < ApplicationController
         session[:signup] = {}
       end
       session[:signup][:name] = params[:name]
+      session[:signup][:product_referer] = params[:product_referer]
       
       render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "restaurant")}
       return

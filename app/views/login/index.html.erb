@@ -22,17 +22,18 @@
 	</div>
 	<div class="login-form">
 		<div class="login-content">
-			<div class="form-login-error">
-				<h3><%=t("login.invalid_title") %></h3>
-				<p><%=t("login.invalid_msg") %></p>
-			</div>
       <%= form_tag({:controller => "ajax/session", :action => "login"}, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
+				<input type="hidden" name="product_referer" id="form-product_referer" value="<%=params[:product_referer] %>" />
+			  <div class="form-invalid form-login-error">
+			  	<h3><%=t("login.invalid_title") %></h3>
+			  	<p><%=t("login.invalid_msg") %></p>
+			  </div>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="entypo-mail"></i>
 						</div>
-						<input type="text" class="form-control" name="email" id="email" placeholder="<%=t("login.email_placeholder") %>" required data-message-required="<%=t("errors.required") %>" />
+						<input type="text" class="form-control" name="email" id="form-email" placeholder="<%=t("login.email_placeholder") %>" required data-message-required="<%=t("errors.required") %>" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -40,7 +41,7 @@
 						<div class="input-group-addon">
 							<i class="entypo-key"></i>
 						</div>
-						<input type="password" class="form-control" name="password" id="password" placeholder="<%=t("login.password_placeholder") %>" required data-message-required="<%=t("errors.required") %>" />
+						<input type="password" class="form-control" name="password" id="form-password" placeholder="<%=t("login.password_placeholder") %>" required data-message-required="<%=t("errors.required") %>" />
 					</div>
 				</div>
 				<div class="form-group">

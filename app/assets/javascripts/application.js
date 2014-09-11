@@ -57,8 +57,26 @@
 $(document).ready(function()
 {
   $(".pl8es_c_ajaxform").each(function(){
+    var f = $(this);
     pl8es_i_ajaxform($(this),function(r){
-      if (r["redirect"]){
+      if (r["status"] == "invalid" && f.find(".form-invalid").length > 0){
+        f.find(".form-invalid").css("display", "block");
+      }
+      else if (r["redirect"]
+               && r["status"] == "success"
+               && f.find(".form-valid").length > 0){
+        f.find(".form-invalid").css("display", "none");
+        f.find(".form-valid").css("display", "block");
+      	show_loading_bar({
+      		pct: 100,
+      		delay: 0.2,
+      		finish: function()
+      		{
+            window.location.href = r["redirect"];
+      		}
+      	});
+      }
+      else if (r["redirect"]){
         window.location.href = r["redirect"];
       }
       else{

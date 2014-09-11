@@ -23,11 +23,6 @@
 	<div class="login-form">
 		<div class="login-content">
       <%= form_tag({:controller => "ajax/session", :action => "signup_restaurant"}, {:role => "form", :id => "form_register", :class => "pl8es_c_ajaxform validate"}) do %>
-				<div class="form-register-success">
-					<i class="entypo-check"></i>
-					<h3><%=t("signup.successful") %></h3>
-					<p><%=t("signup.successful_2") %></p>
-				</div>
 				<div class="form-steps">
 					<div class="step current" id="step-1">
 						<div class="form-group">
