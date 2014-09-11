@@ -140,7 +140,7 @@
               todays_daily_dishes = @visit_restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
             %>
             <div class="row">
-              <%=current_date.updated_at.strftime("%d. %B %Y") %>
+              <%=current_date.strftime("%d. %B %Y") %>
             </div>
             <div class="row">
               <span class="sorted ui-sortable">
