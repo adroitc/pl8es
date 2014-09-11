@@ -42,7 +42,7 @@
     <div class="row">
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
-  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="icon"><i class="entypo-users"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=requests_this_7days %>" data-duration="1500" data-delay="0">0</div>
 			  
   		  	<h3><%=t("dashboard.visits") %></h3>
@@ -51,7 +51,7 @@
   		</div>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
-  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="icon"><i class="entypo-star"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0">0</div>
 			  
   		  	<h3><%=t("dashboard.favorites") %></h3>
@@ -60,7 +60,7 @@
   		</div>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
-  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="icon"><i class="entypo-direction"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.daily_dishes.where([
                  "display_date > (?)",
                  Date.today-7
@@ -119,7 +119,7 @@
       </script>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
-  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="icon"><i class="entypo-star-empty"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.where([
                  "created_at >= (?) AND created_at <= (?)",
                  Date.today-7,
@@ -132,7 +132,7 @@
   		</div>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
-  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
+  		  	<div class="icon"><i class="entypo-ticket"></i></div>
   		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
   		  	<h3><%=t("dailycious.dailis") %></h3>
           <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show');"><p>
@@ -176,7 +176,7 @@
     	</div>
       <div class="col-sm-4">
     	 	<div class="tile-stats tile-white tile-white-primary">
-    	 		<div class="icon"><i class="entypo-user"></i></div>
+    	 		<div class="icon"><i class="entypo-docs"></i></div>
     	 		<div class="num" data-start="0" data-end="<%=@user.restaurant.menus.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
     	 		<h3><%=t("dashboard.menus") %></h3>
           <a href="<%=url_for :controller => "menumalist", :action => "index" %>"><p>
