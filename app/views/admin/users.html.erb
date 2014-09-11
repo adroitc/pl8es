@@ -36,7 +36,7 @@
             <% User.all.joins(:restaurant).order("restaurants.name").each do |user| %>
             <tr style="font-size: 16px;">
               <td>
-                <a href="<%=url_for :controller => "admin", :action => "user_switch", :user_id => user.id %>">
+                <a href="javascript:;" onclick="jQuery('#modal-edituser-<%=user.id %>').modal('show');">
                   <%=user.restaurant.name %>
                 </a>
               </td>
@@ -64,3 +64,6 @@
     <%=render :partial => "layouts/footer" %>
   </div>
 </div>
+<% User.all.joins(:restaurant).order("restaurants.name").each do |user| %>
+<%=render :partial => "modal_edituser", :locals => {:user => user} %>
+<% end %>

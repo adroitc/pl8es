@@ -26,6 +26,26 @@ class Ajax::AdminController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
+  def edituser
+    if @user && @user.isAdmin && !params.values_at(:user_id, :dailycious_credits).include?(nil)
+      user = User.find(params[:user_id])
+      
+      if params[:delete] == "true"
+        user.destroy
+      else
+        for i in 1..params[:dailycious_credits].to_i
+          DailyciousCredit.create(
+            :restaurant => user.restaurant
+          )
+        end
+        
+        render :json => {:status => "success"}
+        return
+      end
+    end
+    render :json => {:status => "invalid"}
+  end
+  
   def addcategory
     if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
       new_category = Category.create()

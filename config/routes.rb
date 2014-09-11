@@ -46,6 +46,8 @@ Pl8es::Application.routes.draw do
   post "/a/language/add" => "ajax/admin#addlanguage"
   post "/a/language/edit" => "ajax/admin#editlanguage"
   
+  post "/a/user/edit" => "ajax/admin#edituser"
+  
   post "/a/font/add" => "ajax/admin#addfont"
   post "/a/font/edit" => "ajax/admin#editfont"
   

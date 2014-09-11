@@ -1,0 +1,27 @@
+<%= neon_modal :id => "edituser-#{user.id}", :width => "678px", :title => "Edit user" do |m| %>
+<%= form_tag({:controller => "ajax/admin", :action => "edituser"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addfont"}) do %>
+<%=neon_modal_body do |b| %>
+<input name="user_id" type="hidden" id="form-language_id" value="<%=user.id %>">
+<div class="row">
+	<div class="col-sm-6 form-group">
+    <label for="form-title" class="control-label"><strong>Add dailis (<%=user.restaurant.dailycious_credits.valid_credits.count %>): </strong></label>
+		<input name="dailycious_credits" type="text" class="form-control" id="form-title" placeholder="dailis" data-validate="number,maxlength[250]" value="0">
+	</div>
+</div>
+<% end %>
+<%=neon_modal_footer do |b| %>
+<%=render :partial => "neon/modal_footer_delete" %>
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+<a href="<%=url_for :controller => "admin", :action => "user_switch", :user_id => user.id %>">
+  <button type="button" class="btn btn-success btn-icon icon-left">
+  	<i class="entypo-plus"></i>
+  	Login as <%=user.restaurant.name %>
+  </button>
+</a>
+<button type="submit" class="btn btn-info btn-icon icon-left">
+	<i class="entypo-plus"></i>
+	Save user
+</button>
+<% end %>
+<% end %>
+<% end %>
