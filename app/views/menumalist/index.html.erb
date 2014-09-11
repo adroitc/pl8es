@@ -44,6 +44,7 @@
               <%=t("menumalist.installations_want_more") %>
               <i class="entypo-plus"></i>
             </button>
+            <br />
             <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: 12px" <% if @user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now %>"disabled="disabled"<% end %>>
               <%=t("menumalist.reset_clients") %>
               <i class="entypo-trash"></i>
