@@ -299,15 +299,22 @@ function pl8es_f_duplicate(m){
 	  location.reload();
 	});
 }
-function pl8es_f_makedefaultmenu(){
-  $(".pl8es_c_toggledefaultmenu").show();
-  $(".pl8es_c_makedefaultmenu").hide();
-  $(".pl8es_c_revertdefaultmenu").show();
+function pl8es_f_makedefaultmenu(e){
+  console.log(e);
+  var md = e.closest(".pl8es_c_defaultmenu");
+  
+  md.find(".pl8es_c_toggledefaultmenu").show();
+  md.find(".pl8es_c_makedefaultmenu").hide();
+  md.find(".pl8es_c_revertdefaultmenu").show();
+  md.find("input").removeAttr("disabled");
 }
-function pl8es_f_revertdefaultmenu(){
-  $(".pl8es_c_toggledefaultmenu").hide();
-  $(".pl8es_c_makedefaultmenu").show();
-  $(".pl8es_c_revertdefaultmenu").hide();
+function pl8es_f_revertdefaultmenu(e){
+  var md = e.closest(".pl8es_c_defaultmenu");
+  
+  md.find(".pl8es_c_toggledefaultmenu").hide();
+  md.find(".pl8es_c_makedefaultmenu").show();
+  md.find(".pl8es_c_revertdefaultmenu").hide();
+  md.find("input").attr("disabled","disabled");
 }
 function pl8es_f_initdelete(e){
   var md = e.closest(".pl8es-modal-delete");

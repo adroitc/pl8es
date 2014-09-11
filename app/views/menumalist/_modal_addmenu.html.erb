@@ -11,24 +11,26 @@
 		</div>
 	</div>
 </div>
+<% if @user.restaurant.menus.count > 0 %>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
 			<label class="control-label"><%=t("menumalist.menu_default") %></label>
-      <div class="input-group">
+      <div class="input-group pl8es_c_defaultmenu">
+        <input type="hidden" name="default" value="true" disabled="disabled" />
         <span class="pl8es_c_toggledefaultmenu">
           <button type="button" class="btn btn-green btn-icon disabled icon-left">
           	<%=t("menumalist.menu_default_default") %>
           	<i class="entypo-flag"></i>
           </button>
         </span>
-        <a href="javascript:;" onclick="pl8es_f_makedefaultmenu();" class="pl8es_c_makedefaultmenu">
+        <a href="javascript:;" onclick="pl8es_f_makedefaultmenu($(this));" class="pl8es_c_makedefaultmenu">
           <button type="button" class="btn btn-default btn-icon icon-left">
           	<%=t("menumalist.menu_default_make_default") %>
           	<i class="entypo-flag"></i>
           </button>
         </a>
-        <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu();" class="pl8es_c_revertdefaultmenu">
+        <a href="javascript:;" onclick="pl8es_f_revertdefaultmenu($(this));" class="pl8es_c_revertdefaultmenu">
           <button type="button" class="btn btn-warning btn-xs">
           	<%=t("menumalist.menu_default_default_undo") %>
           </button>
@@ -37,6 +39,7 @@
 		</div>
 	</div>
 </div>
+<% end %>
 <div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
 	<div class="">
   	<div class="col-md-6 input-group">
