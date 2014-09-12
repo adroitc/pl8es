@@ -14,8 +14,8 @@ de:
     password_forgot_subj: "Passwort zurücksetzen"
     password_forgot_msg: "Dies ist eine automatisch generierte E-Mail.\n\nSie haben ein neues Passwort angefordert.\nBitte klicken Sie auf den unten stehenden Link und geben Ihr neues Passwort ein.\n\n%{l}\n\nBei Rückfragen steht Ihnen unser Kundenservice unter info@pl8.cc gerne zur Verfügung.\n\nGuten App.etit,\nIhr PL8 Team"
     
-    payment_send: "SUSI-"
-    payment_subj: "SUSI-"
+    payment_send: "PL8 Office"
+    payment_subj: "Vielen Dank für Ihren Einkauf"
     payment_msg: "SUSI-"
   
   validation:
