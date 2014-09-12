@@ -64,7 +64,8 @@ class Dish < ActiveRecord::Base
         :format => :png,
         :processors => [:cropper]
       }
-    }
+    },
+    :default_url => "http://app.pl8.cc/assets/:class/:attachment/:style.png?"
   }
   
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
