@@ -69,7 +69,7 @@ de:
     December: "Dezember"
   
   language:
-    default: "Default"
+    default: "Standard"
   
   payment:
     paypal_payment_description: "dailycious - Dailis (Guthaben)"
