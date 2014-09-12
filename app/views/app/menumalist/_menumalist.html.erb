@@ -22,21 +22,21 @@ raw(Jsonify::Builder.plain do |j|
     j.navigations(menu.navigations.find_all_by_navigation_id(nil)) do |navigation|
       j.id                         navigation.id
       j.image_url                  navigation.image.url(:cropped_default_retina)
-      j.image_fingerprint          navigation.image_fingerprint
+      j.image_fingerprint          navigation.image.present ? navigation.image_fingerprint : "default"
       j.style                      navigation.style
       j.navigation_lang            navigation.navigation_lang
       
       j.sub_navigations(navigation.sub_navigations) do |sub_navigation|
         j.id                         sub_navigation.id
         j.image_url                  navigation.image.url(:cropped_default_retina)
-        j.image_fingerprint          sub_navigation.image_fingerprint
+        j.image_fingerprint          sub_navigation.image.present ? sub_navigation.image_fingerprint : "default"
         j.style                      sub_navigation.style
         j.navigation_lang            sub_navigation.navigation_lang
       
         j.dishes(navigation.dishes) do |dish|
           j.id                         dish.id
           j.image_url                  dish.image.url(:cropped_default_retina)
-          j.image_fingerprint          dish.image_fingerprint
+          j.image_fingerprint          dish.image.present ? dish.image_fingerprint : "default"
           j.dish_lang                  dish.dish_lang
           j.price                      dish.price
           
@@ -53,7 +53,7 @@ raw(Jsonify::Builder.plain do |j|
             j.dish_suggestion_1 do
               j.id                         dish.dishsuggestion_1.id
               j.image_url                  dish.dishsuggestion_1.image.url(:cropped_suggestion_retina)
-              j.image_fingerprint          dish.dishsuggestion_1.image_fingerprint
+              j.image_fingerprint          dish.dishsuggestion_1.image.present ? dish.dishsuggestion_1.image_fingerprint : "default"
               j.dish_lang                  dish.dishsuggestion_1.dish_lang
               j.price                      dish.dishsuggestion_1.price
             end
@@ -63,7 +63,7 @@ raw(Jsonify::Builder.plain do |j|
             j.dish_suggestion_2 do
               j.id                         dish.dishsuggestion_2.id
               j.image_url                  dish.dishsuggestion_2.image.url(:cropped_suggestion_retina)
-              j.image_fingerprint          dish.dishsuggestion_2.image_fingerprint
+              j.image_fingerprint          dish.dishsuggestion_2.image.present ? dish.dishsuggestion_2.image_fingerprint : "default"
               j.dish_lang                  dish.dishsuggestion_2.dish_lang
               j.price                      dish.dishsuggestion_2.price
             end
@@ -77,7 +77,7 @@ raw(Jsonify::Builder.plain do |j|
       j.dishes(navigation.dishes) do |dish|
         j.id                         dish.id
         j.image_url                  dish.image.url(:cropped_default_retina)
-        j.image_fingerprint          dish.image_fingerprint
+        j.image_fingerprint          dish.image.present? dish.image_fingerprint : "default"
         j.dish_lang                  dish.dish_lang
         j.price                      dish.price
         
@@ -94,7 +94,7 @@ raw(Jsonify::Builder.plain do |j|
           j.dish_suggestion_1 do
             j.id                         dish.dishsuggestion_1.id
             j.image_url                  dish.dishsuggestion_1.image.url(:cropped_suggestion_retina)
-            j.image_fingerprint          dish.dishsuggestion_1.image_fingerprint
+            j.image_fingerprint          dish.dishsuggestion_1.image.present? dish.dishsuggestion_1.image_fingerprint : "default"
             j.dish_lang                  dish.dishsuggestion_1.dish_lang
             j.price                      dish.dishsuggestion_1.price
           end
@@ -104,7 +104,7 @@ raw(Jsonify::Builder.plain do |j|
           j.dish_suggestion_2 do
             j.id                         dish.dishsuggestion_2.id
             j.image_url                  dish.dishsuggestion_2.image.url(:cropped_suggestion_retina)
-            j.image_fingerprint          dish.dishsuggestion_2.image_fingerprint
+            j.image_fingerprint          dish.dishsuggestion_2.image.present? dish.dishsuggestion_2.image_fingerprint : "default"
             j.dish_lang                  dish.dishsuggestion_2.dish_lang
             j.price                      dish.dishsuggestion_2.price
           end
@@ -122,7 +122,7 @@ raw(Jsonify::Builder.plain do |j|
     
     j.id                         beverage_page.id
     j.image_url                  beverage_page.image.url(:cropped_default_retina)
-    j.image_fingerprint          beverage_page.image_fingerprint
+    j.image_fingerprint          beverage_page.image.present? beverage_page.image_fingerprint : "default"
     
     j.beverage_navigations(beverage_page.beverage_navigations) do |beverage_navigation|
       
@@ -144,8 +144,8 @@ raw(Jsonify::Builder.plain do |j|
   j.daily_dishes(@req_restaurant.daily_dishes.where("display_date BETWEEN ? AND ?", Date.today.to_datetime, (Date.today+7).to_datetime)) do |daily_dish|
     j.id                         daily_dish.id
     j.display_date               daily_dish.display_date.strftime("%d-%m-%Y")
-    j.image_fingerprint          daily_dish.image_fingerprint
     j.image_url                  daily_dish.image.url(:cropped_menumalist_retina)
+    j.image_fingerprint          daily_dish.image.present? daily_dish.image_fingerprint : "default"
     j.title                      daily_dish.title
     j.price                      daily_dish.price
   end
@@ -156,14 +156,14 @@ raw(Jsonify::Builder.plain do |j|
     j.city                       @req_restaurant.location.city
     j.country                    @req_restaurant.location.country
     j.zip                        @req_restaurant.location.zip
-    j.logo_image_fingerprint     @req_restaurant.logo_image_fingerprint
     j.logo_image_url             @req_restaurant.logo_image.url(:cropped_default_retina)
-    j.restaurant_image_fingerprint  @req_restaurant.restaurant_image_fingerprint
+    j.logo_image_fingerprint     @req_restaurant.logo_image.present? @req_restaurant.logo_image_fingerprint : "default"
     j.restaurant_image_url       @req_restaurant.restaurant_image.url(:cropped_default_retina)
-    j.splashscreen_image_fingerprint  @req_restaurant.splashscreen_image_fingerprint
+    j.restaurant_image_fingerprint  @req_restaurant.restaurant_image.present? @req_restaurant.restaurant_image_fingerprint : "default"
     j.splashscreen_image_url     @req_restaurant.splashscreen_image.url(:cropped_default_retina)
-    j.appmain_image_fingerprint  @req_restaurant.appmain_image_fingerprint
+    j.splashscreen_image_fingerprint  @req_restaurant.splashscreen_image.present? @req_restaurant.splashscreen_image_fingerprint : "default"
     j.appmain_image_url          @req_restaurant.appmain_image.url(:cropped_default_retina)
+    j.appmain_image_fingerprint  @req_restaurant.appmain_image.present? @req_restaurant.appmain_image_fingerprint : "default"
     
     j.currency                   "EUR"
     
