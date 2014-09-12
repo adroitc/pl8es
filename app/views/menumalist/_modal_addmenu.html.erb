@@ -1,5 +1,5 @@
 <%= neon_modal :id => "addmenu", :width => "678px", :title => t("menumalist.menu_modal_add_title") do |m| %>
-<%= form_tag({:controller => "ajax/menu", :action => "addmenu"}, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addmenu"}) do %>
+<%= form_tag({:controller => "ajax/menu", :action => "addmenu"}, {:role => "form", :class_ => "pl8es_c_ajaxform validate", :id => "form_addmenu"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-md-12">
@@ -11,7 +11,9 @@
 		</div>
 	</div>
 </div>
-<% if @user.restaurant.menus.count > 0 %>
+<% if @user.restaurant.menus.count == 0 %>
+<input type="hidden" name="default" value="true" />
+<% else %>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">

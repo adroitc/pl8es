@@ -12,11 +12,11 @@ class Menu < ActiveRecord::Base
     :minimum => 4,
     :maximum => 75
   }
-  validates :from_time, :length => {
+  validates :from_time, :allow_blank => true, :length => {
     :minimum => 4,
     :maximum => 7
   }
-  validates :to_time, :length => {
+  validates :to_time, :allow_blank => true, :length => {
     :minimum => 4,
     :maximum => 7
   }

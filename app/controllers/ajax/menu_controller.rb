@@ -25,7 +25,7 @@ class Ajax::MenuController < ApplicationController
         })
       end
       
-      render :json => {:status => "success"}
+      render :json => {:status => "success", :p => params}
       return
     end
     render :json => {:status => "invalid"}
