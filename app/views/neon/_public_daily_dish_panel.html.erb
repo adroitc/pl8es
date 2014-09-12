@@ -4,7 +4,7 @@
       <div class="pl8es_public_daily_panel_price" style="border-radius:12px;-moz-border-radius:12px;"><%=daily_dish.price %></div>
      	<article class="album" style="margin-bottom:0px;border-width:0px;">
      		<header>
-          <img class="unveil" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=daily_dish.image.present? ? daily_dish.image.url(:cropped_default_retina) : "http://placehold.it/400x400" %>" />
+          <img class="unveil" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=daily_dish.image.url(:cropped_default_retina) %>" />
         </header>
         <div class="panel-heading" style="cursor:default;">
           <input type="hidden" name="daily_dish_ids[<%=daily_dish.id %>]" value="">

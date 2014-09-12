@@ -6,8 +6,8 @@ raw(Jsonify::Builder.plain do |j|
   j.locations(@req_locations) do |location|
     j.id                         location.restaurant.id
     
-    j.restaurant_image_url       location.restaurant.logo_image.present? ? location.restaurant.logo_image.url(:cropped_dailycious_retina) : nil
-    j.restaurant_image_fingerprint  location.restaurant.logo_image.present? ? location.restaurant.logo_image_fingerprint : nil
+    j.restaurant_image_url       location.restaurant.logo_image.url(:cropped_dailycious_retina)
+    j.restaurant_image_fingerprint  location.restaurant.logo_image_fingerprint
 
     j.name                       location.restaurant.name
     
@@ -31,9 +31,9 @@ raw(Jsonify::Builder.plain do |j|
     if daily_dishes_count > 0
       j.daily_dish do
         daily_dish = location.restaurant.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
-        j.image_map_url              daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil
-        j.image_small_url            daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil
-        j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : nil
+        j.image_map_url              daily_dish.image.url(:cropped_map_retina)
+        j.image_small_url            daily_dish.image.url(:cropped_small_retina)
+        j.image_fingerprint          daily_dish.image_fingerprint
         j.title                      daily_dish.title
         j.price                      daily_dish.price
       end

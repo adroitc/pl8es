@@ -3,6 +3,6 @@ var locations = [
 @locations.each_with_index do |location, i|
   daily_dish = location.restaurant.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
 %>
-["<%=daily_dish.title %>", "<%=location.restaurant.name %>", "<%=daily_dish.price %> €", <%=location.latitude %>, <%=location.longitude %>, "<%=raw url_for :only_path => false, :controller => "/profile", :action => "public", :restaurant_name => location.restaurant.name.gsub(" ","-"), :restaurant_id => location.restaurant.id %>", "<%=daily_dish.image.present? ? daily_dish.image.url(:cropped_small_retina) : nil %>", "<%=daily_dish.image.present? ? daily_dish.image.url(:cropped_map_retina) : nil %>"]<%="," if i+1 < @locations.count %>
+["<%=daily_dish.title %>", "<%=location.restaurant.name %>", "<%=daily_dish.price %> €", <%=location.latitude %>, <%=location.longitude %>, "<%=raw url_for :only_path => false, :controller => "/profile", :action => "public", :restaurant_name => location.restaurant.name.gsub(" ","-"), :restaurant_id => location.restaurant.id %>", "<%=daily_dish.image.url(:cropped_small_retina) %>", "<%=daily_dish.image.url(:cropped_map_retina) %>"]<%="," if i+1 < @locations.count %>
 <% end %>
 ];
