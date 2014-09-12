@@ -68,6 +68,9 @@ de:
     November: "November"
     December: "Dezember"
   
+  language:
+    default: "Default"
+  
   payment:
     paypal_payment_description: "dailycious - Dailis (Guthaben)"
     paypal_item_dailycious_credits_title: "%{c} Daili-Paket"

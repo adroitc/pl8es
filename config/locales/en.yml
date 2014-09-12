@@ -68,6 +68,9 @@ en:
     November: "November"
     December: "December"
   
+  language:
+    default: "Default"
+  
   payment:
     paypal_payment_description: "dailycious - dailis (credits)"
     paypal_item_dailycious_credits_title: "%{c} dailis package"
