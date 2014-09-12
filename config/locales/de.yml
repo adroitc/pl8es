@@ -378,7 +378,7 @@ de:
     dish_sides: "Beilagen"
     dish_sides_text: "Bitte geben Sie die Beilagen für diese Speise ein."
     dish_sides_placeholder: "z.B. Brot"
-    dish_ingredits: "Inhaltsstoffe und Allergene"
+    dish_ingredients: "Inhaltsstoffe/Allergene"
     dish_ingredients_text: "Bitte geben Sie die Inhaltsstoffe und Allergene für diese Speise ein."
     
   invoice:
