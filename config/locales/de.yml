@@ -8,7 +8,7 @@ de:
     signup_menumalist_msg: "Hallo <strong>%{n}</strong>,\n\nwillkommen bei Menumlaist, schön, dass Sie da sind! \n\nDer Zugang zu Ihrem Menumalist Konto:\n\nLogin: http://menumalist.pl8.cc\nE-Mail: %{e}\nPasswort: **\n\nDownload Code: <strong>%{c}</strong>\n\nLaden Sie die Menumalist iPad App auf dem App-Store, in dem Sie auf diesen Link klicken: https://itunes.apple.com/de/app/menumalist/id653834278?mt=8\n\nBei Fragen, Wünschen oder Problemen können Sie unser Service Team unter info@menumalist.com kontaktieren. \n\nGuten App.etit,\n\nIhr Menumalist Team"
     signup_pl8_send: "PL8 Team"
     signup_pl8_subj: "Anmeldung bei PL8"
-    signup_pl8_msg: "Hallo %{n},\n\nWillkommen bei PL8, schön, dass Sie da sind!\n\nSie können gleich mit unseren Apps loslegen!\n\n dailycious App herunterladen: http://dailycious.co/app\n Tagesgerichte publizieren http://app.pl8.cc/dailycious\n\nMenumalist iPad App herunterladen: https://itunes.apple.com/de/app/menumalist/id653834278?mt=8\n\nSpeisekarte erstellen:\n\nLogin: http://menumalist.pl8.cc\nE-Mail: %{e}\nPasswort: **\n\nViel Spaß und Guten App.etit,\n\nIhr PL8 Team"
+    signup_pl8_msg: "Hallo %{n},\n\nWillkommen bei PL8, schön, dass Sie da sind!\n\nSie können gleich mit unseren Apps loslegen!\n\n dailycious App herunterladen: http://dailycious.co/app\nMenumalist iPad App herunterladen: https://itunes.apple.com/de/app/menumalist/id653834278?mt=8\n\nSpeisekarte erstellen: http://app.pl8.cc/menumalist\n\nLogin: http://menumalist.pl8.cc\nE-Mail: %{e}\nPasswort: **\n\nViel Spaß und Guten App.etit,\n\nIhr PL8 Team"
     
     password_forgot_send: "PL8 Team"
     password_forgot_subj: "Passwort zurücksetzen"

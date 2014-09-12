@@ -71,12 +71,25 @@ class Ajax::MenuController < ApplicationController
   end
   
   def duplicatemenu
-    if @user && !params.values_at(:menu_id).include?(nil) && @user.menus.exists?(params[:menu_id])
-      menu = @user.menus.find(params[:menu_id])
+    if @user && !params.values_at(:menu_id).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
+      menu = @user.restaurant.menus.find(params[:menu_id])
       
       dup_menu = menu.dup
       dup_menu.title = menu.title+" 2"
       dup_menu.save
+      
+      render :json => {:status => "success"}
+      return
+    end
+    render :json => {:status => "invalid"}
+  end
+  
+  def resetclients
+    if @user && !params.values_at(:reset).include?(nil) && params[:reset] == "true" && (!@user.restaurant.client_reset_date || (@user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now))
+      @user.restaurant.clients.actives.each do |client|
+        cient.update_attributes(:active => false)
+      end
+      @user.restaurant.update_attributes(:client_reset_date => DateTime.now)
       
       render :json => {:status => "success"}
       return

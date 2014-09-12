@@ -45,12 +45,17 @@
               <i class="entypo-plus"></i>
             </button>
             <br />
-            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: 12px" <% if @user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now %>"disabled="disabled"<% end %>>
+            <%= form_tag({:controller => "ajax/menu", :action => "resetclients"}, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_resetclients"}) do %>
+            <input type="hidden" name="reset" value="true">
+            <button type="submit" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: 12px" <% if @user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now %>"disabled="disabled"<% end %>>
               <%=t("menumalist.reset_clients") %>
               <i class="entypo-trash"></i>
             </button>
-            <p><%=t("menumalist.last_reset") %> <b><%=@user.restaurant.client_reset_date.strftime("%d. %B %Y") if @user.restaurant.client_reset_date %></b></p>
-            <p><%=t("menumalist.next_reset") %> <b><%=(@user.restaurant.client_reset_date+31.days).strftime("%d. %B %Y") if @user.restaurant.client_reset_date %></b></p>
+            <% end %>
+            <p><%=t("menumalist.last_reset") %></p>
+            <p><b><%=@user.restaurant.client_reset_date.strftime("%d. %B %Y") if @user.restaurant.client_reset_date %></b></p>
+            <p><%=t("menumalist.next_reset") %></p>
+            <p><b><%=(@user.restaurant.client_reset_date+31.days).strftime("%d. %B %Y") if @user.restaurant.client_reset_date %></b></p>
           </p>
     	  </div>
     	</div>
