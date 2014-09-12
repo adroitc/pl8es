@@ -18,6 +18,7 @@ class App::MenumalistController < ApplicationController
           })
         
           render :json => request_partial
+          puts @req_restaurant.beveragePages.to_json
           return
         end
         render :json => {:status => "uptodate"}

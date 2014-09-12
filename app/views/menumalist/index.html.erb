@@ -47,7 +47,7 @@
             <br />
             <%= form_tag({:controller => "ajax/menu", :action => "resetclients"}, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_resetclients"}) do %>
             <input type="hidden" name="reset" value="true">
-            <button type="submit" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: 12px" <% if @user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now %>"disabled="disabled"<% end %>>
+            <button type="submit" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: 12px" <% if @user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) > DateTime.now %>"disabled="disabled"<% end %>>
               <%=t("menumalist.reset_clients") %>
               <i class="entypo-trash"></i>
             </button>

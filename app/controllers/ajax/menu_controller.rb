@@ -85,9 +85,9 @@ class Ajax::MenuController < ApplicationController
   end
   
   def resetclients
-    if @user && !params.values_at(:reset).include?(nil) && params[:reset] == "true" && (!@user.restaurant.client_reset_date || (@user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now))
+    if @user && !params.values_at(:reset).include?(nil) && params[:reset] == "true" && (@user.isAdmin || !@user.restaurant.client_reset_date || (@user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now))
       @user.restaurant.clients.actives.each do |client|
-        cient.update_attributes(:active => false)
+        client.update_attributes(:active => false)
       end
       @user.restaurant.update_attributes(:client_reset_date => DateTime.now)
       
