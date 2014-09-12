@@ -14,6 +14,9 @@ class Ajax::MenuController < ApplicationController
         languages.push(Language.find(params[:default_language].to_i))
       end
       
+      params[:from_time] = "12:00" if !params[:from_time]
+      params[:to_time] = "17:00" if !params[:to_time]
+      
       new_menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({
         :default_language => Language.find(params[:default_language].to_i),
         :languages => languages,

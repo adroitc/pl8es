@@ -4,6 +4,7 @@ raw(Jsonify::Builder.plain do |j|
   j.status                     "success"
   
   j.content_menues(@req_restaurant.menus) do |menu|
+    j.id                         menu.id
     j.title                      menu.title
     j.from_time                  menu.from_time
     j.to_time                    menu.to_time
