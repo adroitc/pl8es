@@ -1,7 +1,7 @@
 class Ajax::MenuController < ApplicationController
   
   def addmenu
-    if @user && !params.values_at(:title, :from_time, :to_time, :default_language).include?(nil) && Language.exists?(params[:default_language].to_i)
+    if @user && !params.values_at(:title, :default_language).include?(nil) && Language.exists?(params[:default_language].to_i)
       languages = Array.new
       if params[:languages]
         params[:languages].each do |language|
@@ -25,14 +25,14 @@ class Ajax::MenuController < ApplicationController
         })
       end
       
-      render :json => {:status => "success", :p => params}
+      render :json => {:status => "success"}
       return
     end
     render :json => {:status => "invalid"}
   end
   
   def editmenu
-    if @user && !params.values_at(:menu_id, :title, :from_time, :to_time, :default_language).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id]) && Language.exists?(params[:default_language].to_i)
+    if @user && !params.values_at(:menu_id, :title, :default_language).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id]) && Language.exists?(params[:default_language].to_i)
       menu = @user.restaurant.menus.find(params[:menu_id])
       
       if params[:delete] == "true"
@@ -61,7 +61,7 @@ class Ajax::MenuController < ApplicationController
         end
       end
       
-      render :json => {:status => "success", :p => params}
+      render :json => {:status => "success"}
       return
     end
     render :json => {:status => "invalid"}
