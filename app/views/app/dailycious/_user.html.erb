@@ -6,7 +6,7 @@ raw(Jsonify::Builder.plain do |j|
   j.id                         @req_location.restaurant.id
   
   j.restaurant_image_url       @req_location.restaurant.logo_image.url(:cropped_dailycious_retina)
-  j.restaurant_image_fingerprint  @req_location.restaurant.logo_image.present ? @req_location.restaurant.logo_image_fingerprint : "default"
+  j.restaurant_image_fingerprint  @req_location.restaurant.logo_image.present?? @req_location.restaurant.logo_image_fingerprint : "default"
 
   j.name                       @req_location.restaurant.name
   
@@ -40,7 +40,7 @@ raw(Jsonify::Builder.plain do |j|
     j.image_map_url              daily_dish.image.url(:cropped_map_retina)
     j.image_small_url            daily_dish.image.url(:cropped_small_retina)
     j.image_url                  daily_dish.image.url(:cropped_default_retina)
-    j.image_fingerprint          daily_dish.image.present ? daily_dish.image_fingerprint : "default"
+    j.image_fingerprint          daily_dish.image.present?? daily_dish.image_fingerprint : "default"
     j.title                      daily_dish.title
     j.price                      daily_dish.price
   end
