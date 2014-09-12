@@ -16,7 +16,7 @@ en:
     
     payment_send: "SUSI-"
     payment_subj: "SUSI-"
-    payment_msg: "SUSI-"
+    payment_msg: "Hello %{n},\n\nthank you for your purchase for dailycious. You can use your dailis here http://app.pl8.cc/dailycious.\nYou can download your invoice here %{l}.\nIf you have any questions don’t hesitate to contact our customer service at support@pl8.cc.\n\nLet your dishes tell their story,\nyour PL8 Team"
   
   validation:
     required: "This field is required."

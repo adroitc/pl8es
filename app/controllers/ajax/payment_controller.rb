@@ -96,6 +96,8 @@ class Ajax::PaymentController < ApplicationController
             payment.update_attributes({
               :successful => true,
             })
+            
+            @user.send_mail(t("email.payment_send"), t("email.payment_subj"), t("email.payment_msg",{:n=>@user.restaurant.name,:l=>@payment.invoice_pdf.url}))
           
             for i in 1..payment.quantity
               DailyciousCredit.create(
