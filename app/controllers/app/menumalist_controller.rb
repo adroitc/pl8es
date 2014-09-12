@@ -5,7 +5,7 @@ class App::MenumalistController < ApplicationController
     if client && Restaurant.find_by_download_code(params[:user_download_code])
       @req_restaurant = Restaurant.find_by_download_code(params[:user_download_code])
       
-      if client.restaurant == @req_restaurant || @req_restaurant.clients.actives.count < 1
+      if 1==1#client.restaurant == @req_restaurant || @req_restaurant.clients.actives.count < 1
         request_partial = render_to_string(
           :partial => "menumalist"
         )
