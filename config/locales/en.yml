@@ -165,7 +165,7 @@ en:
   dashboard:
     visits: "visits"
     in_the_last_7_days: "in the last 7 days"
-    favorites: "favorites"
+    favorites: "followers"
     daily_dishes: "lunch dishes"
     published_in_the_last_7_days: "published in the last 7 days"
     view_all_daily_dishes: "view all lunch dishes"
