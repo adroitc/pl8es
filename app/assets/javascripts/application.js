@@ -244,6 +244,9 @@ function pl8es_i_ajaxform(f,a)
         if (r["results"].length == 1 &&
             r["results"][0]["geometry"]["location_type"] == "ROOFTOP"){
           f.find("input[name='address']").data("validaddress-error",false);
+          f.find("input[name='latitude']").val(r["results"][0]["geometry"]["location"]["lat"]);
+          f.find("input[name='longitude']").val(r["results"][0]["geometry"]["location"]["lng"]);
+          d = new FormData(f[0]);
           f.valid();
           submit_ajax();
         }

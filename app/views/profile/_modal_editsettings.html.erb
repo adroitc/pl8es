@@ -26,6 +26,8 @@
     <div class="col-sm-12 form-group" style="padding:0px;">
       <label for="form-address" class="control-label"><strong><%=t("profile.account_address") %></strong></label>
 	    <input name="address" type="text" class="form-control" id="form-address" placeholder="<%=t("profile.account_address_placeholder") %>" value="<%=@user.restaurant.location.address %>" data-validate="required,maxlength[255],validaddress" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"255"}) %>" data-message-validaddress="<%=t("validation.validaddress") %>">
+      <input name="latitude" type="hidden" class="form-control" id="form-latitude" value="<%=@user.restaurant.location.latitude %>">
+      <input name="longitude" type="hidden" class="form-control" id="form-longitude" value="<%=@user.restaurant.location.longitude %>">
     </div>
   </div>
 </div>

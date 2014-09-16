@@ -47,40 +47,50 @@ class Ajax::SessionController < ApplicationController
   end
   
   def signup_restaurant
-    if !@user && session[:signup] && !params.values_at(:address, :zip, :city, :country).include?(nil)
-      google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
-      google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
-      google_req = Net::HTTP::Get.new(google_url.request_uri)
-      google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
-        http.request(google_req)
-      }
-      google_results = JSON.parse(google_res.body)["results"]
-      if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
-        params[:address] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["route"]
-        }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["street_number"]
-        }[0]["long_name"]
-        params[:zip] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["postal_code"]
-        }[0]["long_name"]
-        params[:city] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["locality", "political"]
-        }[0]["long_name"]
-        params[:country] = google_results[0]["address_components"].find_all{|item|
-          item["types"] == ["country", "political"]
-        }[0]["long_name"]
+    if !@user && session[:signup] && !params.values_at(:address, :zip, :city, :country, :latitude, :longitude).include?(nil)
+      #google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
+      #google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
+      #google_req = Net::HTTP::Get.new(google_url.request_uri)
+      #google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
+      #  http.request(google_req)
+      #}
+      #google_results = JSON.parse(google_res.body)["results"]
+      #if google_results.count == 1 && google_results[0]["geometry"]["location_type"] == "ROOFTOP"
+      #  params[:address] = google_results[0]["address_components"].find_all{|item|
+      #    item["types"] == ["route"]
+      #  }[0]["long_name"]+" "+google_results[0]["address_components"].find_all{|item|
+      #    item["types"] == ["street_number"]
+      #  }[0]["long_name"]
+      #  params[:zip] = google_results[0]["address_components"].find_all{|item|
+      #    item["types"] == ["postal_code"]
+      #  }[0]["long_name"]
+      #  params[:city] = google_results[0]["address_components"].find_all{|item|
+      #    item["types"] == ["locality", "political"]
+      #  }[0]["long_name"]
+      #  params[:country] = google_results[0]["address_components"].find_all{|item|
+      #    item["types"] == ["country", "political"]
+      #  }[0]["long_name"]
+      #
+      #  session[:signup][:address] = params[:address]
+      #  session[:signup][:zip] = params[:zip]
+      #  session[:signup][:city] = params[:city]
+      #  session[:signup][:country] = params[:country]
+      #  session[:signup][:latitude] = google_results[0]["geometry"]["location"]["lat"].to_f
+      #  session[:signup][:longitude] = google_results[0]["geometry"]["location"]["lng"].to_f
+      #  
+      #  render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "user")}
+      #  return
+      #end
 
-        session[:signup][:address] = params[:address]
-        session[:signup][:zip] = params[:zip]
-        session[:signup][:city] = params[:city]
-        session[:signup][:country] = params[:country]
-        session[:signup][:latitude] = google_results[0]["geometry"]["location"]["lat"].to_f
-        session[:signup][:longitude] = google_results[0]["geometry"]["location"]["lng"].to_f
-        
-        render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "user")}
-        return
-      end
+      session[:signup][:address] = params[:address]
+      session[:signup][:zip] = params[:zip]
+      session[:signup][:city] = params[:city]
+      session[:signup][:country] = params[:country]
+      session[:signup][:latitude] = params[:latitude]
+      session[:signup][:longitude] = params[:longitude]
+      
+      render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "user")}
+      return
     end
     render :json => {:status => "invalid"}
   end
