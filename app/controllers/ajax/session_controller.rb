@@ -75,7 +75,9 @@ class Ajax::SessionController < ApplicationController
         session[:signup][:zip] = params[:zip]
         session[:signup][:city] = params[:city]
         session[:signup][:country] = params[:country]
-      
+        session[:signup][:latitude] = google_results[0]["geometry"]["location"]["lat"].to_f
+        session[:signup][:longitude] = google_results[0]["geometry"]["location"]["lng"].to_f
+        
         render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "user")}
         return
       end
@@ -102,7 +104,9 @@ class Ajax::SessionController < ApplicationController
             :address => session[:signup][:address],
             :zip => session[:signup][:zip],
             :city => session[:signup][:city],
-            :country => session[:signup][:country]
+            :country => session[:signup][:country],
+            :latitude => session[:signup][:latitude],
+            :longitude => session[:signup][:longitude]
           }),
           :default_language => Language.find_by_locale(I18n.locale.to_s) ? Language.find_by_locale(I18n.locale.to_s) : Language.first,
           :menuColorTemplate => MenuColorTemplate.first,
