@@ -153,7 +153,7 @@ class Ajax::SessionController < ApplicationController
         if @user.product_referer == "d"
           redirect_url = url_for(:controller => "/dailycious", :action => "index")
           
-          @user.send_mail(t("email.signup_dailycious_send"), t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>@user.restaurant.name}))
+          @user.send_mail(t("email.signup_dailycious_send"), t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>@user.restaurant.name, :e=>@user.email}))
         elsif @user.product_referer == "m"
           redirect_url = url_for(:controller => "/menumalist", :action => "index")
           
