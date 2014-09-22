@@ -11,7 +11,7 @@
     %>
     <span class="tab-pane <%="active" if @user.restaurant.menu_languages.first == language %> form-group" id="modal-addbeveragenavigation-lang-<%=language.locale %>">
       <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_navigation_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.menu_default_languages_include(language.id) %></label>
-		  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.navigation_title_placeholder") %><% I18n.locale = language.locale %>" <%="required" if @user.restaurant.menu_default_languages_include(language.id) %> data-validate="maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
+		  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_navigation_title_placeholder") %><% I18n.locale = language.locale %>" <%="required" if @user.restaurant.menu_default_languages_include(language.id) %> data-validate="maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
     </span>
     <%
     end
