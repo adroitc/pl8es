@@ -5,7 +5,7 @@ class DailyDish < ActiveRecord::Base
 
   validates :title, :length => {
     :minimum => 4,
-    :maximum => 40
+    :maximum => 80
   }
   validates :price, :length => {
     :maximum => 7
