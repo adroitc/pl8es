@@ -20,6 +20,14 @@ In production all required environment variables are **securely** stored in `/et
 
 For deployment, we use [Capistrano](http://capistranorb.com/). To install it, please follow the instructions on it's website.
 
+We also have some `gem` dependencies which can be installed with
+
+```
+gem install capistrano-rails
+gem install capistrano-rvm
+gem install capistrano-passenger
+```
+
 To deploy a new release, run the following in a terminal from within the project's root directory
 
 ```
