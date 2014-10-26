@@ -29,7 +29,7 @@ class Restaurant < ActiveRecord::Base
   translates :description
   
   validates :name, :presence => true, :length => {
-    :minimum => 4,
+    :minimum => 2,
     :maximum => 75
   }
   validates :description, :allow_blank => true, :length => {

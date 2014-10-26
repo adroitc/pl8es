@@ -1,0 +1,86 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API",
+  "osm3s": {
+    "timestamp_osm_base": "2014-10-23T14:48:02Z",
+    "timestamp_areas_base": "2014-10-23T01:12:02Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 76514684,
+  "lat": 48.2096431,
+  "lon": 16.3736826,
+  "tags": {
+    "addr:city": "Wien",
+    "addr:housenumber": "4",
+    "addr:postcode": "1010",
+    "addr:street": "Rotenturmstraße",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizza Bizi",
+    "opening_hours": "Mo-Su 11:00-24:00",
+    "website": "http://www.pizzabizi.at/",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 106061288,
+  "lat": 48.2146856,
+  "lon": 16.3161548,
+  "tags": {
+    "addr:city": "Wien",
+    "addr:country": "AT",
+    "addr:housenumber": "14",
+    "addr:postcode": "1160",
+    "addr:street": "Speckbachergasse",
+    "amenity": "restaurant",
+    "name": "Herrgott aus Sta'",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 115512282,
+  "lat": 48.1940830,
+  "lon": 16.3978779,
+  "tags": {
+    "addr:city": "Wien",
+    "addr:country": "AT",
+    "addr:housenumber": "139",
+    "addr:postcode": "1030",
+    "addr:street": "Landstraßer Hauptstraße",
+    "amenity": "restaurant",
+    "contact:phone:mobile": "+43 (0)664/914 26 99",
+    "cuisine": "indian",
+    "name": "sreeja",
+    "opening_hours": "Mo-Su 11:00-14:30; Mo-Su 18:00-22:30",
+    "phone": "+43 (0)1/710 11 86",
+    "website": "http://sreeja.at/"
+  }
+},
+{
+  "type": "node",
+  "id": 3133049179,
+  "lat": 48.2118240,
+  "lon": 16.3517558,
+  "tags": {
+    "addr:city": "Wien",
+    "addr:housenumber": "17",
+    "addr:postcode": "1080",
+    "addr:street": "Florianigasse",
+    "amenity": "restaurant",
+    "capacity": "20",
+    "cuisine": "Fusion",
+    "name": "I am Bio",
+    "phone": "+43 1 9904969",
+    "smoking": "outside",
+    "website": "iambio.at"
+  }
+}
+
+  ]
+}
