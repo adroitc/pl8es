@@ -52,13 +52,14 @@ class Location < ActiveRecord::Base
       #end
       geokit_address = Geokit::Geocoders::GoogleGeocoder.geocode(google_address)
       if geokit_address.precision == "building"
+        latlon = geokit_address.ll.split(',')
         return {
           :address => geokit_address.street_name+" "+geokit_address.street_number,
           :zip => geokit_address.zip,
           :city => geokit_address.city,
           :country => geokit_address.country,
-          :latitude => geokit_address.ll[0],
-          :longitude => geokit_address.ll[1]
+          :latitude => latlon[0],
+          :longitude => latlon[1]
         }
       end
     end

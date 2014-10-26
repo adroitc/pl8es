@@ -61,6 +61,8 @@ gem "paypal-express"
 # json
 gem "jsonify"
 
+gem "yajl-ruby", require: "yajl"
+
 # encryption
 gem "bcrypt-ruby", :require => "bcrypt"
 
