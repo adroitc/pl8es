@@ -1,13 +1,17 @@
 #!/usr/bin/env rake
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+# import geojson-data from overpass api as users/restaurants to database
+# json files can be retrieved from http://example.api.instance.org/.../interpreter?data=[out:json][timeout:25];area(3600109166)->.area;(node["amenity"="restaurant"]["name"]["addr:street"]["addr:housenumber"]["addr:postcode"](area.area););out body;>;out skel qt;
+
 
 namespace :seed do
   require 'yajl'
-  desc 'import overpass-json file to database'
+  desc 'import overpass-geojson file to database'
   task :byfile, [:filepath] => :environment do |t, args|
 
+    # hardcode pwd for all imported users
     PASS = '3fk!dF(pp'
+    DEFAULT_CITY = 'Vienna'
+    DEFAULT_COUNTRY = 'Austria'
 
     begin
       jsonfile = File.open(args.filepath, 'r')
@@ -25,14 +29,15 @@ namespace :seed do
 
     hash['elements'].each do |restaurantObj|
 
+      # thats just the max-id + 1, may not be the next autoincrement id (should work in any case nevertheless)
       probably_next_user_id = User.maximum(:id).next
 
       user_model = User.new({
-        :email => probably_next_user_id.to_s + '@dailycious.co',
+        :email => probably_next_user_id.to_s + '@dailycious.co', # %USERID%@dailycius.co <- suffix ensures that newsletters or similar things wont be sent to imported restaurants
         :password => PASS,
         :password_confirmation => PASS,
         :last_login => DateTime.now,
-        :product_referer => 'g'
+        :product_referer => 'g' # g => 'generated'
       })
 
       restaurant_model = Restaurant.new({
@@ -48,16 +53,19 @@ namespace :seed do
       address = Location.validate_address({
         :address => address_from(restaurantObj['tags']),
         :zip => restaurantObj['tags']['addr:postcode'],
-        :city => 'Vienna',
-        :country => 'Austria'
+        :city => DEFAULT_CITY,
+        :country => DEFAULT_COUNTRY
       })
+
+      # if google could not locate the address, and the restaurant is available als node (point)
+      # then pick the lat/lon values from the geojson
 
       if address.nil? && restaurantObj['type'].eql?('node')
         address = {
           :address => address_from(restaurantObj['tags']),
           :zip => restaurantObj['tags']['addr:postcode'],
-          :city => 'Vienna',
-          :country => 'Austria',
+          :city => DEFAULT_CITY,
+          :country => DEFAULT_COUNTRY,
           :latitude => restaurantObj['lat'],
           :longitude => restaurantObj['lon']
         }
@@ -92,12 +100,17 @@ namespace :seed do
 
     jsonfile.close
 
+    puts 'import finished. imported ' + success_counter.to_s + ' restaurants; ' + fail_counter.to_s + ' fails.'
+
   end
 
+  # removes als users which were imported.
+  # DOES NOT REMOVE RELATED RESTAURANTS
   def remove_old_import_data
     User.destroy(:product_referer => 'g')
   end
 
+  # concat address-tags and return as string
   def address_from(tags)
 
     s = StringIO.new
@@ -109,6 +122,8 @@ namespace :seed do
 
   end
 
+  # return phone number as string or nil if not available
+  # tag priority 'phone' > 'contact:phone'
   def phone_from(tags)
 
     if tags.key?('phone')
@@ -123,6 +138,8 @@ namespace :seed do
 
   end
 
+  # return website as string, or nil if not available
+  # tag priority 'website' > 'contact:website' > 'url'
   def web_from(tags)
 
     if tags.key?('website')
