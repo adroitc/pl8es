@@ -21,6 +21,3 @@
 
 # Ignore ide settings
 /.idea
-
-# dont commit lock file
-/Gemfile.lock
