@@ -1,7 +1,14 @@
 #!/usr/bin/env rake
-# import geojson-data from overpass api as users/restaurants to database
-# json files can be retrieved from http://example.api.instance.org/.../interpreter?data=[out:json][timeout:25];area(3600109166)->.area;(node["amenity"="restaurant"]["name"]["addr:street"]["addr:housenumber"]["addr:postcode"](area.area););out body;>;out skel qt;
 
+# import geojson-data from overpass api as users/restaurants to database
+
+# json files can be retrieved by
+# curl -g -o import.json 'http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json][timeout:25];area%283600109166%29-%3E.area;%28node[%22amenity%22=%22restaurant%22][%22name%22][%22addr:street%22][%22addr:housenumber%22][%22addr:postcode%22]%28area.area%29;%29;out%20body;%3E;out%20skel%20qt;'
+
+# call like
+# rake seed:byfile[test/import/example.json]
+# or in production
+# rake seed:byfile[tmp/import.json] RAILS_ENV=production
 
 namespace :seed do
   require 'yajl'
@@ -19,7 +26,9 @@ namespace :seed do
       abort "'#{args.filepath}' not found"
     end
 
-    puts "starting import via '#{args.filepath}'"
+    remove_old_import_data
+
+    puts 'removed old import data, starting import via '#{args.filepath}'"
 
     parser = Yajl::Parser.new
     hash = parser.parse(jsonfile)
@@ -50,30 +59,39 @@ namespace :seed do
         :supportedFont => SupportedFont.first
       })
 
-      address = Location.validate_address({
-        :address => address_from(restaurantObj['tags']),
-        :zip => restaurantObj['tags']['addr:postcode'],
-        :city => DEFAULT_CITY,
-        :country => DEFAULT_COUNTRY
-      })
+      begin
+
+        address = Location.validate_address({
+          :address => address_from(restaurantObj['tags']),
+          :zip => restaurantObj['tags']['addr:postcode'],
+          :city => DEFAULT_CITY,
+          :country => DEFAULT_COUNTRY
+        })
+
+      rescue Exception => e
+        puts 'could not google-validate: ' + e.message + ' taking osm-data'
+      end
 
       # if google could not locate the address, and the restaurant is available als node (point)
       # then pick the lat/lon values from the geojson
 
       if address.nil? && restaurantObj['type'].eql?('node')
         address = {
-          :address => address_from(restaurantObj['tags']),
-          :zip => restaurantObj['tags']['addr:postcode'],
-          :city => DEFAULT_CITY,
-          :country => DEFAULT_COUNTRY,
-          :latitude => restaurantObj['lat'],
-          :longitude => restaurantObj['lon']
+            :address => address_from(restaurantObj['tags']),
+            :zip => restaurantObj['tags']['addr:postcode'],
+            :city => DEFAULT_CITY,
+            :country => DEFAULT_COUNTRY,
+            :latitude => restaurantObj['lat'],
+            :longitude => restaurantObj['lon']
         }
       end
 
       if user_model.valid? && user_model.errors.count == 0 && restaurant_model.valid? && restaurant_model.errors.count == 0 && address != nil
 
         user_model.save
+        user_model.update_attributes({
+          :email => user_model.id.to_s + '@dailycious.co'
+        })
 
         restaurant_model.save
         restaurant_model.update_attributes({
@@ -104,10 +122,32 @@ namespace :seed do
 
   end
 
-  # removes als users which were imported.
-  # DOES NOT REMOVE RELATED RESTAURANTS
+  # removes als users/restaurants/locations which were imported.
   def remove_old_import_data
-    User.destroy(:product_referer => 'g')
+
+    Location.connection.execute("
+      delete from locations
+      where locations.id in (
+      select id from locations
+      join (
+        select restaurants.id as 'restid' from restaurants
+        join users on (restaurants.user_id = users.id AND users.product_referer = 'g')
+      ) as 'genrest' on (genrest.restid = locations.restaurant_id)
+      );
+    ", :skip_logging)
+
+    Restaurant.connection.execute("
+      delete from restaurants
+      where restaurants.user_id in (
+        select users.id from users where users.product_referer = 'g'
+      );
+    ", :skip_logging)
+
+    User.connection.execute("
+      delete from users
+      where users.product_referer = 'g'
+    ", :skip_logging)
+
   end
 
   # concat address-tags and return as string
