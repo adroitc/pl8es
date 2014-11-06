@@ -17,8 +17,8 @@ namespace :seed do
 
     # hardcode pwd for all imported users
     PASS = '3fk!dF(pp'
-    DEFAULT_CITY = 'Vienna'
-    DEFAULT_COUNTRY = 'Austria'
+    DEFAULT_CITY = 'Wien'
+    DEFAULT_COUNTRY = 'Österreich'
 
     begin
       jsonfile = File.open(args.filepath, 'r')
@@ -72,10 +72,14 @@ namespace :seed do
         puts 'could not google-validate: ' + e.message + ' taking osm-data'
       end
 
+
       # if google could not locate the address, and the restaurant is available als node (point)
       # then pick the lat/lon values from the geojson
 
       if address.nil? && restaurantObj['type'].eql?('node')
+
+        puts 'could not google-validate: ' + address_from(restaurantObj['tags']) + ' taking osm-data'
+
         address = {
             :address => address_from(restaurantObj['tags']),
             :zip => restaurantObj['tags']['addr:postcode'],
@@ -89,11 +93,15 @@ namespace :seed do
       if user_model.valid? && user_model.errors.count == 0 && restaurant_model.valid? && restaurant_model.errors.count == 0 && address != nil
 
         user_model.save
-        user_model.update_attributes({
-          :email => user_model.id.to_s + '@dailycious.co'
-        })
+
+        if probably_next_user_id != user_model.id
+          user_model.update_attributes({
+            :email => user_model.id.to_s + '@dailycious.co'
+          })
+        end
 
         restaurant_model.save
+
         restaurant_model.update_attributes({
           :location => Location.create(address)
         })

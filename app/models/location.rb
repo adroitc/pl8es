@@ -24,6 +24,7 @@ class Location < ActiveRecord::Base
   def self.validate_address(params)
     if !params.values_at(:address, :zip, :city, :country).include?(nil)
       google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
+
       #google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
       #google_req = Net::HTTP::Get.new(google_url.request_uri)
       #google_res = Net::HTTP.start(google_url.host, google_url.port) {|http|
@@ -50,7 +51,11 @@ class Location < ActiveRecord::Base
       #    :longitude => google_results[0]["geometry"]["location"]["lng"].to_f
       #  }
       #end
-      geokit_address = Geokit::Geocoders::GoogleGeocoder.geocode(google_address)
+
+      geokit_address = Geokit::Geocoders::GoogleGeocoder.geocode(google_address, {
+          :language => 'de'
+      })
+
       if geokit_address.precision == "building"
         latlon = geokit_address.ll.split(',')
         return {
