@@ -138,9 +138,9 @@ namespace :seed do
       where locations.id in (
       select id from locations
       join (
-        select restaurants.id as 'restid' from restaurants
+        select restaurants.id as restid from restaurants
         join users on (restaurants.user_id = users.id AND users.product_referer = 'g')
-      ) as 'genrest' on (genrest.restid = locations.restaurant_id)
+      ) as genrest on (genrest.restid = locations.restaurant_id)
       );
     ", :skip_logging)
 
