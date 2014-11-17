@@ -49,6 +49,11 @@ namespace :seed do
         :product_referer => 'g' # g => 'generated'
       })
 
+      download_code = SecureRandom.hex(3).upcase
+      while Restaurant.find_by_download_code(download_code).present?
+        download_code = SecureRandom.hex(3).upcase
+      end
+
       restaurant_model = Restaurant.new({
         :user => user_model,
         :name => restaurantObj['tags']['name'],
@@ -56,7 +61,16 @@ namespace :seed do
         :telephone => phone_from(restaurantObj['tags']),
         :default_language => Language.first,
         :menuColorTemplate => MenuColorTemplate.first,
-        :supportedFont => SupportedFont.first
+        :supportedFont => SupportedFont.first,
+        :background_type => 'color',
+        :menuColor => MenuColor.create(
+            :background => '#000000',
+            :bar_background => '#000000',
+            :nav_text => '#ffffff',
+            :nav_text_active => '#999999'
+        ),
+        :dailycious_plan => DailyciousPlan.create(),
+        :download_code => download_code,
       })
 
       begin
@@ -133,14 +147,22 @@ namespace :seed do
   # removes als users/restaurants/locations which were imported.
   def remove_old_import_data
 
+    DailyciousPlan.connection.execute("
+      delete from dailycious_plans
+      where dailycious_plans.restaurant_id in (
+          select restaurants.id as restid from restaurants
+          join users on (restaurants.user_id = users.id AND users.product_referer = 'g')
+      );
+    ", :skip_logging)
+
     Location.connection.execute("
       delete from locations
       where locations.id in (
-      select id from locations
-      join (
-        select restaurants.id as restid from restaurants
-        join users on (restaurants.user_id = users.id AND users.product_referer = 'g')
-      ) as genrest on (genrest.restid = locations.restaurant_id)
+        select id from locations
+        join (
+          select restaurants.id as restid from restaurants
+          join users on (restaurants.user_id = users.id AND users.product_referer = 'g')
+        ) as genrest on (genrest.restid = locations.restaurant_id)
       );
     ", :skip_logging)
 
