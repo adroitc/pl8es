@@ -30,7 +30,6 @@ end
 
 group :development do
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3"
   gem "better_errors"
   gem "binding_of_caller"
   gem 'capistrano-rails', '~> 1.1.1'
@@ -39,10 +38,10 @@ group :development do
   gem 'railroady'
 end
 
-group :production do
-  # Use postres for heroku/hetzner
-  gem "pg"
+# database
+gem "pg"
 
+group :production do
   # Use rails_12factor for heroku
   gem "rails_12factor"
 end

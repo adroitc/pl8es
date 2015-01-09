@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140911072448) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "beverage_navigation_translations", force: true do |t|
     t.integer  "beverage_navigation_id", null: false
     t.string   "locale",                 null: false
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "title"
   end
 
-  add_index "beverage_navigation_translations", ["beverage_navigation_id"], name: "index_1cfc283b491f788097bd8f375227f08f4e1a832b"
-  add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale"
+  add_index "beverage_navigation_translations", ["beverage_navigation_id"], name: "index_1cfc283b491f788097bd8f375227f08f4e1a832b", using: :btree
+  add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale", using: :btree
 
   create_table "beverage_navigations", force: true do |t|
     t.integer  "beverage_page_id"
@@ -58,8 +61,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "title"
   end
 
-  add_index "beverage_translations", ["beverage_id"], name: "index_beverage_translations_on_beverage_id"
-  add_index "beverage_translations", ["locale"], name: "index_beverage_translations_on_locale"
+  add_index "beverage_translations", ["beverage_id"], name: "index_beverage_translations_on_beverage_id", using: :btree
+  add_index "beverage_translations", ["locale"], name: "index_beverage_translations_on_locale", using: :btree
 
   create_table "beverages", force: true do |t|
     t.string   "price"
@@ -88,8 +91,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "title"
   end
 
-  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id"
-  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale"
+  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
+  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "restaurant_id"
@@ -115,12 +118,12 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.text     "image_dimensions",     limit: 255
+    t.text     "image_dimensions"
     t.integer  "image_crop_w"
     t.integer  "image_crop_h"
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed",             default: true
+    t.boolean  "image_crop_processed", default: true
     t.string   "image_fingerprint"
     t.integer  "position"
     t.integer  "restaurant_id"
@@ -166,8 +169,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "sides"
   end
 
-  add_index "dish_translations", ["dish_id"], name: "index_dish_translations_on_dish_id"
-  add_index "dish_translations", ["locale"], name: "index_dish_translations_on_locale"
+  add_index "dish_translations", ["dish_id"], name: "index_dish_translations_on_dish_id", using: :btree
+  add_index "dish_translations", ["locale"], name: "index_dish_translations_on_locale", using: :btree
 
   create_table "dishes", force: true do |t|
     t.integer  "menu_id"
@@ -183,13 +186,13 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.text     "image_dimensions",     limit: 255
+    t.text     "image_dimensions"
     t.string   "image_fingerprint"
     t.integer  "image_crop_w"
     t.integer  "image_crop_h"
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed",             default: true
+    t.boolean  "image_crop_processed", default: true
     t.integer  "ingredients_id"
     t.integer  "restaurant_id"
   end
@@ -214,8 +217,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "title"
   end
 
-  add_index "ingredient_translations", ["ingredient_id"], name: "index_ingredient_translations_on_ingredient_id"
-  add_index "ingredient_translations", ["locale"], name: "index_ingredient_translations_on_locale"
+  add_index "ingredient_translations", ["ingredient_id"], name: "index_ingredient_translations_on_ingredient_id", using: :btree
+  add_index "ingredient_translations", ["locale"], name: "index_ingredient_translations_on_locale", using: :btree
 
   create_table "ingredients", force: true do |t|
     t.datetime "created_at"
@@ -278,13 +281,13 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "preview_image_content_type"
     t.integer  "preview_image_file_size"
     t.datetime "preview_image_updated_at"
-    t.text     "preview_image_dimensions",     limit: 255
+    t.text     "preview_image_dimensions"
     t.string   "preview_image_fingerprint"
     t.integer  "preview_image_crop_w"
     t.integer  "preview_image_crop_h"
     t.integer  "preview_image_crop_x"
     t.integer  "preview_image_crop_y"
-    t.boolean  "preview_image_crop_processed",             default: true
+    t.boolean  "preview_image_crop_processed", default: true
   end
 
   create_table "menu_colors", force: true do |t|
@@ -331,8 +334,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "title"
   end
 
-  add_index "navigation_translations", ["locale"], name: "index_navigation_translations_on_locale"
-  add_index "navigation_translations", ["navigation_id"], name: "index_navigation_translations_on_navigation_id"
+  add_index "navigation_translations", ["locale"], name: "index_navigation_translations_on_locale", using: :btree
+  add_index "navigation_translations", ["navigation_id"], name: "index_navigation_translations_on_navigation_id", using: :btree
 
   create_table "navigations", force: true do |t|
     t.integer  "menu_id"
@@ -347,13 +350,13 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.text     "image_dimensions",     limit: 255
+    t.text     "image_dimensions"
     t.string   "image_fingerprint"
     t.integer  "image_crop_w"
     t.integer  "image_crop_h"
     t.integer  "image_crop_x"
     t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed",             default: true
+    t.boolean  "image_crop_processed", default: true
   end
 
   create_table "payments", force: true do |t|
@@ -394,8 +397,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.text     "description"
   end
 
-  add_index "restaurant_translations", ["locale"], name: "index_restaurant_translations_on_locale"
-  add_index "restaurant_translations", ["restaurant_id"], name: "index_restaurant_translations_on_restaurant_id"
+  add_index "restaurant_translations", ["locale"], name: "index_restaurant_translations_on_locale", using: :btree
+  add_index "restaurant_translations", ["restaurant_id"], name: "index_restaurant_translations_on_restaurant_id", using: :btree
 
   create_table "restaurants", force: true do |t|
     t.integer  "user_id"
@@ -523,8 +526,8 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "description"
   end
 
-  add_index "wine_translations", ["locale"], name: "index_wine_translations_on_locale"
-  add_index "wine_translations", ["wine_id"], name: "index_wine_translations_on_wine_id"
+  add_index "wine_translations", ["locale"], name: "index_wine_translations_on_locale", using: :btree
+  add_index "wine_translations", ["wine_id"], name: "index_wine_translations_on_wine_id", using: :btree
 
   create_table "wines", force: true do |t|
     t.integer  "user_id"
