@@ -39,7 +39,8 @@ group :development do
 end
 
 # database
-gem "pg"
+gem 'pg'
+gem 'hirb'
 
 group :production do
   # Use rails_12factor for heroku
