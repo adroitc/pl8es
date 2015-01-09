@@ -36,6 +36,7 @@ group :development do
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
+  gem 'railroady'
 end
 
 group :production do
