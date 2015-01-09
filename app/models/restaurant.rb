@@ -1,4 +1,9 @@
 class Restaurant < ActiveRecord::Base
+	
+	# –––––––––––––
+	#   Relations
+	# –––––––––––––
+	
   belongs_to :user
   has_one :location
   belongs_to :default_language, :class_name => "Language"
@@ -28,21 +33,18 @@ class Restaurant < ActiveRecord::Base
   
   translates :description
   
-  validates :name, :presence => true, :length => {
-    :minimum => 2,
-    :maximum => 75
-  }
-  validates :description, :allow_blank => true, :length => {
-    :maximum => 400
-  }
-  validates :website, :allow_blank => true, :presence => true, :length => {
-    :minimum => 6,
-    :maximum => 255
-  }
-  validates :telephone, :allow_blank => true, :presence => true, :length => {
-    :minimum => 6,
-    :maximum => 255
-  }
+  # –––––––––––––
+	#  Validations
+	# –––––––––––––
+  
+  validates :name, :presence => true, :length => 2..75
+  validates :description, :allow_blank => true, :length => { :maximum => 400 }
+  validates :website, :allow_blank => true, :presence => true, :length => 6..255
+  validates :telephone, :allow_blank => true, :presence => true, :length => 6..255
+  
+  # –––––––––––––
+	#    Images
+	# –––––––––––––
   
   has_attached_file :logo_image, {
     :styles => {
