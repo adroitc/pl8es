@@ -1,0 +1,27 @@
+:output:
+  Navigation:
+    :options:
+      :fields:
+        - menu_id
+        - navigation_id
+        - title
+        - level
+        - style
+        - dishes_id
+        - position
+  BeveragePage:
+    :options:
+      :fields:
+        - id
+        - restaurant_id
+        - title
+  Restaurant:
+    :options:
+      :fields:
+        - id
+        - user_id
+        - name
+        - telephone
+        - website
+        - download_code
+        - email
