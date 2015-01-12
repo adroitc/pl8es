@@ -25,5 +25,10 @@ module Pl8es
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     
     config.i18n.fallbacks =[:en, :de, :fr]
+		
+		console do
+			require 'hirb'
+			Hirb.enable
+		end
   end
 end
