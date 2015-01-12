@@ -3,18 +3,6 @@ Pl8es::Application.configure do
   #payment-paypal
   Paypal.sandbox!
   
-  #images-amazon
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV["AWS_BUCKET"],
-      :access_key_id => ENV["AWS_ACCESS"],
-      :secret_access_key => ENV["AWS_SECRET"]
-    },
-    :url => ":s3_domain_url",
-    :path => "/:class/:attachment/:id_partition/:style/:filename",
-  }
-  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
