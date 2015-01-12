@@ -7,18 +7,9 @@ class Menu < ActiveRecord::Base
   has_many :navigations
   has_many :dishes
   has_many :beverages
-  
-  validates :title, :presence => true, :length => {
-    :minimum => 4,
-    :maximum => 75
-  }
-  validates :from_time, :allow_blank => true, :length => {
-    :minimum => 4,
-    :maximum => 7
-  }
-  validates :to_time, :allow_blank => true, :length => {
-    :minimum => 4,
-    :maximum => 7
-  }
-  
+	
+	validates :title, :presence => true, :length => 4..75
+	validates :from_time, :allow_blank => true, :length => 4..7
+	validates :to_time, :allow_blank => true, :length => 4..7
+	
 end

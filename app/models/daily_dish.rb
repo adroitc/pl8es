@@ -2,15 +2,10 @@ class DailyDish < ActiveRecord::Base
   belongs_to :restaurant
   
   default_scope :order => "position, id"
-
-  validates :title, :length => {
-    :minimum => 4,
-    :maximum => 80
-  }
-  validates :price, :length => {
-    :maximum => 7
-  }
-  
+	
+	validates :title, :length => 4..80
+	validates :price, :length => { :maximum => 7 }
+	
   has_attached_file :image, {
     :styles => {
       :original_cropping => {

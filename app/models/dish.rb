@@ -11,23 +11,12 @@ class Dish < ActiveRecord::Base
 
   default_scope :order => "position, id"
 
-  validates :title, :presence => true, :length => {
-    :minimum => 4,
-    :maximum => 40
-  }
-  validates :description, :length => {
-    :maximum => 400
-  }
-  validates :price, :length => {
-    :maximum => 7
-  }
-  validates :drinks, :length => {
-    :maximum => 255
-  }
-  validates :sides, :length => {
-    :maximum => 255
-  }
-  
+	validates :title, :presence => true, :length => 4..40
+	validates :description, :length => { :maximum => 400 }
+	validates :price, :length => { :maximum => 7 }
+	validates :drinks, :length => { :maximum => 255 }
+	validates :sides, :length => { :maximum => 255 }
+	
   has_attached_file :image, {
     :styles => {
       :original_cropping => {

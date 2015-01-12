@@ -6,19 +6,13 @@ class User < ActiveRecord::Base
   
   has_secure_password
   
-  validates :email, :presence => true, :uniqueness => true, :length => {
-    :minimum => 6,
-    :maximum => 255
-  }, :format => {
-    :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9\.-]+\.[A-Za-z]+\Z/
-  }
-  validates :password, :allow_blank => true, :presence => true, :length => {
-    :minimum => 8,
-    :maximum => 255
-  }, :format => {
-    :with => /\A^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$\Z/
-  }
-  
+	validates :email, :presence => true, :uniqueness => true, :length => 6..255, :format => {
+		:with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9\.-]+\.[A-Za-z]+\Z/
+	}
+	validates :password, :allow_blank => true, :presence => true, :length => 8..255, :format => {
+		:with => /\A^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$\Z/
+	}
+	
 	def self.loggedIn(session)
 		if session[:user_id] && User.exists?(session[:user_id])
 			return true

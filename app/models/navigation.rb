@@ -8,12 +8,9 @@ class Navigation < ActiveRecord::Base
   translates :title
   
   default_scope :order => "position, id"
-  
-  validates :title, :presence => true, :length => {
-    :minimum => 4,
-    :maximum => 40
-  }
-  
+	
+	validates :title, :presence => true, :length => 4..40
+	
   has_attached_file :image, {
     :styles => {
       :original_cropping => {

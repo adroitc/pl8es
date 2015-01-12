@@ -5,11 +5,9 @@ class BeverageNavigation < ActiveRecord::Base
   default_scope :order => "position, id"
   
   translates :title
-  
-  validates :title, :presence => true, :length => {
-    :maximum => 40
-  }
-
+	
+	validates :title, :presence => true, :length => { :maximum => 40 }
+	
   def beverage_navigation_lang
     all_translated_attributes_hash = {}
     
