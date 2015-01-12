@@ -24,13 +24,16 @@ class Ajax::DailyDishController < ApplicationController
       end
 
       params[:price] = params[:price] == "" ? "0.00" : ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
-      new_daily_dish = DailyDish.create(params.permit(:display_date, :image, :title, :price).merge({
-        :restaurant => @user.restaurant,
-        :position => @user.restaurant.daily_dishes.unscoped.last != nil ? @user.restaurant.daily_dishes.unscoped.last.id : 0
-      }))
       
-      new_daily_dish.update_attributes(params.permit(:image))
-      new_daily_dish.image.set_crop_values_for_instance(params.permit(:image))
+			daily_dish = DailyDish.new(params.permit(:display_date, :title, :price, :image).merge({
+				:position => @user.restaurant.daily_dishes.unscoped.last.present? ? @user.restaurant.daily_dishes.unscoped.last.id : 0
+			}))
+			
+			daily_dish.update_attributes(params.permit(:image))
+			daily_dish.image.set_crop_values_for_instance(params.permit(:image))
+			
+			@user.restaurant.daily_dishes << daily_dish
+			@user.save
       
       render :json => {:status => "success"}
       return
