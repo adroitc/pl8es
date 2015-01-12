@@ -5,15 +5,23 @@ class Restaurant < ActiveRecord::Base
 	# –––––––––––––
 	
   belongs_to :user
+  has_one :dailycious_plan
+  has_many :dailycious_credits
+  
   has_one :location
+  
   belongs_to :default_language, :class_name => "Language"
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :categories
-  has_many :daily_dishes
+  
   has_one :menuColor
   belongs_to :menuColorTemplate
   belongs_to :supportedFont
-  belongs_to :defaultMenu, :class_name => "Menu"
+  
+  # –– devices & clients
+  
+  has_many :favoriteRestaurants
+  has_many :devices, :through => :favoriteRestaurants
   has_many :clients do
     def actives()
       where([
@@ -23,14 +31,16 @@ class Restaurant < ActiveRecord::Base
       ])
     end
   end
-  has_many :menus
-  has_many :dishes
-  has_many :beveragePages
-  has_many :favoriteRestaurants
-  has_many :devices, :through => :favoriteRestaurants
-  has_one :dailycious_plan
-  has_many :dailycious_credits
   
+  belongs_to :defaultMenu, :class_name => "Menu"
+  
+  # – menumalist
+  has_many :menus
+  
+  has_many :dishes
+  has_many :daily_dishes
+  
+  has_many :beveragePages
   translates :description
   
   # –––––––––––––
