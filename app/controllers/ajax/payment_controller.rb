@@ -31,8 +31,8 @@ class Ajax::PaymentController < ApplicationController
       )
       response = paypal_req.setup(
         payment.paypal_payment_request,
-        url_for({:controller => "ajax/payment", :action => "datransfercreditplan"}.merge(params.permit(:buydailydish))),
-        url_for(:controller => "/dailycious", :action => "index")
+        buy_datransfercreditplan),
+        dailycious_path
       )
       payment.update_attributes({
         :paypal_token => response.token
