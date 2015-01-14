@@ -8,13 +8,13 @@
     <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+        <a href="<%= dashboard_index_path %>">
           <i class="entypo-home"></i>
           <%=t("layouts.menu.dashboard") %>
         </a>
       </li>
       <li class="">
-        <a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+        <a href="<%= menumalist_path %>">
           <%=t("menumalist.menu.menumalist") %>
         </a>
       </li>
@@ -34,11 +34,11 @@
             </tr>
           </thead>
           <tbody class="sorted ui-sortable">
-            <%= form_tag({:controller => "ajax/beverage", :action => "sortbeveragenavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeveragenavigation"}) do %>
+            <%= form_tag(beveragecategory_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeveragenavigation"}) do %>
               <% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
               <tr style="font-size: 18px;">
                 <td>
-                  <a href="<%=url_for :controller => "beverage", :action => "beveragenavigation", :beverage_page_title => @beverage_page.title.gsub(" ", "-"), :beverage_page_id => @beverage_page.id, :beverage_navigation_title => beverage_navigation.title.gsub(" ", "-"), :beverage_navigation_id => beverage_navigation.id %>">
+                  <a href="<%= show_beverage_navigation_path(@beverage_page.title.gsub(" ", "-"), @beverage_page.id, beverage_navigation.title.gsub(" ", "-"), beverage_navigation.id) %>">
                     <%=beverage_navigation.title %>
                   </a>
                   <input type="hidden" name="beverage_navigation_ids[<%=beverage_navigation.id %>]" value="">

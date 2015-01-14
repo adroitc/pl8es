@@ -22,7 +22,7 @@
 	</div>
 	<div class="login-form">
 		<div class="login-content">
-      <%= form_tag({:controller => "ajax/session", :action => "signup_user"}, {:role => "form", :id => "form_register", :class => "pl8es_c_ajaxform validate"}) do %>
+      <%= form_tag(session_signup_user_path, {:role => "form", :id => "form_register", :class => "pl8es_c_ajaxform validate"}) do %>
 			  <div class="form-invalid form-login-error">
 					<h3><%=t("signup.invalid_title") %></h3>
 					<p><%=t("signup.invalid_msg_email") %></p>
@@ -60,7 +60,7 @@
 				</div>
       <% end %>
 			<div class="login-bottom-links">
-				<a href="<%=url_for :controller => "login", :action => "index" %>" class="link">
+				<a href="<%= login_index_path %>" class="link">
 					<i class="entypo-lock"></i>
 					<%=t("signup.footer_return") %>
 				</a>

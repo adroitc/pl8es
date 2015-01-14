@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editmenu-#{menu.id}", :width => "678px", :title => t("menumalist.menu_modal_edit_title") do |m| %>
-<%= form_tag({:controller => "ajax/menu", :action => "editmenu"}, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editmenu"}) do %>
+<%= form_tag(menu_edit_path, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editmenu"}) do %>
 <input name="menu_id" type="hidden" id="form-menu_id" value="<%=menu.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">

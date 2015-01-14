@@ -8,18 +8,18 @@
     <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+        <a href="<%= dashboard_index_path %>">
           <i class="entypo-home"></i>
           <%=t("layouts.menu.dashboard") %>
         </a>
       </li>
       <li class="">
-        <a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+        <a href="<%= menumalist_path %>">
           <%=t("menumalist.menu.menumalist") %>
         </a>
       </li>
       <li>
-        <a href="<%=url_for :controller => "beverage", :action => "beveragepage", :beverage_page_title => @beverage_navigation.beverage_page.title.gsub(" ", "-"), :beverage_page_id => @beverage_navigation.beverage_page.id %>">
+        <a href="<%= show_beverage_page(@beverage_navigation.beverage_page.title.gsub(" ", "-"), @beverage_navigation.beverage_page.id) %>">
           <%=@beverage_navigation.beverage_page.title %>
         </a>
       </li>
@@ -31,7 +31,7 @@
     <br />
     <div class="row">
       <div class="col-md-12">
-        <%= form_tag({:controller => "ajax/beverage", :action => "sortbeverage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeverage"}) do %>
+        <%= form_tag(sort_beverage_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeverage"}) do %>
           <table class="table table-striped responsive draggable-portlets">
             <thead>
               <tr>

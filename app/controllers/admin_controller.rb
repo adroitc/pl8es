@@ -21,7 +21,7 @@ class AdminController < ApplicationController
   def user_switch
     if @user && (@user.isAdmin || (session[:admin_id] && User.exists?(session[:admin_id]) && User.find(session[:admin_id]).isAdmin))
       session[:user_id] = params[:user_id]
-      redirect_to :controller => "profile", :action => "index"
+      redirect_to profile_index_path
     else
       raise ActionController::RoutingError.new("Not Found")
     end

@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editcategory-#{category.id}", :width => "678px", :title => "Edit tag", :languages => Language.all, :default_language => Language.first do |m| %>
-<%= form_tag({:controller => "ajax/admin", :action => "editcategory"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "editcategory"}) do %>
+<%= form_tag(tag_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "editcategory"}) do %>
 <%=neon_modal_body do |b| %>
 <input name="category_id" type="hidden" id="form-category_id" value="<%=category.id %>">
 <div class="row">

@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editmenucolortemplate-#{menuColorTemplate.id}", :width => "678px", :title => "Edit menu color template" do |m| %>
-<%= form_tag({:controller => "ajax/admin", :action => "editmenucolortemplate"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "editmenucolortemplate"}) do %>
+<%= form_tag(menucolortemplate_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "editmenucolortemplate"}) do %>
 <%=neon_modal_body do |b| %>
 <input name="menuColorTemplate_id" type="hidden" id="form-menuColorTemplate_id" value="<%=menuColorTemplate.id %>">
 <div class="row">

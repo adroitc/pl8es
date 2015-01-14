@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editlanguage-#{language.id}", :width => "678px", :title => "Edit language" do |m| %>
-<%= form_tag({:controller => "ajax/admin", :action => "editlanguage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addfont"}) do %>
+<%= form_tag(language_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addfont"}) do %>
 <%=neon_modal_body do |b| %>
 <input name="language_id" type="hidden" id="form-language_id" value="<%=language.id %>">
 <div class="row">

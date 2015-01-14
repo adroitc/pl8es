@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editbeverage-#{beverage.id}", :width => "678px", :title => t("menumalist.beverage_modal_edit_title"), :languages => @user.restaurant.menu_languages, :default_language => nil do |m| %>
-<%= form_tag({:controller => "ajax/beverage", :action => "editbeverage"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editbeverage"}) do %>
+<%= form_tag(beverage_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editbeverage"}) do %>
 <input name="beverage_id" type="hidden" id="form-beverage_id" value="<%=beverage.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">

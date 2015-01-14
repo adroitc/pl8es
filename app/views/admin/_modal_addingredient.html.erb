@@ -1,5 +1,5 @@
 <%= neon_modal :id => "addingredient", :width => "678px", :title => "Add ingredient", :languages => Language.all, :default_language => Language.first do |m| %>
-<%= form_tag({:controller => "ajax/admin", :action => "addingredient"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "addingredient"}) do %>
+<%= form_tag(ingredients_add_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "addingredient"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-12">

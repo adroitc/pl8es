@@ -122,7 +122,7 @@ class Ajax::PaymentController < ApplicationController
         end
       end
       
-      redirect_to :controller => "/dailycious", :action => "index"
+      redirect_to dailycious_path
       return
     end
     render :json => {:status => "invalid"}

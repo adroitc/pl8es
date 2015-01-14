@@ -26,7 +26,7 @@
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "menumalist" %>">
-  	<a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+  	<a href="<%=menumalist_path %>">
   		<i class="entypo-docs"></i>
   		<span><%=t("layouts.menu.menumalist") %></span>
   	</a>

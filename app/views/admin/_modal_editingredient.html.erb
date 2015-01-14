@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editingredient-#{ingredient.id}", :width => "678px", :title => "Edit ingredient", :languages => Language.all, :default_language => Language.first do |m| %>
-<%= form_tag({:controller => "ajax/admin", :action => "editingredient"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "editingredient"}) do %>
+<%= form_tag(ingredients_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "editingredient"}) do %>
 <%=neon_modal_body do |b| %>
 <input name="ingredient_id" type="hidden" id="form-category_id" value="<%=ingredient.id %>">
 <div class="row">

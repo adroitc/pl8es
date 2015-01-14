@@ -1,5 +1,5 @@
 <%= neon_modal :id => "buydailydish", :width => "678px", :title => t("dailycious.daily_dish_modal_add_title") do |m| %>
-<%= form_tag({:controller => "ajax/daily_dish", :action => "adddailydish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload validate", :id => "form_buydailydish"}) do %>
+<%= form_tag(dailydish_add_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload validate", :id => "form_buydailydish"}) do %>
 <input name="display_date" type="hidden" id="form-display_date" value="">
 <%=neon_modal_body do |b| %>
 <div class="row">

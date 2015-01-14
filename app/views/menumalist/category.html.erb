@@ -8,24 +8,24 @@
     <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+        <a href="<%= dashboard_index_path %>">
           <i class="entypo-home"></i>
           <%=t("layouts.menu.dashboard") %>
         </a>
       </li>
       <li class="">
-        <a href="<%=url_for :controller => "menumalist", :action => "index" %>">
+        <a href="<%= menumalist_path %>">
           <%=t("menumalist.menu.menumalist") %>
         </a>
       </li>
       <li class="">
-        <a href="<%=url_for :controller => "menumalist", :action => "categories", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id %>">
+        <a href="<%= show_menu_path(@navigation.menu.title.gsub(" ","-"), @navigation.menu.id) %>">
           <%=@navigation.menu.title %>
         </a>
       </li>
       <% if @navigation.navigation != nil%>
       <li class="">
-        <a href="<%=url_for :controller => "menumalist", :action => "category", :menu_title => @navigation.menu.title.gsub(" ","-"), :menu_id => @navigation.menu.id, :navigation_title => @navigation.navigation.title.gsub(" ","-"), :navigation_id => @navigation.navigation.id %>">
+        <a href="<%= show_navigation_path(@navigation.menu.title.gsub(" ","-"), @navigation.menu.id, @navigation.navigation.title.gsub(" ","-"), @navigation.navigation.id %>">
           <%=@navigation.navigation.title %>
         </a>
       </li>
@@ -37,14 +37,14 @@
     <h2><%=@navigation.menu.title %> - <%=@navigation.title %></h2>
     <br />
     <div class="row gallery-env draggable-portlets">
-      <%= form_tag({:controller => "ajax/navigation", :action => "sortnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+      <%= form_tag(category_sort_path}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
       <span class="sorted ui-sortable">
         <% @navigation.sub_navigations.each do |navigation| %>
         <%=render :partial => "neon/navigation_panel", :locals => {:navigation => navigation} %>
         <% end %>
       </span>
       <% end %>
-      <%= form_tag({:controller => "ajax/dish", :action => "sortdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
+      <%= form_tag(dish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
       <span class="sorted ui-sortable">
         <% @navigation.dishes.each do |dish| %>
         <%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>

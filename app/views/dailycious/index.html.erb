@@ -8,7 +8,7 @@
     <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+        <a href="<%= dashboard_index_path %>">
           <i class="entypo-home"></i>
           <%=t("layouts.menu.dashboard") %>
         </a>
@@ -61,7 +61,7 @@
     %>
     <div class="row">
 			<div class="col-md-12">
-        <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i-1) %>">
+        <a href="<%=dailycious_path, :add_weeks => (params[:add_weeks].to_i-1) %>">
 				  <button type="button" class="col-md-3 btn btn-white">
             <i class="entypo-left-dir"></i>
             <%=t("dailycious.last_week") %>
@@ -78,7 +78,7 @@
           <%=t("date.#{date.end_of_week.strftime("%B")}") %>
           <%=date.end_of_week.strftime("%Y") %>
         </button>
-        <a href="<%=url_for :controller => "dailycious", :action => "index", :add_weeks => (params[:add_weeks].to_i+1) %>">
+        <a href="<%=dailycious_path, :add_weeks => (params[:add_weeks].to_i+1) %>">
 				  <button type="button" class="col-md-3 btn btn-white">
             <%=t("dailycious.next_week") %>
             <i class="entypo-right-dir"></i>
@@ -104,7 +104,7 @@
                 <%=t("date.#{current_date.strftime("%A")}") %>
               </td>
               <td class="row gallery-env draggable-portlets">
-                <%= form_tag({:controller => "ajax/daily_dish", :action => "sortdailydish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
+                <%= form_tag(dailydish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
                 <span class="sorted ui-sortable">
                   <%=render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
                   <% todays_dailycious_credits.each_with_index do |dailycious_credit, index| %>

@@ -26,7 +26,7 @@
 				<h3><%=t("login.invalid_title") %></h3>
 				<p><%=t("login.invalid_msg") %></p>
 			</div>
-      <%= form_tag({:controller => "ajax/session", :action => "login"}, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
+      <%= form_tag(session_login_path, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
         <input name="user_id" type="hidden" value="<%=params[:user_id] %>">
         <input name="reset_token" type="hidden" value="<%=params[:reset_token] %>">
 				<div class="form-group">

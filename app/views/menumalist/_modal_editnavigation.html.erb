@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editnavigation-#{navigation.id}", :width => "678px", :title => t("menumalist.navigation_modal_edit_title"), :languages => navigation.menu.languages, :default_language => navigation.menu.default_language do |m| %>
-<%= form_tag({:controller => "ajax/navigation", :action => "editnavigation"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editnavigation"}) do %>
+<%= form_tag(category_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editnavigation"}) do %>
 <input name="navigation_id" type="hidden" id="form-navigation_id" value="<%=navigation.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">

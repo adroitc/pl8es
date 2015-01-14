@@ -40,7 +40,7 @@ class Ajax::SessionController < ApplicationController
       session[:signup][:name] = params[:name]
       session[:signup][:product_referer] = params[:product_referer]
       
-      render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "restaurant")}
+      render :json => {:status => "success", :redirect => signup_restaurant_path}
       return
     end
     render :json => {:status => "invalid"}
@@ -78,7 +78,7 @@ class Ajax::SessionController < ApplicationController
       #  session[:signup][:latitude] = google_results[0]["geometry"]["location"]["lat"].to_f
       #  session[:signup][:longitude] = google_results[0]["geometry"]["location"]["lng"].to_f
       #  
-      #  render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "user")}
+      #  render :json => {:status => "success", :redirect => signup_user_path}
       #  return
       #end
 
@@ -89,7 +89,7 @@ class Ajax::SessionController < ApplicationController
       session[:signup][:latitude] = params[:latitude]
       session[:signup][:longitude] = params[:longitude]
       
-      render :json => {:status => "success", :redirect => url_for(:controller => "/signup", :action => "user")}
+      render :json => {:status => "success", :redirect => signup_user_path}
       return
     end
     render :json => {:status => "invalid"}
@@ -149,13 +149,14 @@ class Ajax::SessionController < ApplicationController
           })
         end
         
-        redirect_url = url_for(:controller => "/profile", :action => "index")
+        redirect_url = profile_index_path
+        
         if @user.product_referer == "d"
-          redirect_url = url_for(:controller => "/dailycious", :action => "index")
+          redirect_url = dailycious_path
           
           @user.send_mail(t("email.signup_dailycious_send"), t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>@user.restaurant.name, :e=>@user.email}))
         elsif @user.product_referer == "m"
-          redirect_url = url_for(:controller => "/menumalist", :action => "index")
+          redirect_url = menumalist_path
           
           @user.send_mail(t("email.signup_menumalist_send"), t("email.signup_menumalist_subj"), t("email.signup_menumalist_msg",{:n=>@user.restaurant.name,:e=>@user.email,:c=>@user.restaurant.download_code}))
         else
@@ -196,11 +197,11 @@ class Ajax::SessionController < ApplicationController
           session[:admin_id] = @user.id
         end
         
-        redirect_url = url_for(:controller => "/profile", :action => "index")
+        redirect_url = profile_index_path
         if params[:product_referer] == "d"
-          redirect_url = url_for(:controller => "/dailycious", :action => "index")
+          redirect_url = dailycious_path
         elsif params[:product_referer] == "m"
-          redirect_url = url_for(:controller => "/menumalist", :action => "index")
+          redirect_url = menumalist_path
         end
         
         render :json => {:status => "success", :redirect => redirect_url}
@@ -233,9 +234,7 @@ class Ajax::SessionController < ApplicationController
           session[:admin_id] = @user.id
         end
         
-        redirect_url = url_for(:controller => "/profile", :action => "index")
-        
-        render :json => {:status => "success", :redirect => redirect_url}
+        render :json => {:status => "success", :redirect => profile_index_path}
         return
       end
     end
@@ -254,7 +253,7 @@ class Ajax::SessionController < ApplicationController
       })
       
       I18n.locale = @user.restaurant.default_language.locale
-      @user.send_mail(t("email.password_forgot_send"), t("email.password_forgot_subj"), t("email.password_forgot_msg",{:l=>url_for(:controller => "/login", :action => "forgot_reset", :user_id => @user.id, :reset_token => token)}))
+      @user.send_mail(t("email.password_forgot_send"), t("email.password_forgot_subj"), t("email.password_forgot_msg",{:l=>login_forgot_reset_path(@user.id, token)}))
       
       render :json => {:status => "valid"}
       return

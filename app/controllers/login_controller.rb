@@ -2,13 +2,13 @@ class LoginController < ApplicationController
   
   def index
     if @user
-      redirect_to :controller => "profile", :action => "index"
+      redirect_to profile_index_path
     end
   end
   
   def forgot
     if @user
-      redirect_to :controller => "profile", :action => "index"
+      redirect_to profile_index_path
     end
   end
   

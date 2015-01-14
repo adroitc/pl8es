@@ -2,7 +2,7 @@ class MenumalistController < ApplicationController
   
   def index
     if !@user
-      redirect_to :controller => "login", :action => "index"
+      redirect_to login_index_path
     end
   end
   

@@ -15,7 +15,7 @@ var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
 </script>
 
 <% if @user && session[:admin_id] && session[:admin_id] != @user.id %>
-<a href="<%=url_for :controller => "admin", :action => "user_switch", :user_id => session[:admin_id] %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
+<a href="<%= user_switch(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
 <% end %>
 
 <%= yield %>

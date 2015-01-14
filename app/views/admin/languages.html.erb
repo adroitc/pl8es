@@ -8,10 +8,10 @@
     <%=render :partial => "layouts/topbar" %>
     <ol class="breadcrumb bc-3">
       <li>
-        <a href="<%=url_for :controller => "dashboard", :action => "index" %>"><i class="entypo-home"></i>Dashboard</a>
+        <a href="<%= dashboard_index_path %>"><i class="entypo-home"></i>Dashboard</a>
       </li>
       <li>
-        <a href="<%=url_for :controller => "admin", :action => "index" %>">Admin</a>
+        <a href="<%= admin_index_path %>">Admin</a>
       </li>
       <li class="active">
         <strong>All languages</strong>

@@ -1,5 +1,5 @@
 <%= neon_modal :id => "editdish-#{dish.id}", :width => "678px", :title => t("menumalist.dish_modal_edit_title"), :languages => dish.navigation.menu.languages, :default_language => dish.navigation.menu.default_language do |m| %>
-<%= form_tag({:controller => "ajax/dish", :action => "editdish"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editdish"}) do %>
+<%= form_tag(dish_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editdish"}) do %>
 <input name="dish_id" type="hidden" id="form-dish_id" value="<%=dish.id %>">
 <%=neon_modal_body do |b| %>
 <div class="row">

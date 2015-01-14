@@ -26,7 +26,7 @@
 				<h3><%=t("login.invalid_title") %></h3>
 				<p><%=t("login.invalid_msg") %></p>
 			</div>
-      <%= form_tag({:controller => "ajax/session", :action => "login_forgot"}, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
+      <%= form_tag(login_forgot_path, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
@@ -43,7 +43,7 @@
 				</div>
       <% end %>
 			<div class="login-bottom-links">
-				<a href="<%=url_for :controller => "login", :action => "index" %>" class="link">
+				<a href="<%= login_index_path %>" class="link">
 					<i class="entypo-lock"></i>
 					<%=t("signup.footer_return") %>
 				</a>

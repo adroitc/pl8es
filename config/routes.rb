@@ -119,7 +119,7 @@ Pl8es::Application.routes.draw do
 	#login
 	resources :login, :only => [:index]
 	get "/login/forgot" => "login#forgot"
-	get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset"
+	get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset", as: :login_forgot_reset
 	
 	#logout
 	resources :logout, :only => [:index]
@@ -129,7 +129,7 @@ Pl8es::Application.routes.draw do
 	scope :admin do
 		get "/languages" => "admin#languages"
 		get "/users" => "admin#users"
-		get "/userswitch/:user_id" => "admin#user_switch"
+		get "/userswitch/:user_id" => "admin#user_switch", as: :user_switch
 		get "/tags" => "admin#categories"
 		get "/menucolortemplates" => "admin#menucolortemplates"
 		get "/fonts" => "admin#fonts"
@@ -149,15 +149,15 @@ Pl8es::Application.routes.draw do
 	#get "/invoices/invoice/:payment_id" => "invoice#pdf"
 	
 	#menumalist
-	resources :menumalist, :only => [:index]
-	get "/menumalist/:menu_title/:menu_id" => "menumalist#categories"
-	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menumalist#category"
-	get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menumalist#category"
+	get "/menumalist" => "menumalist#index", as: :menumalist
+	get "/menumalist/:menu_title/:menu_id" => "menumalist#categories", as: :show_menu
+	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menumalist#category", as: :show_navigation
+	get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menumalist#category", as: :show_sub_navigation
 	
 	#beverage
 	resources :beverage, :only => []
-	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepage"
-	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation"
+	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepage", as: :show_beverage_page
+	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation", as: :show_beverage_navigation
 	
 	#dailycious
 	resources :dailycious, :only => [:index]

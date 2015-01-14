@@ -1,5 +1,5 @@
 <%= neon_modal :id => "design", :width => "678px", :title => t("menumalist.design_modal_title") do |m| %>
-<%= form_tag({:controller => "ajax", :action => "editdesign"}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_design"}) do %>
+<%= form_tag(design_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform", :id => "form_design"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row" style="margin-bottom:14px;">
 	<div class="col-sm-12">
