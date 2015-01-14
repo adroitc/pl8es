@@ -1,4 +1,4 @@
-class AjaxController < ApplicationController
+class Ajax::AjaxController < ApplicationController
   
   def editdesign
     if @user && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)

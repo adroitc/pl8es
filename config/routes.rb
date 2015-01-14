@@ -1,168 +1,166 @@
 Pl8es::Application.routes.draw do
-  
-  #app
-  resources :app, :only => []
-  resources :app_dailycious, :only => []
-  resources :app_menumalist, :only => []
-  #app-get
-  get "/app/dailycious/defaults" => "app/dailycious#defaults"
-  get "/app/dailycious/useragreement" => "app/dailycious#useragreement"
-  get "/app/dailycious/week" => "app/dailycious#week"
-  get "/app/dailycious/favorites" => "app/dailycious#favorites"
-  get "/app/dailycious/map" => "app/dailycious#map"
-  get "/app/dailycious/suggestions" => "app/dailycious#suggestions"
-  get "/app/dailycious/search" => "app/dailycious#search"
-  get "/app/dailycious/user" => "app/dailycious#user"
-  get "/app/menumalist/:user_download_code" => "app/menumalist#index"
-  
-  #app-post
-  post "/app/dailycious/signup" => "app/dailycious#signup"
-  post "/app/dailycious/login" => "app/dailycious#login"
-  post "/app/dailycious/profile" => "app/dailycious#profile"
-  post "/app/dailycious/add" => "app/dailycious#adddailydish"
-  post "/app/dailycious/edit" => "app/dailycious#editdailydish"
-  post "/app/dailycious/sort" => "app/dailycious#sortdailydish"
-  
-  #web
-  resources :web, :only => []
-  resources :web_dailycious, :only => []
-  #web-get
-  get "/web/dailycious/list" => "web/dailycious#list"
-  
-  #ajax
-  resources :ajax, :only => []
-  post "/a/design/edit" => "ajax#editdesign"
-  
-  #ajax/session
-  resources :ajax_session, :only => []
-  post "/a/session/signup/name" => "ajax/session#signup_user"
-  post "/a/session/signup/restaurant" => "ajax/session#signup_restaurant"
-  post "/a/session/signup/user" => "ajax/session#signup_name"
-  post "/a/session/login" => "ajax/session#login"
-  post "/a/session/login/forgot" => "ajax/session#login_forgot"
-  
-  #ajax/admin
-  resources :ajax_admin, :only => []
-  post "/a/language/add" => "ajax/admin#addlanguage"
-  post "/a/language/edit" => "ajax/admin#editlanguage"
-  
-  post "/a/user/edit" => "ajax/admin#edituser"
-  
-  post "/a/font/add" => "ajax/admin#addfont"
-  post "/a/font/edit" => "ajax/admin#editfont"
-  
-  post "/a/tag/add" => "ajax/admin#addcategory"
-  post "/a/tag/edit" => "ajax/admin#editcategory"
-  
-  post "/a/menucolortemplate/add" => "ajax/admin#addmenucolortemplate"
-  post "/a/menucolortemplate/edit" => "ajax/admin#editmenucolortemplate"
-  
-  post "/a/ingredients/add" => "ajax/admin#addingredient"
-  post "/a/ingredients/edit" => "ajax/admin#editingredient"
-  
-  resources :ajax_payment, :only => []
-  #ajax_dish-post
-  post "/a/buy/dasetupcreditplan" => "ajax/payment#dasetupcreditplan"
-  
-  #ajax_dish-get
-  get "/a/buy/datransfercreditplan" => "ajax/payment#datransfercreditplan"
-  
-  #ajax/profile
-  resources :ajax_profile, :only => []
-  post "/a/profile/editsettings" => "ajax/profile#editsettings"
-  post "/a/profile/editdescription" => "ajax/profile#editdescription"
-  
-  #ajax/menu
-  resources :ajax_menu, :only => []
-  post "/a/menu/add" => "ajax/menu#addmenu"
-  post "/a/menu/edit" => "ajax/menu#editmenu"
-  post "/a/menu/duplicate" => "ajax/menu#duplicatemenu"
-  post "/a/menu/resetclients" => "ajax/menu#resetclients"
-  
-  #ajax/navigation
-  resources :ajax_navigation, :only => []
-  post "/a/category/add" => "ajax/navigation#addnavigation"
-  post "/a/category/edit" => "ajax/navigation#editnavigation"
-  post "/a/category/sort" => "ajax/navigation#sortnavigation"
-  
-  #ajax/dish
-  resources :ajax_dish, :only => []
-  #ajax/dish-get
-  get "/a/dish/:id/:language_locale" => "ajax/dish#dish"
-  
-  #ajax/dish-post
-  post "/a/dish/add" => "ajax/dish#adddish"
-  post "/a/dish/edit" => "ajax/dish#editdish"
-  post "/a/dish/sort" => "ajax/dish#sortdish"
-  
-  resources :ajax_beverage, :only => []
-  post "/a/beveragepage/add" => "ajax/beverage#addbeveragepage"
-  post "/a/beveragepage/edit" => "ajax/beverage#editbeveragepage"
-  post "/a/beveragepage/sort" => "ajax/beverage#sortbeveragepage"
-  post "/a/beveragenavigation/add" => "ajax/beverage#addbeveragenavigation"
-  post "/a/beveragenavigation/edit" => "ajax/beverage#editbeveragenavigation"
-  post "/a/beveragenavigation/sort" => "ajax/beverage#sortbeveragenavigation"
-  post "/a/beverage/add" => "ajax/beverage#addbeverage"
-  post "/a/beverage/edit" => "ajax/beverage#editbeverage"
-  post "/a/beverage/sort" => "ajax/beverage#sortbeverage"
-  
-  #ajax/daily_dish
-  resources :ajax_daily_dish, :only => []
-  post "/a/dailydish/add" => "ajax/daily_dish#adddailydish"
-  post "/a/dailydish/edit" => "ajax/daily_dish#editdailydish"
-  post "/a/dailydish/sort" => "ajax/daily_dish#sortdailydish"
-  
-  #signup
-  resources :signup, :only => []
-  get "/signup" => "signup#index"
-  get "/signup/restaurant" => "signup#restaurant"
-  get "/signup/user" => "signup#user"
-  
-  #login
-  resources :login, :only => []
-  get "/login" => "login#index"
-  get "/login/forgot" => "login#forgot"
-  get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset"
-  
-  #logout
-  resources :logout, :only => [:index]
-  
-  #admin
-  resources :admin, :only => [:index]
-  get "/admin/languages" => "admin#languages"
-  get "/admin/users" => "admin#users"
-  get "/admin/userswitch/:user_id" => "admin#user_switch"
-  get "/admin/tags" => "admin#categories"
-  get "/admin/menucolortemplates" => "admin#menucolortemplates"
-  get "/admin/fonts" => "admin#fonts"
-  get "/admin/ingredients" => "admin#ingredients"
-  
-  #dashboard
-  resources :dashboard, :only => [:index]
-  
-  #profile
-  resources :profile, :only => [:index]
-  get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
-  get "/restaurant" => "profile#index"
-  
-  #invoice
-  resources :invoice, :only => [:index]
-  #get "/invoices/invoice/:payment_id" => "invoice#pdf"
-  
-  #menumalist
-  resources :menumalist, :only => []
-  get "/menumalist" => "menumalist#index"
-  get "/menumalist/:menu_title/:menu_id" => "menumalist#categories"
-  get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menumalist#category"
-  get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menumalist#category"
-  
-  #beverage
-  resources :beverage, :only => []
-  get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepage"
-  get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation"
-  
-  #dailycious
-  resources :dailycious, :only => [:index]
-  get "/dailycious/:add_weeks-week" => "dailycious#index"
-  
+	
+	#app
+	resources :app, :only => []
+	resources :app_dailycious, :only => []
+	resources :app_menumalist, :only => []	
+	
+	namespace :app do
+		#app-get
+		get "/dailycious/defaults" => "dailycious#defaults"
+		get "/dailycious/useragreement" => "dailycious#useragreement"
+		get "/dailycious/week" => "dailycious#week"
+		get "/dailycious/favorites" => "dailycious#favorites"
+		get "/dailycious/map" => "dailycious#map"
+		get "/dailycious/suggestions" => "dailycious#suggestions"
+		get "/dailycious/search" => "dailycious#search"
+		get "/dailycious/user" => "dailycious#user"
+		
+		get "/menumalist/:user_download_code" => "menumalist#index"
+		
+		#app-post
+		post "/dailycious/signup" => "dailycious#signup"
+		post "/dailycious/login" => "dailycious#login"
+		post "/dailycious/profile" => "dailycious#profile"
+		post "/dailycious/add" => "dailycious#adddailydish"
+		post "/dailycious/edit" => "dailycious#editdailydish"
+		post "/dailycious/sort" => "dailycious#sortdailydish"
+	end
+	
+	#web
+	resources :web, :only => []
+	resources :web_dailycious, :only => []
+	
+	#web-get
+	get "/web/dailycious/list" => "web/dailycious#list"
+	
+	scope module: :ajax do
+		scope :a do
+			
+			post "/design/edit" => "ajax#editdesign"
+			
+			#ajax/session
+			post "/session/signup/name" => "session#signup_user"
+			post "/session/signup/restaurant" => "session#signup_restaurant"
+			post "/session/signup/user" => "session#signup_name"
+			post "/session/login" => "session#login"
+			post "/session/login/forgot" => "session#login_forgot"
+			
+			#ajax/admin
+			post "/language/add" => "admin#addlanguage"
+			post "/language/edit" => "admin#editlanguage"
+			
+			post "/user/edit" => "admin#edituser"
+			
+			post "/font/add" => "admin#addfont"
+			post "/font/edit" => "admin#editfont"
+			
+			post "/tag/add" => "admin#addcategory"
+			post "/tag/edit" => "admin#editcategory"
+			
+			post "/menucolortemplate/add" => "admin#addmenucolortemplate"
+			post "/menucolortemplate/edit" => "admin#editmenucolortemplate"
+			
+			post "/ingredients/add" => "admin#addingredient"
+			post "/ingredients/edit" => "admin#editingredient"
+			
+			#ajax_dish-post
+			post "/buy/dasetupcreditplan" => "payment#dasetupcreditplan"
+			
+			#ajax_dish-get
+			get "/buy/datransfercreditplan" => "payment#datransfercreditplan"
+			
+			#ajax/profile
+			post "/profile/editsettings" => "profile#editsettings"
+			post "/profile/editdescription" => "profile#editdescription"
+			
+			#ajax/menu
+			post "/menu/add" => "menu#addmenu"
+			post "/menu/edit" => "menu#editmenu"
+			post "/menu/duplicate" => "menu#duplicatemenu"
+			post "/menu/resetclients" => "menu#resetclients"
+			
+			#ajax/navigation
+			post "/category/add" => "navigation#addnavigation"
+			post "/category/edit" => "navigation#editnavigation"
+			post "/category/sort" => "navigation#sortnavigation"
+			
+			#ajax/dish
+			#ajax/dish-get
+			get "/dish/:id/:language_locale" => "dish#dish"
+			
+			#ajax/dish-post
+			post "/dish/add" => "dish#adddish"
+			post "/dish/edit" => "dish#editdish"
+			post "/dish/sort" => "dish#sortdish"
+			
+			post "/beveragepage/add" => "beverage#addbeveragepage"
+			post "/beveragepage/edit" => "beverage#editbeveragepage"
+			post "/beveragepage/sort" => "beverage#sortbeveragepage"
+			post "/beveragenavigation/add" => "beverage#addbeveragenavigation"
+			post "/beveragenavigation/edit" => "beverage#editbeveragenavigation"
+			post "/beveragenavigation/sort" => "beverage#sortbeveragenavigation"
+			post "/beverage/add" => "beverage#addbeverage"
+			post "/beverage/edit" => "beverage#editbeverage"
+			post "/beverage/sort" => "beverage#sortbeverage"
+			
+			#ajax/daily_dish
+			post "/dailydish/add" => "daily_dish#adddailydish"
+			post "/dailydish/edit" => "daily_dish#editdailydish"
+			post "/dailydish/sort" => "daily_dish#sortdailydish"
+		end
+	end
+	
+	#signup
+	resources :signup, :only => [:index]
+	get "/signup/restaurant" => "signup#restaurant"
+	get "/signup/user" => "signup#user"
+	
+	#login
+	resources :login, :only => [:index]
+	get "/login/forgot" => "login#forgot"
+	get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset"
+	
+	#logout
+	resources :logout, :only => [:index]
+	
+	#admin
+	resources :admin, :only => [:index]
+	scope :admin do
+		get "/languages" => "admin#languages"
+		get "/users" => "admin#users"
+		get "/userswitch/:user_id" => "admin#user_switch"
+		get "/tags" => "admin#categories"
+		get "/menucolortemplates" => "admin#menucolortemplates"
+		get "/fonts" => "admin#fonts"
+		get "/ingredients" => "admin#ingredients"
+	end
+	
+	#dashboard
+	resources :dashboard, :path => "/", :only => [:index]
+	
+	#profile
+	resources :profile, :only => [:index]
+	get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
+	get "/restaurant" => "profile#index"
+	
+	#invoice
+	resources :invoice, :only => [:index]
+	#get "/invoices/invoice/:payment_id" => "invoice#pdf"
+	
+	#menumalist
+	resources :menumalist, :only => [:index]
+	get "/menumalist/:menu_title/:menu_id" => "menumalist#categories"
+	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menumalist#category"
+	get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menumalist#category"
+	
+	#beverage
+	resources :beverage, :only => []
+	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepage"
+	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation"
+	
+	#dailycious
+	resources :dailycious, :only => [:index]
+	get "/dailycious/:add_weeks-week" => "dailycious#index"
+	
 end
