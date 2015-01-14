@@ -1,26 +1,26 @@
 <ul id="main-menu">
   <% if @user && @user.isAdmin %>
   <li class="<%="active" if params[:controller] == "admin" %>">
-  	<a href="<%=url_for :controller => "admin", :action => "index" %>">
+  	<a href="<%= admin_index_path %>">
   		<i class="entypo-gauge"></i>
   		<span><%=t("layouts.menu.admin") %></span>
   	</a>
   </li>
   <% end %>
   <li class="<%="active" if params[:controller] == "dashboard" %>">
-  	<a href="<%=url_for :controller => "dashboard", :action => "index" %>">
+  	<a href="<%= dashboard_index_path %>">
   		<i class="entypo-chart-area"></i>
   		<span><%=t("layouts.menu.dashboard") %></span>
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "profile" %>">
-  	<a href="<%=url_for :controller => "profile", :action => "index" %>">
+  	<a href="<%= profile_index_path %>">
   		<i class="entypo-user"></i>
   		<span><%=t("layouts.menu.restaurant") %></span>
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "dailycious" %>">
-  	<a href="<%=url_for :controller => "dailycious", :action => "index" %>">
+  	<a href="<%= dailycious_path %>">
   		<i class="entypo-direction"></i>
   		<span><%=t("layouts.menu.dailycious") %></span>
   	</a>
@@ -32,7 +32,7 @@
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "invoice" %>">
-  	<a href="<%=url_for :controller => "invoice", :action => "index" %>">
+  	<a href="<%= invoice_index_path %>">
   		<i class="entypo-info"></i>
   		<span><%=t("layouts.menu.invoices") %></span>
   	</a>

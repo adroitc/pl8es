@@ -4,7 +4,7 @@
     <ul class="user-info pull-left pull-none-xsm">
       <!-- Profile Info -->
       <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-        <a href="<%=url_for :controller => "profile", :action => "index" %>">
+        <a href="<%= profile_index_path %>">
           <img src="<%=@user.restaurant.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
           <span style="font-size:20px"><%=@user.restaurant.name %></span>
         </a>
@@ -15,7 +15,7 @@
     <ul class="list-inline links-list pull-right">
       <li class="sep"></li>
       <li>
-        <a href="<%=url_for :controller => "logout", :action => "index" %>"><%=t("layouts.topbar.logout")%> <i class="entypo-logout right"></i></a>
+        <a href="<%= logout_index_path %>"><%=t("layouts.topbar.logout")%> <i class="entypo-logout right"></i></a>
       </li>
     </ul>
   </div>

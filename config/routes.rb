@@ -125,12 +125,10 @@ Pl8es::Application.routes.draw do
   get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset"
   
   #logout
-  resources :logout, :only => []
-  get "/logout" => "logout#index"
+  resources :logout, :only => [:index]
   
   #admin
-  resources :admin, :only => []
-  get "/admin" => "admin#index"
+  resources :admin, :only => [:index]
   get "/admin/languages" => "admin#languages"
   get "/admin/users" => "admin#users"
   get "/admin/userswitch/:user_id" => "admin#user_switch"
@@ -140,17 +138,15 @@ Pl8es::Application.routes.draw do
   get "/admin/ingredients" => "admin#ingredients"
   
   #dashboard
-  resources :dashboard, :only => []
-  get "/" => "dashboard#index"
+  resources :dashboard, :only => [:index]
   
   #profile
-  resources :profile, :only => []
+  resources :profile, :only => [:index]
   get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
   get "/restaurant" => "profile#index"
   
   #invoice
-  resources :invoice, :only => []
-  get "/invoices" => "invoice#index"
+  resources :invoice, :only => [:index]
   #get "/invoices/invoice/:payment_id" => "invoice#pdf"
   
   #menumalist
@@ -166,8 +162,7 @@ Pl8es::Application.routes.draw do
   get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation"
   
   #dailycious
-  resources :dailycious, :only => []
-  get "/dailycious" => "dailycious#index"
+  resources :dailycious, :only => [:index]
   get "/dailycious/:add_weeks-week" => "dailycious#index"
   
 end
