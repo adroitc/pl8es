@@ -7,7 +7,7 @@ class Navigation < ActiveRecord::Base
   
   translates :title
   
-  default_scope :order => "position, id"
+  default_scope -> { order("position, id") }
 	
 	validates :title, :presence => true, :length => 4..40
 	

@@ -3,19 +3,21 @@ class Dish < ActiveRecord::Base
   belongs_to :menu
   belongs_to :navigation
   has_many :wines
+  
   belongs_to :dishsuggestion_1, :class_name => "Dish"
   belongs_to :dishsuggestion_2, :class_name => "Dish"
+  
   has_and_belongs_to_many :ingredients
   
   translates :title, :description, :drinks, :sides
-
-  default_scope :order => "position, id"
 
 	validates :title, :presence => true, :length => 4..40
 	validates :description, :length => { :maximum => 400 }
 	validates :price, :length => { :maximum => 7 }
 	validates :drinks, :length => { :maximum => 255 }
 	validates :sides, :length => { :maximum => 255 }
+	
+	default_scope -> { order("position, id") }
 	
   has_attached_file :image, {
     :styles => {
