@@ -156,7 +156,7 @@ class Ajax::SessionController < ApplicationController
           
           @user.send_mail(t("email.signup_dailycious_send"), t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>@user.restaurant.name, :e=>@user.email}))
         elsif @user.product_referer == "m"
-          redirect_url = menumalist_path
+          redirect_url = menus_path
           
           @user.send_mail(t("email.signup_menumalist_send"), t("email.signup_menumalist_subj"), t("email.signup_menumalist_msg",{:n=>@user.restaurant.name,:e=>@user.email,:c=>@user.restaurant.download_code}))
         else
@@ -201,7 +201,7 @@ class Ajax::SessionController < ApplicationController
         if params[:product_referer] == "d"
           redirect_url = dailycious_path
         elsif params[:product_referer] == "m"
-          redirect_url = menumalist_path
+          redirect_url = menus_path
         end
         
         render :json => {:status => "success", :redirect => redirect_url}

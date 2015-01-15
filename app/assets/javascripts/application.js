@@ -316,7 +316,7 @@ function pl8es_f_duplicate(m){
   var d = new FormData();
   d.append("authenticity_token", window._token);
   d.append("menu_id", m);
-  pl8es_i_ajax("/a/menus/duplicate",d,function(){
+  pl8es_i_ajax("menumalist/duplicate",d,function(){
 	  location.reload();
 	});
 }

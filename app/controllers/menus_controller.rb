@@ -1,4 +1,4 @@
-class Ajax::MenusController < ApplicationController
+class MenusController < ApplicationController
 	
 	before_filter :authenticate_user
 	

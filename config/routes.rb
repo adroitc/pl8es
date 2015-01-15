@@ -74,7 +74,6 @@ Pl8es::Application.routes.draw do
 			post "/profile/editsettings" => "profile#editsettings"
 			post "/profile/editdescription" => "profile#editdescription"
 			
-			resources :menus, :only => [:create, :update]
 			post "/menus/duplicate" => "menus#duplicate"
 			post "/menus/resetclients" => "menus#reset_clients", as: :reset_clients
 			
@@ -108,6 +107,9 @@ Pl8es::Application.routes.draw do
 			post "/dailydish/sort" => "daily_dish#sortdailydish"
 		end
 	end
+	
+	# menus
+	resources :menus, :only => [:create, :update, :index], :path => "/menumalist"
 	
 	#signup
 	resources :signup, :only => [:index]
@@ -147,7 +149,6 @@ Pl8es::Application.routes.draw do
 	#get "/invoices/invoice/:payment_id" => "invoice#pdf"
 	
 	#menumalist
-	get "/menumalist" => "menumalist#index", as: :menumalist
 	get "/menumalist/:menu_title/:menu_id" => "menumalist#categories", as: :show_menu
 	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menumalist#category", as: :show_navigation
 	get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menumalist#category", as: :show_sub_navigation
