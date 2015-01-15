@@ -106,14 +106,16 @@ Pl8es::Application.routes.draw do
 	end
 	
 	# menus
-	resources :menus, :only => [:create, :update, :index, :show, :destroy], :path => "/menumalist"
-	
-	post "/menumalist/duplicate" => "menus#duplicate"
-	post "/menumalist/resetclients" => "menus#reset_clients", as: :reset_clients
-	
-	# navigations
-	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menus#category", as: :show_navigation
-	get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menus#category", as: :show_sub_navigation
+	scope :menumalist do
+		resources :menus, :only => [:create, :update, :index, :show, :destroy], :path => "/"
+		
+		post "/duplicate" => "menus#duplicate"
+		post "/resetclients" => "menus#reset_clients", as: :reset_clients
+		
+		# navigations
+		get "/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menus#category", as: :show_navigation
+		get "/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menus#category", as: :show_sub_navigation
+	end
 	
 	#signup
 	resources :signup, :only => [:index]
