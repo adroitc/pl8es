@@ -42,6 +42,10 @@ class MenusController < ApplicationController
 		render :json => {:status => "invalid"}
 	end
 	
+	def show
+		@menu = @user.restaurant.menus.find(params[:id])
+	end
+	
 	def update
 		if !params.values_at(:id, :title, :default_language).include?(nil) && @user.restaurant.menus.exists?(params[:id]) && Language.exists?(params[:default_language].to_i)
 			menu = @user.restaurant.menus.find(params[:id])
@@ -78,8 +82,8 @@ class MenusController < ApplicationController
 		render :json => {:status => "invalid"}
 	end
 	
-	def show
-		@menu = @user.restaurant.menus.find(params[:menu_id])
+	def destroy
+		
 	end
 	
 	# this should be @ navigations#show

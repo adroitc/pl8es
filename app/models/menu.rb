@@ -12,4 +12,8 @@ class Menu < ActiveRecord::Base
 	validates :from_time, :allow_blank => true, :length => 4..7
 	validates :to_time, :allow_blank => true, :length => 4..7
 	
+	
+	def to_param
+		"#{id} #{title}".parameterize
+	end
 end

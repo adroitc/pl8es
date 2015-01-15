@@ -89,7 +89,7 @@
 						<% @menus.each do |menu| %>
 							<tr style="font-size: 14px;">
 								<td>
-									<a href="<%= show_menu_path(menu.title.parameterize, menu.id) %>">
+									<a href="<%= menu_path(menu) %>">
 										<%=menu.title %>
 										<span class="badge badge-primary"><%=@restaurant.defaultMenu == menu ? t("menumalist.default_menu") : "#{menu.from_time} - #{menu.to_time}" %></span>
 									</a>
@@ -108,7 +108,7 @@
 										</a>
 									<span>
 								</td>
-								<td><a href="<%= show_menu_path(menu.title.parameterize, menu.id) %>"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
+								<td><a href="<%= menu_path(menu) %>"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
 								<td><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></td>
 							</tr>
 						<% end %>

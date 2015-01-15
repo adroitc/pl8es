@@ -109,8 +109,7 @@ Pl8es::Application.routes.draw do
 	end
 	
 	# menus
-	resources :menus, :only => [:create, :update, :index], :path => "/menumalist"
-	get "/menumalist/:menu_title/:menu_id" => "menus#show", as: :show_menu
+	resources :menus, :only => [:create, :update, :index, :show, :destroy], :path => "/menumalist"
 	
 	# navigations
 	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menus#category", as: :show_navigation
