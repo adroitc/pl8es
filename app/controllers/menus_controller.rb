@@ -3,6 +3,9 @@ class MenusController < ApplicationController
 	before_filter :authenticate_user
 	
 	def index
+		@menus = @user.restaurant.menus.all
+		
+		@restaurant = @user.restaurant
 	end
 	
 	def create
