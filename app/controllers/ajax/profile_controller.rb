@@ -56,7 +56,7 @@ class Ajax::ProfileController < ApplicationController
   end
   
   def editdescription
-    if @user && !params.values_at(:name, :description, :categories).include?(nil)
+    if @user && !params.values_at(:name, :description, :tags).include?(nil)
       @user.restaurant.update_attributes(params.permit(:logo_image, :restaurant_image, :name))
       
       languages = Language.find_all_by_locale(params[:description].keys)
@@ -68,11 +68,11 @@ class Ajax::ProfileController < ApplicationController
       end
       I18n.locale = current_locale
       
-      @user.restaurant.categories = []
-      params[:categories].each_with_index do |category, i|
+      @user.restaurant.tags = []
+      params[:tags].each_with_index do |tag, i|
         break if i >= 2;
-        if Category.exists?(category[1].to_i)
-          @user.restaurant.categories.push(Category.find(category[1].to_i))
+        if Tag.exists?(tag[1].to_i)
+          @user.restaurant.tags.push(Tag.find(tag[1].to_i))
         end
       end
       

@@ -67,16 +67,16 @@
                 <i class="entypo-location"></i>
                 <%=@user.restaurant.location.country %>
      					</li>
-              <% if @user.restaurant.categories.count >= 1 %>
+              <% if @user.restaurant.tags.count >= 1 %>
      					<li>
                 <i class="entypo-user"></i>
-                <%=@user.restaurant.categories.first.title %>
+                <%=@user.restaurant.tags.first.title %>
      					</li>
               <% end %>
-              <% if @user.restaurant.categories.count == 2 %>
+              <% if @user.restaurant.tags.count == 2 %>
      					<li>
                 <i class="entypo-user"></i>
-                <%=@user.restaurant.categories.last.title %>
+                <%=@user.restaurant.tags.last.title %>
      					</li>
               <% end %>
               <% if @user.restaurant.website && @user.restaurant.website.length > 0 %>

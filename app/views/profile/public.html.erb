@@ -77,16 +77,16 @@
                 <i class="entypo-location"></i>
                 <%=@visit_restaurant.location.country %>
      					</li>
-              <% if @visit_restaurant.categories.count >= 1 %>
+              <% if @visit_restaurant.tags.count >= 1 %>
      					<li>
                 <i class="entypo-user"></i>
-                <%=@visit_restaurant.categories.first.title %>
+                <%=@visit_restaurant.tags.first.title %>
      					</li>
               <% end %>
-              <% if @visit_restaurant.categories.count == 2 %>
+              <% if @visit_restaurant.tags.count == 2 %>
      					<li>
                 <i class="entypo-user"></i>
-                <%=@visit_restaurant.categories.last.title %>
+                <%=@visit_restaurant.tags.last.title %>
      					</li>
               <% end %>
               <% if @visit_restaurant.website && @visit_restaurant.website.length > 0 %>

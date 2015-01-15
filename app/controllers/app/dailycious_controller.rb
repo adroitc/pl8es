@@ -363,14 +363,14 @@ class App::DailyciousController < ApplicationController
       suggestions = DailyDish.unscoped.find(
         :all,
         :select => ActiveRecord::Base.send(:sanitize_sql_array,[
-          "CASE WHEN LOWER(restaurants.name) LIKE (?) THEN restaurants.name WHEN category_translations.title IS NOT NULL THEN category_translations.title ELSE daily_dishes.title END AS suggestion",
+          "CASE WHEN LOWER(restaurants.name) LIKE (?) THEN restaurants.name WHEN tag_translations.title IS NOT NULL THEN tag_translations.title ELSE daily_dishes.title END AS suggestion",
           query
         ]),
         :joins => [
           "INNER JOIN restaurants ON restaurants.id = daily_dishes.restaurant_id",
-          "LEFT JOIN categories_restaurants ON categories_restaurants.restaurant_id = daily_dishes.restaurant_id",
+          "LEFT JOIN tags_restaurants ON tags_restaurants.restaurant_id = daily_dishes.restaurant_id",
           ActiveRecord::Base.send(:sanitize_sql_array,[
-            "LEFT JOIN category_translations ON category_translations.category_id = categories_restaurants.category_id AND LOWER(category_translations.title) LIKE (?)",
+            "LEFT JOIN tag_translations ON tag_translations.tag_id = tags_restaurants.tag_id AND LOWER(tag_translations.title) LIKE (?)",
             query
           ])
         ],
@@ -386,7 +386,7 @@ class App::DailyciousController < ApplicationController
             ]
           ).map{|u| u.id}.concat(
             ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
-              "SELECT restaurant_id FROM categories_restaurants, category_translations WHERE categories_restaurants.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
+              "SELECT restaurant_id FROM tags_restaurants, tag_translations WHERE tags_restaurants.tag_id = tag_translations.tag_id AND LOWER(tag_translations.title) LIKE (?)",
               query
             ])).map{|u| u["restaurant_id"]}
           )
@@ -412,9 +412,9 @@ class App::DailyciousController < ApplicationController
             :select => "daily_dishes.restaurant_id",
             :joins => [
               "INNER JOIN restaurants ON restaurants.id = daily_dishes.restaurant_id",
-              "LEFT JOIN categories_restaurants ON categories_restaurants.restaurant_id = daily_dishes.restaurant_id",
+              "LEFT JOIN tags_restaurants ON tags_restaurants.restaurant_id = daily_dishes.restaurant_id",
               ActiveRecord::Base.send(:sanitize_sql_array,[
-                "LEFT JOIN category_translations ON category_translations.category_id = categories_restaurants.category_id AND LOWER(category_translations.title) LIKE (?)",
+                "LEFT JOIN tag_translations ON tag_translations.tag_id = tags_restaurants.tag_id AND LOWER(tag_translations.title) LIKE (?)",
                 query
               ])
             ],
@@ -430,7 +430,7 @@ class App::DailyciousController < ApplicationController
                 ]
               ).map{|u| u.id}.concat(
                 ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
-                  "SELECT restaurant_id FROM categories_restaurants, category_translations WHERE categories_restaurants.category_id = category_translations.category_id AND LOWER(category_translations.title) LIKE (?)",
+                  "SELECT restaurant_id FROM tags_restaurants, tag_translations WHERE tags_restaurants.tag_id = tag_translations.tag_id AND LOWER(tag_translations.title) LIKE (?)",
                   query
                 ])).map{|u| u["restaurant_id"]}
               )

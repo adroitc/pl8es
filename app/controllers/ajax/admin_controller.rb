@@ -2,7 +2,7 @@ class Ajax::AdminController < ApplicationController
   
   def addlanguage
     if @user && @user.isAdmin && !params.values_at(:title, :locale).include?(nil)
-      new_language = Category.create(params.permit(:title, :locale))
+      new_language = Language.create(params.permit(:title, :locale))
       
       render :json => {:status => "success"}
       return
@@ -46,18 +46,18 @@ class Ajax::AdminController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
-  def addcategory
+  def add_tag
     if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
-      new_category = Category.create()
+      tag = Tag.create()
       
       current_locale = I18n.locale
       Language.all.each do |language|
         I18n.locale = language.locale
-        new_category.title = params[:title][language.locale]
+        tag.title = params[:title][language.locale]
       end
       I18n.locale = current_locale
       
-      new_category.save
+      tag.save
       
       render :json => {:status => "success"}
       return
@@ -65,21 +65,21 @@ class Ajax::AdminController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
-  def editcategory
-    if @user && @user.isAdmin && !params.values_at(:category_id, :title).include?(nil) && Category.exists?(params[:category_id])
-      category = Category.find(params[:category_id])
+  def edit_tag
+    if @user && @user.isAdmin && !params.values_at(:tag_id, :title).include?(nil) && Tag.exists?(params[:tag_id])
+      tag = Tag.find(params[:tag_id])
       
       if params[:delete] == "true"
-        category.destroy
+        tag.destroy
       else
         current_locale = I18n.locale
         Language.all.each do |language|
           I18n.locale = language.locale
-          category.title = params[:title][language.locale]
+          tag.title = params[:title][language.locale]
         end
         I18n.locale = current_locale
         
-        category.save
+        tag.save
         
         render :json => {:status => "success"}
         return

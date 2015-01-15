@@ -3,8 +3,8 @@ raw(Jsonify::Builder.plain do |j|
   
   j.token                      @session.token
   
-  j.categories(Category.all) do |category|
-    category.category_lang.each do |key, value|
+  j.tags(Tag.all) do |tag|
+    tag.tag_lang.each do |key, value|
       j[key] = value
     end
   end

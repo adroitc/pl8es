@@ -27,7 +27,7 @@ class AdminController < ApplicationController
     end
   end
   
-  def categories
+  def tags
     if !(@user && @user.isAdmin)
       raise ActionController::RoutingError.new("Not Found")
     end

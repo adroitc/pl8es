@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911072448) do
+ActiveRecord::Schema.define(version: 20150115140921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,27 +72,6 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.integer  "position"
     t.string   "amount"
   end
-
-  create_table "categories", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "categories_restaurants", force: true do |t|
-    t.integer "category_id"
-    t.integer "restaurant_id"
-  end
-
-  create_table "category_translations", force: true do |t|
-    t.integer  "category_id", null: false
-    t.string   "locale",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-  end
-
-  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
-  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "restaurant_id"
@@ -474,6 +453,11 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.datetime "client_reset_date"
   end
 
+  create_table "restaurants_tags", force: true do |t|
+    t.integer "tag_id"
+    t.integer "restaurant_id"
+  end
+
   create_table "sessions", force: true do |t|
     t.integer  "user_id"
     t.integer  "device_id"
@@ -499,6 +483,27 @@ ActiveRecord::Schema.define(version: 20140911072448) do
     t.string   "size_card_tab_title"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tag_translations", force: true do |t|
+    t.integer  "tag_id",     null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "tag_translations", ["locale"], name: "index_tag_translations_on_locale", using: :btree
+  add_index "tag_translations", ["tag_id"], name: "index_tag_translations_on_tag_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags_users", force: true do |t|
+    t.integer "tag_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|

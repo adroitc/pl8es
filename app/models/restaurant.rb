@@ -12,7 +12,7 @@ class Restaurant < ActiveRecord::Base
   
   belongs_to :default_language, :class_name => "Language"
   has_and_belongs_to_many :languages
-  has_and_belongs_to_many :categories
+  has_and_belongs_to_many :tags
   
   has_one :menuColor
   belongs_to :menuColorTemplate

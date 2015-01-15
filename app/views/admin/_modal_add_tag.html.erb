@@ -1,5 +1,5 @@
-<%= neon_modal :id => "addcategory", :width => "678px", :title => "Add tag", :languages => Language.all, :default_language => Language.first do |m| %>
-<%= form_tag(tag_add_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "addcategory"}) do %>
+<%= neon_modal :id => "add-tag", :width => "678px", :title => "Add tag", :languages => Language.all, :default_language => Language.first do |m| %>
+<%= form_tag(tag_add_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "add-tag"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-12">
@@ -9,7 +9,7 @@
       Language.all.each do |language|
         I18n.locale = language.locale
       %>
-      <div class="tab-pane <%="active" if Language.first == language %> form-group" id="modal-addcategory-lang-<%=language.locale %>">
+      <div class="tab-pane <%="active" if Language.first == language %> form-group" id="modal-add-tag-lang-<%=language.locale %>">
         <label for="form-title[<%=language.locale %>]" class="control-label"><strong>Title</strong> - <%=language.title.capitalize %><%=" (Default)" if Language.first == language %></label>
 			  <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="Title" data-validate="maxlength[28]" <%="required" if Language.first == language %>>
       </div>

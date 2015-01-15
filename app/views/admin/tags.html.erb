@@ -28,20 +28,20 @@
             </tr>
           </thead>
           <tbody>
-            <% Category.all.sort_by{|category|
-              category.title
-            }.each do |category| %>
+            <% Tag.all.sort_by{|tag|
+              tag.title
+            }.each do |tag| %>
             <tr style="font-size: 18px;">
               <td>
-                <a href="javascript:;" onclick="jQuery('#modal-editcategory-<%=category.id %>').modal('show');">
-                  <%=category.title %>
+                <a href="javascript:;" onclick="jQuery('#modal-edit-tag-<%=tag.id %>').modal('show');">
+                  <%=tag.title %>
                 </a>
               </td>
             </tr>
             <% end %>
           </tbody>
         </table>
-        <a href="javascript:;" onclick="jQuery('#modal-addcategory').modal('show');">
+        <a href="javascript:;" onclick="jQuery('#modal-add-tag').modal('show');">
           <button type="button" class="btn btn-info btn-icon icon-left">
           	Add tag
           	<i class="entypo-plus"></i>
@@ -52,9 +52,9 @@
     <%=render :partial => "layouts/footer" %>
   </div>
 </div>
-<%=render :partial => "modal_addcategory" %>
-<% Category.all.sort_by{|category|
-              category.title
-            }.each do |category| %>
-<%=render :partial => "modal_editcategory", :locals => {:category => category} %>
+<%=render :partial => "modal_add_tag" %>
+<% Tag.all.sort_by{|tag|
+              tag.title
+            }.each do |tag| %>
+<%=render :partial => "modal_edit_tag", :locals => {:tag => tag} %>
 <% end %>
