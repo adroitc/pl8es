@@ -1,7 +1,12 @@
 class Ajax::MenusController < ApplicationController
 	
+	before_filter :authenticate_user
+	
+	def index
+	end
+	
 	def create
-		if @user && !params.values_at(:title, :default_language).include?(nil) && Language.exists?(params[:default_language].to_i)
+		if !params.values_at(:title, :default_language).include?(nil) && Language.exists?(params[:default_language].to_i)
 			languages = Array.new
 			if params[:languages]
 				params[:languages].each do |language|
@@ -35,7 +40,7 @@ class Ajax::MenusController < ApplicationController
 	end
 	
 	def update
-		if @user && !params.values_at(:id, :title, :default_language).include?(nil) && @user.restaurant.menus.exists?(params[:id]) && Language.exists?(params[:default_language].to_i)
+		if !params.values_at(:id, :title, :default_language).include?(nil) && @user.restaurant.menus.exists?(params[:id]) && Language.exists?(params[:default_language].to_i)
 			menu = @user.restaurant.menus.find(params[:id])
 			
 			if params[:delete] == "true"
@@ -71,7 +76,7 @@ class Ajax::MenusController < ApplicationController
 	end
 	
 	def duplicate
-		if @user && !params.values_at(:menu_id).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
+		if !params.values_at(:menu_id).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
 			menu = @user.restaurant.menus.find(params[:menu_id])
 			
 			dup_menu = menu.dup
@@ -85,10 +90,11 @@ class Ajax::MenusController < ApplicationController
 	end
 	
 	def reset_clients
-		if @user && !params.values_at(:reset).include?(nil) && params[:reset] == "true" && (@user.isAdmin || !@user.restaurant.client_reset_date || (@user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now))
+		if params[:reset] == "true" && (@user.isAdmin || !@user.restaurant.client_reset_date || (@user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now))
 			@user.restaurant.clients.actives.each do |client|
 				client.update_attributes(:active => false)
 			end
+			
 			@user.restaurant.update_attributes(:client_reset_date => DateTime.now)
 			
 			render :json => {:status => "success"}
@@ -96,5 +102,11 @@ class Ajax::MenusController < ApplicationController
 		end
 		render :json => {:status => "invalid"}
 	end
+	
+	private
+		
+		def authenticate_user
+			redirect_to login_index_path unless @user
+		end
 	
 end
