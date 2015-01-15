@@ -74,9 +74,6 @@ Pl8es::Application.routes.draw do
 			post "/profile/editsettings" => "profile#editsettings"
 			post "/profile/editdescription" => "profile#editdescription"
 			
-			post "/menus/duplicate" => "menus#duplicate"
-			post "/menus/resetclients" => "menus#reset_clients", as: :reset_clients
-			
 			#ajax/navigation
 			post "/category/add" => "navigation#addnavigation"
 			post "/category/edit" => "navigation#editnavigation"
@@ -110,6 +107,9 @@ Pl8es::Application.routes.draw do
 	
 	# menus
 	resources :menus, :only => [:create, :update, :index, :show, :destroy], :path => "/menumalist"
+	
+	post "/menumalist/duplicate" => "menus#duplicate"
+	post "/menumalist/resetclients" => "menus#reset_clients", as: :reset_clients
 	
 	# navigations
 	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menus#category", as: :show_navigation
