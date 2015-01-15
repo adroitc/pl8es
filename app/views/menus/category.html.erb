@@ -19,13 +19,13 @@
 				</a>
 			</li>
 			<li class="">
-				<a href="<%= show_menu_path(@navigation.menu.title.gsub(" ","-"), @navigation.menu.id) %>">
+				<a href="<%= show_menu_path(@navigation.menu.title.parameterize, @navigation.menu.id) %>">
 					<%=@navigation.menu.title %>
 				</a>
 			</li>
 			<% if @navigation.navigation != nil%>
 			<li class="">
-				<a href="<%= show_navigation_path(@navigation.menu.title.gsub(" ","-"), @navigation.menu.id, @navigation.navigation.title.gsub(" ","-"), @navigation.navigation.id) %>">
+				<a href="<%= show_navigation_path(@navigation.menu.title.parameterize, @navigation.menu.id, @navigation.navigation.title.parameterize, @navigation.navigation.id) %>">
 					<%=@navigation.navigation.title %>
 				</a>
 			</li>

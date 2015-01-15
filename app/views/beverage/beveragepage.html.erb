@@ -38,7 +38,7 @@
               <% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
               <tr style="font-size: 18px;">
                 <td>
-                  <a href="<%= show_beverage_navigation_path(@beverage_page.title.gsub(" ", "-"), @beverage_page.id, beverage_navigation.title.gsub(" ", "-"), beverage_navigation.id) %>">
+                  <a href="<%= show_beverage_navigation_path(@beverage_page.title.parameterize, @beverage_page.id, beverage_navigation.title.parameterize, beverage_navigation.id) %>">
                     <%=beverage_navigation.title %>
                   </a>
                   <input type="hidden" name="beverage_navigation_ids[<%=beverage_navigation.id %>]" value="">
