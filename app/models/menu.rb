@@ -4,7 +4,7 @@ class Menu < ActiveRecord::Base
   has_and_belongs_to_many :languages
   belongs_to :menuColorTemplate
   belongs_to :menuColor
-  has_many :navigations
+  has_many :navigations, -> { where(:navigation_id => nil) }
   has_many :dishes
   has_many :beverages
 	

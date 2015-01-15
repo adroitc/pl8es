@@ -25,7 +25,7 @@
 			</li>
 			<% if @navigation.navigation != nil%>
 			<li class="">
-				<a href="<%= show_navigation_path(@navigation.menu.title.gsub(" ","-"), @navigation.menu.id, @navigation.navigation.title.gsub(" ","-"), @navigation.navigation.id %>">
+				<a href="<%= show_navigation_path(@navigation.menu.title.gsub(" ","-"), @navigation.menu.id, @navigation.navigation.title.gsub(" ","-"), @navigation.navigation.id) %>">
 					<%=@navigation.navigation.title %>
 				</a>
 			</li>
@@ -37,7 +37,7 @@
 		<h2><%=@navigation.menu.title %> - <%=@navigation.title %></h2>
 		<br />
 		<div class="row gallery-env draggable-portlets">
-			<%= form_tag(category_sort_path}, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
 			<span class="sorted ui-sortable">
 				<% @navigation.sub_navigations.each do |navigation| %>
 				<%=render :partial => "neon/navigation_panel", :locals => {:navigation => navigation} %>

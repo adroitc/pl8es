@@ -28,7 +28,7 @@
 			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
 			<input type="hidden" name="menu_id" value="<%=@menu.id %>">
 			<span class="sorted ui-sortable">
-				<% @menu.navigations.find_all_by_navigation_id(nil).each do |navigation| %>
+				<% @menu.navigations.each do |navigation| %>
 				<%=render :partial => "neon/navigation_panel", :locals => {:navigation => navigation} %>
 				<% end %>
 			</span>

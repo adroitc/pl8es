@@ -78,6 +78,20 @@ class MenusController < ApplicationController
 		render :json => {:status => "invalid"}
 	end
 	
+	def show
+		@menu = @user.restaurant.menus.find(params[:menu_id])
+	end
+	
+	# this should be @ navigations#show
+	
+	def category
+		if @user && @user.restaurant.menus.exists?(params[:menu_id]) && @user.restaurant.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
+			@navigation = @user.restaurant.menus.find(params[:menu_id]).navigations.find(params[:navigation_id])
+		else
+			raise ActionController::RoutingError.new("Not Found")
+		end
+	end
+	
 	def duplicate
 		if !params.values_at(:menu_id).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
 			menu = @user.restaurant.menus.find(params[:menu_id])

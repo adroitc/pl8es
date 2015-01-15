@@ -110,6 +110,11 @@ Pl8es::Application.routes.draw do
 	
 	# menus
 	resources :menus, :only => [:create, :update, :index], :path => "/menumalist"
+	get "/menumalist/:menu_title/:menu_id" => "menus#show", as: :show_menu
+	
+	# navigations
+	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menus#category", as: :show_navigation
+	get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menus#category", as: :show_sub_navigation
 	
 	#signup
 	resources :signup, :only => [:index]
@@ -147,11 +152,6 @@ Pl8es::Application.routes.draw do
 	#invoice
 	resources :invoice, :only => [:index]
 	#get "/invoices/invoice/:payment_id" => "invoice#pdf"
-	
-	#menumalist
-	get "/menumalist/:menu_title/:menu_id" => "menumalist#categories", as: :show_menu
-	get "/menumalist/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menumalist#category", as: :show_navigation
-	get "/menumalist/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menumalist#category", as: :show_sub_navigation
 	
 	#beverage
 	resources :beverage, :only => []
