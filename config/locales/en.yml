@@ -293,11 +293,11 @@ en:
     design_splashscreen_image: "Splashscreen image"
     
     menu_modal_add_title: "Add menu"
-    menu_modal_edit_title: "Edit menu"
+    menu_modal_edit_title: "Update menu"
     menu_modal_add_cancel: "Cancel"
     menu_modal_add_submit: "Add menu"
     menu_modal_edit_cancel: "Cancel"
-    menu_modal_edit_submit: "Edit menu"
+    menu_modal_edit_submit: "Update menu"
     menu_name: "Menu name"
     menu_name_placeholder: "Lunch Menu"
     menu_default: "Make this menu the default menu."

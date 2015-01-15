@@ -74,11 +74,9 @@ Pl8es::Application.routes.draw do
 			post "/profile/editsettings" => "profile#editsettings"
 			post "/profile/editdescription" => "profile#editdescription"
 			
-			#ajax/menu
-			post "/menu/add" => "menu#addmenu"
-			post "/menu/edit" => "menu#editmenu"
-			post "/menu/duplicate" => "menu#duplicatemenu"
-			post "/menu/resetclients" => "menu#resetclients"
+			resources :menus, :only => [:create, :update]
+			post "/menus/duplicate" => "menus#duplicate"
+			post "/menus/resetclients" => "menus#reset_clients", as: :reset_clients
 			
 			#ajax/navigation
 			post "/category/add" => "navigation#addnavigation"
