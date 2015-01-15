@@ -1,21 +1,36 @@
 source "https://rubygems.org"
 
 ruby "2.1.1"
-
-# Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "4.0.2"
 
 # Make sure gem is defined BEFORE any other gems that use environment variables
 gem 'dotenv-rails', :groups => [:development, :test]
 
-# Use SCSS for stylesheets
-gem "sass-rails", "~> 4.0.0"
+gem "bcrypt-ruby", :require => "bcrypt"
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 
-# Use CoffeeScript for .js.coffee assets and views
+# –– json & jQuery
+
+gem "jquery-rails"
+gem "jquery-ui-rails"
+
+gem "jsonify"
+gem "yajl-ruby", require: "yajl"
 gem "coffee-rails", "~> 4.0.0"
+gem "jbuilder", "~> 1.2"
+
+# –– database
+gem 'pg'
+gem 'hirb'
+
+# –– images
+gem "paperclip"
+gem "aws-sdk"
+gem "paperclip-dimension", :git => "git://github.com/mroem/paperclip-dimension.git"
+gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -23,13 +38,14 @@ group :doc do
 end
 
 group :assets do
+	gem "sass-rails", "~> 4.0.0"
+	
   gem "therubyracer", "0.11.3"
   gem "less-rails"
   gem "twitter-bootstrap-rails"
 end
 
 group :development do
-  # Use sqlite3 as the database for Active Record
   gem "better_errors"
   gem "binding_of_caller"
   gem 'capistrano-rails', '~> 1.1.1'
@@ -38,44 +54,17 @@ group :development do
   gem 'railroady'
 end
 
-# database
-gem 'pg'
-gem 'hirb'
-
 group :production do
   # Use rails_12factor for heroku
   gem "rails_12factor"
 end
 
-# Use unicorn as the app server
-# gem "unicorn"
-
-# Use Capistrano for deployment
-# gem "capistrano", group: :development
-
-# Use debugger
-# gem "debugger", group: [:development, :test]
-
 # payment
 gem "paypal-express"
-
-# json
-gem "jsonify"
-
-gem "yajl-ruby", require: "yajl"
-
-# encryption
-gem "bcrypt-ruby", :require => "bcrypt"
 
 # languages
 gem "rename"
 gem "globalize", "~> 4.0.1"
-
-# paperclip
-gem "paperclip"
-gem "aws-sdk"
-gem "paperclip-dimension", :git => "git://github.com/mroem/paperclip-dimension.git"
-gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 
 # location
 gem "geokit-rails"
@@ -87,13 +76,5 @@ gem "rest-client"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 
-# Use jquery as the JavaScript library
-gem "jquery-rails"
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "turbolinks"
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 1.2"
-
-gem "jquery-ui-rails"
