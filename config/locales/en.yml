@@ -218,10 +218,6 @@ en:
     account_restaurant_name_placeholder: "e.g. Restaurant New York"
     account_restaurant_description: "Restaurant description"
     account_restaurant_description_placeholder: "e.g. Our restaurant is the best in town."
-    account_primary_category: "Primary category"
-    account_primary_category_select: "Select primary category"
-    account_secondary_category: "Secondary category"
-    account_secondary_category_select: "Select secondary category"
   
   dailycious:
     dailycious_title: "Dailycious - current week"

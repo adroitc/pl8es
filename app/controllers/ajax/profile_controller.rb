@@ -68,14 +68,6 @@ class Ajax::ProfileController < ApplicationController
       end
       I18n.locale = current_locale
       
-      @user.restaurant.tags = []
-      params[:tags].each_with_index do |tag, i|
-        break if i >= 2;
-        if Tag.exists?(tag[1].to_i)
-          @user.restaurant.tags.push(Tag.find(tag[1].to_i))
-        end
-      end
-      
       @user.restaurant.save
       
       @user.restaurant.update_attributes(params.permit(:logo_image))

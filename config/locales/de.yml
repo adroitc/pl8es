@@ -218,10 +218,6 @@ de:
     account_restaurant_name_placeholder: "z.B. Stadtlokal"
     account_restaurant_description: "Restaurantbeschreibung"
     account_restaurant_description_placeholder: "z.B. Wir bekochen Sie, damit Sie sich wohlfühlen."
-    account_primary_category: "Hauptkategorie"
-    account_primary_category_select: "Hauptkategorie auswählen"
-    account_secondary_category: "Nebenkategorie"
-    account_secondary_category_select: "Nebenkategorie auswählen"
     
   dailycious:
     dailycious_title: "Dailycious - aktuelle Woche"

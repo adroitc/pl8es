@@ -29,24 +29,6 @@
       I18n.locale = current_locale
       %>
     </div>
-    <div class="col-sm-12 form-group" style="padding:0px;">
-      <label for="form-categories[0]" class="control-label"><strong><%=t("profile.account_primary_category") %></strong></label>
-	    <select name="categories[0]" id="form-categories[0]" class="select2" data-allow-clear="true" data-placeholder="<%=t("profile.account_primary_category_select") %>">
-        <option></option>
-        <% Category.all.each do |category| %>
-	    	<option value="<%=category.id %>" <%="selected" if @user.restaurant.categories.count >= 1 && @user.restaurant.categories.first == category %>><%=category.title %></option>
-        <% end %>
-	    </select>
-    </div>
-    <div class="col-sm-12 form-group" style="padding:0px;">
-      <label for="form-categories[1]" class="control-label"><strong><%=t("profile.account_secondary_category") %></strong></label>
-	    <select name="categories[1]" id="form-categories[1]" class="select2" data-allow-clear="true" data-placeholder="<%=t("profile.account_secondary_category_select") %>">
-        <option></option>
-        <% Category.all.each do |category| %>
-	    	<option value="<%=category.id %>" <%="selected" if @user.restaurant.categories.count == 2 && @user.restaurant.categories.last == category %>><%=category.title %></option>
-        <% end %>
-	    </select>
-    </div>
   </div>
 </div>
 <% end %>
