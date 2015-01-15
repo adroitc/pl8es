@@ -1,2 +1,0 @@
-module Ajax::BeverageHelper
-end
