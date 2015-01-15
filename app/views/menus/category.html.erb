@@ -19,42 +19,42 @@
 				</a>
 			</li>
 			<li class="">
-				<a href="<%= menu_path(@navigation) %>">
-					<%=@navigation.menu.title %>
+				<a href="<%= menu_path(@category) %>">
+					<%=@category.menu.title %>
 				</a>
 			</li>
-			<% if @navigation.navigation != nil%>
+			<% if @category.category != nil%>
 			<li class="">
-				<a href="<%= show_navigation_path(@navigation.menu.title.parameterize, @navigation.menu.id, @navigation.navigation.title.parameterize, @navigation.navigation.id) %>">
-					<%=@navigation.navigation.title %>
+				<a href="<%= show_category_path(@category.menu.title.parameterize, @category.menu.id, @category.category.title.parameterize, @category.category.id) %>">
+					<%=@category.category.title %>
 				</a>
 			</li>
 			<% end %>
 			<li class="active">
-				<strong><%=@navigation.title %></strong>
+				<strong><%=@category.title %></strong>
 			</li>
 		</ol>
-		<h2><%=@navigation.menu.title %> - <%=@navigation.title %></h2>
+		<h2><%=@category.menu.title %> - <%=@category.title %></h2>
 		<br />
 		<div class="row gallery-env draggable-portlets">
-			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
 			<span class="sorted ui-sortable">
-				<% @navigation.sub_navigations.each do |navigation| %>
-				<%=render :partial => "neon/navigation_panel", :locals => {:navigation => navigation} %>
+				<% @category.sub_categories.each do |category| %>
+				<%=render :partial => "neon/category_panel", :locals => {:category => category} %>
 				<% end %>
 			</span>
 			<% end %>
 			<%= form_tag(dish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
 			<span class="sorted ui-sortable">
-				<% @navigation.dishes.each do |dish| %>
+				<% @category.dishes.each do |dish| %>
 				<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
 				<% end %>
 			</span>
 			<% end %>
-			<% if @navigation.navigation == nil && @navigation.dishes.count == 0 %>
-			<%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-addnavigation').modal('show');", :title => t("menumalist.add_new_category")} %>
+			<% if @category.category == nil && @category.dishes.count == 0 %>
+			<%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
 			<% end %>
-			<% if @navigation.sub_navigations.count == 0 %>
+			<% if @category.sub_categories.count == 0 %>
 			<%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish")} %>
 			<% end %>
 		</div>
@@ -79,12 +79,12 @@
 					$draggable_portlets.removeClass('dragging');
 					
 					var f = $(this).closest("form");
-					if (f.attr("id") == "form_sortnavigation")
+					if (f.attr("id") == "form_sort_category")
 					{
-						$("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+						$("#form_sort_category .panel input[name^='category_ids[']").each(function(i){
 							$(this).val(i);
 						});
-						$("#form_sortnavigation").submit();
+						$("#form_sort_category").submit();
 					}
 					else if (f.attr("id") == "form_sortdish")
 					{
@@ -99,12 +99,12 @@
 		});
 	});
 </script>
-<%=render :partial => "modal_addnavigation", :locals => {:menu => @navigation.menu, :navigation => @navigation} %>
-<% @navigation.sub_navigations.each do |navigation| %>
-	<%=render :partial => "modal_editnavigation", :locals => {:navigation => navigation} %>
+<%=render :partial => "modal_add_category", :locals => {:menu => @category.menu, :category => @category} %>
+<% @category.sub_categories.each do |category| %>
+	<%=render :partial => "modal_edit_category", :locals => {:category => category} %>
 <% end %>
-<p><%=@navigation.dishes.count%></p>
-<% @navigation.dishes.each do |dish| %>
+<p><%=@category.dishes.count%></p>
+<% @category.dishes.each do |dish| %>
 	<%=render :partial => "modal_editdish", :locals => {:dish => dish} %>
 <% end %>
-<%=render :partial => "modal_adddish", :locals => {:navigation => @navigation} %>
+<%=render :partial => "modal_adddish", :locals => {:category => @category} %>

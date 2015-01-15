@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115140921) do
+ActiveRecord::Schema.define(version: 20150115162719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,39 @@ ActiveRecord::Schema.define(version: 20150115140921) do
     t.integer  "position"
     t.string   "amount"
   end
+
+  create_table "categories", force: true do |t|
+    t.integer  "menu_id"
+    t.integer  "category_id"
+    t.integer  "level"
+    t.string   "style"
+    t.integer  "dishes_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "position"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "image_dimensions"
+    t.string   "image_fingerprint"
+    t.integer  "image_crop_w"
+    t.integer  "image_crop_h"
+    t.integer  "image_crop_x"
+    t.integer  "image_crop_y"
+    t.boolean  "image_crop_processed", default: true
+  end
+
+  create_table "category_translations", force: true do |t|
+    t.integer  "category_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
+  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "restaurant_id"
@@ -153,7 +186,7 @@ ActiveRecord::Schema.define(version: 20150115140921) do
 
   create_table "dishes", force: true do |t|
     t.integer  "menu_id"
-    t.integer  "navigation_id"
+    t.integer  "category_id"
     t.integer  "wines_id"
     t.integer  "dishsuggestion_1_id"
     t.integer  "dishsuggestion_2_id"
@@ -303,39 +336,6 @@ ActiveRecord::Schema.define(version: 20150115140921) do
     t.datetime "updated_at"
     t.integer  "default_language_id"
     t.integer  "restaurant_id"
-  end
-
-  create_table "navigation_translations", force: true do |t|
-    t.integer  "navigation_id", null: false
-    t.string   "locale",        null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-  end
-
-  add_index "navigation_translations", ["locale"], name: "index_navigation_translations_on_locale", using: :btree
-  add_index "navigation_translations", ["navigation_id"], name: "index_navigation_translations_on_navigation_id", using: :btree
-
-  create_table "navigations", force: true do |t|
-    t.integer  "menu_id"
-    t.integer  "navigation_id"
-    t.integer  "level"
-    t.string   "style"
-    t.integer  "dishes_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "position"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.text     "image_dimensions"
-    t.string   "image_fingerprint"
-    t.integer  "image_crop_w"
-    t.integer  "image_crop_h"
-    t.integer  "image_crop_x"
-    t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed", default: true
   end
 
   create_table "payments", force: true do |t|

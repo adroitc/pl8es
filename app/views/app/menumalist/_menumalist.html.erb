@@ -19,21 +19,21 @@ raw(Jsonify::Builder.plain do |j|
       j.title                      language.title
     end
     
-    j.navigations(menu.navigations.find_all_by_navigation_id(nil)) do |navigation|
-      j.id                         navigation.id
-      j.image_url                  navigation.image.url(:cropped_default_retina)
-      j.image_fingerprint          navigation.image.present?? navigation.image_fingerprint : "default"
-      j.style                      navigation.style
-      j.navigation_lang            navigation.navigation_lang
+    j.categories(menu.categories.find_all_by_category_id(nil)) do |category|
+      j.id                         category.id
+      j.image_url                  category.image.url(:cropped_default_retina)
+      j.image_fingerprint          category.image.present? ? category.image_fingerprint : "default"
+      j.style                      category.style
+      j.category_lang              category.category_lang
       
-      j.sub_navigations(navigation.sub_navigations) do |sub_navigation|
-        j.id                         sub_navigation.id
-        j.image_url                  navigation.image.url(:cropped_default_retina)
-        j.image_fingerprint          sub_navigation.image.present?? sub_navigation.image_fingerprint : "default"
-        j.style                      sub_navigation.style
-        j.navigation_lang            sub_navigation.navigation_lang
+      j.sub_categories(navigation.sub_categories) do |sub_category|
+        j.id                         sub_category.id
+        j.image_url                  category.image.url(:cropped_default_retina)
+        j.image_fingerprint          sub_category.image.present?? sub_category.image_fingerprint : "default"
+        j.style                      sub_category.style
+        j.category_lang              sub_category.category_lang
       
-        j.dishes(navigation.dishes) do |dish|
+        j.dishes(category.dishes) do |dish|
           j.id                         dish.id
           j.image_url                  dish.image.url(:cropped_default_retina)
           j.image_fingerprint          dish.image.present?? dish.image_fingerprint : "default"
@@ -74,7 +74,7 @@ raw(Jsonify::Builder.plain do |j|
         
       end
       
-      j.dishes(navigation.dishes) do |dish|
+      j.dishes(category.dishes) do |dish|
         j.id                         dish.id
         j.image_url                  dish.image.url(:cropped_default_retina)
         j.image_fingerprint          dish.image.present? ? dish.image_fingerprint : "default"

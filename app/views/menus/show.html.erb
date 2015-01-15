@@ -25,15 +25,15 @@
 		<h2><%=@menu.title %></h2>
 		<br />
 		<div class="row gallery-env draggable-portlets">
-			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortnavigation"}) do %>
+			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
 			<input type="hidden" name="menu_id" value="<%=@menu.id %>">
 			<span class="sorted ui-sortable">
-				<% @menu.navigations.each do |navigation| %>
-				<%=render :partial => "neon/navigation_panel", :locals => {:navigation => navigation} %>
+				<% @menu.categories.each do |category| %>
+				<%=render :partial => "neon/category_panel", :locals => {:category => category} %>
 				<% end %>
 			</span>
 			<% end %>
-			<%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-addnavigation').modal('show');", :title => t("menumalist.add_new_category")} %>
+			<%=render :partial => "neon/panel_add", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
 		</div>
 		<%=render :partial => "layouts/footer" %>
 	</div>
@@ -53,18 +53,18 @@
 				},
 				stop: function()
 				{
-					$("#form_sortnavigation .panel input[name^='navigation_ids[']").each(function(i){
+					$("#form_sort_category .panel input[name^='category_ids[']").each(function(i){
 						$(this).val(i);
 					});
 					$draggable_portlets.removeClass('dragging');
-					$("#form_sortnavigation").submit();
+					$("#form_sort_category").submit();
 				}
 			});
 			$(".draggable-portlets .sorted .panel-heading").disableSelection();
 		});
 	});
 </script>
-<%=render :partial => "modal_addnavigation", :locals => {:menu => @menu} %>
-<% @menu.navigations.each do |navigation| %>
-	<%=render :partial => "modal_editnavigation", :locals => {:navigation => navigation} %>
+<%=render :partial => "modal_add_category", :locals => {:menu => @menu} %>
+<% @menu.categories.each do |category| %>
+	<%=render :partial => "modal_edit_category", :locals => {:category => category} %>
 <% end %>

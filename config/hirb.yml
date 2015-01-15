@@ -1,9 +1,9 @@
 :output:
-  Navigation:
+  Category:
     :options:
       :fields:
         - menu_id
-        - navigation_id
+        - category_id
         - title
         - level
         - style

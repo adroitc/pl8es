@@ -108,7 +108,7 @@
 										</a>
 									<span>
 								</td>
-								<td><a href="<%= menu_path(menu) %>"><%=menu.navigations.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
+								<td><a href="<%= menu_path(menu) %>"><%=menu.categories.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
 								<td><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></td>
 							</tr>
 						<% end %>
@@ -164,7 +164,7 @@
 		});
 	});
 </script>
-<%=render :partial => "modal_design", :locals => {:navigation => Navigation.first} %>
+<%=render :partial => "modal_design", :locals => {:category => Category.first} %>
 <%=render :partial => "modal_addmenu" %>
 <% @menus.each do |menu| %>
 	<%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>

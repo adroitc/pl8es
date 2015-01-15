@@ -86,11 +86,11 @@ class MenusController < ApplicationController
 		
 	end
 	
-	# this should be @ navigations#show
+	# this should be @ categoriess#show
 	
 	def category
-		if @user && @user.restaurant.menus.exists?(params[:menu_id]) && @user.restaurant.menus.find(params[:menu_id]).navigations.exists?(params[:navigation_id])
-			@navigation = @user.restaurant.menus.find(params[:menu_id]).navigations.find(params[:navigation_id])
+		if @user && @user.restaurant.menus.exists?(params[:menu_id]) && @user.restaurant.menus.find(params[:menu_id]).categories.exists?(params[:category_id])
+			@category = @user.restaurant.menus.find(params[:menu_id]).categories.find(params[:category_id])
 		else
 			raise ActionController::RoutingError.new("Not Found")
 		end

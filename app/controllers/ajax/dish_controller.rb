@@ -29,15 +29,15 @@ class Ajax::DishController < ApplicationController
   
   # post methods
   def adddish
-    if @user && !params.values_at(:navigation_id, :title, :description, :price).include?(nil) && Navigation.exists?(params[:navigation_id]) && Navigation.find(params[:navigation_id]).menu.restaurant.user == @user
+    if @user && !params.values_at(:category_id, :title, :description, :price).include?(nil) && Category.exists?(params[:category_id]) && Category.find(params[:category_id]).menu.restaurant.user == @user
       languages = Language.find_all_by_locale(params[:title].keys)
       
-      navigation = Navigation.find(params[:navigation_id])
+      category = Category.find(params[:category_id])
       new_dish = Dish.new(params.permit(:image, :price).merge({
         :restaurant => @user.restaurant,
-        :menu => navigation.menu,
-        :navigation => navigation,
-        :position => navigation.dishes.unscoped.last != nil ? navigation.dishes.unscoped.last.id : 0
+        :menu => category.menu,
+        :category => category,
+        :position => category.dishes.unscoped.last != nil ? category.dishes.unscoped.last.id : 0
       }))
       
       current_locale = I18n.locale
@@ -59,7 +59,7 @@ class Ajax::DishController < ApplicationController
   end
   
   def editdish
-    if @user && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sides).include?(nil) && Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).navigation.menu.restaurant.user == @user
+    if @user && !params.values_at(:dish_id, :title, :description, :price, :drinks, :sides).include?(nil) && Dish.exists?(params[:dish_id]) && Dish.find(params[:dish_id]).category.menu.restaurant.user == @user
       dish = Dish.find(params[:dish_id])
       
       if params[:delete] == "true"

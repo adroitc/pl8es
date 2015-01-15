@@ -74,10 +74,10 @@ Pl8es::Application.routes.draw do
 			post "/profile/editsettings" => "profile#editsettings"
 			post "/profile/editdescription" => "profile#editdescription"
 			
-			#ajax/navigation
-			post "/category/add" => "navigation#addnavigation"
-			post "/category/edit" => "navigation#editnavigation"
-			post "/category/sort" => "navigation#sortnavigation"
+			#ajax/category
+			post "/category/add" => "category#add_category"
+			post "/category/edit" => "category#edit_category"
+			post "/category/sort" => "category#sort_category"
 			
 			#ajax/dish
 			#ajax/dish-get
@@ -112,9 +112,9 @@ Pl8es::Application.routes.draw do
 		post "/duplicate" => "menus#duplicate"
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients
 		
-		# navigations
-		get "/:menu_title/:menu_id/:navigation_title/:navigation_id" => "menus#category", as: :show_navigation
-		get "/:menu_title/:menu_id/:parent_navigation_title/:parent_navigation_id/:navigation_title/:navigation_id" => "menus#category", as: :show_sub_navigation
+		# categorys
+		get "/:menu_title/:menu_id/:category_title/:category_id" => "menus#category", as: :show_category
+		get "/:menu_title/:menu_id/:parent_category_title/:parent_category_id/:category_title/:category_id" => "menus#category", as: :show_sub_category
 	end
 	
 	#signup
