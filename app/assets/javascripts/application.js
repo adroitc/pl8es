@@ -7,29 +7,22 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // compiled file.
 //
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
-//
-//
-// require turbolinks
-//
 //= require jquery
 //= require jquery-ui
-//= require_tree ./jquery
-//= require_tree ./bootstrap
-//= require_tree ./neon
-//= require_tree ./daterangepicker
+//= require jquery_plugins
+//= require bootstrap
+//= require neon
 //
 //= require cookies.min
-//= require select2
-//
-//= require icheck/icheck
+//= require daterangepicker
+//= require icheck
 //= require fileinput
-//= require toastr
+//= require gsap
 //= require joinable
+//= require moment
 //= require resizeable
-//= require gsap/main-gsap
-
+//= require select2
+//= require toastr
 
 $(document).ready(function()
 {
