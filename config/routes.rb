@@ -160,7 +160,7 @@ Pl8es::Application.routes.draw do
 	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation", as: :show_beverage_navigation
 	
 	#dailycious
-	resources :dailycious, :only => [:index]
-	get "/dailycious/:add_weeks-week" => "dailycious#index"
+	get "/dailycious" => "dailycious#index"
+	get "/dailycious/:add_weeks-week" => "dailycious#index", as: :dailycious_add_weeks
 	
 end
