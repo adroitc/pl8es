@@ -19,9 +19,7 @@
 //= require_tree ./jquery
 //= require_tree ./bootstrap
 //= require_tree ./neon
-//
-//= require daterangepicker/daterangepicker
-//= require daterangepicker/moment.min
+//= require_tree ./daterangepicker
 //
 //= require cookies.min
 //= require select2/select2
