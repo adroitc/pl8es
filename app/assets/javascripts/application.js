@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //
-//= require "gsap/main-gsap"
 // require turbolinks
 //
 //= require jquery
@@ -22,13 +21,14 @@
 //= require_tree ./daterangepicker
 //
 //= require cookies.min
-//= require select2/select2
+//= require select2
 //
 //= require icheck/icheck
 //= require fileinput
 //= require toastr
 //= require joinable
 //= require resizeable
+//= require gsap/main-gsap
 
 
 $(document).ready(function()
