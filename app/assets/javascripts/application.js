@@ -16,17 +16,8 @@
 //
 //= require jquery
 //= require jquery-ui
-//= require jquery.dotdotdot.min
-//= require jquery.ellipsize
-//= require jquery.inputmask.bundle.min
-//= require jquery.Jcrop.min
-//= require jquery.multi-select
-//= require jquery.nestable
-//= require jquery.sparkline.min
-//= require jquery.unveil
-//= require jquery.validate.min
-//
-//= require_tree bootstrap/.
+//= require_tree ./jquery
+//= require_tree ./bootstrap
 //
 //= require neon-api
 //= require neon-custom
