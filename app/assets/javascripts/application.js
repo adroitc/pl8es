@@ -10,49 +10,46 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-
+//
 //= require "gsap/main-gsap"
-
-//= require jquery.min
-// require jquery_ujs
-//= require jquery-ui
 // require turbolinks
+//
+//= require jquery
+//= require jquery-ui
+//= require jquery.dotdotdot.min
+//= require jquery.ellipsize
+//= require jquery.inputmask.bundle.min
+//= require jquery.Jcrop.min
+//= require jquery.multi-select
+//= require jquery.nestable
+//= require jquery.sparkline.min
+//= require jquery.unveil
+//= require jquery.validate.min
+//
+//= require bootstrap
+//= require bootstrap-colorpicker.min
+//= require bootstrap-datepicker
+//= require bootstrap-switch.min
+//= require bootstrap-tagsinput.min
+//= require bootstrap-timepicker.min
+//
+//= require neon-api
+//= require neon-custom
+//= require neon-login
+//= require neon-register
+//
+//= require daterangepicker/daterangepicker
+//= require daterangepicker/moment.min
+//
+//= require cookies.min
+//= require select2/select2
+//
+//= require icheck/icheck
+//= require fileinput
+//= require toastr
+//= require joinable
+//= require resizeable
 
-//= require "bootstrap"
-//= require "joinable"
-//= require "resizeable"
-//= require "neon-api"
-//= require "jquery.validate.min"
-//= require "jquery.nestable"
-//= require "neon-login"
-//= require "neon-register"
-//= require "jquery.inputmask.bundle.min"
-
-//= require "cookies.min"
-//= require "bootstrap-datepicker"
-//= require "bootstrap-timepicker.min"
-//= require "bootstrap-colorpicker.min"
-//= require "bootstrap-switch.min"
-//= require "select2/select2"
-//= require "bootstrap-tagsinput.min"
-//= require "jquery.multi-select"
-//= require "icheck/icheck"
-//= require "fileinput"
-//= require "jcrop/jquery.Jcrop.min"
-//= require "jquery.validate.min"
-//= require "daterangepicker/moment.min"
-//= require "daterangepicker/daterangepicker"
-//= require "toastr"
-//= require "jquery.sparkline.min"
-
-//= require "neon-custom"
-// require "neon-demo"
-
-//= require "jquery.ellipsize"
-//= require "jquery.dotdotdot.min"
-//= require "jquery.unveil"
-
-// require_tree .
 
 $(document).ready(function()
 {
