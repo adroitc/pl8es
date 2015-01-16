@@ -18,11 +18,7 @@
 //= require jquery-ui
 //= require_tree ./jquery
 //= require_tree ./bootstrap
-//
-//= require neon-api
-//= require neon-custom
-//= require neon-login
-//= require neon-register
+//= require_tree ./neon
 //
 //= require daterangepicker/daterangepicker
 //= require daterangepicker/moment.min
