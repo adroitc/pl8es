@@ -26,12 +26,7 @@
 //= require jquery.unveil
 //= require jquery.validate.min
 //
-//= require bootstrap
-//= require bootstrap-colorpicker.min
-//= require bootstrap-datepicker
-//= require bootstrap-switch.min
-//= require bootstrap-tagsinput.min
-//= require bootstrap-timepicker.min
+//= require_tree bootstrap/.
 //
 //= require neon-api
 //= require neon-custom
