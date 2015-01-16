@@ -113,8 +113,8 @@ Pl8es::Application.routes.draw do
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients
 		
 		# categorys
-		get "/:menu_title/:menu_id/:category_title/:category_id" => "menus#category", as: :show_category
-		get "/:menu_title/:menu_id/:parent_category_title/:parent_category_id/:category_title/:category_id" => "menus#category", as: :show_sub_category
+		get "/:menu_title/:menu_id/:category_title/:category_id" => "categories#show", as: :show_category
+		get "/:menu_title/:menu_id/:parent_category_title/:parent_category_id/:category_title/:category_id" => "categories#show", as: :show_sub_category
 	end
 	
 	#signup

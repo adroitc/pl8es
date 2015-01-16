@@ -86,16 +86,6 @@ class MenusController < ApplicationController
 		
 	end
 	
-	# this should be @ categoriess#show
-	
-	def category
-		if @user && @user.restaurant.menus.exists?(params[:menu_id]) && @user.restaurant.menus.find(params[:menu_id]).categories.exists?(params[:category_id])
-			@category = @user.restaurant.menus.find(params[:menu_id]).categories.find(params[:category_id])
-		else
-			raise ActionController::RoutingError.new("Not Found")
-		end
-	end
-	
 	def duplicate
 		if !params.values_at(:menu_id).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
 			menu = @user.restaurant.menus.find(params[:menu_id])

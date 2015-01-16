@@ -99,12 +99,12 @@
 		});
 	});
 </script>
-<%=render :partial => "modal_add_category", :locals => {:menu => @category.menu, :category => @category} %>
+<%=render :partial => "categories/modal_add", :locals => {:menu => @category.menu, :category => @category} %>
 <% @category.sub_categories.each do |category| %>
-	<%=render :partial => "modal_edit_category", :locals => {:category => category} %>
+	<%=render :partial => "categories/modal_edit", :locals => {:category => category} %>
 <% end %>
 <p><%=@category.dishes.count%></p>
 <% @category.dishes.each do |dish| %>
-	<%=render :partial => "modal_editdish", :locals => {:dish => dish} %>
+	<%=render :partial => "dishes/modal_edit", :locals => {:dish => dish} %>
 <% end %>
-<%=render :partial => "modal_adddish", :locals => {:category => @category} %>
+<%=render :partial => "dishes/modal_add", :locals => {:category => @category} %>

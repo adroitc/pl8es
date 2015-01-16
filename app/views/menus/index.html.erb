@@ -164,7 +164,7 @@
 		});
 	});
 </script>
-<%=render :partial => "modal_design", :locals => {:category => Category.first} %>
+<%=render :partial => "designs/modal_design", :locals => {:category => Category.first} %>
 <%=render :partial => "modal_addmenu" %>
 <% @menus.each do |menu| %>
 	<%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>
