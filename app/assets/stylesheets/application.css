@@ -10,26 +10,19 @@
  *
  *= require_self
  *= require jquery-ui
- * jquery-ui-1.10.3.custom.min
- * require "neon.css"
- *= require "font-icons/entypo/css/entypo"
- *= require "font-icons/font-awesome/css/font-awesome.min"
- *= require "bootstrap"
- *= require "neon-core"
- *= require "neon-theme"
- *= require "neon-forms"
- *= require "datatables.responsive.css"
- += require "skins/white.css"
-
- * require "select2/select2-bootstrap"
- *= require "select2/select2"
-
- *= require "icheck.square.blue"
-
- *= require "jquery.Jcrop.min"
-
- *= require "daterangepicker/daterangepicker-bs3"
-
- *= require "custom"
+ 
+ *= require entypo
+ *= require font-awesome
+ *= require bootstrap
+ *= require neon-core
+ *= require neon-forms
+ *= require neon-theme
+ *= require datatables.responsive
+ *= require select2
+ *= require icheck.square.blue
+ *= require jquery.Jcrop.min
+ *= require daterangepicker-bs3
+ *= require custom
+ *= require skins/white
  
  */
