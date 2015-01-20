@@ -12,7 +12,16 @@ class CreateNavigations < ActiveRecord::Migration
       
       t.timestamps
     end
-    Navigation.create_translation_table! :title => :string
+    
+    create_table :navigation_translations do |t|
+      t.references :navigation, null: false
+      t.string :locale, null: false
+      t.timestamps
+      t.string :title
+    end
+    
+    add_index :navigation_translations, :locale
+    add_index :navigation_translations, :navigation_id
   end
   
   def down
