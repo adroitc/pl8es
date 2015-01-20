@@ -22,7 +22,7 @@
 	</div>
 	<div class="login-form">
 		<div class="login-content">
-      <%= form_tag(session_login_path}, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
+      <%= form_tag(session_login_path, {:role => "form", :id => "form_login", :class => "pl8es_c_ajaxform validate"}) do %>
 				<input type="hidden" name="product_referer" id="form-product_referer" value="<%=params[:product_referer] %>" />
 			  <div class="form-invalid form-login-error">
 			  	<h3><%=t("login.invalid_title") %></h3>
