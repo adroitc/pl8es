@@ -10,24 +10,11 @@ class MenusController < ApplicationController
 	
 	def create
 		if !params.values_at(:title, :default_language).include?(nil) && Language.exists?(params[:default_language].to_i)
-			languages = Array.new
-			if params[:languages]
-				params[:languages].each do |language|
-					if Language.exists?(language[0].to_i)
-						languages.push(Language.find(language[0].to_i))
-					end
-				end
-			end
-			if !languages.include?(Language.find(params[:default_language].to_i))
-				languages.push(Language.find(params[:default_language].to_i))
-			end
 			
 			params[:from_time] = "12:00" if !params[:from_time]
 			params[:to_time] = "17:00" if !params[:to_time]
 			
 			new_menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({
-				:default_language => Language.find(params[:default_language].to_i),
-				:languages => languages,
 				:restaurant => @user.restaurant
 			}))
 			if params[:default] == "true" || @user.restaurant.menus.count == 0

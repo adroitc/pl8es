@@ -146,23 +146,4 @@ class Restaurant < ActiveRecord::Base
     :height => 1536
   }
   
-  def menu_languages
-    menu_languages = []
-    menus.each do |menu|
-      menu.languages.each do |menu_language|
-        if menu_languages.select{|language| language[:locale] == menu_language.locale}.count == 0
-          menu_languages.push(menu_language)
-        end
-      end
-    end
-    if !menu_languages.include?(default_language) && default_language != nil
-      menu_languages.push(default_language)
-    end
-    menu_languages.sort_by{|l| l.id}
-  end
-  
-  def menu_default_languages_include(id)
-    (Menu.all.map{|m| m.default_language}.uniq{|l| l.id}.find_all{|l| l.id = id}.count > 0) || (Menu.all.map{|m| m.default_language}.uniq{|l| x.id}.find_all{|l| l.id = id}.count == 0 && menu_languages.count == 1 && menu_languages.find_all{|l| l.id = id}.count == 1)
-  end
-  
 end

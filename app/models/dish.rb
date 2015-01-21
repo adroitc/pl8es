@@ -69,7 +69,7 @@ class Dish < ActiveRecord::Base
     all_translated_attributes_hash = {}
     
     current_locale = I18n.locale
-    category.menu.languages.each do |language|
+    category.menu.restaurant.languages.each do |language|
       I18n.locale = language.locale
       
       all_translated_attributes_hash[language.locale] = translated_attributes
@@ -81,7 +81,7 @@ class Dish < ActiveRecord::Base
   
   def dishingredients
     ingredients_translated_attributes_hash = {}
-    category.menu.languages.each do |language|
+    category.menu.restaurant.languages.each do |language|
       I18n.locale = language.locale
       
       dishingredients_text = ""

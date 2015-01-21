@@ -1,4 +1,4 @@
-<%= neon_modal :id => "addbeverage", :width => "678px", :title => t("menumalist.beverage_modal_add_title"), :languages => @user.restaurant.menu_languages, :default_language => nil do |m| %>
+<%= neon_modal :id => "addbeverage", :width => "678px", :title => t("menumalist.beverage_modal_add_title"), :languages => @user.restaurant.languages, :default_language => nil do |m| %>
 <%= form_tag(beverage_add_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addbeverage"}) do %>
 <input name="beverage_navigation_id" type="hidden" id="form-beverage_navigation_id" value="<%=beverage_navigation.id %>">
 <%=neon_modal_body do |b| %>
@@ -6,17 +6,17 @@
 	<div class="col-sm-12 tab-content">
     <%
     current_locale = I18n.locale
-    @user.restaurant.menu_languages.each do |language|
+    @user.restaurant.languages.each do |language|
       I18n.locale = language.locale
     %>
-    <span class="tab-pane <%="active" if @user.restaurant.menu_languages.first == language %> form-group" id="modal-addbeveragenavigation-lang-<%=language.locale %>">
+    <span class="tab-pane <%="active" if @user.restaurant.languages.first == language %> form-group" id="modal-addbeveragenavigation-lang-<%=language.locale %>">
       <div class="col-md-12 form-group" style="padding:0px;">
-        <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.menu_default_languages_include(language.id) %></label>
-		    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_title_placeholder") %><% I18n.locale = language.locale %>" data-validate="<%="required," if @user.restaurant.menu_default_languages_include(language.id) %>maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
+        <label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.languages.include?(language) %></label>
+		    <input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_title_placeholder") %><% I18n.locale = language.locale %>" data-validate="<%="required," if @user.restaurant.languages.include?(language) %>maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
       </div>
       <div class="col-md-6 form-group" style="padding-left:0px;">
         <label for="form-price" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_price") %><% I18n.locale = language.locale %></strong></label>
-        <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_price_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="<%="required," if @user.restaurant.menu_default_languages_include(language.id) %>maxlength[7],beverageamount" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-price="<%=t("validation.price") %>">
+        <input name="price" type="text" class="form-control" id="form-price" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.beverage_price_placeholder") %><% I18n.locale = language.locale %>" value="" data-validate="<%="required," if @user.restaurant.languages.include?(language) %>maxlength[7],beverageamount" data-message-required="<%=t("validation.required") %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-price="<%=t("validation.price") %>">
       </div>
       <div class="col-md-6 form-group" style="padding-right:0px;">
         <label for="form-amount" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.beverage_amount_in_l") %><% I18n.locale = language.locale %></strong></label>

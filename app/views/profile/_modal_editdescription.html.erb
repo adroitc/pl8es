@@ -1,4 +1,4 @@
-<%= neon_modal :id => "editdescription", :width => "678px", :title => t("profile.restaurant_description_modal_title"), :languages => @user.restaurant.menu_languages, :default_language => @user.restaurant.default_language do |m| %>
+<%= neon_modal :id => "editdescription", :width => "678px", :title => t("profile.restaurant_description_modal_title"), :languages => @user.restaurant.languages, :default_language => @user.restaurant.default_language do |m| %>
 <%= form_tag(profile_editdescription_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
@@ -17,7 +17,7 @@
     <div class="col-sm-12 form-group tab-content" style="padding:0px;">
       <%
       current_locale = I18n.locale
-      @user.restaurant.menu_languages.each do |language|
+      @user.restaurant.languages.each do |language|
         I18n.locale = language.locale
       %>
       <span class="tab-pane <%="active" if language == @user.restaurant.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">

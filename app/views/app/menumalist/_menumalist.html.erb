@@ -10,11 +10,11 @@ raw(Jsonify::Builder.plain do |j|
     j.to_time                    menu.to_time
     
     j.default_language do
-      j.locale                     menu.default_language.locale
-      j.title                      menu.default_language.title
+      j.locale                     menu.restaurant.default_language.locale
+      j.title                      menu.restaurant.default_language.title
     end
     
-    j.languages(menu.languages) do |language|
+    j.languages(menu.restaurant.languages) do |language|
       j.locale                     language.locale
       j.title                      language.title
     end

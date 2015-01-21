@@ -1,4 +1,4 @@
-<%= neon_modal :id => "edit_category-#{category.id}", :width => "678px", :title => t("menumalist.category_modal_edit_title"), :languages => category.menu.languages, :default_language => category.menu.default_language do |m| %>
+<%= neon_modal :id => "edit_category-#{category.id}", :width => "678px", :title => t("menumalist.category_modal_edit_title"), :languages => category.menu.restaurant.languages, :default_language => category.menu.restaurant.default_language do |m| %>
 	<%= form_tag(category_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_edit_category"}) do %>
 		<input name="category_id" type="hidden" id="form-category_id" value="<%=category.id %>">
 		<%=neon_modal_body do |b| %>
@@ -14,12 +14,12 @@
 				<div class="col-sm-6 tab-content">
 					<%
 					current_locale = I18n.locale
-					category.menu.languages.each do |language|
+					category.menu.restaurant.languages.each do |language|
 						I18n.locale = language.locale
 					%>
-					<span class="tab-pane <%="active" if category.menu.default_language == language %> form-group" id="modal-edit_category-<%=category.id %>-lang-<%=language.locale %>">
-						<label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.category_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if category.menu.default_language == language %></label>
-						<input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.category_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=category.title %>" data-validate="<%="required" if category.menu.default_language == language %>,minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
+					<span class="tab-pane <%="active" if category.menu.restaurant.default_language == language %> form-group" id="modal-edit_category-<%=category.id %>-lang-<%=language.locale %>">
+						<label for="form-title[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("menumalist.category_title") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if category.menu.restaurant.default_language == language %></label>
+						<input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("menumalist.category_title_placeholder") %><% I18n.locale = language.locale %>" value="<%=category.title %>" data-validate="<%="required" if category.menu.restaurant.default_language == language %>,minlength[4],maxlength[40]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"40"}) %>">
 					</span>
 					<%
 					end

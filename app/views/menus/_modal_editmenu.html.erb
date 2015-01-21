@@ -68,7 +68,7 @@
 					 <br />
 					<select name="default_language" id="form-default_language" class="select2" data-allow-clear="false" data-placeholder="<%=t("menumalist.menu_default_language_select") %>">
 						 <% Language.all.each do |language| %>
-						<option value="<%=language.id %>" <%="selected" if menu.default_language == language %>><%=language.title.capitalize %></option>
+						<option value="<%=language.id %>" <%="selected" if menu.restaurant.default_language == language %>><%=language.title.capitalize %></option>
 						 <% end %>
 					</select>
 				</div>
@@ -79,11 +79,11 @@
 				 </div>
 				<div class="">
 					<%
-					 languages = menu.languages
+					 languages = menu.restaurant.languages
 					 Language.all.each do |language|
 					%>
 						<div class="col-sm-3">
-							<input class="icheck-2-checkbox" type="checkbox" id="form-language-<%=language.id %>" name="languages[<%=language.id %>]" <%="disabled" if menu.default_language == language %> <%="checked" if languages.exists?(language.id) %>>
+							<input class="icheck-2-checkbox" type="checkbox" id="form-language-<%=language.id %>" name="languages[<%=language.id %>]" <%="disabled" if menu.restaurant.default_language == language %> <%="checked" if languages.exists?(language.id) %>>
 							<label for="form-language-<%=language.id %>"><%=language.title.capitalize %></label>
 						</div>
 					<% end %>
