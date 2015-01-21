@@ -17,6 +17,7 @@ gem "uglifier", ">= 1.3.0"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 
+gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "master"
 gem "jsonify"
 gem "yajl-ruby", require: "yajl"
 gem "coffee-rails", "~> 4.0.0"

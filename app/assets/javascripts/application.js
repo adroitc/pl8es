@@ -10,6 +10,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_plugins
+//= require rails.validations
 //= require bootstrap
 //= require neon
 //
