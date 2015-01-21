@@ -8,25 +8,27 @@ class MenusController < ApplicationController
 		@restaurant = @user.restaurant
 	end
 	
+	def new
+		@menu = @user.restaurant.menus.new
+		@languages = @user.restaurant.languages.order(:title)
+	end
+	
 	def create
-		if !params.values_at(:title, :default_language).include?(nil) && Language.exists?(params[:default_language].to_i)
-			
-			params[:from_time] = "12:00" if !params[:from_time]
-			params[:to_time] = "17:00" if !params[:to_time]
-			
-			new_menu = Menu.create(params.permit(:title, :from_time, :to_time).merge({
-				:restaurant => @user.restaurant
-			}))
-			if params[:default] == "true" || @user.restaurant.menus.count == 0
-				@user.restaurant.update_attributes({
-					:defaultMenu => new_menu
-				})
-			end
-			
-			render :json => {:status => "success", :p => params}
-			return
-		end
-		render :json => {:status => "invalid"}
+		# set the defaults
+		params[:menu][:from_time] = "12:00" unless params[:menu][:from_time].present?
+		params[:menu][:to_time] = "17:00" unless params[:menu][:to_time].present?
+		
+		restaurant = @user.restaurant
+		
+		menu = Menu.new(menu_params)
+		
+		# associations to the restaurant
+		restaurant.menus << menu
+		restaurant.defaultMenu = menu if params[:default] == "1" || @user.restaurant.menus.count == 0
+		
+		restaurant.save
+		
+		redirect_to menus_path
 	end
 	
 	def show
@@ -102,6 +104,10 @@ class MenusController < ApplicationController
 	end
 	
 	private
+		
+		def menu_params
+			params.require(:menu).permit(:title, :from_time, :to_time)
+		end
 		
 		def authenticate_user
 			redirect_to login_index_path unless @user

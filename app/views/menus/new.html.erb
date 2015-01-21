@@ -1,0 +1,7 @@
+<%= form_for @menu do |f| %>
+	<%= f.text_field :title %>
+	<%= check_box_tag :default %>
+	<%= f.time_field :from_time %>
+	<%= f.time_field :to_time %>	
+	<%= f.submit %>
+<% end %>

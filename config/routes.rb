@@ -107,7 +107,7 @@ Pl8es::Application.routes.draw do
 	
 	# menus
 	scope :menumalist do
-		resources :menus, :only => [:create, :update, :index, :show, :destroy], :path => "/"
+		resources :menus, :path => "/"
 		
 		post "/duplicate" => "menus#duplicate"
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients
