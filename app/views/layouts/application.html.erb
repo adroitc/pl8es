@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%=yield(:head_title).length > 0 ? yield(:head_title) : "pl8" %></title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body class="<%= yield (:body_class) %> gray skin-white">
-
-<script type="text/javascript">
-window._token = "<%=form_authenticity_token %>";
-var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
-</script>
-
-<% if @user && session[:admin_id] && session[:admin_id] != @user.id %>
-<a href="<%= user_switch(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
-<% end %>
-
-<%= yield %>
-
-</body>
+	<head>
+		<title><%=yield(:head_title).length > 0 ? yield(:head_title) : "pl8" %></title>
+		<%= stylesheet_link_tag		"application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body class="<%= yield (:body_class) %> gray skin-white">		
+		<script type="text/javascript">
+		window._token = "<%=form_authenticity_token %>";
+		var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
+		</script>
+		
+		<% if @user && session[:admin_id] && session[:admin_id] != @user.id %>
+		<a href="<%= user_switch(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
+		<% end %>
+		
+		<%= yield %>
+		<%=render :partial => "layouts/modal" %>
+	</body>
 </html>

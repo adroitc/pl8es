@@ -8,7 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
+ 
+ ––––––––––––
+   external
+ ––––––––––––
+ 
  *= require jquery-ui
  
  *= require entypo
@@ -24,5 +28,13 @@
  *= require daterangepicker-bs3
  *= require custom
  *= require skins/white
+
+
+ ––––––––––––
+   internal
+ ––––––––––––
+ 
+ *= require_tree .
+ *= require_self
  
  */
