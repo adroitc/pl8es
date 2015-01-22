@@ -13,6 +13,14 @@ class Menu < ActiveRecord::Base
 	validates :to_time, :allow_blank => true, :length => 4..7
 	
 	
+	def default?
+		if self.id.present?
+			self == self.restaurant.defaultMenu ? true : false
+		else
+			self.restaurant.menus.count == 0 ? true : false
+		end
+	end
+	
 	def to_param
 		"#{id} #{title}".parameterize
 	end
