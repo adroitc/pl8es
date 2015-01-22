@@ -25,6 +25,13 @@
 //= require resizeable
 //= require select2
 //= require toastr
+// 
+// ––––––––––––
+//   internal
+// ––––––––––––
+// 
+//= require_tree .  
+
 
 $(document).ready(function()
 {

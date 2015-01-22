@@ -249,6 +249,11 @@ de:
     dailycious_plan_modal_cancel: "Abbrechen"
     dailycious_plan_modal_submit: "Kaufen"
   
+  forms:
+    cancel: "abbrechen"
+    submit_new: "Hinzufügen"
+    submit_edit: "Aktualisieren"
+  
   menumalist:
     menumalist_title: "Menumalist - alle Speisekarten"
     download_code_title: "Das ist Ihr Download-Code. Geben Sie diesen Code in der Menumalist iPad App ein, um Ihre Speisekarte zu sehen."
@@ -262,7 +267,6 @@ de:
     next_reset: "Nächste Zurücksetzung möglich am:"
     design: "Design"
     design_change: "Ändern"
-    menu: "Speisekarte"
     default_menu: "Standardspeisekarte"
     categories: "Kategorien"
     dishes: "Speisen"
@@ -288,25 +292,30 @@ de:
     design_font: "Schriftart"
     design_splashscreen_image: "Startbild"
     
-    menu_modal_add_title: "Speisekarte hinzufügen"
-    menu_modal_edit_title: "Speisekarte ändern"
-    menu_modal_add_cancel: "Abbrechen"
-    menu_modal_add_submit: "Speisekarte hinzufügen"
-    menu_modal_edit_cancel: "Abbrechen"
-    menu_modal_edit_submit: "Speisekarte ändern"
-    menu_name: "Name der Speisekarte"
-    menu_name_placeholder: "z.B. Abendkarte"
+    menu:
+      model_name: "Speisekarte"
+      
+      # –– form actions, different in each language (i.e. "edit menu", "Speisekarte hinzufügen")
+      new: "Speisekarte hinzufügen"
+      edit: "Speisekarte ändern"
+      
+      # –– fields, be descriptive
+      title: "Name der Speisekarte"
+      title_example: "z.B. Abendkarte"
+      
+      # –– default stuff
+      default: "Standardspeisekarte"
+      make_default: "Diese Speisekarte als Standardspeisekarte festlegen."
+      
+      # –– custom stuff
+      display_from: "Anzeigen von"
+      to: "bis"
+      
+    
     menu_default: "Diese Speisekarte als Standardspeisekarte festlegen."
     menu_default_default: "Standardspeisekarte"
     menu_default_make_default: "Standardspeisekarte"
     menu_default_default_undo: "rückgängig"
-    menu_from: "Anzeigen von"
-    menu_from_placeholder: "17:00"
-    menu_to: "bis"
-    menu_to_placeholder: "23:00"
-    menu_default_language: "Standardsprache"
-    menu_default_language_select: "Standardsprache festlegen"
-    menu_languages: "Vorhandene Sprachen auswählen"
     
     beverage_page_modal_add_title: "Getränkeseite hinzufügen"
     beverage_page_modal_edit_title: "Getränkeseite bearbeiten"

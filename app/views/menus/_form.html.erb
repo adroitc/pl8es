@@ -1,7 +1,62 @@
 <%= form_for @menu, validate: true do |f| %>
-	<%= f.text_field :title %>
-	<%= check_box_tag :default %>
-	<%= f.text_field :from_time, :class => "timepicker", :data => { "default-time" => false, "show-meridian" => false} %>
-	<%= f.text_field :to_time, :class => "timepicker", :data => { "default-time" => false, "show-meridian" => false} %>
-	<%= f.submit %>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<%= label_tag :title, :class => "control-label" do %>
+						<%=t("menumalist.menu.title") %>
+					<% end %>
+					<div class="form-group">
+						<%= f.text_field :title, :class => "form-control", :placeholder => t("menumalist.menu.title_example") %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<button class="btn <%= @menu.default? ? "btn-green" : "btn-default" %>">
+						<%= label_tag :default, t("menumalist.menu.default") %>
+					</button>
+					<%= check_box_tag :default, "true", @menu.default?, :style => "display:none" %>
+				</div>
+			</div>
+		</div>
+		<div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
+			<div class="">
+				<div class="col-md-6 input-group">
+					<%= label_tag :from_time, :class => "control-label" do %>
+						<%= t("menumalist.menu.display_from") %>
+					<% end %>
+					<div class="input-group">
+						<%= f.text_field :from_time, :class => "timepicker form-control", :data => { "default-time" => false, "show-meridian" => false} %>
+						<div class="input-group-addon">
+							<a href="#"><i class="entypo-clock"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<%= label_tag :to_time, :class => "control-label" do %>
+						<%= t("menumalist.menu.to") %>
+					<% end %>
+					<div class="input-group">
+						<%= f.text_field :to_time, :class => "timepicker form-control", :data => { "default-time" => false, "show-meridian" => false} %>
+						<div class="input-group-addon">
+							<a href="#"><i class="entypo-clock"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("forms.cancel") %></button>
+		<%= f.button :type => "submit", :class => "btn btn-info icon-left" do %>
+			<% if action_name == "new" %>
+				<i class="entypo-plus"></i>
+			<% end %>
+			<%= t("menumalist.menu.#{action_name}") %>
+		<% end %>
+	</div>
 <% end %>

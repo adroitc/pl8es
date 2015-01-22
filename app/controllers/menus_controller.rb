@@ -25,7 +25,7 @@ class MenusController < ApplicationController
 		
 		# –– associations to the restaurant
 		restaurant.menus << menu
-		restaurant.defaultMenu = menu if params[:default] == "1" || @user.restaurant.menus.count == 0
+		restaurant.defaultMenu = menu if params[:default] == "true" || @user.restaurant.menus.count == 0
 		restaurant.save
 		
 		redirect_to menus_path
@@ -43,7 +43,7 @@ class MenusController < ApplicationController
 		menu = @user.restaurant.menus.find(params[:id])
 		menu.update(menu_params)
 		
-		if params[:default] == "1"
+		if params[:default] == "true"
 			restaurant = menu.restaurant
 			restaurant.defaultMenu = menu
 			restaurant.save

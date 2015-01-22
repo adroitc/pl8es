@@ -249,6 +249,11 @@ en:
     dailycious_plan_modal_cancel: "Cancel"
     dailycious_plan_modal_submit: "Buy"
   
+  forms:
+    cancel: "cancel"
+    submit_new: "Add"
+    submit_edit: "Update"
+  
   menumalist:
     menumalist_title: "Menumalist - all menus"
     download_code_title: "This is your download-code. Enter it on the Menumalist iPad app to view your menus."
@@ -262,7 +267,6 @@ en:
     next_reset: "Next reset available at:"
     design: "Design"
     design_change: "Change"
-    menu: "Menu"
     default_menu: "Default menu"
     categories: "Categories"
     dishes: "Dishes"
@@ -288,25 +292,29 @@ en:
     design_font: "Font"
     design_splashscreen_image: "Splashscreen image"
     
-    menu_modal_add_title: "Add menu"
-    menu_modal_edit_title: "Update menu"
-    menu_modal_add_cancel: "Cancel"
-    menu_modal_add_submit: "Add menu"
-    menu_modal_edit_cancel: "Cancel"
-    menu_modal_edit_submit: "Update menu"
-    menu_name: "Menu name"
-    menu_name_placeholder: "Lunch Menu"
+    menu:
+      model_name: "menu"
+      
+      # –– form actions, different in each language (i.e. "edit menu", "Speisekarte hinzufügen")
+      new: "Add menu"
+      edit: "Update menu"
+      
+      # –– fields, be descriptive
+      title: "Menu name"
+      title_example: "e.g. Lunch Menu"
+      
+      # –– default stuff
+      default: "Default menu"
+      make_default: "Make this menu the default menu."
+      
+      # –– custom stuff
+      display_from: "Display from"
+      to: "to"
+    
     menu_default: "Make this menu the default menu."
     menu_default_default: "Default"
     menu_default_make_default: "Default"
     menu_default_default_undo: "undo"
-    menu_from: "Display from"
-    menu_from_placeholder: "11:00"
-    menu_to: "to"
-    menu_to_placeholder: "16:00"
-    menu_default_language: "Default language"
-    menu_default_language_select: "Select default language"
-    menu_languages: "Select supported languages"
     
     beverage_page_modal_add_title: "Add drinks page"
     beverage_page_modal_edit_title: "Edit drinks page"

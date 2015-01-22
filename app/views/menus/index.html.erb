@@ -79,7 +79,7 @@
 				<table class="table table-striped responsive">
 					<thead>
 						<tr style="font-size: 16px;">
-							<th width="40%"><%=t("menumalist.menu") %></th>
+							<th width="40%"><%=t("menumalist.menu.model_name").capitalize %></th>
 							<th width="120px;" style="width:120px;"></th>
 							<th width=""><%=t("menumalist.categories") %></th>
 							<th width=""><%=t("menumalist.dishes") %></th>
@@ -116,7 +116,7 @@
 				</table>
 				<%= link_to new_menu_path, remote: true do %>
 					<button type="button" class="btn btn-info btn-icon icon-left">
-						<%= t("menumalist.add_new_menu") %>
+						<%= t("menumalist.menu.new") %>
 						<i class="entypo-plus"></i>
 					</button>
 				<% end %>
