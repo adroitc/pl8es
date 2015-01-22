@@ -114,12 +114,12 @@
 						<% end %>
 					</tbody>
 				</table>
-				<a href="javascript:;" onclick="jQuery('#modal-addmenu').modal('show');">
+				<%= link_to(new_menu_path, :remote => true) do %>
 					<button type="button" class="btn btn-info btn-icon icon-left">
-						<%=t("menumalist.add_new_menu") %>
+						<%= t("menumalist.add_new_menu") %>
 						<i class="entypo-plus"></i>
 					</button>
-				</a>
+				<% end %>
 			</div>
 		</div>
 		<br />
@@ -165,10 +165,6 @@
 	});
 </script>
 <%=render :partial => "designs/modal_design", :locals => {:category => Category.first} %>
-<%=render :partial => "modal_addmenu" %>
-<% @menus.each do |menu| %>
-	<%=render :partial => "modal_editmenu", :locals => {:menu => menu} %>
-<% end %>
 <%=render :partial => "beverage/modal_addbeveragepage" %>
 <% @restaurant.beveragePages.each do |beverage_page| %>
 	<%=render :partial => "beverage/modal_editbeveragepage", :locals => {:beverage_page => beverage_page} %>

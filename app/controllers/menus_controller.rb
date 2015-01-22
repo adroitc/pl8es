@@ -11,10 +11,14 @@ class MenusController < ApplicationController
 	def new
 		@menu = @user.restaurant.menus.new
 		@languages = @user.restaurant.languages.order(:title)
+		
+		respond_to do |format|
+			format.js
+		end
 	end
 	
 	def create
-		# set the defaults
+		# –– set the defaults
 		params[:menu][:from_time] = "12:00" unless params[:menu][:from_time].present?
 		params[:menu][:to_time] = "17:00" unless params[:menu][:to_time].present?
 		
@@ -22,7 +26,7 @@ class MenusController < ApplicationController
 		
 		menu = Menu.new(menu_params)
 		
-		# associations to the restaurant
+		# –– associations to the restaurant
 		restaurant.menus << menu
 		restaurant.defaultMenu = menu if params[:default] == "1" || @user.restaurant.menus.count == 0
 		
