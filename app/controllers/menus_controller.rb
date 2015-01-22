@@ -79,20 +79,6 @@ class MenusController < ApplicationController
 		
 	end
 	
-	def duplicate
-		if !params.values_at(:menu_id).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
-			menu = @user.restaurant.menus.find(params[:menu_id])
-			
-			dup_menu = menu.dup
-			dup_menu.title = menu.title+" 2"
-			dup_menu.save
-			
-			render :json => {:status => "success"}
-			return
-		end
-		render :json => {:status => "invalid"}
-	end
-	
 	def reset_clients
 		if params[:reset] == "true" && (@user.isAdmin || !@user.restaurant.client_reset_date || (@user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now))
 			@user.restaurant.clients.actives.each do |client|
