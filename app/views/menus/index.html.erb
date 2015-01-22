@@ -89,27 +89,32 @@
 						<% @menus.each do |menu| %>
 							<tr style="font-size: 14px;">
 								<td>
-									<a href="<%= menu_path(menu) %>">
+									<%= link_to menu_path(menu) do %>
 										<%=menu.title %>
 										<span class="badge badge-primary"><%=@restaurant.defaultMenu == menu ? t("menumalist.default_menu") : "#{menu.from_time} - #{menu.to_time}" %></span>
-									</a>
+									<% end %>
 								</td>
 								<td>
 									<span class="pl8es_c_table-toolbar">
-										<a href="javascript:;" onclick="jQuery('#modal-editmenu-<%=menu.id %>').modal('show');">
+										<%= link_to edit_menu_path(menu), remote: true do %>
 											<button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
 												<i class="entypo-cog"></i>
 											</button>
-										</a>
+										<% end %>
 									<span>
 								</td>
-								<td><a href="<%= menu_path(menu) %>"><%=menu.categories.count %> <i class="entypo-folder" style="color:#ccc;"></i></a></td>
+								<td>
+									<%= link_to menu_path(menu) do %>
+										<%= menu.categories.count %>
+										<i class="entypo-folder" style="color:#ccc;"></i>
+									<% end %>
+								</td>
 								<td><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></td>
 							</tr>
 						<% end %>
 					</tbody>
 				</table>
-				<%= link_to(new_menu_path, :remote => true) do %>
+				<%= link_to new_menu_path, remote: true do %>
 					<button type="button" class="btn btn-info btn-icon icon-left">
 						<%= t("menumalist.add_new_menu") %>
 						<i class="entypo-plus"></i>

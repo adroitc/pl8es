@@ -1,9 +1,10 @@
 class MenusController < ApplicationController
 	
 	before_filter :authenticate_user
+	respond_to :html, :js
 	
 	def index
-		@menus = @user.restaurant.menus.all
+		@menus = @user.restaurant.menus.order(:id)
 		
 		@restaurant = @user.restaurant
 	end
@@ -11,10 +12,6 @@ class MenusController < ApplicationController
 	def new
 		@menu = @user.restaurant.menus.new
 		@languages = @user.restaurant.languages.order(:title)
-		
-		respond_to do |format|
-			format.js
-		end
 	end
 	
 	def create
@@ -29,7 +26,6 @@ class MenusController < ApplicationController
 		# –– associations to the restaurant
 		restaurant.menus << menu
 		restaurant.defaultMenu = menu if params[:default] == "1" || @user.restaurant.menus.count == 0
-		
 		restaurant.save
 		
 		redirect_to menus_path
@@ -39,40 +35,21 @@ class MenusController < ApplicationController
 		@menu = @user.restaurant.menus.find(params[:id])
 	end
 	
+	def edit
+		@menu = @user.restaurant.menus.find(params[:id])
+	end
+	
 	def update
-		if !params.values_at(:id, :title, :default_language).include?(nil) && @user.restaurant.menus.exists?(params[:id]) && Language.exists?(params[:default_language].to_i)
-			menu = @user.restaurant.menus.find(params[:id])
-			
-			if params[:delete] == "true"
-				menu.destroy
-			else
-				languages = Array.new
-				if params[:languages]
-					params[:languages].each do |language|
-						if Language.exists?(language[0].to_i)
-							languages.push(Language.find(language[0].to_i))
-						end
-					end
-				end
-				if !languages.include?(Language.find(params[:default_language].to_i))
-					languages.push(Language.find(params[:default_language].to_i))
-				end
-				
-				menu.update_attributes(params.permit(:title, :from_time, :to_time).merge({
-					:default_language => Language.find(params[:default_language].to_i),
-					:languages => languages,
-				}))
-				if params[:default] == "true"
-					@user.restaurant.update_attributes({
-						:defaultMenu => menu
-					})
-				end
-			end
-			
-			render :json => {:status => "success"}
-			return
+		menu = @user.restaurant.menus.find(params[:id])
+		menu.update(menu_params)
+		
+		if params[:default] == "1"
+			restaurant = menu.restaurant
+			restaurant.defaultMenu = menu
+			restaurant.save
 		end
-		render :json => {:status => "invalid"}
+		
+		redirect_to menus_path
 	end
 	
 	def destroy
