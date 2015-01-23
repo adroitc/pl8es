@@ -38,13 +38,11 @@ group :doc do
   gem "sdoc", require: false
 end
 
-group :assets do
-	gem "sass-rails", "~> 4.0.0"
-	
-  gem "therubyracer", "0.11.3"
-  gem "less-rails"
-  gem "twitter-bootstrap-rails"
-end
+gem "sass-rails", "~> 4.0.0"
+
+gem "therubyracer", "0.11.3"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
 
 group :development do
   gem "better_errors"
