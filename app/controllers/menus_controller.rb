@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
 	
 	before_filter :authenticate_user
+	before_filter :authenticate_ownership_and_get_menu, :only => [:show, :edit, :update, :destroy]
 	respond_to :html, :js
 	
 	def index
@@ -32,20 +33,17 @@ class MenusController < ApplicationController
 	end
 	
 	def show
-		@menu = @user.restaurant.menus.find(params[:id])
 	end
 	
 	def edit
-		@menu = @user.restaurant.menus.find(params[:id])
 	end
 	
 	def update
-		menu = @user.restaurant.menus.find(params[:id])
-		menu.update(menu_params)
+		@menu.update(menu_params)
 		
 		if params[:default] == "true"
-			restaurant = menu.restaurant
-			restaurant.defaultMenu = menu
+			restaurant = @menu.restaurant
+			restaurant.defaultMenu = @menu
 			restaurant.save
 		end
 		
@@ -78,6 +76,14 @@ class MenusController < ApplicationController
 		
 		def authenticate_user
 			redirect_to login_index_path unless @user
+		end
+		
+		def authenticate_ownership_and_get_menu
+			if @user.restaurant.menus.exists?(params[:id])
+				@menu = @user.restaurant.menus.find(params[:id])
+			else
+				redirect_to menus_path
+			end
 		end
 	
 end
