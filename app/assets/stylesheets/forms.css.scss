@@ -1,0 +1,17 @@
+#default-modal {
+	.modal-delete {
+		float: left;
+		
+		.delete {
+			opacity: 0.2;
+			
+			&:hover {
+				opacity: 0.4;
+			}
+		}
+		
+		.cancel, .confirm {
+			display: none;
+		}
+	}
+}
