@@ -51,7 +51,9 @@ class MenusController < ApplicationController
 	end
 	
 	def destroy
+		@menu.destroy
 		
+		redirect_to menus_path
 	end
 	
 	def reset_clients

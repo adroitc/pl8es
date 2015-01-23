@@ -20,14 +20,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<button class="btn <%= @menu.default? ? "btn-green" : "btn-default" %>">
+					<div class="btn <%= @menu.default? ? "btn-green" : "btn-default" %>">
 						<%= label_tag :default, t("menumalist.menu.default") %>
-					</button>
+					</div>
 					<%= check_box_tag :default, "true", @menu.default?, :style => "display:none" %>
 				</div>
 			</div>
 		</div>
-		<div class="row pl8es_c_makedefaultmenu" style="margin-bottom:14px;">
+		<div class="row" style="margin-bottom:14px;">
 			<div class="">
 				<div class="col-md-6 input-group">
 					<%= label_tag :from_time, :class => "control-label" do %>
@@ -56,6 +56,9 @@
 	</div>
 	
 	<div class="modal-footer">
+		<% # only display the destroy button on edit %>
+		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_path(@menu)} if action_name == "edit" %>
+		
 		<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("forms.cancel") %></button>
 		<%= f.button :type => "submit", :class => "btn btn-info icon-left" do %>
 			<% if action_name == "new" %>
