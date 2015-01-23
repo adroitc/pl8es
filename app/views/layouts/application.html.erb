@@ -14,10 +14,10 @@
 		</script>
 		
 		<% if @user && session[:admin_id] && session[:admin_id] != @user.id %>
-		<a href="<%= user_switch(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
+			<a href="<%= user_switch(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
 		<% end %>
 		
 		<%= yield %>
-		<%=render :file => "modals/index" %>
+		<%= render :file => "modals/index" %>
 	</body>
 </html>
