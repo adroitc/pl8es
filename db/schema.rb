@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123133038) do
+ActiveRecord::Schema.define(version: 20150123150214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -385,7 +385,7 @@ ActiveRecord::Schema.define(version: 20150123133038) do
     t.integer  "menuColor_id"
     t.integer  "menuColorTemplate_id"
     t.integer  "supportedFont_id"
-    t.integer  "defaultMenu_id"
+    t.integer  "default_menu_id"
     t.string   "email"
     t.string   "preview_image_file_name"
     t.string   "preview_image_content_type"

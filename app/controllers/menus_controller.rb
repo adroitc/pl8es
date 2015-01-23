@@ -26,7 +26,7 @@ class MenusController < ApplicationController
 		
 		# –– associations to the restaurant
 		restaurant.menus << menu
-		restaurant.defaultMenu = menu if params[:default] == "true" || @user.restaurant.menus.count == 0
+		restaurant.default_menu = menu if params[:default] == "true" || @user.restaurant.menus.count == 0
 		restaurant.save
 		
 		redirect_to menus_path
@@ -40,7 +40,7 @@ class MenusController < ApplicationController
 	
 	def update
 		@menu.update(menu_params)
-		@menu.restaurant.update(:defaultMenu => @menu) if params[:default] == "true"
+		@menu.restaurant.update(:default_menu => @menu) if params[:default] == "true"
 		
 		redirect_to menus_path
 	end
@@ -52,8 +52,8 @@ class MenusController < ApplicationController
 			menus_count = restaurant.menus.count
 			
 			case
-				when menus_count == 1 then restaurant.update(:defaultMenu => nil)
-				when menus_count > 1 then restaurant.update(:defaultMenu => restaurant.menus.first)
+				when menus_count == 1 then restaurant.update(:default_menu => nil)
+				when menus_count > 1 then restaurant.update(:default_menu => restaurant.menus.first)
 			end
 		end
 		

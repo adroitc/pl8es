@@ -32,7 +32,7 @@ class Restaurant < ActiveRecord::Base
     end
   end
   
-  belongs_to :defaultMenu, :class_name => "Menu"
+  belongs_to :default_menu, :class_name => "Menu"
   
   # – menumalist
   has_many :menus

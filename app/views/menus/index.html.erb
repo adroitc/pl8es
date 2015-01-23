@@ -91,7 +91,7 @@
 								<td>
 									<%= link_to menu_path(menu) do %>
 										<%=menu.title %>
-										<span class="badge badge-primary"><%=@restaurant.defaultMenu == menu ? t("menumalist.default_menu") : "#{menu.from_time} - #{menu.to_time}" %></span>
+										<span class="badge badge-primary"><%= menu.default? ? t("menumalist.default_menu") : "#{menu.from_time} - #{menu.to_time}" %></span>
 									<% end %>
 								</td>
 								<td>

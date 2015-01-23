@@ -15,7 +15,7 @@ class Menu < ActiveRecord::Base
 	
 	def default?
 		if self.id.present?
-			self == self.restaurant.defaultMenu ? true : false
+			self == self.restaurant.default_menu ? true : false
 		else
 			false
 		end
