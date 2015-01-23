@@ -17,7 +17,7 @@ class Menu < ActiveRecord::Base
 		if self.id.present?
 			self == self.restaurant.defaultMenu ? true : false
 		else
-			self.restaurant.menus.count == 0 ? true : false
+			false
 		end
 	end
 	

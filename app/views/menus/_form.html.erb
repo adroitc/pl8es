@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<div class="btn <%= @menu.default? ? "btn-green" : "btn-default" %>">
+					<div class="btn <%= @menu.default? || @user.restaurant.menus.count == 0 ? "btn-green" : "btn-default" %>">
 						<%= label_tag :default, t("menumalist.menu.default") %>
 					</div>
 					<%= check_box_tag :default, "true", @menu.default?, :style => "display:none" %>
