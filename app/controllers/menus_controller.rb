@@ -51,6 +51,17 @@ class MenusController < ApplicationController
 	end
 	
 	def destroy
+		# reassign a default menu
+		if @menu.default?
+			restaurant = @menu.restaurant
+			menus_count = restaurant.menus.count
+			
+			case
+				when menus_count == 1 then restaurant.update(:defaultMenu => nil)
+				when menus_count > 1 then restaurant.update(:defaultMenu => restaurant.menus.first)
+			end
+		end
+		
 		@menu.destroy
 		
 		redirect_to menus_path
