@@ -1,3 +1,10 @@
+// trigger form validation after ajax calls
+$(document).ajaxSuccess(function(){
+	if($('#default-modal form[data-validate]').length){
+		$('#default-modal form[data-validate]').enableClientSideValidations();
+	}
+});
+
 $(document).ready(function() {
 	// –– changes button style when toggling a hidden checkbox
 	$("#default-modal").on("click", ".form-group input[type='checkbox']", function() {
