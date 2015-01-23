@@ -40,12 +40,7 @@ class MenusController < ApplicationController
 	
 	def update
 		@menu.update(menu_params)
-		
-		if params[:default] == "true"
-			restaurant = @menu.restaurant
-			restaurant.defaultMenu = @menu
-			restaurant.save
-		end
+		@menu.restaurant.update(:defaultMenu => @menu) if params[:default] == "true"
 		
 		redirect_to menus_path
 	end
