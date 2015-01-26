@@ -52,10 +52,10 @@
 			</span>
 			<% end %>
 			<% if @category.category == nil && @category.dishes.count == 0 %>
-			<%=render :partial => "modals/new_tile", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
+			<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
 			<% end %>
 			<% if @category.sub_categories.count == 0 %>
-			<%=render :partial => "modals/new_tile", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish")} %>
+			<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish")} %>
 			<% end %>
 		</div>
 		<%=render :partial => "layouts/footer" %>

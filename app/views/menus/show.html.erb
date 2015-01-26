@@ -33,7 +33,8 @@
 				<% end %>
 			</span>
 			<% end %>
-			<%=render :partial => "modals/new_tile", :locals => {:panel_size => 3, :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
+			
+			<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
 		</div>
 		<%=render :partial => "layouts/footer" %>
 	</div>

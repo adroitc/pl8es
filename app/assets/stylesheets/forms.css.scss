@@ -1,3 +1,15 @@
+body.modal-open {
+    overflow: visible;
+}
+
+.modal {
+	margin-bottom: 20px;
+	
+	.modal-title {
+		display: inline-block;
+	}
+}
+
 #default-modal {
 	.modal-delete {
 		float: left;
@@ -14,4 +26,9 @@
 			display: none;
 		}
 	}
+}
+
+// tile to add new elements
+.new_tile {
+	margin: 9px 0;
 }
