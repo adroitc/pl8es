@@ -107,7 +107,9 @@ Pl8es::Application.routes.draw do
 	
 	# menus
 	scope :menumalist do
-		resources :menus, :path => "/"
+		resources :menus, :path => "/" do
+			resources :categories
+		end
 		
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients
 		

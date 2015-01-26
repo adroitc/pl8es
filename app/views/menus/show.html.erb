@@ -34,7 +34,7 @@
 			</span>
 			<% end %>
 			
-			<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
+			<%=render :partial => "categories/new_category_tile",:locals => { :@menu => @menu, :title => t("menumalist.add_new_category")} %>
 		</div>
 		<%=render :partial => "layouts/footer" %>
 	</div>

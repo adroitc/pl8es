@@ -1,0 +1,21 @@
+<div class="new_tile col-sm-3">
+  <div class="panel panel-primary panel-add">
+  	<div class="panel-body">
+     	<article class="album">
+     		<header>
+	     		<%= link_to new_menu_category_path(@menu), remote: true do %>
+            <%= image_tag("1x1.png") %>
+					<% end %>
+        </header>
+        <div class="panel-heading" style='<%="margin-top:-10px" if defined? title %>'>
+          <div>+</div>
+        </div>
+        <% if defined? title %>
+	        <div class="panel-heading" style="margin-top:24px;">
+	          <p class="title"><%= title %></p>
+	        </div>
+        <% end %>
+      </article>
+    </div>
+  </div>
+</div>

@@ -31,4 +31,25 @@ body.modal-open {
 // tile to add new elements
 .new_tile {
 	margin: 9px 0;
+	
+	.panel-body {
+		padding: 0;
+		
+		.album {
+			height: 174px;
+			width: 248px;
+			margin-bottom: 0;
+			
+			img {
+				visibility: hidden;
+			}
+			
+			.title {
+				position: absolute;
+				top: 50%;
+				width: 100%;
+				font-size: 16px;
+			}
+		}
+	}
 }
