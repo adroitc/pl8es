@@ -20,7 +20,7 @@
 </div>
 <% end %>
 <%=neon_modal_footer do |b| %>
-<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("dailycious.daily_dish_modal_add_cancel") %></button>
+<button type="button" class="btn btn-default" data-dismiss="modal"><%= t("forms.cancel") %></button>
 <a href="javascript:;" onclick="if (jQuery('#form_buydailydish').validate().errorList.length == 0){jQuery('#modal-buydailydish').modal('hide');jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(1);}">
   <button type="submit" class="btn btn-info btn-icon icon-left">
   	<i class="entypo-plus"></i>

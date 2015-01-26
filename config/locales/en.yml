@@ -184,7 +184,6 @@ en:
     restaurant_description: "Restaurant description"
     
     account_settings_modal_title: "Edit account settings"
-    account_settings_modal_cancel: "Cancel"
     account_settings_modal_submit: "Save"
     account_default_language: "Default language"
     account_default_language_select: "Select default language"
@@ -210,7 +209,6 @@ en:
     account_change_password_new_placeholder: "New password"
     
     restaurant_description_modal_title: "Edit description"
-    restaurant_description_modal_cancel: "Cancel"
     restaurant_description_modal_submit: "Save"
     account_upload_logo: "Upload logo"
     account_upload_restaurant_image: "Upload restaurant image"
@@ -235,17 +233,14 @@ en:
     
     daily_dish_modal_add_title: "Add lunch dish"
     daily_dish_modal_edit_title: "Edit lunch dish"
-    daily_dish_modal_add_cancel: "Cancel"
     daily_dish_modal_add_submit_buy: "Buy lunch dish"
     daily_dish_modal_add_submit: "Add lunch dish"
-    daily_dish_modal_edit_cancel: "Cancel"
     daily_dish_modal_edit_submit: "Save"
     daily_dish_title: "Title"
     daily_dish_title_placeholder: "e.g. Spaghetti Bolognaise"
     daily_dish_price: "Price"
     daily_dish_price_placeholder: "8,00"
     dailycious_plan_modal_title: "Dailycious Credits"
-    dailycious_plan_modal_cancel: "Cancel"
     dailycious_plan_modal_submit: "Buy"
   
   menumalist:
@@ -276,7 +271,6 @@ en:
     add_new_beverage: "Add new drink"
     
     design_modal_title: "Change design"
-    design_modal_cancel: "Cancel"
     design_modal_submit: "Save"
     design_background_color: "Background color"
     design_background_image: "Background image"
@@ -309,27 +303,21 @@ en:
     
     beverage_page_modal_add_title: "Add drinks page"
     beverage_page_modal_edit_title: "Edit drinks page"
-    beverage_page_modal_add_cancel: "Cancel"
     beverage_page_modal_add_submit: "Add drinks page"
-    beverage_page_modal_edit_cancel: "Cancel"
     beverage_page_modal_edit_submit: "Edit drinks page"
     beverage_page_title: "Drinks page title"
     beverage_page_title_placeholder: "e.g. Non-alcoholic drinks"
     
     beverage_navigation_modal_add_title: "Add drinks category"
     beverage_navigation_modal_edit_title: "Edit drinks category"
-    beverage_navigation_modal_add_cancel: "Cancel"
     beverage_navigation_modal_add_submit: "Add drinks category"
-    beverage_navigation_modal_edit_cancel: "Cancel"
     beverage_navigation_modal_edit_submit: "Edit drinks category"
     beverage_navigation_title: "drinks category title"
     beverage_navigation_title_placeholder: "e.g. Soft drinks"
     
     beverage_modal_add_title: "Add drink"
     beverage_modal_edit_title: "Edit drink"
-    beverage_modal_add_cancel: "Cancel"
     beverage_modal_add_submit: "Add drink"
-    beverage_modal_edit_cancel: "Cancel"
     beverage_modal_edit_submit: "Edit drink"
     beverage_title: "Drink title"
     beverage_title_placeholder: "e.g. Sprite"
@@ -340,9 +328,7 @@ en:
     
     dish_modal_add_title: "Add dish"
     dish_modal_edit_title: "Edit dish"
-    dish_modal_add_cancel: "Cancel"
     dish_modal_add_submit: "Add dish"
-    dish_modal_edit_cancel: "Cancel"
     dish_modal_edit_submit: "Save dish"
     dish_title: "Title"
     dish_title_placeholder: "e.g. Eggs Benedict"

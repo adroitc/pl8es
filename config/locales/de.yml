@@ -138,7 +138,6 @@ de:
     image_input_select_different: "Anderes Bild auswählen"
     image_input_change: "Ändern"
     delete: "Löschen"
-    delete_cancel: "Abbrechen"
     delete_confirm: "Ja, dauerhaft löschen"
     cancel_plan: "Plan abbrechen"
     cancel_plan_cancel: "Kündigen"
@@ -184,7 +183,6 @@ de:
     restaurant_description: "Restaurantbeschreibung"
     
     account_settings_modal_title: "Kontoeinstellungen ändern"
-    account_settings_modal_cancel: "Abbrechen"
     account_settings_modal_submit: "Speichern"
     account_default_language: "Standardsprache"
     account_default_language_select: "Standardsprache festlegen"
@@ -210,7 +208,6 @@ de:
     account_change_password_new_placeholder: "Neues Passwort"
     
     restaurant_description_modal_title: "Beschreibung ändern"
-    restaurant_description_modal_cancel: "Abbrechen"
     restaurant_description_modal_submit: "Speichern"
     account_upload_logo: "Logo hochladen"
     account_upload_restaurant_image: "Restaurantbild hochladen"
@@ -235,17 +232,14 @@ de:
     
     daily_dish_modal_add_title: "Mittagsgericht hinzufügen"
     daily_dish_modal_edit_title: "Mittagsgericht ändern"
-    daily_dish_modal_add_cancel: "Abbrechen"
     daily_dish_modal_add_submit_buy: "Mittagsgericht speichern"
     daily_dish_modal_add_submit: "Mittagsgericht hinzufügen"
-    daily_dish_modal_edit_cancel: "Abbrechen"
     daily_dish_modal_edit_submit: "Speichern"
     daily_dish_title: "Name"
     daily_dish_title_placeholder: "z.B. Wiener Schnitzel"
     daily_dish_price: "Preis"
     daily_dish_price_placeholder: "7,50"
     dailycious_plan_modal_title: "Dailycious Guthaben"
-    dailycious_plan_modal_cancel: "Abbrechen"
     dailycious_plan_modal_submit: "Kaufen"
   
   menumalist:
@@ -276,7 +270,6 @@ de:
     add_new_beverage: "Neues Getränk hinzufügen"
     
     design_modal_title: "Design ändern"
-    design_modal_cancel: "Abbrechen"
     design_modal_submit: "Speichern"
     design_background_color: "Hintergrundfarbe"
     design_background_image: "Hintergrundbild"
@@ -309,27 +302,21 @@ de:
       
     beverage_page_modal_add_title: "Getränkeseite hinzufügen"
     beverage_page_modal_edit_title: "Getränkeseite bearbeiten"
-    beverage_page_modal_add_cancel: "Abbrechen"
     beverage_page_modal_add_submit: "Getränkeseite hinzufügen"
-    beverage_page_modal_edit_cancel: "Abbrechen"
     beverage_page_modal_edit_submit: "Getränkeseite bearbeiten"
     beverage_page_title: "Name der Getränkeseite"
     beverage_page_title_placeholder: "z.B. Alkoholfreie Getränke"
     
     beverage_navigation_modal_add_title: "Getränkekategorie hinzufügen"
     beverage_navigation_modal_edit_title: "Getränkekategorie bearbeiten"
-    beverage_navigation_modal_add_cancel: "Abbrechen"
     beverage_navigation_modal_add_submit: "Getränkekategorie hinzufügen"
-    beverage_navigation_modal_edit_cancel: "Abbrechen"
     beverage_navigation_modal_edit_submit: "Getränkekategorie bearbeiten"
     beverage_navigation_title: "Name der Getränkekategorie"
     beverage_navigation_title_placeholder: "z.B. Säfte"
     
     beverage_modal_add_title: "Getränk hinzufügen"
     beverage_modal_edit_title: "Getränk bearbeiten"
-    beverage_modal_add_cancel: "Abbrechen"
     beverage_modal_add_submit: "Getränk hinzufügen"
-    beverage_modal_edit_cancel: "Abbrechen"
     beverage_modal_edit_submit: "Getränk bearbeiten"
     beverage_title: "Getränkename"
     beverage_title_placeholder: "z.B. Apfelsaft"
@@ -340,9 +327,7 @@ de:
     
     dish_modal_add_title: "Speise hinzufügen"
     dish_modal_edit_title: "Speise ändern"
-    dish_modal_add_cancel: "Abbrechen"
     dish_modal_add_submit: "Speise hinzufügen"
-    dish_modal_edit_cancel: "Abbrechen"
     dish_modal_edit_submit: "Speise speichern"
     dish_title: "Name"
     dish_title_placeholder: "z.B. Carpaccio"
