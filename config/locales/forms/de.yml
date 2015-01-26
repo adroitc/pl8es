@@ -1,0 +1,8 @@
+de:
+  forms:
+    new: "%{model} hinzufügen"
+    submit_new: "Hinzufügen"
+    edit: "%{model} aktualisieren"
+    submit_edit: "Aktualisieren"
+    cancel: "abbrechen"
+    upload_image: "Bild hochladen"

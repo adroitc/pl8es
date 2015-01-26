@@ -24,6 +24,7 @@ module Pl8es
     
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{yml}')]
     config.i18n.fallbacks =[:en, :de, :fr]
 		
 		console do

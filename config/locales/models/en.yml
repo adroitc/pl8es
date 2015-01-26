@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    models:
+      user:
+        one: "user"
+        other: "users"
+      menu:
+        one: "menu"
+        other: "menus"
+      category:
+        one: "category"
+        other: "categories"
+      dish:
+        one: "dish"
+        other: "dishes"

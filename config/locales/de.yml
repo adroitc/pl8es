@@ -249,12 +249,6 @@ de:
     dailycious_plan_modal_cancel: "Abbrechen"
     dailycious_plan_modal_submit: "Kaufen"
   
-  forms:
-    cancel: "abbrechen"
-    submit_new: "Hinzufügen"
-    submit_edit: "Aktualisieren"
-    upload_image: "Bild hochladen"
-  
   menumalist:
     menumalist_title: "Menumalist - alle Speisekarten"
     download_code_title: "Das ist Ihr Download-Code. Geben Sie diesen Code in der Menumalist iPad App ein, um Ihre Speisekarte zu sehen."
@@ -294,12 +288,6 @@ de:
     design_splashscreen_image: "Startbild"
     
     menu:
-      model_name: "Speisekarte"
-      
-      # –– form actions, different in each language (i.e. "edit menu", "Speisekarte hinzufügen")
-      new: "Speisekarte hinzufügen"
-      edit: "Speisekarte ändern"
-      
       # –– fields, be descriptive
       title: "Name der Speisekarte"
       title_example: "z.B. Abendkarte"
@@ -313,12 +301,6 @@ de:
       to: "bis"
     
     category:
-      model_name: "Kategorie"
-      
-      # –– form actions, different in each language (i.e. "edit menu", "Speisekarte hinzufügen")
-      new: "Kategorie hinzufügen"
-      edit: "Kategorie ändern"
-      
       # –– fields, be descriptive
       title: "Name"
       title_example: "z.B. Vorspeisen"

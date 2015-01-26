@@ -79,10 +79,10 @@
 				<table class="table table-striped responsive">
 					<thead>
 						<tr style="font-size: 16px;">
-							<th width="40%"><%=t("menumalist.menu.model_name").capitalize %></th>
+							<th width="40%"><%= Menu.model_name.human.capitalize %></th>
 							<th width="120px;" style="width:120px;"></th>
-							<th width=""><%=t("menumalist.categories") %></th>
-							<th width=""><%=t("menumalist.dishes") %></th>
+							<th width=""><%=  Category.model_name.human(count: 2).capitalize %></th>
+							<th width=""><%= Dish.model_name.human(count: 2).capitalize %></th>
 						</tr>
 					</thead>
 					<tbody>

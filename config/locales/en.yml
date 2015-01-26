@@ -249,12 +249,6 @@ en:
     dailycious_plan_modal_cancel: "Cancel"
     dailycious_plan_modal_submit: "Buy"
   
-  forms:
-    cancel: "cancel"
-    submit_new: "Add"
-    submit_edit: "Update"
-    upload_image: "Upload image"
-  
   menumalist:
     menumalist_title: "Menumalist - all menus"
     download_code_title: "This is your download-code. Enter it on the Menumalist iPad app to view your menus."
@@ -294,12 +288,6 @@ en:
     design_splashscreen_image: "Splashscreen image"
     
     menu:
-      model_name: "menu"
-      
-      # –– form actions, different in each language (i.e. "edit menu", "Speisekarte hinzufügen")
-      new: "Add menu"
-      edit: "Update menu"
-      
       # –– fields, be descriptive
       title: "Menu name"
       title_example: "e.g. Lunch Menu"
@@ -313,12 +301,6 @@ en:
       to: "to"
     
     category:
-      model_name: "category"
-      
-      # –– form actions, different in each language (i.e. "edit menu", "Speisekarte hinzufügen")
-      new: "Add category"
-      edit: "Update category"
-      
       # –– fields, be descriptive
       title: "Title"
       title_example: "Starters"

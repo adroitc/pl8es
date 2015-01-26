@@ -1,0 +1,8 @@
+en:
+  forms:
+    new: "Add %{model}"
+    submit_new: "Add"
+    edit: "Update %{model}"
+    submit_edit: "Update"
+    cancel: "cancel"
+    upload_image: "Upload image"
