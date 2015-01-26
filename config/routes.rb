@@ -74,11 +74,6 @@ Pl8es::Application.routes.draw do
 			post "/profile/editsettings" => "profile#editsettings"
 			post "/profile/editdescription" => "profile#editdescription"
 			
-			#ajax/category
-			post "/category/add" => "category#add_category"
-			post "/category/edit" => "category#edit_category"
-			post "/category/sort" => "category#sort_category"
-			
 			#ajax/dish
 			#ajax/dish-get
 			get "/dish/:id/:language_locale" => "dish#dish"
@@ -110,6 +105,11 @@ Pl8es::Application.routes.draw do
 		resources :menus, :path => "/" do
 			resources :categories
 		end
+		
+		#ajax/category
+		post "/category/add" => "categories#create"
+		post "/category/edit" => "categories#update"
+		post "/category/sort" => "categories#sort"
 		
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients
 		
