@@ -253,6 +253,7 @@ de:
     cancel: "abbrechen"
     submit_new: "Hinzufügen"
     submit_edit: "Aktualisieren"
+    upload_image: "Bild hochladen"
   
   menumalist:
     menumalist_title: "Menumalist - alle Speisekarten"
@@ -310,13 +311,21 @@ de:
       # –– custom stuff
       display_from: "Anzeigen von"
       to: "bis"
+    
+    category:
+      model_name: "Kategorie"
       
-    
-    menu_default: "Diese Speisekarte als Standardspeisekarte festlegen."
-    menu_default_default: "Standardspeisekarte"
-    menu_default_make_default: "Standardspeisekarte"
-    menu_default_default_undo: "rückgängig"
-    
+      # –– form actions, different in each language (i.e. "edit menu", "Speisekarte hinzufügen")
+      new: "Kategorie hinzufügen"
+      edit: "Kategorie ändern"
+      
+      # –– fields, be descriptive
+      title: "Name"
+      title_example: "z.B. Vorspeisen"
+      design: "Design"
+      design_default: "Standard"
+      design_grid: "Raster"
+      
     beverage_page_modal_add_title: "Getränkeseite hinzufügen"
     beverage_page_modal_edit_title: "Getränkeseite bearbeiten"
     beverage_page_modal_add_cancel: "Abbrechen"
@@ -348,19 +357,6 @@ de:
     beverage_price_placeholder: "2,00"
     beverage_amount_in_l: "Getränkemenge in Litern"
     beverage_amount_in_l_placeholder: "0,3"
-    
-    category_modal_add_title: "Kategorie hinzufügen"
-    category_modal_edit_title: "Kategorie ändern"
-    category_modal_add_cancel: "Abbrechen"
-    category_modal_add_submit: "Kategorie hinzufügen"
-    category_modal_edit_cancel: "Abbrechen"
-    category_modal_edit_submit: "Kategorie speichern"
-    category_upload_image: "Bild hochladen"
-    category_title: "Name"
-    category_title_placeholder: "z.B. Vorspeisen"
-    category_design: "Design"
-    category_design_default: "Standard"
-    category_design_grid: "Raster"
     
     dish_modal_add_title: "Speise hinzufügen"
     dish_modal_edit_title: "Speise ändern"
