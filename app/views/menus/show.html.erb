@@ -26,12 +26,12 @@
 		<br />
 		<div class="row gallery-env draggable-portlets">
 			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
-			<input type="hidden" name="menu_id" value="<%=@menu.id %>">
-			<span class="sorted ui-sortable">
-				<% @menu.categories.each do |category| %>
-				<%=render :partial => "neon/category_panel", :locals => {:category => category} %>
-				<% end %>
-			</span>
+				<input type="hidden" name="menu_id" value="<%=@menu.id %>">
+				<span class="sorted ui-sortable">
+					<% @menu.categories.each do |category| %>
+						<%=render :partial => "categories/category", :locals => {:category => category} %>
+					<% end %>
+				</span>
 			<% end %>
 			
 			<%=render :partial => "categories/new_category_tile",:locals => { :@menu => @menu, :title => t("menumalist.add_new_category")} %>

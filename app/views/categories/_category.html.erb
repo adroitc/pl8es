@@ -1,0 +1,35 @@
+<div class="col-sm-3" style="margin-top:9px;margin-bottom:9px;">
+	<div class="panel panel-primary" data-collapsed="0" style="margin-bottom:0px;">
+		<div class="panel-body" style="margin:0px;padding:0px;">
+			<article class="album" style="margin-bottom:0px;border-width:0px;">
+				<header>
+					<a href="<%= show_category_path(category.menu.title.parameterize, category.menu.id, category.title.parameterize, category.id) %>">
+						<img class="unveil" src="http://pl8es-production.s3.amazonaws.com/navigations/images/000/000/004/cropped_default_retina/sardinesauer_Bachler51168.png?1416578285" >
+					</a>
+				</header>
+				<div class="panel-heading">
+					<input type="hidden" name="category_ids[<%=category.id %>]" value="">
+					<div class="panel-title ellipsis" style="word-wrap: break-word; overflow: hidden;">
+						<%=category.title %>
+					</div>
+				</div>
+				<footer>
+					<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
+						<% if category.sub_categories.count > 0 %>
+							<%=category.sub_categories.count %>
+							<i class="entypo-folder"></i>
+						<% elsif category.dishes.count > 0 %>
+							<%=category.dishes.count %>
+							<i class="glyphicon glyphicon-cutlery"></i>
+						<% end %>
+					</div>
+					<div class="album-options">
+						<a href="javascript:;" onclick="jQuery('#modal-edit_category-<%=category.id %>').modal('show');">
+							<i class="entypo-cog"></i>
+						</a>
+					</div>
+				</footer>
+			</article>
+		</div>
+	</div>
+</div>
