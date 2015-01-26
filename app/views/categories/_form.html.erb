@@ -1,0 +1,64 @@
+<%= form_for [@menu, @category], validate: true do |f| %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h4 class="modal-title"><%= t("menumalist.category.#{action_name}") %></h4>
+		<ul class="nav nav-tabs">
+			<% @languages.each do |language| %>
+				<li class="<%= :active if language == @default_language %>">
+					<a href="#modal-add-category-lang-<%= language.locale %>" data-toggle="tab">
+						<%= language.title.capitalize %>
+						<%= "(" + t("language.default") + ")" if language == @default_language %>
+					</a>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-sm-6 hidden-xs">
+				<h4 class="margin-top-none"><%= t("forms.upload_image") %></h4>
+					<%=render :partial => "neon/image_upload", :locals => {:instance_class => Category, :name => :image} %>
+			</div>
+			<div class="col-sm-6 tab-content">
+				<% hold_locale = I18n.locale %>
+				<% @languages.each do |language| %>
+					<% # change the translation for the fields %>
+					<% I18n.locale = language.locale %>
+					<span class="tab-pane <%= "active" if @default_language == language %> form-group" id="modal-add-category-lang-<%=language.locale %>">
+						<label for="form-title[<%=language.locale %>]" class="control-label">
+							<strong><%=t("menumalist.category.title") %></strong> - <%= language.title.capitalize %><%=" (Default)" if @default_language == language %>
+						</label>
+						<input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<%=t("menumalist.category.title_example") %>">
+					</span>
+				<% end %>
+				<% I18n.locale = hold_locale %>
+				<label class="control-label"><strong><%=t("menumalist.category.design") %></strong></label>
+				<div class="row">
+					<div class="col-sm-6">
+						<input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default" checked>
+						<label for="form-style-1"><%=t("menumalist.category.design_default") %></label>
+					</div>
+					<div class="col-sm-6">
+						<input class="icheck-2-radio" type="radio" id="form-style-2" name="style" value="grid">
+						<label for="form-style-2"><%=t("menumalist.category.design_grid") %></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal-footer">
+		<% # only display the destroy button on edit %>
+		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_category_path(@menu, @category)} if action_name == "edit" %>
+		
+		<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("forms.cancel") %></button>
+		<%= f.button :type => "submit", :class => "btn btn-info icon-left" do %>
+			<% if action_name == "new" %>
+				<i class="entypo-plus"></i>
+			<% end %>
+			<%= t("menumalist.menu.#{action_name}") %>
+		<% end %>
+	</div>
+					
+<% end %>

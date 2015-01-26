@@ -3,7 +3,11 @@ class CategoriesController < ApplicationController
 	before_filter :authenticate_user
 	
 	def new
-		@category = Category.new
+		@menu = Menu.find(params[:menu_id])
+		@category = @menu.categories.build
+		
+		@default_language = @menu.restaurant.default_language
+		@languages = @menu.restaurant.languages
 	end
 	
 	def create
@@ -41,7 +45,11 @@ class CategoriesController < ApplicationController
 	end
 	
 	def edit
+		@menu = Menu.find(params[:menu_id])
+		@category = @menu.categories.find(params[:id])
 		
+		@default_language = @menu.restaurant.default_language
+		@languages = @menu.restaurant.languages
 	end
 	
 	def update

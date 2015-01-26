@@ -65,7 +65,3 @@
 		});
 	});
 </script>
-<%=render :partial => "categories/modal_add", :locals => {:menu => @menu} %>
-<% @menu.categories.each do |category| %>
-	<%=render :partial => "categories/modal_edit", :locals => {:category => category} %>
-<% end %>

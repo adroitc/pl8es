@@ -24,9 +24,9 @@
 						<% end %>
 					</div>
 					<div class="album-options">
-						<a href="javascript:;" onclick="jQuery('#modal-edit_category-<%=category.id %>').modal('show');">
+						<%= link_to edit_menu_category_path(category.menu, category), remote: true do %>
 							<i class="entypo-cog"></i>
-						</a>
+						<% end %>
 					</div>
 				</footer>
 			</article>
