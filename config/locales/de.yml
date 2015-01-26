@@ -240,7 +240,6 @@ de:
     daily_dish_modal_add_submit: "Mittagsgericht hinzufügen"
     daily_dish_modal_edit_cancel: "Abbrechen"
     daily_dish_modal_edit_submit: "Speichern"
-    daily_dish_upload_image: "Bild hochladen"
     daily_dish_title: "Name"
     daily_dish_title_placeholder: "z.B. Wiener Schnitzel"
     daily_dish_price: "Preis"
@@ -314,7 +313,6 @@ de:
     beverage_page_modal_add_submit: "Getränkeseite hinzufügen"
     beverage_page_modal_edit_cancel: "Abbrechen"
     beverage_page_modal_edit_submit: "Getränkeseite bearbeiten"
-    beverage_page_upload_image: "Bild hochladen"
     beverage_page_title: "Name der Getränkeseite"
     beverage_page_title_placeholder: "z.B. Alkoholfreie Getränke"
     
@@ -346,7 +344,6 @@ de:
     dish_modal_add_submit: "Speise hinzufügen"
     dish_modal_edit_cancel: "Abbrechen"
     dish_modal_edit_submit: "Speise speichern"
-    dish_upload_image: "Bild hochladen"
     dish_title: "Name"
     dish_title_placeholder: "z.B. Carpaccio"
     dish_description: "Beschreibung"

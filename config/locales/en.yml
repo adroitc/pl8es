@@ -240,7 +240,6 @@ en:
     daily_dish_modal_add_submit: "Add lunch dish"
     daily_dish_modal_edit_cancel: "Cancel"
     daily_dish_modal_edit_submit: "Save"
-    daily_dish_upload_image: "Upload image"
     daily_dish_title: "Title"
     daily_dish_title_placeholder: "e.g. Spaghetti Bolognaise"
     daily_dish_price: "Price"
@@ -314,7 +313,6 @@ en:
     beverage_page_modal_add_submit: "Add drinks page"
     beverage_page_modal_edit_cancel: "Cancel"
     beverage_page_modal_edit_submit: "Edit drinks page"
-    beverage_page_upload_image: "Upload image"
     beverage_page_title: "Drinks page title"
     beverage_page_title_placeholder: "e.g. Non-alcoholic drinks"
     
@@ -346,7 +344,6 @@ en:
     dish_modal_add_submit: "Add dish"
     dish_modal_edit_cancel: "Cancel"
     dish_modal_edit_submit: "Save dish"
-    dish_upload_image: "Upload Image"
     dish_title: "Title"
     dish_title_placeholder: "e.g. Eggs Benedict"
     dish_description: "Description"

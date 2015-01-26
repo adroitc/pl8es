@@ -3,7 +3,7 @@
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
-		<h4 class="margin-top-none"><%=t("menumalist.beverage_page_upload_image") %></h4>
+		<h4 class="margin-top-none"><%= t("forms.upload_image") %></h4>
     <%=render :partial => "neon/image_upload", :locals => {:instance_class => BeveragePage, :name => :image} %>
 	</div>
 	<div class="col-sm-6 tab-content">
