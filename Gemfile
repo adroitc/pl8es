@@ -44,6 +44,9 @@ gem "therubyracer", "0.11.3"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 
+# add to_b
+gem "wannabe_bool"
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
