@@ -63,7 +63,8 @@ gem "paypal-express"
 
 # languages
 gem "rename"
-gem "globalize", "~> 4.0.1"
+gem "globalize"
+gem "globalize-accessors"
 
 # location
 gem "geokit-rails"
