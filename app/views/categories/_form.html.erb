@@ -3,12 +3,13 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<h4 class="modal-title"><%= t("menumalist.category.#{action_name}") %></h4>
 		<ul class="nav nav-tabs">
+			<% # generate the tabs from the languages %>
 			<% @languages.each do |language| %>
 				<li class="<%= :active if language == @default_language %>">
-					<a href="#modal-add-category-lang-<%= language.locale %>" data-toggle="tab">
+					<%= link_to "#category-form-#{language.locale}", :data => {:toggle => :tab} do %>
 						<%= language.title.capitalize %>
 						<%= "(" + t("language.default") + ")" if language == @default_language %>
-					</a>
+					<% end %>
 				</li>
 			<% end %>
 		</ul>
@@ -23,25 +24,25 @@
 			<div class="col-sm-6 tab-content">
 				<% hold_locale = I18n.locale %>
 				<% @languages.each do |language| %>
+					<span class="tab-pane <%= "active" if @default_language == language %> form-group" id="category-form-<%= language.locale %>">
+						<%= f.label "title_#{language.locale}", :class => "control-label" do %>
+							<strong><%=t("menumalist.category.title") %></strong> - <%= language.title.capitalize %><%=" (Default)" if @default_language == language %>
+						<% end %>
+						<%= f.text_field "title_#{language.locale}", :class => "form-control", :id => "form-title[#{language.locale}]", :placeholder => t("menumalist.category.title_example") %>
+					</span>
 					<% # change the translation for the fields %>
 					<% I18n.locale = language.locale %>
-					<span class="tab-pane <%= "active" if @default_language == language %> form-group" id="modal-add-category-lang-<%=language.locale %>">
-						<label for="form-title[<%=language.locale %>]" class="control-label">
-							<strong><%=t("menumalist.category.title") %></strong> - <%= language.title.capitalize %><%=" (Default)" if @default_language == language %>
-						</label>
-						<input name="title[<%=language.locale %>]" type="text" class="form-control" id="form-title[<%=language.locale %>]" placeholder="<%=t("menumalist.category.title_example") %>">
-					</span>
 				<% end %>
 				<% I18n.locale = hold_locale %>
 				<label class="control-label"><strong><%=t("menumalist.category.design") %></strong></label>
 				<div class="row">
 					<div class="col-sm-6">
-						<input class="icheck-2-radio" type="radio" id="form-style-1" name="style" value="default" checked>
-						<label for="form-style-1"><%=t("menumalist.category.design_default") %></label>
+						<%= f.radio_button :style, :default, checked: @category.style == "default", class: "icheck-2-radio" %>
+						<%= f.label :style, t("menumalist.category.design_default"), value: :default, class: 'icheck-2-radio' %>
 					</div>
 					<div class="col-sm-6">
-						<input class="icheck-2-radio" type="radio" id="form-style-2" name="style" value="grid">
-						<label for="form-style-2"><%=t("menumalist.category.design_grid") %></label>
+						<%= f.radio_button :style, :grid, checked: @category.style == "grid", class: "icheck-2-radio" %>
+						<%= f.label :style, t("menumalist.category.design_grid"), value: :grid, class: 'icheck-2-radio' %>
 					</div>
 				</div>
 			</div>
