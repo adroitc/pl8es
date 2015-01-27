@@ -1,15 +1,38 @@
 class Category < ActiveRecord::Base
-	belongs_to :restaurant
+	
+	# –––––––––––––
+	#   Relations
+	# –––––––––––––
+	
 	belongs_to :menu
-	belongs_to :category
-	has_many :sub_categories, :class_name => "Category"
 	has_many :dishes
 	
-	translates :title
+	belongs_to :category
+	has_many :sub_categories, :class_name => "Category"
 	
+	# –––––––––––––
+	#  Validations
+	# –––––––––––––
+	
+	validates :title, presence: true, length: 4..40
+	validates :style, presence: true, inclusion: { in: %w(default grid) }
+	
+	# ––––––––––––––
+	#  Translations
+	# ––––––––––––––
+	
+	translates :title
+	globalize_accessors
+	
+	# –––––––––––––
+	#    Scopes
+	# –––––––––––––
+  
 	default_scope -> { order("position, id") }
 	
-	validates :title, :presence => true, :length => 4..40
+	# –––––––––––––
+	#    Images
+	# –––––––––––––
 	
 	has_attached_file :image, {
 		:styles => {
@@ -36,7 +59,7 @@ class Category < ActiveRecord::Base
 		:width => 828,
 		:height => 552
 	}
-
+	
 	def category_lang
 		all_translated_attributes_hash = {}
 		
