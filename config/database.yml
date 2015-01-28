@@ -1,20 +1,23 @@
-development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+default: &default
+  adapter: postgresql
   pool: 5
   timeout: 5000
+
+development:
+  <<: *default
+  database: pl8_dev
+  user: postgres
+  password: qwert6
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
+  <<: *default
+  database: pl8_test
+  user: postgres
+  password: qwert6
 
 production:
-  adapter: postgresql
+  <<: *default
   host: <%= ENV['DB_HOST'] %>
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  pool: 5
-  timeout: 5000

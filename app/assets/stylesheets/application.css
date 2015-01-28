@@ -32,4 +32,6 @@
 
  *= require "custom"
  
+ *= require custom_bootstrap
+ 
  */
