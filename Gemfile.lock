@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/DavyJonesLocker/client_side_validations.git
-  revision: a92df15193acb7318965c66944b85e2bfa4f1109
-  branch: master
-  specs:
-    client_side_validations (4.2.0)
-      jquery-rails (>= 3.1.2, < 5.0.0)
-      rails (>= 4.0.0, < 4.3.0)
-
-GIT
   remote: git://github.com/mroem/paperclip-dimension.git
   revision: d424c621fbbf443fa495c65d86e191754c7415ee
   specs:
@@ -246,7 +237,6 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails (~> 1.1.1)
   capistrano-rvm
-  client_side_validations!
   coffee-rails (~> 4.0.0)
   dotenv-rails
   geokit-rails
