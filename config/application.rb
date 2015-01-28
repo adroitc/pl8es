@@ -21,11 +21,14 @@ module Pl8es
     # config.i18n.default_locale = :de
     
     config.assets.version = "1.01"
-    
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{yml}')]
     config.i18n.fallbacks =[:en, :de, :fr]
+		
+		config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+			"<span class=\"field_with_errors\">#{html_tag}</span>".html_safe
+		}
 		
 		console do
 			require 'hirb'
