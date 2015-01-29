@@ -2,6 +2,7 @@
   Category:
     :options:
       :fields:
+        - id
         - menu_id
         - category_id
         - title

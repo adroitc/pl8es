@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
 	
-	before_filter :authenticate_user
-	before_filter :authenticate_ownership_and_get_menu
-	before_filter :get_languages, :only => [:new, :create, :edit, :update]
+	before_filter :authenticate_user && :authenticate_ownership_and_get_menu
+	before_filter :get_category, only: [:show, :edit, :update, :destroy]
+	before_filter :get_languages, only: [:new, :create, :edit, :update]
 	
 	def new
 		@category = @menu.categories.build
@@ -21,7 +21,6 @@ class CategoriesController < ApplicationController
 	end
 	
 	def edit
-		@category = @menu.categories.find(params[:id])
 	end
 	
 	def update
@@ -81,6 +80,14 @@ class CategoriesController < ApplicationController
 				@menu = @user.restaurant.menus.find(params[:menu_id])
 			else
 				redirect_to menus_path
+			end
+		end
+		
+		def get_category
+			if @menu.categories.exists?(params[:id])
+				@category = @menu.categories.find(params[:id])
+			else
+				redirect_to menu_categories_path(@menu)
 			end
 		end
 		
