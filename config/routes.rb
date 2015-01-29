@@ -104,12 +104,9 @@ Pl8es::Application.routes.draw do
 	scope :menumalist do
 		resources :menus, :path => "/" do
 			resources :categories
+			
+			post "categories/sort" => "categories#sort", as: :sort_categories
 		end
-		
-		#ajax/category
-		post "/category/add" => "categories#create"
-		post "/category/edit" => "categories#update"
-		post "/category/sort" => "categories#sort"
 		
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients
 		

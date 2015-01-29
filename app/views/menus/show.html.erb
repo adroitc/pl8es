@@ -25,7 +25,7 @@
 		<h2><%=@menu.title %></h2>
 		<br />
 		<div class="row gallery-env draggable-portlets">
-			<%= form_tag(category_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
+			<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
 				<input type="hidden" name="menu_id" value="<%=@menu.id %>">
 				<span class="sorted ui-sortable">
 					<% @menu.categories.each do |category| %>
