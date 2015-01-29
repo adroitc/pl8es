@@ -41,7 +41,7 @@ class CategoriesController < ApplicationController
 	def destroy
 		@category.destroy
 		
-		redirect_to menu_categories_path(@menu)
+		redirect_to menu_path(@menu)
 	end
 	
 	def sort
@@ -82,7 +82,7 @@ class CategoriesController < ApplicationController
 			if @menu.categories.exists?(params[:id])
 				@category = @menu.categories.find(params[:id])
 			else
-				redirect_to menu_categories_path(@menu)
+				redirect_to menu_path(@menu)
 			end
 		end
 		
