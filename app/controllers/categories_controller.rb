@@ -38,6 +38,10 @@ class CategoriesController < ApplicationController
 		render :json => {:status => "invalid"}
 	end
 	
+	def index
+		redirect_to menu_path(@menu)
+	end
+	
 	def sort
 		if !params.values_at(:category_ids).include?(nil)
 			params[:category_ids].each do |category_id|
