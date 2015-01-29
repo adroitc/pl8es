@@ -29,7 +29,9 @@ class CategoriesController < ApplicationController
 	end
 	
 	def update
-		@category.update(category_params)
+		unless @category.update(category_params)
+			render :edit
+		end
 	end
 	
 	def destroy
