@@ -51,7 +51,7 @@ class Category < ActiveRecord::Base
 				:processors => [:cropper]
 			}
 		},
-		:default_url => "http://app.pl8.cc/assets/:class/:attachment/:style.png?"
+		:default_url => "/assets/:class/images/:style.png"
 	}
 	
 	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
