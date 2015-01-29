@@ -34,8 +34,6 @@ class CategoriesController < ApplicationController
 	
 	def update
 		@category.update(category_params)
-		
-		redirect_to menu_categories_path(@menu)
 	end
 	
 	def destroy

@@ -1,0 +1,3 @@
+var edited_category = $("<%= j render partial: 'category', locals: {category: @category} %>");
+$("#category-holder-<%= @category.id %>").html(edited_category);
+$('#default-modal').modal('hide');
