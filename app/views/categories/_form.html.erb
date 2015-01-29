@@ -68,7 +68,7 @@
 	
 	<div class="modal-footer">
 		<% # only display the destroy button on edit %>
-		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_category_path(@menu, @category)} if action_name == "edit" %>
+		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_category_path(@menu, @category), :remote => true} if action_name == "edit" %>
 		
 		<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("forms.cancel") %></button>
 		<%= f.button :type => "submit", :class => "btn btn-info icon-left" do %>

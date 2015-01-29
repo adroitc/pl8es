@@ -38,8 +38,6 @@ class CategoriesController < ApplicationController
 	
 	def destroy
 		@category.destroy
-		
-		redirect_to menu_path(@menu)
 	end
 	
 	def sort

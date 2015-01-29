@@ -3,7 +3,7 @@
   <button type="button" class="btn btn-danger delete pl8es-btn-delete"><%=t("neon.delete") %></button>
   <button type="button" class="btn btn-default cancel"><%=t("neon.delete_cancel") %></button>
   
-	<%= link_to destroy_link, :method => "delete", :class => "confirm" do %>
+	<%= link_to destroy_link, :method => "delete", :remote => (true if defined? remote && remote), :class => "confirm" do %>
     <button type="button" class="btn btn-danger"><%=t("neon.delete_confirm") %></button>
 	<% end %>
 </span>
