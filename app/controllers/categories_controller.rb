@@ -1,13 +1,11 @@
 class CategoriesController < ApplicationController
 	
 	before_filter :authenticate_user
+	before_filter :authenticate_ownership_and_get_menu
+	before_filter :get_languages, :only => [:new, :create, :edit, :update]
 	
 	def new
-		@menu = Menu.find(params[:menu_id])
 		@category = @menu.categories.build
-		
-		@default_language = @menu.restaurant.default_language
-		@languages = @menu.restaurant.languages
 	end
 	
 	def create
@@ -45,11 +43,7 @@ class CategoriesController < ApplicationController
 	end
 	
 	def edit
-		@menu = Menu.find(params[:menu_id])
 		@category = @menu.categories.find(params[:id])
-		
-		@default_language = @menu.restaurant.default_language
-		@languages = @menu.restaurant.languages
 	end
 	
 	def update
@@ -107,6 +101,19 @@ class CategoriesController < ApplicationController
 		
 		def authenticate_user
 			redirect_to login_index_path unless @user
+		end
+		
+		def authenticate_ownership_and_get_menu
+			if @user.restaurant.menus.exists?(params[:menu_id])
+				@menu = @user.restaurant.menus.find(params[:menu_id])
+			else
+				redirect_to menus_path
+			end
+		end
+		
+		def get_languages
+			@default_language = @menu.restaurant.default_language
+			@languages = @menu.restaurant.languages
 		end
 	
 end
