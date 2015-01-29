@@ -4,6 +4,12 @@ class CategoriesController < ApplicationController
 	before_filter :get_category, only: [:show, :edit, :update, :destroy]
 	before_filter :get_languages, only: [:new, :create, :edit, :update]
 	
+	respond_to :html, :js
+	
+	def index
+		redirect_to menu_path(@menu)
+	end
+	
 	def new
 		@category = @menu.categories.build
 	end
@@ -20,25 +26,22 @@ class CategoriesController < ApplicationController
 		end
 	end
 	
+	def show
+	end
+	
 	def edit
 	end
 	
 	def update
-		if !params.values_at(:category_id, :title, :style).include?(nil) && Category.exists?(params[:category_id]) && Category.find(params[:category_id]).menu.restaurant.user == @user
-			category = Category.find(params[:category_id])
-			
-			category.update_attributes(params.permit(:image, :style))
-			
-			category.image.set_crop_values_for_instance(params.permit(:image, :image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
-							
-			render :json => {:status => "success"}
-			return
-		end
-		render :json => {:status => "invalid"}
+		@category.update(category_params)
+		
+		redirect_to menu_categories_path(@menu)
 	end
 	
-	def index
-		redirect_to menu_path(@menu)
+	def destroy
+		@category.destroy
+		
+		redirect_to menu_categories_path(@menu)
 	end
 	
 	def sort
@@ -55,14 +58,6 @@ class CategoriesController < ApplicationController
 			return
 		end
 		render :json => {:status => "invalid"}
-	end
-	
-	def show
-		if @user && @user.restaurant.menus.exists?(params[:menu_id]) && @user.restaurant.menus.find(params[:menu_id]).categories.exists?(params[:category_id])
-			@category = @user.restaurant.menus.find(params[:menu_id]).categories.find(params[:category_id])
-		else
-			raise ActionController::RoutingError.new("Not Found")
-		end
 	end
 	
 	private

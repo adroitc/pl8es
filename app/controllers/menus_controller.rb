@@ -2,6 +2,7 @@ class MenusController < ApplicationController
 	
 	before_filter :authenticate_user
 	before_filter :authenticate_ownership_and_get_menu, :only => [:show, :edit, :update, :destroy]
+	
 	respond_to :html, :js
 	
 	def index
