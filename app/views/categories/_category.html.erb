@@ -5,9 +5,9 @@
 			<div class="panel-body" style="margin:0px;padding:0px;">
 				<article class="album" style="margin-bottom:0px;border-width:0px;">
 					<header>
-						<a href="<%= show_category_path(category.menu.title.parameterize, category.menu.id, category.title.parameterize, category.id) %>">
-							<img class="unveil" src="http://pl8es-production.s3.amazonaws.com/navigations/images/000/000/006/cropped_default_retina/nugatriegel_Bachler51263.png?1416578323" >
-						</a>
+						<%= link_to show_category_path(category.menu.title.parameterize, category.menu.id, category.title.parameterize, category.id) do %>
+							<%= image_tag category.image.url(:cropped_default_retina) %>
+						<% end %>
 					</header>
 					<div class="panel-heading">
 						<input type="hidden" name="category_ids[<%=category.id %>]" value="">
