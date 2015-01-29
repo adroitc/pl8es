@@ -75,3 +75,7 @@ class Category < ActiveRecord::Base
 	end
 	
 end
+
+Category::Translation.class_eval do
+	validates :title, presence: true, length: 4..40
+end
