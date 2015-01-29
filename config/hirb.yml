@@ -7,7 +7,6 @@
         - title
         - level
         - style
-        - dishes_id
         - position
   BeveragePage:
     :options:
