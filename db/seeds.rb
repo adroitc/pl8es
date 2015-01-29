@@ -6,26 +6,6 @@ Language.create([
   {
     title: "deutsch",
     locale: "de"
-  },
-  {
-    title: "français",
-    locale: "fr"
-  },
-  {
-    title: "español",
-    locale: "es"
-  },
-  {
-    title: "italiano",
-    locale: "it"
-  },
-  {
-    title: "русский",
-    locale: "ru"
-  },
-  {
-    title: "português",
-    locale: "pt"
   }
 ])
 
@@ -73,10 +53,16 @@ User.create([
       :download_code => "DEMO-2",
       :supportedFont => SupportedFont.first,
       :default_language => Language.first,
-      :dailycious_plan => DailyciousPlan.create()
+      :dailycious_plan => DailyciousPlan.create(),
+      :default_language => Language.first
     )
   }
 ])
+
+r = Restaurant.first
+r.languages << Language.first
+r.languages << Language.last
+r.save
 
 User.create([
   {
