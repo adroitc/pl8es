@@ -24,30 +24,47 @@
 			<div class="col-sm-6 tab-content">
 				<% hold_locale = I18n.locale %>
 				<% @languages.each do |language| %>
+					<% # change the translation for the fields %>
+					<% I18n.locale = language.locale %>
 					<span class="tab-pane <%= "active" if @default_language == language %> form-group" id="category-form-<%= language.locale %>">
 						<%= f.label "title_#{language.locale}", :class => "control-label" do %>
 							<strong><%=t("menumalist.category.title") %></strong> - <%= language.title.capitalize %><%=" (Default)" if @default_language == language %>
 						<% end %>
 						<%= f.text_field "title_#{language.locale}", :class => "form-control", :id => "form-title[#{language.locale}]", :placeholder => t("menumalist.category.title_example") %>
 					</span>
-					<% # change the translation for the fields %>
-					<% I18n.locale = language.locale %>
 				<% end %>
 				<% I18n.locale = hold_locale %>
+				
+				
+				
+				
+				
 				<label class="control-label"><strong><%=t("menumalist.category.design") %></strong></label>
 				<div class="row">
 					<div class="col-sm-6">
 						<%= f.radio_button :style, :default, checked: @category.style == "default", class: "icheck-2-radio" %>
-						<%= f.label :style, t("menumalist.category.design_default"), value: :default, class: 'icheck-2-radio' %>
+						<%= f.label :style, t("menumalist.category.design_default"), value: :default %>
 					</div>
 					<div class="col-sm-6">
 						<%= f.radio_button :style, :grid, checked: @category.style == "grid", class: "icheck-2-radio" %>
-						<%= f.label :style, t("menumalist.category.design_grid"), value: :grid, class: 'icheck-2-radio' %>
+						<%= f.label :style, t("menumalist.category.design_grid"), value: :grid %>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<% if @category.errors.any? %>
+		<div id="error-explanation">
+			<h2><%= pluralize(@category.errors.count, "error") %> prohibited this task from being saved:</h2>
+			
+			<ul>
+			<% @category.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
 	
 	<div class="modal-footer">
 		<% # only display the destroy button on edit %>

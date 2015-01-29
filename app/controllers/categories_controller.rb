@@ -9,28 +9,15 @@ class CategoriesController < ApplicationController
 	end
 	
 	def create
-		if !params.values_at(:menu_id, :title, :style).include?(nil) && @user.restaurant.menus.exists?(params[:menu_id])
-			menu = @user.restaurant.menus.find(params[:menu_id])
-			
-			new_category = Category.new(params.permit(:image, :style).merge({
-				:menu => menu,
-				:position =>menu.categories.unscoped.last != nil ? menu.categories.unscoped.last.id : 0
-			}))
-			
-			if params[:category_id] && menu.categories.exists?(params[:category_id])
-				new_category.attributes = {
-					:level => 1,
-					:category => menu.categories.find(params[:category_id]),
-				}
+		@category = @menu.categories.new(category_params)
+		
+		if @category.save
+			respond_to do |format|
+				format.js
 			end
-			new_category.save
-			
-			new_category.image.set_crop_values_for_instance(params.permit(:image))
-			
-			render :json => {:status => "success", :nav => new_category.errors}
-			return
+		else
+			render :new, :format => :js
 		end
-		render :json => {:status => "invalid"}
 	end
 	
 	def edit
@@ -76,6 +63,10 @@ class CategoriesController < ApplicationController
 	end
 	
 	private
+		
+		def category_params
+			params.require(:category).permit(*Category.globalize_attribute_names, :id, :style)
+		end
 		
 		def authenticate_user
 			redirect_to login_index_path unless @user
