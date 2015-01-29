@@ -17,12 +17,8 @@ class CategoriesController < ApplicationController
 	def create
 		@category = @menu.categories.new(category_params)
 		
-		if @category.save
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :new, :format => :js
+		unless @category.save
+			render :new
 		end
 	end
 	
@@ -41,12 +37,10 @@ class CategoriesController < ApplicationController
 	end
 	
 	def sort
-		if !params.values_at(:category_ids).include?(nil)
+		if params[:category_ids].present?
 			params[:category_ids].each do |category_id|
-				if Category.exists?(category_id[0].to_i) && Category.find(category_id[0].to_i).menu.restaurant.user == @user
-					category = Category.find(category_id[0].to_i)
-					category.position = category_id[1].to_i
-					category.save
+				if @menu.categories.exists?(category_id[0])
+					@menu.categories.find(category_id[0]).update(:position => category_id[1].to_i)
 				end
 			end
 			
