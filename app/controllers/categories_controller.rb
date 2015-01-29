@@ -17,15 +17,6 @@ class CategoriesController < ApplicationController
 				:position =>menu.categories.unscoped.last != nil ? menu.categories.unscoped.last.id : 0
 			}))
 			
-			languages = Language.where(:locale => params[:title].keys)
-			
-			current_locale = I18n.locale
-			languages.each do |language|
-				I18n.locale = language.locale
-				new_category.title = params[:title][language.locale]
-			end
-			I18n.locale = current_locale
-			
 			if params[:category_id] && menu.categories.exists?(params[:category_id])
 				new_category.attributes = {
 					:level => 1,
@@ -53,15 +44,6 @@ class CategoriesController < ApplicationController
 			if params[:delete] == "true"
 				category.destroy
 			else
-				languages = Language.find_all_by_locale(params[:title].keys)
-				
-				current_locale = I18n.locale
-				languages.each do |language|
-					I18n.locale = language.locale
-					category.title = params[:title][language.locale]
-				end
-				I18n.locale = current_locale
-				
 				category.update_attributes(params.permit(:image, :style))
 				
 				category.image.set_crop_values_for_instance(params.permit(:image, :image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
