@@ -1,2 +1,4 @@
-$("#category-holder-<%= @category.id %>").remove();
 $('#default-modal').modal('hide');
+$("#category-holder-<%= @category.id %>").fadeOut(800, function() {
+	$(this).remove();
+});

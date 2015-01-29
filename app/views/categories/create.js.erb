@@ -1,3 +1,3 @@
-var new_category = $("<%= j render partial: 'category', locals: {category: @category} %>");
-$("#form_sort_category .ui-sortable").append(new_category);
 $('#default-modal').modal('hide');
+var new_category = $("<%= j render partial: 'category', locals: {category: @category} %>");
+$(new_category).hide().appendTo("#form_sort_category .ui-sortable").fadeIn(1500);
