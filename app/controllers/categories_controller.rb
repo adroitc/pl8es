@@ -41,14 +41,10 @@ class CategoriesController < ApplicationController
 		if !params.values_at(:category_id, :title, :style).include?(nil) && Category.exists?(params[:category_id]) && Category.find(params[:category_id]).menu.restaurant.user == @user
 			category = Category.find(params[:category_id])
 			
-			if params[:delete] == "true"
-				category.destroy
-			else
-				category.update_attributes(params.permit(:image, :style))
-				
-				category.image.set_crop_values_for_instance(params.permit(:image, :image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
-			end
-				
+			category.update_attributes(params.permit(:image, :style))
+			
+			category.image.set_crop_values_for_instance(params.permit(:image, :image_crop_w, :image_crop_h, :image_crop_x, :image_crop_y))
+							
 			render :json => {:status => "success"}
 			return
 		end
