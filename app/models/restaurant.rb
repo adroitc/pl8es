@@ -78,7 +78,7 @@ class Restaurant < ActiveRecord::Base
         :processors => [:cropper]
       }
     },
-    :default_url => "http://app.pl8.cc/assets/:class/:attachment/:style.png?"
+    :default_url => "/assets/:class/:attachment/:style.png"
   }
   validates_attachment_content_type :logo_image, :content_type => /\Aimage\/.*\Z/
   validates :logo_image, :dimensions => {
@@ -98,7 +98,7 @@ class Restaurant < ActiveRecord::Base
         :processors => [:cropper]
       }
     },
-    :default_url => "http://app.pl8.cc/assets/:class/:attachment/:style.png?"
+    :default_url => "/assets/:class/:attachment/:style.png"
   }
   validates_attachment_content_type :restaurant_image, :content_type => /\Aimage\/.*\Z/
   validates :restaurant_image, :dimensions => {
@@ -118,7 +118,7 @@ class Restaurant < ActiveRecord::Base
         :processors => [:cropper]
       }
     },
-    :default_url => "http://app.pl8.cc/assets/:class/:attachment/:style.png?"
+    :default_url => "/assets/:class/:attachment/:style.png"
   }
   validates_attachment_content_type :appmain_image, :content_type => /\Aimage\/.*\Z/
   validates :appmain_image, :dimensions => {
@@ -138,7 +138,7 @@ class Restaurant < ActiveRecord::Base
         :processors => [:cropper]
       }
     },
-    :default_url => "http://app.pl8.cc/assets/:class/:attachment/:style.png?"
+    :default_url => "/assets/:class/:attachment/:style.png"
   }
   validates_attachment_content_type :splashscreen_image, :content_type => /\Aimage\/.*\Z/
   validates :splashscreen_image, :dimensions => {
