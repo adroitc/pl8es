@@ -1,35 +1,33 @@
 <% if defined? image %>
-<div class="thumbnail" style="width:auto;height:auto;" data-trigger="fileinput">
-	<img id="navigation-<%=image.name.to_s %>-<%=image.instance.id %>" src="<%=image.url(:original_cropping) %>">
-</div>
-<input name="<%=image.name.to_s %>_crop_w" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_w">
-<input name="<%=image.name.to_s %>_crop_h" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_h">
-<input name="<%=image.name.to_s %>_crop_x" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_x">
-<input name="<%=image.name.to_s %>_crop_y" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_y">
-<script type="text/javascript">
-  $("#navigation-<%=image.name.to_s %>-<%=instance.id %>").Jcrop({
-    aspectRatio: <%=image_min_size[:width].to_f/image_min_size[:height].to_f %>,
-    onSelect: updateCoords,
-    trueSize: [<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][0] %>,<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][1] %>],
-    setSelect: [<%=instance.read_attribute(image.name.to_s+"_crop_x") %>, <%=instance.read_attribute(image.name.to_s+"_crop_y") %>, <%=instance.read_attribute(image.name.to_s+"_crop_x") %>+<%=instance.read_attribute(image.name.to_s+"_crop_w") %>, <%=instance.read_attribute(image.name.to_s+"_crop_y") %>+<%=instance.read_attribute(image.name.to_s+"_crop_h") %>],
-    minSize: [<%=image_min_size[:width] %>,<%=image_min_size[:height] %>]
-   %>);
-  function updateCoords(c)
-  {
-  	$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_w").val(Math.min(<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][0] %>,Math.floor(c.w)));
-  	$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_h").val(Math.min(<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][1] %>,Math.floor(c.h)));
-  	$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_x").val(Math.floor(c.x));
-  	$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_y").val(Math.floor(c.y));
-   %>;
-</script>
-<%
-instance_class = image.instance.class
-name = image.name
-end
-%>
-<%
-image_min_size = instance_class.validators_on(name)[instance_class.validators_on(name).index{|v| v.class.to_s == "DimensionsValidator"}].options
-%>
+	<div class="thumbnail" style="width:auto;height:auto;" data-trigger="fileinput">
+		<img id="navigation-<%=image.name.to_s %>-<%=image.instance.id %>" src="<%=image.url(:original_cropping) %>">
+	</div>
+	<input name="<%=image.name.to_s %>_crop_w" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_w">
+	<input name="<%=image.name.to_s %>_crop_h" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_h">
+	<input name="<%=image.name.to_s %>_crop_x" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_x">
+	<input name="<%=image.name.to_s %>_crop_y" type="hidden" id="form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_y">
+	<script type="text/javascript">
+		$("#navigation-<%=image.name.to_s %>-<%=instance.id %>").Jcrop({
+			aspectRatio: <%=image_min_size[:width].to_f/image_min_size[:height].to_f %>,
+			onSelect: updateCoords,
+			trueSize: [<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][0] %>,<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][1] %>],
+			setSelect: [<%=instance.read_attribute(image.name.to_s+"_crop_x") %>, <%=instance.read_attribute(image.name.to_s+"_crop_y") %>, <%=instance.read_attribute(image.name.to_s+"_crop_x") %>+<%=instance.read_attribute(image.name.to_s+"_crop_w") %>, <%=instance.read_attribute(image.name.to_s+"_crop_y") %>+<%=instance.read_attribute(image.name.to_s+"_crop_h") %>],
+			minSize: [<%=image_min_size[:width] %>,<%=image_min_size[:height] %>]
+		});
+		
+		function updateCoords(c)
+		{
+			$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_w").val(Math.min(<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][0] %>,Math.floor(c.w)));
+			$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_h").val(Math.min(<%=instance.read_attribute(image.name.to_s+"_dimensions")["original"][1] %>,Math.floor(c.h)));
+			$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_x").val(Math.floor(c.x));
+			$("#form-cropimage-<%=image.instance.id %>-<%=image.name.to_s %>_crop_y").val(Math.floor(c.y));
+		};
+	</script>
+	<% instance_class = image.instance.class %>
+	<% name = image.name %>
+<% end %>
+
+<% image_min_size = instance_class.validators_on(name)[instance_class.validators_on(name).index{|v| v.class.to_s == "DimensionsValidator"}].options %>
 <div class="form-group fileinput fileinput-new" data-provides="fileinput">
 	<span class="btn btn-info btn-file">
 		<span class="fileinput-new"><%=(defined? image && image.present?) ? t("neon.image_input_select_different") : t("neon.image_input_select") %></span>
