@@ -2,7 +2,11 @@ de:
   forms:
     new: "%{model} hinzufügen"
     submit_new: "Hinzufügen"
+    create: "%{model} hinzufügen"
+    submit_create: "Hinzufügen"
     edit: "%{model} aktualisieren"
     submit_edit: "Aktualisieren"
+    update: "%{model} aktualisieren"
+    submit_update: "Aktualisieren"
     cancel: "abbrechen"
     upload_image: "Bild hochladen"

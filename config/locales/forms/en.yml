@@ -2,7 +2,11 @@ en:
   forms:
     new: "Add %{model}"
     submit_new: "Add"
+    create: "Add %{model}"
+    submit_create: "Add"
     edit: "Update %{model}"
     submit_edit: "Update"
+    update: "Update %{model}"
+    submit_update: "Update"
     cancel: "cancel"
     upload_image: "Upload image"

@@ -1,7 +1,7 @@
 <%= form_for [@menu, @category], remote: true do |f| %>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h4 class="modal-title"><%= t("menumalist.category.#{action_name}") %></h4>
+		<h4 class="modal-title"><%= t("forms.#{action_name}", :model => Menu.model_name.human) %></h4>
 		<ul class="nav nav-tabs">
 			<% # generate the tabs from the languages %>
 			<% @languages.each do |language| %>
@@ -68,14 +68,14 @@
 	
 	<div class="modal-footer">
 		<% # only display the destroy button on edit %>
-		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_category_path(@menu, @category), :remote => true} if action_name == "edit" %>
+		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_category_path(@menu, @category), :remote => true} if ["edit", "update"].include? action_name %>
 		
 		<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("forms.cancel") %></button>
 		<%= f.button :type => "submit", :class => "btn btn-info icon-left" do %>
-			<% if action_name == "new" %>
+			<% if ["new", "create"].include? action_name %>
 				<i class="entypo-plus"></i>
 			<% end %>
-			<%= t("menumalist.menu.#{action_name}") %>
+			<%= t("forms.submit_#{action_name}", :model => Menu.model_name.human) %>
 		<% end %>
 	</div>
 					
