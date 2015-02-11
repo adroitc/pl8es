@@ -31,6 +31,7 @@ gem "paperclip"
 gem "aws-sdk"
 gem "paperclip-dimension", :git => "git://github.com/mroem/paperclip-dimension.git"
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
+gem 'remotipart', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

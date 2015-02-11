@@ -171,6 +171,7 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     ref (1.0.5)
+    remotipart (1.2.1)
     rename (1.0.2)
       rails (>= 3.0.0)
     rest-client (1.7.2)
@@ -255,6 +256,7 @@ DEPENDENCIES
   railroady
   rails (= 4.0.2)
   rails_12factor
+  remotipart (~> 1.2)
   rename
   rest-client
   sass-rails (~> 4.0.0)
