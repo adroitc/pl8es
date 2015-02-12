@@ -31,7 +31,7 @@ class Ajax::PaymentController < ApplicationController
       )
       response = paypal_req.setup(
         payment.paypal_payment_request,
-        buy_datransfercreditplan),
+        buy_datransfercreditplan,
         dailycious_path
       )
       payment.update_attributes({
