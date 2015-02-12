@@ -17,7 +17,11 @@ class CategoriesController < ApplicationController
 	def create
 		@category = @menu.categories.new(category_params)
 		
-		unless @category.save
+		if @category.save
+			if params[:category][:image].present?
+				render action: :crop
+			end
+		else
 			render :new
 		end
 	end
@@ -29,7 +33,11 @@ class CategoriesController < ApplicationController
 	end
 	
 	def update
-		unless @category.update(category_params)
+		if @category.update(category_params)
+			if params[:category][:image].present?
+				render action: :crop
+			end
+		else
 			render :edit
 		end
 	end

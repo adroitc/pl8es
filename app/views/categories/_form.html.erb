@@ -19,7 +19,16 @@
 		<div class="row">
 			<div class="col-sm-6 hidden-xs">
 				<h4 class="margin-top-none"><%= t("forms.upload_image") %></h4>
-					<%=render :partial => "neon/image_upload", :locals => {:instance_class => Category, :name => :image} %>
+				
+				<!-- Image Upload -->
+				<div class="form-group fileinput fileinput-new" data-provides="fileinput">
+					<span class="btn btn-info btn-file">
+						<span class="fileinput-new"><%= t("neon.image_input_select") %></span>
+						<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
+					</span>
+					<span class="fileinput-filename"></span>
+					<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+				</div>
 			</div>
 			<div class="col-sm-6 tab-content">
 				<% hold_locale = I18n.locale %>
@@ -34,10 +43,6 @@
 					</span>
 				<% end %>
 				<% I18n.locale = hold_locale %>
-				
-				
-				
-				
 				
 				<label class="control-label"><strong><%=t("menumalist.category.design") %></strong></label>
 				<div class="row">
@@ -78,5 +83,4 @@
 			<%= t("forms.submit_#{action_name}", :model => Menu.model_name.human) %>
 		<% end %>
 	</div>
-					
 <% end %>
