@@ -1,15 +1,21 @@
 <%= form_for [@menu, @category], remote: true do |f| %>
-	<div class="gallery-image-edit-env">
+	<div class="gallery-image-edit-env <%= 'new-image' unless @category.image.present? %>">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<% if @category.image.present? %>
 			<%= image_tag @category.image.url(:web_large_cropped) %>
 		<% else %>
 			<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
-			<%= image_tag 'sample-crop.jpg', class: 'img-responsive' %>
+			<div class="border-div">
+				<div class="center-holder">
+					<div class="text-holder">
+						Add an image
+					</div>
+				</div>
+			</div>
 		<% end %>
 	</div>
 
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<h4 class="modal-title"><%= t("forms.#{action_name}", :model => Menu.model_name.human) %></h4>
 		<ul class="nav nav-tabs">
 			<% # generate the tabs from the languages %>
