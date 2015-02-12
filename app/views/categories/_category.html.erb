@@ -6,7 +6,7 @@
 				<article class="album" style="margin-bottom:0px;border-width:0px;">
 					<header>
 						<%= link_to show_category_path(category.menu.title.parameterize, category.menu.id, category.title.parameterize, category.id) do %>
-							<%= image_tag category.image.url(:web_cropped) %>
+							<%= image_tag category.image.url(:web_preview_cropped) %>
 						<% end %>
 					</header>
 					<div class="panel-heading">

@@ -37,9 +37,10 @@ class Category < ActiveRecord::Base
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 	has_attached_file :image, format: :png, default_url: "/assets/:class/images/:style.png",
 	
-	styles: { 
-		web_original: { geometry: "580x388" },
-		web_cropped: { geometry: "580x388#", processors: [:nu_cropper] },
+	styles: {
+		web_preview_cropped: { geometry: "256x171#", processors: [:nu_cropper] },
+		web_large: { geometry: "580x388" },
+		web_large_cropped: { geometry: "580x388#", processors: [:nu_cropper] },
 		original_cropping: { geometry: "286x286" },
 		cropped_default_retina: { geometry: "828x552#", processors: [:nu_cropper]}
 	}

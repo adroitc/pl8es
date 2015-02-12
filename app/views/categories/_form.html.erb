@@ -1,7 +1,7 @@
 <%= form_for [@menu, @category], remote: true do |f| %>
 	<div class="gallery-image-edit-env">
 		<% if @category.image.present? %>
-			<%= image_tag @category.image.url(:web_cropped) %>
+			<%= image_tag @category.image.url(:web_large_cropped) %>
 		<% else %>
 			<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
 			<%= image_tag 'sample-crop.jpg', class: 'img-responsive' %>

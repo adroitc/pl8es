@@ -13,7 +13,7 @@
 	});
 	
 	function update_crop(coords) {
-		var ratio = <%= @category.image_geometry(:original).width %> / <%= @category.image_geometry(:web_original).width %>;
+		var ratio = <%= @category.image_geometry(:original).width %> / <%= @category.image_geometry(:web_large).width %>;
 		$("#crop_x").val(Math.round(coords.x * ratio));
 		$("#crop_y").val(Math.round(coords.y * ratio));
 		$("#crop_w").val(Math.round(coords.w * ratio));
@@ -23,7 +23,7 @@
 
 <%= form_for [@menu, @category], remote: true do |f| %>
 	<div class="gallery-image-edit-env">
-		<%= image_tag @category.image.url(:web_original), :id => "cropbox" %>
+		<%= image_tag @category.image.url(:web_large), :id => "cropbox" %>
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	</div>
 
