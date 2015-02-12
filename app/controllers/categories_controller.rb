@@ -63,7 +63,7 @@ class CategoriesController < ApplicationController
 	private
 		
 		def category_params
-			params.require(:category).permit(*Category.globalize_attribute_names, :id, :style)
+			params.require(:category).permit(*Category.globalize_attribute_names, :id, :style, :image, :crop_x, :crop_y, :crop_w, :crop_h)
 		end
 		
 		def authenticate_user

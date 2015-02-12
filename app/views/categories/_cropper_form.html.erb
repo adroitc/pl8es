@@ -1,0 +1,42 @@
+<% Category.validators.find{|v| v.class.to_s == "DimensionsValidator"}.options %>
+
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$('#cropbox').Jcrop({
+			onChange: update_crop,
+			onSelect: update_crop,
+			setSelect: [0, 0, 500, 500],
+			aspectRatio: <%= get_aspect_ratio_of_image(Category) %>
+		});
+	});
+	
+	function update_crop(coords) {
+		var rx = 150/coords.w;
+		var ry = 100/coords.h;
+		$('#preview').css({
+			width: Math.round(rx * <%= @category.image_geometry(:original_cropping).width %>) + 'px',
+			height: Math.round(ry * <%= @category.image_geometry(:original_cropping).height %>) + 'px',
+			marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			marginTop: '-' + Math.round(ry * coords.y) + 'px'
+		});
+		var ratio = <%= @category.image_geometry(:original).width %> / <%= @category.image_geometry(:original_cropping).width %>;
+		$("#crop_x").val(Math.round(coords.x * ratio));
+		$("#crop_y").val(Math.round(coords.y * ratio));
+		$("#crop_w").val(Math.round(coords.w * ratio));
+		$("#crop_h").val(Math.round(coords.h * ratio));
+	}
+</script>
+
+<%= image_tag @category.image.url(:original_cropping), :id => "cropbox" %>
+
+<h4>Preview:</h4>
+<div style="width:150px; height:100px; overflow:hidden">
+	<%= image_tag @category.image.url(:original_cropping), :id => "preview" %>
+</div>
+
+<%= form_for [@menu, @category], remote: true do |f| %>
+	<% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+		<%= f.hidden_field attribute, :id => attribute %>
+	<% end %>
+	<p><%= f.submit "Crop" %></p>
+<% end %>
