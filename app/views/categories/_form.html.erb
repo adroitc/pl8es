@@ -1,4 +1,13 @@
 <%= form_for [@menu, @category], remote: true do |f| %>
+	<div class="gallery-image-edit-env">
+		<% if @category.image.present? %>
+			<%= image_tag @category.image.url(:web_cropped) %>
+		<% else %>
+			<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
+			<%= image_tag 'sample-crop.jpg', class: 'img-responsive' %>
+		<% end %>
+	</div>
+
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<h4 class="modal-title"><%= t("forms.#{action_name}", :model => Menu.model_name.human) %></h4>
@@ -17,19 +26,6 @@
 	
 	<div class="modal-body">
 		<div class="row">
-			<div class="col-sm-6 hidden-xs">
-				<h4 class="margin-top-none"><%= t("forms.upload_image") %></h4>
-				
-				<!-- Image Upload -->
-				<div class="form-group fileinput fileinput-new" data-provides="fileinput">
-					<span class="btn btn-info btn-file">
-						<span class="fileinput-new"><%= t("neon.image_input_select") %></span>
-						<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
-					</span>
-					<span class="fileinput-filename"></span>
-					<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
-				</div>
-			</div>
 			<div class="col-sm-6 tab-content">
 				<% hold_locale = I18n.locale %>
 				<% @languages.each do |language| %>

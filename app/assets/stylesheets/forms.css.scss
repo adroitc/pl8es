@@ -26,6 +26,16 @@ body.modal-open {
 			display: none;
 		}
 	}
+	.gallery-image-edit-env {
+		overflow: hidden;
+	}
+	input[type=file] {
+		cursor: pointer;
+		border: 300px solid transparent;
+		position: absolute;
+		height: 100%;
+		opacity: 0;
+	}
 }
 
 // tile to add new elements
