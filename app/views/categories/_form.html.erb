@@ -1,17 +1,11 @@
 <%= form_for [@menu, @category], remote: true do |f| %>
-	<div class="gallery-image-edit-env <%= 'new-image' unless @category.image.present? %>">
+	<div class="gallery-image-edit-env <%= 'new-image' unless @category.image.exists? %>">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<% if @category.image.present? %>
+		<% if @category.image.exists? %>
 			<%= image_tag @category.image.url(:web_large_cropped) %>
 		<% else %>
 			<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
-			<div class="border-div">
-				<div class="center-holder">
-					<div class="text-holder">
-						Add an image
-					</div>
-				</div>
-			</div>
+			<%= render :partial => 'modals/new_image_div' %>
 		<% end %>
 	</div>
 

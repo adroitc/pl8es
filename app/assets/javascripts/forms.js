@@ -1,10 +1,3 @@
-// trigger form validation after ajax calls
-$(document).ajaxSuccess(function(){
-	if($('#default-modal form[data-validate]').length){
-		$('#default-modal form[data-validate]').enableClientSideValidations();
-	}
-});
-
 $(document).ready(function() {
 	// –– changes button style when toggling a hidden checkbox
 	$("#default-modal").on("click", ".form-group input[type='checkbox']", function() {
@@ -21,4 +14,30 @@ $(document).ready(function() {
 		$(this).hide();
 		$(this).siblings(".confirm").hide();
 	});
+	
+	$("#default-modal").on("change", "input[type='file']", function() {
+		readURL(this);
+	});
 });
+
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		
+		reader.onload = function (e) {
+			$('#new-image-preview').attr('src', e.target.result);
+		}
+		
+		show_image_preview();
+		
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+// & hide the select image box
+function show_image_preview() {
+	$(".border-div").hide();
+	$("#new-image-preview").show();
+	$(".gallery-image-edit-env").addClass("preview");
+	$(".text-holder").text("change image");			
+}
