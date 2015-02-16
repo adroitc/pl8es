@@ -1,3 +1,16 @@
+$(document).ajaxSend(function() {
+	show_loading_bar({
+		pct: 100,
+		delay: 0.5
+	});
+});
+
+$(document).ajaxSuccess(function(){
+	setTimeout(function() {
+		
+	}, 200);
+});
+
 $(document).ready(function() {
 	// –– changes button style when toggling a hidden checkbox
 	$("#default-modal").on("click", ".form-group input[type='checkbox']", function() {
