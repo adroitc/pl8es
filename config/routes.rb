@@ -170,4 +170,6 @@ Pl8es::Application.routes.draw do
   get "/dailycious" => "dailycious#index"
   get "/dailycious/:add_weeks-week" => "dailycious#index"
   
+	  get "restaurants/search" => "restaurants#search", defaults: {format: :json}
+  
 end

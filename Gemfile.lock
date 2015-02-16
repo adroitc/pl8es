@@ -241,7 +241,7 @@ DEPENDENCIES
   geokit-rails
   globalize (~> 4.0.1)
   hirb
-  jbuilder (~> 1.2)
+  jbuilder
   jquery-rails
   jquery-ui-rails
   jsonify

@@ -21,3 +21,5 @@
 
 # Ignore ide settings
 /.idea
+
+/public/system/*
