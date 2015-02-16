@@ -106,6 +106,7 @@ Pl8es::Application.routes.draw do
 			resources :categories
 			
 			post "categories/sort" => "categories#sort", as: :sort_categories
+			get "categories/:id/crop" => "categories#crop", as: :crop_category
 		end
 		
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients

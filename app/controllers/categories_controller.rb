@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 	
 	before_filter :authenticate_user && :authenticate_ownership_and_get_menu
-	before_filter :get_category, only: [:show, :edit, :update, :destroy]
+	before_filter :get_category, only: [:show, :edit, :update, :crop, :destroy]
 	before_filter :get_languages, only: [:new, :create, :edit, :update]
 	
 	respond_to :html, :js
@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
 		
 		if @category.save
 			if params[:category][:image].present?
-				render action: :crop
+				render :crop
 			end
 		else
 			render :new
@@ -35,7 +35,7 @@ class CategoriesController < ApplicationController
 	def update
 		if @category.update(category_params)
 			if params[:category][:image].present?
-				render action: :crop
+				render :crop
 			end
 		else
 			render :edit

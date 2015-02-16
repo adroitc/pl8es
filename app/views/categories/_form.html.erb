@@ -3,6 +3,10 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<% if @category.image.exists? %>
 			<%= image_tag @category.image.url(:web_large_cropped) %>
+			
+			<%= link_to menu_crop_category_path(@category.menu, @category), remote: true, class: 'crop-image' do %>
+				<button type="button" class="btn btn-primary">Crop</button>
+			<% end %>
 		<% else %>
 			<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
 			<%= render :partial => 'modals/new_image_div' %>

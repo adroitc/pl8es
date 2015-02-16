@@ -107,6 +107,12 @@ body.modal-open {
 			width: 100%;
 			height: 388px;
 		}
+		
+		a.crop-image {
+			position: absolute;
+			right: 2em;
+			bottom: 2em;
+		}
 	}
 	
 }
