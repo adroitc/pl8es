@@ -39,8 +39,8 @@ class Category < ActiveRecord::Base
 	
 	styles: {
 		web_preview_cropped: { geometry: "256x171#", processors: [:nu_cropper] },
-		web_large: { geometry: "580x388" },
-		web_large_cropped: { geometry: "580x388#", processors: [:nu_cropper] },
+		web_large: { geometry: "747x497" },
+		web_large_cropped: { geometry: "747x497#", processors: [:nu_cropper] },
 		original_cropping: { geometry: "286x286" },
 		cropped_default_retina: { geometry: "828x552#", processors: [:nu_cropper]}
 	}
