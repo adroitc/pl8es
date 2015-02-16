@@ -1,4 +1,6 @@
 class Restaurant < ActiveRecord::Base
+	scope :referred, -> { joins(:user).where(users: { product_referer: :g }) }
+	
   belongs_to :user
   has_one :location
   belongs_to :default_language, :class_name => "Language"
