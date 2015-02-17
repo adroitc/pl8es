@@ -19,6 +19,7 @@ class CategoriesController < ApplicationController
 		
 		if @category.save
 			if params[:category][:image].present?
+				@new_category = true
 				render :crop
 			end
 		else
@@ -59,6 +60,10 @@ class CategoriesController < ApplicationController
 		end
 		render :json => {:status => "invalid"}
 	end
+	
+	
+	# ––––––––––
+	
 	
 	private
 		

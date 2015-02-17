@@ -1,2 +1,9 @@
 $('#default-modal .modal-content').html("<%= j render 'cropper_form' %>");
 $('#default-modal').modal('show');
+
+<% if defined?(@new_category) && @new_category %>
+	$("#cropbox").on("load", function() {
+		var new_category = $("<%= j render partial: 'category', locals: {category: @category } %>");
+		$(new_category).hide().appendTo("#form_sort_category .ui-sortable").fadeIn(1500);
+	});
+<% end %>
