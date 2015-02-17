@@ -18,12 +18,12 @@ $(document).ready(function() {
 	});
 	
 	// –– deleting a record requires a confirm - manage hiding & showing
-	$("#default-modal").on("click", ".modal-delete button.delete", function() {
+	$("#default-modal").on("click", ".modal-delete button.btn-danger", function() {
 		$(this).hide();
 		$(this).siblings(".cancel, .confirm").show();
 	});
 	$("#default-modal").on("click", ".modal-delete button.cancel", function() {
-		$(this).siblings(".delete").show();
+		$(this).siblings(".btn-danger").show();
 		$(this).hide();
 		$(this).siblings(".confirm").hide();
 	});
