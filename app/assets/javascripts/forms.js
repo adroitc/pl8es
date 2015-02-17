@@ -38,7 +38,7 @@ function readURL(input) {
 		var reader = new FileReader();
 		
 		reader.onload = function (e) {
-			$('#new-image-preview').attr('src', e.target.result);
+			$('#image-preview').attr('src', e.target.result);
 		}
 		
 		show_image_preview();
