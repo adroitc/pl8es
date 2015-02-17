@@ -25,7 +25,7 @@
 			</li>
 			<% if @category.category != nil%>
 			<li class="">
-				<a href="<%= show_category_path(@category.menu.title.parameterize, @category.menu.id, @category.category.title.parameterize, @category.category.id) %>">
+				<a href="<%= menu_category_path(@category.menu, @category) %>">
 					<%=@category.category.title %>
 				</a>
 			</li>

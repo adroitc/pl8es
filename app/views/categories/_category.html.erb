@@ -5,7 +5,7 @@
 			<div class="panel-body" style="margin:0px;padding:0px;">
 				<article class="album" style="margin-bottom:0px;border-width:0px;">
 					<header>
-						<%= link_to show_category_path(category.menu.title.parameterize, category.menu.id, category.title.parameterize, category.id) do %>
+						<%= link_to menu_category_path(category.menu, category) do %>
 							<%= image_tag category.image.url(:web_preview_cropped) %>
 						<% end %>
 					</header>
