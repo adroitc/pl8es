@@ -115,6 +115,11 @@ body.modal-open {
 		}
 	}
 	
+	// fixes the height & width issue of Jcrop
+	canvas {
+		width: 100% !important;
+		height: 100% !important;
+	}
 }
 
 // tile to add new elements

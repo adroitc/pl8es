@@ -1,18 +1,24 @@
-<% Category.validators.find{|v| v.class.to_s == "DimensionsValidator"}.options %>
-
 <script type="text/javascript" charset="utf-8">
 	$(function() {
-		$('#cropbox').Jcrop({
-			onChange: update_crop,
-			onSelect: update_crop,
-			setSelect: [0, 0, 500, 500],
-			boxWidth: 580,
-      boxHeight: 388,
-			aspectRatio: <%= get_aspect_ratio_of_image(Category) %>
+		$("img#cropbox").on("load", function() {
+			
+			$(this).Jcrop({
+				setSelect: [25, 25, 520, 347],
+				boxWidth: 580,
+				aspectRatio: <%= get_aspect_ratio_of_image(Category) %>
+			},function(){
+				// when moving the cropbox, update the coords
+				this.ui.selection.element.on('cropmove cropend',function(e,s,c){
+					update_coords(c);
+				});
+				
+				// with css, canvas gets smaller, so has to refresh the coords
+				this.refresh();
+			});
 		});
 	});
 	
-	function update_crop(coords) {
+	function update_coords(coords) {
 		var ratio = <%= @category.image_geometry(:original).width %> / <%= @category.image_geometry(:web_large).width %>;
 		$("#crop_x").val(Math.round(coords.x * ratio));
 		$("#crop_y").val(Math.round(coords.y * ratio));
@@ -21,12 +27,12 @@
 	}
 </script>
 
-<%= form_for [@menu, @category], remote: true do |f| %>
-	<div class="gallery-image-edit-env">
-		<%= image_tag @category.image.url(:web_large), :id => "cropbox" %>
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	</div>
+<div class="gallery-image-edit-env">
+	<%= image_tag @category.image.url(:web_large), :id => "cropbox" %>
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+</div>
 
+<%= form_for [@menu, @category], remote: true do |f| %>
 	<% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
 		<%= f.hidden_field attribute, :id => attribute %>
 	<% end %>
@@ -40,3 +46,4 @@
 		<% end %>
 	</div>
 <% end %>
+
