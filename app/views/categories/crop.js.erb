@@ -1,9 +1,16 @@
 $('#default-modal .modal-content').html("<%= j render 'cropper_form' %>");
 $('#default-modal').modal('show');
 
+$("#cropbox").on("load", function() {
 <% if defined?(@new_category) && @new_category %>
-	$("#cropbox").on("load", function() {
-		var new_category = $("<%= j render partial: 'category', locals: {category: @category } %>");
-		$(new_category).hide().appendTo("#form_sort_category .ui-sortable").fadeIn(1500);
-	});
+	// after adding a new category, append it to the categories
+	var new_category = $("<%= j render partial: 'category', locals: {category: @category } %>");
+	$(new_category).hide().appendTo("#form_sort_category .ui-sortable").fadeIn(1500);
 <% end %>
+
+<% if defined?(@added_image) && @added_image %>
+	// after adding an image to an existing category, update the category partial
+	var edited_category = $("<%= j render partial: 'category', locals: {category: @category} %>");
+	$("#category-holder-<%= @category.id %>").html(edited_category);
+<% end %>
+});

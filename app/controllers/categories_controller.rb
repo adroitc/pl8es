@@ -36,6 +36,7 @@ class CategoriesController < ApplicationController
 	def update
 		if @category.update(category_params)
 			if params[:category][:image].present?
+				@added_image = true
 				render :crop
 			end
 		else
