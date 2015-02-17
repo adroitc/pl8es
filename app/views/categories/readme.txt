@@ -49,6 +49,7 @@
 		edit.js
 			
 			- renders the form
+			- updates the category partial after deleting its image
 			
 		new.js
 			

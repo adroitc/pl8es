@@ -4,9 +4,10 @@
 		<% if @category.image.exists? %>
 			<%= image_tag @category.image.url(:web_large_cropped) %>
 			
-			<%= link_to menu_crop_category_path(@category.menu, @category), remote: true, class: 'crop-image' do %>
-				<button type="button" class="btn btn-primary">Crop</button>
+			<%= link_to menu_crop_category_path(@category.menu, @category), remote: true do %>
+				<button type="button" class="btn btn-primary crop-button">Crop</button>
 			<% end %>
+			<%= render file: "modals/delete", locals: { destroy_link: menu_destroy_category_image_path(@category.menu, @category), remote: true } %>
 		<% else %>
 			<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
 			<%= render :partial => 'modals/new_image_div' %>
@@ -73,7 +74,7 @@
 	
 	<div class="modal-footer">
 		<% # only display the destroy button on edit %>
-		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_category_path(@menu, @category), :remote => true} if ["edit", "update"].include? action_name %>
+		<%= render :file => "modals/delete", :locals => {:destroy_link => menu_category_path(@menu, @category), :remote => true} if ["edit", "update", "destroy_image"].include? action_name %>
 		
 		<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("forms.cancel") %></button>
 		<%= f.button :type => "submit", :class => "btn btn-info icon-left" do %>

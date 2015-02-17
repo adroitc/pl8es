@@ -107,6 +107,7 @@ Pl8es::Application.routes.draw do
 			
 			post "categories/sort" => "categories#sort", as: :sort_categories
 			get "categories/:id/crop" => "categories#crop", as: :crop_category
+			delete "categories/:id/destroy_image" => "categories#destroy_image", as: :destroy_category_image
 		end
 		
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients

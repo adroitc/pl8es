@@ -11,3 +11,7 @@ en:
     cancel: "cancel"
     upload_image: "Upload image"
     submit: "Submit"
+    
+    # destroy_image renders edit, so it must say the same
+    destroy_image: "Update %{model}"
+    submit_destroy_image: "Update"

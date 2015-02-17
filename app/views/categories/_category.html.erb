@@ -1,4 +1,4 @@
-<% unless action_name == "update" %>
+<% unless action_name == "update" || action_name == "destroy_image"%>
 	<div class="col-sm-3" id="category-holder-<%= category.id %>">
 <% end %>
 		<div class="panel panel-primary" data-collapsed="0">
@@ -34,6 +34,6 @@
 				</article>
 			</div>
 		</div>
-<% unless action_name == "edit" %>
+<% unless action_name == "update" || action_name == "destroy_image"%>
 	</div>
 <% end %>

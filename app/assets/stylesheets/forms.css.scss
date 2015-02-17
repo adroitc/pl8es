@@ -108,7 +108,18 @@ body.modal-open {
 			height: 388px;
 		}
 		
-		a.crop-image {
+		.modal-delete {
+			position: absolute;
+			left: 2em;
+			bottom: 2em;
+			
+			button {
+				float: left;
+				margin-right: 1em;
+			}
+		}
+		
+		.crop-button {
 			position: absolute;
 			right: 2em;
 			bottom: 2em;

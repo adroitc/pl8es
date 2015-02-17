@@ -11,3 +11,8 @@ de:
     cancel: "abbrechen"
     upload_image: "Bild hochladen"
     submit: "Bestätigen"
+    
+    # destroy_image renders edit, so it must say the same
+    destroy_image: "%{model} aktualisieren"
+    submit_destroy_image: "Aktualisieren"
+    
