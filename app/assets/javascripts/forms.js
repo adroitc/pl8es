@@ -45,6 +45,9 @@ function readURL(input) {
 		
 		reader.readAsDataURL(input.files[0]);
 	}
+	else {
+		hide_image_preview();
+	}
 }
 
 // & hide the select image box
@@ -52,5 +55,14 @@ function show_image_preview() {
 	$(".border-div").hide();
 	$("#new-image-preview").show();
 	$(".gallery-image-edit-env").addClass("preview");
-	$(".text-holder").text("change image");			
+	$(".text-holder").text("change image");
+}
+
+function hide_image_preview() {
+	$('#image-preview').attr('src', '');
+	
+	$(".border-div").show();
+	$("#new-image-preview").hide();
+	$(".gallery-image-edit-env").removeClass("preview");
+	$(".text-holder").text("Add an image");	
 }
