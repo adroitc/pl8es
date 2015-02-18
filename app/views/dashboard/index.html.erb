@@ -97,26 +97,6 @@
         Date.today-13
       ]).group("date(created_at)").count
       %>
-      <script type="text/javascript">
-      jQuery(document).ready(function($) 
-      {
-        $(".weekly-visitors").sparkline(<%=(Date.today-13..Date.today).map{|r| requests_this_7days_peaks[r].to_i}.to_json %>,{
-      	    type: "line",
-      	    width: "100%",
-      	    height: "55",
-      	    lineColor: "#ff4e50",
-      	    fillColor: "#ffd2d3",
-      	    lineWidth: 2,
-      	    spotColor: "#a9282a",
-      	    minSpotColor: "#a9282a",
-      	    maxSpotColor: "#a9282a",
-      	    highlightSpotColor: "#a9282a",
-      	    highlightLineColor: "#f4c3c4",
-      	    spotRadius: 2,
-      	    drawNormalOnTop: true
-        });
-      });
-      </script>
       <div class="col-sm-4">
   		  <div class="tile-stats tile-white tile-white-primary">
   		  	<div class="icon"><i class="entypo-star-empty"></i></div>
