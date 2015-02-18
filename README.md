@@ -65,41 +65,57 @@ Format your CSS to make it consistent and more readable throughout the project:
 **Preferred:**
 ```css
 .gallery {
-	background: white;
+	//rules here
 }
 ```
 **Not Preferred:**
 ```css
 .gallery
 {
-	background: white;
+	//rules here
 }
 //OR
 .gallery {
-	background: white; }
+	//rules here }
 ```
 
 ### Nesting
 
-Nest where possible and indent accordingly. Remember not to nest to deep, and don't over specify!
+Nest where possible and indent accordingly. Remember not to nest to deep!
 
 **Preferred:**
 ```css
 .gallery {
-	background: white;
+	//rules here
 	
 	img {
-		border: none;
+		//rules here
 	}
 }
 ```
 **Not Preferred:**
 ```css
 .gallery {
-	background: white;
+	//rules here
 }
-.gallery img.my-image {
-	border: none;
+.gallery img {
+	//rules here
 }
 ```
 
+### Specifying
+
+Where possible use single classes or HTML-attributes, and if possible don't ever use `!important` ;)
+
+**Preferred:**
+```css
+.draggable-portlets .panel-primary article {
+	//rules here	
+}
+```
+**Not Preferred:**
+```css
+.gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album {
+	//rules here
+}
+```
