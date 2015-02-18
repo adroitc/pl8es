@@ -7,6 +7,7 @@
 	<div class="gallery-image-edit-env <%= 'new-image' unless @category.image.exists? %>">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<%	# –––– edit image %>
+		<span id="original-img-src" data-original-image-src="<%= @category.image.exists? ? @category.image.url(:web_large_cropped) : '' %>"></span>
 		<% if @category.image.exists? %>
 			<%= image_tag @category.image.url(:web_large_cropped), id: "image-preview" %>
 			

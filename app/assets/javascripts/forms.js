@@ -59,7 +59,7 @@ function show_image_preview() {
 }
 
 function hide_image_preview() {
-	$('#image-preview').attr('src', '');
+	$('#image-preview').attr('src', $("#original-img-src").attr("data-original-image-src"));
 	
 	$(".border-div").show();
 	$("#new-image-preview").hide();
