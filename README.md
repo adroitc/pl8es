@@ -105,7 +105,7 @@ Nest where possible and indent accordingly. Remember not to nest to deep!
 
 ### Specifying
 
-Where possible use single classes or HTML-attributes, and if possible don't ever use `!important` ;)
+Where possible use single classes or HTML-attributes, and don't ever use `!important` ;) (if possible)
 
 **Preferred:**
 ```scss
@@ -119,3 +119,33 @@ Where possible use single classes or HTML-attributes, and if possible don't ever
 	//rules here
 }
 ```
+
+### Naming
+
+Don't repeat parent element names in child elements, that is what correct nesting is for.
+
+**Preferred:**
+```scss
+.pl8es-c-dish {
+	
+	.title {
+		// code here
+	}
+	
+	.price {
+		// code here
+	}
+}
+```
+**Not Preferred:**
+```scss
+.pl8es-c-dish {
+	
+	.pl8es-c-dish-title {
+		// code here
+	}
+	
+	.pl8es-c-dish-price {
+		// code here
+	}
+}
