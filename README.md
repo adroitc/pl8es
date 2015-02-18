@@ -33,3 +33,75 @@ To deploy a new release, run the following in a terminal from within the project
 ```
 cap production deploy
 ```
+
+
+
+
+## General Coding Guidelines
+
+### Commenting
+
+Remove not used code with a descriptive commit, don't leave code blocks as unused comments:
+
+**Preferred:**
+```
+```
+~~if User.loggedIn(session)~~
+	~~@user = User.find(session[:user_id])~~
+~~end~~
+
+**Not Preferred:**
+```
+#if User.loggedIn(session)
+#	@user = User.find(session[:user_id])
+#end
+```
+
+
+## CSS Styleguides
+
+### Formating
+
+Format your CSS to make it consistent and more readable throughout the project:
+
+**Preferred:**
+```
+.gallery {
+	background: white;
+}
+```
+**Not Preferred:**
+```
+.gallery
+{
+	background: white;
+}
+//OR
+.gallery {
+	background: white; }
+```
+
+### Nesting
+
+Nest where possible and indent accordingly. Remember not to nest to deep, and don't over specify!
+
+**Preferred:**
+```
+.gallery {
+	background: white;
+	
+	img {
+		border: none;
+	}
+}
+```
+**Not Preferred:**
+```
+.gallery {
+	background: white;
+}
+.gallery img.my-image {
+	border: none;
+}
+```
+
