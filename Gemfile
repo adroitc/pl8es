@@ -39,6 +39,7 @@ group :doc do
 end
 
 gem "sass-rails", "~> 4.0.0"
+gem "compass-rails"
 
 gem "therubyracer", "0.11.3"
 gem "less-rails"
