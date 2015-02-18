@@ -1,14 +1,15 @@
+// ––
+// –– Ajax Handling - loading animation
+// ––
+
 $(document).ajaxSend(function() {
-	show_loading_bar({
-		pct: 100,
-		delay: 0.5
-	});
+	$(".loading-circle").addClass("animate");
 });
 
 $(document).ajaxSuccess(function(){
 	setTimeout(function() {
-		
-	}, 200);
+		$(".loading-circle").removeClass("animate");
+	}, 300);
 });
 
 $(document).ready(function() {
