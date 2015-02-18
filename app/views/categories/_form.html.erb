@@ -4,39 +4,7 @@
 			#   image form
 			# –––––––––––––– %>
 	
-	<div class="gallery-image-edit-env <%= 'new-image' unless @category.image.exists? %>">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<%	# –––– edit image %>
-		<span id="original-img-src" data-original-image-src="<%= @category.image.exists? ? @category.image.url(:web_large_cropped) : '' %>"></span>
-		<% if @category.image.exists? %>
-			<%= image_tag @category.image.url(:web_large_cropped), id: "image-preview" %>
-			
-			<div class="image-actions-holder">
-				<%= link_to menu_crop_category_path(@category.menu, @category), remote: true do %>
-					<button type="button" class="btn btn-primary crop-button"><i class="entypo-resize-small"></i></button>
-				<% end %>
-				
-				<button type="button" class="btn btn-primary btn-file">
-					<span class="fileinput-exists"><i class="entypo-pencil"></i></span>
-					<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
-				</button>
-				
-				<span class="modal-delete">
-				  <button type="button" class="btn btn-danger"><i class="entypo-cancel"></i></button>
-				  <button type="button" class="btn btn-default cancel"><%=t("neon.delete_cancel") %></button>
-				  
-					<%= link_to menu_destroy_category_image_path(@category.menu, @category), :method => "delete", :remote => true, :class => "confirm" do %>
-				    <button type="button" class="btn btn-danger"><%=t("neon.delete_confirm") %></button>
-					<% end %>
-				</span>
-			</div>
-			
-		<%	# –––– new image %>
-		<% else %>
-			<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
-			<%= render :partial => 'modals/new_image_div' %>
-		<% end %>
-	</div>
+	<%= render 'modals/image_form', :object => @category, :image => @category.image, :f => f %>
 	
 	<%	# –––––––––––––––––––––
 			#   title & languages
