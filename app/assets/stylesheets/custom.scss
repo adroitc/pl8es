@@ -4,277 +4,259 @@
  *
 */
 
-body {
-	
-}
 .profile-info.dropdown > a img {
-  border: solid 1px transparent;
+	border: solid 1px transparent;
 }
 .pl8es_c_table-toolbar {
-  float: right;
-  margin-right: 12px;
+	float: right;
+	margin-right: 12px;
+	
+	.btn {
+		margin-top: -4px;
+	}
 }
-.pl8es_c_table-toolbar .btn {
-  margin-top: -4px;
+.draggable-portlets {
+	
+	.sorted .ui-sortable-placeholder {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		background-color: #eee;
+		margin-top: -2px;
+		margin-bottom: -2px;
+	}
+	
+	.sorted .panel .panel-heading {
+		cursor: move;
+	}
 }
-.draggable-portlets .sorted .ui-sortable-placeholder
-{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #eee;
-  margin-top: -2px;
-  margin-bottom: -2px;
+.gallery-env.draggable-portlets {
+	
+	.panel {
+		border-radius: 0px;
+		border-radius: 0px;
+		
+		* {
+			border-radius: 0px;
+			border-radius: 0px;
+		}
+		
+		img {
+			-webkit-border-radius: 0 0 0 0;
+			-webkit-background-clip: padding-box;
+			-moz-border-radius: 0 0 0 0;
+			-moz-background-clip: padding;
+			border-radius: 0 0 0 0;
+		}
+	}
+	
+	article.album .panel-heading {
+		color: #fff;
+		position: absolute;
+		margin-top: -40px;
+		margin-bottom: -40px;
+		background-color: rgba(0,0,0,0.4);
+		width: 100%;
+		border-top-right-radius: 0px;
+		border-top-left-radius: 0px;
+		
+		.panel-title {
+			height: 40px;
+			line-height: 40px;
+			padding-top: 0px;
+			padding-bottom: 0px;
+			padding-left: 10px;
+			padding-right: 10px;
+			font-weight: normal;
+			width: 100%;
+		}
+	}	
 }
-.draggable-portlets .sorted .panel .panel-heading
-{
-  cursor: move;
+.gallery-env.draggable-portlets div.panel.panel-primary.panel-add {
+	background-color: transparent;
+	border-color: transparent;
+	
+	div.panel-body {
+		border: 4px dashed #999;
+	}	
+	&:hover div.panel-body {
+		border: 4px dashed #666;
+	}
+	
+	
+	article.album {
+		header img {
+			visibility: hidden;
+		}
+		
+		div.panel-heading {
+			background-color: transparent;
+			color: #666;
+			position: absolute;
+			top: 0px;
+			margin: 0px;
+			height: 100%;
+			line-height: 100%;
+			text-align: center;
+			display: table-cell;
+			vertical-align: middle;
+			line-height: 100%;
+			/*line-height: 40px;*/
+			
+			div {
+				width: 100%;
+				position: absolute;
+				top: 50%;
+				margin-top: -14px;
+				text-align: center;
+				font-size: 60px;
+			}
+		}
+	}
+	&:hover article.album div.panel-heading {
+		color: #333;
+		pointer-events: none;
+	}
 }
-.gallery-env.draggable-portlets .panel
-{
-    border-radius: 0px;
-    border-radius: 0px;
+
+ul.ui-selectable {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	
+	li.ui-selectee {
+		border: solid 2px #fff;
+		
+		&.ui-selected {
+			border: solid 2px #21a9e1;
+		}
+	}
 }
-.gallery-env.draggable-portlets .panel *
-{
-    border-radius: 0px;
-    border-radius: 0px;
+.pl8es_c_dish {
+	
+	.pl8es_c_dish_title {
+		padding-top: 6px;
+		padding-bottom: 6px;
+		color: #000;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	
+	.pl8es_c_dish_price {
+		padding: 6px;
+		background-color: rgba(0,0,0,0.2);
+		color: #fff;
+		font-weight: bold;
+		display: inline-block;
+	}
 }
-.gallery-env.draggable-portlets .panel img
-{
-  -webkit-border-radius: 0 0 0 0;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 0 0 0 0;
-  -moz-background-clip: padding;
-  border-radius: 0 0 0 0;
+.modal .modal-dialog .modal-content .modal-header ul.nav.nav-tabs {
+	display: inline-block;
+	margin-bottom: 0px;
+	border-bottom: 0px solid transparent;
+	
+	li {
+		margin-bottom: -20px;
+		
+		a {
+			padding-bottom: 15px;
+		}
+	}
 }
-.gallery-env.draggable-portlets article.album .panel-heading
-{
-  color: #fff;
-  position: absolute;
-  margin-top: -40px;
-  margin-bottom: -40px;
-  background-color: rgba(0,0,0,0.4);
-  width: 100%;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
+div.form-group.fileinput.fileinput-new {
+	
+	.fileinput-filename, .close {
+		position: absolute;
+	}
 }
-.gallery-env.draggable-portlets article.album .panel-heading .panel-title
-{
-  height: 40px;
-  line-height: 40px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-weight: normal;
-  width: 100%;
+div.has-switch div.switch-off input {
+	display: none;
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add
-{
-  background-color: transparent;
-  border-color: transparent;
+.select2-container .select2-choice {
+	height: 31px;
+	line-height: 31px;
+	
+	.select2-chosen {
+		height: 31px;
+		line-height: 31px;
+	}
+	
+	.select2-arrow {
+		height: 31px;
+		line-height: 31px;
+	}
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add div.panel-body
-{
-  border: 4px dashed #999;
+div.tile-stats.datepicker.weekpicker {
+	float: left;
+	padding: 0px;
+	border: solid 0px transparent;
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add:hover div.panel-body
-{
-  border: 4px dashed #666;
+.form-group.fileinput.validate-has-error span.btn.btn-info.btn-file {
+	overflow: visible;
+	border-color: #cc2424;
+	
+	span.validate-has-error {
+		position: absolute;
+		left: 0px;
+		top: 30px;
+		background-color: #fff;
+	}
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album header img
-{
-  visibility: hidden;
+.form-group.fileinput.validate-has-error-file span.btn.btn-info.btn-file {
+	overflow: visible;
+	border-color: #cc2424;
+	
+	span.validate-has-error-file {
+		position: absolute;
+		left: 0px;
+		top: 30px;
+		background-color: #fff;
+		color: #cc2424;
+		display: inline-block;
+		margin-top: 5px;
+	}
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album div.panel-heading
-{
-  /*background-color: rgba(0,0,0,0.02);*/
-  background-color: transparent;
-  color: #666;
-  position: absolute;
-  top: 0px;
-  margin: 0px;
-  height: 100%;
-  line-height: 100%;
-  text-align: center;
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 100%;
-  /*line-height: 40px;*/
+
+span.pl8es-modal-delete {
+	
+	button.btn.pl8es-btn-delete {
+		float: left;
+		opacity: 0.2;
+		
+		&:hover {
+			opacity: 0.4;
+		}
+	}
+	
+	button.btn.pl8es-btn-delete-cancel {
+		float: left;
+		display: none;
+		margin-right: 8px;
+	}
+	
+	button.btn.pl8es-btn-delete-confirm {
+		float: left;
+		display: none;
+	}
+	
+	input.pl8es-input-delete {
+		display: none;
+	}
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add:hover article.album div.panel-heading
-{
-  color: #333;
-  pointer-events: none;
+.neon-loading-bar span {
+	background-color: #68ccf0;
 }
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album div.panel-heading div
-{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  margin-top: -14px;
-  text-align: center;
-  font-size: 60px;
-}
-ul.ui-selectable
-{
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-ul.ui-selectable li.ui-selectee
-{
-  /*display: inline;*/
-  border: solid 2px #fff;
-}
-ul.ui-selectable li.ui-selectee.ui-selected
-{
-  border: solid 2px #21a9e1;
-}
-.pl8es_c_dish .pl8es_c_dish_title
-{
-  /*margin-right: 6px;*/
-  padding-top: 6px;
-  padding-bottom: 6px;
-  color: #000;
-  font-size: 14px;
-  font-weight: bold;
-  /*display: inline;*/
-}
-.pl8es_c_dish .pl8es_c_dish_price
-{
-  padding: 6px;
-  background-color: rgba(0,0,0,0.2);
-  color: #fff;
-  font-weight: bold;
-  display: inline-block;
-}
-.modal .modal-dialog .modal-content .modal-header ul.nav.nav-tabs
-{
-  display: inline-block;
-  margin-bottom: 0px;
-  border-bottom: 0px solid transparent;
-}
-.modal .modal-dialog .modal-content .modal-header ul.nav.nav-tabs li
-{
-  /*
-  margin-bottom: 0px;
-  background-color: rgba(0,0,0,0.1);
-  margin-left: 8px;
-  */
-  margin-bottom: -20px;
-}
-.modal .modal-dialog .modal-content .modal-header ul.nav.nav-tabs li a
-{
-  /*
-  border: 0px solid transparent;
-  padding: 6px;
-  margin: 0px;
-  background-color: transparent;
-  */
-  padding-bottom: 15px;
-}
-div.form-group.fileinput.fileinput-new .fileinput-filename
-{
-  position: absolute;
-}
-div.form-group.fileinput.fileinput-new .close
-{
-  position: absolute;
-}
-div.has-switch div.switch-off input
-{
-  display: none;
-}
-.select2-container .select2-choice
-{
-  height: 31px;
-  line-height: 31px;
-}
-.select2-container .select2-choice .select2-chosen
-{
-  height: 31px;
-  line-height: 31px;
-}
-.select2-container .select2-choice .select2-arrow
-{
-  height: 31px;
-  line-height: 31px;
-}
-div.tile-stats.datepicker.weekpicker
-{
-  float: left;
-  padding: 0px;
-  border: solid 0px transparent;
-}
-.form-group.fileinput.validate-has-error span.btn.btn-info.btn-file
-{
-  overflow: visible;
-  border-color: #cc2424;
-}
-.form-group.fileinput.validate-has-error span.btn.btn-info.btn-file span.validate-has-error
-{
-  position: absolute;
-  left: 0px;
-  top: 30px;
-  background-color: #fff;
-}
-.form-group.fileinput.validate-has-error-file span.btn.btn-info.btn-file
-{
-  overflow: visible;
-  border-color: #cc2424;
-}
-.form-group.fileinput.validate-has-error-file span.btn.btn-info.btn-file span.validate-has-error-file
-{
-  position: absolute;
-  left: 0px;
-  top: 30px;
-  background-color: #fff;
-  color: #cc2424;
-  display: inline-block;
-  margin-top: 5px;
-}
-span.pl8es-modal-delete button.btn.pl8es-btn-delete
-{
-  float: left;
-  opacity: 0.2;
-}
-span.pl8es-modal-delete button.btn.pl8es-btn-delete:hover
-{
-  opacity: 0.4;
-}
-span.pl8es-modal-delete button.btn.pl8es-btn-delete-cancel
-{
-  float: left;
-  display: none;
-  margin-right: 8px;
-}
-span.pl8es-modal-delete button.btn.pl8es-btn-delete-confirm
-{
-  float: left;
-  display: none;
-}
-span.pl8es-modal-delete input.pl8es-input-delete
-{
-  display: none;
-}
-.neon-loading-bar span
-{
-  background-color: #68ccf0;
-}
-.pl8es_public_daily_panel_price
-{
-  position: absolute;
-  z-index: 20;
-  right: 0px;
-  margin-top: 8px;
-  margin-right: 8px;
-  line-height: 24px;
-  padding-left: 6px;
-  padding-right: 6px;
-  background-color: rgba(168, 168, 168, 0.8);
-  color: #fff;
-  font-size: 14px;
-  font-weight: normal;
-  border: 1px solid #ffffff;
+.pl8es_public_daily_panel_price {
+	position: absolute;
+	z-index: 20;
+	right: 0px;
+	margin-top: 8px;
+	margin-right: 8px;
+	line-height: 24px;
+	padding-left: 6px;
+	padding-right: 6px;
+	background-color: rgba(168, 168, 168, 0.8);
+	color: #fff;
+	font-size: 14px;
+	font-weight: normal;
+	border: 1px solid #ffffff;
 }
