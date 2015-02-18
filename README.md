@@ -63,13 +63,13 @@ Remove not used code with a descriptive commit, don't leave code blocks as unuse
 Format your CSS to make it consistent and more readable throughout the project:
 
 **Preferred:**
-```css
+```scss
 .gallery {
 	//rules here
 }
 ```
 **Not Preferred:**
-```css
+```scss
 .gallery
 {
 	//rules here
@@ -84,7 +84,7 @@ Format your CSS to make it consistent and more readable throughout the project:
 Nest where possible and indent accordingly. Remember not to nest to deep!
 
 **Preferred:**
-```css
+```scss
 .gallery {
 	//rules here
 	
@@ -94,7 +94,7 @@ Nest where possible and indent accordingly. Remember not to nest to deep!
 }
 ```
 **Not Preferred:**
-```css
+```scss
 .gallery {
 	//rules here
 }
@@ -108,13 +108,13 @@ Nest where possible and indent accordingly. Remember not to nest to deep!
 Where possible use single classes or HTML-attributes, and if possible don't ever use `!important` ;)
 
 **Preferred:**
-```css
+```scss
 .draggable-portlets .panel-primary article {
 	//rules here	
 }
 ```
 **Not Preferred:**
-```css
+```scss
 .gallery-env.draggable-portlets div.panel.panel-primary.panel-add article.album {
 	//rules here
 }
