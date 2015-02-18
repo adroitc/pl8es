@@ -46,12 +46,10 @@ Remove not used code with a descriptive commit, don't leave code blocks as unuse
 **Preferred:**
 ```
 ```
-~~if User.loggedIn(session)~~
-	~~@user = User.find(session[:user_id])~~
-~~end~~
+`git commit -m "removed check if user is signed in"`
 
 **Not Preferred:**
-```
+```ruby
 #if User.loggedIn(session)
 #	@user = User.find(session[:user_id])
 #end
@@ -65,13 +63,13 @@ Remove not used code with a descriptive commit, don't leave code blocks as unuse
 Format your CSS to make it consistent and more readable throughout the project:
 
 **Preferred:**
-```
+```css
 .gallery {
 	background: white;
 }
 ```
 **Not Preferred:**
-```
+```css
 .gallery
 {
 	background: white;
@@ -86,7 +84,7 @@ Format your CSS to make it consistent and more readable throughout the project:
 Nest where possible and indent accordingly. Remember not to nest to deep, and don't over specify!
 
 **Preferred:**
-```
+```css
 .gallery {
 	background: white;
 	
@@ -96,7 +94,7 @@ Nest where possible and indent accordingly. Remember not to nest to deep, and do
 }
 ```
 **Not Preferred:**
-```
+```css
 .gallery {
 	background: white;
 }
