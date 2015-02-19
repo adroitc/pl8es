@@ -111,6 +111,7 @@ Pl8es::Application.routes.draw do
 		get "/:menu_title/:menu_id/:parent_category_title/:parent_category_id/:category_title/:category_id" => "categories#show", as: :show_sub_category
 		
 		resources :dishes
+		post "dishes/sort" => "dishes#sort", as: :sort_dishes
 	end
 	
 	#signup
