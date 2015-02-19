@@ -26,6 +26,7 @@
 		<strong><%=@category.title %></strong>
 	</li>
 </ol>
+
 <h2><%=@category.menu.title %> - <%=@category.title %></h2>
 <br />
 <div class="row gallery-env draggable-portlets">
@@ -44,8 +45,9 @@
 			<% end %>
 		</span>
 	<% end %>
+	
 	<% if @category.category == nil && @category.dishes.count == 0 %>
-	<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
+		<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
 	<% end %>
 	
 	<% if @category.children.count == 0 %>
