@@ -21,16 +21,18 @@
 		
 		<div class="page-container">
 			<div class="sidebar-menu">
-				<%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-menumalist.png")} %>
+				<%= render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-menumalist.png")} %>
 				<% if @user %>
-					<%=render :partial => "layouts/menu" %>
+					<%= render :partial => "layouts/menu" %>
 				<% else %>
-					<%=render :partial => "layouts/public_menu" %>
+					<%= render :partial => "layouts/public_menu" %>
 				<% end %>
 			</div>
 			<div class="main-content">
 				<%= render :partial => "layouts/topbar" if @user%>
 				<%= yield %>
+				
+				<%= render :partial => "layouts/footer" %>
 			</div>
 		</div>
 		<%= render :file => "modals/index" %>

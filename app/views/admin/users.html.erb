@@ -53,7 +53,6 @@
 		</table>
 	</div>
 </div>
-<%=render :partial => "layouts/footer" %>
 
 <% User.all.joins(:restaurant).order("restaurants.name").each do |user| %>
 <%=render :partial => "modal_edituser", :locals => {:user => user} %>
