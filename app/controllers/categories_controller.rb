@@ -79,10 +79,6 @@ class CategoriesController < ApplicationController
 			params.require(:category).permit(*Category.globalize_attribute_names, :id, :style, :image, :crop_x, :crop_y, :crop_w, :crop_h)
 		end
 		
-		def authenticate_user
-			redirect_to login_index_path unless @user
-		end
-		
 		def authenticate_ownership_and_get_menu
 			if @user.restaurant.menus.exists?(params[:menu_id])
 				@menu = @user.restaurant.menus.find(params[:menu_id])

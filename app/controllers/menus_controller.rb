@@ -83,10 +83,6 @@ class MenusController < ApplicationController
 			params.require(:menu).permit(:title, :from_time, :to_time)
 		end
 		
-		def authenticate_user
-			redirect_to login_index_path unless @user
-		end
-		
 		def authenticate_ownership_and_get_menu
 			if @user.restaurant.menus.exists?(params[:id])
 				@menu = @user.restaurant.menus.find(params[:id])

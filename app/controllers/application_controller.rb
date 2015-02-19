@@ -5,7 +5,12 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_current_locale
 
-  private
+	private
+	
+		def authenticate_user
+			redirect_to login_index_path unless @user
+		end
+	
   def set_current_locale
     
     #user
@@ -96,8 +101,6 @@ class ApplicationController < ActionController::Base
       I18n.locale = @user.restaurant.default_language.locale
     end
   end
-  
-  private
   
   def extract_locale_from_accept_language_header
     if request.env['HTTP_ACCEPT_LANGUAGE']
