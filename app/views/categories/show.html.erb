@@ -30,24 +30,26 @@
 <br />
 <div class="row gallery-env draggable-portlets">
 	<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
-	<span class="sorted ui-sortable">
-		<% @category.sub_categories.each do |category| %>
-		<%=render :partial => "categories/category", :locals => {:category => category} %>
-		<% end %>
-	</span>
+		<span class="sorted ui-sortable">
+			<% @category.children.each do |category| %>
+				<%=render :partial => "categories/category", :locals => {:category => category} %>
+			<% end %>
+		</span>
 	<% end %>
-	<%= form_tag(dish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
-	<span class="sorted ui-sortable">
-		<% @category.dishes.each do |dish| %>
-		<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
-		<% end %>
-	</span>
+	
+	<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
+		<span class="sorted ui-sortable">
+			<% @category.dishes.each do |dish| %>
+				<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
+			<% end %>
+		</span>
 	<% end %>
 	<% if @category.category == nil && @category.dishes.count == 0 %>
 	<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
 	<% end %>
-	<% if @category.sub_categories.count == 0 %>
-	<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish")} %>
+	
+	<% if @category.children.count == 0 %>
+		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(), :title => t("forms.new", :model => Dish.model_name.human) %>
 	<% end %>
 </div>
 

@@ -7,7 +7,7 @@ class Category < ActiveRecord::Base
 	belongs_to :menu
 	has_many :dishes
 	
-	acts_as_tree order: "name"
+	acts_as_tree
 	
 	# –––––––––––––
 	#  Validations

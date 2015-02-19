@@ -17,8 +17,8 @@
 					</div>
 					<footer>
 						<div class="album-images-count" style="padding-left:10px;padding-right:10px;">
-							<% if category.sub_categories.count > 0 %>
-								<%=category.sub_categories.count %>
+							<% if category.children.count > 0 %>
+								<%=category.children.count %>
 								<i class="entypo-folder"></i>
 							<% elsif category.dishes.count > 0 %>
 								<%=category.dishes.count %>
