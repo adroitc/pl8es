@@ -1,78 +1,69 @@
-<% content_for :body_class, "page-body" %>
-<div class="page-container">
-  <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-pl8.png")} %>
-    <%=render :partial => "layouts/menu" %>
-  </div>
-  <div class="main-content">
-    <%=render :partial => "layouts/topbar" %>
-    <ol class="breadcrumb bc-3">
-      <li>
-        <a href="<%= dashboard_index_path %>">
-          <i class="entypo-home"></i>
-          <%=t("layouts.menu.dashboard") %>
-        </a>
-      </li>
-      <li class="">
-        <a href="<%= menus_path %>">
-          <%=t("menumalist.menu.menumalist") %>
-        </a>
-      </li>
-      <li>
-        <a href="<%= show_beverage_page_path(@beverage_navigation.beverage_page.title.parameterize, @beverage_navigation.beverage_page.id) %>">
-          <%=@beverage_navigation.beverage_page.title %>
-        </a>
-      </li>
-      <li class="active">
-        <strong><%=@beverage_navigation.title %></strong>
-      </li>
-    </ol>
-    <h2><%=@beverage_navigation.title %></h2>
-    <br />
-    <div class="row">
-      <div class="col-md-12">
-        <%= form_tag(sort_beverage_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeverage"}) do %>
-          <table class="table table-striped responsive draggable-portlets">
-            <thead>
-              <tr>
-                <th><%=t("menumalist.beverage") %></th>
-                <th width="120px;" style="width:120px;"></th>
-              </tr>
-            </thead>
-            <tbody class="sorted ui-sortable">
-              <% @beverage_navigation.beverages.each do |beverage| %>
-              <tr style="font-size: 18px;">
-                <td>
-                  <a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
-                    <%=beverage.title %>
-                  </a>
-                  <input type="hidden" name="beverage_ids[<%=beverage.id %>]" value="">
-                </td>
-                <td>
-                  <span class="pl8es_c_table-toolbar">
-                    <a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
-                      <button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
-                        <i class="entypo-cog"></i>
-                      </button>
-                    </a>
-                  <span>
-                </td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-        <% end %>
-        <a href="javascript:;" onclick="jQuery('#modal-addbeverage').modal('show');">
-          <button type="button" class="btn btn-info btn-icon icon-left">
-          	<%=t("menumalist.add_new_beverage") %>
-          	<i class="entypo-plus"></i>
-          </button>
-        </a>
-      </div>
-    </div>
-    <%=render :partial => "layouts/footer" %>
-  </div>
+<ol class="breadcrumb bc-3">
+	<li>
+		<a href="<%= dashboard_index_path %>">
+			<i class="entypo-home"></i>
+			<%=t("layouts.menu.dashboard") %>
+		</a>
+	</li>
+	<li class="">
+		<a href="<%= menus_path %>">
+			<%=t("menumalist.menu.menumalist") %>
+		</a>
+	</li>
+	<li>
+		<a href="<%= show_beverage_page_path(@beverage_navigation.beverage_page.title.parameterize, @beverage_navigation.beverage_page.id) %>">
+			<%=@beverage_navigation.beverage_page.title %>
+		</a>
+	</li>
+	<li class="active">
+		<strong><%=@beverage_navigation.title %></strong>
+	</li>
+</ol>
+<h2><%=@beverage_navigation.title %></h2>
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<%= form_tag(sort_beverage_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortbeverage"}) do %>
+			<table class="table table-striped responsive draggable-portlets">
+				<thead>
+					<tr>
+						<th><%=t("menumalist.beverage") %></th>
+						<th width="120px;" style="width:120px;"></th>
+					</tr>
+				</thead>
+				<tbody class="sorted ui-sortable">
+					<% @beverage_navigation.beverages.each do |beverage| %>
+					<tr style="font-size: 18px;">
+						<td>
+							<a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
+								<%=beverage.title %>
+							</a>
+							<input type="hidden" name="beverage_ids[<%=beverage.id %>]" value="">
+						</td>
+						<td>
+							<span class="pl8es_c_table-toolbar">
+								<a href="javascript:;" onclick="jQuery('#modal-editbeverage-<%=beverage.id %>').modal('show');">
+									<button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+										<i class="entypo-cog"></i>
+									</button>
+								</a>
+							<span>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>
+		<a href="javascript:;" onclick="jQuery('#modal-addbeverage').modal('show');">
+			<button type="button" class="btn btn-info btn-icon icon-left">
+				<%=t("menumalist.add_new_beverage") %>
+				<i class="entypo-plus"></i>
+			</button>
+		</a>
+	</div>
 </div>
+<%=render :partial => "layouts/footer" %>
+
 <script type="text/javascript">
 	jQuery(document).ready(function($)
 	{
@@ -86,11 +77,11 @@
 				},
 				stop: function()
 				{
-          $("#form_sortbeverage input[name^='beverage_ids[']").each(function(i){
-            $(this).val(i);
-          });
+					$("#form_sortbeverage input[name^='beverage_ids[']").each(function(i){
+						$(this).val(i);
+					});
 					$draggable_portlets.removeClass('dragging');
-          $("#form_sortbeverage").submit();
+					$("#form_sortbeverage").submit();
 				}
 			});
 			//$(".draggable-portlets .sorted .panel-heading").disableSelection();

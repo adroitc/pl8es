@@ -7,18 +7,32 @@
 		<%= csrf_meta_tags %>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	<body class="<%= yield (:body_class) %> gray skin-white">
+	<body class="<%= yield (:body_class) %> page-body gray skin-white">
 		<div class="loading-circle"></div>
+		
 		<script type="text/javascript">
-		window._token = "<%=form_authenticity_token %>";
-		var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
+			window._token = "<%=form_authenticity_token %>";
+			var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
 		</script>
 		
 		<% if @user && session[:admin_id] && session[:admin_id] != @user.id %>
 			<a href="<%= user_switch(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
 		<% end %>
 		
-		<%= yield %>
+		<div class="page-container">
+			<div class="sidebar-menu">
+				<%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-menumalist.png")} %>
+				<% if @user %>
+					<%=render :partial => "layouts/menu" %>
+				<% else %>
+					<%=render :partial => "layouts/public_menu" %>
+				<% end %>
+			</div>
+			<div class="main-content">
+				<%= render :partial => "layouts/topbar" if @user%>
+				<%= yield %>
+			</div>
+		</div>
 		<%= render :file => "modals/index" %>
 	</body>
 </html>

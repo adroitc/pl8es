@@ -1,137 +1,128 @@
-<% content_for :body_class, "page-body" %>
-<div class="page-container">
-  <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-dailycious.png")} %>
-    <%=render :partial => "layouts/menu" %>
-  </div>
-  <div class="main-content">
-    <%=render :partial => "layouts/topbar" %>
-    <ol class="breadcrumb bc-3">
-      <li>
-        <a href="<%= dashboard_index_path %>">
-          <i class="entypo-home"></i>
-          <%=t("layouts.menu.dashboard") %>
-        </a>
-      </li>
-      <li class="active">
-        <strong>
-          <%=t("layouts.menu.dailycious") %>
-        </strong>
-      </li>
-    </ol>
-    <div class="row">
-      <% if @user.restaurant.dailycious_plan.status > 1 %>
-      <div class="col-sm-4">
-  		  <div class="tile-stats tile-white tile-white-primary">
-  		  	<div class="icon"><i class="entypo-suitcase"></i></div>
-  		  	<div class="num">unlimited</div>
-  		  	<h3><%=t("dailycious.dailis") %></h3>
-          <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
-            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              <%=t("dailycious.change_plan") %>
-              <i class="entypo-plus"></i>
-            </button>
-          </p></a>
-  		  </div>
-  		</div>
-      <% else %>
-      <div class="col-sm-4">
-  		  <div class="tile-stats tile-white tile-white-primary">
-  		  	<div class="icon"><i class="entypo-ticket"></i></div>
-  		  	<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
-			  
-  		  	<h3><%=t("dailycious.dailis") %></h3>
-          <a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
-            <button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-              <%=t("dailycious.get_more") %>
-              <i class="entypo-plus"></i>
-            </button>
-          </p></a>
-  		  </div>
-  		</div>
-      <% end %>
-    </div>
-    <h2><%=t("dailycious.dailycious_title") %></h2>
-    <br />
-    <%
-    date = Date.today
-    if params[:add_weeks]
-      date += params[:add_weeks].to_i*7
-    end
-    %>
-    <div class="row">
-			<div class="col-md-12">
-        <a href="<%=dailycious_add_weeks_path(params[:add_weeks].to_i-1) %>">
-				  <button type="button" class="col-md-3 btn btn-white">
-            <i class="entypo-left-dir"></i>
-            <%=t("dailycious.last_week") %>
-          </button>
-        </a>
-				<button type="button" class="col-md-6 btn btn-default" disabled>
-          <%=t("date.#{date.beginning_of_week.strftime("%a")}") %>,
-          <%=date.beginning_of_week.strftime("%d") %>
-          <%=t("date.#{date.beginning_of_week.strftime("%B")}") %>
-          <%=date.beginning_of_week.strftime("%Y") %>
-          -
-          <%=t("date.#{date.end_of_week.strftime("%a")}") %>,
-          <%=date.end_of_week.strftime("%d") %>
-          <%=t("date.#{date.end_of_week.strftime("%B")}") %>
-          <%=date.end_of_week.strftime("%Y") %>
-        </button>
-        <a href="<%=dailycious_add_weeks_path(params[:add_weeks].to_i+1) %>">
-				  <button type="button" class="col-md-3 btn btn-white">
-            <%=t("dailycious.next_week") %>
-            <i class="entypo-right-dir"></i>
-          </button>
-        </a>
-			</div>
+<ol class="breadcrumb bc-3">
+	<li>
+		<a href="<%= dashboard_index_path %>">
+			<i class="entypo-home"></i>
+			<%=t("layouts.menu.dashboard") %>
+		</a>
+	</li>
+	<li class="active">
+		<strong>
+			<%=t("layouts.menu.dailycious") %>
+		</strong>
+	</li>
+</ol>
+<div class="row">
+	<% if @user.restaurant.dailycious_plan.status > 1 %>
+	<div class="col-sm-4">
+		<div class="tile-stats tile-white tile-white-primary">
+			<div class="icon"><i class="entypo-suitcase"></i></div>
+			<div class="num">unlimited</div>
+			<h3><%=t("dailycious.dailis") %></h3>
+			<a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
+				<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+					<%=t("dailycious.change_plan") %>
+					<i class="entypo-plus"></i>
+				</button>
+			</p></a>
 		</div>
-    <br />
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-striped responsive">
-          <tbody>
-            <%
-            for i in 0..6
-              current_date = (date.beginning_of_week+i)
-            %>
-            <tr style="font-size: 18px;">
-              <%
-              todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => current_date)
-              todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
-              %>
-              <td width="100px;">
-                <%=t("date.#{current_date.strftime("%A")}") %>
-              </td>
-              <td class="row gallery-env draggable-portlets">
-                <%= form_tag(dailydish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
-                <span class="sorted ui-sortable">
-                  <%=render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
-                  <% todays_dailycious_credits.each_with_index do |dailycious_credit, index| %>
-                    <%=render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[index+1]}) if todays_daily_dishes[index+1] %>
-                  <% end %>
-                </span>
-                <% end %>
-                <%
-                if !current_date.past?
-                  dailydish_add_modal = "#modal-adddailydish"
-                  if todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count == 0
-                    dailydish_add_modal = "#modal-buydailydish"
-                %>
-                <%=render :partial => "modals/new_tile",:locals => { :image_size => 0, :js_onclick => "jQuery('#modal-buydailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');", :title => t("dailycious.daily_dish_add")} %>
-                <% else %>
-                <%=render :partial => "modals/new_tile",:locals => { :image_size => 0, :js_onclick => "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');", :title => t("dailycious.daily_dish_add")} %>
-                <% end end %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <%=render :partial => "layouts/footer" %>
-  </div>
+	</div>
+	<% else %>
+	<div class="col-sm-4">
+		<div class="tile-stats tile-white tile-white-primary">
+			<div class="icon"><i class="entypo-ticket"></i></div>
+			<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
+			
+			<h3><%=t("dailycious.dailis") %></h3>
+			<a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show').find('#form-buydailydish').val(0);"><p>
+				<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+					<%=t("dailycious.get_more") %>
+					<i class="entypo-plus"></i>
+				</button>
+			</p></a>
+		</div>
+	</div>
+	<% end %>
 </div>
+<h2><%=t("dailycious.dailycious_title") %></h2>
+<br />
+<%
+date = Date.today
+if params[:add_weeks]
+	date += params[:add_weeks].to_i*7
+end
+%>
+<div class="row">
+	<div class="col-md-12">
+		<a href="<%=dailycious_add_weeks_path(params[:add_weeks].to_i-1) %>">
+			<button type="button" class="col-md-3 btn btn-white">
+				<i class="entypo-left-dir"></i>
+				<%=t("dailycious.last_week") %>
+			</button>
+		</a>
+		<button type="button" class="col-md-6 btn btn-default" disabled>
+			<%=t("date.#{date.beginning_of_week.strftime("%a")}") %>,
+			<%=date.beginning_of_week.strftime("%d") %>
+			<%=t("date.#{date.beginning_of_week.strftime("%B")}") %>
+			<%=date.beginning_of_week.strftime("%Y") %>
+			-
+			<%=t("date.#{date.end_of_week.strftime("%a")}") %>,
+			<%=date.end_of_week.strftime("%d") %>
+			<%=t("date.#{date.end_of_week.strftime("%B")}") %>
+			<%=date.end_of_week.strftime("%Y") %>
+		</button>
+		<a href="<%=dailycious_add_weeks_path(params[:add_weeks].to_i+1) %>">
+			<button type="button" class="col-md-3 btn btn-white">
+				<%=t("dailycious.next_week") %>
+				<i class="entypo-right-dir"></i>
+			</button>
+		</a>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped responsive">
+			<tbody>
+				<%
+				for i in 0..6
+					current_date = (date.beginning_of_week+i)
+				%>
+				<tr style="font-size: 18px;">
+					<%
+					todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => current_date)
+					todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime)
+					%>
+					<td width="100px;">
+						<%=t("date.#{current_date.strftime("%A")}") %>
+					</td>
+					<td class="row gallery-env draggable-portlets">
+						<%= form_tag(dailydish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
+						<span class="sorted ui-sortable">
+							<%=render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[0]}) if todays_daily_dishes.count > 0 %>
+							<% todays_dailycious_credits.each_with_index do |dailycious_credit, index| %>
+								<%=render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => todays_daily_dishes[index+1]}) if todays_daily_dishes[index+1] %>
+							<% end %>
+						</span>
+						<% end %>
+						<%
+						if !current_date.past?
+							dailydish_add_modal = "#modal-adddailydish"
+							if todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count == 0
+								dailydish_add_modal = "#modal-buydailydish"
+						%>
+						<%=render :partial => "modals/new_tile",:locals => { :image_size => 0, :js_onclick => "jQuery('#modal-buydailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');", :title => t("dailycious.daily_dish_add")} %>
+						<% else %>
+						<%=render :partial => "modals/new_tile",:locals => { :image_size => 0, :js_onclick => "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');", :title => t("dailycious.daily_dish_add")} %>
+						<% end end %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<%=render :partial => "layouts/footer" %>
+
 <script type="text/javascript">
 	jQuery(document).ready(function($)
 	{
@@ -147,11 +138,11 @@
 				},
 				stop: function()
 				{
-          var f = $(this).closest("form");
-          f.find(".panel input[name^='daily_dish_ids[']").each(function(i){
-            $(this).val(i);
-          });
-          f.submit();
+					var f = $(this).closest("form");
+					f.find(".panel input[name^='daily_dish_ids[']").each(function(i){
+						$(this).val(i);
+					});
+					f.submit();
 				}
 			});
 			$(".draggable-portlets .sorted .panel-heading").disableSelection();
@@ -163,7 +154,7 @@
 <%=render :partial => "modal_buydailydish" %>
 <%
 for i in 0..6
-  current_date = (date.beginning_of_week+i)
+	current_date = (date.beginning_of_week+i)
 %>
 <% @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
 <%=render :partial => "modal_editdailydish", :locals => {:daily_dish => daily_dish} %>

@@ -1,66 +1,57 @@
-<% content_for :body_class, "page-body" %>
-<div class="page-container">
-	<div class="sidebar-menu">
-		<%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-menumalist.png")} %>
-		<%=render :partial => "layouts/menu" %>
-	</div>
-	<div class="main-content">
-		<%=render :partial => "layouts/topbar" %>
-		<ol class="breadcrumb bc-3">
-			<li>
-				<a href="<%= dashboard_index_path %>">
-					<i class="entypo-home"></i>
-					<%=t("layouts.menu.dashboard") %>
-				</a>
-			</li>
-			<li class="">
-				<a href="<%= menus_path %>">
-					<%=t("menumalist.menu.menumalist") %>
-				</a>
-			</li>
-			<li class="">
-				<a href="<%= menu_path(@category) %>">
-					<%=@category.menu.title %>
-				</a>
-			</li>
-			<% if @category.category != nil%>
-			<li class="">
-				<a href="<%= menu_category_path(@category.menu, @category) %>">
-					<%=@category.category.title %>
-				</a>
-			</li>
-			<% end %>
-			<li class="active">
-				<strong><%=@category.title %></strong>
-			</li>
-		</ol>
-		<h2><%=@category.menu.title %> - <%=@category.title %></h2>
-		<br />
-		<div class="row gallery-env draggable-portlets">
-			<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
-			<span class="sorted ui-sortable">
-				<% @category.sub_categories.each do |category| %>
-				<%=render :partial => "categories/category", :locals => {:category => category} %>
-				<% end %>
-			</span>
-			<% end %>
-			<%= form_tag(dish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
-			<span class="sorted ui-sortable">
-				<% @category.dishes.each do |dish| %>
-				<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
-				<% end %>
-			</span>
-			<% end %>
-			<% if @category.category == nil && @category.dishes.count == 0 %>
-			<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
-			<% end %>
-			<% if @category.sub_categories.count == 0 %>
-			<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish")} %>
-			<% end %>
-		</div>
-		<%=render :partial => "layouts/footer" %>
-	</div>
+<ol class="breadcrumb bc-3">
+	<li>
+		<a href="<%= dashboard_index_path %>">
+			<i class="entypo-home"></i>
+			<%=t("layouts.menu.dashboard") %>
+		</a>
+	</li>
+	<li class="">
+		<a href="<%= menus_path %>">
+			<%=t("menumalist.menu.menumalist") %>
+		</a>
+	</li>
+	<li class="">
+		<a href="<%= menu_path(@category) %>">
+			<%=@category.menu.title %>
+		</a>
+	</li>
+	<% if @category.category != nil%>
+	<li class="">
+		<a href="<%= menu_category_path(@category.menu, @category) %>">
+			<%=@category.category.title %>
+		</a>
+	</li>
+	<% end %>
+	<li class="active">
+		<strong><%=@category.title %></strong>
+	</li>
+</ol>
+<h2><%=@category.menu.title %> - <%=@category.title %></h2>
+<br />
+<div class="row gallery-env draggable-portlets">
+	<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
+	<span class="sorted ui-sortable">
+		<% @category.sub_categories.each do |category| %>
+		<%=render :partial => "categories/category", :locals => {:category => category} %>
+		<% end %>
+	</span>
+	<% end %>
+	<%= form_tag(dish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
+	<span class="sorted ui-sortable">
+		<% @category.dishes.each do |dish| %>
+		<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
+		<% end %>
+	</span>
+	<% end %>
+	<% if @category.category == nil && @category.dishes.count == 0 %>
+	<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
+	<% end %>
+	<% if @category.sub_categories.count == 0 %>
+	<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-adddish').modal('show');", :title => t("menumalist.add_new_dish")} %>
+	<% end %>
 </div>
+<%=render :partial => "layouts/footer" %>
+
 <script type="text/javascript">
 	jQuery(document).ready(function($)
 	{

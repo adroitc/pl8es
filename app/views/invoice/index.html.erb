@@ -1,62 +1,52 @@
-<% content_for :body_class, "page-body" %>
-<div class="page-container">
-  <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-dailycious.png")} %>
-    <%=render :partial => "layouts/menu" %>
-  </div>
-  <div class="main-content">
-    <%=render :partial => "layouts/topbar" %>
-    <ol class="breadcrumb bc-3">
-      <li>
-        <a href="<%=dashboard_index_path %>">
-          <i class="entypo-home"></i>
-          <%=t("layouts.menu.dashboard") %>
-        </a>
-      </li>
-      <li class="active">
-        <strong>
-          <%=t("layouts.menu.invoices") %>
-        </strong>
-      </li>
-    </ol>
-    <h2><%=t("invoice.invoice_title") %></h2>
-    <br />
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-striped responsive">
-          <tbody>
-            <tr style="font-size: 16px;">
-              <th><%=t("invoice.invoice_date") %></th>
-              <th><%=t("invoice.invoice_billing_contact") %></th>
-              <th><%=t("invoice.invoice_description") %></th>
-              <th><%=t("invoice.invoice_quantity") %></th>
-              <th><%=t("invoice.invoice_total") %></th>
-              <th><%=t("invoice.invoice_download") %></th>
-            </tr>
-            <% @user.payments.where([
-              "successful = (?)",
-              true
-            ]).order("updated_at DESC").each do |p| %>
-            <tr style="font-size: 14px;">
-              <td><%=p.updated_at.strftime("%d-%m-%Y") %></td>
-              <td><%=p.billing_contact %></td>
-              <td><%=p.description %></td>
-              <td><%=p.quantity %></td>
-              <td><%=number_to_currency(p.amount*1.2, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
-              <td>
-                <a href="<%=p.invoice_pdf.url %>" target="_blank">
-                  <button type="button" class="btn btn-info btn-icon icon-left">
-                  	Download
-                  	<i class="entypo-down-thin"></i>
-                  </button>
-                </a>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <%=render :partial => "layouts/footer" %>
-  </div>
+<ol class="breadcrumb bc-3">
+	<li>
+		<a href="<%=dashboard_index_path %>">
+			<i class="entypo-home"></i>
+			<%=t("layouts.menu.dashboard") %>
+		</a>
+	</li>
+	<li class="active">
+		<strong>
+			<%=t("layouts.menu.invoices") %>
+		</strong>
+	</li>
+</ol>
+<h2><%=t("invoice.invoice_title") %></h2>
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped responsive">
+			<tbody>
+				<tr style="font-size: 16px;">
+					<th><%=t("invoice.invoice_date") %></th>
+					<th><%=t("invoice.invoice_billing_contact") %></th>
+					<th><%=t("invoice.invoice_description") %></th>
+					<th><%=t("invoice.invoice_quantity") %></th>
+					<th><%=t("invoice.invoice_total") %></th>
+					<th><%=t("invoice.invoice_download") %></th>
+				</tr>
+				<% @user.payments.where([
+					"successful = (?)",
+					true
+				]).order("updated_at DESC").each do |p| %>
+				<tr style="font-size: 14px;">
+					<td><%=p.updated_at.strftime("%d-%m-%Y") %></td>
+					<td><%=p.billing_contact %></td>
+					<td><%=p.description %></td>
+					<td><%=p.quantity %></td>
+					<td><%=number_to_currency(p.amount*1.2, :unit => "€", :separator => ",", :delimiter => ".", :format => "%n %u") %></td>
+					<td>
+						<a href="<%=p.invoice_pdf.url %>" target="_blank">
+							<button type="button" class="btn btn-info btn-icon icon-left">
+								Download
+								<i class="entypo-down-thin"></i>
+							</button>
+						</a>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 </div>
+<%=render :partial => "layouts/footer" %>

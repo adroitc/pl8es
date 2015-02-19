@@ -1,130 +1,120 @@
-<% content_for :body_class, "page-body" %>
-<div class="page-container">
-	<div class="sidebar-menu">
-		<%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-menumalist.png")} %>
-		<%=render :partial => "layouts/menu" %>
+<ol class="breadcrumb bc-3">
+	<li>
+		<a href="<%=dashboard_index_path %>">
+			<i class="entypo-home"></i>
+			<%=t("layouts.menu.dashboard") %>
+		</a>
+	</li>
+	<li class="active">
+		<strong>
+			<%=t("menumalist.menu.menumalist") %>
+		</strong>
+	</li>
+</ol>
+<div class="row">
+	<div class="col-sm-4">
+		<div class="tile-stats tile-white">
+			<div class="icon">
+				<i class="glyphicon glyphicon-download"></i>
+			</div>
+			<div class="num">
+				<h2><%=@restaurant.download_code %></h2>
+			</div>
+			<div class="title">
+				<p><%=t("menumalist.download_code_title") %></p>
+			</div>
+		</div>
 	</div>
-	<div class="main-content">
-		<%=render :partial => "layouts/topbar" %>
-		<ol class="breadcrumb bc-3">
-			<li>
-				<a href="<%=dashboard_index_path %>">
-					<i class="entypo-home"></i>
-					<%=t("layouts.menu.dashboard") %>
-				</a>
-			</li>
-			<li class="active">
-				<strong>
-					<%=t("menumalist.menu.menumalist") %>
-				</strong>
-			</li>
-		</ol>
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="tile-stats tile-white">
-					<div class="icon">
-						<i class="glyphicon glyphicon-download"></i>
-					</div>
-					<div class="num">
-						<h2><%=@restaurant.download_code %></h2>
-					</div>
-					<div class="title">
-						<p><%=t("menumalist.download_code_title") %></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="tile-stats tile-white">
-					<div class="icon"><i class="entypo-monitor"></i></div>
-					<div class="num" data-start="0" data-end="<%=@restaurant.clients.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;"><%=@restaurant.clients.actives.count %></div>
-					<span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
-					<h3><%=@restaurant.clients.actives.count == 1 ? t("menumalist.installation") : t("menumalist.installations") %></h3>
-					<p><%=@restaurant.clients.actives.count == 1 ? t("menumalist.installation_on_iPad") : t("menumalist.installations_on_iPads") %>
-						<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-							<%=t("menumalist.installations_want_more") %>
-							<i class="entypo-plus"></i>
-						</button>
-						<br />
-						<%= form_tag(reset_clients_path, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_resetclients"}) do %>
-						<input type="hidden" name="reset" value="true">
-						<button type="submit" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: 12px" <% if @restaurant.client_reset_date && (@restaurant.client_reset_date+31.days) > DateTime.now %>disabled="disabled"<% end %>>
-							<%=t("menumalist.reset_clients") %>
-							<i class="entypo-trash"></i>
-						</button>
-						<% end %>
-						<p><%=t("menumalist.last_reset") %></p>
-						<p><b><%=@restaurant.client_reset_date.strftime("%d. %B %Y") if @restaurant.client_reset_date %></b></p>
-						<p><%=t("menumalist.next_reset") %></p>
-						<p><b><%=(@restaurant.client_reset_date+31.days).strftime("%d. %B %Y") if @restaurant.client_reset_date %></b></p>
-					</p>
-				 </div>
-			</div>
-			<div class="col-sm-4">
-			 	<div class="tile-stats tile-white">
-			 		<div class="icon"><i class="entypo-brush"></i></div>
-			 		<h2><%=t("menumalist.design") %></h3>
-					<a href="javascript:;" onclick="jQuery('#modal-design').modal('show');">
-						<button type="button" class="btn btn-default btn-icon icon-left" style="margin-top: -2px">
-							<%=t("menumalist.design_change") %>
-							<i class="entypo-brush"></i>
-						</button>
-					</a>
-				 </div>
-			</div>
-		</div>
-		<h2><%=t("menumalist.menumalist_title") %></h2>
-		<br />
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table table-striped responsive">
-					<thead>
-						<tr style="font-size: 16px;">
-							<th width="40%"><%= Menu.model_name.human.capitalize %></th>
-							<th width="120px;" style="width:120px;"></th>
-							<th width=""><%=  Category.model_name.human(count: 2).capitalize %></th>
-							<th width=""><%= Dish.model_name.human(count: 2).capitalize %></th>
-						</tr>
-					</thead>
-					<tbody>
-						<% @menus.each do |menu| %>
-							<tr style="font-size: 14px;">
-								<td>
-									<%= link_to menu_path(menu) do %>
-										<%=menu.title %>
-										<span class="badge badge-primary"><%= menu.default? ? t("menumalist.default_menu") : "#{menu.from_time} - #{menu.to_time}" %></span>
-									<% end %>
-								</td>
-								<td>
-									<span class="pl8es_c_table-toolbar">
-										<%= link_to edit_menu_path(menu), remote: true do %>
-											<button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
-												<i class="entypo-cog"></i>
-											</button>
-										<% end %>
-									<span>
-								</td>
-								<td>
-									<%= link_to menu_path(menu) do %>
-										<%= menu.categories.count %>
-										<i class="entypo-folder" style="color:#ccc;"></i>
-									<% end %>
-								</td>
-								<td><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></td>
-							</tr>
-						<% end %>
-					</tbody>
-				</table>
-				<%= link_to new_menu_path, remote: true do %>
-					<button type="button" class="btn btn-info btn-icon icon-left">
-						<%= t("menumalist.menu.new") %>
-						<i class="entypo-plus"></i>
-					</button>
+	<div class="col-sm-4">
+		<div class="tile-stats tile-white">
+			<div class="icon"><i class="entypo-monitor"></i></div>
+			<div class="num" data-start="0" data-end="<%=@restaurant.clients.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;"><%=@restaurant.clients.actives.count %></div>
+			<span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
+			<h3><%=@restaurant.clients.actives.count == 1 ? t("menumalist.installation") : t("menumalist.installations") %></h3>
+			<p><%=@restaurant.clients.actives.count == 1 ? t("menumalist.installation_on_iPad") : t("menumalist.installations_on_iPads") %>
+				<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
+					<%=t("menumalist.installations_want_more") %>
+					<i class="entypo-plus"></i>
+				</button>
+				<br />
+				<%= form_tag(reset_clients_path, {:role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_resetclients"}) do %>
+				<input type="hidden" name="reset" value="true">
+				<button type="submit" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: 12px" <% if @restaurant.client_reset_date && (@restaurant.client_reset_date+31.days) > DateTime.now %>disabled="disabled"<% end %>>
+					<%=t("menumalist.reset_clients") %>
+					<i class="entypo-trash"></i>
+				</button>
 				<% end %>
-			</div>
-		</div>
-		<%=render :partial => "layouts/footer" %>
+				<p><%=t("menumalist.last_reset") %></p>
+				<p><b><%=@restaurant.client_reset_date.strftime("%d. %B %Y") if @restaurant.client_reset_date %></b></p>
+				<p><%=t("menumalist.next_reset") %></p>
+				<p><b><%=(@restaurant.client_reset_date+31.days).strftime("%d. %B %Y") if @restaurant.client_reset_date %></b></p>
+			</p>
+		 </div>
+	</div>
+	<div class="col-sm-4">
+	 	<div class="tile-stats tile-white">
+	 		<div class="icon"><i class="entypo-brush"></i></div>
+	 		<h2><%=t("menumalist.design") %></h3>
+			<a href="javascript:;" onclick="jQuery('#modal-design').modal('show');">
+				<button type="button" class="btn btn-default btn-icon icon-left" style="margin-top: -2px">
+					<%=t("menumalist.design_change") %>
+					<i class="entypo-brush"></i>
+				</button>
+			</a>
+		 </div>
 	</div>
 </div>
+<h2><%=t("menumalist.menumalist_title") %></h2>
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped responsive">
+			<thead>
+				<tr style="font-size: 16px;">
+					<th width="40%"><%= Menu.model_name.human.capitalize %></th>
+					<th width="120px;" style="width:120px;"></th>
+					<th width=""><%=  Category.model_name.human(count: 2).capitalize %></th>
+					<th width=""><%= Dish.model_name.human(count: 2).capitalize %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @menus.each do |menu| %>
+					<tr style="font-size: 14px;">
+						<td>
+							<%= link_to menu_path(menu) do %>
+								<%=menu.title %>
+								<span class="badge badge-primary"><%= menu.default? ? t("menumalist.default_menu") : "#{menu.from_time} - #{menu.to_time}" %></span>
+							<% end %>
+						</td>
+						<td>
+							<span class="pl8es_c_table-toolbar">
+								<%= link_to edit_menu_path(menu), remote: true do %>
+									<button type="button" class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+										<i class="entypo-cog"></i>
+									</button>
+								<% end %>
+							<span>
+						</td>
+						<td>
+							<%= link_to menu_path(menu) do %>
+								<%= menu.categories.count %>
+								<i class="entypo-folder" style="color:#ccc;"></i>
+							<% end %>
+						</td>
+						<td><%=menu.dishes.count %> <i class="glyphicon glyphicon-cutlery" style="color:#ccc;"></i></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= link_to new_menu_path, remote: true do %>
+			<button type="button" class="btn btn-info btn-icon icon-left">
+				<%= t("menumalist.menu.new") %>
+				<i class="entypo-plus"></i>
+			</button>
+		<% end %>
+	</div>
+</div>
+<%=render :partial => "layouts/footer" %>
 
 <% # form for design, should move to another place in the long term %>
 <%=render :partial => "designs/modal_design" %>

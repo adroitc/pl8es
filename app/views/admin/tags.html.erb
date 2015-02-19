@@ -1,60 +1,51 @@
-<% content_for :body_class, "page-body" %>
-<div class="page-container">
-  <div class="sidebar-menu">
-    <%=render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-pl8.png")} %>
-    <%=render :partial => "layouts/menu" %>
-  </div>
-  <div class="main-content">
-    <%=render :partial => "layouts/topbar" %>
-    <ol class="breadcrumb bc-3">
-      <li>
-        <a href="<%= dashboard_index_path %>"><i class="entypo-home"></i>Dashboard</a>
-      </li>
-      <li>
-        <a href="<%= admin_index_path %>">Admin</a>
-      </li>
-      <li class="active">
-        <strong>All tags</strong>
-      </li>
-    </ol>
-    <h2>All tags</h2>
-    <br />
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-striped responsive">
-          <thead>
-            <tr>
-              <th>Tag</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Tag.all.sort_by{|tag|
-              tag.title
-            }.each do |tag| %>
-            <tr style="font-size: 18px;">
-              <td>
-                <a href="javascript:;" onclick="jQuery('#modal-edit-tag-<%=tag.id %>').modal('show');">
-                  <%=tag.title %>
-                </a>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <a href="javascript:;" onclick="jQuery('#modal-add-tag').modal('show');">
-          <button type="button" class="btn btn-info btn-icon icon-left">
-          	Add tag
-          	<i class="entypo-plus"></i>
-          </button>
-        </a>
-      </div>
-    </div>
-    <%=render :partial => "layouts/footer" %>
-  </div>
+<ol class="breadcrumb bc-3">
+	<li>
+		<a href="<%= dashboard_index_path %>"><i class="entypo-home"></i>Dashboard</a>
+	</li>
+	<li>
+		<a href="<%= admin_index_path %>">Admin</a>
+	</li>
+	<li class="active">
+		<strong>All tags</strong>
+	</li>
+</ol>
+<h2>All tags</h2>
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped responsive">
+			<thead>
+				<tr>
+					<th>Tag</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% Tag.all.sort_by{|tag|
+					tag.title
+				}.each do |tag| %>
+				<tr style="font-size: 18px;">
+					<td>
+						<a href="javascript:;" onclick="jQuery('#modal-edit-tag-<%=tag.id %>').modal('show');">
+							<%=tag.title %>
+						</a>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<a href="javascript:;" onclick="jQuery('#modal-add-tag').modal('show');">
+			<button type="button" class="btn btn-info btn-icon icon-left">
+				Add tag
+				<i class="entypo-plus"></i>
+			</button>
+		</a>
+	</div>
 </div>
+<%=render :partial => "layouts/footer" %>
+
 <%=render :partial => "modal_add_tag" %>
 <% Tag.all.sort_by{|tag|
-              tag.title
-            }.each do |tag| %>
+							tag.title
+						}.each do |tag| %>
 <%=render :partial => "modal_edit_tag", :locals => {:tag => tag} %>
 <% end %>
