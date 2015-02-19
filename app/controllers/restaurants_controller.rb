@@ -5,7 +5,11 @@ class RestaurantsController < ApplicationController
 			search_term = params[:s].gsub(/\s+/, " ")
 			search_term = "%#{search_term.squish.downcase}%"
 			
-			@restaurants = Restaurant.referred.where("lower(restaurants.name) LIKE ?", search_term).joins(:location)
+			@restaurants = Restaurant.referred.where("lower(restaurants.name) LIKE ?", search_term).joins(:location).order(:name)
+			
+			if params[:limit]
+				@restaurants = @restaurants.limit(params[:limit].to_i)
+			end
 		else
 			@restaurants = nil
 		end
