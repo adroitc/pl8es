@@ -7,8 +7,7 @@ class Category < ActiveRecord::Base
 	belongs_to :menu
 	has_many :dishes
 	
-	belongs_to :category
-	has_many :sub_categories, :class_name => "Category"
+	acts_as_tree order: "name"
 	
 	# –––––––––––––
 	#  Validations
