@@ -87,7 +87,9 @@
 		});
 	});
 </script>
-<%=render :partial => "modal_addbeverage", :locals => {:beverage_navigation => @beverage_navigation} %>
-<% @beverage_navigation.beverages.each do |beverage| %>
-<%=render :partial => "modal_editbeverage", :locals => {:beverage => beverage} %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_addbeverage", :locals => {:beverage_navigation => @beverage_navigation} %>
+	<% @beverage_navigation.beverages.each do |beverage| %>
+		<%=render :partial => "modal_editbeverage", :locals => {:beverage => beverage} %>
+	<% end %>
 <% end %>

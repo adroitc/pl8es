@@ -89,12 +89,15 @@
 		});
 	});
 </script>
-<%=render :partial => "categories/modal_add", :locals => {:menu => @category.menu, :category => @category} %>
-<% @category.sub_categories.each do |category| %>
-	<%=render :partial => "categories/modal_edit", :locals => {:category => category} %>
+
+<% content_for :modals do %>
+	<%=render :partial => "categories/modal_add", :locals => {:menu => @category.menu, :category => @category} %>
+	<% @category.sub_categories.each do |category| %>
+		<%=render :partial => "categories/modal_edit", :locals => {:category => category} %>
+	<% end %>
+	<p><%=@category.dishes.count%></p>
+	<% @category.dishes.each do |dish| %>
+		<%=render :partial => "dishes/modal_edit", :locals => {:dish => dish} %>
+	<% end %>
+	<%=render :partial => "dishes/modal_add", :locals => {:category => @category} %>
 <% end %>
-<p><%=@category.dishes.count%></p>
-<% @category.dishes.each do |dish| %>
-	<%=render :partial => "dishes/modal_edit", :locals => {:dish => dish} %>
-<% end %>
-<%=render :partial => "dishes/modal_add", :locals => {:category => @category} %>

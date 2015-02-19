@@ -28,13 +28,19 @@
 					<%= render :partial => "layouts/public_menu" %>
 				<% end %>
 			</div>
+			
 			<div class="main-content">
 				<%= render :partial => "layouts/topbar" if @user%>
+				
 				<%= yield %>
 				
 				<%= render :partial => "layouts/footer" %>
 			</div>
 		</div>
+		
+		<% # temporarily yield the modals here, should get removed long term  %>
+		<%= yield :modals %>
+		
 		<%= render :file => "modals/index" %>
 	</body>
 </html>

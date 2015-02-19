@@ -50,9 +50,11 @@
 	</div>
 </div>
 
-<%=render :partial => "modal_addingredient" %>
-<% Ingredient.all.sort_by{|ingredient|
-							ingredient.title
-						}.each do |ingredient| %>
-<%=render :partial => "modal_editingredient", :locals => {:ingredient => ingredient} %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_addingredient" %>
+	<% Ingredient.all.sort_by{|ingredient|
+								ingredient.title
+							}.each do |ingredient| %>
+	<%=render :partial => "modal_editingredient", :locals => {:ingredient => ingredient} %>
+	<% end %>
 <% end %>

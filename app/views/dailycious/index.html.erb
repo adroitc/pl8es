@@ -148,14 +148,14 @@ end
 		});
 	});
 </script>
-<%=render :partial => "modal_creditplan" %>
-<%=render :partial => "modal_adddailydish" %>
-<%=render :partial => "modal_buydailydish" %>
-<%
-for i in 0..6
-	current_date = (date.beginning_of_week+i)
-%>
-<% @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
-<%=render :partial => "modal_editdailydish", :locals => {:daily_dish => daily_dish} %>
-<% end %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_creditplan" %>
+	<%=render :partial => "modal_adddailydish" %>
+	<%=render :partial => "modal_buydailydish" %>
+	<% for i in 0..6 %>
+		<% current_date = (date.beginning_of_week+i) %>
+		<% @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
+			<%=render :partial => "modal_editdailydish", :locals => {:daily_dish => daily_dish} %>
+		<% end %>
+	<% end %>
 <% end %>

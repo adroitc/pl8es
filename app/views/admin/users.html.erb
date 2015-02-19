@@ -54,6 +54,8 @@
 	</div>
 </div>
 
-<% User.all.joins(:restaurant).order("restaurants.name").each do |user| %>
-<%=render :partial => "modal_edituser", :locals => {:user => user} %>
+<% content_for :modals do %>
+	<% User.all.joins(:restaurant).order("restaurants.name").each do |user| %>
+		<%=render :partial => "modal_edituser", :locals => {:user => user} %>
+	<% end %>
 <% end %>

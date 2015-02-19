@@ -138,5 +138,7 @@
 	</section>
 </div>
 
-<%=render :partial => "modal_editsettings" %>
-<%=render :partial => "modal_editdescription" %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_editsettings" %>
+	<%=render :partial => "modal_editdescription" %>
+<% end %>

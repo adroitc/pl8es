@@ -83,7 +83,10 @@
 		});
 	});
 </script>
-<%=render :partial => "modal_addbeveragenavigation", :locals => {:beverage_page => @beverage_page} %>
-<% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
-<%=render :partial => "modal_editbeveragenavigation", :locals => {:beverage_navigation => beverage_navigation} %>
+
+<% content_for :modals do %>
+	<%=render :partial => "modal_addbeveragenavigation", :locals => {:beverage_page => @beverage_page} %>
+	<% @beverage_page.beverage_navigations.each do |beverage_navigation| %>
+		<%=render :partial => "modal_editbeveragenavigation", :locals => {:beverage_navigation => beverage_navigation} %>
+	<% end %>
 <% end %>

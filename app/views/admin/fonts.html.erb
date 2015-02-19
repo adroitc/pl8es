@@ -42,9 +42,11 @@
 	</div>
 </div>
 
-<%=render :partial => "modal_addfont" %>
-<% SupportedFont.all.sort_by{|supportedFont|
-              supportedFont.title
-            }.each do |supportedFont| %>
-<%=render :partial => "modal_editfont", :locals => {:supportedFont => supportedFont} %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_addfont" %>
+	<% SupportedFont.all.sort_by{|supportedFont|
+	              supportedFont.title
+	            }.each do |supportedFont| %>
+	<%=render :partial => "modal_editfont", :locals => {:supportedFont => supportedFont} %>
+	<% end %>
 <% end %>

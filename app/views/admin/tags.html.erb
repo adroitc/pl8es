@@ -42,9 +42,11 @@
 	</div>
 </div>
 
-<%=render :partial => "modal_add_tag" %>
-<% Tag.all.sort_by{|tag|
-							tag.title
-						}.each do |tag| %>
-<%=render :partial => "modal_edit_tag", :locals => {:tag => tag} %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_add_tag" %>
+	<% Tag.all.sort_by{|tag|
+								tag.title
+							}.each do |tag| %>
+	<%=render :partial => "modal_edit_tag", :locals => {:tag => tag} %>
+	<% end %>
 <% end %>

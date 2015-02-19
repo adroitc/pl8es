@@ -46,9 +46,11 @@
 	</div>
 </div>
 
-<%=render :partial => "modal_addlanguage" %>
-<% Language.all.sort_by{|language|
-							language.title
-						}.each do |language| %>
-<%=render :partial => "modal_editlanguage", :locals => {:language => language} %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_addlanguage" %>
+	<% Language.all.sort_by{|language|
+								language.title
+							}.each do |language| %>
+	<%=render :partial => "modal_editlanguage", :locals => {:language => language} %>
+	<% end %>
 <% end %>

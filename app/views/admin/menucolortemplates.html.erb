@@ -40,7 +40,9 @@
 	</div>
 </div>
 
-<%=render :partial => "modal_addmenucolortemplate" %>
-<% MenuColorTemplate.all.each do |menuColorTemplate| %>
-<%=render :partial => "modal_editmenucolortemplate", :locals => {:menuColorTemplate => menuColorTemplate} %>
+<% content_for :modals do %>
+	<%=render :partial => "modal_addmenucolortemplate" %>
+	<% MenuColorTemplate.all.each do |menuColorTemplate| %>
+		<%=render :partial => "modal_editmenucolortemplate", :locals => {:menuColorTemplate => menuColorTemplate} %>
+	<% end %>
 <% end %>
