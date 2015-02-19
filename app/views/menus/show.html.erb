@@ -25,7 +25,7 @@
 		</span>
 	<% end %>
 	
-	<%=render :partial => "categories/new_category_tile",:locals => { :@menu => @menu, :title => t("forms.new", :model => Category.model_name.human) } %>
+	<%=render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu), :title => t("forms.new", :model => Category.model_name.human) %>
 </div>
 
 <script type="text/javascript">
