@@ -1,5 +1,15 @@
 module ApplicationHelper
 	
+	def get_correct_logo
+		sector = case params[:controller]
+			when "menus", "categories", "dishes" then "menumalist"
+			when "dailycious" then "dailycious"
+			else "pl8"
+		end
+		
+		return image_tag("logo-#{sector}.png")
+	end
+	
 	def get_aspect_ratio_of_image(instance)
 		options = instance.validators.find{|v| v.class.to_s == "DimensionsValidator"}.options
 		return options[:width].to_f/options[:height].to_f
