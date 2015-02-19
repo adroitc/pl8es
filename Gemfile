@@ -26,6 +26,8 @@ gem "jbuilder", "~> 1.2"
 gem 'pg'
 gem 'hirb'
 
+gem 'acts_as_tree'
+
 # –– images
 gem "paperclip"
 gem "aws-sdk"
