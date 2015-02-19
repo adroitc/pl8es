@@ -78,11 +78,6 @@ Pl8es::Application.routes.draw do
 			#ajax/dish-get
 			get "/dish/:id/:language_locale" => "dish#dish"
 			
-			#ajax/dish-post
-			post "/dish/add" => "dish#adddish"
-			post "/dish/edit" => "dish#editdish"
-			post "/dish/sort" => "dish#sortdish"
-			
 			post "/beveragepage/add" => "beverage#addbeveragepage"
 			post "/beveragepage/edit" => "beverage#editbeveragepage"
 			post "/beveragepage/sort" => "beverage#sortbeveragepage"
@@ -114,6 +109,8 @@ Pl8es::Application.routes.draw do
 		
 		# categorys
 		get "/:menu_title/:menu_id/:parent_category_title/:parent_category_id/:category_title/:category_id" => "categories#show", as: :show_sub_category
+		
+		resources :dishes
 	end
 	
 	#signup
