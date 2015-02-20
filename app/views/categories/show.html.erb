@@ -11,16 +11,16 @@
 		</a>
 	</li>
 	<li class="">
-		<a href="<%= menu_path(@category) %>">
+		<a href="<%= menu_path(@menu) %>">
 			<%=@category.menu.title %>
 		</a>
 	</li>
 	<% if @category.parent.present? %>
-	<li class="">
-		<a href="<%= menu_category_path(@category.menu, @category) %>">
-			<%=@category.parent.title %>
-		</a>
-	</li>
+		<li class="">
+			<a href="<%= menu_category_path(@menu, @category.parent) %>">
+				<%=@category.parent.title %>
+			</a>
+		</li>
 	<% end %>
 	<li class="active">
 		<strong><%=@category.title %></strong>
