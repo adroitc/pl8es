@@ -30,6 +30,9 @@
 			# –––––––––––––––– %>
 	
 	<div class="modal-body">
+		<% # –– parent_id is hidden %>
+		<%= f.hidden_field :parent_id, value: params[:parent_id] if params[:parent_id].present? %>
+		
 		<div class="row">
 			<div class="col-sm-6 tab-content">
 				<% hold_locale = I18n.locale %>

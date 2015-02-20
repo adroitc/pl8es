@@ -46,8 +46,8 @@
 		</span>
 	<% end %>
 	
-	<% if @category.category == nil && @category.dishes.count == 0 %>
-		<%=render :partial => "modals/new_tile",:locals => { :image_size => 1, :js_onclick => "jQuery('#modal-add_category').modal('show');", :title => t("menumalist.add_new_category")} %>
+	<% if @category.parent.blank? && @category.dishes.blank? %>
+		<%= render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu.id, :parent_id => @category.id), :title => t("forms.new", :model => Category.model_name.human) %>
 	<% end %>
 	
 	<% if @category.children.count == 0 %>

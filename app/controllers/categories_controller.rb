@@ -11,13 +11,14 @@ class CategoriesController < ApplicationController
 	end
 	
 	def new
-		@category = @menu.categories.build
+		@category = @menu.categories.build(new_category_params)
 	end
 	
 	def create
 		@category = @menu.categories.new(category_params)
 		
-		if @category.save
+		# –– validate parent, has to be root, only one level nesting allowed
+		if @category.parent == @category.root && @category.save
 			if params[:category][:image].present?
 				@new_category = true
 				render :crop
@@ -75,8 +76,12 @@ class CategoriesController < ApplicationController
 	
 	private
 		
+		def new_category_params
+			params.permit(:parent_id, :menu_id)
+		end
+		
 		def category_params
-			params.require(:category).permit(*Category.globalize_attribute_names, :id, :style, :image, :crop_x, :crop_y, :crop_w, :crop_h)
+			params.require(:category).permit(*Category.globalize_attribute_names, :id, :style, :image, :crop_x, :crop_y, :crop_w, :crop_h, :parent_id)
 		end
 		
 		def authenticate_ownership_and_get_menu
