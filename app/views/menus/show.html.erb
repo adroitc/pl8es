@@ -20,7 +20,7 @@
 	<% if @menu.categories.any? %>
 		<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
 			<span class="sorted ui-sortable">
-				<% @menu.categories.roots.each do |category| %>
+				<% @menu.categories.each do |category| %>
 					<%= render "categories/category", :category => category %>
 				<% end %>
 			</span>
