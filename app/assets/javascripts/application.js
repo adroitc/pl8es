@@ -35,6 +35,34 @@
 
 $(document).ready(function()
 {
+  $(".pl8es_c_ajaxform").each(function(){
+    var f = $(this);
+    pl8es_i_ajaxform($(this),function(r){
+      if (r["status"] == "invalid" && f.find(".form-invalid").length > 0){
+        f.find(".form-invalid").css("display", "block");
+      }
+      else if (r["redirect"]
+               && r["status"] == "success"
+               && f.find(".form-valid").length > 0){
+        f.find(".form-invalid").css("display", "none");
+        f.find(".form-valid").css("display", "block");
+      	show_loading_bar({
+      		pct: 100,
+      		delay: 0.2,
+      		finish: function()
+      		{
+            window.location.href = r["redirect"];
+      		}
+      	});
+      }
+      else if (r["redirect"]){
+        window.location.href = r["redirect"];
+      }
+      else{
+        location.reload();
+      }
+    })
+  });
   $(".pl8es_c_ajaxform_noreload").each(function(){
     pl8es_i_ajaxform($(this),function(){
     })
@@ -209,6 +237,57 @@ function pl8es_i_ajaxform(f,a)
     }
     else{
       submit_ajax();
+    }
+  });
+}
+function pl8es_i_ajax(u,d,s)
+{
+  show_loading_bar({
+  	pct: 78,
+  	delay: 0.4,
+		finish: function()
+		{
+      method = "POST";
+      if (d == null){
+        method = "GET";
+      }
+    	$.ajax({
+    		url: u,
+    		method: method,
+    		dataType: "json",
+    		data: d,
+        contentType: false,
+        processData: false,
+    		error: function(e,r,t)
+    		{
+          var opts = {
+          	"closeButton": true,
+          	"debug": false,
+          	"positionClass": "toast-top-right",
+          	"onclick": null,
+          	"showDuration": "100",
+          	"hideDuration": "100",
+          	"timeOut": "2000",
+          	"extendedTimeOut": "1000",
+          	"showEasing": "swing",
+          	"hideEasing": "linear",
+          	"showMethod": "fadeIn",
+          	"hideMethod": "fadeOut"
+          };
+          toastr.error("The administrator was contacted.", "An error occured", opts);
+    		},
+    		success: function(response)
+    		{
+        	show_loading_bar({
+        		pct: 100,
+        		delay: 0.2,
+        		finish: function()
+        		{
+              s(response);
+        		}
+        	});
+    		}
+    	});
     }
   });
 }
