@@ -15,10 +15,10 @@
 			<%=@category.menu.title %>
 		</a>
 	</li>
-	<% if @category.category != nil%>
+	<% if @category.parent.present? %>
 	<li class="">
 		<a href="<%= menu_category_path(@category.menu, @category) %>">
-			<%=@category.category.title %>
+			<%=@category.parent.title %>
 		</a>
 	</li>
 	<% end %>
