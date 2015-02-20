@@ -30,27 +30,31 @@
 <h2><%=@category.menu.title %> - <%=@category.title %></h2>
 <br />
 <div class="row gallery-env draggable-portlets">
-	<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
-		<span class="sorted ui-sortable">
-			<% @category.children.each do |category| %>
-				<%=render :partial => "categories/category", :locals => {:category => category} %>
-			<% end %>
-		</span>
+	<% if @category.children.any? %>
+		<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
+			<span class="sorted ui-sortable">
+				<% @category.children.each do |category| %>
+					<%=render :partial => "categories/category", :locals => {:category => category} %>
+				<% end %>
+			</span>
+		<% end %>
 	<% end %>
 	
-	<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
-		<span class="sorted ui-sortable">
-			<% @category.dishes.each do |dish| %>
-				<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
-			<% end %>
-		</span>
+	<% if @category.dishes.any? %>
+		<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
+			<span class="sorted ui-sortable">
+				<% @category.dishes.each do |dish| %>
+					<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
+				<% end %>
+			</span>
+		<% end %>
 	<% end %>
 	
 	<% if @category.parent.blank? && @category.dishes.blank? %>
 		<%= render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu.id, :parent_id => @category.id), :title => t("forms.new", :model => Category.model_name.human) %>
 	<% end %>
 	
-	<% if @category.children.count == 0 %>
+	<% if @category.children.blank? %>
 		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(), :title => t("forms.new", :model => Dish.model_name.human) %>
 	<% end %>
 </div>
