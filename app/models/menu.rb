@@ -7,7 +7,6 @@ class Menu < ActiveRecord::Base
   has_many :categories
   
   has_many :dishes
-  has_many :beverages
 	
 	validates :title, :presence => true, :length => 4..75
 	validates :from_time, :allow_blank => true, :length => 4..7

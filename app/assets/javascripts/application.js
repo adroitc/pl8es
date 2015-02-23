@@ -150,10 +150,6 @@ $(document).ready(function()
     return /(^[0-9\,]*$)/.test($(e).val())
   }, "Please enter a valid price.");
   
-  jQuery.validator.addMethod("beverageamount", function(v,e){
-    return /(^[0-9\,]*$)/.test($(e).val())
-  }, "Please enter a valid amount.");
-  
   $("input[type='file']").each(function(){
     var f = $(this).closest("form");
     var file_input = $(this);

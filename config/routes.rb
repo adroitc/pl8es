@@ -69,16 +69,6 @@ Pl8es::Application.routes.draw do
 			#ajax/dish-get
 			get "/dish/:id/:language_locale" => "dish#dish"
 			
-			post "/beveragepage/add" => "beverage#addbeveragepage"
-			post "/beveragepage/edit" => "beverage#editbeveragepage"
-			post "/beveragepage/sort" => "beverage#sortbeveragepage"
-			post "/beveragenavigation/add" => "beverage#addbeveragenavigation"
-			post "/beveragenavigation/edit" => "beverage#editbeveragenavigation"
-			post "/beveragenavigation/sort" => "beverage#sortbeveragenavigation"
-			post "/beverage/add" => "beverage#addbeverage"
-			post "/beverage/edit" => "beverage#editbeverage"
-			post "/beverage/sort" => "beverage#sortbeverage"
-			
 			#ajax/daily_dish
 			post "/dailydish/add" => "daily_dish#adddailydish"
 			post "/dailydish/edit" => "daily_dish#editdailydish"

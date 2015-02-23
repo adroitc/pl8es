@@ -40,7 +40,6 @@ class Restaurant < ActiveRecord::Base
   has_many :dishes
   has_many :daily_dishes
   
-  has_many :beveragePages
   translates :description
   
   # –––––––––––––

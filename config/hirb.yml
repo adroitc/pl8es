@@ -9,12 +9,6 @@
         - level
         - style
         - position
-  BeveragePage:
-    :options:
-      :fields:
-        - id
-        - restaurant_id
-        - title
   Restaurant:
     :options:
       :fields:

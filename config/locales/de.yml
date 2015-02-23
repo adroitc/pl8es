@@ -29,7 +29,6 @@ de:
     hexcolor: "Bitte geben Sie eine gültige URL ein."
     time: "Bitte geben Sie eine gültige Uhrzeit ein."
     price: "Bitte geben Sie einen gültigen Preis ein."
-    beverageamount: "Bitte geben Sie eine gültige Menge ein."
     confirm_password: "Bitte geben Sie das gleiche Passwort erneut ein."
   
   errors:
@@ -261,13 +260,6 @@ de:
     add_new_menu: "Speisekarte hinzufügen"
     add_new_category: "Kategorie hinzufügen"
     add_new_dish: "Speise hinzufügen"
-    add_new_beverage_page: "Getränkeseite hinzufügen"
-    beverage_pages_title: "Getränkeseiten"
-    beverage_page: "Getränkeseite"
-    beverage_navigation: "Getränkekategorie"
-    add_new_beverage_navigation: "Getränkekategorie hinzufügen"
-    beverage: "Getränk"
-    add_new_beverage: "Neues Getränk hinzufügen"
     
     design_modal_title: "Design ändern"
     design_modal_submit: "Speichern"
@@ -299,31 +291,6 @@ de:
       design: "Design"
       design_default: "Standard"
       design_grid: "Raster"
-      
-    beverage_page_modal_add_title: "Getränkeseite hinzufügen"
-    beverage_page_modal_edit_title: "Getränkeseite bearbeiten"
-    beverage_page_modal_add_submit: "Getränkeseite hinzufügen"
-    beverage_page_modal_edit_submit: "Getränkeseite bearbeiten"
-    beverage_page_title: "Name der Getränkeseite"
-    beverage_page_title_placeholder: "z.B. Alkoholfreie Getränke"
-    
-    beverage_navigation_modal_add_title: "Getränkekategorie hinzufügen"
-    beverage_navigation_modal_edit_title: "Getränkekategorie bearbeiten"
-    beverage_navigation_modal_add_submit: "Getränkekategorie hinzufügen"
-    beverage_navigation_modal_edit_submit: "Getränkekategorie bearbeiten"
-    beverage_navigation_title: "Name der Getränkekategorie"
-    beverage_navigation_title_placeholder: "z.B. Säfte"
-    
-    beverage_modal_add_title: "Getränk hinzufügen"
-    beverage_modal_edit_title: "Getränk bearbeiten"
-    beverage_modal_add_submit: "Getränk hinzufügen"
-    beverage_modal_edit_submit: "Getränk bearbeiten"
-    beverage_title: "Getränkename"
-    beverage_title_placeholder: "z.B. Apfelsaft"
-    beverage_price: "Getränkepreis"
-    beverage_price_placeholder: "2,00"
-    beverage_amount_in_l: "Getränkemenge in Litern"
-    beverage_amount_in_l_placeholder: "0,3"
     
     dish_modal_add_title: "Speise hinzufügen"
     dish_modal_edit_title: "Speise ändern"
