@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
 		@category = @menu.categories.new(category_params)
 		
 		# –– validate parent, has to be root, only one level nesting allowed
-		if @category.parent == @category.root && @category.save
+		if (@category.parent == @category.root || @category.root?) && @category.save
 			if params[:category][:image].present?
 				@new_category = true
 				render :crop
