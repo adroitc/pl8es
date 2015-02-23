@@ -1,10 +1,5 @@
 Pl8es::Application.routes.draw do
 	
-	#app
-	resources :app, :only => []
-	resources :app_dailycious, :only => []
-	resources :app_menumalist, :only => []	
-	
 	namespace :app do
 		#app-get
 		get "/dailycious/defaults" => "dailycious#defaults"
@@ -26,10 +21,6 @@ Pl8es::Application.routes.draw do
 		post "/dailycious/edit" => "dailycious#editdailydish"
 		post "/dailycious/sort" => "dailycious#sortdailydish"
 	end
-	
-	#web
-	resources :web, :only => []
-	resources :web_dailycious, :only => []
 	
 	#web-get
 	get "/web/dailycious/list" => "web/dailycious#list"
@@ -107,9 +98,6 @@ Pl8es::Application.routes.draw do
 		
 		post "/resetclients" => "menus#reset_clients", as: :reset_clients
 		
-		# categorys
-		get "/:menu_title/:menu_id/:parent_category_title/:parent_category_id/:category_title/:category_id" => "categories#show", as: :show_sub_category
-		
 		resources :dishes
 		post "dishes/sort" => "dishes#sort", as: :sort_dishes
 	end
@@ -149,12 +137,6 @@ Pl8es::Application.routes.draw do
 	
 	#invoice
 	resources :invoice, :only => [:index]
-	#get "/invoices/invoice/:payment_id" => "invoice#pdf"
-	
-	#beverage
-	resources :beverage, :only => []
-	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id" => "beverage#beveragepage", as: :show_beverage_page
-	get "/menumalist/beverages/:beverage_page_title/:beverage_page_id/:beverage_navigation_title/:beverage_navigation_id" => "beverage#beveragenavigation", as: :show_beverage_navigation
 	
 	#dailycious
 	get "/dailycious" => "dailycious#index"
