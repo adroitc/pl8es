@@ -171,5 +171,13 @@ body.modal-open {
 }
 
 textarea.form-control {
-	min-height: 130px;
+	min-height: 80px;
+}
+
+/* –––––––––––––––––––––
+	custom bootstrap css
+––––––––––––––––––––– */
+
+.nav-tabs, .modal-footer {
+	margin-top: 0;
 }
