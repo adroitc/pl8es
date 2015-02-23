@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219152239) do
+ActiveRecord::Schema.define(version: 20150223132902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,32 +26,6 @@ ActiveRecord::Schema.define(version: 20150219152239) do
 
   add_index "beverage_navigation_translations", ["beverage_navigation_id"], name: "index_1cfc283b491f788097bd8f375227f08f4e1a832b", using: :btree
   add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale", using: :btree
-
-  create_table "beverage_navigations", force: true do |t|
-    t.integer  "beverage_page_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "position"
-  end
-
-  create_table "beverage_pages", force: true do |t|
-    t.integer  "restaurant_id"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "image_dimensions"
-    t.string   "image_fingerprint"
-    t.integer  "image_crop_w"
-    t.integer  "image_crop_h"
-    t.integer  "image_crop_x"
-    t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed", default: true
-    t.integer  "position"
-  end
 
   create_table "beverage_translations", force: true do |t|
     t.integer  "beverage_id", null: false
