@@ -2,6 +2,7 @@ class MenusController < ApplicationController
 	
 	before_filter :authenticate_user
 	before_filter :authenticate_ownership_and_get_menu, :only => [:show, :edit, :update, :destroy]
+	before_filter :get_languages, :only => [:new]
 	
 	respond_to :html, :js
 	
@@ -13,7 +14,6 @@ class MenusController < ApplicationController
 	
 	def new
 		@menu = @user.restaurant.menus.new
-		@languages = @user.restaurant.languages.order(:title)
 	end
 	
 	def create

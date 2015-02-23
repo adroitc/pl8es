@@ -99,10 +99,5 @@ class CategoriesController < ApplicationController
 				redirect_to menu_path(@menu)
 			end
 		end
-		
-		def get_languages
-			@default_language = @menu.restaurant.default_language
-			@languages = @menu.restaurant.languages
-		end
 	
 end

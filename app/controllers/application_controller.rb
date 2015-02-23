@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
 		def authenticate_user
 			redirect_to login_index_path unless @user
 		end
+		
+		def get_languages
+			@default_language = @user.restaurant.default_language
+			@languages = @user.restaurant.languages.order(:id)
+		end
 	
   def set_current_locale
     
