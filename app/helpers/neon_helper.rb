@@ -88,7 +88,7 @@ module NeonHelper
       <input name="#{image.name.to_s}_crop_x" type="hidden" id="form-cropimage-#{instance.id}-#{image.name.to_s}_crop_x">
       <input name="#{image.name.to_s}_crop_y" type="hidden" id="form-cropimage-#{instance.id}-#{image.name.to_s}_crop_y">
       <script type="text/javascript">
-        $("#navigation-#{image.name.to_s}-#{instance.id}").Jcrop({
+        $("#navigation-#{image.name.to_s}-#{instance.id}").jcrop_old({
           aspectRatio: #{image_min_size[:width].to_f/image_min_size[:height].to_f},
           onSelect: updateCoords,
           trueSize: [#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][0]},#{instance.read_attribute(image.name.to_s+"_dimensions")["original"][1]}],

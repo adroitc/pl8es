@@ -1,0 +1,30 @@
+/* jquery.jcrop_old.min.css v0.9.12 (build:20130521) */
+.jcrop_old-holder{-ms-touch-action:none;direction:ltr;text-align:left;}
+.jcrop_old-vline,.jcrop_old-hline{background:#FFF url(jcrop_old.gif);font-size:0;position:absolute;}
+.jcrop_old-vline{height:100%;width:1px!important;}
+.jcrop_old-vline.right{right:0;}
+.jcrop_old-hline{height:1px!important;width:100%;}
+.jcrop_old-hline.bottom{bottom:0;}
+.jcrop_old-tracker{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;height:100%;width:100%;}
+.jcrop_old-handle{background-color:#333;border:1px #EEE solid;font-size:1px;height:7px;width:7px;}
+.jcrop_old-handle.ord-n{left:50%;margin-left:-4px;margin-top:-4px;top:0;}
+.jcrop_old-handle.ord-s{bottom:0;left:50%;margin-bottom:-4px;margin-left:-4px;}
+.jcrop_old-handle.ord-e{margin-right:-4px;margin-top:-4px;right:0;top:50%;}
+.jcrop_old-handle.ord-w{left:0;margin-left:-4px;margin-top:-4px;top:50%;}
+.jcrop_old-handle.ord-nw{left:0;margin-left:-4px;margin-top:-4px;top:0;}
+.jcrop_old-handle.ord-ne{margin-right:-4px;margin-top:-4px;right:0;top:0;}
+.jcrop_old-handle.ord-se{bottom:0;margin-bottom:-4px;margin-right:-4px;right:0;}
+.jcrop_old-handle.ord-sw{bottom:0;left:0;margin-bottom:-4px;margin-left:-4px;}
+.jcrop_old-dragbar.ord-n,.jcrop_old-dragbar.ord-s{height:7px;width:100%;}
+.jcrop_old-dragbar.ord-e,.jcrop_old-dragbar.ord-w{height:100%;width:7px;}
+.jcrop_old-dragbar.ord-n{margin-top:-4px;}
+.jcrop_old-dragbar.ord-s{bottom:0;margin-bottom:-4px;}
+.jcrop_old-dragbar.ord-e{margin-right:-4px;right:0;}
+.jcrop_old-dragbar.ord-w{margin-left:-4px;}
+.jcrop_old-light .jcrop_old-vline,.jcrop_old-light .jcrop_old-hline{background:#FFF;filter:alpha(opacity=70)!important;opacity:.70!important;}
+.jcrop_old-light .jcrop_old-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#000;border-color:#FFF;border-radius:3px;}
+.jcrop_old-dark .jcrop_old-vline,.jcrop_old-dark .jcrop_old-hline{background:#000;filter:alpha(opacity=70)!important;opacity:.7!important;}
+.jcrop_old-dark .jcrop_old-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#FFF;border-color:#000;border-radius:3px;}
+.solid-line .jcrop_old-vline,.solid-line .jcrop_old-hline{background:#FFF;}
+.jcrop_old-holder img,img.jcrop_old-preview{max-width:none;}
+.jcrop_old-holder {background-color: transparent !important;}
