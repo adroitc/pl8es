@@ -19,7 +19,7 @@ raw(Jsonify::Builder.plain do |j|
       j.title                      language.title
     end
     
-    j.categories(menu.categories) do |category|
+    j.categories(menu.categories.roots) do |category|
       j.id                         category.id
       j.image_url                  category.image.url(:cropped_default_retina)
       j.image_fingerprint          category.image.present? ? category.image_fingerprint : "default"

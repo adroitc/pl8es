@@ -4,7 +4,6 @@ class Menu < ActiveRecord::Base
   belongs_to :menuColorTemplate
   belongs_to :menuColor
   
-  has_many :categories, -> { roots }
   has_many :dishes
   has_many :beverages
 	
