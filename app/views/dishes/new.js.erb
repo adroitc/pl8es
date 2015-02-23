@@ -1,1 +1,3 @@
-alert("nu nu");
+var dish_form = $("<%= j render 'form' %>")
+$('#default-modal .modal-content').html(dish_form);
+$('#default-modal').modal('show');

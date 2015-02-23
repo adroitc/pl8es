@@ -169,3 +169,7 @@ body.modal-open {
 .field_with_errors {
 	color: red;
 }
+
+textarea.form-control {
+	min-height: 130px;
+}

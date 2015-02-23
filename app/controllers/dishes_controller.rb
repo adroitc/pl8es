@@ -1,9 +1,13 @@
 class DishesController < ApplicationController
 	
+	before_filter :authenticate_user
+	before_filter :get_languages, only: [:new, :create, :edit, :update, :destroy_image]
+	
 	def index
 	end
 	
 	def new
+		@dish = Dish.new()
 	end
 	
 	def create

@@ -1,0 +1,89 @@
+<%= form_for @dish, remote: true do |f| %>
+	
+	<%	# ––––––––––––––
+			#   image form
+			# –––––––––––––– %>
+	
+	<%= render 'modals/image_form', :object => @dish, :image => @dish.image, :f => f %>
+	
+	<%	# –––––––––––––––––––––
+			#   title & languages
+			# ––––––––––––––––––––– %>
+	
+	<div class="modal-header">
+		<h4 class="modal-title"><%= t("forms.#{action_name}", :model => Dish.model_name.human) %></h4>
+		<ul class="nav nav-tabs">
+			<% # generate the tabs from the languages %>
+			<% @languages.each do |language| %>
+				<li class="<%= :active if language == @default_language %>">
+					<%= link_to "#dish-form-#{language.locale}", :data => {:toggle => :tab} do %>
+						<%= language.title.capitalize %>
+						<%= "(" + t("language.default") + ")" if language == @default_language %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	
+	<%	# ––––––––––––––––
+			#   input fields
+			# –––––––––––––––– %>
+	
+	<div class="modal-body">
+		<% # –– parent_id is hidden %>
+		<%= f.hidden_field :category_id, value: params[:category_id] if params[:category_id].present? %>
+		
+		<div class="row">
+			<div class="col-sm-12 tab-content">
+				<% hold_locale = I18n.locale %>
+				<% @languages.each do |language| %>
+					<% # change the translation for the fields %>
+					<% I18n.locale = language.locale %>
+					<span class="tab-pane <%= "active" if @default_language == language %> form-group" id="dish-form-<%= language.locale %>">
+						<%= f.label "title_#{language.locale}", :class => "control-label" do %>
+							<strong><%=t("menumalist.dish.title") %></strong> - <%= language.title.capitalize %><%=" (Default)" if @default_language == language %>
+						<% end %>
+						<%= f.text_field "title_#{language.locale}", :class => "form-control", :id => "form-title[#{language.locale}]", :placeholder => t("menumalist.dish.title_example") %>
+						<%= f.label "description_#{language.locale}", :class => "control-label" do %>
+							<strong><%=t("menumalist.dish.description") %></strong> - <%= language.title.capitalize %>
+						<% end %>
+						<%= f.text_area "description_#{language.locale}", :class => "form-control", :id => "form-description[#{language.locale}]", :placeholder => t("menumalist.dish.description_example") %>
+					</span>
+				<% end %>
+				<% I18n.locale = hold_locale %>
+				
+				<div class="row">
+					<div class="col-sm-6">
+						<strong><%=t("menumalist.dish.price") %></strong>
+						<%= f.text_field :price, :class => "form-control", :placeholder => "12,00" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<% if @dish.errors.any? %>
+		<div id="error-explanation">
+			<h2><%= pluralize(@dish.errors.count, "error") %> prohibited this task from being saved:</h2>
+			
+			<ul>
+			<% @dish.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+	<div class="modal-footer">
+		<% # only display the destroy button on edit %>
+		<%= render :file => "modals/delete", :locals => {:destroy_link => dish_path(@dish), :remote => true} if ["edit", "update", "destroy_image"].include? action_name %>
+		
+		<button type="button" class="btn btn-default" data-dismiss="modal"><%=t("forms.cancel") %></button>
+		<%= f.button :type => "submit", :class => "btn btn-info icon-left" do %>
+			<% if ["new", "create"].include? action_name %>
+				<i class="entypo-plus"></i>
+			<% end %>
+			<%= t("forms.submit_#{action_name}", :model => Dish.model_name.human) %>
+		<% end %>
+	</div>
+<% end %>

@@ -291,17 +291,15 @@ de:
       design: "Design"
       design_default: "Standard"
       design_grid: "Raster"
+      
+    dish:
+      # –– fields, be descriptive
+      title: "Name"
+      title_example: "z.B. Carpaccio"
+      price: "Preis"
+      description: "Beschreibung"
+      description_example: "z.B. mit Parmesan und Rucola"
     
-    dish_modal_add_title: "Speise hinzufügen"
-    dish_modal_edit_title: "Speise ändern"
-    dish_modal_add_submit: "Speise hinzufügen"
-    dish_modal_edit_submit: "Speise speichern"
-    dish_title: "Name"
-    dish_title_placeholder: "z.B. Carpaccio"
-    dish_description: "Beschreibung"
-    dish_description_placeholder: "z.B. mit Parmesan und Rucola"
-    dish_price: "Preis"
-    dish_price_placeholder: "11"
     dish_wines: "Weinempfehlungen"
     dish_wines_text: "Bitte geben Sie Ihre Weinempfehlungen für diese Speise ein."
     dish_dishes: "Speiseempfehlungen"

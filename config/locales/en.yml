@@ -291,17 +291,15 @@ en:
       design: "Design"
       design_default: "default"
       design_grid: "grid"
+      
+    dish:
+      # –– fields, be descriptive
+      title: "Name"
+      title_example: "e.g. Eggs Benedict"
+      price: "Price"
+      description: "Description"
+      description_example: "e.g. Served with polenta and spinach. Originally for breakfast, it also makes a great appetizer."
     
-    dish_modal_add_title: "Add dish"
-    dish_modal_edit_title: "Edit dish"
-    dish_modal_add_submit: "Add dish"
-    dish_modal_edit_submit: "Save dish"
-    dish_title: "Title"
-    dish_title_placeholder: "e.g. Eggs Benedict"
-    dish_description: "Description"
-    dish_description_placeholder: "e.g. Served with polenta and spinach. Originally for breakfast, it also makes a great appetizer."
-    dish_price: "Price"
-    dish_price_placeholder: "15,00"
     dish_wines: "Wines"
     dish_wines_text: "Please enter your wine suggestions for this dish"
     dish_dishes: "Dishes"
