@@ -1,6 +1,7 @@
 class DishesController < ApplicationController
 	
 	before_filter :authenticate_user
+	before_filter :get_dish, only: [:show, :edit, :update, :crop, :destroy, :destroy_image]
 	before_filter :get_languages, only: [:new, :create, :edit, :update, :destroy_image]
 	
 	def index
@@ -11,33 +12,16 @@ class DishesController < ApplicationController
 	end
 	
 	def create
-		if @user && !params.values_at(:category_id, :title, :description, :price).include?(nil) && Category.exists?(params[:category_id]) && Category.find(params[:category_id]).menu.restaurant.user == @user
-			languages = Language.find_all_by_locale(params[:title].keys)
-			
-			category = Category.find(params[:category_id])
-			new_dish = Dish.new(params.permit(:image, :price).merge({
-				:restaurant => @user.restaurant,
-				:menu => category.menu,
-				:category => category,
-				:position => category.dishes.unscoped.last != nil ? category.dishes.unscoped.last.id : 0
-			}))
-			
-			current_locale = I18n.locale
-			languages.each do |language|
-				I18n.locale = language.locale
-				new_dish.title = params[:title][language.locale]
-				new_dish.description = params[:description][language.locale]
+		@dish = @user.restaurant.dishes.build(dish_params)
+		
+		if @dish.save
+			if params[:dish][:image].present?
+				@new_dish = true
+				render :crop
 			end
-			I18n.locale = current_locale
-			
-			new_dish.save
-			
-			new_dish.image.set_crop_values_for_instance(params.permit(:image))
-			
-			render :json => {:status => "success"}
-			return
+		else
+			render :new
 		end
-		render :json => {:status => "invalid"}
 	end
 	
 	def show
@@ -117,5 +101,19 @@ class DishesController < ApplicationController
 		end
 		render :json => {:status => "invalid"}
 	end
+	
+	private
+		
+		def dish_params
+			params.require(:dish).permit(*Category.globalize_attribute_names, :price)
+		end
+		
+		def get_category
+			if @user.restaurant.dishes.exists?(params[:id])
+				@dish = @user.restaurant.dishes.find(params[:id])
+			else
+				redirect_to menus_path
+			end
+		end
 	
 end
