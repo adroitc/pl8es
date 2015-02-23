@@ -51,11 +51,11 @@
 	<% end %>
 	
 	<% if @category.parent.blank? && @category.dishes.blank? %>
-		<%= render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu.id, :parent_id => @category.id), :title => t("forms.new", :model => Category.model_name.human) %>
+		<%= render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu.id, :parent_id => @category.id), :model => Category %>
 	<% end %>
 	
 	<% if @category.children.blank? %>
-		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(), :title => t("forms.new", :model => Dish.model_name.human) %>
+		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(), :model => Dish %>
 	<% end %>
 </div>
 

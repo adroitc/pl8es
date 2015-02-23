@@ -34,6 +34,12 @@ $(document).ready(function() {
 	});
 });
 
+function hide_new_tile(model) {
+	$(".new_tile." + model).fadeOut(1200, function() {
+		$(this).remove();
+	});
+}
+
 // ––
 // –– image specific JS
 // ––

@@ -27,7 +27,7 @@
 		</span>
 	<% end %>
 	
-	<%=render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu), :title => t("forms.new", :model => Category.model_name.human) %>
+	<%=render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu), :model => Category %>
 </div>
 
 <script type="text/javascript">

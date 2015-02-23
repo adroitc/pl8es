@@ -1,4 +1,4 @@
-<div class="new_tile col-sm-3">
+<div class="new_tile col-sm-3 <%= model.name.downcase %>">
   <div class="panel panel-primary panel-add">
   	<div class="panel-body">
      	<article class="album">
@@ -7,12 +7,12 @@
             <%= image_tag("placeholders/1x1.png") %>
 					<% end %>
         </header>
-        <div class="panel-heading" style='<%="margin-top:-10px" if defined? title %>'>
+        <div class="panel-heading" style='<%="margin-top:-10px" if defined? model %>'>
           <div>+</div>
         </div>
-        <% if defined? title %>
+        <% if defined? model %>
 	        <div class="panel-heading" style="margin-top:24px;">
-	          <p class="title"><%= title %></p>
+	          <p class="title"><%= t("forms.new", :model => model.model_name.human) %></p>
 	        </div>
         <% end %>
       </article>

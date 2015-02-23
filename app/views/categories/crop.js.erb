@@ -12,5 +12,7 @@ $("#cropbox").on("load", function() {
 	// after adding an image to an existing category, update the category partial
 	var edited_category = $("<%= j render partial: 'category', locals: {category: @category} %>");
 	$("#category-holder-<%= @category.id %>").html(edited_category);
+	
+	hide_new_tile("dish");
 <% end %>
 });
