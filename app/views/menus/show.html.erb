@@ -17,14 +17,15 @@
 <h2><%=@menu.title %></h2>
 <br />
 <div class="row gallery-env draggable-portlets">
-	<% if @menu.categories.any? %>
-		<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
-			<span class="sorted ui-sortable">
+
+	<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
+		<span class="sorted ui-sortable">
+			<% if @menu.categories.any? %>
 				<% @menu.categories.each do |category| %>
 					<%= render "categories/category", :category => category %>
 				<% end %>
-			</span>
-		<% end %>
+			<% end %>
+		</span>
 	<% end %>
 	
 	<%=render "modals/new_object_tile", :new_object_path => new_menu_category_path(@menu), :title => t("forms.new", :model => Category.model_name.human) %>

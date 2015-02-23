@@ -30,24 +30,24 @@
 <h2><%=@category.menu.title %> - <%=@category.title %></h2>
 <br />
 <div class="row gallery-env draggable-portlets">
-	<% if @category.children.any? %>
-		<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
-			<span class="sorted ui-sortable">
+	<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
+		<span class="sorted ui-sortable">
+			<% if @category.children.any? %>
 				<% @category.children.each do |category| %>
 					<%=render :partial => "categories/category", :locals => {:category => category} %>
 				<% end %>
-			</span>
-		<% end %>
+			<% end %>
+		</span>
 	<% end %>
 	
-	<% if @category.dishes.any? %>
-		<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
-			<span class="sorted ui-sortable">
+	<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
+		<span class="sorted ui-sortable">
+			<% if @category.dishes.any? %>
 				<% @category.dishes.each do |dish| %>
 					<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
 				<% end %>
-			</span>
-		<% end %>
+			<% end %>
+		</span>
 	<% end %>
 	
 	<% if @category.parent.blank? && @category.dishes.blank? %>
