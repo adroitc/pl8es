@@ -24,14 +24,12 @@ raw(Jsonify::Builder.plain do |j|
       j.image_url                  category.image.url(:cropped_default_retina)
       j.image_fingerprint          category.image.present? ? category.image_fingerprint : "default"
       j.style                      category.style
-      j.category_lang              category.category_lang
       
       j.sub_categories(navigation.sub_categories) do |sub_category|
         j.id                         sub_category.id
         j.image_url                  category.image.url(:cropped_default_retina)
         j.image_fingerprint          sub_category.image.present?? sub_category.image_fingerprint : "default"
         j.style                      sub_category.style
-        j.category_lang              sub_category.category_lang
       
         j.dishes(category.dishes) do |dish|
           j.id                         dish.id

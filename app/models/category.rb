@@ -58,20 +58,6 @@ class Category < ActiveRecord::Base
 		crop_x.present? && crop_y.present? && crop_w.present? && crop_h.present?
 	end
 	
-	def category_lang
-		all_translated_attributes_hash = {}
-		
-		current_locale = I18n.locale
-		menu.restaurant.languages.each do |language|
-			I18n.locale = language.locale
-			
-			all_translated_attributes_hash[language.locale] = translated_attributes
-		end
-		I18n.locale = current_locale
-		
-		return all_translated_attributes_hash
-	end
-	
 	private
 	
 		def reprocess_image
