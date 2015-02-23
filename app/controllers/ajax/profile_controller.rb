@@ -56,8 +56,8 @@ class Ajax::ProfileController < ApplicationController
   end
   
   def editdescription
-    if @user && !params.values_at(:name, :description, :tags).include?(nil)
-      @user.restaurant.update_attributes(params.permit(:logo_image, :restaurant_image, :name))
+    if @user && !params.values_at(:name, :description).include?(nil)
+      @user.restaurant.update(params.permit(:logo_image, :restaurant_image, :name))
       
       languages = Language.find_all_by_locale(params[:description].keys)
       
@@ -70,10 +70,10 @@ class Ajax::ProfileController < ApplicationController
       
       @user.restaurant.save
       
-      @user.restaurant.update_attributes(params.permit(:logo_image))
+      @user.restaurant.update(params.permit(:logo_image))
       @user.restaurant.logo_image.set_crop_values_for_instance(params.permit(:logo_image, :logo_image_crop_w, :logo_image_crop_h, :logo_image_crop_x, :logo_image_crop_y))
       
-      @user.restaurant.update_attributes(params.permit(:restaurant_image))
+      @user.restaurant.update(params.permit(:restaurant_image))
       @user.restaurant.restaurant_image.set_crop_values_for_instance(params.permit(:restaurant_image, :restaurant_image_crop_w, :restaurant_image_crop_h, :restaurant_image_crop_x, :restaurant_image_crop_y))
       
       render :json => {:status => "success"}
