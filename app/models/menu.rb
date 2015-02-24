@@ -5,8 +5,6 @@ class Menu < ActiveRecord::Base
   belongs_to :menuColor
   
   has_many :categories
-  
-  has_many :dishes
 	
 	validates :title, :presence => true, :length => 4..75
 	validates :from_time, :allow_blank => true, :length => 4..7

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224170815) do
+ActiveRecord::Schema.define(version: 20150224171607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,9 +158,6 @@ ActiveRecord::Schema.define(version: 20150224170815) do
   add_index "dish_translations", ["locale"], name: "index_dish_translations_on_locale", using: :btree
 
   create_table "dishes", force: true do |t|
-    t.integer  "menu_id"
-    t.integer  "category_id"
-    t.integer  "wines_id"
     t.integer  "dishsuggestion_1_id"
     t.integer  "dishsuggestion_2_id"
     t.string   "price"
@@ -173,12 +170,7 @@ ActiveRecord::Schema.define(version: 20150224170815) do
     t.datetime "image_updated_at"
     t.text     "image_dimensions"
     t.string   "image_fingerprint"
-    t.integer  "image_crop_w"
-    t.integer  "image_crop_h"
-    t.integer  "image_crop_x"
-    t.integer  "image_crop_y"
     t.boolean  "image_crop_processed", default: true
-    t.integer  "ingredients_id"
     t.integer  "restaurant_id"
   end
 

@@ -5,8 +5,6 @@ class Dish < ActiveRecord::Base
 	# –––––––––––––
 	
 	belongs_to :restaurant
-	belongs_to :menu
-	belongs_to :category
 	
 	belongs_to :dishsuggestion_1, :class_name => "Dish"
 	belongs_to :dishsuggestion_2, :class_name => "Dish"
