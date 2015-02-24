@@ -18,8 +18,6 @@ class Dish < ActiveRecord::Base
 	#  Validations
 	# –––––––––––––
 	
-	validates :title, :presence => true, :length => 4..40
-	validates :description, :length => { :maximum => 400 }
 	validates :price, :length => { :maximum => 7 }
 	
 	# ––––––––––––––
@@ -72,4 +70,9 @@ class Dish < ActiveRecord::Base
 			image.assign(image)
 			image.save
 		end
+end
+
+Dish::Translation.class_eval do
+	validates :title, presence: true, length: 4..40
+	validates :description, presence: true, length: { max: 400 }
 end
