@@ -71,5 +71,5 @@ end
 
 Dish::Translation.class_eval do
 	validates :title, presence: true, length: 4..40
-	validates :description, presence: true, length: { max: 400 }
+	validates :description, presence: true, length: { maximum: 400 }
 end
