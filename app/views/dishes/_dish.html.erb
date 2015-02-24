@@ -1,0 +1,19 @@
+<div class="col-sm-4">
+	<div class="panel panel-primary" data-collapsed="0">
+		<div class="panel-body">
+			<article class="album">
+				<header>
+					<%= link_to edit_dish_path(dish), remote: true do %>
+						<%= image_tag dish.image.url(:web_preview_cropped) %>
+					<% end %>
+				</header>
+				<div class="panel-heading">
+					<input type="hidden" name="dish_ids[<%=dish.id %>]" value="">
+					<div class="panel-title ellipsis">
+						<%=dish.title %>
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
+</div>

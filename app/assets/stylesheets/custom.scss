@@ -3,6 +3,14 @@
 	padding: 11px 15px !important;
 }
 
+article.album {
+	margin-bottom: 0 !important;
+}
+
+.panel-body {
+	padding: 0 !important;
+}
+
 
 /**
  *
@@ -58,10 +66,9 @@
 	article.album .panel-heading {
 		color: #fff;
 		position: absolute;
-		margin-top: -40px;
-		margin-bottom: -40px;
+		bottom: 0;
 		background-color: rgba(0,0,0,0.4);
-		width: 100%;
+		width: calc(100% - 2px);
 		border-top-right-radius: 0px;
 		border-top-left-radius: 0px;
 		
@@ -81,7 +88,8 @@
 	background-color: transparent;
 	border-color: transparent;
 	
-	div.panel-body {
+	.panel-body {
+		padding: 0;
 		border: 4px dashed #999;
 	}	
 	&:hover div.panel-body {
