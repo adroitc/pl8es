@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223132902) do
+ActiveRecord::Schema.define(version: 20150224170815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -500,13 +500,5 @@ ActiveRecord::Schema.define(version: 20150223132902) do
 
   add_index "wine_translations", ["locale"], name: "index_wine_translations_on_locale", using: :btree
   add_index "wine_translations", ["wine_id"], name: "index_wine_translations_on_wine_id", using: :btree
-
-  create_table "wines", force: true do |t|
-    t.integer  "user_id"
-    t.string   "year"
-    t.string   "price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
