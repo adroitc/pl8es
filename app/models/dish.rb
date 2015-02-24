@@ -41,51 +41,32 @@ class Dish < ActiveRecord::Base
 	#    Images
 	# –––––––––––––
 	
-	has_attached_file :image, {
-		:styles => {
-			:original_cropping => {
-				:geometry => "286x286",
-				:format => :png
-			},
-			#:cropped_default => {
-			#	 :geometry => "840x560#",
-			#	 :format => :png,
-			#	 :processors => [:cropper]
-			#},
-			:cropped_default_retina => {
-				:geometry => "1680x1120#",
-				:format => :png,
-				:processors => [:cropper]
-			},
-			#:cropped_grid => {
-			#	 :geometry => "414x276#",
-			#	 :format => :png,
-			#	 :processors => [:cropper]
-			#},
-			:cropped_grid_retina => {
-				:geometry => "828x552#",
-				:format => :png,
-				:processors => [:cropper]
-			},
-			#:cropped_suggestion => {
-			#	 :geometry => "150x100#",
-			#	 :format => :png,
-			#	 :processors => [:cropper]
-			#},
-			:cropped_suggestion_retina => {
-				:geometry => "300x200#",
-				:format => :png,
-				:processors => [:cropper]
-			}
-		},
-		:default_url => "http://app.pl8.cc/assets/:class/:attachment/:style.png?"
+	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+	has_attached_file :image, format: :png, default_url: "/assets/:class/images/:style.png",
+	
+	styles: {
+		web_preview_cropped: { geometry: "351x234#", processors: [:nu_cropper] },
+		web_large: { geometry: "747x497" },
+		web_large_cropped: { geometry: "747x497#", processors: [:nu_cropper] },
+		original_cropping: { geometry: "286x286" },
+		cropped_default_retina: { geometry: "1680x1120#", processors: [:nu_cropper]},
+		cropped_grid_retina: { geometry: "828x552#", processors: [:nu_cropper]},
+		cropped_suggestion_retina: { geometry: "300x200#", processors: [:nu_cropper]}
 	}
 	
+	after_update :reprocess_image, :if => :cropping?
+	
 	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-	validates :image, :dimensions => {
-		:width => 1680,
-		:height => 1120
-	}
+	validates :image, :dimensions => { width: 1680, height: 1120 }
+	
+	def image_geometry(style = :original)
+		@geometry ||= {}
+		@geometry[style] ||= Paperclip::Geometry.from_file(image.path(style))
+	end
+	
+	def cropping?
+		crop_x.present? && crop_y.present? && crop_w.present? && crop_h.present?
+	end
 	
 	def dishingredients
 		ingredients_translated_attributes_hash = {}
@@ -105,4 +86,10 @@ class Dish < ActiveRecord::Base
 		return ingredients_translated_attributes_hash
 	end
 	
+	private
+	
+		def reprocess_image
+			image.assign(image)
+			image.save
+		end
 end
