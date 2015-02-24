@@ -10,26 +10,26 @@ class DailyDish < ActiveRecord::Base
     :styles => {
       :original_cropping => {
         :geometry => "286x286",
-        :format => :png
+        :format => :jpg
       },
       :cropped_menumalist_retina => {
         :geometry => "276x276#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       },
       :cropped_default_retina => {
         :geometry => "640x640#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       },
       :cropped_map_retina => {
         :geometry => "104x104#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       },
       :cropped_small_retina => {
         :geometry => "320x320#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       }
     },

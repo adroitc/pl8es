@@ -4,11 +4,11 @@ class MenuColorTemplate < ActiveRecord::Base
     :styles => {
       :original_cropping => {
         :geometry => "286x286",
-        :format => :png
+        :format => :jpg
       },
       :cropped_default_retina => {
         :geometry => "288x216#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       }
     }

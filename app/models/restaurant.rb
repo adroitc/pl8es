@@ -59,21 +59,21 @@ class Restaurant < ActiveRecord::Base
     :styles => {
       :original_cropping => {
         :geometry => "286x286",
-        :format => :png
+        :format => :jpg
       },
       :cropped_website => {
         :geometry => "108x72#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       },
       :cropped_default_retina => {
         :geometry => "312x208#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       },
       :cropped_dailycious_retina => {
         :geometry => "174x116#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       }
     },
@@ -89,11 +89,11 @@ class Restaurant < ActiveRecord::Base
     :styles => {
       :original_cropping => {
         :geometry => "286x286",
-        :format => :png
+        :format => :jpg
       },
       :cropped_default_retina => {
         :geometry => "828x552#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       }
     },
@@ -109,11 +109,11 @@ class Restaurant < ActiveRecord::Base
     :styles => {
       :original_cropping => {
         :geometry => "286x286",
-        :format => :png
+        :format => :jpg
       },
       :cropped_default_retina => {
         :geometry => "1680x1120#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       }
     },
@@ -129,11 +129,11 @@ class Restaurant < ActiveRecord::Base
     :styles => {
       :original_cropping => {
         :geometry => "286x286",
-        :format => :png
+        :format => :jpg
       },
       :cropped_default_retina => {
         :geometry => "2048x1536#",
-        :format => :png,
+        :format => :jpg,
         :processors => [:cropper]
       }
     },
