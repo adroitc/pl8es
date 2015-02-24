@@ -21,14 +21,12 @@ class Dish < ActiveRecord::Base
 	validates :title, :presence => true, :length => 4..40
 	validates :description, :length => { :maximum => 400 }
 	validates :price, :length => { :maximum => 7 }
-	validates :drinks, :length => { :maximum => 255 }
-	validates :sides, :length => { :maximum => 255 }
 	
 	# ––––––––––––––
 	#  Translations
 	# ––––––––––––––
 	
-	translates :title, :description, :drinks, :sides
+	translates :title, :description
 	globalize_accessors
 	
 	# –––––––––––––
@@ -66,24 +64,6 @@ class Dish < ActiveRecord::Base
 	
 	def cropping?
 		crop_x.present? && crop_y.present? && crop_w.present? && crop_h.present?
-	end
-	
-	def dishingredients
-		ingredients_translated_attributes_hash = {}
-		category.menu.restaurant.languages.each do |language|
-			I18n.locale = language.locale
-			
-			dishingredients_text = ""
-			ingredients.each do |ingredient|
-				if ingredient != ingredients.first
-					dishingredients_text = "\n"
-				end
-				dishingredients_text += ingredient.title
-			end
-			
-			ingredients_translated_attributes_hash[language.locale] = {:text => dishingredients_text}
-		end
-		return ingredients_translated_attributes_hash
 	end
 	
 	private
