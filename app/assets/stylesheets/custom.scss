@@ -11,6 +11,10 @@ article.album {
 	padding: 0 !important;
 }
 
+.panel-heading {
+	width: 100%;
+}
+
 
 /**
  *
@@ -32,18 +36,14 @@ article.album {
 .draggable-portlets {
 	
 	.sorted .ui-sortable-placeholder {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px 0;
 		background-color: #eee;
-		margin-top: -2px;
-		margin-bottom: -2px;
+		margin: -2px 0;
 	}
 	
 	.sorted .panel .panel-heading {
 		cursor: move;
 	}
-}
-.gallery-env.draggable-portlets {
 	
 	.panel {
 		border-radius: 0px;
@@ -61,74 +61,6 @@ article.album {
 			-moz-background-clip: padding;
 			border-radius: 0 0 0 0;
 		}
-	}
-	
-	article.album .panel-heading {
-		color: #fff;
-		position: absolute;
-		bottom: 0;
-		background-color: rgba(0,0,0,0.4);
-		width: calc(100% - 2px);
-		border-top-right-radius: 0px;
-		border-top-left-radius: 0px;
-		
-		.panel-title {
-			height: 40px;
-			line-height: 40px;
-			padding-top: 0px;
-			padding-bottom: 0px;
-			padding-left: 10px;
-			padding-right: 10px;
-			font-weight: normal;
-			width: 100%;
-		}
-	}	
-}
-.gallery-env.draggable-portlets div.panel.panel-primary.panel-add {
-	background-color: transparent;
-	border-color: transparent;
-	
-	.panel-body {
-		padding: 0;
-		border: 4px dashed #999;
-	}	
-	&:hover div.panel-body {
-		border: 4px dashed #666;
-	}
-	
-	
-	article.album {
-		header img {
-			visibility: hidden;
-		}
-		
-		div.panel-heading {
-			background-color: transparent;
-			color: #666;
-			position: absolute;
-			top: 0px;
-			margin: 0px;
-			height: 100%;
-			line-height: 100%;
-			text-align: center;
-			display: table-cell;
-			vertical-align: middle;
-			line-height: 100%;
-			/*line-height: 40px;*/
-			
-			div {
-				width: 100%;
-				position: absolute;
-				top: 50%;
-				margin-top: -14px;
-				text-align: center;
-				font-size: 60px;
-			}
-		}
-	}
-	&:hover article.album div.panel-heading {
-		color: #333;
-		pointer-events: none;
 	}
 }
 
@@ -266,8 +198,7 @@ span.pl8es-modal-delete {
 	margin-top: 8px;
 	margin-right: 8px;
 	line-height: 24px;
-	padding-left: 6px;
-	padding-right: 6px;
+	padding: 0 6px;
 	background-color: rgba(168, 168, 168, 0.8);
 	color: #fff;
 	font-size: 14px;

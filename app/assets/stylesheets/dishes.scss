@@ -1,0 +1,22 @@
+.gallery-env {
+	
+	.dish-holder {
+		
+		.panel-heading {
+			position: absolute;
+			color: #fff;
+			margin-bottom: 0;
+			bottom: 0;
+			background-color: rgba(0,0,0,0.4);
+			width: calc(100% - 2px);
+			
+			.panel-title {
+				height: 40px;
+				line-height: 40px;
+				padding: 0 10px;
+				font-weight: normal;
+				width: 100%;
+			}
+		}
+	}
+}
