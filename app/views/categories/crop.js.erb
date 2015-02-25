@@ -1,4 +1,4 @@
-$('#default-modal .modal-content').html("<%= j render 'cropper_form' %>");
+$('#default-modal .modal-content').html("<%= j render 'forms/cropper_form', model: Category, form_object: [@menu, @category], object: @category %>");
 $('#default-modal').modal('show');
 
 $("#cropbox").on("load", function() {
