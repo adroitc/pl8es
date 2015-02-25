@@ -4,7 +4,7 @@
 			#   image form
 			# –––––––––––––– %>
 	
-	<%= render 'modals/image_form', :object => @dish, :image => @dish.image, :f => f %>
+	<%= render 'forms/image_handler', :image => @dish.image, :f => f, :crop_link => crop_dish_path(@dish), :destroy_link => dish_path(@dish) %>
 	
 	<%	# –––––––––––––––––––––
 			#   title & languages

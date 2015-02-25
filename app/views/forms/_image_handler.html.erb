@@ -1,13 +1,14 @@
 <%
 	# 
-	# form to handle the image uploads
+	# form partial to handle the image uploads
 	# ––––––––––––––––––––––––––––––––
 	# 
 	# variables:
 	# 
 	# f - form being used
-	# object - model object, iE @category
 	# image - image of the object
+	# crop_link
+	# destroy_link
 	# 
 	# 
 	# relevant JavaScript can be found in forms.js
@@ -21,20 +22,20 @@
 		<%= image_tag image.url(:web_large_cropped), id: "image-preview" %>
 		
 		<div class="image-actions-holder">
-			<%= link_to menu_crop_category_path(object.menu, object), remote: true do %>
+			<%= link_to crop_link, remote: true do %>
 				<button type="button" class="btn btn-primary crop-button"><i class="entypo-resize-small"></i></button>
 			<% end %>
 			
 			<button type="button" class="btn btn-primary btn-file">
 				<span class="fileinput-exists"><i class="entypo-pencil"></i></span>
-				<%= f.file_field :image, data: { validate: "filedimension", imgvalidation: "828x552" }, accept: "image/*" %>
+				<%= f.file_field :image, accept: "image/*" %>
 			</button>
 			
 			<span class="modal-delete">
 			  <button type="button" class="btn btn-danger"><i class="entypo-cancel"></i></button>
 			  <button type="button" class="btn btn-default cancel"><%=t("neon.delete_cancel") %></button>
 			  
-				<%= link_to menu_destroy_category_image_path(object.menu, object), :method => "delete", :remote => true, :class => "confirm" do %>
+				<%= link_to destroy_link, :method => "delete", :remote => true, :class => "confirm" do %>
 			    <button type="button" class="btn btn-danger"><%=t("neon.delete_confirm") %></button>
 				<% end %>
 			</span>
