@@ -4,7 +4,11 @@
 			#   image form
 			# –––––––––––––– %>
 	
-	<%= render 'forms/image_handler', :image => @dish.image, :f => f, :crop_link => crop_dish_path(@dish), :destroy_link => dish_path(@dish) %>
+	<%  if @dish.id.present? %>
+		<%= render 'forms/image_handler', :image => @dish.image, :f => f, :crop_link => crop_dish_path(@dish), :destroy_link => dish_path(@dish) %>
+	<% else %>
+		<%= render 'forms/image_handler', :image => @dish.image, :f => f %>
+	<% end %>
 	
 	<%	# –––––––––––––––––––––
 			#   title & languages

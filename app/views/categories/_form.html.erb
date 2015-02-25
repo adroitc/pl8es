@@ -4,7 +4,12 @@
 			#   image form
 			# –––––––––––––– %>
 	
-	<%= render 'forms/image_handler', :image => @category.image, :f => f, :crop_link => menu_crop_category_path(@menu, @category), :destroy_link => menu_category_path(@menu, @category) %>
+	<%  if @dish.id.present? %>
+		<%= render 'forms/image_handler', :image => @category.image, :f => f, :crop_link => menu_crop_category_path(@menu, @category), :destroy_link => menu_category_path(@menu, @category) %>
+	<% else %>
+		<%= render 'forms/image_handler', :image => @category.image, :f => f %>
+	<% end %>
+	
 	
 	<%	# –––––––––––––––––––––
 			#   title & languages
