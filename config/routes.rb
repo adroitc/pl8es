@@ -90,6 +90,7 @@ Pl8es::Application.routes.draw do
 		
 		resources :dishes
 		post "dishes/sort" => "dishes#sort", as: :sort_dishes
+		get "dishes/:id/crop" => "dishes#crop", as: :crop_dish
 	end
 	
 	#signup

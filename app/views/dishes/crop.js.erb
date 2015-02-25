@@ -1,0 +1,18 @@
+$('#default-modal .modal-content').html("<%= j render 'forms/cropper_form', model: Dish, form_object: @dish, object: @dish %>");
+$('#default-modal').modal('show');
+
+$("#cropbox").on("load", function() {
+<% if defined?(@new_dish) && @new_dish %>
+	// after adding a new dish, append it to the dishes
+	var new_dish = $("<%= j render partial: 'dish', locals: {dish: @dish } %>");
+	$(new_dish).hide().appendTo("#form_sort_dish .ui-sortable").fadeIn(1500);
+<% end %>
+
+<% if defined?(@added_image) && @added_image %>
+	// after adding an image to an existing dish, update the dish partial
+	var edited_dish = $("<%= j render partial: 'dish', locals: {dish: @dish} %>");
+	$("#dish	-holder-<%= @dish.id %>").html(edited_dish);
+	
+	hide_new_tile("dish");
+<% end %>
+});

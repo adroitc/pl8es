@@ -1,0 +1,8 @@
+$('#default-modal .modal-content').html("<%= j render 'form' %>");
+$('#default-modal').modal('show');
+
+<% if action_name == "destroy_image" %>
+	// after adding an image to an existing dish, update the dish partial
+	var edited_dish = $("<%= j render partial: 'dish', locals: {dish: @dish} %>");
+	$("#dish-holder-<%= @dish.id %>").html(edited_dish);
+<% end %>
