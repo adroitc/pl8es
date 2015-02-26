@@ -1,12 +1,17 @@
+/* ––––––––––––––
+	category tile
+–––––––––––––– */
+
 .gallery-env {
 	
 	.category-holder {
 		
 		.panel-heading {
+			position: absolute;
+			bottom: 40px;
 			color: #fff;
-			bottom: 0;
 			background-color: rgba(0,0,0,0.4);
-			width: calc(100% - 2px);
+			width: 100%;
 			
 			.panel-title {
 				height: 40px;
