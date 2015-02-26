@@ -1,0 +1,20 @@
+.gallery-env {
+	
+	.category-holder {
+		
+		.panel-heading {
+			color: #fff;
+			bottom: 0;
+			background-color: rgba(0,0,0,0.4);
+			width: calc(100% - 2px);
+			
+			.panel-title {
+				height: 40px;
+				line-height: 40px;
+				padding: 0 10px;
+				font-weight: normal;
+				width: 100%;
+			}
+		}
+	}
+}

@@ -131,53 +131,44 @@ body.modal-open {
 		tile to add new elements
 ––––––––––––––––––––––––––– */
 
-.new_tile {
-	margin: 9px 0;
-	overflow: hidden;
+.new-tile {
 	
-	.panel-add {
+	.panel {
 		background-color: transparent;
 		border-color: transparent;
+		color: #666;
 		
 		.panel-body {
 			padding: 0;
 			border: 4px dashed #999;
 			
 			.album {
-				height: 174px;
-				width: 248px;
 				margin-bottom: 0;
 				
-				img {
-					visibility: hidden;
+				header {
+					// this "undos" the border from the panel body, else the image would be too short
+					margin: -8px;
 				}
 				
-				.title {
+				.center-wrapper {
 					position: absolute;
 					top: 50%;
-					width: 100%;
-					font-size: 16px;
-				}
-				.panel-heading {
-					background-color: transparent;
+					left: 50%;
+					transform: translateX(-50%) translateY(-50%);
 					color: #666;
-					position: absolute;
-					top: 0px;
-					margin: 0px;
-					height: 100%;
-					line-height: 100%;
-					text-align: center;
-					display: table-cell;
-					vertical-align: middle;
-					line-height: 100%;
 					
-					div {
-						width: 100%;
-						position: absolute;
-						top: 50%;
-						margin-top: -14px;
-						text-align: center;
-						font-size: 60px;
+					p {
+						font-size: 1.5em;
+						margin-top: 3em;
+					}
+					
+					&.plus-wrapper {
+						padding-bottom: 2em;
+						
+						span {
+							font-size: 6em; 
+						}
+
 					}
 				}
 			}
@@ -190,7 +181,7 @@ body.modal-open {
 		.panel-body {
 			border: 4px dashed #666;
 			
-			.panel-heading {
+			.album .center-wrapper {
 				color: #333;
 			}
 		}

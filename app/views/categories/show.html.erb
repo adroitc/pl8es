@@ -55,7 +55,7 @@
 	<% end %>
 	
 	<% if @category.children.blank? %>
-		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(), :model => Dish %>
+		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(), :model => Dish, :big => true %>
 	<% end %>
 </div>
 

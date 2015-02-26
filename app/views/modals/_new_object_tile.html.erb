@@ -1,21 +1,21 @@
 <%= link_to new_object_path, remote: true do %>
-	<div class="new_tile col-sm-3 <%= model.name.downcase %>">
-	  <div class="panel panel-primary panel-add">
-	  	<div class="panel-body">
-	     	<article class="album">
-	     		<header>
-		     		<%= image_tag("placeholders/1x1.png") %>
-	        </header>
-	        <div class="panel-heading" style='<%="margin-top:-10px" if defined? model %>'>
-	          <div>+</div>
-	        </div>
-	        <% if defined? model %>
-		        <div class="panel-heading" style="margin-top:24px;">
-		          <p class="title"><%= t("forms.new", :model => model.model_name.human) %></p>
-		        </div>
-	        <% end %>
-	      </article>
-	    </div>
-	  </div>
+	<div class="<%= model.name.downcase %> new-tile col-sm-<%= defined?(big) ? "4" : "3" %>">
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<article class="album">
+					<header>
+						<%= image_tag "placeholders/3x2.png" %>
+					</header>
+					<% if defined? model %>
+						<div class="center-wrapper">
+							<p class="panel-title"><%= t("forms.new", :model => model.model_name.human) %></p>
+						</div>
+						<div class="center-wrapper plus-wrapper">
+							<span>+</span>
+						</div>
+					<% end %>
+				</article>
+			</div>
+		</div>
 	</div>
 <% end %>
