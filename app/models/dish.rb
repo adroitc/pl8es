@@ -6,10 +6,8 @@ class Dish < ActiveRecord::Base
 	
 	belongs_to :restaurant
 	
-	belongs_to :dishsuggestion_1, :class_name => "Dish"
-	belongs_to :dishsuggestion_2, :class_name => "Dish"
-	
-	has_and_belongs_to_many :ingredients
+	has_many :dish_ingredients
+	has_many :ingredients, :through => :dish_ingredients
 	
 	# –––––––––––––
 	#  Validations

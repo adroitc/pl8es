@@ -1,6 +1,22 @@
 class Ingredient < ActiveRecord::Base
-  has_and_belongs_to_many :dishes
-  
-  translates :title
-  
+	
+	# –––––––––––––
+	#   Relations
+	# –––––––––––––
+	
+	has_many :dish_ingredients
+	has_many :dishes, :through => :dish_ingredients
+	
+	# –––––––––––––
+	#  Validations
+	# –––––––––––––
+	
+	validates :abbreviation, :presence => true, :length => { :maximum => 2 }
+	
+	# ––––––––––––––
+	#  Translations
+	# ––––––––––––––
+	
+	translates :title
+	
 end
