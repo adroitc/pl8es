@@ -9,6 +9,41 @@ Language.create([
   }
 ])
 
+# ––––––––––––––––
+#   Ingredients
+# ––––––––––––––––
+
+# only import the ingredients if they're not yet present
+unless Ingredient.count == 14
+	ingredients_hash = [
+											{ en: "Cereals containing gluten", de: "Glutenhaltiges Getreide"},
+											{ en: "Eggs", de: "Eier"},
+											{ en: "Peanuts", de: "Erdnüsse"},
+											{ en: "Lupins", de: "Lupinen"},
+											{ en: "Curstaceans", de: "Krebstiere"},
+											{ en: "Celery", de: "Sellerie"},
+											{ en: "Sesame seeds", de: "Sesamsamen"},
+											{ en: "Sulfur dioxide and sulfites", de: "Schwefeldioxid und Sulfite"},
+											{ en: "Milk - Lactose", de: "Milch - Laktose"},
+											{ en: "Nuts", de: "Schalenfrüchte (Nüsse)"},
+											{ en: "Mustard", de: "Senf"},
+											{ en: "Fish", de: "Fisch"},
+											{ en: "Soy(-beans)", de: "Soja(-bohnen)"},
+											{ en: "Molluscs", de: "Weichtiere"}
+										]
+	
+	ingredients_hash.each do |ingredient_translations|
+		new_ingredient = Ingredient.new()
+		
+		ingredient_translations.each do |locale, translation|
+			I18n.locale = locale
+			new_ingredient.update(:title => translation)
+		end
+		
+		new_ingredient.save
+	end
+end
+
 SupportedFont.create([
   {
     :title => "GillSans",
