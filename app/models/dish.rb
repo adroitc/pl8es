@@ -9,6 +9,8 @@ class Dish < ActiveRecord::Base
 	has_many :dish_ingredients
 	has_many :ingredients, :through => :dish_ingredients
 	
+	default_scope includes(:ingredients)
+	
 	# –––––––––––––
 	#  Validations
 	# –––––––––––––
