@@ -19,11 +19,7 @@
 <div class="row gallery-env draggable-portlets">
 	<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>
 		<span class="sorted ui-sortable">
-			<% if @menu.categories.roots.any? %>
-				<% @menu.categories.roots.each do |category| %>
-					<%= render "categories/category", :category => category %>
-				<% end %>
-			<% end %>
+			<%= render @menu.categories.roots %>
 		</span>
 	<% end %>
 	
