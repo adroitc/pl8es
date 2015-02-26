@@ -9,9 +9,10 @@ $("#cropbox").on("load", function() {
 <% end %>
 
 <% if defined?(@added_image) && @added_image %>
+console.log("mhm");
 	// after adding an image to an existing dish, update the dish partial
 	var edited_dish = $("<%= j render partial: 'dish', locals: {dish: @dish} %>");
-	$("#dish	-holder-<%= @dish.id %>").html(edited_dish);
+	$("#dish-holder-<%= @dish.id %>").html(edited_dish);
 	
 	hide_new_tile("dish");
 <% end %>
