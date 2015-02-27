@@ -9,8 +9,6 @@ class Dish < ActiveRecord::Base
 	has_many :dish_ingredients
 	has_many :ingredients, :through => :dish_ingredients
 	
-	default_scope includes(:ingredients)
-	
 	# –––––––––––––
 	#  Validations
 	# –––––––––––––
@@ -28,7 +26,7 @@ class Dish < ActiveRecord::Base
 	#    Scopes
 	# –––––––––––––
 	
-	default_scope -> { order("position, id") }
+	default_scope -> { order("dishes.position, dishes.id") }
 	
 	# –––––––––––––
 	#    Images
