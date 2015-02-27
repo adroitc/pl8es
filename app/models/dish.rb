@@ -7,6 +7,7 @@ class Dish < ActiveRecord::Base
 	belongs_to :restaurant
 	
 	has_many :dish_ingredients
+	accepts_nested_attributes_for :dish_ingredients, allow_destroy: true
 	has_many :ingredients, :through => :dish_ingredients
 	
 	# –––––––––––––

@@ -64,7 +64,7 @@ class DishesController < ApplicationController
 	private
 		
 		def dish_params
-			params.require(:dish).permit(*Dish.globalize_attribute_names, :price, :image, :crop_x, :crop_y, :crop_w, :crop_h)
+			params.require(:dish).permit(*Dish.globalize_attribute_names, :price, :image, :crop_x, :crop_y, :crop_w, :crop_h, :ingredient_ids => [])
 		end
 		
 		def get_dish

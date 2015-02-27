@@ -30,8 +30,8 @@
 	</div>
 	
 	<%	# ––––––––––––––––
-			#   input fields
-			# –––––––––––––––– %>
+		#   input fields
+		# –––––––––––––––– %>
 	
 	<div class="modal-body">
 		<% # –– parent_id is hidden %>
@@ -61,6 +61,18 @@
 						<strong><%=t("menumalist.dish.price") %></strong>
 						<%= f.text_field :price, :class => "form-control", :placeholder => "12,00" %>
 					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<strong><%=t("menumalist.dish.ingredients") %></strong>
+					</div>
+					<%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :title do |b| %>
+						<div class="col-sm-6">
+							<%= b.check_box(class: "icheck-2-checkbox") %>
+							<%= b.label %>
+						</div>
+					<% end %>
 				</div>
 			</div>
 		</div>
