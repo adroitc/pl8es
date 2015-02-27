@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227143641) do
+ActiveRecord::Schema.define(version: 20150227152030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20150227143641) do
   create_table "categories", force: true do |t|
     t.integer  "menu_id"
     t.integer  "parent_id"
-    t.integer  "level"
     t.string   "style"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -61,10 +60,6 @@ ActiveRecord::Schema.define(version: 20150227143641) do
     t.datetime "image_updated_at"
     t.text     "image_dimensions"
     t.string   "image_fingerprint"
-    t.integer  "image_crop_w"
-    t.integer  "image_crop_h"
-    t.integer  "image_crop_x"
-    t.integer  "image_crop_y"
     t.boolean  "image_crop_processed", default: true
   end
 
