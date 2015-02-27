@@ -8,6 +8,9 @@ class Category < ActiveRecord::Base
 	
 	acts_as_tree
 	
+	has_many :category_dishes
+	has_many :dishes, :through => :category_dishes
+	
 	# –––––––––––––
 	#  Validations
 	# –––––––––––––

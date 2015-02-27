@@ -38,11 +38,7 @@
 	
 	<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
 		<span class="sorted ui-sortable">
-			<% if @category.dishes.any? %>
-				<% @category.dishes.each do |dish| %>
-					<%=render :partial => "neon/dish_panel", :locals => {:dish => dish} %>
-				<% end %>
-			<% end %>
+			<%= render @category.dishes %>
 		</span>
 	<% end %>
 	
