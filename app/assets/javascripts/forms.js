@@ -77,3 +77,17 @@ function hide_image_preview() {
 	$(".gallery-image-edit-env").removeClass("preview");
 	$(".text-holder").text("Add an image");	
 }
+
+// iCheck initializers
+
+function init_icheck_checkboxes() {
+	$("input.icheck-2-checkbox").iCheck({
+		checkboxClass: 'icheckbox_square-blue'
+	});
+}
+
+function init_icheck_radio_buttons() {
+	$('input.icheck-2-radio').iCheck({
+		radioClass: 'iradio_square-blue'
+	});
+}

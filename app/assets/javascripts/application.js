@@ -78,13 +78,9 @@ $(document).ready(function()
     wrap: "letter",
     fallbackToLetter: true
   }).css("overflow", "hidden");
-
-	$("input.icheck-2-checkbox").iCheck({
-		checkboxClass: 'icheckbox_square-blue'
-	});
-  $('input.icheck-2-radio').iCheck({
-  	radioClass: 'iradio_square-blue'
-  });
+  
+  init_icheck_checkboxes();
+  init_icheck_radio_buttons();
   
   function pl8es_f_setupinputchanger(t){
     if (t.attr("type") != "radio"){
