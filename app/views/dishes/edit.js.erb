@@ -6,3 +6,5 @@ $('#default-modal').modal('show');
 	var edited_dish = $("<%= j render partial: 'dish', locals: {dish: @dish} %>");
 	$("#dish-holder-<%= @dish.id %>").html(edited_dish);
 <% end %>
+
+init_icheck_checkboxes();
