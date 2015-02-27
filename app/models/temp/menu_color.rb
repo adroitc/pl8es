@@ -1,5 +1,5 @@
 class MenuColor < ActiveRecord::Base
-  belongs_to :restaurant
+	belongs_to :restaurant
 	
 	validates :background, :presence => true, :length => 4..7
 	validates :bar_background, :presence => true, :length => 4..7
