@@ -187,3 +187,16 @@ span.pl8es-modal-delete {
 	font-weight: normal;
 	border: 1px solid #ffffff;
 }
+
+// decrease logo-size on mobile devices
+
+@media all and (max-width: 700px) {
+  .logo > img {
+    height: 45px;
+  }
+}
+
+//todo: this is probably the wrong file for this style
+.logo-env {
+  padding: 25px !important;
+}

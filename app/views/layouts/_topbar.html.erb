@@ -1,12 +1,15 @@
-<div class="row">
+<div class="row topbar">
   <!-- Profile Info -->
   <div class="col-md-10 col-sm-8 clearfix">
     <ul class="user-info pull-left pull-none-xsm">
       <!-- Profile Info -->
       <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
         <a href="<%= profile_index_path %>">
-          <img src="<%=@user.restaurant.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
-          <span style="font-size:20px"><%=@user.restaurant.name %></span>
+          <img src="<%=@user.restaurant.logo_image.url(:cropped_website) %>" class="profile-logo" />
+          <ul class="profile-info-right">
+            <li class="profile-name"><%=@user.restaurant.name %></li>
+            <li class="profile-email"><%=@user.email %></li>
+          </ul>
         </a>
       </li>
     </ul>
@@ -20,4 +23,3 @@
     </ul>
   </div>
 </div>
-<hr />

@@ -1,0 +1,26 @@
+.topbar {
+
+  .profile-logo {
+    height: 45px;
+    margin-bottom: 20px;
+  }
+
+  .profile-info-right {
+
+    list-style: none;
+    display: inline-block;
+    padding: 0px;
+
+    .profile-name {
+      color: $neon-blue-grey;
+      font-size: 12pt
+    }
+
+    .profile-email {
+      font-size: 10pt;
+      color: $neon-blue-grey;
+    }
+
+  }
+
+}
