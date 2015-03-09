@@ -70,30 +70,6 @@ de:
   language:
     default: "Standard"
   
-  payment:
-    paypal_payment_description: "dailycious - Dailis (Guthaben)"
-    paypal_item_dailycious_credits_title: "%{c} Daili-Paket"
-    paypal_item_dailycious_credits_description: "entspricht %{c} Mittagsgerichten"
-    paypal_payment_recurring_description: "dailycious - Daili-Plan (Guthaben)"
-    
-    #invoice_uid_nr: "UID Nr. #"
-    invoice_invoice_to: "RECHNUNG FÜR"
-    invoice_invoice: "RECHNUNG"
-    invoice_date_of_invoice: "Rechnungsdatum:"
-    invoice_description: "BESCHREIBUNG"
-    invoice_unit_price: "EINZELPREIS"
-    invoice_quantity: "ANZAHL"
-    invoice_total: "GESAMT"
-    invoice_sub_total: "Netto"
-    invoice_tax_total: "20% MwSt"
-    invoice_grand_total: "Gesamt"
-    invoice_payment_method: "ZAHLUNGSMETHODE:"
-    invoice_payment_method_paypal: "PayPal"
-    invoice_thank_you: "Vielen Dank!"
-    invoice_notice: "HINWEIS"
-    invoice_notice_msg: "Bei unbezahlten Rechnungen werden nach 30 Tagen 1,5% Zinsen verrechnet."
-    invoice_footer: "Diese Rechnung wurde auf einem Computer erstellt und ist ohne Signatur gültig."
-    
   signup:
     welcome: "Richten Sie Ihr kostenloses Konto ein, in nur wenigen Schritten."
     restaurant_name_placeholder: "Restaurantname"
@@ -149,7 +125,6 @@ de:
       restaurant: "Restaurant"
       menumalist: "Speisekarte"
       dailycious: "Mittagsgerichte"
-      invoices: "Rechnungen"
       
     public_menu:
       map: "Karte"
@@ -220,12 +195,7 @@ de:
     last_week: "letzte Woche"
     next_week: "nächste Woche"
 
-    dailis: "Dailis"
-    get_more: "mehr kaufen"
-    change_plan: "mehr kaufen"
-    equal_of_n_dailis: "entspricht %{n} Mittagsgerichten"
     unlimited: "unbegrenzten"
-    payment_introduction: "Wir haben die folgenden Pakete für Sie (exkl. MwSt):"
     
     daily_dish_add: "Mittagsgericht hinzufügen"
     
@@ -238,8 +208,6 @@ de:
     daily_dish_title_placeholder: "z.B. Wiener Schnitzel"
     daily_dish_price: "Preis"
     daily_dish_price_placeholder: "7,50"
-    dailycious_plan_modal_title: "Dailycious Guthaben"
-    dailycious_plan_modal_submit: "Kaufen"
   
   menumalist:
     menumalist_title: "Menumalist - alle Speisekarten"
@@ -313,13 +281,3 @@ de:
     dish_sides_placeholder: "z.B. Brot"
     dish_ingredients: "Inhaltsstoffe/Allergene"
     dish_ingredients_text: "Bitte geben Sie die Inhaltsstoffe und Allergene für diese Speise ein."
-    
-  invoice:
-    invoice_title: "Rechnungen"
-    
-    invoice_date: "Datum"
-    invoice_billing_contact: "Rechnungsempfänger"
-    invoice_description: "Beschreibung"
-    invoice_quantity: "Anzahl"
-    invoice_total: "Gesamt"
-    invoice_download: "Herunterladen"

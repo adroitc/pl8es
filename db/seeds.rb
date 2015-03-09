@@ -87,8 +87,6 @@ User.create([
       ),
       :download_code => "DEMO-2",
       :supportedFont => SupportedFont.first,
-      :default_language => Language.first,
-      :dailycious_plan => DailyciousPlan.create(),
       :default_language => Language.first
     )
   }
@@ -124,8 +122,7 @@ User.create([
       ),
       :download_code => "DEMO",
       :supportedFont => SupportedFont.first,
-      :default_language => Language.first,
-      :dailycious_plan => DailyciousPlan.create()
+      :default_language => Language.first
     )
   }
 ])

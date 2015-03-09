@@ -5,8 +5,6 @@ class Restaurant < ActiveRecord::Base
 	# –––––––––––––
 	
   belongs_to :user
-  has_one :dailycious_plan
-  has_many :dailycious_credits
   
   has_one :location
   

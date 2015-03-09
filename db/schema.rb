@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227152030) do
+ActiveRecord::Schema.define(version: 20150309161416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,24 +114,6 @@ ActiveRecord::Schema.define(version: 20150227152030) do
     t.string   "image_fingerprint"
     t.integer  "position"
     t.integer  "restaurant_id"
-  end
-
-  create_table "dailycious_credits", force: true do |t|
-    t.integer  "restaurant_id"
-    t.integer  "payment_id"
-    t.date     "usage_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "dailycious_plans", force: true do |t|
-    t.integer  "restaurant_id"
-    t.string   "paypal_profile_id"
-    t.string   "paypal_profile_status"
-    t.boolean  "activated",             default: false
-    t.date     "setup_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "devices", force: true do |t|
@@ -305,27 +287,6 @@ ActiveRecord::Schema.define(version: 20150227152030) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "restaurant_id"
-  end
-
-  create_table "payments", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "dailycious_plan_id"
-    t.string   "paypal_payment_id"
-    t.string   "paypal_token"
-    t.string   "paypal_payer_id"
-    t.boolean  "recurring",                default: false
-    t.integer  "quantity"
-    t.decimal  "amount"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "successful",               default: false
-    t.string   "invoice_pdf_file_name"
-    t.string   "invoice_pdf_content_type"
-    t.integer  "invoice_pdf_file_size"
-    t.datetime "invoice_pdf_updated_at"
-    t.string   "invoice_pdf_dimensions"
-    t.string   "billing_contact"
   end
 
   create_table "requests", force: true do |t|

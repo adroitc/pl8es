@@ -2,27 +2,6 @@ class Ajax::DailyDishController < ApplicationController
   
   def adddailydish
     if @user && !params.values_at(:display_date, :title, :price).include?(nil)
-      todays_dailycious_credits = @user.restaurant.dailycious_credits.where(:usage_date => params[:display_date].to_date)
-      todays_daily_dishes = @user.restaurant.daily_dishes.where(:display_date => params[:display_date].to_datetime)
-      
-      #if todays_daily_dishes.count == 0 || (todays_daily_dishes.count > 0 && @user.restaurant.dailycious_credits.valid_credits.count > 0)
-      #  if todays_daily_dishes.count > todays_dailycious_credits.count
-      #    @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
-      #      :usage_date => params[:display_date]
-      #    })
-      #  end
-      #end
-
-      while @user.restaurant.daily_dishes.where(:display_date => params[:display_date].to_datetime).count > todays_dailycious_credits.count+1
-        @user.restaurant.daily_dishes.where(:display_date => params[:display_date].to_datetime).last.destroy
-      end
-      
-      if @user.restaurant.daily_dishes.where(:display_date => params[:display_date].to_datetime).count == todays_dailycious_credits.count+1 && @user.restaurant.dailycious_credits.valid_credits.count > 0
-        @user.restaurant.dailycious_credits.valid_credits.first.update_attributes({
-          :usage_date => params[:display_date]
-        })
-      end
-
       params[:price] = params[:price] == "" ? "0.00" : ("%.2f" % params[:price].gsub(",", ".")).gsub(".", ",")
       
 			daily_dish = DailyDish.new(params.permit(:display_date, :title, :price, :image).merge({

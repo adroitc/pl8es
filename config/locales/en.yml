@@ -70,30 +70,6 @@ en:
   language:
     default: "Default"
   
-  payment:
-    paypal_payment_description: "dailycious - dailis (credits)"
-    paypal_item_dailycious_credits_title: "%{c} dailis package"
-    paypal_item_dailycious_credits_description: "equals %{c} lunch dishes"
-    paypal_payment_recurring_description: "dailycious - dailis plan (credits)"
-    
-    invoice_uid_nr: "UID Nr. #"
-    invoice_invoice_to: "INVOICE TO"
-    invoice_invoice: "INVOICE"
-    invoice_date_of_invoice: "Date of invoice:"
-    invoice_description: "DESCRIPTION"
-    invoice_unit_price: "UNIT PRICE"
-    invoice_quantity: "QUANTITY"
-    invoice_total: "TOTAL"
-    invoice_sub_total: "Sub Total"
-    invoice_tax_total: "20% VAT"
-    invoice_grand_total: "Total"
-    invoice_payment_method: "METHOD OF PAYMENT:"
-    invoice_payment_method_paypal: "PayPal"
-    invoice_thank_you: "Thank you!"
-    invoice_notice: "NOTICE"
-    invoice_notice_msg: "A finance charge of 1.5% will be made on unpaid balances after 30 days."
-    invoice_footer: "Invoice was created on a computer and is valid without a signature."
-  
   signup:
     welcome: "Create an account, it's free and easy to sign-up!"
     restaurant_name_placeholder: "Restaurant name"
@@ -150,7 +126,6 @@ en:
       restaurant: "Restaurant"
       menumalist: "Menus"
       dailycious: "Lunch Dishes"
-      invoices: "Invoices"
       
     public_menu:
       map: "Map"
@@ -221,12 +196,7 @@ en:
     last_week: "Last week"
     next_week: "Next week"
 
-    dailis: "dailis"
-    get_more: "get more"
-    change_plan: "get more"
-    equal_of_n_dailis: "equals %{n} lunch dishes"
     unlimited: "unlimited"
-    payment_introduction: "We have devised these payment plans for you (excl. VAT):"
     
     daily_dish_add: "Add lunch dish"
     
@@ -239,8 +209,6 @@ en:
     daily_dish_title_placeholder: "e.g. Spaghetti Bolognaise"
     daily_dish_price: "Price"
     daily_dish_price_placeholder: "8,00"
-    dailycious_plan_modal_title: "Dailycious Credits"
-    dailycious_plan_modal_submit: "Buy"
   
   menumalist:
     menumalist_title: "Menumalist - all menus"
@@ -313,14 +281,3 @@ en:
     dish_sides_placeholder: "e.g. Bread"
     dish_ingredients: "Ingredients/Allergens"
     dish_ingredients_text: "Please choose the ingredients and allergens for this dish"
-    
-  invoice:
-    invoice_title: "Invoices"
-    
-    invoice_date: "Date"
-    invoice_billing_contact: "Billing contact"
-    invoice_description: "Description"
-    invoice_quantity: "Quantity"
-    invoice_total: "Total"
-    invoice_download: "Download"
-    

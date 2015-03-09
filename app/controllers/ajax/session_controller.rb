@@ -128,15 +128,8 @@ class Ajax::SessionController < ApplicationController
           ),
           :supportedFont => SupportedFont.first,
           :download_code => download_code,
-          :background_type => "color",
-          :dailycious_plan => DailyciousPlan.create()
+          :background_type => "color"
         })
-        
-        for i in 1..5
-          DailyciousCredit.create(
-            :restaurant => @user.restaurant
-          )
-        end
         
         if @device
           @device.update_attributes({

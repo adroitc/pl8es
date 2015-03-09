@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   has_one :restaurant
   has_many :devices
   has_many :sessions
-  has_many :payments
   
   has_secure_password
   
