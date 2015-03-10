@@ -34,6 +34,7 @@ class Restaurant < ActiveRecord::Base
 	
 	# – menumalist
 	has_many :menus
+	has_many :categories, :through => :menus
 	
 	has_many :dishes
 	has_many :daily_dishes

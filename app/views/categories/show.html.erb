@@ -36,7 +36,7 @@
 		</span>
 	<% end %>
 	
-	<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdish"}) do %>
+	<%= form_tag(sort_dishes_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_dish"}) do %>
 		<span class="sorted ui-sortable">
 			<%= render @category.dishes %>
 		</span>
@@ -47,7 +47,7 @@
 	<% end %>
 	
 	<% if @category.children.blank? %>
-		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(), :model => Dish, :big => true %>
+		<%= render "modals/new_object_tile", :new_object_path => new_dish_path(:category_id => params[:id]), :model => Dish, :big => true %>
 	<% end %>
 </div>
 

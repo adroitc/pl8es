@@ -8,11 +8,19 @@ class DishesController < ApplicationController
 	end
 	
 	def new
+		@category_id = params[:category_id] if params[:category_id].present?
+		
 		@dish = Dish.new()
 	end
 	
 	def create
 		@dish = @user.restaurant.dishes.build(dish_params)
+		
+		category_id = params[:dish][:category_id]
+		
+		if category_id.present? && @user.restaurant.categories.leaves.exists?(category_id)
+			@dish.categories << Category.find(category_id)
+		end
 		
 		if @dish.save
 			if params[:dish][:image].present?

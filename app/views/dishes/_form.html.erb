@@ -35,7 +35,7 @@
 	
 	<div class="modal-body">
 		<% # –– parent_id is hidden %>
-		<%= f.hidden_field :category_id, value: params[:category_id] if params[:category_id].present? %>
+		<%= f.hidden_field :category_id, value: @category_id if @category_id.present? %>
 		
 		<div class="row">
 			<div class="col-sm-12 tab-content">

@@ -29,7 +29,8 @@ class Category < ActiveRecord::Base
 	#    Scopes
 	# –––––––––––––
   
-	default_scope -> { order("position, id") }
+	default_scope -> { order("categories.position, categories.id") }
+	scope :leaves, -> { where.not(:parent_id => nil) }
 	
 	# –––––––––––––
 	#    Images
