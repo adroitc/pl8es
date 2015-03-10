@@ -57,6 +57,8 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
   gem 'railroady'
+  
+  gem 'rails-erd'
 end
 
 group :production do
