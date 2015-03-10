@@ -36,7 +36,7 @@ class Category < ActiveRecord::Base
 	# –––––––––––––
 	
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-	has_attached_file :image, format: :jpg, default_url: "/assets/:class/images/:style.png",
+	has_attached_file :image, format: :jpg, default_url: "/assets/:class/:attachment/:style.png",
 	
 	styles: {
 		web_preview_cropped: { geometry: "256x171#", processors: [:nu_cropper] },
