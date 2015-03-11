@@ -23,4 +23,20 @@
 
   }
 
+  ul.profile-info-sections {
+
+    list-style: none;
+
+    li {
+      min-width: 80px;
+      display: inline-block;
+      padding-left: 25px;
+
+      h3 {
+        margin-top: 0px;
+      }
+    }
+
+  }
+
 }

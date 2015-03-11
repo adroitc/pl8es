@@ -13,6 +13,24 @@
         </a>
       </li>
     </ul>
+    <ul class="profile-info-sections">
+      <li>
+        <div class="profile-stat">
+          <h3><%=@visit_restaurant.daily_dishes.count %></h3>
+          <a href="<%=dishes_path %>">
+            <%=@visit_restaurant.daily_dishes.count == 1 ? t('profile.dish') : t('profile.dishes') %>
+          </a>
+        </div>
+      </li>
+      <li>
+        <div class="profile-stat">
+          <h3><%=@visit_restaurant.menus.count %></h3>
+          <a href="<%=menus_path %>">
+            <%=@visit_restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
   <div class="col-md-2 col-sm-4 clearfix hidden-xs">
     <ul class="list-inline links-list pull-right">
