@@ -1,0 +1,99 @@
+.profile-env {
+
+  max-width: 930px;
+
+  h4 {
+    line-height: 17pt;
+    font-size: 11pt;
+    border-bottom: 1px solid $neon-lighter-notwhite;
+    margin-left: 11px;
+    margin-right: 15px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+  }
+
+  .profile-head {
+    height: 244px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -20px !important;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+
+  .profile-logo {
+    position: relative;
+    top: 120px;
+    margin-left: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .profile-caption {
+
+    left: 200px;
+    position: relative;
+    top: -25px;
+    max-width: 56%;
+
+    .profile-name {
+      display: inline-block;
+      font-size: 20pt;
+      margin-right: 4px;
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .profile-description {
+      display: block;
+      margin-top: 8px;
+      font-size: 10pt;
+      color: #fff;
+      text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  .profile-map {
+    max-width: 640px;
+
+    .profile-tile {
+      background-position: center center;
+    }
+  }
+
+  .profile-tile {
+    height: 148px;
+    font-size: 10pt;
+    padding: 15px;
+    text-align: left;
+    color: $neon-blue-grey;
+
+    ul {
+      position: absolute;
+      z-index: 2;
+      padding: 0;
+      list-style: none;
+
+      li {
+        padding: 2px;
+      }
+    }
+
+  }
+
+  .label-restaurant-category {
+    background-color: $dailycious-main-color;
+    display: inline-block;
+    font-size: 8pt;
+    height: 18px;
+    line-height: 10px;
+    margin-left: 8px;
+    text-shadow: none;
+  }
+
+}
+
+
