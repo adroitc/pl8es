@@ -1,5 +1,5 @@
 $('#default-modal').modal('hide');
-var new_category = $("<%= j render partial: 'dish', locals: {category: @dish} %>");
+var new_category = $("<%= j render partial: 'dish', locals: {dish: @dish} %>");
 $(new_category).hide().appendTo("#form_sort_dish .ui-sortable").fadeIn(1500);
 
 hide_new_tile("category");

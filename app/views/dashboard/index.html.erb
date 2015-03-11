@@ -102,19 +102,6 @@ requests_this_7days = Request.where({
 			<p><%=t("dashboard.in_the_last_7_days") %></p>
 		</div>
 	</div>
-	<div class="col-sm-4">
-		<div class="tile-stats tile-white tile-white-primary">
-			<div class="icon"><i class="entypo-ticket"></i></div>
-			<div class="num" data-start="0" data-end="<%=@user.restaurant.dailycious_credits.valid_credits.count %>" data-duration="1500" data-delay="0">0</div>
-			<h3><%=t("dailycious.dailis") %></h3>
-			<a href="javascript:;" onclick="jQuery('#modal-dacreditplan').modal('show');"><p>
-				<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-					<%=t("dailycious.get_more") %>
-					<i class="entypo-plus"></i>
-				</button>
-			</p></a>
-		</div>
-	</div>
 </div>
 <h2><%=t("layouts.menu.menumalist") %></h2>
 <br />
@@ -160,6 +147,3 @@ requests_this_7days = Request.where({
 		</div>
 	</div>
 </div>
-		
-<% # superfluos modals, leave them for now %>
-<%=render :partial => "dailycious/modal_creditplan" %>

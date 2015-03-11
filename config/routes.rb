@@ -55,12 +55,6 @@ Pl8es::Application.routes.draw do
 			post "/ingredients/add" => "admin#addingredient"
 			post "/ingredients/edit" => "admin#editingredient"
 			
-			#ajax_dish-post
-			post "/buy/dasetupcreditplan" => "payment#dasetupcreditplan"
-			
-			#ajax_dish-get
-			get "/buy/datransfercreditplan" => "payment#datransfercreditplan"
-			
 			#ajax/profile
 			post "/profile/editsettings" => "profile#editsettings"
 			post "/profile/editdescription" => "profile#editdescription"
@@ -125,9 +119,6 @@ Pl8es::Application.routes.draw do
 	resources :profile, :only => [:index]
 	get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
 	get "/restaurant" => "profile#index"
-	
-	#invoice
-	resources :invoice, :only => [:index]
 	
 	#dailycious
 	get "/dailycious" => "dailycious#index"

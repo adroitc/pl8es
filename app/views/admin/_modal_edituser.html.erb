@@ -2,12 +2,6 @@
 <%= form_tag(user_edit_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_addfont"}) do %>
 <%=neon_modal_body do |b| %>
 <input name="user_id" type="hidden" id="form-language_id" value="<%=user.id %>">
-<div class="row">
-	<div class="col-sm-6 form-group">
-    <label for="form-title" class="control-label"><strong>Add dailis (<%=user.restaurant.dailycious_credits.valid_credits.count %>): </strong></label>
-		<input name="dailycious_credits" type="text" class="form-control" id="form-title" placeholder="dailis" data-validate="number,maxlength[250]" value="0">
-	</div>
-</div>
 <% end %>
 <%=neon_modal_footer do |b| %>
 <%=render :partial => "neon/modal_footer_delete" %>

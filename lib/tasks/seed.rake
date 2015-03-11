@@ -69,7 +69,6 @@ namespace :seed do
             :nav_text => '#ffffff',
             :nav_text_active => '#999999'
         ),
-        :dailycious_plan => DailyciousPlan.create(),
         :download_code => download_code,
       })
 
@@ -146,14 +145,6 @@ namespace :seed do
 
   # removes als users/restaurants/locations which were imported.
   def remove_old_import_data
-
-    DailyciousPlan.connection.execute("
-      delete from dailycious_plans
-      where dailycious_plans.restaurant_id in (
-          select restaurants.id as restid from restaurants
-          join users on (restaurants.user_id = users.id AND users.product_referer = 'g')
-      );
-    ", :skip_logging)
 
     Location.connection.execute("
       delete from locations
