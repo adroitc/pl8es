@@ -28,6 +28,10 @@ gem 'hirb'
 
 gem 'acts_as_tree'
 
+# –– devise
+gem 'devise'
+gem 'omniauth-facebook'
+
 # –– images
 gem "paperclip"
 gem "aws-sdk"

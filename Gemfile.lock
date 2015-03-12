@@ -96,11 +96,20 @@ GEM
     compass-rails (2.0.0)
       compass (>= 0.12.2)
     debug_inspector (0.0.2)
+    devise (3.4.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
     execjs (2.2.2)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
     fssm (0.2.10)
     geokit (1.9.0)
       multi_json (>= 1.3.2)
@@ -112,6 +121,7 @@ GEM
       activerecord (>= 4.0.0, < 5)
     globalize-accessors (0.1.5)
       globalize (>= 3)
+    hashie (3.4.0)
     hike (1.2.3)
     hirb (0.7.2)
     i18n (0.7.0)
@@ -126,6 +136,7 @@ GEM
     json (1.8.2)
     jsonify (0.4.1)
       multi_json (~> 1.3)
+    jwt (1.4.1)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (2.6.0)
@@ -139,12 +150,31 @@ GEM
     mini_portile (0.6.2)
     minitest (4.7.5)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     netrc (0.10.2)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
+    oauth2 (1.0.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-facebook (2.0.1)
+      omniauth-oauth2 (~> 1.2)
+    omniauth-oauth2 (1.2.0)
+      faraday (>= 0.8, < 0.10)
+      multi_json (~> 1.3)
+      oauth2 (~> 1.0)
+      omniauth (~> 1.2)
+    orm_adapter (0.5.0)
     paperclip (4.2.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -190,6 +220,8 @@ GEM
     remotipart (1.2.1)
     rename (1.0.2)
       rails (>= 3.0.0)
+    responders (1.1.2)
+      railties (>= 3.2, < 4.2)
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -237,6 +269,8 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     wannabe_bool (0.1.0)
+    warden (1.2.3)
+      rack (>= 1.0)
     wicked_pdf (0.11.0)
       rails
     wkhtmltopdf-binary (0.9.9.3)
@@ -258,6 +292,7 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.0.0)
   compass-rails
+  devise
   dotenv-rails
   geokit-rails
   globalize
@@ -268,6 +303,7 @@ DEPENDENCIES
   jquery-ui-rails
   jsonify
   less-rails
+  omniauth-facebook
   paperclip
   paperclip-dimension!
   paypal-express
