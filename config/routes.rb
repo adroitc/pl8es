@@ -31,13 +31,6 @@ Pl8es::Application.routes.draw do
 			
 			post "/design/edit" => "ajax#editdesign"
 			
-			#ajax/session
-			post "/session/signup/name" => "session#signup_user"
-			post "/session/signup/restaurant" => "session#signup_restaurant"
-			post "/session/signup/user" => "session#signup_name"
-			post "/session/login" => "session#login"
-			post "/session/login/forgot" => "session#login_forgot"
-			
 			#ajax/admin
 			post "/language/add" => "admin#addlanguage"
 			post "/language/edit" => "admin#editlanguage"
@@ -87,19 +80,6 @@ Pl8es::Application.routes.draw do
 		post "dishes/sort" => "dishes#sort", as: :sort_dishes
 		get "dishes/:id/crop" => "dishes#crop", as: :crop_dish
 	end
-	
-	#signup
-	resources :signup, :only => [:index]
-	get "/signup/restaurant" => "signup#restaurant"
-	get "/signup/user" => "signup#user"
-	
-	#login
-	resources :login, :only => [:index]
-	get "/login/forgot" => "login#forgot"
-	get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset", as: :login_forgot_reset
-	
-	#logout
-	resources :logout, :only => [:index]
 	
 	#admin
 	resources :admin, :only => [:index]
