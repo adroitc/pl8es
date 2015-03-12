@@ -79,7 +79,7 @@
 		<div class="row gallery-env draggable-portlets">
 			<h4>Todays Dishes</h4>
 			<span class="sorted ui-sortable">
-				<% todays_daily_dishes.each do |dish| %>
+				<% @todays_daily_dishes.each do |dish| %>
 					<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => false})%>
 				<% end %>
 			</span>
@@ -90,7 +90,7 @@
 		<div class="row gallery-env draggable-portlets">
 			<h4>Past Dishes</h4>
 			<span class="sorted ui-sortable">
-				<% past_daily_dishes.each do |dish| %>
+				<% @past_daily_dishes.each do |dish| %>
 					<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => true})%>
 				<% end %>
 			</span>
