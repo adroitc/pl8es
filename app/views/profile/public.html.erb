@@ -45,7 +45,6 @@
 	<% end %>
 	
 	<section class="row">
-		
 		<div class="col-sm-8 profile-map">
 			<div class="tile-stats profile-tile"
 					 style="background-image: url('//maps.googleapis.com/maps/api/staticmap?zoom=16&maptype=roadmap&size=640x640&center=<%=@visit_restaurant.location.latitude%>,<%=@visit_restaurant.location.longitude%>&markers=<%=@visit_restaurant.location.latitude%>,<%=@visit_restaurant.location.longitude%>');">
@@ -74,41 +73,29 @@
 				</ul>
 			</div>
 		</div>
-		
 	</section>
 	
-	<%
-		 todays_daily_dishes = @visit_restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)
-		 if todays_daily_dishes.count > 0
-	%>
-			
-			<div class="row gallery-env draggable-portlets">
-				<h4>Todays Dishes</h4>
-				<span class="sorted ui-sortable">
-						<% todays_daily_dishes.each do |dish| %>
-						<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => false})%>
-						<% end %>
-				</span>
-			</div>
-			
-	<% end %>
-	
-	<%
-		 past_daily_dishes = @visit_restaurant.daily_dishes.where('display_date < ?', Date.today.to_datetime).reorder('display_date DESC')
-		 if past_daily_dishes.count > 0
-	%>
-	
-	<div class="row gallery-env draggable-portlets">
-		<h4>Past Dishes</h4>
-		<span class="sorted ui-sortable">
-				<% past_daily_dishes.each do |dish| %>
-				<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => true})%>
+	<% if @todays_daily_dishes.count > 0 %>
+		<div class="row gallery-env draggable-portlets">
+			<h4>Todays Dishes</h4>
+			<span class="sorted ui-sortable">
+				<% todays_daily_dishes.each do |dish| %>
+					<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => false})%>
 				<% end %>
-		</span>
-	</div>
-		
+			</span>
+		</div>
 	<% end %>
 	
+	<% if @past_daily_dishes.count > 0 	%>
+		<div class="row gallery-env draggable-portlets">
+			<h4>Past Dishes</h4>
+			<span class="sorted ui-sortable">
+				<% past_daily_dishes.each do |dish| %>
+					<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => true})%>
+				<% end %>
+			</span>
+		</div>
+	<% end %>
 </div>
 
 <% content_for :modals do %>	
