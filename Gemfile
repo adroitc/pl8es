@@ -55,6 +55,7 @@ gem "twitter-bootstrap-rails"
 gem "wannabe_bool"
 
 group :development do
+	gem 'letter_opener'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'capistrano-rails', '~> 1.1.1'
