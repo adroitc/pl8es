@@ -14,101 +14,101 @@
 <% end %>
 
 <div class="profile-env">
-
-  <header class="row profile-head" style="background-image:url('<%=@visit_restaurant.restaurant_image.url(:cropped_default_retina) %>')">
-    <div class="profile-logo">
-      <img width="156" src="<%=@visit_restaurant.logo_image.url(:cropped_default_retina) %>" />
-    </div>
-    <div class="profile-caption">
-      <div class="profile-name"><%=@visit_restaurant.name %></div>
-      <span class="label label-restaurant-category">Tag 1</span>
-      <span class="label label-restaurant-category">Tag 2</span>
-      <div class="profile-description"><%=@visit_restaurant.description %></div>
-    </div>
-  </header>
-
-  <% if @user && @user.restaurant == @visit_restaurant %>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="profile-buttons">
-        <a href="javascript:;" onclick="jQuery('#modal-editsettings').modal('show');" class="btn btn-white btn-icon icon-left" style="margin-right:12px;">
-          <i class="entypo-cog"></i>
-          <%=t("profile.account_settings") %>
-        </a>
-        <a href="javascript:;" onclick="jQuery('#modal-editdescription').modal('show');" class="btn btn-white btn-icon icon-left">
-          <i class="entypo-brush"></i>
-          <%=t("profile.restaurant_description") %>
-        </a>
-      </div>
-    </div>
-  </div>
-  <% end %>
-
-  <section class="row">
-
-    <div class="col-sm-8 profile-map">
-      <div class="tile-stats profile-tile"
-           style="background-image: url('//maps.googleapis.com/maps/api/staticmap?zoom=16&maptype=roadmap&size=640x640&center=<%=@visit_restaurant.location.latitude%>,<%=@visit_restaurant.location.longitude%>&markers=<%=@visit_restaurant.location.latitude%>,<%=@visit_restaurant.location.longitude%>');">
-      </div>
-    </div>
-
-    <div class="col-sm-4" >
-      <div class="tile-stats tile-white tile-white-primary profile-tile">
-        <div class="icon"><i class="entypo-mail"></i></div>
-        <ul>
-          <li>
-            <i class="entypo-location"></i><%=@visit_restaurant.location.address %><br/>
-            <i class="entypo-location invisible"></i><%=@visit_restaurant.location.zip %>, <%=@visit_restaurant.location.city %><br/>
-            <i class="entypo-location invisible"></i><%=@visit_restaurant.location.country %>
-          </li>
-          <li>
-            <a href="<%=@visit_restaurant.website %>" target="_blank">
-              <i class="entypo-globe"></i>
-              <%=@visit_restaurant.website %>
-            </a>
-          </li>
-          <li>
-            <i class="entypo-phone"></i>
-            <%=@visit_restaurant.telephone %>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </section>
-
-  <%
-     todays_daily_dishes = @visit_restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)
-     if todays_daily_dishes.count > 0
-  %>
-
-      <div class="row gallery-env draggable-portlets">
-        <h4>Todays Dishes</h4>
-        <span class="sorted ui-sortable">
-            <% todays_daily_dishes.each do |dish| %>
-            <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => false})%>
-            <% end %>
-        </span>
-      </div>
-
-  <% end %>
-
-  <%
-     past_daily_dishes = @visit_restaurant.daily_dishes.where('display_date < ?', Date.today.to_datetime).reorder('display_date DESC')
-     if past_daily_dishes.count > 0
-  %>
-
-  <div class="row gallery-env draggable-portlets">
-    <h4>Past Dishes</h4>
-    <span class="sorted ui-sortable">
-        <% past_daily_dishes.each do |dish| %>
-        <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => true})%>
-        <% end %>
-    </span>
-  </div>
-
-  <% end %>
-
+	
+	<header class="row profile-head" style="background-image:url('<%=@visit_restaurant.restaurant_image.url(:cropped_default_retina) %>')">
+		<div class="profile-logo">
+			<img width="156" src="<%=@visit_restaurant.logo_image.url(:cropped_default_retina) %>" />
+		</div>
+		<div class="profile-caption">
+			<div class="profile-name"><%=@visit_restaurant.name %></div>
+			<span class="label label-restaurant-category">Tag 1</span>
+			<span class="label label-restaurant-category">Tag 2</span>
+			<div class="profile-description"><%=@visit_restaurant.description %></div>
+		</div>
+	</header>
+	
+	<% if @user && @user.restaurant == @visit_restaurant %>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="profile-buttons">
+					<a href="javascript:;" onclick="jQuery('#modal-editsettings').modal('show');" class="btn btn-white btn-icon icon-left" style="margin-right:12px;">
+						<i class="entypo-cog"></i>
+						<%=t("profile.account_settings") %>
+					</a>
+					<a href="javascript:;" onclick="jQuery('#modal-editdescription').modal('show');" class="btn btn-white btn-icon icon-left">
+						<i class="entypo-b	rush"></i>
+						<%=t("profile.restaurant_description") %>
+					</a>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	
+	<section class="row">
+		
+		<div class="col-sm-8 profile-map">
+			<div class="tile-stats profile-tile"
+					 style="background-image: url('//maps.googleapis.com/maps/api/staticmap?zoom=16&maptype=roadmap&size=640x640&center=<%=@visit_restaurant.location.latitude%>,<%=@visit_restaurant.location.longitude%>&markers=<%=@visit_restaurant.location.latitude%>,<%=@visit_restaurant.location.longitude%>');">
+			</div>
+		</div>
+		
+		<div class="col-sm-4" >
+			<div class="tile-stats tile-white tile-white-primary profile-tile">
+				<div class="icon"><i class="entypo-mail"></i></div>
+				<ul>
+					<li>
+						<i class="entypo-location"></i><%=@visit_restaurant.location.address %><br/>
+						<i class="entypo-location invisible"></i><%=@visit_restaurant.location.zip %>, <%=@visit_restaurant.location.city %><br/>
+						<i class="entypo-location invisible"></i><%=@visit_restaurant.location.country %>
+					</li>
+					<li>
+						<a href="<%=@visit_restaurant.website %>" target="_blank">
+							<i class="entypo-globe"></i>
+							<%=@visit_restaurant.website %>
+						</a>
+					</li>
+					<li>
+						<i class="entypo-phone"></i>
+						<%=@visit_restaurant.telephone %>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+	</section>
+	
+	<%
+		 todays_daily_dishes = @visit_restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)
+		 if todays_daily_dishes.count > 0
+	%>
+			
+			<div class="row gallery-env draggable-portlets">
+				<h4>Todays Dishes</h4>
+				<span class="sorted ui-sortable">
+						<% todays_daily_dishes.each do |dish| %>
+						<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => false})%>
+						<% end %>
+				</span>
+			</div>
+			
+	<% end %>
+	
+	<%
+		 past_daily_dishes = @visit_restaurant.daily_dishes.where('display_date < ?', Date.today.to_datetime).reorder('display_date DESC')
+		 if past_daily_dishes.count > 0
+	%>
+	
+	<div class="row gallery-env draggable-portlets">
+		<h4>Past Dishes</h4>
+		<span class="sorted ui-sortable">
+				<% past_daily_dishes.each do |dish| %>
+				<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => true})%>
+				<% end %>
+		</span>
+	</div>
+		
+	<% end %>
+	
 </div>
 
 <% content_for :modals do %>	
