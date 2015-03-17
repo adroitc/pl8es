@@ -36,7 +36,9 @@
     <ul class="list-inline links-list pull-right">
       <li class="sep"></li>
       <li>
-        <a href="<%= logout_index_path %>"><%=t("layouts.topbar.logout")%> <i class="entypo-logout right"></i></a>
+      		<%= link_to destroy_user_session_path, :method => "delete" do %>
+      			<%= t("layouts.topbar.logout") %><i class="entypo-logout right"></i>
+      		<% end %>
       </li>
     </ul>
   </div>
