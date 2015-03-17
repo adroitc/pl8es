@@ -2,7 +2,7 @@ class ProfileController < ApplicationController
 	
 	def index
 		unless current_user
-			redirect_to login_index_path
+			redirect_to new_user_session_path
 		end
 	end
 	
