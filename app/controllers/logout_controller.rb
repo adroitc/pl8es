@@ -1,7 +1,7 @@
 class LogoutController < ApplicationController
   
   def index
-    if @user
+    if current_user
       reset_session
       redirect_to login_index_path
     end

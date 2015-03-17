@@ -1,28 +1,28 @@
-<%= neon_modal :id => "editdescription", :width => "678px", :title => t("profile.restaurant_description_modal_title"), :languages => @user.restaurant.languages, :default_language => @user.restaurant.default_language do |m| %>
+<%= neon_modal :id => "editdescription", :width => "678px", :title => t("profile.restaurant_description_modal_title"), :languages => current_user.restaurant.languages, :default_language => current_user.restaurant.default_language do |m| %>
 <%= form_tag(profile_editdescription_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform validate", :id => "form_editprofile"}) do %>
 <%=neon_modal_body do |b| %>
 <div class="row">
 	<div class="col-sm-6 hidden-xs">
 		<h4 class="margin-top-none"><%=t("profile.account_upload_logo") %></h4>
-    <%=neon_imagecrop :image => @user.restaurant.logo_image %>
+    <%=neon_imagecrop :image => current_user.restaurant.logo_image %>
     
 		<h4 class="margin-top-none"><%=t("profile.account_upload_restaurant_image") %></h4>
-    <%=neon_imagecrop :image => @user.restaurant.restaurant_image %>
+    <%=neon_imagecrop :image => current_user.restaurant.restaurant_image %>
 	</div>
   <div class="col-sm-6">
     <div class="col-sm-12 form-group" style="padding:0px;">
       <label for="form-name" class="control-label"><strong><%=t("profile.account_restaurant_name") %></strong></label>
-	    <input name="name" type="text" class="form-control" id="form-name" placeholder="<%=t("profile.account_restaurant_name_placeholder") %>" value="<%=@user.restaurant.name %>" required data-validate="minlength[4],maxlength[75]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"75"}) %>">
+	    <input name="name" type="text" class="form-control" id="form-name" placeholder="<%=t("profile.account_restaurant_name_placeholder") %>" value="<%=current_user.restaurant.name %>" required data-validate="minlength[4],maxlength[75]" data-message-required="<%=t("validation.required") %>" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"75"}) %>">
     </div>
     <div class="col-sm-12 form-group tab-content" style="padding:0px;">
       <%
       current_locale = I18n.locale
-      @user.restaurant.languages.each do |language|
+      current_user.restaurant.languages.each do |language|
         I18n.locale = language.locale
       %>
-      <span class="tab-pane <%="active" if language == @user.restaurant.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
-        <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("profile.account_restaurant_description") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if @user.restaurant.default_language == language %></label>
-	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("profile.account_restaurant_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="<%="required," if language == @user.restaurant.default_language %>maxlength[400]" data-message-required="<% I18n.locale = current_locale %><%=t("validation.required")+I18n.locale.to_s %><% I18n.locale = language.locale %>" data-message-maxlength="<% I18n.locale = current_locale %><%=t("validation.maxlength",{l:"400"})+I18n.locale.to_s %><% I18n.locale = language.locale %>"><%=@user.restaurant.description %></textarea>
+      <span class="tab-pane <%="active" if language == current_user.restaurant.default_language %>" id="modal-editdescription-lang-<%=language.locale %>">
+        <label for="form-description[<%=language.locale %>]" class="control-label"><strong><% I18n.locale = current_locale %><%=t("profile.account_restaurant_description") %><% I18n.locale = language.locale %></strong> - <%=language.title.capitalize %><%=" (Default)" if current_user.restaurant.default_language == language %></label>
+	      <textarea name="description[<%=language.locale %>]" type="text" class="form-control" id="form-description[<%=language.locale %>]" placeholder="<% I18n.locale = current_locale %><%=t("profile.account_restaurant_description_placeholder") %><% I18n.locale = language.locale %>" data-validate="<%="required," if language == current_user.restaurant.default_language %>maxlength[400]" data-message-required="<% I18n.locale = current_locale %><%=t("validation.required")+I18n.locale.to_s %><% I18n.locale = language.locale %>" data-message-maxlength="<% I18n.locale = current_locale %><%=t("validation.maxlength",{l:"400"})+I18n.locale.to_s %><% I18n.locale = language.locale %>"><%=current_user.restaurant.description %></textarea>
       </span>
       <%
       end

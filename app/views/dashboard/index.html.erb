@@ -13,7 +13,7 @@ requests_last_7days = Request.where({
 	:controller => "app/dailycious",
 	:action => "user",
 	:params => {
-		:q => @user.id.to_s
+		:q => current_user.id.to_s
 	}.to_json
 }).where([
 	"created_at >= (?) AND created_at <= (?)", 
@@ -24,7 +24,7 @@ requests_this_7days = Request.where({
 	:controller => "app/dailycious",
 	:action => "user",
 	:params => {
-		:q => @user.id.to_s
+		:q => current_user.id.to_s
 	}.to_json
 }).where([
 	"created_at >= (?)",
@@ -44,16 +44,16 @@ requests_this_7days = Request.where({
 	<div class="col-sm-4">
 		<div class="tile-stats tile-white tile-white-primary">
 			<div class="icon"><i class="entypo-star"></i></div>
-			<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0">0</div>
+			<div class="num" data-start="0" data-end="<%=current_user.restaurant.favoriteRestaurants.count %>" data-duration="1500" data-delay="0">0</div>
 		
 			<h3><%=t("dashboard.favorites") %></h3>
-			<p><%=@user.restaurant.name %></p>
+			<p><%=current_user.restaurant.name %></p>
 		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="tile-stats tile-white tile-white-primary">
 			<div class="icon"><i class="entypo-direction"></i></div>
-			<div class="num" data-start="0" data-end="<%=@user.restaurant.daily_dishes.where([
+			<div class="num" data-start="0" data-end="<%=current_user.restaurant.daily_dishes.where([
 						"display_date > (?)",
 						Date.today-7
 					]).count %>" data-duration="1500" data-delay="0">0</div>
@@ -92,7 +92,7 @@ requests_this_7days = Request.where({
 	<div class="col-sm-4">
 		<div class="tile-stats tile-white tile-white-primary">
 			<div class="icon"><i class="entypo-star-empty"></i></div>
-			<div class="num" data-start="0" data-end="<%=@user.restaurant.favoriteRestaurants.where([
+			<div class="num" data-start="0" data-end="<%=current_user.restaurant.favoriteRestaurants.where([
 						"created_at >= (?) AND created_at <= (?)",
 						Date.today-7,
 						Date.today
@@ -112,7 +112,7 @@ requests_this_7days = Request.where({
 				<i class="glyphicon glyphicon-download"></i>
 			</div>
 			<div class="num">
-				<h2><%=@user.restaurant.download_code %></h2>
+				<h2><%=current_user.restaurant.download_code %></h2>
 			</div>
 			<div class="title">
 				<p><%=t("menumalist.download_code_title") %></p>
@@ -122,10 +122,10 @@ requests_this_7days = Request.where({
 	<div class="col-sm-4">
 		<div class="tile-stats tile-white">
 			<div class="icon"><i class="entypo-monitor"></i></div>
-			<div class="num" data-start="0" data-end="<%=@user.restaurant.clients.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+			<div class="num" data-start="0" data-end="<%=current_user.restaurant.clients.actives.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
 			<span style="color:#000;font-size:28px;display:inline-block;margin-left:10px;">/ 1</span>
-			<h3><%=@user.restaurant.clients.actives.count == 1 ? t("menumalist.installation") : t("menumalist.installations") %></h3>
-			<p><%=@user.restaurant.clients.actives.count == 1 ? t("menumalist.installation_on_iPad") : t("menumalist.installations_on_iPads") %>
+			<h3><%=current_user.restaurant.clients.actives.count == 1 ? t("menumalist.installation") : t("menumalist.installations") %></h3>
+			<p><%=current_user.restaurant.clients.actives.count == 1 ? t("menumalist.installation_on_iPad") : t("menumalist.installations_on_iPads") %>
 				<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
 					<%=t("menumalist.installations_want_more") %>
 					<i class="entypo-plus"></i>
@@ -136,7 +136,7 @@ requests_this_7days = Request.where({
 	<div class="col-sm-4">
 		<div class="tile-stats tile-white tile-white-primary">
 			<div class="icon"><i class="entypo-docs"></i></div>
-			<div class="num" data-start="0" data-end="<%=@user.restaurant.menus.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
+			<div class="num" data-start="0" data-end="<%=current_user.restaurant.menus.count %>" data-postfix="" data-duration="1500" data-delay="600" style="display:inline-block;">0</div>
 			<h3><%=t("dashboard.menus") %></h3>
 			<a href="<%= menus_path %>"><p>
 				<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">

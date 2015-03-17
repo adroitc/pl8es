@@ -7,13 +7,13 @@ class MenusController < ApplicationController
 	respond_to :html, :js
 	
 	def index
-		@menus = @user.restaurant.menus.order(:id)
+		@menus = current_user.restaurant.menus.order(:id)
 		
-		@restaurant = @user.restaurant
+		@restaurant = current_user.restaurant
 	end
 	
 	def new
-		@menu = @user.restaurant.menus.new
+		@menu = current_user.restaurant.menus.new
 	end
 	
 	def create
@@ -21,13 +21,13 @@ class MenusController < ApplicationController
 		params[:menu][:from_time] = "12:00" unless params[:menu][:from_time].present?
 		params[:menu][:to_time] = "17:00" unless params[:menu][:to_time].present?
 		
-		restaurant = @user.restaurant
+		restaurant = current_user.restaurant
 		
 		menu = Menu.new(menu_params)
 		
 		# –– associations to the restaurant
 		restaurant.menus << menu
-		restaurant.default_menu = menu if params[:default] == "true" || @user.restaurant.menus.count == 0
+		restaurant.default_menu = menu if params[:default] == "true" || current_user.restaurant.menus.count == 0
 		restaurant.save
 		
 		redirect_to menus_path
@@ -64,12 +64,12 @@ class MenusController < ApplicationController
 	end
 	
 	def reset_clients
-		if params[:reset] == "true" && (@user.isAdmin || !@user.restaurant.client_reset_date || (@user.restaurant.client_reset_date && (@user.restaurant.client_reset_date+31.days) < DateTime.now))
-			@user.restaurant.clients.actives.each do |client|
+		if params[:reset] == "true" && (current_user.isAdmin || !current_user.restaurant.client_reset_date || (current_user.restaurant.client_reset_date && (current_user.restaurant.client_reset_date+31.days) < DateTime.now))
+			current_user.restaurant.clients.actives.each do |client|
 				client.update_attributes(:active => false)
 			end
 			
-			@user.restaurant.update_attributes(:client_reset_date => DateTime.now)
+			current_user.restaurant.update_attributes(:client_reset_date => DateTime.now)
 			
 			render :json => {:status => "success"}
 			return
@@ -84,8 +84,8 @@ class MenusController < ApplicationController
 		end
 		
 		def authenticate_ownership_and_get_menu
-			if @user.restaurant.menus.exists?(params[:id])
-				@menu = @user.restaurant.menus.find(params[:id])
+			if current_user.restaurant.menus.exists?(params[:id])
+				@menu = current_user.restaurant.menus.find(params[:id])
 			else
 				redirect_to menus_path
 			end

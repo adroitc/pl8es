@@ -1,15 +1,15 @@
 class Ajax::SessionController < ApplicationController
   
   def signup
-    if !@user && !params.values_at(:name, :email, :password).include?(nil)
-      @user = User.create(params.permit(:name, :email, :password))
+    if !current_user && !params.values_at(:name, :email, :password).include?(nil)
+      current_user = User.create(params.permit(:name, :email, :password))
       
-      if @user.errors.count == 0 && !@user.blank?
+      if current_user.errors.count == 0 && !current_user.blank?
         download_code = SecureRandom.hex(3).upcase
         while Restaurant.find_by_download_code(download_code).present?
           download_code = SecureRandom.hex(3).upcase
         end
-        @user.update_attributes({
+        current_user.update_attributes({
           :last_login => DateTime.now,
           :restaurant => Restaurant.create({
             :name => params[:name],
@@ -23,7 +23,7 @@ class Ajax::SessionController < ApplicationController
           })
         })
         
-        session[:user_id] = @user.id
+        session[:user_id] = current_user.id
         
         render :json => {:status => "success"}
         return
@@ -33,7 +33,7 @@ class Ajax::SessionController < ApplicationController
   end
   
   def signup_name
-    if !@user && !params.values_at(:name).include?(nil)
+    if !current_user && !params.values_at(:name).include?(nil)
       if !session[:signup]
         session[:signup] = {}
       end
@@ -47,7 +47,7 @@ class Ajax::SessionController < ApplicationController
   end
   
   def signup_restaurant
-    if !@user && session[:signup] && !params.values_at(:address, :zip, :city, :country, :latitude, :longitude).include?(nil)
+    if !current_user && session[:signup] && !params.values_at(:address, :zip, :city, :country, :latitude, :longitude).include?(nil)
       #google_address = params[:address].gsub(" ","+")+","+params[:zip].gsub(" ","+")+","+params[:city].gsub(" ","+")+","+params[:country].gsub(" ","+")
       #google_url = URI.parse(URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address="+google_address+"&sensor=false&language="+I18n.locale.to_s))
       #google_req = Net::HTTP::Get.new(google_url.request_uri)
@@ -96,19 +96,19 @@ class Ajax::SessionController < ApplicationController
   end
   
   def signup_user
-    if !@user && session[:signup] && !params.values_at(:email, :password).include?(nil)
-      @user = User.new(params.permit(:email, :password).merge({
+    if !current_user && session[:signup] && !params.values_at(:email, :password).include?(nil)
+      current_user = User.new(params.permit(:email, :password).merge({
         :password_confirmation => params[:password],
         :last_login => DateTime.now,
         :product_referer => session[:signup][:product_referer]
       }))
       
-      if @user.valid? && @user.errors.count == 0
+      if current_user.valid? && current_user.errors.count == 0
         download_code = SecureRandom.hex(3).upcase
         while Restaurant.find_by_download_code(download_code).present?
           download_code = SecureRandom.hex(3).upcase
         end
-        @user.restaurant = Restaurant.create({
+        current_user.restaurant = Restaurant.create({
           :name => session[:signup][:name],
           :location => Location.create({
             :address => session[:signup][:address],
@@ -133,30 +133,30 @@ class Ajax::SessionController < ApplicationController
         
         if @device
           @device.update_attributes({
-            :user => @user
+            :user => current_user
           })
         end
         if @session
           @session.update_attributes({
-            :user => @user
+            :user => current_user
           })
         end
         
         redirect_url = profile_index_path
         
-        if @user.product_referer == "d"
+        if current_user.product_referer == "d"
           redirect_url = dailycious_path
           
-          @user.send_mail(t("email.signup_dailycious_send"), t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>@user.restaurant.name, :e=>@user.email}))
-        elsif @user.product_referer == "m"
+          current_user.send_mail(t("email.signup_dailycious_send"), t("email.signup_dailycious_subj"), t("email.signup_dailycious_msg",{:n=>current_user.restaurant.name, :e=>current_user.email}))
+        elsif current_user.product_referer == "m"
           redirect_url = menus_path
           
-          @user.send_mail(t("email.signup_menumalist_send"), t("email.signup_menumalist_subj"), t("email.signup_menumalist_msg",{:n=>@user.restaurant.name,:e=>@user.email,:c=>@user.restaurant.download_code}))
+          current_user.send_mail(t("email.signup_menumalist_send"), t("email.signup_menumalist_subj"), t("email.signup_menumalist_msg",{:n=>current_user.restaurant.name,:e=>current_user.email,:c=>current_user.restaurant.download_code}))
         else
-          @user.send_mail(t("email.signup_pl8_send"), t("email.signup_pl8_subj"), t("email.signup_pl8_msg",{:n=>@user.restaurant.name,:e=>@user.email}))
+          current_user.send_mail(t("email.signup_pl8_send"), t("email.signup_pl8_subj"), t("email.signup_pl8_msg",{:n=>current_user.restaurant.name,:e=>current_user.email}))
         end
         
-        session[:user_id] = @user.id
+        session[:user_id] = current_user.id
         
         render :json => {:status => "success", :redirect => redirect_url}
         return
@@ -167,27 +167,27 @@ class Ajax::SessionController < ApplicationController
   
   def login
     if !params.values_at(:email, :password).include?(nil)
-      @user = User.find_by_email(params[:email])
+      current_user = User.find_by_email(params[:email])
       
-      if !@user.blank? && @user.authenticate(params[:password])
-        @user.update_attributes({
+      if !current_user.blank? && current_user.authenticate(params[:password])
+        current_user.update_attributes({
           :last_login => DateTime.now
         })
         
         if @device
           @device.update_attributes({
-            :user => @user
+            :user => current_user
           })
         end
         if @session
           @session.update_attributes({
-            :user => @user
+            :user => current_user
           })
         end
         
-        session[:user_id] = @user.id
-        if @user.isAdmin
-          session[:admin_id] = @user.id
+        session[:user_id] = current_user.id
+        if current_user.isAdmin
+          session[:admin_id] = current_user.id
         end
         
         redirect_url = profile_index_path
@@ -201,30 +201,30 @@ class Ajax::SessionController < ApplicationController
         return
       end
     elsif !params.values_at(:user_id, :reset_token, :password, :password_confirm).include?(nil)
-      @user = User.find(params[:user_id])
+      current_user = User.find(params[:user_id])
       
-      if !@user.blank? && @user.reset_token == params[:reset_token] && @user.reset_date < DateTime.now+24.hours
-        @user.password = params[:password]
-        @user.password_confirmation = params[:password_confirm]
-        @user.save
-        @user.update_attributes({
+      if !current_user.blank? && current_user.reset_token == params[:reset_token] && current_user.reset_date < DateTime.now+24.hours
+        current_user.password = params[:password]
+        current_user.password_confirmation = params[:password_confirm]
+        current_user.save
+        current_user.update_attributes({
           :last_login => DateTime.now
         })
         
         if @device
           @device.update_attributes({
-            :user => @user
+            :user => current_user
           })
         end
         if @session
           @session.update_attributes({
-            :user => @user
+            :user => current_user
           })
         end
         
-        session[:user_id] = @user.id
-        if @user.isAdmin
-          session[:admin_id] = @user.id
+        session[:user_id] = current_user.id
+        if current_user.isAdmin
+          session[:admin_id] = current_user.id
         end
         
         render :json => {:status => "success", :redirect => profile_index_path}
@@ -236,17 +236,17 @@ class Ajax::SessionController < ApplicationController
   
   def login_forgot
     if !params.values_at(:email).include?(nil)
-      @user = User.find_by_email(params[:email])
+      current_user = User.find_by_email(params[:email])
       
       token = SecureRandom.hex(64)
       
-      @user.update_attributes({
+      current_user.update_attributes({
         :reset_token => token,
         :reset_date => DateTime.now
       })
       
-      I18n.locale = @user.restaurant.default_language.locale
-      @user.send_mail(t("email.password_forgot_send"), t("email.password_forgot_subj"), t("email.password_forgot_msg",{:l=>login_forgot_reset_path(@user.id, token)}))
+      I18n.locale = current_user.restaurant.default_language.locale
+      current_user.send_mail(t("email.password_forgot_send"), t("email.password_forgot_subj"), t("email.password_forgot_msg",{:l=>login_forgot_reset_path(current_user.id, token)}))
       
       render :json => {:status => "valid"}
       return

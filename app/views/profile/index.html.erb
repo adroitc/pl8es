@@ -14,32 +14,32 @@
 
 	<header class="row profile-head">
 		<div class="col-sm-2">
-			<img src="<%=@user.restaurant.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
+			<img src="<%=current_user.restaurant.logo_image.url(:cropped_website) %>" alt="" class="" width="108" height="72" />
 		</div>
 		<div class="col-sm-10">
 			<ul class="profile-info-sections">
 				<li>
 					<div class="profile-name">
 						<strong style="color:#000">
-							<%=@user.restaurant.name %>
+							<%=current_user.restaurant.name %>
 						</strong>
 						<span>
-							<%=@user.restaurant.email %>
+							<%=current_user.restaurant.email %>
 						</span>
 					</div>
 				</li>
 				<li>
 					<div class="profile-stat">
-						<h3><%=@user.restaurant.menus.count %></h3>
+						<h3><%=current_user.restaurant.menus.count %></h3>
 						<a href="<%=menus_path %>">
-							<span><%=@user.restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %></span>
+							<span><%=current_user.restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %></span>
 						</a>
 					</div>
 				</li>
 				<li>
 					<div class="profile-stat">
-						<h3><%= @user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime).count %></h3>
-						<span><%= @user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime).count == 1 ? t("profile.dish") : t("profile.dishes") %></span>
+						<h3><%= current_user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime).count %></h3>
+						<span><%= current_user.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime).count == 1 ? t("profile.dish") : t("profile.dishes") %></span>
 					</div>
 				</li>
 			</ul>
@@ -51,40 +51,40 @@
 				<ul class="user-details">
 					<li>
 						<i class="entypo-location"></i>
-						<%=@user.restaurant.location.address %>
+						<%=current_user.restaurant.location.address %>
 					</li>
 					<li>
 						<i class="entypo-location"></i>
-						<%=@user.restaurant.location.zip %>, <%=@user.restaurant.location.city %>
+						<%=current_user.restaurant.location.zip %>, <%=current_user.restaurant.location.city %>
 					</li>
 					<li>
 						<i class="entypo-location"></i>
-						<%=@user.restaurant.location.country %>
+						<%=current_user.restaurant.location.country %>
 					</li>
-					<% if @user.restaurant.tags.count >= 1 %>
+					<% if current_user.restaurant.tags.count >= 1 %>
 					<li>
 						<i class="entypo-user"></i>
-						<%=@user.restaurant.tags.first.title %>
+						<%=current_user.restaurant.tags.first.title %>
 					</li>
 					<% end %>
-					<% if @user.restaurant.tags.count == 2 %>
+					<% if current_user.restaurant.tags.count == 2 %>
 					<li>
 						<i class="entypo-user"></i>
-						<%=@user.restaurant.tags.last.title %>
+						<%=current_user.restaurant.tags.last.title %>
 					</li>
 					<% end %>
-					<% if @user.restaurant.website && @user.restaurant.website.length > 0 %>
+					<% if current_user.restaurant.website && current_user.restaurant.website.length > 0 %>
 					<li>
-						<a href="<%=@user.restaurant.website %>" target="_blank">
+						<a href="<%=current_user.restaurant.website %>" target="_blank">
 							<i class="entypo-globe"></i>
-							<%=@user.restaurant.website %>
+							<%=current_user.restaurant.website %>
 						</a>
 					</li>
 					<% end %>
-					<% if @user.restaurant.telephone && @user.restaurant.telephone.length > 0 %>
+					<% if current_user.restaurant.telephone && current_user.restaurant.telephone.length > 0 %>
 					<li>
 						<i class="entypo-phone"></i>
-						<%=@user.restaurant.telephone %>
+						<%=current_user.restaurant.telephone %>
 					</li>
 					<% end %>
 				</ul>
@@ -106,10 +106,10 @@
 		</div>
 	</div>
 	<header class="row" style="margin-bottom:60px;">
-		<img src="<%=@user.restaurant.restaurant_image.url(:cropped_default_retina) %>" alt="" class="col-sm-4" />
+		<img src="<%=current_user.restaurant.restaurant_image.url(:cropped_default_retina) %>" alt="" class="col-sm-4" />
 		<div class="col-sm-8">
 			<br />
-			<%=@user.restaurant.description %>
+			<%=current_user.restaurant.description %>
 		</div>
 	</header>
 	<section class="profile-feed">
@@ -126,7 +126,7 @@
 				</div>
 				<div class="row">
 					<span class="sorted ui-sortable">
-						<% @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |dish| %>
+						<% current_user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |dish| %>
 							<%= render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => dish }) %>
 						<% end %>
 					</span>

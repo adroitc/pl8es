@@ -1,16 +1,16 @@
 class Ajax::AjaxController < ApplicationController
   
   def editdesign
-    if @user && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)
+    if current_user && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)
       if MenuColorTemplate.exists?(params[:menuColorTemplate_id])
-        @user.restaurant.menuColorTemplate = MenuColorTemplate.find(params[:menuColorTemplate_id])
+        current_user.restaurant.menuColorTemplate = MenuColorTemplate.find(params[:menuColorTemplate_id])
       else
-        @user.restaurant.menuColorTemplate = nil
+        current_user.restaurant.menuColorTemplate = nil
       end
-      @user.restaurant.background_type = params[:background_type]
-      @user.restaurant.save
+      current_user.restaurant.background_type = params[:background_type]
+      current_user.restaurant.save
       
-      @user.restaurant.menuColor.update_attributes(
+      current_user.restaurant.menuColor.update_attributes(
         params.permit(:background, :bar_background, :nav_text, :nav_text_active).merge({
           bev_background: params[:nav_text],
           bev_background_selected: params[:bar_background],
@@ -36,12 +36,12 @@ class Ajax::AjaxController < ApplicationController
       )
       
       if SupportedFont.exists?(params[:supportedFont_id])
-        @user.restaurant.supportedFont = SupportedFont.find(params[:supportedFont_id])
+        current_user.restaurant.supportedFont = SupportedFont.find(params[:supportedFont_id])
       end
       
-      @user.restaurant.update_attributes(params.permit(:background_type, :appmain_image, :splashscreen_image))
-      @user.restaurant.appmain_image.set_crop_values_for_instance(params.permit(:appmain_image))
-      @user.restaurant.splashscreen_image.set_crop_values_for_instance(params.permit(:splashscreen_image))
+      current_user.restaurant.update_attributes(params.permit(:background_type, :appmain_image, :splashscreen_image))
+      current_user.restaurant.appmain_image.set_crop_values_for_instance(params.permit(:appmain_image))
+      current_user.restaurant.splashscreen_image.set_crop_values_for_instance(params.permit(:splashscreen_image))
       
       render :json => {:status => "success"}
       return

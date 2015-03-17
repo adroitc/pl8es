@@ -1,5 +1,5 @@
 <ul id="main-menu">
-  <% if @user && @user.isAdmin %>
+  <% if current_user && current_user.isAdmin %>
   <li class="<%="active" if params[:controller] == "admin" %>">
   	<a href="<%= admin_index_path %>">
   		<i class="entypo-gauge"></i>

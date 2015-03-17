@@ -85,8 +85,8 @@ class CategoriesController < ApplicationController
 		end
 		
 		def authenticate_ownership_and_get_menu
-			if @user.restaurant.menus.exists?(params[:menu_id])
-				@menu = @user.restaurant.menus.find(params[:menu_id])
+			if current_user.restaurant.menus.exists?(params[:menu_id])
+				@menu = current_user.restaurant.menus.find(params[:menu_id])
 			else
 				redirect_to menus_path
 			end

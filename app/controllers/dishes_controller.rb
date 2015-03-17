@@ -14,11 +14,11 @@ class DishesController < ApplicationController
 	end
 	
 	def create
-		@dish = @user.restaurant.dishes.build(dish_params)
+		@dish = current_user.restaurant.dishes.build(dish_params)
 		
 		category_id = params[:dish][:category_id]
 		
-		if category_id.present? && @user.restaurant.categories.leaves.exists?(category_id)
+		if category_id.present? && current_user.restaurant.categories.leaves.exists?(category_id)
 			@dish.categories << Category.find(category_id)
 		end
 		
@@ -54,9 +54,9 @@ class DishesController < ApplicationController
 	end
 	
 	def sort
-		if @user && !params.values_at(:dish_ids).include?(nil)
+		if current_user && !params.values_at(:dish_ids).include?(nil)
 			params[:dish_ids].each do |dish_id|
-				if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).restaurant.user == @user
+				if Dish.exists?(dish_id[0].to_i) && Dish.find(dish_id[0].to_i).restaurant.user == current_user
 					Dish.find(dish_id[0].to_i).update_attributes({
 						:position => dish_id[1].to_i
 					})
@@ -76,8 +76,8 @@ class DishesController < ApplicationController
 		end
 		
 		def get_dish
-			if @user.restaurant.dishes.exists?(params[:id])
-				@dish = @user.restaurant.dishes.find(params[:id])
+			if current_user.restaurant.dishes.exists?(params[:id])
+				@dish = current_user.restaurant.dishes.find(params[:id])
 			else
 				redirect_to menus_path
 			end

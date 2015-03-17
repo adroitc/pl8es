@@ -1,13 +1,13 @@
 class SignupController < ApplicationController
   
   def index
-    if @user
+    if current_user
       redirect_to profile_index_path
     end
   end
   
   def restaurant
-    if @user
+    if current_user
       redirect_to profile_index_path
     elsif !session[:signup] || !params.values_at(:name).include?(nil)
       redirect_to signup_index_path
@@ -15,7 +15,7 @@ class SignupController < ApplicationController
   end
   
   def user
-    if @user
+    if current_user
       redirect_to profile_index_path
     elsif !session[:signup] || !params.values_at(:name).include?(nil)
       redirect_to signup_index_path
