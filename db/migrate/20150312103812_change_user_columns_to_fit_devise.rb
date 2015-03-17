@@ -2,7 +2,7 @@ class ChangeUserColumnsToFitDevise < ActiveRecord::Migration
 	def change
 		change_table :users do |t|
 			## Database authenticatable
-			t.string :encrypted_password, null: false, default: ""
+			t.rename :password_digest, :encrypted_password
 			
 			## Recoverable
 			t.rename :reset_token, :reset_password_token
