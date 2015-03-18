@@ -17,20 +17,12 @@
  @import "compass/css3/transform";
  @import "compass/css3/transition";
  
- @import "jquery-ui";
- 
  @import "entypo";
  @import "font-awesome";
  @import "bootstrap";
  @import "neon-core";
  @import "neon-forms";
  @import "neon-theme";
- @import "datatables.responsive";
- @import "select2";
- @import "icheck.square.blue";
- @import "jquery.Jcrop";
- @import "jquery.Jcrop.min";
- @import "daterangepicker-bs3";
  @import "skins/white";
  
  // ––––––––––––
@@ -40,8 +32,3 @@
 @import "internal/variables";
 @import "internal/forms";
 @import "internal/loading_circle";
-@import "internal/custom";
-@import "internal/dishes";
-@import "internal/categories";
-@import "internal/topbar";
-@import "internal/profile";

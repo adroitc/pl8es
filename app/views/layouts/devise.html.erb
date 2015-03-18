@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%=yield(:head_title).length > 0 ? yield(:head_title) : "pl8" %></title>
+		<%= stylesheet_link_tag		"devise", media: "all", "data-turbolinks-track" => true %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body class="<%= yield (:body_class) %> page-body gray skin-white">
+		<div class="loading-circle"></div>
+		
+		<div class="page-container">
+			
+			<%= render :partial => 'layouts/messages' %>
+			
+			<div class="main-content">
+				<%= render :partial => "layouts/topbar" if current_user %>
+				
+				<%= yield %>
+				
+				<%= render :partial => "layouts/footer" %>
+			</div>
+		</div>
+		
+		<% # temporarily yield the modals here, should get removed long term  %>
+		<%= yield :modals %>
+		
+		<%= render :file => "modals/index" %>
+	</body>
+</html>
