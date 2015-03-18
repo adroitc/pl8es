@@ -6,25 +6,24 @@
 		<%= csrf_meta_tags %>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	<body class="<%= yield (:body_class) %> page-body gray skin-white">
+	<body class="login-page page-body gray skin-white">
 		<div class="loading-circle"></div>
+		<%= render :partial => 'layouts/messages' %>
 		
-		<div class="page-container">
-			
-			<%= render :partial => 'layouts/messages' %>
-			
-			<div class="main-content">
-				<%= render :partial => "layouts/topbar" if current_user %>
+		<div class="login-container">
+			<div class="login-header">
 				
-				<%= yield %>
-				
-				<%= render :partial => "layouts/footer" %>
+				<div class="login-content">
+					<%= image_tag "logo-pl8.png", :width => 120 %>
+					<p class="description"><%=t("login.welcome") %></p>
+				</div>
+			</div>
+			
+			<div class="login-form">
+				<div class="login-content">
+					<%= yield %>
+				</div>
 			</div>
 		</div>
-		
-		<% # temporarily yield the modals here, should get removed long term  %>
-		<%= yield :modals %>
-		
-		<%= render :file => "modals/index" %>
 	</body>
 </html>
