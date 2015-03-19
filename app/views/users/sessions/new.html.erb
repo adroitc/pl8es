@@ -1,5 +1,3 @@
-<h2>Log in</h2>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 	<div class="form-group">
 		<div class="input-group">
@@ -13,7 +11,7 @@
 	<div class="form-group">
 		<div class="input-group">
 			<div class="input-group-addon">
-				<i class="entypo-user"></i>
+				<i class="entypo-key"></i>
 			</div>
 			<%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password" %>
 		</div>
@@ -29,7 +27,7 @@
 	<% end -%>
 
 	<div class="form-group">
-		<%= f.submit "Log in", :class => "btn btn-success btn-block btn-login" %>
+		<%= f.submit "Login", :class => "btn btn-success btn-block btn-login" %>
 	</div>
 <% end %>
 
