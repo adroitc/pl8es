@@ -383,14 +383,14 @@ ActiveRecord::Schema.define(version: 20150312110032) do
     t.datetime "restaurant_image_updated_at"
     t.string   "restaurant_image_dimensions"
     t.string   "restaurant_image_fingerprint"
+    t.integer  "restaurant_image_crop_w"
+    t.integer  "restaurant_image_crop_h"
+    t.integer  "restaurant_image_crop_x"
+    t.integer  "restaurant_image_crop_y"
     t.boolean  "restaurant_image_crop_processed",   default: true
     t.string   "background_type"
     t.string   "billing_contact"
     t.datetime "client_reset_date"
-    t.integer  "restaurant_image_crop_y"
-    t.integer  "restaurant_image_crop_x"
-    t.integer  "restaurant_image_crop_w"
-    t.integer  "restaurant_image_crop_h"
   end
 
   create_table "restaurants_tags", force: true do |t|
@@ -458,11 +458,11 @@ ActiveRecord::Schema.define(version: 20150312110032) do
     t.string   "encrypted_password"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
