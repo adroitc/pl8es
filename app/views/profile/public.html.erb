@@ -1,5 +1,5 @@
 <% content_for :head_title, "dailycious | #{@visit_restaurant.name} - #{@visit_restaurant.location.zip} #{@visit_restaurant.location.city}, #{@visit_restaurant.location.country}" %>
-<% if @user %>
+<% if current_user %>
 	<ol class="breadcrumb bc-3">
 		<li>
 			<a href="<%=dashboard_index_path %>">
@@ -27,7 +27,7 @@
 		</div>
 	</header>
 	
-	<% if @user && @user.restaurant == @visit_restaurant %>
+	<% if current_user && current_user.restaurant == @visit_restaurant %>
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="profile-buttons">
@@ -99,7 +99,7 @@
 </div>
 
 <% content_for :modals do %>	
-	<% if @user && @user.restaurant == @visit_restaurant %>
+	<% if current_user && current_user.restaurant == @visit_restaurant %>
 		<%=render :partial => "modal_editsettings" %>
 		<%=render :partial => "modal_editdescription" %>
 	<% end %>

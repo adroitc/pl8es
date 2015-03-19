@@ -7,11 +7,11 @@
 						<label class="control-label">Colors</label>
 						<ul id="form-menu_color" class="ui-selectable">
 							<% MenuColorTemplate.all.each do |menuColorTemplate| %>
-								<li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;background-image:url(<%=menuColorTemplate.preview_image.url(:cropped_default_retina) %>);background-size:cover;color:transparent;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == menuColorTemplate %>" data-id="<%=menuColorTemplate.id %>"></li>
+								<li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;background-image:url(<%=menuColorTemplate.preview_image.url(:cropped_default_retina) %>);background-size:cover;color:transparent;" class="<%="ui-selected" if current_user.restaurant.menuColorTemplate == menuColorTemplate %>" data-id="<%=menuColorTemplate.id %>"></li>
 							<% end %>
-							<li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;" class="<%="ui-selected" if @user.restaurant.menuColorTemplate == nil %>" data-id="0">custom</li>
+							<li style="float:left;width:144px;height:108px;text-align:center;line-height:108px;margin:4px;" class="<%="ui-selected" if current_user.restaurant.menuColorTemplate == nil %>" data-id="0">custom</li>
 						</ul>
-						<input name="menuColorTemplate_id" type="hidden" id="form-menuColorTemplate_id" value="<%=@user.restaurant.menuColorTemplate.id if @user.restaurant.menuColorTemplate %>">
+						<input name="menuColorTemplate_id" type="hidden" id="form-menuColorTemplate_id" value="<%=current_user.restaurant.menuColorTemplate.id if current_user.restaurant.menuColorTemplate %>">
 					</div>
 				</div>
 			</div>
@@ -23,7 +23,7 @@
 							<div class="input-group-addon">
 								<a href="#"><i class="color-preview"></i></a>
 							</div>
-							<input id="form-background" name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.background %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
+							<input id="form-background" name="background" type="text" class="form-control colorpicker" data-format="hex" value="<%=current_user.restaurant.menuColor.background %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
 						</div>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 					<div class="form-group">
 						<label for="form-bar_background" class="control-label"><%=t("menumalist.design_background_image") %></label>
 						<br />
-						<%=neon_imagecrop :image => @user.restaurant.appmain_image %>
+						<%=neon_imagecrop :image => current_user.restaurant.appmain_image %>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -41,7 +41,7 @@
 							<div class="input-group-addon">
 								<a href="#"><i class="color-preview"></i></a>
 							</div>
-							<input id="form-bar_background" name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.bar_background %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
+							<input id="form-bar_background" name="bar_background" type="text" class="form-control colorpicker" data-format="hex" value="<%=current_user.restaurant.menuColor.bar_background %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
 						</div>
 					</div>
 				</div> 
@@ -52,7 +52,7 @@
 							<div class="input-group-addon">
 								<a href="#"><i class="color-preview"></i></a>
 							</div>
-							<input id="form-nav_text" name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.nav_text %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
+							<input id="form-nav_text" name="nav_text" type="text" class="form-control colorpicker" data-format="hex" value="<%=current_user.restaurant.menuColor.nav_text %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
 						</div>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 							<div class="input-group-addon">
 								<a href="#"><i class="color-preview"></i></a>
 							</div>
-							<input id="form-nav_text_active" name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=@user.restaurant.menuColor.nav_text_active %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
+							<input id="form-nav_text_active" name="nav_text_active" type="text" class="form-control colorpicker" data-format="hex" value="<%=current_user.restaurant.menuColor.nav_text_active %>" placeholder="<%=t("neon.input_color_placeholder") %>" data-validate="required,minlength[4],maxlength[7],hexcolor" data-message-minlength="<%=t("validation.minlength",{l:"4"}) %>" data-message-maxlength="<%=t("validation.maxlength",{l:"7"}) %>" data-message-hexcolor="<%=t("validation.hexcolor") %>" />
 						</div>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 						<label class="control-label"><%=t("menumalist.design_font") %></label>
 						<select name="supportedFont_id" class="select2" data-allow-clear="false" data-placeholder="Select one city...">
 							<% SupportedFont.all.each do |supportedFont| %>
-								<option value="<%=supportedFont.id %>" <%="selected" if @user.restaurant.supportedFont == supportedFont %>><%=supportedFont.title %></option>
+								<option value="<%=supportedFont.id %>" <%="selected" if current_user.restaurant.supportedFont == supportedFont %>><%=supportedFont.title %></option>
 							<% end %>
 						</select>
 					</div>
@@ -83,7 +83,7 @@
 					<div class="form-group">
 						<label for="field-1" class="control-label"><%=t("menumalist.design_splashscreen_image") %></label>
 						<br />
-						<%=neon_imagecrop :image => @user.restaurant.splashscreen_image %>
+						<%=neon_imagecrop :image => current_user.restaurant.splashscreen_image %>
 					</div>
 				</div>
 			</div>

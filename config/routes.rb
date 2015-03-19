@@ -1,4 +1,5 @@
 Pl8es::Application.routes.draw do
+	devise_for :users, :controllers => { :omniauth_callbacks => "authentications" }
 	
 	namespace :app do
 		#app-get
@@ -29,13 +30,6 @@ Pl8es::Application.routes.draw do
 		scope :a do
 			
 			post "/design/edit" => "ajax#editdesign"
-			
-			#ajax/session
-			post "/session/signup/name" => "session#signup_user"
-			post "/session/signup/restaurant" => "session#signup_restaurant"
-			post "/session/signup/user" => "session#signup_name"
-			post "/session/login" => "session#login"
-			post "/session/login/forgot" => "session#login_forgot"
 			
 			#ajax/admin
 			post "/language/add" => "admin#addlanguage"
@@ -86,19 +80,6 @@ Pl8es::Application.routes.draw do
 		post "dishes/sort" => "dishes#sort", as: :sort_dishes
 		get "dishes/:id/crop" => "dishes#crop", as: :crop_dish
 	end
-	
-	#signup
-	resources :signup, :only => [:index]
-	get "/signup/restaurant" => "signup#restaurant"
-	get "/signup/user" => "signup#user"
-	
-	#login
-	resources :login, :only => [:index]
-	get "/login/forgot" => "login#forgot"
-	get "/login/forgot/:user_id/:reset_token" => "login#forgot_reset", as: :login_forgot_reset
-	
-	#logout
-	resources :logout, :only => [:index]
 	
 	#admin
 	resources :admin, :only => [:index]

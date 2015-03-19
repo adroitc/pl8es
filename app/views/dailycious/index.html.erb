@@ -62,7 +62,7 @@ end
 					<td class="row gallery-env draggable-portlets">
 						<%= form_tag(dailydish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
 							<span class="sorted ui-sortable">
-								<% @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |dish| %>
+								<% current_user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |dish| %>
 									<%= render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => dish }) %>
 								<% end %>
 							</span>
@@ -109,7 +109,7 @@ end
 	<%=render :partial => "modal_adddailydish" %>
 	<% for i in 0..6 %>
 		<% current_date = (date.beginning_of_week+i) %>
-		<% @user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
+		<% current_user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |daily_dish| %>
 			<%=render :partial => "modal_editdailydish", :locals => {:daily_dish => daily_dish} %>
 		<% end %>
 	<% end %>

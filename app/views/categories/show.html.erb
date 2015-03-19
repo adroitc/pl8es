@@ -12,22 +12,22 @@
 	</li>
 	<li class="">
 		<a href="<%= menu_path(@menu) %>">
-			<%=@category.menu.title %>
+			<%= @category.menu.title %>
 		</a>
 	</li>
 	<% if @category.parent.present? %>
 		<li class="">
 			<a href="<%= menu_category_path(@menu, @category.parent) %>">
-				<%=@category.parent.title %>
+				<%= @category.parent.title %>
 			</a>
 		</li>
 	<% end %>
 	<li class="active">
-		<strong><%=@category.title %></strong>
+		<strong><%= @category.title %></strong>
 	</li>
 </ol>
 
-<h2><%=@category.menu.title %> - <%=@category.title %></h2>
+<h2><%= @category.menu.title %> - <%= @category.title %></h2>
 <br />
 <div class="row gallery-env draggable-portlets">
 	<%= form_tag(menu_sort_categories_path(@menu), {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sort_category"}) do %>

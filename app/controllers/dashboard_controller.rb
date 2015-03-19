@@ -1,8 +1,8 @@
 class DashboardController < ApplicationController
   
   def index
-    if !@user
-      redirect_to login_index_path
+    if !current_user
+      redirect_to new_user_session_path
     end
   end
   

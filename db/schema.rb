@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309161416) do
+ActiveRecord::Schema.define(version: 20150312110032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authentications", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "beverage_navigation_translations", force: true do |t|
     t.integer  "beverage_navigation_id", null: false
@@ -373,14 +383,14 @@ ActiveRecord::Schema.define(version: 20150309161416) do
     t.datetime "restaurant_image_updated_at"
     t.string   "restaurant_image_dimensions"
     t.string   "restaurant_image_fingerprint"
-    t.integer  "restaurant_image_crop_w"
-    t.integer  "restaurant_image_crop_h"
-    t.integer  "restaurant_image_crop_x"
-    t.integer  "restaurant_image_crop_y"
     t.boolean  "restaurant_image_crop_processed",   default: true
     t.string   "background_type"
     t.string   "billing_contact"
     t.datetime "client_reset_date"
+    t.integer  "restaurant_image_crop_y"
+    t.integer  "restaurant_image_crop_x"
+    t.integer  "restaurant_image_crop_w"
+    t.integer  "restaurant_image_crop_h"
   end
 
   create_table "restaurants_tags", force: true do |t|
@@ -440,14 +450,23 @@ ActiveRecord::Schema.define(version: 20150309161416) do
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "last_login"
+    t.datetime "last_sign_in_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "isAdmin",         default: false
+    t.boolean  "isAdmin",                default: false
     t.string   "product_referer"
-    t.string   "password_digest"
-    t.string   "reset_token"
-    t.datetime "reset_date"
+    t.string   "encrypted_password"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   create_table "wine_translations", force: true do |t|

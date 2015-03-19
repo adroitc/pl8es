@@ -28,6 +28,10 @@ gem 'hirb'
 
 gem 'acts_as_tree'
 
+# –– devise
+gem 'devise'
+gem 'omniauth-facebook'
+
 # –– images
 gem "paperclip"
 gem "aws-sdk"
@@ -51,6 +55,7 @@ gem "twitter-bootstrap-rails"
 gem "wannabe_bool"
 
 group :development do
+	gem 'letter_opener'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'capistrano-rails', '~> 1.1.1'
@@ -86,3 +91,19 @@ gem "wkhtmltopdf-binary"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "turbolinks"
+
+group :test do
+	gem 'capybara'
+	gem 'selenium-webdriver'
+	gem 'factory_girl_rails'
+	gem 'database_cleaner'
+	gem 'shoulda-matchers', require: false
+	
+	gem 'growl'
+end
+
+group :test, :development do
+	gem 'rspec-rails'
+	gem 'guard-rspec'
+	gem 'guard-livereload'
+end

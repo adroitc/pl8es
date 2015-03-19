@@ -5,10 +5,10 @@
       <!-- Profile Info -->
       <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
         <a href="<%= profile_index_path %>">
-          <img src="<%=@user.restaurant.logo_image.url(:cropped_website) %>" class="profile-logo" />
+          <img src="<%= current_user.restaurant.logo_image.url(:cropped_website) %>" class="profile-logo" />
           <ul class="profile-info-right">
-            <li class="profile-name"><%=@user.restaurant.name %></li>
-            <li class="profile-email"><%=@user.email %></li>
+            <li class="profile-name"><%= current_user.restaurant.name %></li>
+            <li class="profile-email"><%= current_user.email %></li>
           </ul>
         </a>
       </li>
@@ -16,17 +16,17 @@
     <ul class="profile-info-sections">
       <li>
         <div class="profile-stat">
-          <h3><%= @user.restaurant.daily_dishes.count %></h3>
+          <h3><%= current_user.restaurant.daily_dishes.count %></h3>
           <a href="<%=dishes_path %>">
-            <%= @user.restaurant.daily_dishes.count == 1 ? t('profile.dish') : t('profile.dishes') %>
+            <%= current_user.restaurant.daily_dishes.count == 1 ? t('profile.dish') : t('profile.dishes') %>
           </a>
         </div>
       </li>
       <li>
         <div class="profile-stat">
-          <h3><%==@user.restaurant.menus.count %></h3>
+          <h3><%= current_user.restaurant.menus.count %></h3>
           <a href="<%=menus_path %>">
-            <%= @user.restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %>
+            <%= current_user.restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %>
           </a>
         </div>
       </li>
@@ -36,7 +36,9 @@
     <ul class="list-inline links-list pull-right">
       <li class="sep"></li>
       <li>
-        <a href="<%= logout_index_path %>"><%=t("layouts.topbar.logout")%> <i class="entypo-logout right"></i></a>
+      		<%= link_to destroy_user_session_path, :method => "delete" do %>
+      			<%= t("layouts.topbar.logout") %><i class="entypo-logout right"></i>
+      		<% end %>
       </li>
     </ul>
   </div>

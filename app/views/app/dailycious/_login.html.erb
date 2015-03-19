@@ -4,31 +4,31 @@ raw(Jsonify::Builder.plain do |j|
   j.token                      @session.token
   
   j.location do
-    j.id                         @user.restaurant.id
+    j.id                         current_user.restaurant.id
     
-    j.restaurant_image_url       @user.restaurant.logo_image.url(:cropped_dailycious_retina)
-    j.restaurant_image_fingerprint  @user.restaurant.logo_image.present? ? @user.restaurant.logo_image_fingerprint : "default"
+    j.restaurant_image_url       current_user.restaurant.logo_image.url(:cropped_dailycious_retina)
+    j.restaurant_image_fingerprint  current_user.restaurant.logo_image.present? ? current_user.restaurant.logo_image_fingerprint : "default"
 
-    j.name                       @user.restaurant.name
+    j.name                       current_user.restaurant.name
   
-    j.address                    @user.restaurant.location.address
-    j.zip                        @user.restaurant.location.zip
-    j.city                       @user.restaurant.location.city
-    j.country                    @user.restaurant.location.country
+    j.address                    current_user.restaurant.location.address
+    j.zip                        current_user.restaurant.location.zip
+    j.city                       current_user.restaurant.location.city
+    j.country                    current_user.restaurant.location.country
     
-    j.favorites                  @user.restaurant.favoriteRestaurants.count
+    j.favorites                  current_user.restaurant.favoriteRestaurants.count
     
-    j.telephone                  @user.restaurant.telephone
-    j.email                      @user.restaurant.email
-    j.website                    @user.restaurant.website
+    j.telephone                  current_user.restaurant.telephone
+    j.email                      current_user.restaurant.email
+    j.website                    current_user.restaurant.website
   
-    j.tags(@user.restaurant.tags) do |tag|
+    j.tags(current_user.restaurant.tags) do |tag|
       tag.tag_lang.each do |key, value|
         j[key] = value
       end
     end
     
-    daily_dishes_count = @user.restaurant.daily_dishes.find(
+    daily_dishes_count = current_user.restaurant.daily_dishes.find(
       :all,
       :conditions => [
         "display_date = (?)",

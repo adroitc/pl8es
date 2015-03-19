@@ -1,54 +1,40 @@
 class AdminController < ApplicationController
-  
-  def index
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
-  def languages
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
-  def users
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
-  def user_switch
-    if @user && (@user.isAdmin || (session[:admin_id] && User.exists?(session[:admin_id]) && User.find(session[:admin_id]).isAdmin))
-      session[:user_id] = params[:user_id]
-      redirect_to profile_index_path
-    else
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
-  def tags
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
-  def menucolortemplates
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
-  def fonts
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
-  def ingredients
-    if !(@user && @user.isAdmin)
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-  
+	
+	before_filter :authenticate_admin!, :except => [:user_switch]
+	
+	def index
+	end
+	
+	def languages
+	end
+	
+	def users
+	end
+	
+	def user_switch
+		if current_user && (current_user.isAdmin || (session[:admin_id] && User.exists?(session[:admin_id]) && User.find(session[:admin_id]).isAdmin))
+			session[:user_id] = params[:user_id]
+			redirect_to profile_index_path
+		else
+			raise ActionController::RoutingError.new("Not Found")
+		end
+	end
+	
+	def tags
+	end
+	
+	def menucolortemplates
+	end
+	
+	def fonts
+	end
+	
+	def ingredients
+	end
+	
+	private
+	
+		def authenticate_admin!
+			raise ActionController::RoutingError.new("Not Found") unless current_user && current_user.isAdmin
+		end
 end

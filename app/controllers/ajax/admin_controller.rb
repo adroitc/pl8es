@@ -1,7 +1,7 @@
 class Ajax::AdminController < ApplicationController
   
   def addlanguage
-    if @user && @user.isAdmin && !params.values_at(:title, :locale).include?(nil)
+    if current_user && current_user.isAdmin && !params.values_at(:title, :locale).include?(nil)
       new_language = Language.create(params.permit(:title, :locale))
       
       render :json => {:status => "success"}
@@ -11,7 +11,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def editlanguage
-    if @user && @user.isAdmin && !params.values_at(:language_id, :title, :locale).include?(nil)
+    if current_user && current_user.isAdmin && !params.values_at(:language_id, :title, :locale).include?(nil)
       language = Language.find(params[:language_id])
       
       if params[:delete] == "true"
@@ -27,7 +27,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def edituser
-    if @user && @user.isAdmin && !params.values_at(:user_id).include?(nil)
+    if current_user && current_user.isAdmin && !params.values_at(:user_id).include?(nil)
       user = User.find(params[:user_id])
       
       if params[:delete] == "true"
@@ -38,7 +38,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def add_tag
-    if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
+    if current_user && current_user.isAdmin && !params.values_at(:title).include?(nil)
       tag = Tag.create()
       
       current_locale = I18n.locale
@@ -57,7 +57,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def edit_tag
-    if @user && @user.isAdmin && !params.values_at(:tag_id, :title).include?(nil) && Tag.exists?(params[:tag_id])
+    if current_user && current_user.isAdmin && !params.values_at(:tag_id, :title).include?(nil) && Tag.exists?(params[:tag_id])
       tag = Tag.find(params[:tag_id])
       
       if params[:delete] == "true"
@@ -80,7 +80,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def addmenucolortemplate
-    if @user && @user.isAdmin && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active).include?(nil)
+    if current_user && current_user.isAdmin && !params.values_at(:background, :bar_background, :nav_text, :nav_text_active).include?(nil)
       MenuColorTemplate.create(params.permit(:preview_image, :background, :bar_background, :nav_text, :nav_text_active).merge({
         bev_background: params[:nav_text],
         bev_background_selected: params[:bar_background],
@@ -111,7 +111,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def editmenucolortemplate
-    if @user && @user.isAdmin && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active).include?(nil) && MenuColorTemplate.exists?(params[:menuColorTemplate_id])
+    if current_user && current_user.isAdmin && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active).include?(nil) && MenuColorTemplate.exists?(params[:menuColorTemplate_id])
       menuColorTemplate = MenuColorTemplate.find(params[:menuColorTemplate_id])
       
       if params[:delete] == "true"
@@ -149,7 +149,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def addfont
-    if @user && @user.isAdmin && !params.values_at(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil)
+    if current_user && current_user.isAdmin && !params.values_at(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil)
       SupportedFont.create(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
       
       render :json => {:status => "success"}
@@ -159,7 +159,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def editfont
-    if @user && @user.isAdmin && !params.values_at(:supportedFont_id, :title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil) && SupportedFont.exists?(params[:supportedFont_id])
+    if current_user && current_user.isAdmin && !params.values_at(:supportedFont_id, :title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil) && SupportedFont.exists?(params[:supportedFont_id])
       supportedFont = SupportedFont.find(params[:supportedFont_id])
       
       if params[:delete] == "true"
@@ -175,7 +175,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def addingredient
-    if @user && @user.isAdmin && !params.values_at(:title).include?(nil)
+    if current_user && current_user.isAdmin && !params.values_at(:title).include?(nil)
       new_ingredient = Ingredient.create()
       
       current_locale = I18n.locale
@@ -194,7 +194,7 @@ class Ajax::AdminController < ApplicationController
   end
   
   def editingredient
-    if @user && @user.isAdmin && !params.values_at(:ingredient_id, :title).include?(nil) && Ingredient.exists?(params[:ingredient_id])
+    if current_user && current_user.isAdmin && !params.values_at(:ingredient_id, :title).include?(nil) && Ingredient.exists?(params[:ingredient_id])
       ingredient = Ingredient.find(params[:ingredient_id])
       
       if params[:delete] == "true"
