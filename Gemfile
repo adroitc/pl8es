@@ -91,3 +91,19 @@ gem "wkhtmltopdf-binary"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "turbolinks"
+
+group :test do
+	gem 'capybara'
+	gem 'selenium-webdriver'
+	gem 'factory_girl_rails'
+	gem 'database_cleaner'
+	gem 'shoulda-matchers', require: false
+	
+	gem 'growl'
+end
+
+group :test, :development do
+	gem 'rspec-rails'
+	gem 'guard-rspec'
+	gem 'guard-livereload'
+end
