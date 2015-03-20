@@ -22,7 +22,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
 				flash[:notice] = "Signed up successfully via Facebook"
 			else
 				session[:omniauth] = omni.except(:extra)
-				redirect_to root_url
+				redirect_to dashboard_index_path
 			end
 		end
 	end
