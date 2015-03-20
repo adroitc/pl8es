@@ -16,9 +16,8 @@
 /tmp
 /public/system
 
-/credentials.env.*
-
-.env
+*.env
 
 # Ignore ide settings
 /.idea
+
