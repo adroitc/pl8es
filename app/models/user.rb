@@ -3,11 +3,11 @@ class User < ActiveRecord::Base
 	devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable,
 				 :omniauthable, :omniauth_providers => [:facebook]
 	
-	has_many :authentications
+	has_many :authentications, :dependent => :destroy
 	
 	has_one :restaurant
 	has_many :devices
-	has_many :sessions
+	has_many :sessions, :dependent => :destroy
 	
 	before_create :assign_default_restaurant
 	
