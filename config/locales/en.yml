@@ -156,6 +156,8 @@ en:
     dishes: "Dishes"
     account_settings: "Account settings"
     restaurant_description: "Restaurant description"
+    goto_map: "Enlarge map"
+    edit_description: "Edit description"
     
     account_settings_modal_title: "Edit account settings"
     account_settings_modal_submit: "Save"

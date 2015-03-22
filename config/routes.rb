@@ -98,8 +98,7 @@ Pl8es::Application.routes.draw do
 	
 	#profile
 	resources :profile, :only => [:index]
-	get "/restaurant/:restaurant_name/:restaurant_id" => "profile#public" #public
-	get "/restaurant" => "profile#index"
+	get "/restaurant/:restaurant_name/:restaurant_id" => "profile#restaurant"
 	
 	#dailycious
 	get "/dailycious" => "dailycious#index"

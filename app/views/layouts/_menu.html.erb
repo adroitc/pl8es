@@ -14,9 +14,10 @@
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "profile" %>">
-  	<a href="<%= profile_index_path %>">
-  		<i class="entypo-user"></i>
-  		<span><%=t("layouts.menu.restaurant") %></span>
+    <%= link_to ({controller: "profile", action: "restaurant", restaurant_name: current_user.restaurant.name, restaurant_id: current_user.restaurant.id}) do %>
+        <i class="entypo-user"></i>
+        <span><%=t("layouts.menu.restaurant") %></span>
+    <% end %>
   	</a>
   </li>
   <li class="<%="active" if params[:controller] == "dailycious" %>">

@@ -1,4 +1,4 @@
-.profile-env {
+.profile-env.pl8 {
 
   max-width: 930px;
 
@@ -13,7 +13,7 @@
     padding-left: 4px;
   }
 
-  .profile-head {
+  .pl8-profile-head {
     height: 244px;
     margin-left: -20px;
     margin-right: -20px;
@@ -22,23 +22,29 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left center;
+
+    .pl8-profile-buttons {
+      position: absolute;
+      right: 8px;
+      top: 6px;
+    }
   }
 
-  .profile-logo {
+  .pl8-profile-logo {
     position: relative;
     top: 120px;
     margin-left: 20px;
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  .profile-caption {
+  .pl8-profile-caption {
 
     left: 200px;
     position: relative;
     top: -25px;
     max-width: 56%;
 
-    .profile-name {
+    .pl8-profile-name {
       display: inline-block;
       font-size: 20pt;
       margin-right: 4px;
@@ -47,7 +53,7 @@
       text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.8);
     }
 
-    .profile-description {
+    .pl8-profile-description {
       display: block;
       margin-top: 8px;
       font-size: 10pt;
@@ -56,15 +62,22 @@
     }
   }
 
-  .profile-map {
+  .pl8-profile-map {
     max-width: 640px;
 
-    .profile-tile {
+    .pl8-profile-tile {
       background-position: center center;
     }
+
+    .pl8-map-options {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+
   }
 
-  .profile-tile {
+  .pl8-profile-tile {
     height: 148px;
     font-size: 10pt;
     padding: 15px;
@@ -84,16 +97,12 @@
 
   }
 
-  .profile-buttons {
-    margin-bottom: 15px;
-  }
-
-  .label-restaurant-category {
+  .pl8-label-restaurant-category {
     background-color: $dailycious-main-color;
     display: inline-block;
     font-size: 8pt;
     height: 18px;
-    line-height: 10px;
+    line-height: 8px;
     margin-left: 8px;
     text-shadow: none;
   }
