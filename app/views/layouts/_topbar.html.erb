@@ -4,7 +4,7 @@
     <ul class="user-info pull-left pull-none-xsm">
       <!-- Profile Info -->
       <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-        <a href="<%= profile_index_path %>">
+        <a href="<%= restaurant_path(current_user.restaurant) %>">
           <img src="<%= current_user.restaurant.logo_image.url(:cropped_website) %>" class="profile-logo" />
           <ul class="profile-info-right">
             <li class="profile-name"><%= current_user.restaurant.name %></li>

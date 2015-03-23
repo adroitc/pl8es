@@ -62,14 +62,11 @@ SupportedFont.create([
   }
 ])
 
-u = User.new(
-								:isAdmin => true,
-								:email => "dave.gson@gmail.com	",
-								:password => "okokokok",
-								:password_confirmation => "okokokok",
-								:restaurant => Restaurant.new(
+u = User.new(:isAdmin => true, :email => "dave.gson@gmail.com	", :password => "okokokok", :password_confirmation => "okokokok")
+u.skip_confirmation!
+u.restaurant = Restaurant.create(
 									:name => "Demo restaurant",
-									:location => Location.new(
+									:location => Location.create(
 										:latitude => 48.2087105,
 										:longitude => 16.372654,
 										:address => "Stephansplatz 1",
@@ -81,23 +78,19 @@ u = User.new(
 									:background_type => "color",
 									:default_language => Language.first
 								)
-							)
-u.skip_confirmation!
 u.save
+
 
 r = Restaurant.first
 r.languages << Language.first
 r.languages << Language.last
 r.save
 
-u = User.new(
-								:isAdmin => true,
-								:email => "s.mairhofer@pl8.cc",
-								:password => "okokokok",
-								:password_confirmation => "okokokok",
-								:restaurant => Restaurant.new(
+u = User.new(:isAdmin => true, :email => "s.mairhofer@pl8.cc", :password => "okokokok", :password_confirmation => "okokokok")
+u.skip_confirmation!
+u.restaurant = Restaurant.create(
 									:name => "Demo restaurant",
-									:location => Location.new(
+									:location => Location.create(
 										:latitude => 48.202452,
 										:longitude => 16.393683,
 										:address => "Erdbergstraße 10",
@@ -109,6 +102,4 @@ u = User.new(
 									:background_type => "color",
 									:default_language => Language.first
 								)
-							)
-u.skip_confirmation!
 u.save
