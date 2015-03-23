@@ -81,5 +81,9 @@ class ApplicationController < ActionController::Base
 			end
 			nil
 		end
+		
+		def not_found
+			raise ActionController::RoutingError.new('Not found')
+		end
 	
 end
