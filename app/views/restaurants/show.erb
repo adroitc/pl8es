@@ -2,10 +2,10 @@
 <% if current_user %>
 	<ol class="breadcrumb bc-3">
 		<li>
-			<a href="<%=dashboard_index_path %>">
+			<%= link_to dashboard_index_path do %>
 				<i class="entypo-home"></i>
 				<%=t("layouts.menu.dashboard") %>
-			</a>
+			<% end %>
 		</li>
 		<li class="active">
 			<strong><%=t("layouts.menu.restaurant") %></strong>
@@ -65,7 +65,6 @@
 						<li>
 							<a href="<%=@restaurant.website %>" target="_blank">
 								<i class="entypo-globe"></i>
-								<%= %>
 							</a>
 						</li>
 					<% end %>
