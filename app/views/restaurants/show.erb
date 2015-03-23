@@ -13,22 +13,22 @@
 	</ol>
 <% end %>
 
-<div class="pl8 profile-env">
+<div class="pl8es profile-env">
 	
-	<header class="row pl8-profile-head" style="background-image:url('<%=@restaurant.restaurant_image.url(:cropped_default_retina) %>')">
-		<div class="pl8-profile-logo">
+	<header class="row profile-head" style="background-image:url('<%=@restaurant.restaurant_image.url(:cropped_default_retina) %>')">
+		<div class="restaurant-logo">
 			<img width="156" src="<%=@restaurant.logo_image.url(:cropped_default_retina) %>" />
 		</div>
-		<div class="pl8-profile-caption">
-			<div class="pl8-profile-name"><%=@restaurant.name %></div>
-			<span class="label pl8-label-restaurant-category">Tag 1</span>
-			<span class="label pl8-label-restaurant-category">Tag 2</span>
-			<div class="pl8-profile-description">
+		<div class="profile-caption">
+			<div class="restaurant-name"><%=@restaurant.name %></div>
+			<span class="label restaurant-category">Tag 1</span>
+			<span class="label restaurant-category">Tag 2</span>
+			<div class="restaurant-description">
 				<%=@restaurant.description %>
 			</div>
 		</div>
 		<% if current_user && current_user.restaurant == @restaurant %>
-			<div class="pl8-profile-buttons">
+			<div class="restaurant-options">
 				<button class="btn btn-white" type="button" onclick="jQuery('#modal-editsettings').modal('show');">
 					<i class="entypo-cog"></i>
 				</button>
@@ -40,10 +40,10 @@
 	</header>
 
 	<section class="row">
-		<div class="col-sm-8 pl8-profile-map">
-			<div class="tile-stats pl8-profile-tile"
+		<div class="col-sm-8 restaurant-location">
+			<div class="tile-stats profile-tile"
 					 style="background-image: url('//maps.googleapis.com/maps/api/staticmap?zoom=16&maptype=roadmap&size=640x640&center=<%=@restaurant.location.latitude%>,<%=@restaurant.location.longitude%>&markers=<%=@restaurant.location.latitude%>,<%=@restaurant.location.longitude%>');">
-				<div class="pl8-map-options">
+				<div class="location-options">
 					<a href="http://dailycious.co#<%=@restaurant.id %>" target="_blank" class="btn btn-white btn-icon icon-left">
 						<i class="entypo-map"></i>
 						<%=t("profile.goto_map") %>
@@ -53,7 +53,7 @@
 		</div>
 
 		<div class="col-sm-4" >
-			<div class="tile-stats tile-white tile-white-primary pl8-profile-tile">
+			<div class="tile-stats tile-white tile-white-primary profile-tile">
 				<div class="icon"><i class="entypo-mail"></i></div>
 				<ul>
 					<li>
@@ -64,14 +64,16 @@
 					<% if @restaurant.website %>
 						<li>
 							<a href="<%=@restaurant.website %>" target="_blank">
-								<i class="entypo-globe"></i>
+								<i class="entypo-globe"></i><%=@restaurant.website %>
 							</a>
 						</li>
 					<% end %>
-					<li>
-						<i class="entypo-phone"></i>
-						<%=@restaurant.telephone %>
-					</li>
+                    <% if @restaurant.telephone %>
+                        <li>
+                            <i class="entypo-phone"></i>
+                            <%=@restaurant.telephone %>
+                        </li>
+                    <% end %>
 				</ul>
 			</div>
 		</div>
