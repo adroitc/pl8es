@@ -1,6 +1,10 @@
 class RestaurantsController < ApplicationController
 	
 	before_filter :get_restaurant, only: [:show]
+
+  def index
+    render layout: "map"
+  end
 	
 	def show
 		@todays_daily_dishes = @restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)

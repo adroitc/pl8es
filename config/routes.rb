@@ -97,7 +97,7 @@ Pl8es::Application.routes.draw do
 	resources :dashboard, :path => "/", :only => [:index]
 	
 	#profile
-	resources :restaurants, :only => [:show]
+	resources :restaurants, :only => [:index, :show]
 	
 	#dailycious
 	get "/dailycious" => "dailycious#index"
