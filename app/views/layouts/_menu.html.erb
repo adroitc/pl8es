@@ -14,7 +14,7 @@
 		</a>
 	</li>
 	<li class="<%="active" if params[:controller] == "profile" %>">
-		<%= link_to ({controller: "profile", action: "restaurant", restaurant_name: current_user.restaurant.name, restaurant_id: current_user.restaurant.id}) do %>
+		<%= link_to restaurant_path(current_user.restaurant) do %>
 			<i class="entypo-user"></i>
 			<span><%=t("layouts.menu.restaurant") %></span>
 		<% end %>
