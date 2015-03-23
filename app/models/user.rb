@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
 	private
 		
 		def assign_default_restaurant
-			self.restaurant = Restaurant.new(:name => :Default)
+			if self.restaurant == nil
+				self.restaurant = Restaurant.new(:name => :Default)
+			end
 		end
 	
 end
