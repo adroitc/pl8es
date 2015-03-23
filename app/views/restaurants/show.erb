@@ -16,94 +16,94 @@
 <div class="pl8 profile-env">
 	
 	<header class="row pl8-profile-head" style="background-image:url('<%=@restaurant.restaurant_image.url(:cropped_default_retina) %>')">
-      <div class="pl8-profile-logo">
-        <img width="156" src="<%=@restaurant.logo_image.url(:cropped_default_retina) %>" />
-      </div>
-      <div class="pl8-profile-caption">
-        <div class="pl8-profile-name"><%=@restaurant.name %></div>
-        <span class="label pl8-label-restaurant-category">Tag 1</span>
-        <span class="label pl8-label-restaurant-category">Tag 2</span>
-        <div class="pl8-profile-description">
-          <%=@restaurant.description %>
-        </div>
-      </div>
-      <% if current_user && current_user.restaurant == @restaurant %>
-          <div class="pl8-profile-buttons">
-            <button class="btn btn-white" type="button" onclick="jQuery('#modal-editsettings').modal('show');">
-              <i class="entypo-cog"></i>
-            </button>
-            <button class="btn btn-white" type="button" onclick="jQuery('#modal-editdescription').modal('show');">
-              <i class="entypo-brush"></i>
-            </button>
-          </div>
-      <% end %>
+		<div class="pl8-profile-logo">
+			<img width="156" src="<%=@restaurant.logo_image.url(:cropped_default_retina) %>" />
+		</div>
+		<div class="pl8-profile-caption">
+			<div class="pl8-profile-name"><%=@restaurant.name %></div>
+			<span class="label pl8-label-restaurant-category">Tag 1</span>
+			<span class="label pl8-label-restaurant-category">Tag 2</span>
+			<div class="pl8-profile-description">
+				<%=@restaurant.description %>
+			</div>
+		</div>
+		<% if current_user && current_user.restaurant == @restaurant %>
+			<div class="pl8-profile-buttons">
+				<button class="btn btn-white" type="button" onclick="jQuery('#modal-editsettings').modal('show');">
+					<i class="entypo-cog"></i>
+				</button>
+				<button class="btn btn-white" type="button" onclick="jQuery('#modal-editdescription').modal('show');">
+					<i class="entypo-brush"></i>
+				</button>
+			</div>
+		<% end %>
 	</header>
 
 	<section class="row">
-      <div class="col-sm-8 pl8-profile-map">
-        <div class="tile-stats pl8-profile-tile"
-             style="background-image: url('//maps.googleapis.com/maps/api/staticmap?zoom=16&maptype=roadmap&size=640x640&center=<%=@restaurant.location.latitude%>,<%=@restaurant.location.longitude%>&markers=<%=@restaurant.location.latitude%>,<%=@restaurant.location.longitude%>');">
-          <div class="pl8-map-options">
-            <a href="http://dailycious.co#<%=@restaurant.id %>" target="_blank" class="btn btn-white btn-icon icon-left">
-              <i class="entypo-map"></i>
-              <%=t("profile.goto_map") %>
-            </a>
-          </div>
-        </div>
-      </div>
+		<div class="col-sm-8 pl8-profile-map">
+			<div class="tile-stats pl8-profile-tile"
+					 style="background-image: url('//maps.googleapis.com/maps/api/staticmap?zoom=16&maptype=roadmap&size=640x640&center=<%=@restaurant.location.latitude%>,<%=@restaurant.location.longitude%>&markers=<%=@restaurant.location.latitude%>,<%=@restaurant.location.longitude%>');">
+				<div class="pl8-map-options">
+					<a href="http://dailycious.co#<%=@restaurant.id %>" target="_blank" class="btn btn-white btn-icon icon-left">
+						<i class="entypo-map"></i>
+						<%=t("profile.goto_map") %>
+					</a>
+				</div>
+			</div>
+		</div>
 
-      <div class="col-sm-4" >
-        <div class="tile-stats tile-white tile-white-primary pl8-profile-tile">
-          <div class="icon"><i class="entypo-mail"></i></div>
-          <ul>
-            <li>
-              <i class="entypo-location"></i><%=@restaurant.location.address %><br/>
-              <i class="entypo-location invisible"></i><%=@restaurant.location.zip %>, <%=@restaurant.location.city %><br/>
-              <i class="entypo-location invisible"></i><%=@restaurant.location.country %>
-            </li>
-            <% if @restaurant.website %>
-            <li>
-              <a href="<%=@restaurant.website %>" target="_blank">
-                <i class="entypo-globe"></i>
-                <%= %>
-              </a>
-            </li>
-            <% end %>
-            <li>
-              <i class="entypo-phone"></i>
-              <%=@restaurant.telephone %>
-            </li>
-          </ul>
-        </div>
-      </div>
+		<div class="col-sm-4" >
+			<div class="tile-stats tile-white tile-white-primary pl8-profile-tile">
+				<div class="icon"><i class="entypo-mail"></i></div>
+				<ul>
+					<li>
+						<i class="entypo-location"></i><%=@restaurant.location.address %><br/>
+						<i class="entypo-location invisible"></i><%=@restaurant.location.zip %>, <%=@restaurant.location.city %><br/>
+						<i class="entypo-location invisible"></i><%=@restaurant.location.country %>
+					</li>
+					<% if @restaurant.website %>
+						<li>
+							<a href="<%=@restaurant.website %>" target="_blank">
+								<i class="entypo-globe"></i>
+								<%= %>
+							</a>
+						</li>
+					<% end %>
+					<li>
+						<i class="entypo-phone"></i>
+						<%=@restaurant.telephone %>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</section>
 	
 	<% if @todays_daily_dishes.count > 0 %>
-      <div class="row gallery-env draggable-portlets">
-        <h4>Todays Dishes</h4>
-		  <span class="sorted ui-sortable">
-            <% @todays_daily_dishes.each do |dish| %>
-                <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => false})%>
-            <% end %>
-		  </span>
-      </div>
+		<div class="row gallery-env draggable-portlets">
+			<h4>Todays Dishes</h4>
+		<span class="sorted ui-sortable">
+			<% @todays_daily_dishes.each do |dish| %>
+				<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => false})%>
+			<% end %>
+		</span>
+		</div>
 	<% end %>
 	
 	<% if @past_daily_dishes.count > 0 	%>
-      <div class="row gallery-env draggable-portlets">
-        <h4>Past Dishes</h4>
-	      <span class="sorted ui-sortable">
-            <% @past_daily_dishes.each do |dish| %>
-                <%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => true})%>
-            <% end %>
-		  </span>
-      </div>
+		<div class="row gallery-env draggable-portlets">
+			<h4>Past Dishes</h4>
+			 <span class="sorted ui-sortable">
+				<% @past_daily_dishes.each do |dish| %>
+					<%=render(:partial => "neon/public_daily_dish_panel", :locals => {:daily_dish => dish, :showDate => true})%>
+				<% end %>
+			</span>
+		</div>
 	<% end %>
 </div>
 
 <% content_for :modals do %>	
-    <% if current_user && current_user.restaurant == @restaurant %>
-        <%=render :partial => "modal_editsettings" %>
-        <%=render :partial => "modal_editdescription" %>
-    <% end %>
+	<% if current_user && current_user.restaurant == @restaurant %>
+		<%=render :partial => "profile/modal_editsettings" %>
+		<%=render :partial => "profile/modal_editdescription" %>
+	<% end %>
 <% end %>
