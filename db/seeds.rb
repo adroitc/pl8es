@@ -62,7 +62,7 @@ SupportedFont.create([
   }
 ])
 
-u = User.new(:isAdmin => true, :email => "dave.gson@gmail.com	", :password => "okokokok", :password_confirmation => "okokokok")
+u = User.new(:rank => "admin", :email => "dave.gson@gmail.com	", :password => "okokokok", :password_confirmation => "okokokok")
 u.skip_confirmation!
 u.restaurant = Restaurant.create(
 									:name => "Demo restaurant",
@@ -86,7 +86,7 @@ r.languages << Language.first
 r.languages << Language.last
 r.save
 
-u = User.new(:isAdmin => true, :email => "s.mairhofer@pl8.cc", :password => "okokokok", :password_confirmation => "okokokok")
+u = User.new(:rank => "admin", :email => "s.mairhofer@pl8.cc", :password => "okokokok", :password_confirmation => "okokokok")
 u.skip_confirmation!
 u.restaurant = Restaurant.create(
 									:name => "Demo restaurant",

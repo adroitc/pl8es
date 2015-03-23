@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312110032) do
+ActiveRecord::Schema.define(version: 20150323150629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -453,7 +453,7 @@ ActiveRecord::Schema.define(version: 20150312110032) do
     t.datetime "last_sign_in_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "isAdmin",                default: false
+    t.string   "rank",                   default: false
     t.string   "product_referer"
     t.string   "encrypted_password"
     t.string   "reset_password_token"

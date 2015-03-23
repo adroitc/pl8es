@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
       :text => content
   end
 	
+	def admin?
+		self.rank == "admin"
+	end
+	
 	private
 		
 		def assign_default_restaurant

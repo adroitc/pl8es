@@ -64,7 +64,7 @@ class MenusController < ApplicationController
 	end
 	
 	def reset_clients
-		if params[:reset] == "true" && (current_user.isAdmin || !current_user.restaurant.client_reset_date || (current_user.restaurant.client_reset_date && (current_user.restaurant.client_reset_date+31.days) < DateTime.now))
+		if params[:reset] == "true" && (current_user.admin? || !current_user.restaurant.client_reset_date || (current_user.restaurant.client_reset_date && (current_user.restaurant.client_reset_date+31.days) < DateTime.now))
 			current_user.restaurant.clients.actives.each do |client|
 				client.update_attributes(:active => false)
 			end
