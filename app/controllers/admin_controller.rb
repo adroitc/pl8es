@@ -16,7 +16,7 @@ class AdminController < ApplicationController
 			session[:user_id] = params[:user_id]
 			redirect_to profile_index_path
 		else
-			raise ActionController::RoutingError.new("Not Found")
+			not_found
 		end
 	end
 	
@@ -35,6 +35,6 @@ class AdminController < ApplicationController
 	private
 	
 		def authenticate_admin!
-			raise ActionController::RoutingError.new("Not Found") unless current_user && current_user.isAdmin
+			not_found unless current_user && current_user.isAdmin
 		end
 end
