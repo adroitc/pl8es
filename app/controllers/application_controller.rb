@@ -68,8 +68,10 @@ class ApplicationController < ActionController::Base
 				if session[:signup]
 					session[:signup][:locale] = extract_locale_from_accept_language_header
 				end
-			elsif current_user
+			elsif current_user && current_user.restaurant.present? && current_user.restaurant.default_language.present?
 				I18n.locale = current_user.restaurant.default_language.locale
+			else
+				I18n.locale = :en
 			end
 		end
 		

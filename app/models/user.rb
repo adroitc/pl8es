@@ -3,20 +3,15 @@ class User < ActiveRecord::Base
 	devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable,
 				 :omniauthable, :omniauth_providers => [:facebook]
 	
-	has_many :authentications
+	has_many :authentications, :dependent => :destroy
 	
-  has_one :restaurant
-  has_many :devices
-  has_many :sessions
+	has_one :restaurant
+	has_many :devices
+	has_many :sessions, :dependent => :destroy
 	
-	def self.loggedIn(session)
-		if session[:user_id] && User.exists?(session[:user_id])
-			return true
-		end
-		return false
-	end
-  
-  def send_mail(sender, subject, content)
+	before_create :assign_default_restaurant
+	
+	def send_mail(sender, subject, content)
     RestClient.post "https://api:#{ENV["MAILGUN_API"]}"\
     "@api.mailgun.net/v2/pl8.cc/messages",
       :from => "#{sender} <hi@pl8.cc>",
@@ -24,5 +19,17 @@ class User < ActiveRecord::Base
       :subject => subject,
       :text => content
   end
-  
+	
+	def admin?
+		self.rank == "admin"
+	end
+	
+	private
+		
+		def assign_default_restaurant
+			if self.restaurant == nil
+				self.restaurant = Restaurant.new(:name => :Default)
+			end
+		end
+	
 end

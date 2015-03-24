@@ -62,67 +62,44 @@ SupportedFont.create([
   }
 ])
 
-User.create([
-  {
-    :isAdmin => true,
-    :email => "marc@roemer.io",
-    :password => "Lol123lol",
-    :password_confirmation => "Lol123lol",
-    :restaurant => Restaurant.create(
-      :name => "Demo restaurant",
-      :location => Location.create(
-        :latitude => 48.2087105,
-        :longitude => 16.372654,
-        :address => "Stephansplatz 1",
-        :zip => "1010",
-        :city => "Vienna",
-        :country => "Austria"
-      ),
-      :background_type => "color",
-      :menuColor => MenuColor.create(
-        :background => "#000000",
-        :bar_background => "#000000",
-        :nav_text => "#ffffff",
-        :nav_text_active => "#999999"
-      ),
-      :download_code => "DEMO-2",
-      :supportedFont => SupportedFont.first,
-      :default_language => Language.first
-    )
-  }
-])
+u = User.new(:rank => "admin", :email => "dave.gson@gmail.com	", :password => "okokokok", :password_confirmation => "okokokok")
+u.skip_confirmation!
+u.restaurant = Restaurant.create(
+									:name => "Demo restaurant",
+									:location => Location.create(
+										:latitude => 48.2087105,
+										:longitude => 16.372654,
+										:address => "Stephansplatz 1",
+										:zip => "1010",
+										:city => "Vienna",
+										:country => "Austria"
+									),
+									:download_code => "DEMO 2",
+									:background_type => "color",
+									:default_language => Language.first
+								)
+u.save
+
 
 r = Restaurant.first
 r.languages << Language.first
 r.languages << Language.last
 r.save
 
-User.create([
-  {
-    :isAdmin => true,
-    :email => "s.mairhofer@pl8.cc",
-    :password => "Lol123lol",
-    :password_confirmation => "Lol123lol",
-    :restaurant => Restaurant.create(
-      :name => "Demo restaurant",
-      :location => Location.create(
-        :latitude => 48.202452,
-        :longitude => 16.393683,
-        :address => "Erdbergstraße 10",
-        :zip => "1030",
-        :city => "Vienna",
-        :country => "Austria"
-      ),
-      :background_type => "color",
-      :menuColor => MenuColor.create(
-        :background => "#000000",
-        :bar_background => "#000000",
-        :nav_text => "#ffffff",
-        :nav_text_active => "#999999"
-      ),
-      :download_code => "DEMO",
-      :supportedFont => SupportedFont.first,
-      :default_language => Language.first
-    )
-  }
-])
+u = User.new(:rank => "admin", :email => "s.mairhofer@pl8.cc", :password => "okokokok", :password_confirmation => "okokokok")
+u.skip_confirmation!
+u.restaurant = Restaurant.create(
+									:name => "Demo restaurant",
+									:location => Location.create(
+										:latitude => 48.202452,
+										:longitude => 16.393683,
+										:address => "Erdbergstraße 10",
+										:zip => "1030",
+										:city => "Vienna",
+										:country => "Austria"
+									),
+									:download_code => "DEMO",
+									:background_type => "color",
+									:default_language => Language.first
+								)
+u.save

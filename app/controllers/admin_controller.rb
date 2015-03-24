@@ -12,7 +12,7 @@ class AdminController < ApplicationController
 	end
 	
 	def user_switch
-		if current_user && (current_user.isAdmin || (session[:admin_id] && User.exists?(session[:admin_id]) && User.find(session[:admin_id]).isAdmin))
+		if current_user && (current_user.admin? || (session[:admin_id] && User.exists?(session[:admin_id]) && User.find(session[:admin_id]).admin?))
 			session[:user_id] = params[:user_id]
 			redirect_to profile_index_path
 		else
@@ -35,6 +35,6 @@ class AdminController < ApplicationController
 	private
 	
 		def authenticate_admin!
-			not_found unless current_user && current_user.isAdmin
+			not_found unless current_user && current_user.admin?
 		end
 end

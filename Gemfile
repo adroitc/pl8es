@@ -54,18 +54,6 @@ gem "twitter-bootstrap-rails"
 # add to_b
 gem "wannabe_bool"
 
-group :development do
-	gem 'letter_opener'
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem 'capistrano-rails', '~> 1.1.1'
-  gem 'capistrano-rvm'
-  gem 'capistrano-passenger'
-  gem 'railroady'
-  
-  gem 'rails-erd'
-end
-
 group :production do
   # Use rails_12factor for heroku
   gem "rails_12factor"
@@ -102,7 +90,21 @@ group :test do
 	gem 'growl'
 end
 
+group :development do
+	gem 'letter_opener'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
+  gem 'railroady'
+  
+  gem 'rails-erd'
+end
+
 group :test, :development do
+	gem 'spring'
+	gem "spring-commands-rspec"
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'guard-livereload'
