@@ -8,6 +8,8 @@
 // compiled file.
 //
 //= require jquery
+//= require dailycious/leaflet
+//= require dailycious/leaflet.markercluster
 //
 // ––––––––––––
 //   internal
