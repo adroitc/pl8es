@@ -3,7 +3,7 @@ class RestaurantsController < ApplicationController
 	before_filter :get_restaurant, only: [:show]
 
   def index
-    render layout: "map"
+    render layout: "dailycious"
   end
 	
 	def show
