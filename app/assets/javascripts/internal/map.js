@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     if ($("#map").length > 0) initMap();
 });

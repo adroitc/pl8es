@@ -30,7 +30,8 @@
 //   internal
 // ––––––––––––
 // 
-//= require_tree .  
+//= require internal/forms
+//= require internal/profile
 
 
 $(document).ready(function()
