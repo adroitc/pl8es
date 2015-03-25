@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
 	has_many :devices
 	has_many :sessions, :dependent => :destroy
 	
-	before_create :assign_default_restaurant
-	
 	def send_mail(sender, subject, content)
     RestClient.post "https://api:#{ENV["MAILGUN_API"]}"\
     "@api.mailgun.net/v2/pl8.cc/messages",
@@ -23,13 +21,4 @@ class User < ActiveRecord::Base
 	def admin?
 		self.rank == "admin"
 	end
-	
-	private
-		
-		def assign_default_restaurant
-			if self.restaurant == nil
-				self.restaurant = Restaurant.new(:name => :Default)
-			end
-		end
-	
 end
