@@ -6,6 +6,7 @@ $(document).ready(function() {
 function initMap() {
 
     var POS_VIENNA = [48.2091477000000, 16.3729087000004];
+    var POPUP_CONTENT = "<div class='location'><div class='dish-img'></div><div class='dish-name'></div><div class='dish-price'></div></div>";
 
     $.getScript("http://app.pl8.cc/web/dailycious/list", function onMapDataLoaded() {
 
@@ -35,6 +36,8 @@ function initMap() {
 
         for (var i = 0; i < locations.length; i++) {
 
+            console.log(locations[i]);
+
             var _icon = L.divIcon({
                 html: '<img src="' + locations[i][7] +'">',
                 iconSize:     [40, 48],
@@ -44,10 +47,17 @@ function initMap() {
 
             var title = locations[i][0];
 
+            var popup = $(POPUP_CONTENT);
+            $(popup).find(".dish-name").text(locations[i][0]);
+            $(popup).find(".dish-price").text(locations[i][2]);
+            $(popup).find(".dish-img").css("background-image", "url(" + locations[i][6] + ")");
+
+            console.log($(popup));
+
             var marker = L.marker(new L.LatLng(locations[i][3], locations[i][4]), {
                 title: title,
                 icon: _icon
-            });
+            }).bindPopup($(popup)[0]);
 
             markers.addLayer(marker);
         }

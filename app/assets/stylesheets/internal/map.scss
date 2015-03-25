@@ -1,9 +1,33 @@
+$dailycious-main-color: #4C9A33;
+$border-radius: 4px;
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Roboto Light'), local('Roboto-Light'), url(http://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'), url(http://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Roboto'), local('Roboto-Regular'), url(http://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2'), url(http://fonts.gstatic.com/s/roboto/v15/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Roboto Bold'), local('Roboto-Bold'), url(http://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'), url(http://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
 body, html {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	position: fixed;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 #map {
@@ -17,7 +41,6 @@ body, html {
 	transition: 0.4s;
 	background-color: transparent;
 	border: none;
-	background-image: url("../img/marker.png");
 	
 	&:after {
 		-moz-transition: 0.4s;
@@ -28,7 +51,7 @@ body, html {
 		-moz-border-radius: 50%;
 		-webkit-border-radius: 50%;
 		border-radius: 50%;
-		border: 3px solid #48a841;
+		border: 3px solid $dailycious-main-color;
 		content: "";
 		display: block;
 		height: 34px;
@@ -53,78 +76,80 @@ body, html {
 	}
 }
 
-.leaflet-container {
-	font: inherit;
-	bottom: 15px;
-}
-
 .leaflet-popup {
+
 	.leaflet-popup-close-button {
-		filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
-		opacity: 0.9;
-		background: transparent !important;
-		color: #ffffff !important;
-		height: 25px !important;
-		top: 10px !important;
+		color: #fff !important;
+		font-size: 12pt !important;
 		padding: 4px !important;
+		background-color: rgba(0, 0, 0, 0.3) !important;
+		border-radius: 4px;
+		text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.8);
+		height: 18px !important;
+
+		top: 10px !important;
 		left: 10px !important;
-		width: 25px !important;
 		z-index: 2;
 	}
-	
+
 	.leaflet-popup-content-wrapper {
-		-moz-border-radius: 0px;
-		-webkit-border-radius: 0px;
-		border-radius: 0px;
-		-moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
-		-webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+		border-radius: $border-radius;
 		box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 		padding: 0;
-		
+
 		.leaflet-popup-content {
-			border-bottom: 5px solid #fff;
-			border-top: 5px solid #073855;
-			height: 206px;
-			width: 260px;
+			height: 320px;
+			width: 320px !important;
 			margin: 0;
-			overflow: hidden;
-			
-			/* ??? */
-			
-			border-top: none;
-			border-bottom: none;
-			width: 301px;
-			height: 290px;
-			
-			.property {
-				margin-bottom: 0;
-				
-				&:hover img {
-					top: 0;
+			padding: 0;
+
+			.location {
+				position: relative;
+				height: 100%;
+				background: none;
+				border-radius: $border-radius;
+
+				.dish-img {
+					background-size: 100%;
+					background-position: center;
+					width: 100%;
+					height: 100%;
+					border-radius: $border-radius;
 				}
-				
-				.overlay {
-					bottom: 0px;
-					font-family: "Roboto", sans-serif;
+
+				.dish-price {
+					position: absolute;
+					top: 10px;
+					right: 10px;
+					color: #fff;
+					font-size: 12pt;
+					padding: 2px 8px;
+					background-color: rgba(0, 0, 0, 0.3);
+					border-radius: 4px;
+					text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.8);
+				}
+
+				.dish-name {
+					position: absolute;
+					bottom: 0;
+					right: 0;
+					left: 0;
+					color: #fff;
+					font-size: 12pt;
+					padding: 2px 8px;
+					background-color: rgba(0, 0, 0, 0.3);
+					border-bottom-left-radius: $border-radius;
+					border-bottom-right-radius: $border-radius;
+					text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.8);
 				}
 			}
+
 		}
 	}
 }
 
-.property .overlay h3 {
-	margin-right: 40px;
-}
-
-.tag.price {
-		position: absolute;
-		right: 20px;
-		top: 15px;
-		font-family: "Roboto",sans-serif;
-		z-index: 1;
-}
-
 .leaflet-div-icon {
+
 	img {
 		width: 38px;
 		height: 38px;
@@ -138,33 +163,35 @@ body, html {
 	&:after {
 		border-color: transparent;
 	}
+
 }
 
 .marker-cluster {
-	background-color: #ffffff;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-		border: 1px solid #48a841;
-	-moz-transition: 0.4s;
-	-webkit-transition: 0.4s;
-	transition: 0.4s;
-	color: #61a141;
-	width: 32px;
-	height: 38px;
-	background-color: #48a841;
-	text-align: center;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 38px;
-	
-	&:hover {
-		background-color: #61a141;
-		color: #fff;
-	}
-}
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 1px solid $dailycious-main-color;
+  -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  color: $dailycious-main-color;
+  width: 32px;
+  height: 38px;
+  background-color: #fff;
 
-.leaflet-control-attribution {
-	display: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 40px;
+
+  span {
+    font-family: "Roboto", sans-serif;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: $dailycious-main-color;
+    border: 1px solid #fff;
+  }
 }
 
