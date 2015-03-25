@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
 	
-	before_filter :authenticate_admin!, :except => [:user_switch]
+	before_action :authenticate_admin!, :except => [:user_switch]
 	
 	def index
 	end

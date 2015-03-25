@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
 	
-	before_filter :get_restaurant, only: [:show]
+	before_action :get_restaurant, only: [:show]
+	before_action :authenticate_user, except: [:show, :index]
 
   def index
     render layout: "dailycious"

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  before_filter :set_current_locale, :set_device
+  before_action :set_current_locale, :set_device, :verify_restaurant
 	
 	layout :resolve_layout
 	
@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
 	
 		def authenticate_user
 			redirect_to new_user_session_path unless current_user
+		end
+		
+		def verify_restaurant
+			if current_user && current_user.restaurant.nil?
+				redirect_to new_restaurant_path unless controller_name == "restaurants"
+			end
 		end
 		
 		def get_languages

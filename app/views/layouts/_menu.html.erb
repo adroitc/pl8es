@@ -13,13 +13,15 @@
 			<span><%=t("layouts.menu.dashboard") %></span>
 		</a>
 	</li>
-	<li class="<%="active" if params[:controller] == "profile" %>">
-		<%= link_to restaurant_path(current_user.restaurant) do %>
-			<i class="entypo-user"></i>
-			<span><%=t("layouts.menu.restaurant") %></span>
-		<% end %>
-		</a>
-	</li>
+	<% if current_user.restaurant.present? %>
+		<li class="<%="active" if params[:controller] == "profile" %>">
+			<%= link_to restaurant_path(current_user.restaurant) do %>
+				<i class="entypo-user"></i>
+				<span><%=t("layouts.menu.restaurant") %></span>
+			<% end %>
+			</a>
+		</li>
+	<% end %>
 	<li class="<%="active" if params[:controller] == "dailycious" %>">
 		<a href="<%= dailycious_path %>">
 			<i class="entypo-direction"></i>
