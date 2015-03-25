@@ -1,8 +1,8 @@
 class MenusController < ApplicationController
 	
-	before_filter :authenticate_user
-	before_filter :authenticate_ownership_and_get_menu, :only => [:show, :edit, :update, :destroy]
-	before_filter :get_languages, :only => [:new]
+	before_action :authenticate_user
+	before_action :authenticate_ownership_and_get_menu, :only => [:show, :edit, :update, :destroy]
+	before_action :get_languages, :only => [:new]
 	
 	respond_to :html, :js
 	

@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
 	
-	before_filter :authenticate_user && :authenticate_ownership_and_get_menu
-	before_filter :get_category, only: [:show, :edit, :update, :crop, :destroy, :destroy_image]
-	before_filter :get_languages, only: [:new, :create, :edit, :update, :destroy_image]
+	before_action :authenticate_user && :authenticate_ownership_and_get_menu
+	before_action :get_category, only: [:show, :edit, :update, :crop, :destroy, :destroy_image]
+	before_action :get_languages, only: [:new, :create, :edit, :update, :destroy_image]
 	
 	respond_to :html, :js
 	

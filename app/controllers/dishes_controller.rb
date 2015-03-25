@@ -1,8 +1,8 @@
 class DishesController < ApplicationController
 	
-	before_filter :authenticate_user
-	before_filter :get_dish, only: [:show, :edit, :update, :crop, :destroy, :destroy_image]
-	before_filter :get_languages, only: [:new, :create, :edit, :update, :destroy_image]
+	before_action :authenticate_user
+	before_action :get_dish, only: [:show, :edit, :update, :crop, :destroy, :destroy_image]
+	before_action :get_languages, only: [:new, :create, :edit, :update, :destroy_image]
 	
 	def index
 	end
