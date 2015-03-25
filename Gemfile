@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 ruby "2.1.1"
-gem "rails", "4.0.2"
+gem "rails", "4.2.1"
 
 # Make sure gem is defined BEFORE any other gems that use environment variables
 gem 'dotenv-rails', :groups => [:development, :test]
@@ -21,6 +21,9 @@ gem "jsonify"
 gem "yajl-ruby", require: "yajl"
 gem "coffee-rails", "~> 4.0.0"
 gem "jbuilder", "~> 1.2"
+
+# still be able to call respond_to :html, :json
+gem 'responders'
 
 # –– database
 gem 'pg'
@@ -91,6 +94,7 @@ group :test do
 end
 
 group :development do
+	gem 'web-console'
 	gem 'letter_opener'
   gem "better_errors"
   gem "binding_of_caller"

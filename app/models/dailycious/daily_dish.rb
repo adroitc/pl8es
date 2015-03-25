@@ -1,7 +1,7 @@
 class DailyDish < ActiveRecord::Base
 	belongs_to :restaurant
 	
-	default_scope :order => "position, id"
+	default_scope -> { order("position, id") }
 	
 	validates :title, :length => 4..80
 	validates :price, :length => { :maximum => 7 }
