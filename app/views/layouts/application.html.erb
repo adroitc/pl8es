@@ -19,7 +19,7 @@
 			<a href="<%= user_switch_path(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
 		<% end %>
 		
-		<div class="page-container">
+		<div class="page-container sidebar-collapsed">
 			
 			<%= render :partial => 'layouts/messages' %>
 			
@@ -33,7 +33,7 @@
 			</div>
 			
 			<div class="main-content">
-				<%= render :partial => "layouts/topbar" if current_user %>
+				<%= render :partial => "layouts/topbar" if current_user && current_user.restaurant.present? %>
 				
 				<%= yield %>
 				
