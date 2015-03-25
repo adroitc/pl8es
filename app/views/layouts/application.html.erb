@@ -19,7 +19,7 @@
 			<a href="<%= user_switch_path(session[:admin_id]) %>" style="padding:10px;">Switch to admin [<%=User.find(session[:admin_id]).email %>]</a>
 		<% end %>
 		
-		<div class="page-container sidebar-collapsed">
+		<div class="page-container">
 			
 			<%= render :partial => 'layouts/messages' %>
 			
