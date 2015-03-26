@@ -16,6 +16,9 @@ RSpec.configure do |config|
 	# include the routes
 	config.include Rails.application.routes.url_helpers
 	
+	# include support stuff
+	config.include Features::SessionHelpers, type: :feature
+	
 	config.before(:suite) do
 		begin
 			DatabaseCleaner.start
