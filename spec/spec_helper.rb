@@ -10,6 +10,9 @@ require 'shoulda/matchers'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+	
+	config.color = true
+	
 	config.include Devise::TestHelpers, type: :controller
 	config.include FactoryGirl::Syntax::Methods
 	
