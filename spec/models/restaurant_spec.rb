@@ -8,10 +8,10 @@ describe Restaurant do
 	
 	# –––– associations
 	
-	it { should belong_to(:user) }
-	it { should have_one(:location) }
-	it { should have_many(:menus) }
-	it { should have_many(:categories) }
-	it { should have_many(:dishes) }
+	it { is_expected.to belong_to(:user) }
+	it { is_expected.to have_one(:location) }
+	it { is_expected.to have_many(:menus) }
+	it { is_expected.to have_many(:categories) }
+	it { is_expected.to have_many(:dishes) }
 	
 end

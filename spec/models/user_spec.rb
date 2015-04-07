@@ -14,21 +14,21 @@ describe User do
 	
 	describe "when email is not present" do
 		before { user.email = nil }
-		it { should_not be_valid }
+		it { is_expected.not_to be_valid }
 	end
 	
 	describe "when password is not present" do
 		before { user.password = nil }
-		it { should_not be_valid }
+		it { is_expected.not_to be_valid }
 	end
 	
 	describe "when password is too short" do
 		before { user.password = "1234567" }
-		it { should_not be_valid }
+		it { is_expected.not_to be_valid }
 	end
 	
 	describe "when email & password are present" do
-		it { should be_valid }
+		it { is_expected.to be_valid }
 	end
 	
 	it "should have encrypted password after save" do
@@ -38,8 +38,8 @@ describe User do
 	
 	# –––– associations
 	
-	it { should have_one(:restaurant) }
-	it { should have_many(:authentications) }
-	it { should have_many(:sessions) }
-	it { should have_many(:devices) }
+	it { is_expected.to have_one(:restaurant) }
+	it { is_expected.to have_many(:authentications) }
+	it { is_expected.to have_many(:sessions) }
+	it { is_expected.to have_many(:devices) }
 end
