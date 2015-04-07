@@ -18,7 +18,14 @@ class User < ActiveRecord::Base
       :text => content
   end
 	
-	def admin?
-		self.rank == "admin"
+	def self.types
+		%w(User Admin)
 	end
+	
+	def admin?
+		self.type == "Admin"
+	end
+end
+
+class Admin < User
 end
