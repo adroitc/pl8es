@@ -453,7 +453,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.datetime "last_sign_in_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "rank",                   default: "User"
+    t.string   "type",                   default: "User"
     t.string   "product_referer"
     t.string   "encrypted_password"
     t.string   "reset_password_token"
