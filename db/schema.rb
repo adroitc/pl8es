@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "authentications", force: true do |t|
+  create_table "authentications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
-  create_table "beverage_navigation_translations", force: true do |t|
+  create_table "beverage_navigation_translations", force: :cascade do |t|
     t.integer  "beverage_navigation_id", null: false
     t.string   "locale",                 null: false
     t.datetime "created_at"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
   add_index "beverage_navigation_translations", ["beverage_navigation_id"], name: "index_1cfc283b491f788097bd8f375227f08f4e1a832b", using: :btree
   add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale", using: :btree
 
-  create_table "beverage_translations", force: true do |t|
+  create_table "beverage_translations", force: :cascade do |t|
     t.integer  "beverage_id", null: false
     t.string   "locale",      null: false
     t.datetime "created_at"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
   add_index "beverage_translations", ["beverage_id"], name: "index_beverage_translations_on_beverage_id", using: :btree
   add_index "beverage_translations", ["locale"], name: "index_beverage_translations_on_locale", using: :btree
 
-  create_table "beverages", force: true do |t|
+  create_table "beverages", force: :cascade do |t|
     t.string   "price"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.string   "amount"
   end
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.integer  "menu_id"
     t.integer  "parent_id"
     t.string   "style"
@@ -73,14 +73,14 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.boolean  "image_crop_processed", default: true
   end
 
-  create_table "category_dishes", force: true do |t|
+  create_table "category_dishes", force: :cascade do |t|
     t.integer  "category_id"
     t.integer  "dish_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "category_translations", force: true do |t|
+  create_table "category_translations", force: :cascade do |t|
     t.integer  "category_id", null: false
     t.string   "locale",      null: false
     t.datetime "created_at"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
 
-  create_table "clients", force: true do |t|
+  create_table "clients", force: :cascade do |t|
     t.integer  "restaurant_id"
     t.string   "device_id"
     t.string   "device_app"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.boolean  "active",         default: true
   end
 
-  create_table "daily_dishes", force: true do |t|
+  create_table "daily_dishes", force: :cascade do |t|
     t.string   "title"
     t.string   "price"
     t.datetime "display_date"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.integer  "restaurant_id"
   end
 
-  create_table "devices", force: true do |t|
+  create_table "devices", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "device_id"
     t.string   "device_app"
@@ -137,14 +137,14 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.datetime "updated_at"
   end
 
-  create_table "dish_ingredients", force: true do |t|
+  create_table "dish_ingredients", force: :cascade do |t|
     t.integer  "dish_id"
     t.integer  "ingredient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dish_translations", force: true do |t|
+  create_table "dish_translations", force: :cascade do |t|
     t.integer  "dish_id",     null: false
     t.string   "locale",      null: false
     t.datetime "created_at"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
   add_index "dish_translations", ["dish_id"], name: "index_dish_translations_on_dish_id", using: :btree
   add_index "dish_translations", ["locale"], name: "index_dish_translations_on_locale", using: :btree
 
-  create_table "dishes", force: true do |t|
+  create_table "dishes", force: :cascade do |t|
     t.integer  "dishsuggestion_1_id"
     t.integer  "dishsuggestion_2_id"
     t.string   "price"
@@ -175,19 +175,19 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.integer  "restaurant_id"
   end
 
-  create_table "dishes_ingredients", force: true do |t|
+  create_table "dishes_ingredients", force: :cascade do |t|
     t.integer "dish_id"
     t.integer "ingredient_id"
   end
 
-  create_table "favorite_restaurants", force: true do |t|
+  create_table "favorite_restaurants", force: :cascade do |t|
     t.integer  "device_id"
     t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "ingredient_translations", force: true do |t|
+  create_table "ingredient_translations", force: :cascade do |t|
     t.integer  "ingredient_id", null: false
     t.string   "locale",        null: false
     t.datetime "created_at"
@@ -198,25 +198,25 @@ ActiveRecord::Schema.define(version: 20150323150629) do
   add_index "ingredient_translations", ["ingredient_id"], name: "index_ingredient_translations_on_ingredient_id", using: :btree
   add_index "ingredient_translations", ["locale"], name: "index_ingredient_translations_on_locale", using: :btree
 
-  create_table "ingredients", force: true do |t|
+  create_table "ingredients", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "abbreviation"
   end
 
-  create_table "languages", force: true do |t|
+  create_table "languages", force: :cascade do |t|
     t.string   "title"
     t.string   "locale"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "languages_restaurants", force: true do |t|
+  create_table "languages_restaurants", force: :cascade do |t|
     t.integer "language_id"
     t.integer "restaurant_id"
   end
 
-  create_table "locations", force: true do |t|
+  create_table "locations", force: :cascade do |t|
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.integer  "restaurant_id"
   end
 
-  create_table "menu_color_templates", force: true do |t|
+  create_table "menu_color_templates", force: :cascade do |t|
     t.string   "background"
     t.string   "bar_background"
     t.string   "bev_background"
@@ -264,7 +264,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.boolean  "preview_image_crop_processed", default: true
   end
 
-  create_table "menu_colors", force: true do |t|
+  create_table "menu_colors", force: :cascade do |t|
     t.string   "background"
     t.string   "bar_background"
     t.string   "bev_background"
@@ -290,7 +290,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.integer  "restaurant_id"
   end
 
-  create_table "menus", force: true do |t|
+  create_table "menus", force: :cascade do |t|
     t.string   "title"
     t.string   "from_time"
     t.string   "to_time"
@@ -299,7 +299,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.integer  "restaurant_id"
   end
 
-  create_table "requests", force: true do |t|
+  create_table "requests", force: :cascade do |t|
     t.integer  "session_id"
     t.string   "controller"
     t.string   "action"
@@ -308,7 +308,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.datetime "updated_at"
   end
 
-  create_table "restaurant_translations", force: true do |t|
+  create_table "restaurant_translations", force: :cascade do |t|
     t.integer  "restaurant_id", null: false
     t.string   "locale",        null: false
     t.datetime "created_at"
@@ -319,7 +319,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
   add_index "restaurant_translations", ["locale"], name: "index_restaurant_translations_on_locale", using: :btree
   add_index "restaurant_translations", ["restaurant_id"], name: "index_restaurant_translations_on_restaurant_id", using: :btree
 
-  create_table "restaurants", force: true do |t|
+  create_table "restaurants", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.string   "telephone"
@@ -393,12 +393,12 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.datetime "client_reset_date"
   end
 
-  create_table "restaurants_tags", force: true do |t|
+  create_table "restaurants_tags", force: :cascade do |t|
     t.integer "tag_id"
     t.integer "restaurant_id"
   end
 
-  create_table "sessions", force: true do |t|
+  create_table "sessions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "device_id"
     t.datetime "created_at"
@@ -407,7 +407,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.text     "user_agent"
   end
 
-  create_table "supported_fonts", force: true do |t|
+  create_table "supported_fonts", force: :cascade do |t|
     t.string   "title"
     t.string   "name_navigation"
     t.string   "size_navigation"
@@ -425,41 +425,41 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.datetime "updated_at"
   end
 
-  create_table "tag_translations", force: true do |t|
+  create_table "tag_translations", force: :cascade do |t|
     t.integer  "tag_id",     null: false
     t.string   "locale",     null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "title"
   end
 
   add_index "tag_translations", ["locale"], name: "index_tag_translations_on_locale", using: :btree
   add_index "tag_translations", ["tag_id"], name: "index_tag_translations_on_tag_id", using: :btree
 
-  create_table "tags", force: true do |t|
+  create_table "tags", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tags_users", force: true do |t|
+  create_table "tags_users", force: :cascade do |t|
     t.integer "tag_id"
     t.integer "user_id"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
     t.datetime "last_sign_in_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "rank",                   default: false
+    t.string   "rank",                   default: "User"
     t.string   "product_referer"
     t.string   "encrypted_password"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,      null: false
     t.datetime "current_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
@@ -469,7 +469,7 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.string   "unconfirmed_email"
   end
 
-  create_table "wine_translations", force: true do |t|
+  create_table "wine_translations", force: :cascade do |t|
     t.integer  "wine_id",     null: false
     t.string   "locale",      null: false
     t.datetime "created_at"
