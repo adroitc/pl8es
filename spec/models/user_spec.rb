@@ -42,4 +42,16 @@ describe User do
 	it { is_expected.to have_many(:authentications) }
 	it { is_expected.to have_many(:sessions) }
 	it { is_expected.to have_many(:devices) }
+	
+	describe "#admin?" do
+		it "returns true as admin" do
+			user.type = "Admin"
+			expect(user.admin?).to be true
+		end
+		
+		it "returns false as user" do
+			user.type = "User"
+			expect(user.admin?).to be false
+		end
+	end
 end
