@@ -10,7 +10,7 @@ require 'shoulda/matchers'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-	
+	config.expect_with(:rspec) { |c| c.syntax = :expect }
 	config.color = true
 	
 	config.include Devise::TestHelpers, type: :controller
