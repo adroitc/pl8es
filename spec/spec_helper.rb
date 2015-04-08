@@ -41,6 +41,9 @@ RSpec.configure do |config|
 	
 	config.infer_base_class_for_anonymous_controllers = false
 	
+	# automatically recognise controller specs by the file location /controllers
+	config.infer_spec_type_from_file_location!
+	
 	config.order = "random"
 	config.include Capybara::DSL
 end
