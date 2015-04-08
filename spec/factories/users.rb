@@ -22,4 +22,14 @@ FactoryGirl.define do
 			end
 		end
 	end
+	
+	factory :admin do
+		sequence(:email) { |n| "admin#{n}@gmail.com" }
+		password "adminpassword"
+		type "Admin"
+		
+		factory :confirmed_admin do
+			after(:create) { |admin| admin.confirm! }
+		end
+	end
 end

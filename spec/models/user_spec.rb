@@ -2,8 +2,14 @@ require 'spec_helper'
 
 describe User do
 	
-	it "has a valid factory" do
+	it "has valid factories" do
 		expect(build(:user)).to be_valid
+		expect(build(:confirmed_user)).to be_valid
+		expect(build(:user_with_auth)).to be_valid
+		expect(build(:user_with_restaurant)).to be_valid
+		
+		expect(build(:admin)).to be_valid
+		expect(build(:confirmed_admin)).to be_valid
 	end
 	
 	let(:user) { build(:user) }
