@@ -21,6 +21,7 @@ RSpec.configure do |config|
 	
 	# include support stuff
 	config.include Features::SessionHelpers, type: :feature
+	config.include Controllers::ControllerMacros, type: :controller
 	
 	config.before(:suite) do
 		begin
