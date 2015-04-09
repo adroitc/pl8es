@@ -13,7 +13,6 @@ describe User do
 	end
 	
 	let(:user) { build(:user) }
-	
 	subject { user }
 	
 	# –––– validations

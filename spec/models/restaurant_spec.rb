@@ -14,4 +14,11 @@ describe Restaurant do
 	it { is_expected.to have_many(:categories) }
 	it { is_expected.to have_many(:dishes) }
 	
+	let(:restaurant) { build(:restaurant) }
+	subject { restaurant }
+	
+	describe "when name is not present" do
+		before { restaurant.name = nil }
+		it { is_expected.not_to be_valid }
+	end
 end
