@@ -5,9 +5,7 @@
 # json files can be retrieved by
 # curl -g -o import.json 'http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json][timeout:25];area%283600109166%29-%3E.area;%28node[%22amenity%22=%22restaurant%22][%22name%22][%22addr:street%22][%22addr:housenumber%22][%22addr:postcode%22]%28area.area%29;%29;out%20body;%3E;out%20skel%20qt;'
 
-# call like
-# rake seed:byfile[test/import/example.json]
-# or in production
+# in production call:
 # rake seed:byfile[tmp/import.json] RAILS_ENV=production
 
 namespace :seed do
