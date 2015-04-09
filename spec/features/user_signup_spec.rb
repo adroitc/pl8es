@@ -4,7 +4,7 @@ feature "User logs in" do
 	scenario "without a restaurant" do
 		sign_in(create(:user_with_auth))
 		
-		expect(page).to have_content("MUUH")
+		expect(page).to have_content("New Restaurant")
 	end
 	
 	scenario "with a restaurant" do
