@@ -21,7 +21,7 @@ describe RestaurantsController do
 		let(:restaurant) { create :restaurant }
 		before(:each) { get :show, id: restaurant }
 		
-		it "assigns @restaurant" do
+		it "assigns the requested Restaurant as @restaurant" do
 			expect(restaurant).to eq assigns(:restaurant)
 		end
 		it "renders :show" do
@@ -38,7 +38,7 @@ describe RestaurantsController do
 				get :new
 			end
 			
-			it "assigns @restaurant" do
+			it "assigns a new Restaurant object to @restaurant" do
 				expect(assigns(:restaurant)).to be_a_new(Restaurant)
 			end
 			it "renders :new" do
@@ -78,7 +78,7 @@ describe RestaurantsController do
 			it "re-renders :new" do
 				expect(response).to render_template :new
 			end
-			it "assigns @restaurant with it's errors" do	
+			it "does not create the restaurant" do	
 				expect(assigns(:restaurant)).to be_a_new(Restaurant)
 			end
 		end

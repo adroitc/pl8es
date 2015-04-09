@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><%=yield(:head_title).length > 0 ? yield(:head_title) : "pl8" %></title>
+		<title><%= yield(:head_title).length > 0 ? yield(:head_title) : "pl8" %></title>
 		<%= stylesheet_link_tag		"application", media: "all", "data-turbolinks-track" => true %>
 		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 		<%= csrf_meta_tags %>
@@ -11,8 +11,8 @@
 		<div class="loading-circle"></div>
 		
 		<script type="text/javascript">
-			window._token = "<%=form_authenticity_token %>";
-			var baseurl = "http://<%=request.env['HTTP_HOST'] %>/";
+			window._token = "<%= form_authenticity_token %>";
+			var baseurl = "http://<%= request.env['HTTP_HOST'] %>/";
 		</script>
 		
 		<% if current_user && session[:admin_id] && session[:admin_id] != current_user.id %>
