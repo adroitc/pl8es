@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RestaurantsController do
 	
 	describe "GET #index" do
-		before(:each) { get :index }
+		before { get :index }
 		let(:restaurants) { create_pair :restaurant }
 		
 		it "populates @restaurants" do
@@ -19,7 +19,7 @@ describe RestaurantsController do
 	
 	describe "GET #show" do
 		let(:restaurant) { create :restaurant }
-		before(:each) { get :show, id: restaurant }
+		before { get :show, id: restaurant }
 		
 		it "assigns the requested Restaurant as @restaurant" do
 			expect(restaurant).to eq assigns(:restaurant)
@@ -30,13 +30,11 @@ describe RestaurantsController do
 	end
 	
 	describe "GET #new" do
-		before(:each) { get :new }
-		
 		context "user signed in" do
 			
 			context "user already has a restaurant" do
-				before(:each) do
-					login_user(create(:user_with_restaurant))
+				before do
+					login_user create(:user_with_restaurant)
 					get :new
 				end
 				
@@ -46,7 +44,7 @@ describe RestaurantsController do
 			end
 			
 			context "user has no restaurant" do
-				before(:each) do
+				before do
 					login_user
 					get :new
 				end
@@ -61,6 +59,7 @@ describe RestaurantsController do
 		end
 		
 		context "user signed out" do
+			get :new
 			it "redirects to login page" do
 				expect(response).to redirect_to new_user_session_path
 			end
@@ -68,7 +67,7 @@ describe RestaurantsController do
 	end
 	
 	describe "POST #create" do
-		before(:each) { login_user }
+		before { login_user }
 		let(:restaurant_attributes) { attributes_for(:restaurant) }
 		
 		def do_post(attributes = restaurant_attributes)
@@ -87,7 +86,7 @@ describe RestaurantsController do
 		end
 		
 		context "with invalid data" do
-			before(:each) { do_post(restaurant_attributes.merge({:name => nil})) }
+			before { do_post(restaurant_attributes.merge({:name => nil})) }
 			
 			it "re-renders :new" do
 				expect(response).to render_template :new
