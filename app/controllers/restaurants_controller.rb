@@ -9,6 +9,8 @@ class RestaurantsController < ApplicationController
   end
 	
 	def new
+		# for now, only allow one restaurant per user
+		redirect_to dashboard_index_path if current_user.restaurant.present?
 		@restaurant = Restaurant.new
 	end
 	

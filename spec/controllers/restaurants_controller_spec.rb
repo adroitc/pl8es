@@ -33,16 +33,30 @@ describe RestaurantsController do
 		before(:each) { get :new }
 		
 		context "user signed in" do
-			before(:each) do
-				login_user
-				get :new
+			
+			context "user already has a restaurant" do
+				before(:each) do
+					login_user(create(:user_with_restaurant))
+					get :new
+				end
+				
+				it "redirect to dashboard" do
+					expect(response).to redirect_to dashboard_index_path
+				end
 			end
 			
-			it "assigns a new Restaurant object to @restaurant" do
-				expect(assigns(:restaurant)).to be_a_new(Restaurant)
-			end
-			it "renders :new" do
-				expect(response).to render_template :new
+			context "user has no restaurant" do
+				before(:each) do
+					login_user
+					get :new
+				end
+				
+				it "assigns a new Restaurant object to @restaurant" do
+					expect(assigns(:restaurant)).to be_a_new(Restaurant)
+				end
+				it "renders :new" do
+					expect(response).to render_template :new
+				end
 			end
 		end
 		
