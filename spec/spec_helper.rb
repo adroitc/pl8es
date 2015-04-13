@@ -15,32 +15,8 @@ RSpec.configure do |config|
 	config.expect_with(:rspec) { |c| c.syntax = :expect }
 	config.color = true
 	
-	config.include Devise::TestHelpers, type: :controller
-	config.include FactoryGirl::Syntax::Methods
-	
 	# include the routes
 	config.include Rails.application.routes.url_helpers
-	
-	# include support stuff
-	config.include Features::SessionHelpers, type: :feature
-	config.include Controllers::ControllerMacros, type: :controller
-	
-	config.before(:suite) do
-		begin
-			DatabaseCleaner.start
-			FactoryGirl.lint
-		ensure
-			DatabaseCleaner.clean
-		end
-	end
-	
-	config.before(:each) do
-		DatabaseCleaner.start
-	end
-	
-	config.after(:each) do
-		DatabaseCleaner.clean
-	end
 	
 	config.infer_base_class_for_anonymous_controllers = false
 	
@@ -48,5 +24,4 @@ RSpec.configure do |config|
 	config.infer_spec_type_from_file_location!
 	
 	config.order = "random"
-	config.include Capybara::DSL
 end
