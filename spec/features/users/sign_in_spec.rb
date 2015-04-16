@@ -21,9 +21,11 @@ feature 'Sign in', :devise do
 	#   And I am not signed in
 	#   When I sign in with valid credentials
 	#   Then I see a success message
+	#   And I am viewing the dashboard
 	scenario 'user can sign in with valid credentials' do
 		sign_in(create(:user_with_restaurant))
 		expect(page).to have_content I18n.t 'devise.sessions.signed_in'
+		expect(current_path).to eq(dashboard_index_path)
 	end
 	
 	# Scenario: User cannot sign in with wrong email
