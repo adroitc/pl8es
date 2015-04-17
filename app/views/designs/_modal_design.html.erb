@@ -69,16 +69,6 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label"><%=t("menumalist.design_font") %></label>
-						<select name="supportedFont_id" class="select2" data-allow-clear="false" data-placeholder="Select one city...">
-							<% SupportedFont.all.each do |supportedFont| %>
-								<option value="<%=supportedFont.id %>" <%="selected" if current_user.restaurant.supportedFont == supportedFont %>><%=supportedFont.title %></option>
-							<% end %>
-						</select>
-					</div>
-				</div>
 				<div class="col-md-6 col-md-offset-2">
 					<div class="form-group">
 						<label for="field-1" class="control-label"><%=t("menumalist.design_splashscreen_image") %></label>

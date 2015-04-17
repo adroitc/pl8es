@@ -1,7 +1,7 @@
 class Ajax::AjaxController < ApplicationController
   
   def editdesign
-    if current_user && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active, :supportedFont_id).include?(nil)
+    if current_user && !params.values_at(:menuColorTemplate_id, :background, :bar_background, :nav_text, :nav_text_active).include?(nil)
       if MenuColorTemplate.exists?(params[:menuColorTemplate_id])
         current_user.restaurant.menuColorTemplate = MenuColorTemplate.find(params[:menuColorTemplate_id])
       else
@@ -34,10 +34,6 @@ class Ajax::AjaxController < ApplicationController
           sub_text_active: params[:nav_text_active]
         })
       )
-      
-      if SupportedFont.exists?(params[:supportedFont_id])
-        current_user.restaurant.supportedFont = SupportedFont.find(params[:supportedFont_id])
-      end
       
       current_user.restaurant.update_attributes(params.permit(:background_type, :appmain_image, :splashscreen_image))
       current_user.restaurant.appmain_image.set_crop_values_for_instance(params.permit(:appmain_image))

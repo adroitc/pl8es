@@ -14,7 +14,6 @@ class Restaurant < ActiveRecord::Base
 	
 	has_one :menuColor
 	belongs_to :menuColorTemplate
-	belongs_to :supportedFont
 	
 	# –– devices & clients
 	

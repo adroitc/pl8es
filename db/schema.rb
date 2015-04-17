@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323150629) do
+ActiveRecord::Schema.define(version: 20150417075007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -330,7 +330,6 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.integer  "default_language_id"
     t.integer  "menuColor_id"
     t.integer  "menuColorTemplate_id"
-    t.integer  "supportedFont_id"
     t.integer  "default_menu_id"
     t.string   "email"
     t.string   "preview_image_file_name"
@@ -405,24 +404,6 @@ ActiveRecord::Schema.define(version: 20150323150629) do
     t.datetime "updated_at"
     t.string   "token"
     t.text     "user_agent"
-  end
-
-  create_table "supported_fonts", force: :cascade do |t|
-    t.string   "title"
-    t.string   "name_navigation"
-    t.string   "size_navigation"
-    t.string   "name_heading"
-    t.string   "size_heading"
-    t.string   "name_heading_small"
-    t.string   "size_heading_small"
-    t.string   "name_description"
-    t.string   "size_description"
-    t.string   "name_price"
-    t.string   "size_price"
-    t.string   "name_card_tab_title"
-    t.string   "size_card_tab_title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "tag_translations", force: :cascade do |t|

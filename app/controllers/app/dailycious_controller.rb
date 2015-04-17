@@ -17,7 +17,6 @@ class App::DailyciousController < ApplicationController
         :user => current_user,
         :default_language => Language.first,
         :menuColorTemplate => MenuColorTemplate.first,
-        :supportedFont => SupportedFont.first,
         :download_code => download_code,
         :background_type => "color"
       }))

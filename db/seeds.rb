@@ -44,24 +44,6 @@ unless Ingredient.count == 14
 	end
 end
 
-SupportedFont.create([
-  {
-    :title => "GillSans",
-    :name_navigation => "GillSans",
-    :size_navigation => "18",
-    :name_heading => "GillSans",
-    :size_heading => "30",
-    :name_heading_small => "GillSans",
-    :size_heading_small => "24",
-    :name_description => "GillSans-Light",
-    :size_description => "18",
-    :name_price => "GillSans",
-    :size_price => "18",
-    :name_card_tab_title => "GillSans",
-    :size_card_tab_title => "18"
-  }
-])
-
 u = User.new(:type => "Admin", :email => "dave.gson@gmail.com	", :password => "okokokok", :password_confirmation => "okokokok")
 u.skip_confirmation!
 u.restaurant = Restaurant.create(

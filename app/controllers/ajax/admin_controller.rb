@@ -148,32 +148,6 @@ class Ajax::AdminController < ApplicationController
     render :json => {:status => "invalid"}
   end
   
-  def addfont
-    if current_user && current_user.admin? && !params.values_at(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil)
-      SupportedFont.create(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
-      
-      render :json => {:status => "success"}
-      return
-    end
-    render :json => {:status => "invalid"}
-  end
-  
-  def editfont
-    if current_user && current_user.admin? && !params.values_at(:supportedFont_id, :title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title).include?(nil) && SupportedFont.exists?(params[:supportedFont_id])
-      supportedFont = SupportedFont.find(params[:supportedFont_id])
-      
-      if params[:delete] == "true"
-        supportedFont.destroy
-      else
-        supportedFont.update_attributes(params.permit(:title, :name_navigation, :size_navigation, :name_heading, :size_heading, :name_heading_small, :size_heading_small, :name_description, :size_description, :name_price, :size_price, :name_card_tab_title, :size_card_tab_title))
-      end
-      
-      render :json => {:status => "success"}
-      return
-    end
-    render :json => {:status => "invalid"}
-  end
-  
   def addingredient
     if current_user && current_user.admin? && !params.values_at(:title).include?(nil)
       new_ingredient = Ingredient.create()

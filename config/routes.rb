@@ -37,9 +37,6 @@ Pl8es::Application.routes.draw do
 			
 			post "/user/edit" => "admin#edituser"
 			
-			post "/font/add" => "admin#addfont"
-			post "/font/edit" => "admin#editfont"
-			
 			post "/tag/add" => "admin#add_tag"
 			post "/tag/edit" => "admin#edit_tag"
 			
@@ -89,7 +86,6 @@ Pl8es::Application.routes.draw do
 		get "/userswitch/:user_id" => "admin#user_switch", as: :user_switch
 		get "/tags" => "admin#tags"
 		get "/menucolortemplates" => "admin#menucolortemplates"
-		get "/fonts" => "admin#fonts"
 		get "/ingredients" => "admin#ingredients"
 	end
 	
