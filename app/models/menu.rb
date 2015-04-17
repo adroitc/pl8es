@@ -1,9 +1,6 @@
 class Menu < ActiveRecord::Base
   belongs_to :restaurant
   
-  belongs_to :menuColorTemplate
-  belongs_to :menuColor
-  
   has_many :categories
   has_many :dishes, :through => :categories
 	

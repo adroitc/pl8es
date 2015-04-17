@@ -23,9 +23,6 @@ class AdminController < ApplicationController
 	def tags
 	end
 	
-	def menucolortemplates
-	end
-	
 	def ingredients
 	end
 	

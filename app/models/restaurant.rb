@@ -12,9 +12,6 @@ class Restaurant < ActiveRecord::Base
 	has_and_belongs_to_many :languages
 	has_and_belongs_to_many :tags
 	
-	has_one :menuColor
-	belongs_to :menuColorTemplate
-	
 	# –– devices & clients
 	
 	has_many :favoriteRestaurants

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417075007) do
+ActiveRecord::Schema.define(version: 20150417080707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,68 +228,6 @@ ActiveRecord::Schema.define(version: 20150417075007) do
     t.integer  "restaurant_id"
   end
 
-  create_table "menu_color_templates", force: :cascade do |t|
-    t.string   "background"
-    t.string   "bar_background"
-    t.string   "bev_background"
-    t.string   "bev_background_selected"
-    t.string   "bev_background_active"
-    t.string   "bev_text"
-    t.string   "bev_text_selected"
-    t.string   "bev_text_active"
-    t.string   "nav_background"
-    t.string   "nav_background_selected"
-    t.string   "nav_background_active"
-    t.string   "nav_text"
-    t.string   "nav_text_selected"
-    t.string   "nav_text_active"
-    t.string   "sub_background"
-    t.string   "sub_background_selected"
-    t.string   "sub_background_active"
-    t.string   "sub_text"
-    t.string   "sub_text_selected"
-    t.string   "sub_text_active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "preview_image_file_name"
-    t.string   "preview_image_content_type"
-    t.integer  "preview_image_file_size"
-    t.datetime "preview_image_updated_at"
-    t.text     "preview_image_dimensions"
-    t.string   "preview_image_fingerprint"
-    t.integer  "preview_image_crop_w"
-    t.integer  "preview_image_crop_h"
-    t.integer  "preview_image_crop_x"
-    t.integer  "preview_image_crop_y"
-    t.boolean  "preview_image_crop_processed", default: true
-  end
-
-  create_table "menu_colors", force: :cascade do |t|
-    t.string   "background"
-    t.string   "bar_background"
-    t.string   "bev_background"
-    t.string   "bev_background_selected"
-    t.string   "bev_background_active"
-    t.string   "bev_text"
-    t.string   "bev_text_selected"
-    t.string   "bev_text_active"
-    t.string   "nav_background"
-    t.string   "nav_background_selected"
-    t.string   "nav_background_active"
-    t.string   "nav_text"
-    t.string   "nav_text_selected"
-    t.string   "nav_text_active"
-    t.string   "sub_background"
-    t.string   "sub_background_selected"
-    t.string   "sub_background_active"
-    t.string   "sub_text"
-    t.string   "sub_text_selected"
-    t.string   "sub_text_active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "restaurant_id"
-  end
-
   create_table "menus", force: :cascade do |t|
     t.string   "title"
     t.string   "from_time"
@@ -328,8 +266,6 @@ ActiveRecord::Schema.define(version: 20150417075007) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "default_language_id"
-    t.integer  "menuColor_id"
-    t.integer  "menuColorTemplate_id"
     t.integer  "default_menu_id"
     t.string   "email"
     t.string   "preview_image_file_name"

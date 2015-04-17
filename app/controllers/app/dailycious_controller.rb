@@ -16,7 +16,6 @@ class App::DailyciousController < ApplicationController
       restaurant = Restaurant.new(params.permit(:name, :logo_image).merge({
         :user => current_user,
         :default_language => Language.first,
-        :menuColorTemplate => MenuColorTemplate.first,
         :download_code => download_code,
         :background_type => "color"
       }))
@@ -26,13 +25,7 @@ class App::DailyciousController < ApplicationController
         current_user.save
         restaurant.save
         restaurant.update_attributes({
-          :location => Location.create(address),
-          :menuColor => MenuColor.create(
-            :background => "#000000",
-            :bar_background => "#000000",
-            :nav_text => "#ffffff",
-            :nav_text_active => "#999999"
-          )
+          :location => Location.create(address)
         })
         
         if @device

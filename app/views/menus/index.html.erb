@@ -51,18 +51,6 @@
 			</p>
 		 </div>
 	</div>
-	<div class="col-sm-4">
-	 	<div class="tile-stats tile-white">
-	 		<div class="icon"><i class="entypo-brush"></i></div>
-	 		<h2><%=t("menumalist.design") %></h3>
-			<a href="javascript:;" onclick="jQuery('#modal-design').modal('show');">
-				<button type="button" class="btn btn-default btn-icon icon-left" style="margin-top: -2px">
-					<%=t("menumalist.design_change") %>
-					<i class="entypo-brush"></i>
-				</button>
-			</a>
-		 </div>
-	</div>
 </div>
 <h2><%=t("menumalist.menumalist_title") %></h2>
 <br />
@@ -114,6 +102,3 @@
 		<% end %>
 	</div>
 </div>
-
-<% # form for design, should move to another place in the long term %>
-<%=render :partial => "designs/modal_design" %>

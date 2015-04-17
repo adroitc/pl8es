@@ -58,16 +58,8 @@ namespace :seed do
         :website => web_from(restaurantObj['tags']),
         :telephone => phone_from(restaurantObj['tags']),
         :default_language => Language.first,
-        :menuColorTemplate => MenuColorTemplate.first,
-        :supportedFont => SupportedFont.first,
         :background_type => 'color',
-        :menuColor => MenuColor.create(
-            :background => '#000000',
-            :bar_background => '#000000',
-            :nav_text => '#ffffff',
-            :nav_text_active => '#999999'
-        ),
-        :download_code => download_code,
+        :download_code => download_code
       })
 
       begin
