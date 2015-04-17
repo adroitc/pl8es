@@ -24,7 +24,7 @@
 			<%= render :partial => 'layouts/messages' %>
 			
 			<div class="sidebar-menu">
-				<%= render :partial => "layouts/menuheader", :locals => {:logo => asset_path("logo-menumalist.png")} %>
+				<%= render :partial => "layouts/menuheader" %>
 				<% if current_user %>
 					<%= render :partial => "layouts/menu" %>
 				<% else %>
