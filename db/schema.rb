@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417080707) do
+ActiveRecord::Schema.define(version: 20150420081124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,17 +25,6 @@ ActiveRecord::Schema.define(version: 20150417080707) do
   end
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
-
-  create_table "beverage_navigation_translations", force: :cascade do |t|
-    t.integer  "beverage_navigation_id", null: false
-    t.string   "locale",                 null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-  end
-
-  add_index "beverage_navigation_translations", ["beverage_navigation_id"], name: "index_1cfc283b491f788097bd8f375227f08f4e1a832b", using: :btree
-  add_index "beverage_navigation_translations", ["locale"], name: "index_beverage_navigation_translations_on_locale", using: :btree
 
   create_table "beverage_translations", force: :cascade do |t|
     t.integer  "beverage_id", null: false
@@ -385,19 +374,5 @@ ActiveRecord::Schema.define(version: 20150417080707) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
   end
-
-  create_table "wine_translations", force: :cascade do |t|
-    t.integer  "wine_id",     null: false
-    t.string   "locale",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-    t.string   "type"
-    t.string   "country"
-    t.string   "description"
-  end
-
-  add_index "wine_translations", ["locale"], name: "index_wine_translations_on_locale", using: :btree
-  add_index "wine_translations", ["wine_id"], name: "index_wine_translations_on_wine_id", using: :btree
 
 end
