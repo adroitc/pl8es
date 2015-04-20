@@ -28,15 +28,7 @@ end
 			</button>
 		</a>
 		<button type="button" class="col-md-6 btn btn-default" disabled>
-			<%=t("date.#{date.beginning_of_week.strftime("%a")}") %>,
-			<%=date.beginning_of_week.strftime("%d") %>
-			<%=t("date.#{date.beginning_of_week.strftime("%B")}") %>
-			<%=date.beginning_of_week.strftime("%Y") %>
-			-
-			<%=t("date.#{date.end_of_week.strftime("%a")}") %>,
-			<%=date.end_of_week.strftime("%d") %>
-			<%=t("date.#{date.end_of_week.strftime("%B")}") %>
-			<%=date.end_of_week.strftime("%Y") %>
+			<%= get_week_range(date) %>
 		</button>
 		<a href="<%=dailycious_add_weeks_path(params[:add_weeks].to_i+1) %>">
 			<button type="button" class="col-md-3 btn btn-white">
