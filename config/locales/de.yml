@@ -36,36 +36,6 @@ de:
     minlength: "Bitte geben Sie mindestens %{l} Zeichen ein."
     invalid_email: "Ungültige E-Mail Adresse."
     already_exists: "Diese E-Mail Adresse existiert bereits."
-    
-  date:
-    Monday: "Montag"
-    Tuesday: "Dienstag"
-    Thursday: "Donnerstag"
-    Wednesday: "Mittwoch"
-    Friday: "Freitag"
-    Saturday: "Samstag"
-    Sunday: "Sonntag"
-
-    Mon: "Mo"
-    Tue: "Di"
-    Thu: "Mi"
-    Wed: "Do"
-    Fri: "Fr"
-    Sat: "Sa"
-    Sun: "So"
-    
-    January: "Januar"
-    February: "Februar"
-    March: "März"
-    April: "April"
-    May: "Mai"
-    June: "Juni"
-    July: "Juli"
-    August: "August"
-    September: "September"
-    October: "Oktober"
-    November: "November"
-    December: "Dezember"
   
   language:
     default: "Standard"
