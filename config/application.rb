@@ -32,6 +32,9 @@ module Pl8es
     
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{yml}')]
     config.i18n.fallbacks =[:en, :de, :fr]
+    
+    # locales that are loaded via the rails-i18n gem
+    config.i18n.available_locales = [:en, :de]
 		
 		config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
 			"<span class=\"field_with_errors\">#{html_tag}</span>".html_safe

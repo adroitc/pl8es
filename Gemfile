@@ -69,6 +69,7 @@ gem "paypal-express"
 gem "rename"
 gem "globalize"
 gem "globalize-accessors"
+gem 'rails-i18n'
 
 # location
 gem "geokit-rails"
