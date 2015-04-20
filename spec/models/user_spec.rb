@@ -12,10 +12,10 @@ describe User do
 		expect(build(:confirmed_admin)).to be_valid
 	end
 	
+	# –––– validations
+	
 	let(:user) { build(:user) }
 	subject { user }
-	
-	# –––– validations
 	
 	describe "when email is not present" do
 		before { user.email = nil }
