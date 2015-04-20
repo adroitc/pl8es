@@ -92,7 +92,7 @@ Pl8es::Application.routes.draw do
 	resources :restaurants
 	
 	#dailycious
-	get "/dailycious" => "dailycious#index"
+	get "/dailycious" => "lunch_menus#index"
 	get "/dailycious/:add_weeks-week" => "dailycious#index", as: :dailycious_add_weeks
 	
 end
