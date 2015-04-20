@@ -250,18 +250,13 @@ class App::DailyciousController < ApplicationController
   
   def favorites
     if @device && !params.values_at(:q).include?(nil)
-      restaurants = Restaurant.where([
-        "id IN (?) AND id IN (?)",
-        params[:q].split(",").drop(2),
-        DailyDish.find(
-          :all,
-          :select => "restaurant_id",
-          :conditions => [
-            "display_date = (?)",
-            Date.today.to_datetime
-          ]
-        ).map{|d| d.restaurant_id}
-      ])
+
+			restaurants = Restaurant.where(
+					:id => DailyDish.select(:restaurant_id).where(:display_date => Date.today.to_datetime)
+			).where(
+					:id => params[:q].split(",").drop(2)
+			)
+
       @device.restaurants = restaurants
       @req_locations = restaurants.map{|r| r.location}.sort_by do |e|
         distance = e.distance_to([
@@ -281,17 +276,11 @@ class App::DailyciousController < ApplicationController
   
   def map
     if @device && !params.values_at(:q).include?(nil)
-      locations = Location.where([
-        "restaurant_id IN (?)",
-        DailyDish.find(
-          :all,
-          :select => "restaurant_id",
-          :conditions => [
-            "display_date = (?)",
-            Date.today.to_datetime
-          ]
-        ).map{|d| d.restaurant_id}
-      ])
+
+			locations = Location.where(
+					:restaurant_id => DailyDish.select(:restaurant_id).where(:display_date => Date.today.to_datetime)
+			)
+
       @req_locations = locations.in_bounds(#restaurants.map{|r| r.location}.in_bounds(
         [
           [
