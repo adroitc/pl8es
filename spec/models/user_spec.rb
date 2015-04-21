@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, type: :model do
 	
 	it "has valid factories" do
 		expect(build(:user)).to be_valid

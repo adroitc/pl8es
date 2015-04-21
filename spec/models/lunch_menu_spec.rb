@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LunchMenu do
+describe LunchMenu, type: :model do
 	
 	it "has a valid factory" do
 		expect(build(:lunch_menu)).to be_valid

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dish do
+describe Dish, type: :model do
 	
 	it "has a valid factory" do
 		expect(build(:dish)).to be_valid
