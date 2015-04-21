@@ -281,7 +281,7 @@ class App::DailyciousController < ApplicationController
 					:restaurant_id => DailyDish.select(:restaurant_id).where(:display_date => Date.today.to_datetime)
 			)
 
-      @req_locations = locations.in_bounds(#restaurants.map{|r| r.location}.in_bounds(
+      @locations = locations.in_bounds(
         [
           [
             params[:q].split(",")[2].to_f,
@@ -304,9 +304,8 @@ class App::DailyciousController < ApplicationController
         e.distance = distance
         distance
       end
-      #.order("distance")
       
-      render :partial => "map"
+      render 'restaurants.json.jbuilder'
       return
     end
     render :json => {:token => @session.token, :status => "invalid"}
