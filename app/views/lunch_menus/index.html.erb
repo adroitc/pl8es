@@ -52,7 +52,7 @@ end
 						<%=t("date.#{current_date.strftime("%A")}") %>
 					</td>
 					<td class="row gallery-env draggable-portlets">
-						<%= form_tag(dailydish_sort_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
+						<%= form_tag(sort_lunch_menus_path, {:multipart => true, :role => "form", :class => "pl8es_c_ajaxform_noreload", :id => "form_sortdailydishes_#{current_date.strftime("%d-%m-%Y")}"}) do %>
 							<span class="sorted ui-sortable">
 								<% current_user.restaurant.daily_dishes.where(:display_date => current_date.to_datetime).each do |dish| %>
 									<%= render(:partial => "neon/daily_dish_panel", :locals => {:daily_dish => dish }) %>
@@ -61,7 +61,7 @@ end
 						<% end %>
 						
 						<% if !current_date.past? %>
-							<%= render :partial => "modals/new_tile",:locals => { :image_size => 0, :js_onclick => "jQuery('#modal-adddailydish').modal('show').find('#form-display_date').val('#{current_date.strftime("%d-%m-%Y")}');", :title => t("dailycious.daily_dish_add")} %>
+							<%= render "modals/new_object_tile", :new_object_path => new_lunch_menu_path, :model => LunchMenu, :big => true %>
 						<% end %>
 					</td>
 				</tr>

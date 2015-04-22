@@ -50,11 +50,6 @@ Pl8es::Application.routes.draw do
 			#ajax/dish
 			#ajax/dish-get
 			get "/dish/:id/:language_locale" => "dish#dish"
-			
-			#ajax/daily_dish
-			post "/dailydish/add" => "daily_dish#adddailydish"
-			post "/dailydish/edit" => "daily_dish#editdailydish"
-			post "/dailydish/sort" => "daily_dish#sortdailydish"
 		end
 	end
 	
@@ -91,8 +86,10 @@ Pl8es::Application.routes.draw do
 	#profile
 	resources :restaurants
 	
-	#dailycious
-	get "/dailycious" => "lunch_menus#index"
-	get "/dailycious/:add_weeks-week" => "dailycious#index", as: :dailycious_add_weeks
-	
+	# dailycious
+	scope :dailycious do
+		get "/:add_weeks-week" => "dailycious#index", as: :dailycious_add_weeks
+		resources :lunch_menus, :path => "/"
+		post "/sort" => "lunch_menu#sort", as: :sort_lunch_menus
+	end
 end
