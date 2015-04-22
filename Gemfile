@@ -81,6 +81,9 @@ gem "rest-client"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 
+# recurring lunch menus
+gem 'recurrence'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "turbolinks"
 
