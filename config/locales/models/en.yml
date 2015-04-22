@@ -13,6 +13,3 @@ en:
       dish:
         one: "dish"
         other: "dishes"
-      lunch_menu:
-        one: "lunch menu"
-        other: "lunch menus"

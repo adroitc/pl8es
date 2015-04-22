@@ -89,7 +89,5 @@ Pl8es::Application.routes.draw do
 	# dailycious
 	scope :dailycious do
 		get "/:add_weeks-week" => "dailycious#index", as: :dailycious_add_weeks
-		resources :lunch_menus, :path => "/"
-		post "/sort" => "lunch_menu#sort", as: :sort_lunch_menus
 	end
 end

@@ -15,8 +15,6 @@ describe Dish, type: :model do
 	it { is_expected.to have_many(:categories) }
 	it { is_expected.to have_many(:category_dishes) }
 	
-	it { is_expected.to have_many(:lunch_menus) }
-	
 	let(:dish) { build(:dish) }
 	subject { dish }
 
