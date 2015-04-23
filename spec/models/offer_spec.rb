@@ -27,17 +27,22 @@ describe Offer, type: :model do
 			it { is_expected.not_to be_valid }
 		end
 		
-		describe "when .every is not present" do
+		describe "when every is not present" do
 			before { offer.end_date = nil }
 			it { is_expected.not_to be_valid }
 		end
 		
-		describe "when .every is something else than 'day' & 'week'" do
+		describe "when dish is not present" do
+			before { offer.dish = nil }
+			it { is_expected.not_to be_valid }
+		end
+		
+		describe "when every is something else than 'day' & 'week'" do
 			before { offer.every = 'monthly' }
 			it { is_expected.not_to be_valid }
 		end
 		
-		describe "when start_date, end_date & every are present" do
+		describe "when dish, start_date, end_date & every are present" do
 			it { is_expected.to be_valid }
 		end
 	end
