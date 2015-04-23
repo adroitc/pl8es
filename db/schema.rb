@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420081124) do
+ActiveRecord::Schema.define(version: 20150422140459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,6 +226,21 @@ ActiveRecord::Schema.define(version: 20150420081124) do
     t.integer  "restaurant_id"
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.integer  "dish_id"
+    t.string   "every"
+    t.text     "on"
+    t.integer  "interval"
+    t.integer  "repeat"
+    t.date     "start_date"
+    t.date     "end_date",   default: '2037-12-31'
+    t.text     "except"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "offers", ["dish_id"], name: "index_offers_on_dish_id", using: :btree
+
   create_table "requests", force: :cascade do |t|
     t.integer  "session_id"
     t.string   "controller"
@@ -375,4 +390,5 @@ ActiveRecord::Schema.define(version: 20150420081124) do
     t.string   "unconfirmed_email"
   end
 
+  add_foreign_key "offers", "dishes"
 end

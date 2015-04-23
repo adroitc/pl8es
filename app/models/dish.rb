@@ -12,6 +12,8 @@ class Dish < ActiveRecord::Base
 	has_many :category_dishes
 	has_many :categories, :through => :category_dishes
 	
+	has_many :offers
+	
 	accepts_nested_attributes_for :dish_ingredients, allow_destroy: true
 	
 	# –––––––––––––
