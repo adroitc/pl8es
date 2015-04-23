@@ -40,6 +40,11 @@ module Pl8es
 			"<span class=\"field_with_errors\">#{html_tag}</span>".html_safe
 		}
 		
+		config.generators do |g|
+			g.test_framework :rspec, :fixture => true, :views => false, :fixture_replacement => :factory_girl
+			g.javascript_engine :js
+		end
+		
 		console do
 			require 'hirb'
 			Hirb.enable
