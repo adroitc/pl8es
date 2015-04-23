@@ -18,7 +18,7 @@ FactoryGirl.define do
 		end
 		
 		factory :static_offer do
-			start_date "2014-12-28"
+			start_date "2014-12-27"
 			end_date "2015-2-14"
 		end
 	end
