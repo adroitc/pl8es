@@ -16,14 +16,6 @@
     <ul class="profile-info-sections">
       <li>
         <div class="profile-stat">
-          <h3><%= current_user.restaurant.daily_dishes.count %></h3>
-          <a href="<%=dishes_path %>">
-            <%= current_user.restaurant.daily_dishes.count == 1 ? t('profile.dish') : t('profile.dishes') %>
-          </a>
-        </div>
-      </li>
-      <li>
-        <div class="profile-stat">
           <h3><%= current_user.restaurant.menus.count %></h3>
           <a href="<%=menus_path %>">
             <%= current_user.restaurant.menus.count == 1 ? t("profile.menu") : t("profile.menus") %>

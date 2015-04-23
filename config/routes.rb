@@ -5,9 +5,6 @@ Pl8es::Application.routes.draw do
 		#app-get
 		get "/dailycious/defaults" => "dailycious#defaults"
 		get "/dailycious/useragreement" => "dailycious#useragreement"
-		get "/dailycious/week" => "dailycious#week"
-		get "/dailycious/favorites" => "dailycious#favorites"
-		get "/dailycious/map" => "dailycious#map"
 		get "/dailycious/suggestions" => "dailycious#suggestions"
 		get "/dailycious/search" => "dailycious#search"
 		get "/dailycious/user" => "dailycious#user"
@@ -18,13 +15,7 @@ Pl8es::Application.routes.draw do
 		post "/dailycious/signup" => "dailycious#signup"
 		post "/dailycious/login" => "dailycious#login"
 		post "/dailycious/profile" => "dailycious#profile"
-		post "/dailycious/add" => "dailycious#adddailydish"
-		post "/dailycious/edit" => "dailycious#editdailydish"
-		post "/dailycious/sort" => "dailycious#sortdailydish"
 	end
-	
-	#web-get
-	get "/web/dailycious/list" => "web/dailycious#list"
 	
 	scope module: :ajax do
 		scope :a do
