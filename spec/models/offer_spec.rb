@@ -9,10 +9,14 @@ describe Offer, type: :model do
 		expect(build(:static_offer)).to be_valid
 	end
 	
+	let(:offer) { build(:offer) }
+	subject { offer }
+	
+	describe :associations do
+		it { is_expected.to belong_to(:dish) }
+	end
+	
 	describe :validations do
-		let(:offer) { build(:offer) }
-		subject { offer }
-		
 		describe "when start_date is not present" do
 			before { offer.start_date = nil }
 			it { is_expected.not_to be_valid }
@@ -38,13 +42,11 @@ describe Offer, type: :model do
 		end
 	end
 	
-	# –– associations
-	it { is_expected.to belong_to(:dish) }
-	
-	# –– methods
-	describe "#dates" do
-		it "returns all dates in the offer time span" do
-			expect(build(:static_offer).dates.to_s).to eq("[Mon, 29 Dec 2014, Mon, 05 Jan 2015, Mon, 12 Jan 2015, Mon, 19 Jan 2015, Mon, 26 Jan 2015, Mon, 02 Feb 2015, Mon, 09 Feb 2015]")
+	describe :methods do
+		describe "#dates" do
+			it "returns all dates in the offer time span" do
+				expect(build(:static_offer).dates.to_s).to eq("[Mon, 29 Dec 2014, Mon, 05 Jan 2015, Mon, 12 Jan 2015, Mon, 19 Jan 2015, Mon, 26 Jan 2015, Mon, 02 Feb 2015, Mon, 09 Feb 2015]")
+			end
 		end
 	end
 end

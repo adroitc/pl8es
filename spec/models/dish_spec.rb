@@ -6,19 +6,20 @@ describe Dish, type: :model do
 		expect(build(:dish)).to be_valid
 	end
 	
-	# –– associations
-	it { is_expected.to belong_to(:restaurant) }
-	
-	it { is_expected.to have_many(:ingredients) }
-	it { is_expected.to have_many(:dish_ingredients) }
-	
-	it { is_expected.to have_many(:categories) }
-	it { is_expected.to have_many(:category_dishes) }
-	
-	it { is_expected.to have_many(:offers) }
-	
 	let(:dish) { build(:dish) }
 	subject { dish }
+	
+	describe :associations do
+		it { is_expected.to belong_to(:restaurant) }
+		
+		it { is_expected.to have_many(:ingredients) }
+		it { is_expected.to have_many(:dish_ingredients) }
+		
+		it { is_expected.to have_many(:categories) }
+		it { is_expected.to have_many(:category_dishes) }
+		
+		it { is_expected.to have_many(:offers) }
+	end
 
 # not working as expected
 # 	
