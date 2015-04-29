@@ -42,11 +42,6 @@ end
 gem 'pg'
 gem 'hirb'
 
-group :production do
-  # Use rails_12factor for heroku
-  gem "rails_12factor"
-end
-
 # Use unicorn as the app server
 # gem "unicorn"
 
