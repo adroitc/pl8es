@@ -57,11 +57,6 @@ gem "twitter-bootstrap-rails"
 # add to_b
 gem "wannabe_bool"
 
-group :production do
-  # Use rails_12factor for heroku
-  gem "rails_12factor"
-end
-
 # payment
 gem "paypal-express"
 
@@ -105,8 +100,6 @@ group :development do
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
-  gem 'railroady'
-  
   gem 'rails-erd'
 end
 
