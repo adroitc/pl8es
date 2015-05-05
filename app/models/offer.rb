@@ -19,7 +19,7 @@ class Offer < ActiveRecord::Base
 		end
 	end
 	
-	def self.offers_with_dates(offers, range)
+	def self.dates_with_offers(offers, range)
 		# firstly converts the offers to this format:
 		# => [ { "dish_id" => 1, "dates" => [ Mon, 13 Apr 2015, Wed, 15 Apr 2015, Fri, 17 Apr 2015 ] },
 		#      { "dish_id" => 2, "dates" => [ Mon, 13 Apr 2015, Tue, 14 Apr 2015 ] } ]
