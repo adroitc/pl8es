@@ -15,7 +15,7 @@
 <br />
 <div class="row">
 	<div class="col-md-12">
-		<a href="<%=dailycious_add_weeks_path(params[:add_weeks].to_i-1) %>">
+		<a href="<%= offers_path(params[:weeks].to_i-1) %>">
 			<button type="button" class="col-md-3 btn btn-white">
 				<i class="entypo-left-dir"></i>
 				<%=t("dailycious.last_week") %>
@@ -24,7 +24,7 @@
 		<button type="button" class="col-md-6 btn btn-default" disabled>
 			<%= output_dates_range(@dates_with_offers) %>
 		</button>
-		<a href="<%=dailycious_add_weeks_path(params[:add_weeks].to_i+1) %>">
+		<a href="<%= offers_path(params[:weeks].to_i+1) %>">
 			<button type="button" class="col-md-3 btn btn-white">
 				<%=t("dailycious.next_week") %>
 				<i class="entypo-right-dir"></i>
@@ -40,7 +40,7 @@
 				<% @dates_with_offers.each do |date, offer_ids| %>
 					<tr style="font-size: 18px;">
 						<td width="100px;">
-							<%=t("date.#{date.strftime("%A")}") %>
+							<%= t("date.#{date.strftime("%A")}") %>
 						</td>
 						<td class="row gallery-env draggable-portlets">
 							<span class="sorted ui-sortable">

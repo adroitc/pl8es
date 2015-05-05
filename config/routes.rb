@@ -79,8 +79,7 @@ Pl8es::Application.routes.draw do
 	
 	# dailycious
 	scope :dailycious do
-		get "/:add_weeks-week" => "dailycious#index", as: :dailycious_add_weeks
-		
-		resources :offers, :path => "/", :only => [:index]
+		get "(/:weeks-weeks)" => "offers#index", as: :offers
+		resources :offers, except: [:index]
 	end
 end
