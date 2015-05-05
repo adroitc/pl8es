@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RestaurantsController do
+describe RestaurantsController, type: :controller do
 	
 	describe "GET #index" do
 		before { get :index }

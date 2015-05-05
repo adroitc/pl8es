@@ -1,0 +1,61 @@
+<ol class="breadcrumb bc-3">
+	<li>
+		<a href="<%= dashboard_index_path %>">
+			<i class="entypo-home"></i>
+			<%=t("layouts.menu.dashboard") %>
+		</a>
+	</li>
+	<li class="active">
+		<strong>
+			<%=t("layouts.menu.dailycious") %>
+		</strong>
+	</li>
+</ol>
+<h2><%=t("dailycious.dailycious_title") %></h2>
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<a href="<%= offers_path(params[:weeks].to_i-1) %>">
+			<button type="button" class="col-md-3 btn btn-white">
+				<i class="entypo-left-dir"></i>
+				<%=t("dailycious.last_week") %>
+			</button>
+		</a>
+		<button type="button" class="col-md-6 btn btn-default" disabled>
+			<%= output_dates_range(@dates_with_offers) %>
+		</button>
+		<a href="<%= offers_path(params[:weeks].to_i+1) %>">
+			<button type="button" class="col-md-3 btn btn-white">
+				<%=t("dailycious.next_week") %>
+				<i class="entypo-right-dir"></i>
+			</button>
+		</a>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped responsive">
+			<tbody>
+				<% @dates_with_offers.each do |date, offer_ids| %>
+					<tr style="font-size: 18px;">
+						<td width="100px;">
+							<%= t("date.#{date.strftime("%A")}") %>
+						</td>
+						<td class="row gallery-env draggable-portlets">
+							<span class="sorted ui-sortable">
+								<% offer_ids.each do |offer_id| %>
+									<%= render(:partial => "dishes/dish", :locals => {:dish => Offer.find(offer_id).dish }) %>
+								<% end %>
+							</span>
+							
+							<% unless date.past? %>
+								<%= render "modals/new_object_tile", :new_object_path => new_offer_path, :model => Offer, :big => true %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

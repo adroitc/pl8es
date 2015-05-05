@@ -6,12 +6,13 @@ class Dish < ActiveRecord::Base
 	
 	belongs_to :restaurant
 	
+	has_many :dish_ingredients
+	has_many :ingredients, :through => :dish_ingredients
+	
 	has_many :category_dishes
 	has_many :categories, :through => :category_dishes
 	
-	
-	has_many :dish_ingredients
-	has_many :ingredients, :through => :dish_ingredients
+	has_many :offers
 	
 	accepts_nested_attributes_for :dish_ingredients, allow_destroy: true
 	

@@ -1,12 +1,15 @@
 require 'spec_helper'
 
-describe Authentication do
+describe Authentication, type: :model do
 	
 	it "has a valid factory" do
 		expect(build(:authentication)).to be_valid
 	end
 	
-	# –––– associations
+	let(:authentication) { build(:authentication) }
+	subject { authentication }
 	
-	it { is_expected.to belong_to(:user) }
+	describe :associations do
+		it { is_expected.to belong_to(:user) }
+	end
 end

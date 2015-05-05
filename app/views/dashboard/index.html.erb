@@ -50,24 +50,6 @@ requests_this_7days = Request.where({
 			<p><%=current_user.restaurant.name %></p>
 		</div>
 	</div>
-	<div class="col-sm-4">
-		<div class="tile-stats tile-white tile-white-primary">
-			<div class="icon"><i class="entypo-direction"></i></div>
-			<div class="num" data-start="0" data-end="<%=current_user.restaurant.daily_dishes.where([
-						"display_date > (?)",
-						Date.today-7
-					]).count %>" data-duration="1500" data-delay="0">0</div>
-		
-			<h3><%=t("dashboard.daily_dishes") %></h3>
-			<p><%=t("dashboard.published_in_the_last_7_days") %></p>
-			<a href="<%= dailycious_path %>"><p>
-				<button type="button" class="btn btn-default btn-icon btn-xs icon-left" style="margin-top: -2px">
-					<%=t("dashboard.view_all_daily_dishes") %>
-					<i class="entypo-user"></i>
-				</button>
-			</p></a>
-		</div>
-	</div>
 </div>
 <div class="row">
 	<div class="col-md-4">

@@ -33,7 +33,7 @@ class Restaurant < ActiveRecord::Base
 	has_many :categories, :through => :menus
 	
 	has_many :dishes
-	has_many :daily_dishes
+	has_many :offers, :through => :dishes
 	
 	translates :description
 	

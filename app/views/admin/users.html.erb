@@ -44,9 +44,6 @@
 					<td>
 						<%=user.restaurant.dishes.count %>
 					</td>
-					<td>
-						<%=user.restaurant.daily_dishes.where(:display_date => Date.today).count %> (<%=user.restaurant.daily_dishes.count %>)
-					</td>
 				</tr>
 				<% end %>
 			</tbody>

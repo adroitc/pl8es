@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, type: :model do
 	
 	it "has valid factories" do
 		expect(build(:user)).to be_valid
@@ -15,48 +15,50 @@ describe User do
 	let(:user) { build(:user) }
 	subject { user }
 	
-	# –––– validations
-	
-	describe "when email is not present" do
-		before { user.email = nil }
-		it { is_expected.not_to be_valid }
+	describe :associations do
+		it { is_expected.to have_one(:restaurant) }
+		it { is_expected.to have_many(:authentications) }
+		it { is_expected.to have_many(:sessions) }
+		it { is_expected.to have_many(:devices) }
 	end
 	
-	describe "when password is not present" do
-		before { user.password = nil }
-		it { is_expected.not_to be_valid }
-	end
-	
-	describe "when password is too short" do
-		before { user.password = "1234567" }
-		it { is_expected.not_to be_valid }
-	end
-	
-	describe "when email & password are present" do
-		it { is_expected.to be_valid }
-	end
-	
-	it "should have encrypted password after save" do
-		user.save
-		expect(user.encrypted_password).to be_truthy
-	end
-	
-	# –––– associations
-	
-	it { is_expected.to have_one(:restaurant) }
-	it { is_expected.to have_many(:authentications) }
-	it { is_expected.to have_many(:sessions) }
-	it { is_expected.to have_many(:devices) }
-	
-	describe "#admin?" do
-		it "returns true as admin" do
-			user.type = "Admin"
-			expect(user.admin?).to be true
+	describe :validations do
+		describe "when email is not present" do
+			before { user.email = nil }
+			it { is_expected.not_to be_valid }
 		end
 		
-		it "returns false as user" do
-			user.type = "User"
-			expect(user.admin?).to be false
+		describe "when password is not present" do
+			before { user.password = nil }
+			it { is_expected.not_to be_valid }
+		end
+		
+		describe "when password is too short" do
+			before { user.password = "1234567" }
+			it { is_expected.not_to be_valid }
+		end
+		
+		describe "when email & password are present" do
+			it { is_expected.to be_valid }
+		end
+		
+		it "should have encrypted password after save" do
+			user.save
+			expect(user.encrypted_password).to be_truthy
+		end
+	end
+	
+	describe :methods do
+		describe "#admin?" do
+			it "returns true as admin" do
+				user.type = "Admin"
+				expect(user.admin?).to be true
+			end
+			
+			it "returns false as user" do
+				user.type = "User"
+				expect(user.admin?).to be false
+			end
 		end
 	end
 end

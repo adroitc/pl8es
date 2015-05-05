@@ -18,26 +18,6 @@ raw(Jsonify::Builder.plain do |j|
     j.longitude                  location.longitude
     
     j.favorites                  location.restaurant.favoriteRestaurants.count
-    
-    daily_dishes_count = location.restaurant.daily_dishes.find(
-      :all,
-      :conditions => [
-        "display_date = (?)",
-        Date.today.to_datetime
-      ]
-    ).count
-    j.daily_dishes_count         daily_dishes_count
-    
-    if daily_dishes_count > 0
-      j.daily_dish do
-        daily_dish = location.restaurant.daily_dishes.find(:first, :conditions => ["display_date = (?)", Date.today.to_datetime])
-        j.image_map_url              daily_dish.image.url(:cropped_map_retina)
-        j.image_small_url            daily_dish.image.url(:cropped_small_retina)
-        j.image_fingerprint          daily_dish.image.present? ? daily_dish.image_fingerprint : "default"
-        j.title                      daily_dish.title
-        j.price                      daily_dish.price
-      end
-    end
   end
   
 end)

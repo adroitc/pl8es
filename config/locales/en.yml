@@ -37,36 +37,6 @@ en:
     invalid_email: "Invalid email."
     already_exists: "This email already exists."
   
-  date:
-    Monday: "Monday"
-    Tuesday: "Tuesday"
-    Thursday: "Thursday"
-    Wednesday: "Wednesday"
-    Friday: "Friday"
-    Saturday: "Saturday"
-    Sunday: "Sunday"
-
-    Mon: "Mon"
-    Tue: "Tue"
-    Thu: "Thu"
-    Wed: "Wed"
-    Fri: "Fri"
-    Sat: "Sat"
-    Sun: "Sun"
-    
-    January: "January"
-    February: "February"
-    March: "March"
-    April: "April"
-    May: "May"
-    June: "June"
-    July: "July"
-    August: "August"
-    September: "September"
-    October: "October"
-    November: "November"
-    December: "December"
-  
   language:
     default: "Default"
   
@@ -140,9 +110,7 @@ en:
     visits: "visits"
     in_the_last_7_days: "in the last 7 days"
     favorites: "followers"
-    daily_dishes: "lunch dishes"
     published_in_the_last_7_days: "published in the last 7 days"
-    view_all_daily_dishes: "view all lunch dishes"
     more: "more"
     visits_in_the_last_7_days: "visits in the last 7 days"
     new_favorites: "new favorites"

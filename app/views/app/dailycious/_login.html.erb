@@ -27,15 +27,6 @@ raw(Jsonify::Builder.plain do |j|
         j[key] = value
       end
     end
-    
-    daily_dishes_count = current_user.restaurant.daily_dishes.find(
-      :all,
-      :conditions => [
-        "display_date = (?)",
-        Date.today.to_datetime
-      ]
-    ).count
-    j.daily_dishes_count         daily_dishes_count
   end
   
 end)

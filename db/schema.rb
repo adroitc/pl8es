@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420081124) do
+ActiveRecord::Schema.define(version: 20150423134442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,27 +92,6 @@ ActiveRecord::Schema.define(version: 20150420081124) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",         default: true
-  end
-
-  create_table "daily_dishes", force: :cascade do |t|
-    t.string   "title"
-    t.string   "price"
-    t.datetime "display_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.text     "image_dimensions"
-    t.integer  "image_crop_w"
-    t.integer  "image_crop_h"
-    t.integer  "image_crop_x"
-    t.integer  "image_crop_y"
-    t.boolean  "image_crop_processed", default: true
-    t.string   "image_fingerprint"
-    t.integer  "position"
-    t.integer  "restaurant_id"
   end
 
   create_table "devices", force: :cascade do |t|
@@ -225,6 +204,21 @@ ActiveRecord::Schema.define(version: 20150420081124) do
     t.datetime "updated_at"
     t.integer  "restaurant_id"
   end
+
+  create_table "offers", force: :cascade do |t|
+    t.integer  "dish_id"
+    t.string   "every"
+    t.text     "on"
+    t.integer  "interval"
+    t.integer  "repeat"
+    t.date     "start_date"
+    t.date     "end_date",   default: '2037-12-31'
+    t.text     "except"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "offers", ["dish_id"], name: "index_offers_on_dish_id", using: :btree
 
   create_table "requests", force: :cascade do |t|
     t.integer  "session_id"
@@ -375,4 +369,5 @@ ActiveRecord::Schema.define(version: 20150420081124) do
     t.string   "unconfirmed_email"
   end
 
+  add_foreign_key "offers", "dishes"
 end
