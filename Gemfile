@@ -1,26 +1,26 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.2.1"
-gem "rails", "4.2.1"
+ruby '2.2.1'
+gem 'rails', '4.2.1'
 
 # Make sure gem is defined BEFORE any other gems that use environment variables
 gem 'dotenv-rails', :groups => [:development, :test]
 
-gem "bcrypt-ruby", :require => "bcrypt"
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 
 # Use Uglifier as compressor for JavaScript assets
-gem "uglifier", ">= 1.3.0"
+gem 'uglifier', '>= 1.3.0'
 
 # –– json & jQuery
 
-gem "jquery-rails"
-gem "jquery-ui-rails"
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
-gem "jsonify"
-gem "yajl-ruby", require: "yajl"
-gem "coffee-rails", "~> 4.0.0"
-gem "jbuilder", "~> 1.2"
+gem 'jsonify'
+gem 'yajl-ruby', require: 'yajl'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'jbuilder', '~> 1.2'
 
 # still be able to call respond_to :html, :json
 gem 'responders'
@@ -36,51 +36,51 @@ gem 'devise'
 gem 'omniauth-facebook'
 
 # –– images
-gem "paperclip"
-gem "aws-sdk"
-gem "paperclip-dimension", :git => "git://github.com/mroem/paperclip-dimension.git"
-gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'paperclip-dimension', :git => 'git://github.com/mroem/paperclip-dimension.git'
+gem 'aws-ses', '~> 0.5.0', :require => 'aws/ses'
 gem 'remotipart', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem "sdoc", require: false
+  gem 'sdoc', require: false
 end
 
-gem "sass-rails", "~> 4.0.0"
-gem "compass-rails"
+gem 'sass-rails', '~> 4.0.0'
+gem 'compass-rails'
 
-gem "therubyracer", "0.11.3"
-gem "less-rails"
-gem "twitter-bootstrap-rails"
+gem 'therubyracer', '0.11.3'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 
 # add to_b
-gem "wannabe_bool"
+gem 'wannabe_bool'
 
 # payment
-gem "paypal-express"
+gem 'paypal-express'
 
 # languages
-gem "rename"
-gem "globalize"
-gem "globalize-accessors"
+gem 'rename'
+gem 'globalize'
+gem 'globalize-accessors'
 gem 'rails-i18n'
 
 # location
-gem "geokit-rails"
+gem 'geokit-rails'
 
 # RestClient
-gem "rest-client"
+gem 'rest-client'
 
 # PDF
-gem "wicked_pdf"
-gem "wkhtmltopdf-binary"
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # recurring lunch menus
 gem 'recurrence'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem "turbolinks"
+gem 'turbolinks'
 
 group :test do
 	gem 'capybara'
@@ -95,8 +95,8 @@ end
 group :development do
 	gem 'web-console'
 	gem 'letter_opener'
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
@@ -105,7 +105,7 @@ end
 
 group :test, :development do
 	gem 'spring'
-	gem "spring-commands-rspec"
+	gem 'spring-commands-rspec'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'guard-livereload'
