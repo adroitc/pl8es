@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  before_action :set_current_locale, :set_device, :verify_restaurant
+  before_action :set_current_locale, :set_device, :verify_restaurant, :set_session
 	
 	layout :resolve_layout
 	
@@ -92,4 +92,43 @@ class ApplicationController < ActionController::Base
 			raise ActionController::RoutingError.new('Not found')
 		end
 	
+		def set_session
+			#session + request
+			if Session.logsSession(session)
+				@session = Session.find(session[:user_session_id])
+				if !current_user && @session.user
+					current_user = @session.user
+				end
+			elsif request.headers["Token"] && !Session.find_by_token(request.headers["Token"]).blank?
+				@session = Session.find_by_token(request.headers["Token"])
+				if !currrent_user && @session.user
+					current_user = @session.user
+				end
+				session[:user_session_id] = @session.id
+			else
+				token = SecureRandom.hex(32).upcase
+				while Session.find_by_token(token).present?
+					token = SecureRandom.hex(32).upcase
+				end
+				@session = Session.create({
+					:device => @device,
+					:token => token,
+					:user_agent => request.env["HTTP_USER_AGENT"]
+				})
+				session[:user_session_id] = @session.id
+			end
+			unless params[:controller] == "app/dailycious" && params[:action] == "map"
+				Request.create(params.permit(:controller, :action).merge({
+					:session => @session,
+					:params => params.to_json({
+						:except => [
+							:controller,
+							:action,
+							:password
+						]
+					})
+				}))
+			end
+			@session.touch
+		end
 end
