@@ -162,7 +162,7 @@ de:
     
   dailycious:
     dailycious_title: "Dailycious - aktuelle Woche"
-    last_week: "letzte Woche"
+    last_week: "vorherige Woche"
     next_week: "nächste Woche"
 
     unlimited: "unbegrenzten"

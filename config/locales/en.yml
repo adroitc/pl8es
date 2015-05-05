@@ -163,7 +163,7 @@ en:
   
   dailycious:
     dailycious_title: "Dailycious - current week"
-    last_week: "Last week"
+    last_week: "Previous week"
     next_week: "Next week"
 
     unlimited: "unlimited"
