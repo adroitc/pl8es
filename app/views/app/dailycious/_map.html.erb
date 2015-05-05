@@ -1,23 +1,38 @@
 <%=
 raw(Jsonify::Builder.plain do |j|
-  
-  j.token                      @session.token
-  
-  j.locations(@req_locations) do |location|
-    j.id                         location.restaurant.id
-    
-    j.restaurant_image_url       location.restaurant.logo_image.url(:cropped_dailycious_retina)
-    j.restaurant_image_fingerprint  location.restaurant.logo_image.present? ? location.restaurant.logo_image_fingerprint : "default"
 
-    j.name                       location.restaurant.name
+  j.locations(@req_locations) do |location|
+
+    j.id	location.restaurant.id
+    j.restaurant_image_url	location.restaurant.logo_image.url(:cropped_dailycious_retina)
+    j.restaurant_image_fingerprint	location.restaurant.logo_image.present? ? location.restaurant.logo_image_fingerprint : "default"
+	j.name	location.restaurant.name
     
     if location.distance
-      j.distance                   location.distance
+      j.distance	location.distance
     end
+
     j.latitude                   location.latitude
     j.longitude                  location.longitude
-    
     j.favorites                  location.restaurant.favoriteRestaurants.count
+
+# 	daily_dishes_count = location.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime).count
+#     j.daily_dishes_count         daily_dishes_count
+#     
+#     if daily_dishes_count > 0
+# 
+# 	  daily_dishes = location.restaurant.daily_dishes.where(:display_date => Date.today.to_datetime)
+# 
+# 	  j.daily_dishes do
+# 	  	daily_dishes.each do |d|
+# 			j.image_map_url              d.image.url(:cropped_map_retina)
+# 			j.image_small_url            d.image.url(:cropped_small_retina)
+# 			j.image_fingerprint          d.image.present? ? d.image_fingerprint : "default"
+# 			j.title                      d.title
+# 			j.price                      d.price
+# 		 end
+#       end
+#     end
   end
   
 end)

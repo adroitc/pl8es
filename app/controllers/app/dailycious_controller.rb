@@ -154,6 +154,166 @@ class App::DailyciousController < ApplicationController
     render :json => {:token => @session.token, :status => "invalid"}
   end
   
+#   def favorites
+#     if @device && !params.values_at(:q).include?(nil)
+# 
+# 			restaurants = Restaurant.where(
+# 					:id => DailyDish.select(:restaurant_id).where(:display_date => Date.today.to_datetime)
+# 			).where(
+# 					:id => params[:q].split(",").drop(2)
+# 			)
+# 
+#       @device.restaurants = restaurants
+#       @req_locations = restaurants.map{|r| r.location}.sort_by do |e|
+#         distance = e.distance_to([
+#           params[:q].split(",")[0].to_f,
+#           params[:q].split(",")[1].to_f
+#         ])
+#         e.distance = distance
+#         distance
+#       end
+#       #.order("distance")
+#       
+#       render :partial => "map"
+#       return
+#     end
+#     render :json => {:token => @session.token, :status => "invalid"}
+#   end
+#   
+#   def map
+#     if @device && !params.values_at(:q).include?(nil)
+# 
+# 			locations = Location.where(
+# 					:restaurant_id => DailyDish.select(:restaurant_id).where(:display_date => Date.today.to_datetime)
+# 			)
+# 
+#       @locations = locations.in_bounds(
+#         [
+#           [
+#             params[:q].split(",")[2].to_f,
+#             params[:q].split(",")[3].to_f
+#           ],
+#           [
+#             params[:q].split(",")[4].to_f,
+#             params[:q].split(",")[5].to_f
+#           ]
+#         ],
+#         :origin => [
+#           params[:q].split(",")[0].to_f,
+#           params[:q].split(",")[1].to_f
+#         ]
+#       ).sort_by do |e|
+#         distance = e.distance_to([
+#           params[:q].split(",")[0].to_f,
+#           params[:q].split(",")[1].to_f
+#         ])
+#         e.distance = distance
+#         distance
+#       end
+#       
+#       render 'restaurants.json.jbuilder'
+#       return
+#     end
+#     render :json => {:token => @session.token, :status => "invalid"}
+#   end
+#   
+#   def suggestions
+#     if @device && !params.values_at(:q).include?(nil) && params[:q].length > 0
+#       query = "%#{params[:q].gsub("+"," ").downcase}%"
+#       
+#       suggestions = DailyDish.unscoped.find(
+#         :all,
+#         :select => ActiveRecord::Base.send(:sanitize_sql_array,[
+#           "CASE WHEN LOWER(restaurants.name) LIKE (?) THEN restaurants.name WHEN tag_translations.title IS NOT NULL THEN tag_translations.title ELSE daily_dishes.title END AS suggestion",
+#           query
+#         ]),
+#         :joins => [
+#           "INNER JOIN restaurants ON restaurants.id = daily_dishes.restaurant_id",
+#           "LEFT JOIN tags_restaurants ON tags_restaurants.restaurant_id = daily_dishes.restaurant_id",
+#           ActiveRecord::Base.send(:sanitize_sql_array,[
+#             "LEFT JOIN tag_translations ON tag_translations.tag_id = tags_restaurants.tag_id AND LOWER(tag_translations.title) LIKE (?)",
+#             query
+#           ])
+#         ],
+#         :conditions => [
+#           "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.restaurant_id IN (?))",
+#           Date.today.to_datetime,
+#           "#{query}",
+#           Restaurant.find(
+#             :all,
+#             :select => "id",
+#             :conditions => ["LOWER(name) LIKE (?)",
+#               "#{query}"
+#             ]
+#           ).map{|u| u.id}.concat(
+#             ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
+#               "SELECT restaurant_id FROM tags_restaurants, tag_translations WHERE tags_restaurants.tag_id = tag_translations.tag_id AND LOWER(tag_translations.title) LIKE (?)",
+#               query
+#             ])).map{|u| u["restaurant_id"]}
+#           )
+#         ],
+#         :group => "suggestion",
+#         :order => "suggestion"
+#       ).map{|u| u.suggestion}
+#       
+#       render :json => {:token => @session.token, :suggestions => suggestions}
+#       return
+#     end
+#     render :json => {:token => @session.token, :status => "invalid"}
+#   end
+#   
+#   def search
+#     if @device && !params.values_at(:q).include?(nil) && params[:q].length > 0
+#       query = "%#{params[:q].gsub("+"," ").downcase}%"
+#       
+#       @req_locations = Location.where(
+#         ["restaurant_id IN (?)",
+#           DailyDish.unscoped.find(
+#             :all,
+#             :select => "daily_dishes.restaurant_id",
+#             :joins => [
+#               "INNER JOIN restaurants ON restaurants.id = daily_dishes.restaurant_id",
+#               "LEFT JOIN tags_restaurants ON tags_restaurants.restaurant_id = daily_dishes.restaurant_id",
+#               ActiveRecord::Base.send(:sanitize_sql_array,[
+#                 "LEFT JOIN tag_translations ON tag_translations.tag_id = tags_restaurants.tag_id AND LOWER(tag_translations.title) LIKE (?)",
+#                 query
+#               ])
+#             ],
+#             :conditions => [
+#               "display_date = (?) AND (LOWER(daily_dishes.title) LIKE (?) OR daily_dishes.restaurant_id IN (?))",
+#               Date.today.to_datetime,
+#               "#{query}",
+#               Restaurant.find(
+#                 :all,
+#                 :select => "id",
+#                 :conditions => ["LOWER(name) LIKE (?)",
+#                   "#{query}"
+#                 ]
+#               ).map{|u| u.id}.concat(
+#                 ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array,[
+#                   "SELECT restaurant_id FROM tags_restaurants, tag_translations WHERE tags_restaurants.tag_id = tag_translations.tag_id AND LOWER(tag_translations.title) LIKE (?)",
+#                   query
+#                 ])).map{|u| u["restaurant_id"]}
+#               )
+#             ],
+#             :group => "daily_dishes.restaurant_id"
+#           ).map{|u| u.restaurant_id}
+#         ]
+#       ).sort_by do |e|
+#         distance = e.distance_to([
+#           params[:q].split(",")[0].to_f,
+#           params[:q].split(",")[1].to_f
+#         ])
+#         e.distance = distance
+#         distance
+#       end
+#       
+#       render :partial => "map"
+#       return
+#     end
+#     render :json => {:token => @session.token, :status => "invalid"}
+#   end
+  
   def user
     if @device && !params.values_at(:q).include?(nil) && Restaurant.exists?(params[:q])
       @req_location = Restaurant.find(params[:q]).location
