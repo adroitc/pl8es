@@ -22,7 +22,7 @@
 			</button>
 		</a>
 		<button type="button" class="col-md-6 btn btn-default" disabled>
-			<%= output_dates_range(@dates_with_offers) %>
+			<%= output_dates_range(@dates_with_dishes) %>
 		</button>
 		<a href="<%= offers_path(params[:weeks].to_i+1) %>">
 			<button type="button" class="col-md-3 btn btn-white">
@@ -37,15 +37,15 @@
 	<div class="col-md-12">
 		<table class="table table-striped responsive">
 			<tbody>
-				<% @dates_with_offers.each do |date, offer_ids| %>
+				<% @dates_with_dishes.each do |date, dishes_ids| %>
 					<tr style="font-size: 18px;">
 						<td width="100px;">
 							<%= t("date.#{date.strftime("%A")}") %>
 						</td>
 						<td class="row gallery-env draggable-portlets">
 							<span class="sorted ui-sortable">
-								<% offer_ids.each do |offer_id| %>
-									<%= render(:partial => "dishes/dish", :locals => {:dish => Offer.find(offer_id).dish }) %>
+								<% dishes_ids.each do |dish_id| %>
+									<%= render(:partial => "dishes/dish", :locals => {:dish => current_user.restaurant.dishes.find(dish_id) }) %>
 								<% end %>
 							</span>
 							

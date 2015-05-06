@@ -5,6 +5,6 @@ class OffersController < ApplicationController
 		week_range = selected_date.at_beginning_of_week..selected_date.at_end_of_week
 		
 		@offers = current_user.restaurant.offers.in_range(week_range)
-		@dates_with_offers = Offer.dates_with_offers(@offers, week_range)
+		@dates_with_dishes = Offer.dates_with_dishes(@offers, week_range)
 	end
 end
