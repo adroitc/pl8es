@@ -29,6 +29,7 @@ gem 'responders'
 # –– database
 gem 'pg'
 gem 'hirb'
+gem 'activesupport-json_encoder', github: 'rails/activesupport-json_encoder'
 
 gem 'acts_as_tree'
 
