@@ -1,0 +1,24 @@
+<%= form_for @offer, remote: true do |f| %>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-12">
+				<%= f.collection_select :dish_id, current_user.restaurant.dishes, :id, :title, {}, { class: "selectpicker", data: { "live-search" => "true" } } %>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<strong>Weekdays</strong>
+			</div>
+			
+			<%= f.fields_for :on do |o| %>
+				<% [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday].each do |weekday| %>
+					<div class="col-sm-12">
+						<%= o.check_box weekday, class: "icheck-2-checkbox", value: @offer.on.include?(:weekday) %>
+						<%= o.label weekday %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+<% end %>

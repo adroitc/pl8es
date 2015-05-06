@@ -1,0 +1,6 @@
+var offer_form = $("<%= j render 'form' %>")
+$('#default-modal .modal-content').html(offer_form);
+$('#default-modal').modal('show');
+
+init_icheck_checkboxes();
+$('.selectpicker').selectpicker();

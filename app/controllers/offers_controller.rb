@@ -7,4 +7,8 @@ class OffersController < ApplicationController
 		@offers = current_user.restaurant.offers.in_range(week_range)
 		@dates_with_dishes = Offer.dates_with_dishes(@offers, week_range)
 	end
+	
+	def new
+		@offer = Offer.new
+	end
 end

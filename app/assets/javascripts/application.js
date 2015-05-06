@@ -13,6 +13,7 @@
 //= require jquery-ui
 //= require jquery_plugins
 //= require bootstrap
+//= require bootstrap-select
 //= require neon
 //
 //= require cookies.min

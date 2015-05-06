@@ -22,6 +22,7 @@ gem 'yajl-ruby', require: 'yajl'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jbuilder', '~> 1.2'
 
+
 # still be able to call respond_to :html, :json
 gem 'responders'
 
@@ -53,6 +54,9 @@ gem 'compass-rails'
 gem 'therubyracer', '0.11.3'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+
+# gem to handle select dropdowns
+gem 'bootstrap-select-rails'
 
 # add to_b
 gem 'wannabe_bool'
