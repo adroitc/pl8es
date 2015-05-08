@@ -34,6 +34,7 @@
 // 
 //= require internal/forms
 //= require internal/profile
+//= require internal/offers
 
 
 $(document).ready(function()
