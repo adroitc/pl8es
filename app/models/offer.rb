@@ -42,7 +42,7 @@ class Offer < ActiveRecord::Base
 	end
 	
 	def dates(range = nil, options={})
-		recurrence_params = {:every => every, :on => on, :interval => interval, :repeat => repeat, :starts => start_date, :until => end_date}.merge(options)
+		recurrence_params = {:every => every, :on => on, :interval => interval, :starts => start_date, :until => end_date}.merge(options)
 		
 		return Recurrence.new(recurrence_params).events
 	end
