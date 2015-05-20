@@ -1,0 +1,19 @@
+var offer_form = $("<%= j render 'form' %>")
+$('#default-modal .modal-content').html(offer_form);
+$('#default-modal').modal('show');
+
+init_icheck_checkboxes();
+$('.selectpicker').selectpicker();
+
+
+$('.datetimepicker').datetimepicker({
+	format: "D. MMMM YYYY",
+	minDate: moment()
+});
+
+$("#datetimepicker-start").on("dp.change", function (e) {
+	$('#datetimepicker-end').data("DateTimePicker").minDate(e.date);
+});
+$("#datetimepicker-end").on("dp.change", function (e) {
+	$('#datetimepicker-start').data("DateTimePicker").maxDate(e.date);
+});

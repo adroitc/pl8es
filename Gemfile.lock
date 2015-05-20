@@ -5,6 +5,13 @@ GIT
     paperclip-dimension (0.2.1)
       paperclip (>= 3.0)
 
+GIT
+  remote: git://github.com/rails/activesupport-json_encoder.git
+  revision: f02fb52c02609b3157e9288e1502dc6a4fe3b1fd
+  specs:
+    activesupport-json_encoder (1.1.0)
+      activesupport (>= 4.1.0, < 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -71,6 +78,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-select-rails (1.6.3)
+    bootstrap3-datetimepicker-rails (4.7.14)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     capistrano (3.4.0)
       i18n
@@ -228,6 +238,8 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
+    momentjs-rails (2.10.2)
+      railties (>= 3.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -427,12 +439,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport-json_encoder!
   acts_as_tree
   aws-sdk
   aws-ses (~> 0.5.0)
   bcrypt-ruby
   better_errors
   binding_of_caller
+  bootstrap-select-rails
+  bootstrap3-datetimepicker-rails
   capistrano-passenger
   capistrano-rails (~> 1.1.1)
   capistrano-rvm
@@ -457,6 +472,7 @@ DEPENDENCIES
   jsonify
   less-rails
   letter_opener
+  momentjs-rails
   omniauth-facebook
   paperclip
   paperclip-dimension!

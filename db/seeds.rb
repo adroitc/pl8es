@@ -76,15 +76,15 @@ d4 = Dish.new(:title_en => "Tomatoe Soup", :description_en => "With some good ol
 
 
 # –– offers
-d1.offers << Offer.create(every: :week, on: [:monday], interval: 1, repeat: 7, start_date: Date.today, end_date: 7.weeks.from_now)
-d1.offers << Offer.create(every: :week, on: [:tuesday], interval: 2, repeat: 7, start_date: Date.today, end_date: 14.weeks.from_now)
+d1.offers << Offer.create(every: :week, on: [:monday], interval: 1, start_date: Date.today, end_date: 7.weeks.from_now)
+d1.offers << Offer.create(every: :week, on: [:tuesday], interval: 2, start_date: Date.today, end_date: 14.weeks.from_now)
 
-d2.offers << Offer.create(every: :week, on: [:tuesday], interval: 2, repeat: 7, start_date: 1.week.from_now, end_date: 15.weeks.from_now)
-d2.offers << Offer.create(every: :week, on: [:friday], interval: 1, repeat: 7, start_date: Date.today, end_date: 7.weeks.from_now)
+d2.offers << Offer.create(every: :week, on: [:tuesday], interval: 2, start_date: 1.week.from_now, end_date: 15.weeks.from_now)
+d2.offers << Offer.create(every: :week, on: [:friday], interval: 1, start_date: Date.today, end_date: 7.weeks.from_now)
 
-d3.offers << Offer.create(every: :week, on: [:wednesday, :thursday], interval: 1, repeat: 7, start_date: Date.today, end_date: 7.weeks.from_now)
+d3.offers << Offer.create(every: :week, on: [:wednesday, :thursday], interval: 1, start_date: Date.today, end_date: 7.weeks.from_now)
 
-d4.offers << Offer.create(every: :week, on: [:saturday, :sunday], interval: 1, repeat: 7, start_date: Date.today, end_date: 7.weeks.from_now)
+d4.offers << Offer.create(every: :week, on: [:saturday, :sunday], interval: 1, start_date: Date.today, end_date: 7.weeks.from_now)
 
 r.dishes << d1 << d2 << d3 << d4
 r.save

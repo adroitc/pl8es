@@ -22,12 +22,14 @@ gem 'yajl-ruby', require: 'yajl'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jbuilder', '~> 1.2'
 
+
 # still be able to call respond_to :html, :json
 gem 'responders'
 
 # –– database
 gem 'pg'
 gem 'hirb'
+gem 'activesupport-json_encoder', github: 'rails/activesupport-json_encoder'
 
 gem 'acts_as_tree'
 
@@ -47,12 +49,18 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# –– assets
+
 gem 'sass-rails', '~> 4.0.0'
 gem 'compass-rails'
 
 gem 'therubyracer', '0.11.3'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'bootstrap-select-rails'
 
 # add to_b
 gem 'wannabe_bool'

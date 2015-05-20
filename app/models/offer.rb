@@ -10,7 +10,7 @@ class Offer < ActiveRecord::Base
 	scope :in_range, ->(range) { where("end_date >= ?", range.first).where("start_date <= ?", range.last) }
 	
 	
-	def self.dates_with_offers(offers, range)
+	def self.dates_with_dishes(offers, range)
 		# firstly converts the offers to this format:
 		# => [ { "dish_id" => 1, "dates" => [ Mon, 13 Apr 2015, Wed, 15 Apr 2015, Fri, 17 Apr 2015 ] },
 		#      { "dish_id" => 2, "dates" => [ Mon, 13 Apr 2015, Tue, 14 Apr 2015 ] } ]
@@ -42,7 +42,7 @@ class Offer < ActiveRecord::Base
 	end
 	
 	def dates(range = nil, options={})
-		recurrence_params = {:every => every, :on => on, :interval => interval, :repeat => repeat, :starts => start_date, :until => end_date}.merge(options)
+		recurrence_params = {:every => every, :on => on, :interval => interval, :starts => start_date, :until => end_date}.merge(options)
 		
 		return Recurrence.new(recurrence_params).events
 	end

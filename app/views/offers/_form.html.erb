@@ -1,0 +1,57 @@
+<%= form_for @offer, remote: true, html: { class: "offer-form" } do |f| %>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-12">
+				<%= f.collection_select :dish_id, current_user.restaurant.dishes, :id, :title, {}, { class: "selectpicker", data: { "live-search" => "true" } } %>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class='input-group date datetimepicker' id='datetimepicker-start'>
+						<%= f.text_field :start_date, class: "form-control" %>
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class='input-group date datetimepicker' id='datetimepicker-end'>
+						<%= f.text_field :end_date, value: (nil if @offer.new_record?), class: "form-control" %>
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				Repeat?
+			</div>
+		</div>
+		
+		<div class="row">
+			<strong style="float: left;">every</strong>
+			<div class="col-md-2">
+				<%= f.number_field :interval, class: "form-control", value: @offer.interval || 1 %>
+			</div>
+			<div class="col-md-4">
+				<%= f.select(:every, [ ["days", :day], ["weeks", :week] ], {}, { class: "selectpicker", data: { width: '100%' } }) %>
+			</div>
+				<strong>on</strong>
+				<%= f.select(:on, weekdays_array, {}, { class: "selectpicker", multiple: true, data: { width: 'auto' } }) %>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<%= f.submit "create Offer" %>
+			</div>
+		</div>
+	</div>
+<% end %>

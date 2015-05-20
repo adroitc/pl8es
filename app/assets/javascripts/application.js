@@ -12,7 +12,10 @@
 //= require jquery.remotipart
 //= require jquery-ui
 //= require jquery_plugins
+//= require moment
 //= require bootstrap
+//= require bootstrap-select
+//= require bootstrap-datetimepicker
 //= require neon
 //
 //= require cookies.min
@@ -21,7 +24,6 @@
 //= require fileinput
 //= require gsap
 //= require joinable
-//= require moment
 //= require resizeable
 //= require select2
 //= require toastr
@@ -32,6 +34,7 @@
 // 
 //= require internal/forms
 //= require internal/profile
+//= require internal/offers
 
 
 $(document).ready(function()

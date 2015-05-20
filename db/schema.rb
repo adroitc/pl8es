@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423134442) do
+ActiveRecord::Schema.define(version: 20150508133332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,7 +210,6 @@ ActiveRecord::Schema.define(version: 20150423134442) do
     t.string   "every"
     t.text     "on"
     t.integer  "interval"
-    t.integer  "repeat"
     t.date     "start_date"
     t.date     "end_date",   default: '2037-12-31'
     t.text     "except"
