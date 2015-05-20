@@ -138,13 +138,71 @@ class App::DailyciousController < ApplicationController
     }
   end
   
-  def defaults
+  def hello
+
     if @device
-      render :partial => "defaults"
-      return
-    end
-    render :json => {:token => @session.token, :status => "invalid"}
-  end
+
+			@token = @session.token
+			@tags = Tag.all
+
+			render 'hello.json.jbuilder'
+
+			return
+
+		end
+
+    render :json => {
+				:token => @session.token,
+				:status => 'invalid'
+		}
+
+	end
+
+  def map
+
+		if @device && request.headers['Token'] && !params.values_at(:ne, :sw, :origin).include?(nil)
+
+
+			@locations = Location.joins(:restaurant)
+			.merge(Restaurant.joins(:offers).merge(Offer.in_range([Date.today]))).distinct
+			.in_bounds([params[:sw].split(','), params[:ne].split(',')], :origin => params[:origin].split(','))
+			.sort_by do |e|
+				e.distance = e.distance_to(params[:origin].split(','))
+			end
+
+			render 'restaurants.json.jbuilder'
+			return
+
+		end
+
+		render :json => {
+				:token => @session.token,
+				:status => 'invalid'
+		}
+
+	end
+
+	def search
+
+		if @device && request.headers['Token'] && !params.values_at(:term, :page, :origin).include?(nil)
+
+			@locations = Location.joins(:restaurant)
+			.merge(Restaurant.joins(:offers).merge(Offer.in_range([Date.today]))).distinct
+			.sort_by do |e|
+				e.distance = e.distance_to(params[:origin].split(','))
+			end
+
+			render 'restaurants.json.jbuilder'
+			return
+
+		end
+
+		render :json => {
+				:token => @session.token,
+				:status => 'invalid'
+		}
+
+	end
   
   def useragreement
     if @device
@@ -180,42 +238,7 @@ class App::DailyciousController < ApplicationController
 #     render :json => {:token => @session.token, :status => "invalid"}
 #   end
 #   
-#   def map
-#     if @device && !params.values_at(:q).include?(nil)
-# 
-# 			locations = Location.where(
-# 					:restaurant_id => DailyDish.select(:restaurant_id).where(:display_date => Date.today.to_datetime)
-# 			)
-# 
-#       @locations = locations.in_bounds(
-#         [
-#           [
-#             params[:q].split(",")[2].to_f,
-#             params[:q].split(",")[3].to_f
-#           ],
-#           [
-#             params[:q].split(",")[4].to_f,
-#             params[:q].split(",")[5].to_f
-#           ]
-#         ],
-#         :origin => [
-#           params[:q].split(",")[0].to_f,
-#           params[:q].split(",")[1].to_f
-#         ]
-#       ).sort_by do |e|
-#         distance = e.distance_to([
-#           params[:q].split(",")[0].to_f,
-#           params[:q].split(",")[1].to_f
-#         ])
-#         e.distance = distance
-#         distance
-#       end
-#       
-#       render 'restaurants.json.jbuilder'
-#       return
-#     end
-#     render :json => {:token => @session.token, :status => "invalid"}
-#   end
+
 #   
 #   def suggestions
 #     if @device && !params.values_at(:q).include?(nil) && params[:q].length > 0
