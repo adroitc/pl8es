@@ -6,9 +6,9 @@ json.restaurants (@locations) do |location|
 			json.(location, :address, :zip, :city, :country, :distance, :latitude, :longitude)
 		end
 
-		json.offers location.restaurant.offers.in_range([Date.today]) do |offer|
-			json.(offer.dish, :id, :title, :price)
-			json.cropped_suggestion_retina image_url_for_host(offer.dish.image.url(:cropped_default_retina))
-			json.original_cropping image_url_for_host(offer.dish.image.url(:original_cropping))
+		json.dishes Dish.where( :id => location.restaurant.offers.dates_with_dishes(location.restaurant.offers, Date.today..Date.today).first.last ) do |dish|
+			json.(dish, :id, :title, :price)
+			json.cropped_suggestion_retina image_url_for_host(dish.image.url(:cropped_default_retina))
+			json.original_cropping image_url_for_host(dish.image.url(:original_cropping))
 		end
 end
