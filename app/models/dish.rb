@@ -40,7 +40,7 @@ class Dish < ActiveRecord::Base
       #  :processors => [:cropper]
       #},
       :cropped_default_retina => {
-        :geometry => "1680x1120#",
+        :geometry => "1120x1680#",
         :format => :png,
         :processors => [:cropper]
       },
@@ -50,7 +50,7 @@ class Dish < ActiveRecord::Base
       #  :processors => [:cropper]
       #},
       :cropped_grid_retina => {
-        :geometry => "828x552#",
+        :geometry => "552x828#",
         :format => :png,
         :processors => [:cropper]
       },
@@ -60,7 +60,7 @@ class Dish < ActiveRecord::Base
       #  :processors => [:cropper]
       #},
       :cropped_suggestion_retina => {
-        :geometry => "300x200#",
+        :geometry => "200x300#",
         :format => :png,
         :processors => [:cropper]
       }
@@ -70,8 +70,8 @@ class Dish < ActiveRecord::Base
   
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates :image, :dimensions => {
-    :width => 1680,
-    :height => 1120
+    :width => 1120,
+    :height => 1680
   }
   
   def dish_lang
