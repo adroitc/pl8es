@@ -83,7 +83,7 @@ class Restaurant < ActiveRecord::Base
         :format => :png
       },
       :cropped_default_retina => {
-        :geometry => "828x552#",
+        :geometry => "552x828#",
         :format => :png,
         :processors => [:cropper]
       }
@@ -103,7 +103,7 @@ class Restaurant < ActiveRecord::Base
         :format => :png
       },
       :cropped_default_retina => {
-        :geometry => "1680x1120#",
+        :geometry => "1120x1680#",
         :format => :png,
         :processors => [:cropper]
       }
@@ -112,8 +112,8 @@ class Restaurant < ActiveRecord::Base
   }
   validates_attachment_content_type :appmain_image, :content_type => /\Aimage\/.*\Z/
   validates :appmain_image, :dimensions => {
-    :width => 1680,
-    :height => 1120
+    :width => 1120,
+    :height => 1680
   }
   
   has_attached_file :splashscreen_image, {
@@ -123,7 +123,7 @@ class Restaurant < ActiveRecord::Base
         :format => :png
       },
       :cropped_default_retina => {
-        :geometry => "2048x1536#",
+        :geometry => "1536x2048#",
         :format => :png,
         :processors => [:cropper]
       }
@@ -132,8 +132,8 @@ class Restaurant < ActiveRecord::Base
   }
   validates_attachment_content_type :splashscreen_image, :content_type => /\Aimage\/.*\Z/
   validates :splashscreen_image, :dimensions => {
-    :width => 2048,
-    :height => 1536
+    :width => 1536,
+    :height => 2048
   }
   
   def menu_languages
